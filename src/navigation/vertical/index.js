@@ -6,7 +6,12 @@ const navigation = () => {
       icon: 'tabler:home',
       path: '/dashboard'
     },
-  
+    {
+      title: 'Contracts',
+      icon: 'tabler:home',
+      path: '/contracts'
+    },
+
 
   ]
 }

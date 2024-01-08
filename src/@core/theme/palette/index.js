@@ -3,7 +3,7 @@ const DefaultPalette = (mode, skin) => {
   const whiteColor = '#FFF'
   const lightColor = '47, 43, 61'
   const darkColor = '225,225,224' /* text color in dark mode */
-  const darkPaperBgColor = '#6AB2DF' /* background color of components in dark mode */
+  const darkPaperBgColor = '#fff' /* background color of components in dark mode */
   const mainColor = mode === 'light' ? lightColor : darkColor
 
   const defaultBgColor = () => {
@@ -12,7 +12,7 @@ const DefaultPalette = (mode, skin) => {
     } else if (skin === 'bordered' && mode === 'dark') {
       return darkPaperBgColor
     } else if (mode === 'light') {
-      return '#F8F7FA'
+      return '#E9ECF3'
     } else return '#121214'
   }
 
@@ -35,7 +35,7 @@ const DefaultPalette = (mode, skin) => {
     },
     primary: {
       light: '#8479F2',
-      main: '#D8042A',
+      main: '#6AB2DF',
       dark: '#9C001C', /* edit hover color of button  */
       contrastText: whiteColor
     },

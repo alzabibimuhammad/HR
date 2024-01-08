@@ -55,6 +55,8 @@ import 'src/iconify-bundle/icons-bundle-react'
 
 // ** Global css styles
 import '../../styles/globals.css'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import React from 'react'
 
 const clientSideEmotionCache = createEmotionCache()
 
@@ -84,7 +86,7 @@ const Guard = ({ children, authGuard, guestGuard }) => {
 // ** Configure JSS & ClassName
 const App = props => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
-
+const [queryClient]= React.useState(()=> new QueryClient)
   // Variables
   const contentHeightFixed = Component.contentHeightFixed ?? false
 
@@ -116,7 +118,9 @@ const App = props => {
                   <ThemeComponent settings={settings}>
                     <Guard authGuard={authGuard} guestGuard={guestGuard}>
                       <AclGuard aclAbilities={aclAbilities} guestGuard={guestGuard} authGuard={authGuard}>
+                      <QueryClientProvider client ={queryClient}>
                         {getLayout(<Component {...pageProps} />)}
+                        </QueryClientProvider>
                       </AclGuard>
                     </Guard>
                     <ReactHotToast>

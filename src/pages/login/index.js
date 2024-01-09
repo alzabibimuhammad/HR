@@ -1,9 +1,6 @@
 import { useState } from 'react';
-
 import Link from 'next/link';
-
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import { Box, Stack } from '@mui/system'
@@ -11,15 +8,11 @@ import { styled, useTheme } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 import MuiFormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField'; // Import TextField from MUI
-
 import Icon from 'src/@core/components/icon';
 import * as yup from 'yup';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { useSettings } from 'src/@core/hooks/useSettings';
-
-import themeConfig from 'src/configs/themeConfig';
 import BlankLayout from 'src/@core/layouts/BlankLayout';
 import { useAuth } from 'src/hooks/useAuth';
 import Grid from '@mui/material/Grid';
@@ -37,13 +30,13 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 }));
 
 const schema = yup.object().shape({
-  phoneNumber: yup.string().required(),
+  email: yup.string().required(),
   password: yup.string().min(5).required(),
 });
 
 const defaultValues = {
-  password: '222222',
-  phoneNumber: '1234567890',
+  email: 'samy16@gmail.com',
+  password: 'password',
 };
 
 const LoginPage = () => {
@@ -94,24 +87,16 @@ const LoginPage = () => {
 
   return <>
 
-
-
-
-
-
-
       <Grid container spacing={0} columns={20} sx={{backgroundColor:"#E9ECF3",}}>
         <Grid item xs={12}>
-          <Item sx={{height: '100vh',backgroundColor:"#3f4458",position:"relative"}}>
+          <Item sx={{ height: '100vh',backgroundColor:"#3f4458",position:"relative"}}>
               <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",left:"72.8%",top:"3%", transform: "rotate(-90deg)" }} ></Box>
               <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",left:"72.8%",top:"-10%", transform: "rotate(-92deg)" }} ></Box>
               <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",bottom:"-12.8%", left:"-3%",transform: "rotate(70deg)" }} ></Box>
               <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",bottom:"-1.8%", left:"-2%",transform: "rotate(70deg)" }} ></Box>
-              <Box></Box>
 
           </Item>
         </Grid>
-
 
         <Grid item xs={7} display={"flex"} direction={"row"} sx={{marginLeft:'5%',marginTop:'6.3%'}}  >
         <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
@@ -125,18 +110,18 @@ const LoginPage = () => {
               </Box>
                 <Box sx={{ mb: 4,  }}>
                   <Controller
-                    name='Email'
+                    name='email'
                     control={control}
                     rules={{ required: true }}
                     render={({ field: { value, onChange, onBlur } }) => (
                       <CustomTextField
                         fullWidth
                         autoFocus
-                        label='Email'
+                        label='email'
                         value={value}
                         onBlur={onBlur}
                         onChange={onChange}
-                        placeholder='1234567890'
+                        placeholder='samy16@gmail.com'
                         error={Boolean(errors.email)}
                         {...(errors.email && { helperText: errors.email.message })}
                       />
@@ -210,244 +195,6 @@ const LoginPage = () => {
                 </Box>
               </form>
         </Grid>
-
-
-        {/* <Item  sx={{
-             backgroundColor:"#fff",
-             display: 'flex',
-             justifyContent:"center",
-             alignItems:"center",
-             flexDirection:"column",
-             height:"100vh",
-             width:"100vh",
-             boxShadow:"0",
-
-          }}>
-              <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
-             <Box sx={{ my: 6,textAlign:"start" }}>
-                <Typography variant='h3' sx={{ color: '#000',fontSize:"24px",lineHeight: "130%" }}>
-                  {`Hello! 👋🏻`}
-                </Typography>
-                <Typography sx={{ color: '#000000' }}>
-                Log in to get started
-                 </Typography>
-              </Box>
-                <Box sx={{ mb: 4,  }}>
-                  <Controller
-                    name='Email'
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange, onBlur } }) => (
-                      <CustomTextField
-                        fullWidth
-                        autoFocus
-                        label='Email'
-                        value={value}
-                        onBlur={onBlur}
-                        onChange={onChange}
-                        placeholder='1234567890'
-                        error={Boolean(errors.email)}
-                        {...(errors.email && { helperText: errors.email.message })}
-                      />
-                    )}
-                  />
-                </Box>
-                <Box sx={{ mb: 1.5 }}>
-                  <Controller
-                    name='password'
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange, onBlur } }) => (
-                      <CustomTextField
-                        fullWidth
-                        value={value}
-                        onBlur={onBlur}
-                        label='Password'
-                        onChange={onChange}
-                        id='auth-login-v2-password'
-                        error={Boolean(errors.password)}
-                        {...(errors.password && { helperText: errors.password.message })}
-                        type={showPassword ? 'text' : 'password'}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position='end'>
-                              <IconButton
-                                edge='end'
-                                onMouseDown={(e) => e.preventDefault()}
-                                onClick={() => setShowPassword(!showPassword)}
-                              >
-                                <Icon fontSize='1.25rem' icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    )}
-                  />
-                </Box>
-                <Box
-                  sx={{
-                    mb: 1.75,
-                    textAlign:"end"
-                  }}
-                >
-
-
-
-                  <Typography component={LinkStyled} href='/forgot-password' sx={{ color: '#3F4458',fontSize:"14px",fontWeight: "400",lineHeight: "130%" }}>
-                    Forgot Password?
-                  </Typography>
-                </Box>
-                <Box sx={{ }}>
-                  <Button type='submit' variant='contained' sx={{
-
-                    width: "360px",
-                    display: "flex",
-                    padding: "15px 0px 16px 0px",
-                    height: "52px",
-                    alignItems: "center",
-                    flexShrink: "0",
-                    borderRadius: "8px",
-                    background: "#3F4458",
-                    justifyContent: "center",
-                   }}>
-                    Login
-                  </Button>
-                </Box>
-                <Box sx={{ height:"50vh" ,backgroundImage: `url('/images/image.svg')  `, backgroundPosition: 'no-repeat',backgroundSize: 'cover',}}>
-
-                </Box>
-              </form>
-          </Item> */}
-
-
-        {/* <Grid item xs={8}>
-          <Item>
-              <Box
-          sx={{
-
-            backgroundColor:"#fff",
-            display: 'flex',
-            alignItems: 'end',
-            justifyContent: 'center',
-            position:"absolute",
-
-
-
-          }}
-        >
-          <Box
-            sx={{
-              marginTop: '5px',
-              p: [6, 12],
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Box >
-
-              <Box sx={{ my: 6 }}>
-                <Typography variant='h3' sx={{ color: '#000',fontSize:"24px",lineHeight: "130%" }}>
-                  {`Hello! 👋🏻`}
-                </Typography>
-                <Typography sx={{ color: '#000000' }}>
-                Log in to get started
-                 </Typography>
-              </Box>
-
-              <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
-                <Box sx={{ mb: 4,  }}>
-                  <Controller
-                    name='Email'
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange, onBlur } }) => (
-                      <CustomTextField
-                        fullWidth
-                        autoFocus
-                        label='Email'
-                        value={value}
-                        onBlur={onBlur}
-                        onChange={onChange}
-                        placeholder='1234567890'
-                        error={Boolean(errors.email)}
-                        {...(errors.email && { helperText: errors.email.message })}
-                      />
-                    )}
-                  />
-                </Box>
-                <Box sx={{ mb: 1.5 }}>
-                  <Controller
-                    name='password'
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { value, onChange, onBlur } }) => (
-                      <CustomTextField
-                        fullWidth
-                        value={value}
-                        onBlur={onBlur}
-                        label='Password'
-                        onChange={onChange}
-                        id='auth-login-v2-password'
-                        error={Boolean(errors.password)}
-                        {...(errors.password && { helperText: errors.password.message })}
-                        type={showPassword ? 'text' : 'password'}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position='end'>
-                              <IconButton
-                                edge='end'
-                                onMouseDown={(e) => e.preventDefault()}
-                                onClick={() => setShowPassword(!showPassword)}
-                              >
-                                <Icon fontSize='1.25rem' icon={showPassword ? 'tabler:eye' : 'tabler:eye-off'} />
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    )}
-                  />
-                </Box>
-                <Box
-                  sx={{
-                    mb: 1.75,
-                    textAlign:"end"
-                  }}
-                >
-
-
-
-                  <Typography component={LinkStyled} href='/forgot-password' sx={{ color: '#3F4458',fontSize:"14px",fontWeight: "400",lineHeight: "130%" }}>
-                    Forgot Password?
-                  </Typography>
-                </Box>
-                <Box sx={{ }}>
-                  <Button type='submit' variant='contained' sx={{
-
-                    width: "360px",
-                    display: "flex",
-                    padding: "15px 0px 16px 0px",
-                    height: "52px",
-                    alignItems: "center",
-                    flexShrink: "0",
-                    borderRadius: "8px",
-                    background: "#3F4458",
-                    justifyContent: "center",
-                   }}>
-                    Login
-                  </Button>
-                </Box>
-                <Box sx={{ height:"50vh" ,backgroundImage: `url('/images/image.svg')  `, backgroundPosition: 'no-repeat',backgroundSize: 'cover',}}>
-
-                </Box>
-              </form>
-            </Box>
-          </Box>
-        </Box></Item>
-        </Grid> */}
       </Grid>
 
 

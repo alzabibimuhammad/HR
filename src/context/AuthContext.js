@@ -46,31 +46,31 @@ const AuthProvider = ({ children }) => {
     axios
       .post('http://192.168.2.138:800/api/login', params)
       .then(async response => {
-        localStorage.setItem('accessToken', response.data.data.data.token)
-        localStorage.setItem('userData', JSON.stringify(response.data.data.data.user))
-
-        const returnUrl = router.query.returnUrl
-        setUser(response.data.data.data.user)
-
-        const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
-        router.replace(redirectURL)
-        toast.success(`${response.data.message} `, {
-          position: "top-left",
-          style: {
-            backgroundColor: "green",
-            width: "500px",
-          },
-        });
+        localStorage.setItem('accessToken', response.data?.data?.authorization.token);
+        localStorage.setItem('userData', JSON.stringify(response.data?.data?.user));
+         const returnUrl = router.query.returnUrl
+         setUser(response.data?.data?.user)
+         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
+         router.replace(redirectURL)
+         console.log(response)
+         toast.success(`${response.data.message} `, {
+           position: "top-left",
+           style: {
+             backgroundColor: "green",
+             width: "500px",
+           },
+         });
       })
-      .catch(err => {
-        toast.error(`${err.response.data.message} , ${err.response.data.data} `, {
-          position: "top-left",
-          style: {
-            backgroundColor: "#e20d29",
-            width: "500px",
-          },
-        });
-      })
+       .catch(err => {
+        console.log(err);
+         toast.error(`${err.response.status === 401 ? "Unauthorized":err.message}  `, {
+           position: "top-left",
+           style: {
+             backgroundColor: "#e20d29",
+             width: "500px",
+           },
+         });
+       })
   }
 
   const handleLogout = () => {

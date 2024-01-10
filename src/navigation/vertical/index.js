@@ -32,9 +32,17 @@ const navigation = () => {
         },
       ]
     },
-
-
+    {
+      title: 'Email',
+      icon: 'tabler:mail',
+      path: '/apps/email'
+    },
+    {
+      title: 'Report',
+      icon: 'tabler:report',
+      path: '/report'
+    },
   ]
-}
 
+}
 export default navigation

@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next';
 import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { ContractsData } from '../../infrastructure'
 
-const ContractGrid = ({ rows }) => {
+const List = ({ rows }) => {
   const columns = useContractColumns();
   const [openParent, setOpenParent] = React.useState(false);
   const { t } = useTranslation()
@@ -181,4 +181,4 @@ const ContractGrid = ({ rows }) => {
   );
 };
 
-export default ContractGrid;
+export default List;

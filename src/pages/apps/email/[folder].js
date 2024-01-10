@@ -12,7 +12,6 @@ export const getStaticPaths = async () => {
 
   const res = await axios.get('/apps/email/allEmails')
   const data = await res.data.emails
-  console.log("res api from mail ",res)
 
   const paths = data.map(mail => ({
     params: { folder: mail.folder }

@@ -281,7 +281,7 @@ const SidebarLeft = props => {
                 <Icon icon='mdi:circle' fontSize='0.625rem' />
               </ListItemIcon>
               <ListItemText
-                primary='Personal'
+                primary='Work'
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(handleActiveItem('label', 'personal') && { color: 'primary.main' }) }
@@ -308,26 +308,7 @@ const SidebarLeft = props => {
                 }}
               />
             </ListItemStyled>
-            <ListItemStyled
-              component={Link}
-              href='/apps/email/label/important'
-              onClick={handleListItemClick}
-              sx={{
-                py: 0.75,
-                borderLeftColor: handleActiveItem('label', 'important') ? 'primary.main' : 'transparent'
-              }}
-            >
-              <ListItemIcon sx={{ mr: 2.5, '& svg': { color: 'warning.main' } }}>
-                <Icon icon='mdi:circle' fontSize='0.625rem' />
-              </ListItemIcon>
-              <ListItemText
-                primary='Important'
-                primaryTypographyProps={{
-                  noWrap: true,
-                  sx: { fontWeight: 500, ...(handleActiveItem('label', 'important') && { color: 'primary.main' }) }
-                }}
-              />
-            </ListItemStyled>
+
             <ListItemStyled
               component={Link}
               href='/apps/email/label/private'

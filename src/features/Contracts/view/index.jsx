@@ -1,9 +1,7 @@
 import React from 'react'
 import { Box, Stack } from '@mui/system'
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography'
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+
 import Image from 'next/image';
 import Button from '@mui/material/Button';
 

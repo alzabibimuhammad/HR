@@ -11,9 +11,11 @@ const navigation = () => {
       icon: 'tabler:home',
       path: '/contracts'
     },
-
-
+    {
+      title: 'Email',
+      icon: 'tabler:mail',
+      path: '/apps/email'
+    },
   ]
 }
-
 export default navigation

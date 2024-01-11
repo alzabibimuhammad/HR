@@ -115,8 +115,22 @@ const SidebarLeft = props => {
 
 
         <Typography sx={{fontWeight:"600",fontSize:"20px",color:"#131627"}}>Today Event</Typography>
-        </Box>
+        <Box sx={{width:"100%"}}>
 
+        <div class="parent">
+        <div>
+            <p><span class="child">19</span>Jan - 2020</p>
+            <p>9:00 AM</p>
+        </div>
+        <div>
+          <p className='lorem'>
+            lorem23e <br/> adsdgdf;jn
+          </p>
+        </div>
+
+      </div>
+        </Box>
+        </Box>
       </Drawer>
     )
   } else {

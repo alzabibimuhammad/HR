@@ -46,11 +46,9 @@ export default function Add() {
  };
 
   return <>
-
+  <Stack direction={{ xs:'column' }} >
   <Stack sx={{backgroundColor:"#FFFFFF",p:"30px",borderRadius:"12px"}}>
       <Box sx={{width:"246px",height:"100px",}}>
-
-
 
       <Typography variant='h2'>
       <span style={{color: '#6AB2DF'}}>A</span><span style={{color:"#131627"}}>xis</span> <span style={{color: '#6AB2DF'}}>Code</span>
@@ -58,14 +56,14 @@ export default function Add() {
 
 
       <Typography sx={{marginTop:"4px",fontWeight:"500",fontSize:"12px",color:"#8090A7"}}>Office 149, 450 South Brand Brooklyn
-San Diego Country, CA 91905, USA
-+1 (123) 456 7894, +44 (789) 54222</Typography>
+      San Diego Country, CA 91905, USA
+      +1 (123) 456 7894, +44 (789) 54222</Typography>
 
       </Box>
     </Stack>
-<Box sx={{marginTop:"20px",padding:"30px 30px",backgroundColor:"#FFFFFF",borderRadius:"12px",width:"100%  "}}>
+<Box sx={{marginTop:"20px",padding:"30px 30px",backgroundColor:"#FFFFFF",borderRadius:"12px",width:"100%"}}  >
 
-    <FormControl sx={{ width: "100%",display:"flex",flexDirection:"row",justifyContent:"space-around",gap:"26px" }}>
+    <FormControl sx={{ width: { sm:'100%',xs:'100%'},flexDirection:{sm:'row',xs:'column' } ,justifyContent:"space-around",gap:"26px" }}>
           <InputLabel id="demo-simple-select-helper-label">Employee Name : </InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
@@ -100,7 +98,7 @@ San Diego Country, CA 91905, USA
         <Typography sx={{color:"#3F4458",fontSize:"16px",fontWeight:"600",marginTop:"20px"}}>Contract File :</Typography>
 
         <Box  sx={{display:"flex",justifyContent:"center"}} marginTop={"25px"}>
-            <Box sx={{width:"754px",height:"380px",borderRadius:"26px",border:"7px dashed #8090A7"}}>
+            <Box sx={{width:"75%",height:"40%",borderRadius:"26px",border:"7px dashed #8090A7"}}>
             <Box {...getRootProps({ className: 'dropzone' })} sx={files.length ? { height: 450 } : {}}>
       <input {...getInputProps()} />
       {files.length ? (
@@ -109,7 +107,7 @@ San Diego Country, CA 91905, USA
         <Box sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', flexDirection: 'column',marginTop:"12%" }}>
 
         <CloudDoneOutlinedIcon sx={{width:"56px",height:"56px"}}/>
-          <Typography variant='h4' sx={{ width:"421px",height:"77px",fontSize:"24px",fontWeight:"500",my:"10px" }}>
+          <Typography variant='h4' sx={{ width:"50%",height:"10%",fontSize:"24px",fontWeight:"500",my:"10px" }}>
           Choose a file or drag & drop it here
                 PDF, up to 50MB
           </Typography>
@@ -139,7 +137,7 @@ San Diego Country, CA 91905, USA
 </Box>
 
 
-
+</Stack>
 
 
 

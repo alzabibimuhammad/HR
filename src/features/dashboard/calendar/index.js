@@ -55,8 +55,8 @@ const AppCalendar = () => {
   const { skin, direction } = settings
   const mdAbove = useMediaQuery(theme => theme.breakpoints.up('md'))
   useEffect(() => {
-    dispatch(fetchEvents(store.selectedCalendars))
-  }, [dispatch, store.selectedCalendars])
+    dispatch(fetchEvents(store?.selectedCalendars))
+  }, [dispatch, store?.selectedCalendars])
 
   return (
     <CalendarWrapper

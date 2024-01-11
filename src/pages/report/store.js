@@ -18,26 +18,26 @@ export const getReportsData = createAsyncThunk('ReportStore/getReportsData', asy
   }
 })
 
-export const RemoveReport = createAsyncThunk('ReportStore/RemoveReport', async id => {
- try{
-  const response = await axios.delete(process.env.NEXT_PUBLIC_BASE_URL+`/api/deletereport/${id}`, {
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${localStorage.accessToken}`
-    }
-  })
-  showSuccesToast(response.data.data.message)
-   
-  return response.data
- }
- catch(error){
-  showErrorToast(error.response?.data?.message);
-  
-  return rejectWithValue(error.response?.data);
+// export const RemoveReport = createAsyncThunk('ReportStore/RemoveReport', async id => {
+//  try{
+//   const response = await axios.delete(process.env.NEXT_PUBLIC_BASE_URL+`/api/deletereport/${id}`, {
+//     headers: {
+//       Accept: 'application/json',
+//       Authorization: `Bearer ${localStorage.accessToken}`
+//     }
+//   })
+//   showSuccesToast(response.data.data.message)
 
- }
-  
-})
+//   return response.data
+//  }
+//  catch(error){
+//   showErrorToast(error.response?.data?.message);
+
+//   return rejectWithValue(error.response?.data);
+
+//  }
+
+// })
 
 const appReportSlice = createSlice({
   name: 'ReportStore',
@@ -48,19 +48,19 @@ const appReportSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(getReportsData.pending, state => {
-        // Set loading to true when the request starts
-        state.loading = true
-      })
-      .addCase(getReportsData.fulfilled, (state, action) => {
-        // Set loading to false when the request is fulfilled
-        state.loading = false
-        state.data = action.payload.data
-      })
+      // .addCase(getReportsData.pending, state => {
+      //   // Set loading to true when the request starts
+      //   state.loading = true
+      // })
+      // .addCase(getReportsData.fulfilled, (state, action) => {
+      //   // Set loading to false when the request is fulfilled
+      //   state.loading = false
+      //   state.data = action.payload.data
+      // })
 
-      .addCase(RemoveReport.fulfilled, state => {
-        state.status = 'succeeded'
-      })
+      // .addCase(RemoveReport.fulfilled, state => {
+      //   state.status = 'succeeded'
+      // })
   }
 })
 

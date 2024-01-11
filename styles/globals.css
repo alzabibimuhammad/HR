@@ -144,3 +144,38 @@ code[class*='language-'] {
 
 
 
+.parent{
+  background-color: #E9ECF3;
+  color: #6AB2DF;
+  border-left-style: solid;
+  border-left-width: 5px;
+  height: 60%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-right: 10px;
+  border-radius: 5px 5px 5px 5px;
+  margin-top: 15px;
+}
+
+
+.parent div{
+  margin-left: 36px;
+}
+.child{
+  position: absolute;
+  left: 0px;
+  bottom: 6px;
+  font-size: 30px;
+  color: #3F4458;
+}
+.parent p{
+  font-size: 10px;
+  color: #3F4458;
+}
+
+.lorem{
+  margin-left: 50px !important;
+}

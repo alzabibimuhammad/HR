@@ -42,7 +42,13 @@ const navigation = () => {
       icon: 'tabler:report',
       path: '/report'
     },
+    {
+      title: 'Calendar',
+      icon: 'tabler:report',
+      path: '/calendar'
+    },
   ]
 
 }
+
 export default navigation

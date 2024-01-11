@@ -1,27 +1,22 @@
 import { useState } from 'react';
-
 import Link from 'next/link';
-
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import Box from '@mui/material/Box';
+import { Box, Stack } from '@mui/system'
 import { styled, useTheme } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 import MuiFormControlLabel from '@mui/material/FormControlLabel';
 import TextField from '@mui/material/TextField'; // Import TextField from MUI
-
 import Icon from 'src/@core/components/icon';
 import * as yup from 'yup';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { useSettings } from 'src/@core/hooks/useSettings';
-
-import themeConfig from 'src/configs/themeConfig';
 import BlankLayout from 'src/@core/layouts/BlankLayout';
 import { useAuth } from 'src/hooks/useAuth';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 const LinkStyled = styled(Link)(({ theme }) => ({
   textDecoration: 'none',
@@ -35,13 +30,13 @@ const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
 }));
 
 const schema = yup.object().shape({
-  phoneNumber: yup.string().required(),
+  email: yup.string().required(),
   password: yup.string().min(5).required(),
 });
 
 const defaultValues = {
-  password: '222222',
-  phoneNumber: '1234567890',
+  email: 'samy156@gmail.com',
+  password: 'password',
 };
 
 const LoginPage = () => {
@@ -53,7 +48,7 @@ const LoginPage = () => {
   const theme = useTheme();
   const { settings } = useSettings();
 
-  
+
   const {
     control,
     setError,
@@ -72,6 +67,7 @@ const LoginPage = () => {
       console.error('Login error:', error);
     }
   };
+
   const CustomTextField = styled(TextField)({
     '& .MuiInputBase-input': {
       color: 'rgba(200,200,200,0.7)', // Set the font color to rgba(200,200,200,0.7)
@@ -82,90 +78,50 @@ const LoginPage = () => {
 
   });
 
-  return (
-    <Box
-      sx={{
-        height: '100vh',
-        backgroundImage: `url('/images/background.png')  `,
-        backgroundSize: 'cover',
-        backgroundPosition: 'no-repeat',
-      }}
-    >
-      <Box sx={{ justifyContent: 'flex-end', display: 'flex', p: [2, 10] }}>
-        <Box
-          sx={{
-            borderRadius: '2.5rem',
-            height: '34.3125rem',
-            width: '24.6875rem',
-            display: 'flex',
-            alignItems: 'end',
-            justifyContent: 'center',
-            backgroundColor: 'rgba(0,0,0,0.8)',
-          }}
-        >
-          <Box
-            sx={{
-              marginTop: '5px',
-              p: [6, 12],
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Box sx={{ width: '100%', maxWidth: 400 }}>
-              <svg width={34} viewBox='0 0 32 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
-                <path
-                  fillRule='evenodd'
-                  clipRule='evenodd'
-                  fill={theme.palette.primary.main}
-                  d='M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z'
-                />
-                <path
-                  fill='#161616'
-                  opacity={0.06}
-                  fillRule='evenodd'
-                  clipRule='evenodd'
-                  d='M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z'
-                />
-                <path
-                  fill='#161616'
-                  opacity={0.06}
-                  fillRule='evenodd'
-                  clipRule='evenodd'
-                  d='M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z'
-                />
-                <path
-                  fillRule='evenodd'
-                  clipRule='evenodd'
-                  fill={theme.palette.primary.main}
-                  d='M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z'
-                />
-              </svg>
-              <Box sx={{ my: 6 }}>
-                <Typography variant='h3' sx={{ mb: 1.5, color: 'white' }}>
-                  {`Welcome to ${themeConfig.templateName}! 👋🏻`}
-                </Typography>
-                <Typography sx={{ color: 'rgba(200,200,200,0.7)' }}>
-                  Please sign-in to your account and start the adventure
-                </Typography>
-              </Box>
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
-              <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
-                <Box sx={{ mb: 4, color: 'rgba(200,200,200,0.7)' }}>
+  return <>
+
+      <Grid container spacing={0} columns={20} sx={{backgroundColor:"#E9ECF3",}}>
+        <Grid item xs={12}>
+          <Item sx={{ height: '100vh',backgroundColor:"#3f4458",position:"relative"}}>
+              <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",left:"72.8%",top:"3%", transform: "rotate(-90deg)" }} ></Box>
+              <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",left:"72.8%",top:"-10%", transform: "rotate(-92deg)" }} ></Box>
+              <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",bottom:"-12.8%", left:"-3%",transform: "rotate(70deg)" }} ></Box>
+              <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",bottom:"-1.8%", left:"-2%",transform: "rotate(70deg)" }} ></Box>
+
+          </Item>
+        </Grid>
+
+        <Grid item xs={7} display={"flex"} direction={"row"} sx={{marginLeft:'5%',marginTop:'6.3%'}}  >
+        <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+             <Box sx={{ my: 6,  }}>
+                <Typography variant='h3' sx={{ color: '#000',fontSize:"24px",lineHeight: "130%" }}>
+                  {`Hello! 👋🏻`}
+                </Typography>
+                <Typography sx={{ color: '#000000' }}>
+                Log in to get started
+                 </Typography>
+              </Box>
+                <Box sx={{ mb: 4,  }}>
                   <Controller
-                    name='phoneNumber'
+                    name='email'
                     control={control}
                     rules={{ required: true }}
                     render={({ field: { value, onChange, onBlur } }) => (
                       <CustomTextField
                         fullWidth
                         autoFocus
-                        label='Phone Number'
+                        label='email'
                         value={value}
                         onBlur={onBlur}
                         onChange={onChange}
-                        placeholder='1234567890'
+                        placeholder='samy16@gmail.com'
                         error={Boolean(errors.email)}
                         {...(errors.email && { helperText: errors.email.message })}
                       />
@@ -208,41 +164,44 @@ const LoginPage = () => {
                 <Box
                   sx={{
                     mb: 1.75,
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
+                    textAlign:"end"
                   }}
                 >
 
-                  <FormControlLabel
-                    label='Remember Me'
-                    control={<Checkbox checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />}
-                  />
 
-                  <Typography component={LinkStyled} href='/forgot-password' sx={{ color: 'rgba(200,200,200,0.7)' }}>
+
+                  <Typography component={LinkStyled} href='/forgot-password' sx={{ color: '#3F4458',fontSize:"14px",fontWeight: "400",lineHeight: "130%" }}>
                     Forgot Password?
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'end', flexWrap: 'wrap', justifyContent: 'end' }}>
-                  <Button type='submit' variant='contained' sx={{ mb: 4, color: 'white', backgroundColor: '#A20D29',  }}>
+                <Box sx={{ }}>
+                  <Button type='submit' variant='contained' sx={{
+
+                    width: "360px",
+                    display: "flex",
+                    padding: "15px 0px 16px 0px",
+                    height: "52px",
+                    alignItems: "center",
+                    flexShrink: "0",
+                    borderRadius: "8px",
+                    background: "#3F4458",
+                    justifyContent: "center",
+                   }}>
                     Login
                   </Button>
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-                  <Typography sx={{ color: 'rgba(200,200,200,0.7)', mr: 2 }}>New on our platform?</Typography>
-                  <Typography href='/register' component={LinkStyled} sx={{ color: 'rgba(200,200,200,0.7)' }}>
-                    Create an account
-                  </Typography>
+                <Box sx={{ height:"300px" ,width:"300px",backgroundImage: `url('/images/image.svg')  `, backgroundPosition: 'no-repeat',backgroundSize: 'cover',}}>
+
                 </Box>
               </form>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-    </Box>
-  );
+        </Grid>
+      </Grid>
+
+
+  </>
+
 };
+
 LoginPage.getLayout = (page) => <BlankLayout>{page}</BlankLayout>;
 LoginPage.guestGuard = true;
 

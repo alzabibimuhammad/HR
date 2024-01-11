@@ -67,22 +67,21 @@ const AppCalendar = () => {
       }}
     >
 
-<Stack  direction={"row"} justifyContent={"space-between"}>
+
+<Stack  direction={{sm: "row",xs:'column' }} justifyContent={"space-between"}>
 
 
       <Box sx={{   p: 6, pb: 0,  borderRadius: 1, height:"360px",width:"50%"}}>
         <Typography variant="body1" color="initial">Calendar</Typography>
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DateCalendar/>
-    </LocalizationProvider>
+     </LocalizationProvider>
       </Box>
       <Box sx={{   p: 6, pb: 0,  borderRadius: 1,width:"100%",marginLeft:"30px" }} >
-     <Typography variant="body1" color="initial">Events</Typography>
-
+      <Typography variant="body1" color="initial">Events</Typography>
          <SidebarLeft/>
       </Box>
-
-</Stack>
+      </Stack>
 
     </CalendarWrapper>
   )

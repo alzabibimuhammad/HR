@@ -1,117 +1,88 @@
-// ** MUI Imports
-import Card from '@mui/material/Card'
-import { useTheme } from '@mui/material/styles'
-import CardHeader from '@mui/material/CardHeader'
-import CardContent from '@mui/material/CardContent'
+import React, { useEffect } from 'react';
+import * as agCharts from 'ag-charts-community';
 
-// ** Component Import
-import ReactApexcharts from 'src/@core/components/react-apexcharts'
+function Attendance(Data) {
 
-const donutColors = {
-  series1: '#6AB2DF',
-  series2: '#DCE1E6',
+  useEffect(() => {
 
-}
+    function getData() {
+      return [
+        { type: 'Total Employees', count: Data?.Data?.data?.total_employees },
+        { type: 'Active Employees', count: Data?.Data?.data?.present_employees },
+      ];
+    }
 
-const Attendance = () => {
-  // ** Hook
-  const theme = useTheme()
+    const data = getData();
+    const numFormatter = new Intl.NumberFormat('en-US');
+    const total = ((Data?.Data?.data?.present_employees/Data?.Data?.data?.total_employees)*100).toFixed(1);
 
-  const options = {
-    stroke: { width: 0 },
-    labels: ['Present Employees', 'Total Employees'],
-    colors: [donutColors.series1,donutColors.series2],
-    dataLabels: {
-      enabled: true,
-      formatter: val => `${parseInt(val, 10)}%`
-    },
-    legend: {
-      position: 'bottom',
-      markers: { offsetX: -3 },
-      labels: { colors: theme.palette.text.secondary },
-      itemMargin: {
-        vertical: 3,
-        horizontal: 10
-      }
-    },
-    plotOptions: {
-      pie: {
-        donut: {
-          labels: {
-            show: true,
-            name: {
-              fontSize: '1.2rem'
-            },
-            value: {
-              fontSize: '1.2rem',
-              color: theme.palette.text.secondary,
-              formatter: val => `${parseInt(val, 10)}`
-            },
-            total: {
-              show: true,
-              fontSize: '1.2rem',
-              formatter: () => '80%',
-            }
-          }
-        }
-      }
-    },
-    responsive: [
-      {
-        breakpoint: 992,
-        options: {
-          chart: {
-            height: 380
-          },
-          legend: {
-            position: 'bottom'
-          }
-        }
+
+    const options = {
+      container: document.getElementById('myChart'),
+
+      data,
+      title: {
+        text: 'Employees',
       },
-      {
-        breakpoint: 576,
-        options: {
-          chart: {
-            height: 360
-          },
-          plotOptions: {
-            pie: {
-              donut: {
-                labels: {
-                  show: true,
-                  name: {
 
-                    fontSize: theme.typography.body1.fontSize
-                  },
-                  value: {
-                    fontSize: theme.typography.body1.fontSize
-                  },
-                  total: {
-                    fontSize: theme.typography.body1.fontSize
-                  }
-                }
-              }
-            }
-          }
-        }
+      series: [
+        {
+          type: 'pie',
+          calloutLabelKey: 'type',
+          angleKey: 'count',
+          sectorLabelKey: 'count',
+          calloutLabel: {
+            enabled: false,
+          },
+          sectorLabel: {
+            formatter: ({ datum, sectorLabelKey }) => {
+              const value = datum[sectorLabelKey];
+              return numFormatter.format(value);
+            },
+            color:'#444444'
+          },
+          // title: {
+          //   text: 'Annual Count',
+          // },
+          innerRadiusRatio: 0.7,
+          innerLabels: [
+            {
+              text: numFormatter.format(total)+'%',
+              fontSize: 24,
+            },
+            {
+              text: 'Active',
+              fontSize: 16,
+              margin: 10,
+            },
+          ],
+          tooltip: {
+            renderer: ({ datum, calloutLabelKey, title, sectorLabelKey }) => {
+              return {
+                title,
+                content: `${datum[calloutLabelKey]}: ${numFormatter.format(datum[sectorLabelKey])}`,
+              };
+            },
+          },
+          fills: ['#6AB2DF', '#DCE1E6'], // Add your desired colors here
+
+        },
+      ],
+    };
+
+    const chart = agCharts.AgCharts.create(options);
+
+    return () => {
+      if (chart) {
+        chart.destroy();
       }
-    ]
-  }
+    };
+  }, [Data]);
 
   return (
-    <Card >
-      <CardHeader
-        title='Attendance'
-        subheader='10/13 employees'
-
-
-        subheaderTypographyProps={{ sx: { color:"#8090A7" } }}
-      />
-      <CardContent >
-        <ReactApexcharts type='donut' height={"270px"} width={"328px"} options={options} series={[85, 20]} />
-      </CardContent>
-    </Card>
-  )
+    <div id="myChart" style={{ height: '100%' }}>
+    </div>
+    )
 }
 
-export default Attendance
+export default Attendance;

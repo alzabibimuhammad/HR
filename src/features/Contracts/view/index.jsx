@@ -40,7 +40,7 @@ San Diego Country, CA 91905, USA
     src='/images/A4 - 1.png'
     alt='contract Image'
 
-    width={900}
+    width={700}
     height={900}
   />
 </Box>

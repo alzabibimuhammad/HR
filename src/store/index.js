@@ -9,7 +9,8 @@ import Dashboard from 'src/pages/dashboard/store'
 
 export const store = configureStore({
   reducer: {
-
+    calendar,
+    email,
     Dashboard
 
 

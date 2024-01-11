@@ -8,7 +8,7 @@ function Attendance(Data) {
     function getData() {
       return [
         { type: 'Total Employees', count: Data?.Data?.data?.total_employees },
-        { type: 'Active Employees', count: Data?.Data?.data?.present_employees },
+        { type: 'Active Employees', count: Data?.Data?.data?.present_employees  },
       ];
     }
 
@@ -64,7 +64,7 @@ function Attendance(Data) {
               };
             },
           },
-          fills: ['#6AB2DF', '#DCE1E6'], // Add your desired colors here
+          fills: ['#DCE1E6','#6AB2DF' ], // Add your desired colors here
 
         },
       ],

@@ -110,33 +110,33 @@ const AddEventSidebar = props => {
   }
 
   const resetToStoredValues = useCallback(() => {
-    if (store.selectedEvent !== null) {
-      const event = store.selectedEvent
-      setValue('title', event.title || '')
+    if (store?.selectedEvent !== null) {
+      const event = store?.selectedEvent
+      setValue('title', event?.title || '')
       setValues({
-        url: event.url || '',
-        title: event.title || '',
-        allDay: event.allDay,
-        guests: event.extendedProps.guests || [],
-        description: event.extendedProps.description || '',
-        calendar: event.extendedProps.calendar || 'Business',
-        endDate: event.end !== null ? event.end : event.start,
-        startDate: event.start !== null ? event.start : new Date()
+        url: event?.url || '',
+        title: event?.title || '',
+        allDay: event?.allDay,
+        guests: event?.extendedProps.guests || [],
+        description: event?.extendedProps.description || '',
+        calendar: event?.extendedProps.calendar || 'Business',
+        endDate: event?.end !== null ? event?.end : event?.start,
+        startDate: event?.start !== null ? event?.start : new Date()
       })
     }
-  }, [setValue, store.selectedEvent])
+  }, [setValue, store?.selectedEvent])
 
   const resetToEmptyValues = useCallback(() => {
     setValue('title', '')
     setValues(defaultState)
   }, [setValue])
   useEffect(() => {
-    if (store.selectedEvent !== null) {
+    if (store?.selectedEvent !== null) {
       resetToStoredValues()
     } else {
       resetToEmptyValues()
     }
-  }, [addEventSidebarOpen, resetToStoredValues, resetToEmptyValues, store.selectedEvent])
+  }, [addEventSidebarOpen, resetToStoredValues, resetToEmptyValues, store?.selectedEvent])
 
   const PickersComponent = forwardRef(({ ...props }, ref) => {
     return (
@@ -152,7 +152,7 @@ const AddEventSidebar = props => {
   })
 
   const RenderSidebarFooter = () => {
-    if (store.selectedEvent === null || (store.selectedEvent !== null && !store.selectedEvent.title.length)) {
+    if (store?.selectedEvent === null || (store?.selectedEvent !== null && !store?.selectedEvent.title.length)) {
       return (
         <Fragment>
           <Button type='submit' variant='contained' sx={{ mr: 4 }}>
@@ -194,14 +194,14 @@ const AddEventSidebar = props => {
         }}
       >
         <Typography variant='h5'>
-          {store.selectedEvent !== null && store.selectedEvent.title.length ? 'Update Event' : 'Add Event'}
+          {store?.selectedEvent !== null && store?.selectedEvent.title.length ? 'Update Event' : 'Add Event'}
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          {store.selectedEvent !== null && store.selectedEvent.title.length ? (
+          {store?.selectedEvent !== null && store?.selectedEvent.title.length ? (
             <IconButton
               size='small'
               onClick={handleDeleteEvent}
-              sx={{ color: 'text.primary', mr: store.selectedEvent !== null ? 1 : 0 }}
+              sx={{ color: 'text.primary', mr: store?.selectedEvent !== null ? 1 : 0 }}
             >
               <Icon icon='tabler:trash' fontSize='1.25rem' />
             </IconButton>

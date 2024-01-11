@@ -44,7 +44,7 @@ const SidebarLeft = props => {
             control={
               <Checkbox
                 color={value}
-                checked={store.selectedCalendars.includes(key)}
+                checked={store?.selectedCalendars.includes(key)}
                 onChange={() => dispatch(handleCalendarsUpdate(key))}
               />
             }
@@ -89,6 +89,7 @@ const SidebarLeft = props => {
           }
         }}
       >
+
         <Box sx={{ p: 6, width: '100%' }}>
         <Typography sx={{color:"#8090A7",width:"93px",height:"24px",marginLeft:"10px"}} variant='h3'>Calendar</Typography>
         </Box>

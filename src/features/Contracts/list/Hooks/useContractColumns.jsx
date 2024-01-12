@@ -79,6 +79,7 @@ const useContractColumns = () => {
       flex: 2,
       disableClickEventBubbling: true,
     },
+
     // {
     //   field: 'image',
     //   headerName: '',

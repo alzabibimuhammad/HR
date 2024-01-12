@@ -3,16 +3,13 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { useDispatch } from "react-redux";
 import { RemoveContracts,getContractsData } from "src/pages/contracts/store";
+import { useDeleteContract } from "../../Hooks/useDeleteContract";
 
 export default function AlertDialog({ id, open, handleClose }) {
-  // Use state to manage the local id value
-  const [localId, setLocalId] = useState(id);
-  const dispatch = useDispatch()
+ const { mutate: deleteContract, isLoading } = useDeleteContract();
 
   const handleDeleteAPI = () => {
-      dispatch(RemoveContracts(localId))
-      dispatch(getContractsData())
-
+    deleteContract(id)
       handleClose()
   };
 

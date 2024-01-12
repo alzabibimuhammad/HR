@@ -1,13 +1,15 @@
 export const ContractsData = elements => {
-  return elements.map(element => {
+  console.log("🚀 ~ ContractsData ~ elements:", elements.data?.data?.data)
+
+  return elements.data?.data?.data.map(element => {
     return {
-      image:element?.image[0],
-      id: element?.id,
-      name: element?.name,
+      endDate:element?.endDate,
+      id: element?.contract_id,
+      startDate: element?.startDate,
       phoneNumber: element?.phoneNumber,
-      rate:element?.rate,
-      birthDate:element?.birthDate,
-      createdAt: element?.createdAt
+      status:element?.status,
+      employee:element?.user?.first_name,
+      role: element?.user?.role
     }
   })
 }

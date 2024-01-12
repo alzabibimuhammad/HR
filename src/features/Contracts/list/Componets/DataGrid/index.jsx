@@ -16,13 +16,11 @@ import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { ContractsData } from '../../infrastructure'
 
 const List = ({ rows }) => {
+  console.log("🚀 ~ List ~ data:", rows.data?.data?.data)
   const columns = useContractColumns();
   const [openParent, setOpenParent] = React.useState(false);
   const { t } = useTranslation()
-  const[DataGrid,setDataGrid]=useState([])
-  useEffect(() => {
-    setDataGrid(rows)
-  }, )
+
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
@@ -172,7 +170,7 @@ const List = ({ rows }) => {
               </Stack>
 
               <Divider sx={{ m: '0 !important' }} />
-              <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={ContractsData(DataGrid)}  />
+              <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={ContractsData(rows)|| []}  />
             </CardContent>
           </Card>
         </Grid>

@@ -179,3 +179,7 @@ code[class*='language-'] {
 .lorem{
   margin-left: 50px !important;
 }
+
+.css-1x2dz75-MuiPaper-root-MuiDialog-paper{
+  overflow: visible !important;
+}

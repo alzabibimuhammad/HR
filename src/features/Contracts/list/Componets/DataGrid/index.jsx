@@ -16,7 +16,6 @@ import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { ContractsData } from '../../infrastructure'
 
 const List = ({ rows }) => {
-  console.log("🚀 ~ List ~ data:", rows.data?.data?.data)
   const columns = useContractColumns();
   const [openParent, setOpenParent] = React.useState(false);
   const { t } = useTranslation()

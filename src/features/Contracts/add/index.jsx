@@ -11,6 +11,7 @@ import { useDropzone } from 'react-dropzone'
 import CustomTextField from 'src/@core/components/mui/text-field';
 import useGetEmployeeDropDown from '../list/Hooks/useEmployee';
 import { useAddContract } from '../list/Hooks/useAddContract';
+import PDFViewer from '../list/Componets/Profile/componets/PdfViwer';
 
 export default function Add() {
   const [age, setAge] = React.useState('');
@@ -31,7 +32,7 @@ const { getRootProps, getInputProps } = useDropzone({
   accept: 'application/pdf', // Specify accepted file types
   maxSize: 50000000, // 50MB limit
   accept: {
-    'image/*': ['.png', '.jpg', '.jpeg', '.gif']
+    'image/*': ['.png', '.jpg', '.jpeg', '.gif','.pdf']
   },
 });
 
@@ -76,105 +77,7 @@ const { getRootProps, getInputProps } = useDropzone({
 });
 
 
-//   return <>
-//   <Stack direction={{ xs:'column' }} >
-//   <Stack sx={{backgroundColor:"#FFFFFF",p:"30px",borderRadius:"12px"}}>
-//       <Box sx={{width:"246px",height:"100px",}}>
 
-//       <Typography variant='h2'>
-//       <span style={{color: '#6AB2DF'}}>A</span><span style={{color:"#131627"}}>xis</span> <span style={{color: '#6AB2DF'}}>Code</span>
-//     </Typography>
-
-
-//       <Typography sx={{marginTop:"4px",fontWeight:"500",fontSize:"12px",color:"#8090A7"}}>Office 149, 450 South Brand Brooklyn
-//       San Diego Country, CA 91905, USA
-//       +1 (123) 456 7894, +44 (789) 54222</Typography>
-
-//       </Box>
-//     </Stack>
-// <Box sx={{marginTop:"20px",padding:"30px 30px",backgroundColor:"#FFFFFF",borderRadius:"12px",width:"100%"}}  >
-
-//     <FormControl sx={{ width: { sm:'100%',xs:'100%'},flexDirection:{sm:'row',xs:'column' } ,justifyContent:"space-around",gap:"26px" }}>
-//           <InputLabel id="demo-simple-select-helper-label">Employee Name : </InputLabel>
-//           <Select
-//             labelId="demo-simple-select-helper-label"
-//             id="demo-simple-select-helper"
-//             value={age}
-//             label="Employee Name"
-//             onChange={handleChange}
-//             fullWidth
-//           >
-//             <MenuItem value="">
-//               <em>None</em>
-//             </MenuItem>
-//             <MenuItem value={10}>Ten</MenuItem>
-//             <MenuItem value={20}>Twenty</MenuItem>
-//             <MenuItem value={30}>Thirty</MenuItem>
-//           </Select>
-
-//           <TextField
-//                        autoFocus
-//                       label={`Start Date :`}
-//                       variant='outlined'
-//                       fullWidth
-//                     />
-//           <TextField
-//                        autoFocus
-//                       label={`End Date :`}
-//                       variant='outlined'
-//                       fullWidth
-//                     />
-//         </FormControl>
-
-//         <Typography sx={{color:"#3F4458",fontSize:"16px",fontWeight:"600",marginTop:"20px"}}>Contract File :</Typography>
-
-//         <Box  sx={{display:"flex",justifyContent:"center"}} marginTop={"25px"}>
-//             <Box sx={{width:"75%",height:"40%",borderRadius:"26px",border:"7px dashed #8090A7"}}>
-//             <Box {...getRootProps({ className: 'dropzone' })} sx={files.length ? { height: 450 } : {}}>
-//       <input {...getInputProps()} />
-//       {files.length ? (
-//         img
-//       ) : (
-//         <Box sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', flexDirection: 'column',marginTop:"12%" }}>
-
-//         <CloudDoneOutlinedIcon sx={{width:"56px",height:"56px"}}/>
-//           <Typography variant='h4' sx={{ width:"50%",height:"10%",fontSize:"24px",fontWeight:"500",my:"10px" }}>
-//           Choose a file or drag & drop it here
-//                 PDF, up to 50MB
-//           </Typography>
-//           <Box
-//             sx={{
-//               mb: 8.75,
-//               width: "160px",
-//               height: "52px",
-//               display: 'flex',
-//               borderRadius: "8px",
-//               padding:"16px 33px 16px 33px",
-//               alignItems: 'center',
-//               justifyContent: 'center',
-//               backgroundColor: theme => `rgba(${theme.palette.customColors.main}, 0.08)`,
-//               cursor:"pointer"
-//             }}
-//           >
-
-//             <Typography > Browse File</Typography>
-//           </Box>
-
-//         </Box>
-//       )}
-//     </Box>
-//             </Box>
-//         </Box>
-// </Box>
-
-
-// </Stack>
-
-
-
-
-
-//   </>
 return <>
 
 <Stack sx={{backgroundColor:"#FFFFFF",p:"30px",borderRadius:"12px"}}>
@@ -273,7 +176,7 @@ San Diego Country, CA 91905, USA
       <Box {...getRootProps({ className: 'dropzone' })} sx={files.length ? { height: 450 } : {}}>
         <input {...getInputProps()} />
         {files.length ? (
-          img
+          <PDFViewer pdfUrl={URL.createObjectURL(files[0])} />
         ) : (
           <Box sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', flexDirection: 'column', marginTop: "12%" }}>
             <CloudDoneOutlinedIcon sx={{ width: "56px", height: "56px" }} />

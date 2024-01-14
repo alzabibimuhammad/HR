@@ -183,3 +183,13 @@ code[class*='language-'] {
 .css-1x2dz75-MuiPaper-root-MuiDialog-paper{
   overflow: visible !important;
 }
+
+.rpv-default-layout__toolbar{
+  border: none !important;
+border-radius: 12px;
+}
+
+.rpv-default-layout__container{
+border: none !important;
+border-radius: 12px;
+}

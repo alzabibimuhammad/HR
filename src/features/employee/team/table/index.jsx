@@ -16,128 +16,151 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Button } from '@mui/material';
 import DrawerForm from '../DrawerForm';
-
-function createData(name, calories, fat, carbs, protein, price) {
+import { Stack } from '@mui/system';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import Link from 'next/link';
+function createData(name,id,user) {
   return {
     name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      {
-        date: '2020-01-05',
-        customerId: '11091700',
-        amount: 3,
-      },
-      {
-        date: '2020-01-02',
-        customerId: 'Anonymous',
-        amount: 1,
-      },
-    ],
+    id,
+    user,
+
   };
 }
 
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
 
-  return (
-    <React.Fragment>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
 
-        <TableCell  component="th" scope="row">
-          {row.name}
-          <br/>
+export default function CollapsibleTable(Data) {
+  function Row(props) {
+    const { row } = props;
 
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-            sx={{ fontSize:'13px' }}
-          >
-            Members
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell >{row.calories}</TableCell>
-        <TableCell sx={{ textAlign:'right' }}>{row.fat}</TableCell>
-      </TableRow>
-       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-         <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box sx={{ margin: 1 }}>
-               <Typography variant="h6" gutterBottom component="div">
-                History
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                {/* <TableHead>
-                  <TableRow>
-                    <TableCell>Team</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
-                  </TableRow>
-                </TableHead> */}
-                <TableBody>
-                  {/* {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))} */}
-                  jsj
-                </TableBody>
-              </Table>
+    const [open, setOpen] = React.useState(false);
+    console.log('rowssssss',row)
+    return (
+      <React.Fragment>
+        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+
+          <TableCell  component="th" >
+
+            <Stack direction={'column'}  justifyContent={'start'} alignItems={'start'} sx={{ padding:'0',margin:'0' }}  >
+
+            <Box>
+              {row.name}
             </Box>
-          </Collapse>
-        </TableCell>
 
-      </TableRow>
-    </React.Fragment>
-  );
-}
+            <Box >
+            <IconButton
+              size="small"
+              onClick={() => setOpen(!open)}
+              sx={{ fontSize:'13px',   "&:hover": {
+                background: 'none !important',
+              },
+              padding:0
+            }}
+              disableRipple
+            >
 
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
+              <Stack direction={'row'} >
+                <Typography sx={{ fontSize:'13px',marginRight:'3px'  }} >{row?.user?.length}</Typography>
+                <Typography sx={{ fontSize:'13px' }} >Members</Typography>
+              </Stack>
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Eclair', 262, 16.0),
-  createData('Cupcake', 305, 3.7),
-  createData('Gingerbread', 356, 16.0),
-];
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
 
-export default function CollapsibleTable() {
+            </Box>
+            </Stack>
+
+          </TableCell>
+          <TableCell >{row.user.length}</TableCell>
+          <TableCell sx={{ textAlign:'right' }}>
+              <Box>
+                <IconButton>
+                  <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon>
+                </IconButton>
+                <IconButton  onClick={() => handleClickOpen(params)}>
+                <DeleteOutlinedIcon style={{ color:'#8090A7'  }} variant color="error" size='small'>Delete</DeleteOutlinedIcon>
+                </IconButton>
+              </Box>
+
+
+              {/* <Box>
+                <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
+              </Box> */}
+              {/* {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />} */}
+
+
+
+          </TableCell>
+
+        </TableRow>
+         <TableRow>
+          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+           <Collapse in={open} timeout="auto" unmountOnExit>
+              <Box sx={{ margin: 1 }}>
+                 <Typography variant="h6" gutterBottom component="div">
+                  History
+                </Typography>
+                <Table size="small" aria-label="purchases">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>ID</TableCell>
+                      <TableCell>First Name</TableCell>
+                      <TableCell align="right">Last Name</TableCell>
+                      <TableCell align="right">Email</TableCell>
+                    </TableRow>
+                  </TableHead>
+
+                  <TableBody>
+
+                    {row?.user?.map((user) => (
+                      <TableRow key={user.date}>
+                        <TableCell component="th" scope="row">
+                          {user.id}
+                        </TableCell>
+                        <TableCell>{user.first_name}</TableCell>
+                        <TableCell align="right">{user.last_name}</TableCell>
+                        <TableCell align="right">
+                          {user.email}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+
+                  </TableBody>
+                </Table>
+              </Box>
+            </Collapse>
+          </TableCell>
+
+        </TableRow>
+      </React.Fragment>
+    );
+  }
+
+
+
+
+  // const rows = [
+  //   createData('Frozen yoghurt', 159, 6),
+  //   createData('Ice cream sandwich', 237, 9.0),
+  //   createData('Eclair', 262, 16.0),
+  //   createData('Cupcake', 305, 3.7),
+  //   createData('Gingerbread', 356, 16.0),
+  // ];
+
+
+  console.log(Data?.Data?.data?.data);
+  const rows = Data?.Data?.data?.data?.map((item) => {
+    return createData(item.name, 5,item.user);
+  });
+
   const [openParent, setOpenParent] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
   };
+
 
   return (
     <>
@@ -163,7 +186,7 @@ export default function CollapsibleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows?.map((row) => (
             <Row key={row.name} row={row} />
           ))}
         </TableBody>

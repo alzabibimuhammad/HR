@@ -193,3 +193,8 @@ border-radius: 12px;
 border: none !important;
 border-radius: 12px;
 }
+
+.css-1p0wxo6-MuiModal-root-MuiDrawer-root .MuiDrawer-paper {
+
+  border-radius: 12px 0px 0px 0px;
+}

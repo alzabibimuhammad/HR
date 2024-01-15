@@ -33,6 +33,7 @@ const Calendar = props => {
     dispatch,
     direction,
     updateEvent,
+data,
     calendarApi,
     calendarsColor,
     setCalendarApi,
@@ -40,6 +41,23 @@ const Calendar = props => {
     handleLeftSidebarToggle,
     handleAddEventSidebarToggle
   } = props
+ console.log(data)
+
+  const staticEvents = [
+    {
+      title: 'Event 1',
+      start: '2024-01-15T10:00:00',
+      end: '2024-01-15T12:00:00',
+      allDay: false,
+      extendedProps: {
+        calendar: 'default', // Adjust as needed
+        guests: ['Guest 1', 'Guest 2'],
+        location: 'Location 1',
+        description: 'Description 1',
+      },
+    },
+
+  ];
 
   // ** Refs
   const calendarRef = useRef()
@@ -52,8 +70,8 @@ const Calendar = props => {
   if (store) {
     // ** calendarOptions(Props)
     const calendarOptions = {
-      events: store.events.length ? store.events : [],
-      plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, bootstrap5Plugin],
+      events: data,
+     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin, bootstrap5Plugin],
       initialView: 'dayGridMonth',
       headerToolbar: {
         start: 'sidebarToggle, prev, next, title',

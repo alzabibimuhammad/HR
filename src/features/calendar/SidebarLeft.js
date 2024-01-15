@@ -16,6 +16,8 @@ import Icon from 'src/@core/components/icon'
 // ** Styled Component
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { RequestPage } from '@mui/icons-material'
+import { FormateDate } from 'src/utiltis/DateFormate'
+import { useGetEventByDay } from './hooks/useGetEventByDay'
 
 const SidebarLeft = props => {
   const {
@@ -30,9 +32,11 @@ const SidebarLeft = props => {
     handleAllCalendars,
     handleCalendarsUpdate,
     handleLeftSidebarToggle,
+    data,
     handleAddEventSidebarToggle
   } = props
   const colorsArr = calendarsColor ? Object.entries(calendarsColor) : []
+const {mutate:getEvent,isLoading}=useGetEventByDay()
 
   const renderFilters = colorsArr.length
     ? colorsArr.map(([key, value]) => {
@@ -57,6 +61,14 @@ const SidebarLeft = props => {
     handleAddEventSidebarToggle()
     dispatch(handleSelectEvent(null))
   }
+
+  const handleDateChoose = (date) => {
+    const formattedDate = FormateDate(date);
+    getEvent(formattedDate)
+    calendarApi.gotoDate(date)
+
+
+}
   if (renderFilters) {
     return (
       <Drawer
@@ -94,7 +106,8 @@ const SidebarLeft = props => {
         <Typography sx={{color:"#8090A7",width:"93px",height:"24px",marginLeft:"10px"}} variant='h3'>Calendar</Typography>
         </Box>
 
-        {/* <Divider sx={{ width: '100%', m: '0 !important' }} /> */}
+        {/* calender show data <Divider sx={{ width: '100%', m: '0 !important' }} /> */}
+
         <DatePickerWrapper
           sx={{
             width: '100%',
@@ -103,7 +116,7 @@ const SidebarLeft = props => {
             '& .react-datepicker': { boxShadow: 'none !important', border: 'none !important' }
           }}
         >
-          <DatePicker inline onChange={date => calendarApi.gotoDate(date)} />
+          <DatePicker inline onChange={date => handleDateChoose(date)} />
         </DatePickerWrapper>
         <Box sx={{ p: 7, width: '100%' }}>
           <Button fullWidth variant='contained' sx={{ '& svg': { mr: 2 } }} onClick={handleSidebarToggleSidebar}>

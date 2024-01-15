@@ -27,6 +27,7 @@ import CalendarWrapper from 'src/@core/styles/libs/fullcalendar'
 import SidebarLeft from 'src/features/calendar/SidebarLeft'
 import Calendar from 'src/features/calendar/Calendar'
 import AddEventSidebar from 'src/features/calendar/AddEventSidebar'
+import useGetEventByMonth from 'src/features/calendar/hooks/useGetEventByMonth'
 
 // ** CalendarColors
 const calendarsColor = {
@@ -56,6 +57,9 @@ const AppCalendar = () => {
   useEffect(() => {
     dispatch(fetchEvents(store.selectedCalendars))
   }, [dispatch, store.selectedCalendars])
+
+  const {data,loading}=useGetEventByMonth()
+  console.log("🚀 ~ AppCalendar ~ data:", data)
   const handleLeftSidebarToggle = () => setLeftSidebarOpen(!leftSidebarOpen)
   const handleAddEventSidebarToggle = () => setAddEventSidebarOpen(!addEventSidebarOpen)
 
@@ -68,6 +72,7 @@ const AppCalendar = () => {
       }}
     >
       <SidebarLeft
+      data={data}
         store={store}
         mdAbove={mdAbove}
         dispatch={dispatch}
@@ -93,6 +98,7 @@ const AppCalendar = () => {
         }}
       >
         <Calendar
+        data={data?.data?.data}
           store={store}
           dispatch={dispatch}
           direction={direction}
@@ -106,6 +112,7 @@ const AppCalendar = () => {
         />
       </Box>
       <AddEventSidebar
+      data={data}
         store={store}
         dispatch={dispatch}
         addEvent={addEvent}

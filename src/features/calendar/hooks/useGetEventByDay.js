@@ -3,7 +3,6 @@ import GetEventDay from "../api/EventByDay";
 
 export const useGetEventByDay = () => {
   const queryClient = useQueryClient();
-  console.log("🚀 ~ useGetEventByDay ~ queryClient:", queryClient)
 
   return useMutation({
     mutationFn:GetEventDay,

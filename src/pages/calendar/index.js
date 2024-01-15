@@ -59,7 +59,6 @@ const AppCalendar = () => {
   }, [dispatch, store.selectedCalendars])
 
   const {data,loading}=useGetEventByMonth()
-  console.log("🚀 ~ AppCalendar ~ data:", data)
   const handleLeftSidebarToggle = () => setLeftSidebarOpen(!leftSidebarOpen)
   const handleAddEventSidebarToggle = () => setAddEventSidebarOpen(!addEventSidebarOpen)
 

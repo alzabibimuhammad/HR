@@ -193,3 +193,8 @@ border-radius: 12px;
 border: none !important;
 border-radius: 12px;
 }
+
+.notRequest img{
+    height: 200px;
+    width: 100%;
+}

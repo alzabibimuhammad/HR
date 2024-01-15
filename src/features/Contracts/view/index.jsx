@@ -9,7 +9,6 @@ import PDFViewer from '../list/Componets/Profile/componets/PdfViwer';
 export default function View() {
 
   const pdfUrl = `C:/Users/ASUS/Downloads/abd.pdf`;
-  console.log("🚀 ~ View ~ pdfUrl:", pdfUrl)
 
 
   return <>

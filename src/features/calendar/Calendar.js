@@ -41,7 +41,6 @@ data,
     handleLeftSidebarToggle,
     handleAddEventSidebarToggle
   } = props
- console.log(data)
 
   const staticEvents = [
     {

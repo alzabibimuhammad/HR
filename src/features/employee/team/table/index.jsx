@@ -16,7 +16,10 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Button } from '@mui/material';
 import DrawerForm from '../DrawerForm';
-
+import { Stack } from '@mui/system';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import Link from 'next/link';
 function createData(name, calories, fat, carbs, protein, price) {
   return {
     name,
@@ -63,7 +66,26 @@ function Row(props) {
           </IconButton>
         </TableCell>
         <TableCell >{row.calories}</TableCell>
-        <TableCell sx={{ textAlign:'right' }}>{row.fat}</TableCell>
+        <TableCell sx={{ textAlign:'right' }}>
+            <Box>
+              <IconButton>
+                <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon>
+              </IconButton>
+              <IconButton  onClick={() => handleClickOpen(params)}>
+              <DeleteOutlinedIcon style={{ color:'#8090A7'  }} variant color="error" size='small'>Delete</DeleteOutlinedIcon>
+              </IconButton>
+            </Box>
+
+
+            {/* <Box>
+              <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
+            </Box> */}
+            {/* {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />} */}
+
+
+
+        </TableCell>
+
       </TableRow>
        <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

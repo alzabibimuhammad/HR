@@ -134,33 +134,28 @@ const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
         <Typography sx={{fontWeight:"600",fontSize:"20px",color:"#131627"}}>Today Event</Typography>
         <Box sx={{width:"100%"}}>
 
-{DataEventByDay?.data?.data ?
-
-<div class="parent">
-        <div>
-            <p><span class="child">19</span>Jan - 2020</p>
-            <p>9:00 AM</p>
+        {Array.isArray(DataEventByDay?.data?.data) && DataEventByDay.data.data.length > 0 ? (
+      DataEventByDay.data.data.map(event => (
+        <div className="parent" key={event.id}>
+          <div>
+            <p><span className="child">{event.day}</span>{event.start}</p>
+            {/* <p>{event.time}</p> */}
+          </div>
+          <div>
+            <p className='description'>
+              {event.description}
+            </p>
+          </div>
         </div>
-        <div>
-          <p className='lorem'>
-            lorem23e <br/> adsdgdf;jn
-          </p>
-        </div>
-
-      </div>
-
-    :
-    <div className='notRequest'>
-
-      <img
+      ))
+    ) : (
+      <Image
+        width={250}
+        height={200}
         src="/images/notRequest.svg"
         alt="Alternate Text"
       />
-    </div>
-
-    }
-
-
+    )}
         </Box>
         </Box>
       </Drawer>

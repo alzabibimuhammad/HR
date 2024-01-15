@@ -167,7 +167,7 @@ code[class*='language-'] {
 .child{
   position: absolute;
   left: 0px;
-  bottom: 6px;
+  bottom: 10px;
   font-size: 30px;
   color: #3F4458;
 }
@@ -176,7 +176,7 @@ code[class*='language-'] {
   color: #3F4458;
 }
 
-.lorem{
+.description{
   margin-left: 50px !important;
 }
 

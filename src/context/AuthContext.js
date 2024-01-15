@@ -52,7 +52,6 @@ const AuthProvider = ({ children }) => {
          setUser(response.data?.data?.user)
          const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
          router.replace(redirectURL)
-         console.log(response)
          toast.success(`${response.data.message} `, {
            position: "top-left",
            style: {
@@ -62,7 +61,6 @@ const AuthProvider = ({ children }) => {
          });
       })
        .catch(err => {
-        console.log(err);
          toast.error(`${err.response.status === 401 ? "Unauthorized":err.message}  `, {
            position: "top-left",
            style: {

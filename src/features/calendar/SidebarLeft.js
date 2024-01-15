@@ -18,6 +18,7 @@ import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { RequestPage } from '@mui/icons-material'
 import { FormateDate } from 'src/utiltis/DateFormate'
 import { useGetEventByDay } from './hooks/useGetEventByDay'
+import Image from 'next/image';
 
 const SidebarLeft = props => {
   const {
@@ -32,11 +33,13 @@ const SidebarLeft = props => {
     handleAllCalendars,
     handleCalendarsUpdate,
     handleLeftSidebarToggle,
-    data,
     handleAddEventSidebarToggle
+
   } = props
+
   const colorsArr = calendarsColor ? Object.entries(calendarsColor) : []
-const {mutate:getEvent,isLoading}=useGetEventByDay()
+const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
+
 
   const renderFilters = colorsArr.length
     ? colorsArr.map(([key, value]) => {
@@ -131,18 +134,28 @@ const {mutate:getEvent,isLoading}=useGetEventByDay()
         <Typography sx={{fontWeight:"600",fontSize:"20px",color:"#131627"}}>Today Event</Typography>
         <Box sx={{width:"100%"}}>
 
-        <div class="parent">
-        <div>
-            <p><span class="child">19</span>Jan - 2020</p>
-            <p>9:00 AM</p>
+        {Array.isArray(DataEventByDay?.data?.data) && DataEventByDay.data.data.length > 0 ? (
+      DataEventByDay.data.data.map(event => (
+        <div className="parent" key={event.id}>
+          <div>
+            <p><span className="child">{event.day}</span>{event.start}</p>
+            {/* <p>{event.time}</p> */}
+          </div>
+          <div>
+            <p className='description'>
+              {event.description}
+            </p>
+          </div>
         </div>
-        <div>
-          <p className='lorem'>
-            lorem23e <br/> adsdgdf;jn
-          </p>
-        </div>
-
-      </div>
+      ))
+    ) : (
+      <Image
+        width={250}
+        height={200}
+        src="/images/notRequest.svg"
+        alt="Alternate Text"
+      />
+    )}
         </Box>
         </Box>
       </Drawer>

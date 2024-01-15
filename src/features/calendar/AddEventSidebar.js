@@ -72,6 +72,8 @@ const AddEventSidebar = props => {
   }
 
   const onSubmit = data => {
+    console.log("🚀 ~ onSubmit ~ data:", data)
+
     const modifiedEvent = {
       url: values.url,
       display: 'block',
@@ -85,6 +87,7 @@ const AddEventSidebar = props => {
         description: values.description.length ? values.description : undefined
       }
     }
+    console.log("🚀 ~ onSubmit ~ modifiedEvent:", modifiedEvent)
     if (store.selectedEvent === null || (store.selectedEvent !== null && !store.selectedEvent.title.length)) {
       dispatch(addEvent(modifiedEvent))
     } else {

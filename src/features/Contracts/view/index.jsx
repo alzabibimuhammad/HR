@@ -4,12 +4,42 @@ import Typography from '@mui/material/Typography'
 
 import Image from 'next/image';
 import Button from '@mui/material/Button';
-import PDFViewer from '../list/Componets/Profile/componets/PdfViwer';
+import PDFViewer from '../list/Profile/PdfViwer';
+import useViewContract from '../list/Hooks/useViewContracts';
+import { useRouter } from 'next/router';
 
-export default function View() {
+export default function View({id}) {
 
-  const pdfUrl = `C:/Users/ASUS/Downloads/abd.pdf`;
+  const router = useRouter();
 
+  const { data, isLoading, isError } = useViewContract(id);
+
+
+  const downloadPDF = (data) => {
+    const element = document.createElement('a');
+    element.href = data?.data?.data[0]?.path;
+    element.download = 'contract.pdf';
+    element.click();
+  };
+
+  const deleteContract = async (data) => {
+    try {
+      const contractId = data?.data?.data[0]?.id;
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contract/Delete/${contractId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('Contract deleted successfully');
+        router.push('/contracts/list');
+      } else {
+        console.error('Failed to delete contract');
+      }
+    } catch (error) {
+      console.error('An error occurred while deleting contract', error);
+    }
+  };
 
   return <>
     <Stack sx={{backgroundColor:"#FFFFFF",p:"30px",borderRadius:"12px"}}>
@@ -31,43 +61,48 @@ San Diego Country, CA 91905, USA
 
 
 
-{/*           */}
 
 
     <Stack  marginTop={"20px"} direction={"row"} justifyContent={"space-between"}  spacing={12}>
+      {data?.data?.data.map((ele)=> <>
     <Box sx={{width:"100%",borderRadius:"12px",backgroundColor:"#FFFFFF",textAlign:"center",padding:"35px 0px"}}>
-
-    <PDFViewer  pdfUrl={pdfUrl} />
-
-</Box>
-
+    <PDFViewer pdfUrl={ele.path} />
+        </Box>
       <Box sx={{display:"flex",flexDirection:"column",gap:"18px"}}>
       <Box sx={{width:"380px",height:"131px", backgroundColor:"#FFFFFF",borderRadius:"12PX",padding:"12px 19px"}}>
 
       <Typography sx={{marginTop:"4px",fontWeight:"600",fontSize:"16px",color:"#3F4458"}}>
-      Contract #12
+      Contract #{ele.id}
 </Typography>
 
       <Typography sx={{marginTop:"4px",fontWeight:"600",fontSize:"14px",color:"#8090A7"}}>
-      Name : Raya Scott
+      Name : {ele.user.first_name} {ele.user.last_name}
 
 </Typography>
       <Typography sx={{marginTop:"4px",fontWeight:"600",fontSize:"14px",color:"#8090A7"}}>
-Start Date : 23 - August - 2024
+
+Start Date : {ele.startTime}
+
 </Typography>
+
+
       <Typography sx={{marginTop:"4px",fontWeight:"600",fontSize:"14px",color:"#8090A7"}}>
 
-End Date : 23 - August - 2024
+End Date : {ele.endTime}
 </Typography>
       </Box>
 
       <Box sx={{backgroundColor:"#FFFFFF",width:"380px",height:"240px",borderRadius:"12px",display:"flex",flexDirection:"column",justifyContent:"space-around",padding:"0 15px"}}>
-      <Button sx={{width:"100%"}} size='large' variant="contained" > Print</Button>
-      <Button sx={{width:"100%"}} size='large' variant="contained"> Download</Button>
-      <Button sx={{width:"100%",backgroundColor:"#DF2E38"}} size='large' variant="contained"> Delete</Button>
+      <Button sx={{width:"100%"}} size='large' variant="contained"onClick={() => window.print()} > Print</Button>
+      <Button sx={{width:"100%"}} size='large' variant="contained"onClick={() => downloadPDF(data)}> Download</Button>
+      <Button sx={{width:"100%",backgroundColor:"#DF2E38"}} size='large' variant="contained"onClick={() => deleteContract(data)}> Delete</Button>
 
       </Box>
       </Box>
+      </>)}
+
+
+
     </Stack>
 </>
 }

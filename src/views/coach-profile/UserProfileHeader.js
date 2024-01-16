@@ -25,16 +25,16 @@ const ProfilePicture = styled('img')(({ theme }) => ({
 
 const UserProfileHeader = (Data) => {
   const {t} = useTranslation()
+
   return Object.keys(Data).length > 0 ? (
 
     <Card>
-      {Data.Data.map((coachData)  => (
 
-      <div key={coachData.id}>
+      <div key={"coachData.id"}>
       <CardMedia
         component='img'
         alt='profile-header'
-        image={process.env.NEXT_PUBLIC_IMAGES + '/' +coachData?.image[0]?.image || '/images/icons/project-icons/python.png'}
+        image={process.env.NEXT_PUBLIC_IMAGES + '/' +"coachData?.image[0]?.image" || '/images/icons/project-icons/python.png'}
         sx={{
           height: { xs: 150, md: 250 }
         }}
@@ -49,7 +49,7 @@ const UserProfileHeader = (Data) => {
           justifyContent: { xs: 'center', md: 'flex-start' }
         }}
       >
-        <ProfilePicture src={process.env.NEXT_PUBLIC_IMAGES + '/' +coachData?.image[0]?.image} alt='profile-picture' />
+        <ProfilePicture src={process.env.NEXT_PUBLIC_IMAGES + '/' +"coachData?.image[0]?.image"} alt='profile-picture' />
         <Box
           sx={{
             width: '100%',
@@ -62,7 +62,7 @@ const UserProfileHeader = (Data) => {
         >
           <Box sx={{ mb: [6, 0], display: 'flex', flexDirection: 'column', alignItems: ['center', 'flex-start'] }}>
             <Typography variant='h5' sx={{ mb: 2.5 }}>
-            {coachData.name}
+            {"coachData.name"}
             </Typography>
             <Box
               sx={{
@@ -73,7 +73,7 @@ const UserProfileHeader = (Data) => {
             >
               <Box sx={{ mr: 4, display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'text.secondary' } }}>
                 <Icon fontSize='1.25rem'  />
-                <Typography sx={{ color: 'text.secondary' }}>{t(coachData.role)}</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>{t("coachData.role")}</Typography>
               </Box>
               <Box sx={{ mr: 4, display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'text.secondary' } }}>
                 <Icon fontSize='1.25rem' icon='tabler:map-pin' />
@@ -81,7 +81,7 @@ const UserProfileHeader = (Data) => {
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'text.secondary' } }}>
                 <Icon fontSize='1.25rem' icon='tabler:calendar' />
-                <Typography sx={{ color: 'text.secondary' }}>{coachData.phoneNumber}</Typography>
+                <Typography sx={{ color: 'text.secondary' }}>{"coachData.phoneNumber"}</Typography>
               </Box>
             </Box>
           </Box>
@@ -93,7 +93,6 @@ const UserProfileHeader = (Data) => {
       </CardContent>
       </div>
 
-      ))}
 
     </Card>
 

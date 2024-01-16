@@ -20,11 +20,12 @@ const navigation = () => {
           path:"/contracts/list"
 
         },
-        {
-          title:"View",
-          path:"/contracts/view"
 
-        },
+        // {
+        //   title:"View",
+        //   path:"/contracts/view"
+
+        // },
         {
           title:"Add",
           path:"/contracts/add"

@@ -11,7 +11,7 @@ import { useDropzone } from 'react-dropzone'
 import CustomTextField from 'src/@core/components/mui/text-field';
 import useGetEmployeeDropDown from '../list/Hooks/useEmployee';
 import { useAddContract } from '../list/Hooks/useAddContract';
-import PDFViewer from '../list/Componets/Profile/componets/PdfViwer';
+import PDFViewer from '../list/Profile/PdfViwer';
 
 export default function Add() {
   const [age, setAge] = React.useState('');

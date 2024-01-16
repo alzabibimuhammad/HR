@@ -194,7 +194,7 @@ border: none !important;
 border-radius: 12px;
 }
 
-.notRequest img{
-    height: 200px;
-    width: 40% !important;
+.css-1p0wxo6-MuiModal-root-MuiDrawer-root .MuiDrawer-paper {
+
+  border-radius: 12px 0px 0px 0px;
 }

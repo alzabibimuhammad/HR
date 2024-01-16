@@ -48,6 +48,19 @@ const navigation = () => {
       icon: 'tabler:report',
       path: '/calendar'
     },
+    {
+      title: 'Employees',
+      icon: 'tabler:file-pencil',
+
+      children:[
+        {
+          title:"Team",
+          path:"/employees/team"
+
+        },
+
+      ]
+    },
   ]
 
 }

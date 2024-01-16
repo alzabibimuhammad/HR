@@ -23,7 +23,7 @@ export default function Dashboard() {
 
 
  return <>
-      <Stack spacing={5}>
+      <Stack spacing={5} sx={{ overflow:'hidden' }} >
 
       <Stack justifyContent={"center"}  spacing={5} direction={{sm:'row',xs:'column'}} >
 

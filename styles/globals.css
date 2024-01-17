@@ -36,12 +36,12 @@ code[class*='language-'] {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #121214;
+  background: #E9ece3;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #A10C28;
+  background: #6AB2DF;
   border-radius: 10px;
 
 }
@@ -110,7 +110,7 @@ code[class*='language-'] {
 }
 
 .cssbuttons-io-button .icon {
-  background: #A20D29;
+
   margin-left: 1em;
   position: absolute;
   display: flex;

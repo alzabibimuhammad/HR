@@ -37,6 +37,7 @@ export default function CollapsibleTable(Data) {
   function Row(props) {
     const { row } = props;
 
+    console.log('dddsss props',row.id);
     const [open, setOpen] = useState(false);
 
 
@@ -49,8 +50,8 @@ export default function CollapsibleTable(Data) {
     };
 
     const handleClickOpen = (params) => {
-      const { id } = params;
-      setDeleteId(id);
+      console.log('dssdds oiiii',params) ;
+      setDeleteId(params);
       setIsDeletePopupOpen(true);
 
 
@@ -104,7 +105,7 @@ export default function CollapsibleTable(Data) {
                   <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon>
                 </IconButton>
 
-                <IconButton  onClick={() => handleClickOpen(row.name)}>
+                <IconButton  onClick={() => handleClickOpen(row.id)}>
                 <DeleteOutlinedIcon style={{ color:'#8090A7'  }} variant color="error" size='small'>Delete</DeleteOutlinedIcon>
                 </IconButton>
 
@@ -167,18 +168,11 @@ export default function CollapsibleTable(Data) {
 
 
 
-  // const rows = [
-  //   createData('Frozen yoghurt', 159, 6),
-  //   createData('Ice cream sandwich', 237, 9.0),
-  //   createData('Eclair', 262, 16.0),
-  //   createData('Cupcake', 305, 3.7),
-  //   createData('Gingerbread', 356, 16.0),
-  // ];
 
 
   console.log(Data?.Data?.data?.data);
   const rows = Data?.Data?.data?.data?.map((item) => {
-    return createData(item.name, 5,item.user);
+    return createData(item.name, item.id,item.user);
   });
 
   const [openParent, setOpenParent] = React.useState(false);

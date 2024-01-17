@@ -20,6 +20,8 @@ import { Stack } from '@mui/system';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import Link from 'next/link';
+import AlertDialog from '../dialog';
+import { useState } from 'react';
 function createData(name,id,user) {
   return {
     name,
@@ -35,8 +37,30 @@ export default function CollapsibleTable(Data) {
   function Row(props) {
     const { row } = props;
 
-    const [open, setOpen] = React.useState(false);
-    console.log('rowssssss',row)
+    const [open, setOpen] = useState(false);
+
+
+    const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
+    const [deleteId, setDeleteId] = useState(null);
+
+    const handleEditClick = (row) => {
+      setEditData(row);
+      setIsDrawerOpenEdit(true);
+    };
+
+    const handleClickOpen = (params) => {
+      const { id } = params;
+      setDeleteId(id);
+      setIsDeletePopupOpen(true);
+
+
+    };
+
+    const handleClose = () => {
+      setIsDeletePopupOpen(false)
+    };
+
+
     return (
       <React.Fragment>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -79,16 +103,18 @@ export default function CollapsibleTable(Data) {
                 <IconButton>
                   <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon>
                 </IconButton>
-                <IconButton  onClick={() => handleClickOpen(params)}>
+
+                <IconButton  onClick={() => handleClickOpen(row.name)}>
                 <DeleteOutlinedIcon style={{ color:'#8090A7'  }} variant color="error" size='small'>Delete</DeleteOutlinedIcon>
                 </IconButton>
+
               </Box>
 
 
               {/* <Box>
                 <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
               </Box> */}
-              {/* {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />} */}
+              {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
 
 
 

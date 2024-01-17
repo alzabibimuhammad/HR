@@ -198,3 +198,8 @@ border-radius: 12px;
 
   border-radius: 12px 0px 0px 0px;
 }
+
+
+.css-as200-MuiFormControl-root-MuiTextField-root .MuiInputBase-input{
+  color: #8090A7;
+}

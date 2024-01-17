@@ -70,10 +70,10 @@ const LoginPage = () => {
 
   const CustomTextField = styled(TextField)({
     '& .MuiInputBase-input': {
-      color: 'rgba(200,200,200,0.7)', // Set the font color to rgba(200,200,200,0.7)
+      color: '#8090A7',
     },
     '& label': {
-      color: 'rgba(200,200,200,0.7)', // Set the font color to rgba(200,200,200,0.7)
+      color: '#8090A7s',
     },
 
   });
@@ -116,12 +116,13 @@ const LoginPage = () => {
                     render={({ field: { value, onChange, onBlur } }) => (
                       <CustomTextField
                         fullWidth
+                        sx={{ color:'#8090A7' }}
                         autoFocus
                         label='email'
                         value={value}
                         onBlur={onBlur}
                         onChange={onChange}
-                        placeholder='samy16@gmail.com'
+                        placeholder=''
                         error={Boolean(errors.email)}
                         {...(errors.email && { helperText: errors.email.message })}
                       />

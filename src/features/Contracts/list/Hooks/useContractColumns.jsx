@@ -106,29 +106,19 @@ const useContractColumns = () => {
       renderCell: (params) => {
         return (
           <>
-          <Stack direction={"row"} spacing={2} justifyContent={"center"} marginTop={"10px"}>
-            <Box>
-              <IconButton>
-                <BorderColorOutlinedIcon style={{ color:'#B4B4B6' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon>
-              </IconButton>
-            </Box>
-            <Box>
-              <IconButton onClick={() => handleClickOpen(params)}>
-              <DeleteOutlinedIcon variant="contained" color="error" size='small'>Delete</DeleteOutlinedIcon>
-              </IconButton>
-            </Box>
+          <Stack >
 
 
-              <Link href={`/contract/contractProfile/${params.row.id}`} >
+
+
+              <Link href={`/contracts/view/${params.row.id}`} >
               <IconButton >
               <VisibilityIcon  variant="contained" sx={{ color:'#FF9F43' }} size='small'>Details</VisibilityIcon>
               </IconButton>
 
               </Link>
 
-            <Box>
-              <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
-            </Box>
+
           </Stack>
             {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
 

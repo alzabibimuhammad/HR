@@ -77,7 +77,6 @@ const AboutOverivew = (Data) => {
 
   return Object.keys(Data).length > 0 ? (
   <div>
-  {Data.Data.map((coachData)  => (
 
     <Grid container spacing={6}>
       <Grid item xs={12}>
@@ -91,11 +90,11 @@ const AboutOverivew = (Data) => {
               <Stack direction={{ xs: 'column', sm: 'column' }}>
 
               <Typography ariant='body2'v sx={{ mb: 4, color: 'inherit' }} >
-                {t('Birth Date')} :  {coachData.birthDate}
+                {t('Birth Date')} :  {"coachData.birthDate"}
               </Typography>
 
               <Typography ariant='body2'v sx={{ mb: 4, color: 'inherit' }} >
-                <Rating name="read-only" value={coachData.rate} readOnly />
+                <Rating name="read-only" value="{coachData.rate}" readOnly />
               </Typography>
 
               </Stack>
@@ -111,7 +110,6 @@ const AboutOverivew = (Data) => {
       </Grid>
 
     </Grid>
-  ))}
   </div>
 
   ) : null

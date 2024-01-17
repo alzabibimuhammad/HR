@@ -22,18 +22,7 @@ const BootstrapButton = styled(Button)({
   textTransform: 'none',
   borderColor: '#0063cc',
   backgroundColor: '#0063cc',
-  fontFamily: [
-    '-apple-system',
-    'BlinkMacSystemFont',
-    '"Segoe UI"',
-    'Roboto',
-    '"Helvetica Neue"',
-    'Arial',
-    'sans-serif',
-    '"Apple Color Emoji"',
-    '"Segoe UI Emoji"',
-    '"Segoe UI Symbol"'
-  ].join(','),
+  fontFamily: ['Montserrat'],
   '&:hover': {
     boxShadow: 'none',
     borderColor: '#0062cc',

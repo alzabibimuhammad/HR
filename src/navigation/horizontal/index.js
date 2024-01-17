@@ -10,6 +10,11 @@ const navigation = () => {
           path: '/apps/email'
         },
       ]
+      },
+      {
+        icon: 'tabler:layout-grid-add',
+        title: 'Profile',
+        path:'/profile/[id]'
       }
 
 

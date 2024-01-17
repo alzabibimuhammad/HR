@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { Button } from '@mui/material';
+import { Button, Card, CardContent, MenuItem, TextField } from '@mui/material';
 import DrawerForm from '../DrawerForm';
 import { Stack } from '@mui/system';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
@@ -22,11 +22,17 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import Link from 'next/link';
 import AlertDialog from '../dialog';
 import { useState } from 'react';
-function createData(name,id,user) {
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import { useTranslation } from 'react-i18next';
+
+function createData(id,employee,role,spcialization,team) {
   return {
-    name,
-    id,
-    user,
+    employee,
+    role,
+    spcialization,
+    team,
+    id
+
 
   };
 }
@@ -38,11 +44,9 @@ export default function CollapsibleTable(Data) {
     const { row } = props;
 
     const [open, setOpen] = useState(false);
-
-
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
-
+    const {t} = useTranslation()
     const handleEditClick = (row) => {
       setEditData(row);
       setIsDrawerOpenEdit(true);
@@ -63,6 +67,7 @@ export default function CollapsibleTable(Data) {
 
     return (
       <React.Fragment>
+
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
 
           <TableCell  component="th" >
@@ -70,7 +75,7 @@ export default function CollapsibleTable(Data) {
             <Stack direction={'column'}  justifyContent={'start'} alignItems={'start'} sx={{ padding:'0',margin:'0' }}  >
 
             <Box>
-              {row.name}
+              {row.employee}
             </Box>
 
             <Box >
@@ -87,7 +92,7 @@ export default function CollapsibleTable(Data) {
 
               <Stack direction={'row'} >
                 <Typography sx={{ fontSize:'13px',marginRight:'3px'  }} >{row?.user?.length}</Typography>
-                <Typography sx={{ fontSize:'13px' }} >Members</Typography>
+                <Typography sx={{ fontSize:'13px' }} >Daily Report</Typography>
               </Stack>
 
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -97,14 +102,22 @@ export default function CollapsibleTable(Data) {
             </Stack>
 
           </TableCell>
-          <TableCell >{row.user.length}</TableCell>
-          <TableCell sx={{ textAlign:'right' }}>
-              <Box>
-                <IconButton>
-                  <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon>
-                </IconButton>
 
-                <IconButton  onClick={() => handleClickOpen(row.name)}>
+          <TableCell >{/*{row.user.length}*/}dddd</TableCell>
+          <TableCell >Specialization</TableCell>
+          <TableCell >Team</TableCell>
+
+          <TableCell >
+              <Box>
+
+              <Link href={`/coach/coachProfile/id`} >
+              <IconButton >
+              <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'>Details</VisibilityIcon>
+              </IconButton>
+
+              </Link>
+
+                <IconButton  onClick={() => handleClickOpen(row.id)}>
                 <DeleteOutlinedIcon style={{ color:'#8090A7'  }} variant color="error" size='small'>Delete</DeleteOutlinedIcon>
                 </IconButton>
 
@@ -177,37 +190,121 @@ export default function CollapsibleTable(Data) {
 
 
   console.log(Data?.Data?.data?.data);
-  const rows = Data?.Data?.data?.data?.map((item) => {
-    return createData(item.name, 5,item.user);
-  });
+  // const rows = Data?.Data?.data?.data?.map((item) => {
+  //   return createData(item.name, 5,item.user);
+  // });
+
+  const rows = [
+    createData(2,'muhammad',1,'sss','front'),
+    createData(3,'muhammad',1,'sss','front')
+    ];
+
 
   const [openParent, setOpenParent] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
   };
+  const [role, setRole] = useState('');
+  const [status, setStatus] = useState('');
+
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
+  };
+
+  const handleStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
 
 
   return (
-    <>
-    <Button
-    sx={{ marginLeft:'90%',fontSize:'13px',color:'white',backgroundColor:'#6AB2DF' ,     ":hover": {color:'#6D6B77'}, }}
-    onClick={handleDrawerOpen}
 
-     >+ ADD TEAM
-     </Button>
-     <Box sx={{ borderRadius:'15px' }} >
-    <DrawerForm  open={openParent} setOpenParent={setOpenParent} />
-    </Box>
+
+    <Card>
+      <CardContent   >
+
+            <Stack
+                direction={{ xs: 'column', sm: 'column' }}
+                marginBottom={"10px"}
+                spacing={3}
+              >
+            <TextField
+              placeholder='Search'
+              InputProps={{
+                startAdornment: (
+                  <Box paddingRight={1} >
+                  <svg width="14"  height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="zoom-split">
+                      <path id="Combined Shape" fill-rule="evenodd" clip-rule="evenodd" d="M5.75002 11.875C2.64341 11.875 0.125015 9.3566 0.125015 6.25C0.125015 3.1434 2.64341 0.625 5.75002 0.625C8.85662 0.625 11.375 3.1434 11.375 6.25C11.375 9.3566 8.85662 11.875 5.75002 11.875ZM5.75 10.6251C8.16625 10.6251 10.125 8.6663 10.125 6.25005C10.125 3.8338 8.16625 1.87505 5.75 1.87505C3.33376 1.87505 1.375 3.8338 1.375 6.25005C1.375 8.6663 3.33376 10.6251 5.75 10.6251ZM13.692 14.1919C13.936 13.9478 13.936 13.5521 13.692 13.308L11.192 10.808C10.9479 10.5639 10.5522 10.5639 10.3081 10.808C10.064 11.0521 10.064 11.4478 10.3081 11.6919L12.8081 14.1919C13.0522 14.436 13.4479 14.436 13.692 14.1919Z" fill="#8090A7"/>
+                    </g>
+                  </svg>
+                  </Box>
+                ),
+              }}
+              sx={{ paddingLeft: '8px',backgroundColor:'#F5F7FA' }}
+              size='small'
+
+
+            />
+
+              <Stack
+                direction={{ xs: 'column', sm: 'row' }}
+                spacing={{ sm: 10, xs: 5 }}
+                width={{ xs: '250%', sm: '97%' }}
+                marginLeft={{ xs:'30px' }}
+                marginBottom={"10px"}
+                alignItems={{sm:"center",xs:"inherit"}}
+
+              >
+
+                <Typography>Filter</Typography>
+                  <TextField
+                    select
+                    fullWidth
+                    defaultValue="Select Role"
+                    SelectProps={{
+                      value: role,
+                      displayEmpty: true,
+                      onChange: handleRoleChange,
+                    }}
+                  >
+                    <MenuItem value=''>Select Role</MenuItem>
+                    <MenuItem value='admin'>admin</MenuItem>
+                    <MenuItem value='customer'>customer</MenuItem>
+                    <MenuItem value='employee'>employee</MenuItem>
+                  </TextField>
+                  <TextField
+                    select
+                    fullWidth
+                    defaultValue='Select Team'
+                    SelectProps={{
+                      value: status,
+                      displayEmpty: true,
+                      onChange: handleStatusChange,
+                    }}
+                  >
+                    <MenuItem value=''>Specialization</MenuItem>
+                    <MenuItem value='back'>back</MenuItem>
+                    <MenuItem value='front'>front</MenuItem>
+                    <MenuItem value='UI/UX'>UI/UX</MenuItem>
+                  </TextField>
+                  <TextField
+                  fullWidth
+                  type='date'
+                  />
+                </Stack>
+                </Stack>
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
 
           <TableRow>
 
-            <TableCell sx={{ width:'20%',marginLeft:'10%' }} >TEAM NAME</TableCell>
-            <TableCell sx={{ width:'10%' }} >TEAM ID</TableCell>
-            <TableCell sx={{ left:0,width:'70%',textAlign:'right' }} >ACTION</TableCell>
+            <TableCell sx={{ width:'20%',marginLeft:'10%' }} >Employee</TableCell>
+            <TableCell sx={{ width:'10%' }} >Role</TableCell>
+            <TableCell sx={{ left:0,width:'10%' }} >Specialization</TableCell>
+            <TableCell sx={{ left:0,width:'10%' }} >Team</TableCell>
+            <TableCell sx={{ left:0,width:'10%' }} >Action</TableCell>
 
           </TableRow>
         </TableHead>
@@ -218,6 +315,8 @@ export default function CollapsibleTable(Data) {
         </TableBody>
       </Table>
     </TableContainer>
-    </>
+    </CardContent>
+
+    </Card>
   );
 }

@@ -1,9 +1,9 @@
 
 import { useQuery } from '@tanstack/react-query'
-import GetAllEmployee from '../api/GetAllEmployee'
+import GetAllTeams from '../api/GetAllTeams'
 
 const useGetAllEmployee = () => {
-  const query = useQuery({ queryKey: ['employees'], queryFn: GetAllEmployee })
+  const query = useQuery({ queryKey: ['employees'], queryFn: GetAllTeams })
 
   return query
 }

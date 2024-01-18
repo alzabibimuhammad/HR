@@ -1,11 +1,13 @@
 import { Card, CardContent, CardHeader, Grid, List, Menu, MenuItem } from '@mui/material'
 import React from 'react'
 import CollapsibleTable from 'src/features/employee/teams/Componets/table'
-import useGetAllEmployee from 'src/features/employee/teams/hooks/useGetAllTeams'
+import Users from 'src/features/employee/users/componets/DataGrid'
+import useGetAllUsers from 'src/features/employee/users/hooks/useGetAllUsers'
 
 export default function Employees() {
 
-  const {data , loading } = useGetAllEmployee()
+  const {data , loading } = useGetAllUsers()
+
 
   return (
     <Grid container spacing={4}>
@@ -13,7 +15,7 @@ export default function Employees() {
       <Card>
         <CardContent >
 
-          <CollapsibleTable Data = {data}/>
+          {data ? <Users rows = {data}/>:null}
 
         </CardContent>
         </Card>

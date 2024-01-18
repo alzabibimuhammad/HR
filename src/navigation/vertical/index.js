@@ -54,6 +54,11 @@ const navigation = () => {
 
       children:[
         {
+          title:"All Users",
+          path:"/employees/users"
+
+        },
+        {
           title:"Team",
           path:"/employees/team"
 

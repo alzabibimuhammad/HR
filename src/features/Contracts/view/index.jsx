@@ -15,20 +15,15 @@ export default function View({id}) {
   const { data, isLoading, isError } = useViewContract(id);
 
 
-  const downloadPDF = (data) => {
-    const element = document.createElement('a');
-    element.href = data?.data?.data[0]?.path;
-    element.download = 'contract.pdf';
-    element.click();
-  };
+
 
   const deleteContract = async (data) => {
     try {
       const contractId = data?.data?.data[0]?.id;
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contract/Delete/${contractId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contract/Delete/${contractId}, {
         method: 'DELETE',
-      });
+      }`);
 
       if (response.ok) {
         console.log('Contract deleted successfully');
@@ -65,9 +60,18 @@ San Diego Country, CA 91905, USA
 
     <Stack  marginTop={"20px"} direction={"row"} justifyContent={"space-between"}  spacing={12}>
       {data?.data?.data.map((ele)=> <>
-    <Box sx={{width:"100%",borderRadius:"12px",backgroundColor:"#FFFFFF",textAlign:"center",padding:"35px 0px"}}>
-    <PDFViewer pdfUrl={ele.path} />
-        </Box>
+        <Box sx={{ width: "100%", borderRadius: "12px", backgroundColor: "#FFFFFF", textAlign: "center",  }}>
+  <iframe
+    style={{
+      width: "100%",
+      height: "100vh",
+      border: "none", // Remove border if necessary
+      borderRadius: "inherit", // Inherit border radius from the parent Box
+    }}
+    src={`${process.env.NEXT_PUBLIC_BASE_URL}/${ele.path}`}
+  />
+
+</Box>
       <Box sx={{display:"flex",flexDirection:"column",gap:"18px"}}>
       <Box sx={{width:"380px",height:"131px", backgroundColor:"#FFFFFF",borderRadius:"12PX",padding:"12px 19px"}}>
 
@@ -94,7 +98,7 @@ End Date : {ele.endTime}
 
       <Box sx={{backgroundColor:"#FFFFFF",width:"380px",height:"240px",borderRadius:"12px",display:"flex",flexDirection:"column",justifyContent:"space-around",padding:"0 15px"}}>
       <Button sx={{width:"100%"}} size='large' variant="contained"onClick={() => window.print()} > Print</Button>
-      <Button sx={{width:"100%"}} size='large' variant="contained"onClick={() => downloadPDF(data)}> Download</Button>
+      <Button sx={{width:"100%"}} size='large' variant="contained" > Download</Button>
       <Button sx={{width:"100%",backgroundColor:"#DF2E38"}} size='large' variant="contained"onClick={() => deleteContract(data)}> Delete</Button>
 
       </Box>
@@ -103,6 +107,6 @@ End Date : {ele.endTime}
 
 
 
-    </Stack>
+    </Stack>
 </>
 }

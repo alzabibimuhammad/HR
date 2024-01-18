@@ -64,10 +64,11 @@ const navigation = () => {
 
         },
         {
-          title:"Add",
-          path:"/employees/add"
+          title:"Absence",
+          path:"/employees/absence"
 
         },
+
 
       ]
     },

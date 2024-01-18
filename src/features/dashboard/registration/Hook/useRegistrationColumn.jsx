@@ -25,7 +25,7 @@ const useRegistrationColumn = () => {
     //   )
     // } },
     {
-      field: 'ID',
+      field: 'id',
       headerName: t("ID"),
 
       // disableClickEventBubbling: true,
@@ -33,13 +33,13 @@ const useRegistrationColumn = () => {
     },
 
     {
-      field: 'first Name',
+      field: 'first_name',
       headerName: t("first Name"),
       flex: 3
     },
 
     {
-      field: 'Last name',
+      field: 'last_name',
       headerName: t("Last name"),
       flex: 3
 
@@ -58,13 +58,13 @@ const useRegistrationColumn = () => {
 
   },
     {
-      field: 'Department',
+      field: 'department',
       headerName: t('Department'),
       flex: 3
 
     },
     {
-      field: 'Status',
+      field: 'status',
       headerName: t('Status '),
       flex: 3
     },

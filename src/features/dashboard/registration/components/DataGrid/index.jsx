@@ -5,15 +5,15 @@ import Paper from '@mui/material/Paper';
 import PageHeader from 'src/@core/components/page-header';
 import { useTranslation } from 'react-i18next';
 import CustomDataGrid from 'src/@core/components/custom-datagrid'
-import {  RegistrationsData } from '../../infrastructure'
+import {  RegistrationData, RegistrationsData } from '../../infrastructure'
 import useRegistrationColumn from '../../Hook/useRegistrationColumn';
 import { Box, Stack } from '@mui/system'
 
-const Registration = ({  }) => {
+const Registration = Data => {
   const columns = useRegistrationColumn();
+  console.log('reg',Data);
 
-
-
+  const {data} = Data?.Data
 
   const { t } = useTranslation()
 
@@ -77,8 +77,7 @@ const Registration = ({  }) => {
 
 
 
-
-              <CustomDataGrid  columns={columns}  sx={gridStyles.root} rows={""}/>
+              <CustomDataGrid  columns={columns}  sx={gridStyles.root} rows={RegistrationData(data)||[]}/>
 
             </CardContent>
           </Card>

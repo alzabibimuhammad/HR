@@ -20,6 +20,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { useDeleteRequest } from './useDeleteRequest';
+import { useAccepteRequest } from './useAccepteRequest'; // Import the new hook
+import { useRejectRequest } from './useRejectRequest';
 
 
 const ITEM_HEIGHT = 162;
@@ -39,6 +41,25 @@ console.log(rowData);
   const open = Boolean(anchorEl);
 
   const deleteContractMutation = useDeleteRequest();
+  const { mutate: AccepteRequest, isLoading } = useAccepteRequest();
+
+  const { mutate: RejectRequest } = useRejectRequest();
+
+
+
+  const handleApproveClick = (params) => {
+     AccepteRequest(params?.row?.id)
+    console.log(params?.row?.id);
+  };
+
+  const handleRejectClick = (params) => {
+    RejectRequest(params?.row?.id)
+    console.log(params?.row?.id);
+  };
+
+
+
+
 
 
   const handleClick = (event,params) => {
@@ -70,7 +91,7 @@ console.log(rowData);
     const { id } = params.row;
     setShowMoreMap((prevMap) => ({
       ...prevMap,
-      [id]: !prevMap[id], // Toggle showMore state for the specific id
+      [id]: !prevMap[id],
     }));
   };
 
@@ -79,7 +100,17 @@ console.log(rowData);
     handleCloseAnchor();
   };
 
-  return useMemo(() => [
+//   const handleApproveClick = () => {
+//     acceptRequestMutation.mutate(rowData?.id);
+
+//     // handleCloseAnchor();
+
+//     console.log("foot");
+
+//     // handleDeleteClick()
+//  }
+
+ return useMemo(() => [
 
     {
       field: 'employee',
@@ -139,7 +170,6 @@ console.log(rowData);
 
       flex: 1,
       renderCell: (params) => {
-
         return (
           <Box sx={{display:"flex",flexDirection:"column",justifyContent:"flex-start"}}>
             <div style={{marginLeft:"100px"}}>
@@ -171,7 +201,7 @@ console.log(rowData);
   }}
 >
         <MenuItem sx={{ padding: "0",color:"#3F4458"  }} onClick={handleCloseAnchor}>
-      <Link style={{textDecoration:"none"}} href={`/contracts/view/${params.row.id}`}>
+      <Link style={{textDecoration:"none"}} href={`/profile/${params.row.id}`}>
         <IconButton>
           <VisibilityIcon variant="contained" sx={{ color: '#3F4458' }} size='small'></VisibilityIcon>
         </IconButton>
@@ -207,8 +237,10 @@ console.log(rowData);
   </DialogContent>
   <DialogActions>
     <Box sx={{ marginTop: "19px", display: "flex", gap: "19px" }}>
-      <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}>Decline</Button>
-      <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }}>Approve</Button>
+
+      <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }} onClick={() => handleRejectClick(params)}>Decline</Button>
+      <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>Approve</Button>
+
     </Box>
   </DialogActions>
 </Dialog>
@@ -231,8 +263,43 @@ console.log(rowData);
 
       sx={{marginTop:"19px",display:"flex",gap:"10px"}}
     >
-      <Button sx={{width:"100%",color:"#DF2E38",fontWeight:"500",fontSize:"12px",backgroundColor:"#F9D5D7",borderRadius:"4px"}}>Decline</Button>
-      <Button sx={{width:"100%",color:"#91C483",fontWeight:"500",fontSize:"12px",backgroundColor:"#DDE6DA",borderRadius:"4px"}}>Approve</Button>
+      {console.log('params.rowwww',params.row.status) }
+
+      {params.row.status === 'waiting' ? (
+  <>
+    <Button
+      sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }}
+      onClick={() => handleApproveClick(params)}
+    >
+      Approve
+    </Button>
+    <Button
+      sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}
+      onClick={() => handleRejectClick(params)}
+    >
+      Decline
+    </Button>
+  </>
+) : params.row.status === 'rejected' ? (
+  <>
+ <Button
+      sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}
+      onClick={() => handleRejectClick(params)}
+      disabled={true}
+    >
+      Decline
+    </Button>  </>
+) : (
+  <Button
+    sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }}
+    onClick={() => handleApproveClick(params)}
+    disabled={true}
+
+  >
+    Approve
+  </Button>
+)}
+
     </Box>
 
           </Box>

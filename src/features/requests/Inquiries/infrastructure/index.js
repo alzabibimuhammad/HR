@@ -7,6 +7,8 @@ export const InquiriesData = elements => {
       Title: element?.title,
       Date:element?.date,
       employee:element?.user?.first_name  +" "+ element?.user?.last_name ,
+      status:element?.status,
+
     }
   })
 }

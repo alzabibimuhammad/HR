@@ -63,6 +63,12 @@ const navigation = () => {
           path:"/employees/team"
 
         },
+        {
+          title:"Absence",
+          path:"/employees/absence"
+
+        },
+
 
       ]
     },

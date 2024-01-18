@@ -68,7 +68,11 @@ const navigation = () => {
           path:"/employees/absence"
 
         },
+        {
+          title:"Add",
+          path:"/employees/add"
 
+        },
 
       ]
     },

@@ -11,10 +11,13 @@ import { UsersData } from '../../infrastructure';
 import { Box } from '@mui/system';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FallbackSpinner from '../spinner';
+
 const Users = ({ rows }) => {
+
   const columns = useUserColumns();
   const [openParent, setOpenParent] = React.useState(false);
   const { t } = useTranslation()
+  const [row,setRow] = useState(rows);
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
@@ -32,6 +35,37 @@ const Users = ({ rows }) => {
     setStatus(e.target.value);
   };
 
+  const handelSearch = (event) => {
+    const searchText = event.target.value;
+    let searchData;
+    if (!searchText) {
+      setRow(rows);
+    }
+    else {
+      searchData= rows?.data?.data?.filter((element) => {
+        if( element?.first_name?.includes(searchText) ){
+          return element?.first_name?.includes(searchText);
+        }
+        else if( element?.last_name?.includes(searchText) ){
+          return element?.last_name?.includes(searchText);
+        }
+        else if( element?.role?.includes(searchText) ){
+          return element?.role?.includes(searchText);
+        }
+        else if(element?.email?.includes(searchText) ){
+          return element?.email?.includes(searchText);
+        }
+        else if(element?.department?.name?.includes(searchText) ){
+          return element?.department?.name?.includes(searchText);
+        }
+      });
+
+      setRow({'data':{'data':searchData}});
+
+    }
+  };
+
+  console.log("rows after search",row);
 
   const gridStyles = {
     root: {
@@ -129,6 +163,7 @@ const Users = ({ rows }) => {
                   </Box>
                 ),
               }}
+              onChange={handelSearch}
               sx={{ paddingLeft: '8px',backgroundColor:'#F5F7FA' }}
               size='small'
 
@@ -142,7 +177,7 @@ const Users = ({ rows }) => {
                   <TextField
                     select
                     fullWidth
-                    defaultValue="Select Role"
+                    defaultValue="Role"
                     SelectProps={{
                       value: role,
                       displayEmpty: true,
@@ -150,7 +185,7 @@ const Users = ({ rows }) => {
                     }}
                     size='small'
                   >
-                    <MenuItem value=''>{`${t("Select Role")}`}</MenuItem>
+                    <MenuItem value=''>{`${t("Role")}`}</MenuItem>
                     <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
                     <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
                     <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
@@ -159,7 +194,7 @@ const Users = ({ rows }) => {
                   <TextField
                     select
                     fullWidth
-                    defaultValue='Select Status'
+                    defaultValue='Specialization'
                     SelectProps={{
                       value: status,
                       displayEmpty: true,
@@ -168,14 +203,14 @@ const Users = ({ rows }) => {
                     size='small'
 
                   >
-                    <MenuItem value=''>{`${t("Select Status")}`}</MenuItem>
+                    <MenuItem value=''>{`${t("Specialization")}`}</MenuItem>
                     <MenuItem value='active'>{`${t("active")}`}</MenuItem>
                     <MenuItem value='not-active'>{`${t("not active")}`}</MenuItem>
                   </TextField>
                   <TextField
                     select
                     fullWidth
-                    defaultValue='Select Status'
+                    defaultValue='Team'
                     SelectProps={{
                       value: status,
                       displayEmpty: true,
@@ -184,13 +219,13 @@ const Users = ({ rows }) => {
                     size='small'
 
                   >
-                    <MenuItem value=''>{`${t("Select Status")}`}</MenuItem>
+                    <MenuItem value=''>{`${t("Team")}`}</MenuItem>
                     <MenuItem value='active'>{`${t("active")}`}</MenuItem>
                     <MenuItem value='not-active'>{`${t("not active")}`}</MenuItem>
                   </TextField>
                   </Stack>
 
-              <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(rows)|| []}  />
+                <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(row)|| []}  />
 
               </Stack>
               </CardContent>

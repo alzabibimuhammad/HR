@@ -62,7 +62,7 @@ const data = [
 
 const Members = () => {
   return (
-    <Card  >
+    <Box  >
       <Typography sx={{ fontFamily:'Montserrat' }}>
         Members
       </Typography>
@@ -81,13 +81,12 @@ const Members = () => {
             </Box>
           ),
         }}
-        sx={{ paddingLeft: '8px',backgroundColor:'#F5F7FA' }}
+        sx={{ paddingLeft: '8px',backgroundColor:'#F5F7FA',marginBottom:'2%' }}
         size='small'
         fullWidth
       />
 
 
-      <CardContent>
         {data.map((item, index) => {
           return (
             <Box
@@ -127,8 +126,7 @@ const Members = () => {
             </Box>
           )
         })}
-      </CardContent>
-    </Card>
+  </Box>
   )
 }
 

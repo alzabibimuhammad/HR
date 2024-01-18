@@ -93,6 +93,7 @@ export default function DrawerForm({ open, setOpenParent,Data }) {
   return (
 
       <Drawer
+        backgroundColor='#fff'
         sx={{
           width: drawerWidth,
           flexShrink: 0,

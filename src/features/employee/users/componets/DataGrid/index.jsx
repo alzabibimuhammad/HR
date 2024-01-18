@@ -152,6 +152,7 @@ const Users = ({ rows }) => {
             <TextField
               placeholder='Search'
               fullWidth
+
               InputProps={{
                 startAdornment: (
                   <Box paddingRight={1} >
@@ -164,7 +165,7 @@ const Users = ({ rows }) => {
                 ),
               }}
               onChange={handelSearch}
-              sx={{ paddingLeft: '8px',backgroundColor:'#F5F7FA' }}
+              sx={{ paddingLeft: '8px',backgroundColor:'#F5F7FA',border:"none",boxShadow:"none" }}
               size='small'
 
 

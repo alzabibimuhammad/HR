@@ -237,9 +237,36 @@ console.log(rowData);
   </DialogContent>
   <DialogActions>
     <Box sx={{ marginTop: "19px", display: "flex", gap: "19px" }}>
+      {params.row.status === "waiting"?(
+        <>
+<Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }} onClick={() => handleRejectClick(params)}>Decline</Button>
+<Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>Approve</Button>
+        </>
+      ):params.row.status==="rejected"? (
+        <>
 
-      <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }} onClick={() => handleRejectClick(params)}>Decline</Button>
-      <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>Approve</Button>
+        <Button
+      sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}
+      onClick={() => handleRejectClick(params)}
+      disabled={true}
+    >
+      Decline
+    </Button>
+      </>
+
+
+      ):(
+        <Button
+        sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }}
+        onClick={() => handleApproveClick(params)}
+        disabled={true}
+
+      >
+        Approve
+      </Button>
+      )
+
+      }
 
     </Box>
   </DialogActions>
@@ -263,22 +290,11 @@ console.log(rowData);
 
       sx={{marginTop:"19px",display:"flex",gap:"10px"}}
     >
-      {console.log('params.rowwww',params.row.status) }
 
       {params.row.status === 'waiting' ? (
   <>
-    <Button
-      sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }}
-      onClick={() => handleApproveClick(params)}
-    >
-      Approve
-    </Button>
-    <Button
-      sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}
-      onClick={() => handleRejectClick(params)}
-    >
-      Decline
-    </Button>
+    <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}> Approve </Button>
+    <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}  onClick={() => handleRejectClick(params)} > Decline </Button>
   </>
 ) : params.row.status === 'rejected' ? (
   <>

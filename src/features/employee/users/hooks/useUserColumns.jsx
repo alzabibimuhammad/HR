@@ -5,16 +5,15 @@ import Box from '@mui/material/Box';
 import DrawerForm from '../Componets/DrawerForm/index';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { Avatar, Button, IconButton, Rating } from '@mui/material';
+import { Avatar, Button, IconButton, Rating, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import { useTranslation } from 'react-i18next';
-import AlertDialog from '../Componets/dialog';
 import { useDispatch, useSelector } from 'react-redux';
-import { RemoveContracts } from 'src/pages/contracts/store';
 import Link from 'next/link';
+import AlertDialog from '../componets/dialog';
 
-const useContractColumns = () => {
+const useUserColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false);
 
   const [EditData, setEditData] = useState(null);
@@ -35,7 +34,7 @@ const useContractColumns = () => {
   };
 
   const handleClickOpen = (params) => {
-    const { id } = params.row;
+    const { id } = params;
     setDeleteId(id);
     setIsDeletePopupOpen(true);
 
@@ -49,36 +48,45 @@ const useContractColumns = () => {
 
 
   return useMemo(() => [
+
+      {
+        field: '',
+        headerName: t("Employee"),
+        disableClickEventBubbling: true,
+        flex:1,
+        renderCell: (params) => {
+          console.log("colunm ",params);
+            return (
+              <>
+              <Avatar alt=''  />
+              <p style={{ marginLeft:'2px' }} >{params?.row?.first_name}</p>
+              <p style={{ marginLeft:'3px' }} >{params?.row?.last_name}</p>
+              </>
+            );
+          },
+      },
     {
-      field: 'id',
-      headerName: t("ID"),
-      flex: 2,
+      field: 'role',
+      headerName: t("Role"),
       disableClickEventBubbling: true,
+      flex:1,
+
     },
     {
-      field: 'employee',
-      headerName: t("Employee"),
-      flex: 2,
+      field: 'specialization',
+      headerName: t("SPECIALIZATION"),
       disableClickEventBubbling: true,
+      flex:1,
+
     },
     {
-      field: 'startDate',
-      headerName: t("Start Date"),
-      flex: 2,
+      field: 'specialization',
+      headerName: t("Team"),
       disableClickEventBubbling: true,
+      flex:1,
+
     },
-    {
-      field: 'endDate',
-      headerName: t("End Date"),
-      flex: 2,
-      disableClickEventBubbling: true,
-    },
-    {
-      field: 'status',
-      headerName: t("Status"),
-      flex: 2,
-      disableClickEventBubbling: true,
-    },
+
 
     // {
     //   field: 'image',
@@ -102,22 +110,27 @@ const useContractColumns = () => {
     {
       field: 'action',
       headerName: t("Action"),
-      flex: 2,
+      flex:1,
       renderCell: (params) => {
         return (
           <>
-          <Stack >
+          <Stack direction={{ sm:'row' }}  >
 
-
-     
-
-              <Link href={`/contracts/view/${params.row.id}`} >
+              <Link href={`/profile/id`} >
               <IconButton >
-              <VisibilityIcon  variant="contained" sx={{ color:'#FF9F43' }} size='small'>Details</VisibilityIcon>
+              <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'>Details</VisibilityIcon>
               </IconButton>
-
               </Link>
-
+              <Box >
+                <IconButton>
+                <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={()=>handleEditClick(params.row)} >Edit</BorderColorOutlinedIcon>
+                </IconButton>
+              </Box>
+              <Box>
+                <IconButton onClick={() => handleClickOpen(params?.row?.id)}>
+                <DeleteOutlinedIcon  variant="contained" color="#8090A7" size='small'>  Delete   </DeleteOutlinedIcon>
+                </IconButton>
+              </Box>
 
           </Stack>
             {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
@@ -130,4 +143,4 @@ const useContractColumns = () => {
   ]);
 };
 
-export default useContractColumns;
+export default useUserColumns;

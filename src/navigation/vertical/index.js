@@ -66,6 +66,19 @@ const navigation = () => {
 
       ]
     },
+    {
+      title: 'Requests',
+      icon: 'tabler:file-pencil',
+
+      children:[
+        {
+          title:"Inquiries",
+          path:"/requests/Inquiries"
+
+        },
+
+      ]
+    },
   ]
 
 }

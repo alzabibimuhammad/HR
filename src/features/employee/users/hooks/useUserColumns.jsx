@@ -55,8 +55,7 @@ const useUserColumns = () => {
         disableClickEventBubbling: true,
         flex:1,
         renderCell: (params) => {
-          console.log("colunm ",params);
-            return (
+              return (
               <>
               <Avatar alt=''  />
               <p style={{ marginLeft:'2px' }} >{params?.row?.first_name}</p>

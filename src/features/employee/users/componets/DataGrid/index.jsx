@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography } from '@mui/material';
+import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
@@ -9,7 +9,8 @@ import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import useUserColumns from '../../hooks/useUserColumns';
 import { UsersData } from '../../infrastructure';
 import { Box } from '@mui/system';
-
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import FallbackSpinner from '../spinner';
 const Users = ({ rows }) => {
   const columns = useUserColumns();
   const [openParent, setOpenParent] = React.useState(false);
@@ -55,20 +56,63 @@ const Users = ({ rows }) => {
     },
   };
 
+  const  Data = {
+
+    "success": true,
+    "message": "success",
+    "data":
+        {
+          'total':10,
+          'active':3
+        }
+
+    }
+
+  return    <>
+
+    <Box sx={{ margin:0,padding:0 }} >
+        <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2-content"
+              id="panel2-header"
+              >
+              <Stack  width={'50%'}  direction={'row'} >
+
+                <Stack direction={'row'}>
+                <Typography>{Data.data.active}</Typography>/
+
+                <Typography>{Data.data.total}</Typography>
+                </Stack>
+
+                <Box marginTop={'5px'} marginLeft={'5px'} width={'50%'} >
+                <FallbackSpinner total={Data.data.total} active={Data.data.active} />
+                </Box>
+
+                <Typography marginLeft={'5px'}>{(Data.data.active/Data.data.total)*100}%</Typography>
+
+              </Stack>
+            </AccordionSummary>
+
+            <AccordionDetails>
+              <Typography>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+                malesuada lacus ex, sit amet blandit leo lobortis eget.
+              </Typography>
+            </AccordionDetails>
+
+          </Accordion>
+    </Box>
 
 
-
-  return (
-
-          <Card>
-            <CardContent>
-
-
+            <Card>
+              <CardContent>
               <Stack
                 direction={{ xs: 'column', sm: 'column' }}
                 spacing={3}
                 alignContent={'center'}
                 justifyContent={'center'}
+                my={"30px"}
               >
 
             <TextField
@@ -150,8 +194,9 @@ const Users = ({ rows }) => {
 
               </Stack>
               </CardContent>
-          </Card>
-  );
+              </Card>
+          </>
+
 };
 
 export default Users;

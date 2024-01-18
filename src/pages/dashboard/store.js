@@ -15,11 +15,22 @@ export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendance
     data: response.data
   }
 })
+export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async () => {
+  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/api/showAttendanceLogs', {
+    headers: {
+      Authorization: `Bearer ${localStorage.accessToken}`
+    }
+  })
+  return {
+    data: response.data
+  }
+})
 
 const DashboardSlice = createSlice({
   name: 'Dashboard',
   initialState: {
     AttendancePercentage: [],
+    Registertion: [],
     loading: false
   },
   reducers: {},
@@ -30,7 +41,10 @@ const DashboardSlice = createSlice({
       state.loading = false
       state.AttendancePercentage = action.payload.data
     })
-
+    .addCase(getRegisteration.fulfilled,(state,action)=>{
+      state.loading = false
+      state.Registertion = action.payload.data
+    })
 
 
   },

@@ -1,16 +1,36 @@
+import data from "src/@fake-db/components/data";
 
  export const RegistrationData = elements => {
 
-  return elements.map(element => {
-    const dateOnly = element?.SubscriptionDate ? element.SubscriptionDate.split('T')[0] : null;
+
+   let arrr = new Array
+
+   return elements?.map(element => {
+     let statusX ;
+
+    if(Number(element.attendance?.[0]?.status) === 0)
+      statusX = "checkout"
+    else if(Number(element.attendance?.[0]?.status) === 1)
+      statusX = "checkin"
+    else
+      statusX = "none"
+
+    console.log("finalll",arrr);
 
     return {
       id: element?.id,
-      name: element?.userNaname,
-      remainingTime: element?.remainingTime,
-      paidStatus:element?.paidStatus,
-      daysNotPaid:element?.daysNotPaid,
-      SubscriptionDate: dateOnly
-    }
-  })
-}
+      first_name: element?.first_name,
+      last_name: element?.last_name,
+      department:element?.department?.name,
+      status:statusX
+
+  }
+
+
+})
+
+
+ }
+
+
+

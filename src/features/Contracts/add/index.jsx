@@ -205,8 +205,8 @@ San Diego Country, CA 91905, USA
     </Box>
   </Box>
 
-  <Box sx={{width:"88%",mt:"24px"}} textAlign={"end"}>
-  <Button type='submit' variant='contained' >
+  <Box sx={{width:"100%",mt:"24px"}} textAlign={"end"}>
+  <Button  sx={{padding:"16px 33px 16px 33px"}}  type='submit' variant='contained' >
   Add Contract
 </Button>
   </Box>

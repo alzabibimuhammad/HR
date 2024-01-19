@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Box, Stack } from '@mui/system'
 import Typography from '@mui/material/Typography'
 
@@ -7,34 +7,44 @@ import Button from '@mui/material/Button';
 import PDFViewer from '../list/Profile/PdfViwer';
 import useViewContract from '../list/Hooks/useViewContracts';
 import { useRouter } from 'next/router';
+import { useDeleteContract } from '../list/Hooks/useDeleteContract';
+import { useReactToPrint } from 'react-to-print';
 
 export default function View({id}) {
+  const componentRef = useRef();
 
   const router = useRouter();
 
   const { data, isLoading, isError } = useViewContract(id);
 
+  const { mutate: deleteContract } = useDeleteContract();
 
-
-
-  const deleteContract = async (data) => {
+  const deleteContractt = async (id) => {
     try {
-      const contractId = data?.data?.data[0]?.id;
-
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contract/Delete/${contractId}, {
-        method: 'DELETE',
-      }`);
-
-      if (response.ok) {
-        console.log('Contract deleted successfully');
-        router.push('/contracts/list');
-      } else {
-        console.error('Failed to delete contract');
-      }
+      await deleteContract(id);
+      console.log('Contract deleted successfully');
+      router.push('/contracts/list');
     } catch (error) {
-      console.error('An error occurred while deleting contract', error);
+      console.error('Failed to delete contract', error);
     }
   };
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+  const handleDownloadClick = () => {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = `${process.env.NEXT_PUBLIC_BASE_URL}/${data?.data?.data?.[0].path}`;
+    downloadLink.download = 'your_pdf_filename.pdf';
+    downloadLink.style.display = 'none';
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
+
+
 
   return <>
     <Stack sx={{backgroundColor:"#FFFFFF",p:"30px",borderRadius:"12px"}}>
@@ -60,13 +70,13 @@ San Diego Country, CA 91905, USA
 
     <Stack  marginTop={"20px"} direction={"row"} justifyContent={"space-between"}  spacing={12}>
       {data?.data?.data.map((ele)=> <>
-        <Box sx={{ width: "100%", borderRadius: "12px", backgroundColor: "#FFFFFF", textAlign: "center",  }}>
+        <Box  ref={componentRef}  sx={{ width: "100%", borderRadius: "12px", backgroundColor: "#FFFFFF", textAlign: "center",  }}>
   <iframe
     style={{
       width: "100%",
       height: "100vh",
-      border: "none", // Remove border if necessary
-      borderRadius: "inherit", // Inherit border radius from the parent Box
+      border: "none",
+      borderRadius: "inherit",
     }}
     src={`${process.env.NEXT_PUBLIC_BASE_URL}/${ele.path}`}
   />
@@ -97,9 +107,9 @@ End Date : {ele.endTime}
       </Box>
 
       <Box sx={{backgroundColor:"#FFFFFF",width:"380px",height:"240px",borderRadius:"12px",display:"flex",flexDirection:"column",justifyContent:"space-around",padding:"0 15px"}}>
-      <Button sx={{width:"100%"}} size='large' variant="contained"onClick={() => window.print()} > Print</Button>
-      <Button sx={{width:"100%"}} size='large' variant="contained" > Download</Button>
-      <Button sx={{width:"100%",backgroundColor:"#DF2E38"}} size='large' variant="contained"onClick={() => deleteContract(data)}> Delete</Button>
+      <Button sx={{width:"100%"}} size='large' variant="contained" onClick={handlePrint}> Print</Button>
+      <Button sx={{width:"100%"}} size='large' variant="contained"onClick={handleDownloadClick} > Download</Button>
+      <Button sx={{width:"100%",backgroundColor:"#DF2E38"}} size='large' variant="contained"onClick={() => deleteContractt(id)}> Delete</Button>
 
       </Box>
       </Box>

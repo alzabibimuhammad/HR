@@ -5,6 +5,8 @@ import Avatar from '@mui/material/Avatar'
 import Typography from '@mui/material/Typography'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
+import Stack from '@mui/material/Stack';
+import { Checkbox } from '@mui/material'
 
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
@@ -13,6 +15,9 @@ import Icon from 'src/@core/components/icon'
 import CustomChip from 'src/@core/components/mui/chip'
 import OptionsMenu from 'src/@core/components/option-menu'
 import { Input, TextField } from '@mui/material'
+import { useEffect, useMemo, useState } from 'react'
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton } from '@mui/material';
 
 const data = [
   {
@@ -61,15 +66,56 @@ const data = [
 ]
 
 const Members = () => {
+
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [searchText, setSearchText] = useState('');
+
+  const deletee = (index) => {
+    setSelectedItems((prevItems) => prevItems.filter((_, i) => i !== index));
+  };
+
+  const toggleSelect = (icon) => {
+    const isSelected = selectedItems.includes(icon);
+    if (isSelected) {
+      setSelectedItems(selectedItems.filter((item) => item !== icon));
+    } else {
+      setSelectedItems([...selectedItems, icon]);
+    }
+  };
+console.log("selectedItems",selectedItems);
+
+const filteredData = useMemo(() => {
+  if (!searchText) return data;
+
+  return data.filter((item) =>
+    item.title.toLowerCase().includes(searchText.toLowerCase())
+  );
+}, [searchText]);
+
   return (
-    <Box  >
+    <Box>
       <Typography sx={{ fontFamily:'Montserrat' }}>
         Members
       </Typography>
 
+      <Stack direction="row" spacing={2} padding={"10px"} position={"relative"} >
+          {selectedItems?.map((icon, index) => (
+    <Avatar key={index} variant='circular' sx={{  width: 34, height: 34 ,overflow:"visible"}}>
+      <Icon icon={icon} />
+      <Box onClick={()=>{deletee(index)}}>
+
+      <CloseIcon  sx={{position:"absolute",backgroundColor:"red",width:"10px",height:"10px",borderRadius:"50%",left:"0px",bottom:"23px",color:"#fff",cursor:"pointer"}} />
+      </Box>
+    </Avatar>
+  ))}
+
+</Stack>
+
+
       <TextField
         placeholder='Search'
-
+value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
         InputProps={{
           startAdornment: (
             <Box paddingRight={1} >
@@ -87,47 +133,46 @@ const Members = () => {
       />
 
 
-        {data.map((item, index) => {
-          return (
-            <Box
-              key={index}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                mb: index !== data.length - 1 ? [6.25, 6.25, 5.5, 6.25] : undefined
-              }}
-            >
-              <Avatar variant='rounded' sx={{ mr: 4, width: 34, height: 34 }}>
-                <Icon icon={item.icon} />
-              </Avatar>
-              <Box
-                sx={{
-                  rowGap: 1,
-                  columnGap: 4,
-                  width: '100%',
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-                }}
-              >
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                  <Typography variant='h6'>{item.title}</Typography>
-                  <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-                    {item.subtitle}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Input
-                  type='checkbox'
-                  />
-                </Box>
-              </Box>
+  {filteredData.map((item, index) => (
+        <Box
+          key={index}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            mb: index !== filteredData.length - 1 ? [6.25, 6.25, 5.5, 6.25] : undefined
+          }}
+        >
+          <Avatar variant="rounded" sx={{ mr: 4, width: 34, height: 34 }}>
+            <Icon icon={item.icon} />
+          </Avatar>
+          <Box
+            sx={{
+              rowGap: 1,
+              columnGap: 4,
+              width: '100%',
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}
+          >
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <Typography variant="h6">{item.title}</Typography>
+              <Typography variant="body2" sx={{ color: 'text.disabled' }}>
+                {item.subtitle}
+              </Typography>
             </Box>
-          )
-        })}
-  </Box>
-  )
+            <Box>
+              <Checkbox
+                checked={selectedItems.includes(item.icon)}
+                onChange={() => toggleSelect(item.icon)}
+              />
+            </Box>
+          </Box>
+        </Box>
+      ))}
+    </Box>
+  );
 }
 
 export default Members

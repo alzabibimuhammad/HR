@@ -37,7 +37,6 @@ export default function CollapsibleTable(Data) {
   function Row(props) {
     const { row } = props;
 
-    console.log('dddsss props',row.id);
     const [open, setOpen] = useState(false);
 
 

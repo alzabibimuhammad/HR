@@ -43,10 +43,15 @@ export default function CollapsibleTable(Data) {
   function Row(props) {
     const { row } = props;
 
+    const [data , setData] = useState(row)
+
+    console.log("datafff",data.rows);
+
     const [open, setOpen] = useState(false);
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
     const {t} = useTranslation()
+
     const handleEditClick = (row) => {
       setEditData(row);
       setIsDrawerOpenEdit(true);
@@ -63,140 +68,101 @@ export default function CollapsibleTable(Data) {
     const handleClose = () => {
       setIsDeletePopupOpen(false)
     };
-
-
     return (
-      <React.Fragment>
-
-        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-
-          <TableCell  component="th" >
-
-            <Stack direction={'column'}  justifyContent={'start'} alignItems={'start'} sx={{ padding:'0',margin:'0' }}  >
-
-            <Box>
-              {row.employee}
-            </Box>
-
-            <Box >
-            <IconButton
-              size="small"
-              onClick={() => setOpen(!open)}
-              sx={{ fontSize:'13px',   "&:hover": {
-                background: 'none !important',
-              },
-              padding:0
-            }}
-              disableRipple
-            >
-
-              <Stack direction={'row'} >
-                <Typography sx={{ fontSize:'13px',marginRight:'3px'  }} >{row?.user?.length}</Typography>
-                <Typography sx={{ fontSize:'13px' }} >Daily Report</Typography>
-              </Stack>
-
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-
-            </Box>
-            </Stack>
-
-          </TableCell>
-
-          <TableCell >{/*{row.user.length}*/}dddd</TableCell>
-          <TableCell >Specialization</TableCell>
-          <TableCell >Team</TableCell>
-
-          <TableCell >
-              <Box>
-
-              <Link href={`/coach/coachProfile/id`} >
-              <IconButton >
-              <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'>Details</VisibilityIcon>
-              </IconButton>
-
-              </Link>
-
-                <IconButton  onClick={() => handleClickOpen(row.id)}>
-                <DeleteOutlinedIcon style={{ color:'#8090A7'  }} variant color="error" size='small'>Delete</DeleteOutlinedIcon>
-                </IconButton>
-
-              </Box>
-
-
-              {/* <Box>
-                <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
-              </Box> */}
-              {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
-
-
-
-          </TableCell>
-
-        </TableRow>
-         <TableRow>
-          <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-           <Collapse in={open} timeout="auto" unmountOnExit>
-              <Box sx={{ margin: 1 }}>
-                 <Typography variant="h6" gutterBottom component="div">
-                  History
-                </Typography>
-                <Table size="small" aria-label="purchases">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>ID</TableCell>
-                      <TableCell>First Name</TableCell>
-                      <TableCell align="right">Last Name</TableCell>
-                      <TableCell align="right">Email</TableCell>
-                    </TableRow>
-                  </TableHead>
-
-                  <TableBody>
-
-                    {row?.user?.map((user) => (
-                      <TableRow key={user.date}>
-                        <TableCell component="th" scope="row">
-                          {user.id}
-                        </TableCell>
-                        <TableCell>{user.first_name}</TableCell>
-                        <TableCell align="right">{user.last_name}</TableCell>
-                        <TableCell align="right">
-                          {user.email}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-
-                  </TableBody>
-                </Table>
-              </Box>
-            </Collapse>
-          </TableCell>
-
-        </TableRow>
-      </React.Fragment>
+      <>
+        {data?.rows?.map((row) => (
+          <>
+            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+              <TableCell component="th">
+                <Stack direction={'column'} justifyContent={'start'} alignItems={'start'} sx={{ padding: '0', margin: '0' }}>
+                  <Box>{row.employee}</Box>
+                  <Box>
+                    <IconButton
+                      size="small"
+                      onClick={() => setOpen(!open)}
+                      sx={{
+                        fontSize: '13px',
+                        '&:hover': {
+                          background: 'none !important',
+                        },
+                        padding: 0,
+                      }}
+                      disableRipple
+                    >
+                      <Stack direction={'row'}>
+                        <Typography sx={{ fontSize: '13px', marginRight: '3px' }}>{row?.user?.length}</Typography>
+                        <Typography sx={{ fontSize: '13px' }}>Daily Report</Typography>
+                      </Stack>
+                      {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    </IconButton>
+                  </Box>
+                </Stack>
+              </TableCell>
+              <TableCell>{row.role}</TableCell>
+              <TableCell>{row.specialization}</TableCell>
+              <TableCell>{row.team}</TableCell>
+              <TableCell>
+                <Box>
+                  <Link href={`/coach/coachProfile/${row.id}`}>
+                    <IconButton>
+                      <VisibilityIcon variant="contained" sx={{ color: '#8090A7' }} size="small">
+                        Details
+                      </VisibilityIcon>
+                    </IconButton>
+                  </Link>
+                  <IconButton onClick={() => handleClickOpen(row.id)}>
+                    <DeleteOutlinedIcon style={{ color: '#8090A7' }} variant="error" size="small">
+                      Delete
+                    </DeleteOutlinedIcon>
+                  </IconButton>
+                </Box>
+                {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Box sx={{ margin: 1 }}>
+                    <Typography variant="h6" gutterBottom component="div">
+                      History
+                    </Typography>
+                    <Table size="small" aria-label="purchases">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>ID</TableCell>
+                          <TableCell>First Name</TableCell>
+                          <TableCell align="right">Last Name</TableCell>
+                          <TableCell align="right">Email</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {row?.user?.map((user) => (
+                          <TableRow key={user.date}>
+                            <TableCell component="th" scope="row">
+                              {user.id}
+                            </TableCell>
+                            <TableCell>{user.first_name}</TableCell>
+                            <TableCell align="right">{user.last_name}</TableCell>
+                            <TableCell align="right">{user.email}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </Box>
+                </Collapse>
+              </TableCell>
+            </TableRow>
+          </>
+        ))}
+      </>
     );
+
   }
-
-
-
-
-  // const rows = [
-  //   createData('Frozen yoghurt', 159, 6),
-  //   createData('Ice cream sandwich', 237, 9.0),
-  //   createData('Eclair', 262, 16.0),
-  //   createData('Cupcake', 305, 3.7),
-  //   createData('Gingerbread', 356, 16.0),
-  // ];
-
-
-  console.log(Data?.Data?.data?.data);
-  // const rows = Data?.Data?.data?.data?.map((item) => {
-  //   return createData(item.name, 5,item.user);
-  // });
-
   const rows = [
-    createData(2,'muhammad',1,'sss','front'),
-    createData(3,'muhammad',1,'sss','front')
+    createData(1,'muhammad','admin','sss','front'),
+    createData(2,'muhammad','admin','sss','back'),
+    createData(3,'muhammad','customer','sss','ui'),
+    createData(4,'muhammad','employee','sss','ui')
     ];
 
 
@@ -205,15 +171,45 @@ export default function CollapsibleTable(Data) {
   const handleDrawerOpen = () => {
     setOpenParent(true);
   };
+
+  const [originalData, setOriginalData] = useState(rows);
+  const [teams, setTeams] = useState({ rows: rows });
+
+
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
 
+
   const handleRoleChange = (e) => {
     setRole(e.target.value);
+
+    if (e.target.value !== '') {
+      const filteredData = originalData.filter((row) => {
+        return row.role === e.target.value;
+      });
+
+      setTeams({ rows: filteredData });
+
+    } else {
+      setTeams({ rows: originalData });
+    }
   };
+
+
 
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
+
+    if (e.target.value !== '') {
+      const filteredData = originalData.filter((row) => {
+        return row.team === e.target.value;
+      });
+
+      setTeams({ rows: filteredData });
+
+    } else {
+      setTeams({ rows: originalData });
+    }
   };
 
 
@@ -230,6 +226,7 @@ export default function CollapsibleTable(Data) {
               >
             <TextField
               placeholder='Search'
+
               InputProps={{
                 startAdornment: (
                   <Box paddingRight={1} >
@@ -259,6 +256,7 @@ export default function CollapsibleTable(Data) {
 
                 <Typography>Filter</Typography>
                   <TextField
+                    size='small'
                     select
                     fullWidth
                     defaultValue="Select Role"
@@ -276,6 +274,8 @@ export default function CollapsibleTable(Data) {
                   <TextField
                     select
                     fullWidth
+                    size='small'
+
                     defaultValue='Select Team'
                     SelectProps={{
                       value: status,
@@ -286,11 +286,13 @@ export default function CollapsibleTable(Data) {
                     <MenuItem value=''>Specialization</MenuItem>
                     <MenuItem value='back'>back</MenuItem>
                     <MenuItem value='front'>front</MenuItem>
-                    <MenuItem value='UI/UX'>UI/UX</MenuItem>
+                    <MenuItem value='ui'>UI/UX</MenuItem>
                   </TextField>
                   <TextField
                   fullWidth
                   type='date'
+                  size='small'
+
                   />
                 </Stack>
                 </Stack>
@@ -309,9 +311,9 @@ export default function CollapsibleTable(Data) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows?.map((row) => (
-            <Row key={row.name} row={row} />
-          ))}
+
+            <Row row={teams} />
+
         </TableBody>
       </Table>
     </TableContainer>

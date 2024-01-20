@@ -1,10 +1,30 @@
 
 import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
+import { useState } from 'react';
+import Avatar from 'src/@core/components/mui/avatar';
 
 export default function Employment({onDataChange}) {
+  const [contract, setContract] = useState(null);
+
+console.log(contract);
+
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setContract(reader.result);
+        onDataChange("contract"+reader.result);
+      };
+      reader.readAsDataURL(file);
+      console.log("done");
+    }
   };
 
   const SvgDate = `
@@ -19,10 +39,12 @@ export default function Employment({onDataChange}) {
   <path d="M11.6667 15H15.0001" stroke="#8090A7" stroke-width="1.2" stroke-linecap="round"/>
 </svg>
   `;
+
   const SvgSalary = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
   <path d="M10.7174 9.32258C9.0164 8.76422 8.53878 7.77972 8.6468 7.10564C8.74426 6.49514 9.3541 5.87826 10.4952 5.87826C11.9644 5.87826 12.2748 7.27086 12.3056 7.43498C12.3751 7.82218 12.7623 8.0721 13.13 8.01072C13.5185 7.94252 13.7402 7.5727 13.6723 7.18506C13.5251 6.34554 12.8609 4.84228 11.1009 4.51602V3.28138C11.1009 2.88736 10.8349 2.56836 10.4409 2.56836C10.0467 2.56836 9.7809 2.88736 9.7809 3.28138V4.52042C8.4609 4.76748 7.44824 5.66926 7.25486 6.8808C7.05862 8.1084 7.7272 9.83914 10.281 10.6773C11.6238 11.1182 12.3512 11.8242 12.2328 12.5678C12.1312 13.2069 11.359 13.8698 10.2464 13.8698C8.34012 13.8698 8.20328 12.8322 8.1958 12.6373C8.1958 12.2433 7.87658 11.9245 7.48234 11.9245C7.08832 11.9245 6.78516 12.2433 6.78516 12.6373C6.78516 13.4986 7.3609 15.08 9.7809 15.2756V16.2772C9.7809 16.6715 10.0467 16.9902 10.4409 16.9902C10.8349 16.9902 11.1009 16.6715 11.1009 16.2772V15.186C12.4209 14.878 13.4155 13.9507 13.5997 12.7918C13.6903 12.2321 13.7801 10.3264 10.7174 9.32258Z" fill="#8090A7"/>
 </svg>`;
+
   return (
     <Card>
         <CardContent>
@@ -66,14 +88,24 @@ export default function Employment({onDataChange}) {
                   </Stack>
                 }
               />
+              <Box sx={{display:"flex",alignItems:"center",gap:"16px"}}>
               <Typography>Contract</Typography>
-              <TextField
-                fullWidth
-                type='file'
-                size='small'
-                required
-                placeholder='add contract file'
-              />
+              <Box>
+      <label htmlFor="contractInput" style={{border:"3px solid red",padding:"2px",cursor:"pointer"}}>
+                    choose file
+      </label>
+      <input
+        id="contractInput"
+        type="file"
+        accept="contract/*"
+        style={{ display: 'none' }}
+        onChange={handleImageChange}
+      />
+    </Box>
+    {contract?.slice(17,27)}
+
+    </Box>
+
               <Typography>Secretariats</Typography>
               <TextField
                 fullWidth

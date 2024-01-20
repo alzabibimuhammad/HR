@@ -1,12 +1,14 @@
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export default function Account() {
+export default function Account({onDataChange}) {
+
+
   const SvgMail = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
   <rect x="3.33325" y="5" width="13.3333" height="10" rx="2" stroke="#8090A7"/>
@@ -21,15 +23,38 @@ export default function Account() {
   <circle cx="9.99935" cy="12.0003" r="1.33333" fill="#8090A7"/>
 </svg>
   `;
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [password, setPassword] = useState(true);
+  const [passwordsMatch, setpasswordsMatch] = useState(true);
+
+
+  const handleFieldChange = (field, value) => {
+    onDataChange((prevData) => ({ ...prevData, [field]: value }));
+  };
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
+
   const handleToggleConfirmVisibility = () => {
     setShowConfirm((prevShowPassword) => !prevShowPassword);
   };
+
+  const handlePasswordChange=value=>{
+      setPassword(value)
+  }
+
+  const handleConfirmationChange=value=>{
+
+    if(value == password){
+      setpasswordsMatch(true)
+      handleFieldChange('password',value)
+    }
+    else
+      setpasswordsMatch(false)
+  }
 
   return (
     <Card>
@@ -44,6 +69,8 @@ export default function Account() {
                 fullWidth
                 type='email'
                 size='small'
+                onChange={(e) => handleFieldChange('email', e.target.value)}
+
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -60,6 +87,8 @@ export default function Account() {
                   fullWidth
                   size='small'
                   type={showPassword ? 'text' : 'password'}
+                  onChange={(e) => handlePasswordChange( e.target.value)}
+
                   label={
                     <Stack direction={'row'} spacing={2}>
                       <Box>
@@ -84,33 +113,32 @@ export default function Account() {
                   }}
                 />
 
-              <TextField
-                    fullWidth
-                    size='small'
-                    type={showConfirm ? 'text' : 'password'}
-                    label={
-                      <Stack direction={'row'} spacing={2}>
-                        <Box>
-                          <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
-                        </Box>
-                        <Box>
-                          {'Confirm Password'}
-                        </Box>
-                      </Stack>
-                    }
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            onClick={handleToggleConfirmVisibility}
-                            edge="end"
-                          >
-                            {showConfirm ? <Visibility /> : <VisibilityOff />}
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
+      <TextField
+            fullWidth
+            size="small"
+            type={showConfirm ? 'text' : 'password'}
+            onChange={(e) => handleConfirmationChange(e.target.value)}
+            error={!passwordsMatch}
+            helperText={!passwordsMatch ? 'Passwords do not match' : ''}
+            label={
+              <Stack direction={'row'} spacing={2}>
+                <Box>
+                  <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
+                </Box>
+                <Box>{'Confirm Password'}</Box>
+              </Stack>
+            }
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleToggleConfirmVisibility} edge="end">
+                    {showConfirm ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+
 
           </Stack>
         </CardContent>

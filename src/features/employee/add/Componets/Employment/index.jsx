@@ -2,7 +2,11 @@
 import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 
-export default function Employment() {
+export default function Employment({onDataChange}) {
+  const handleFieldChange = (field, value) => {
+    onDataChange(prevData => ({ ...prevData, [field]: value }));
+  };
+
   const SvgDate = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
   <path d="M14.1667 2.5L14.1667 5.83333" stroke="#8090A7" stroke-width="1.2" stroke-linecap="round"/>
@@ -31,6 +35,7 @@ export default function Employment() {
               <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('salary', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2}  >
                     <Box>
@@ -49,6 +54,7 @@ export default function Employment() {
               <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('startDate', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -72,6 +78,7 @@ export default function Employment() {
               <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('secretariats', e.target.value)}
                 required
                 placeholder='Secretariats'
               />
@@ -79,6 +86,7 @@ export default function Employment() {
                <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('deliveryDate', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>

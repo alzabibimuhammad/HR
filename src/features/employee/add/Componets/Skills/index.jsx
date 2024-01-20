@@ -3,11 +3,19 @@ import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
 
-export default function Skills() {
+export default function Skills({onDataChange}) {
+
+  const handleFieldChange = (field, value) => {
+    onDataChange(prevData => ({ ...prevData, [field]: value }));
+  };
+
   const [degree, setDegree] = useState('');
+
+
 
   const handleDegreeChange = (e) => {
     setDegree(e.target.value);
+    handleFieldChange('degree',e.target.value)
   };
   const SvgStudy = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -68,6 +76,7 @@ export default function Skills() {
                 <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('study', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -83,6 +92,7 @@ export default function Skills() {
             <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('certificate', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -99,6 +109,7 @@ export default function Skills() {
               <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('experience', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -115,6 +126,7 @@ export default function Skills() {
               <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('skills', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -139,6 +151,7 @@ export default function Skills() {
               <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('language', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>

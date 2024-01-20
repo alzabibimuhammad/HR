@@ -1,11 +1,31 @@
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
-import React from 'react'
+import React, { useState } from 'react'
+import Avatar from '@mui/material/Avatar';
 
 export default function Snapshot({onDataChange}) {
+
+  const [image, setImage] = useState(null);
+
+
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
+
+
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+        onDataChange(reader.result)
+      };
+      reader.readAsDataURL(file);
+    }
+     }
 
   const svgContent = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -20,14 +40,22 @@ export default function Snapshot({onDataChange}) {
 
           <Typography >Snapshot</Typography>
           <br/>
-          <Stack direction={'row'} spacing={3} >
-            <Box>
-              <img src='/images/avatars/3.png' alt='profile-picture' />
-              {/* <TextField type='file'
-                size='small'
-                sx={{width:'100px'}}
-              /> */}
-            </Box>
+          <Stack direction={'row'} alignItems={"center"} spacing={3} >
+          <Box>
+      <label htmlFor="imageInput">
+        <Avatar
+          sx={{ width: '120px', height: '120px', borderRadius: '5px' }}
+          src={image || "/broken-image.jpg"}
+        />
+      </label>
+      <input
+        id="imageInput"
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={handleImageChange}
+      />
+    </Box>
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
 

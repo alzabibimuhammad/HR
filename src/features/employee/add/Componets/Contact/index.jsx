@@ -1,7 +1,11 @@
 import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 
-export default function Contact() {
+export default function Contact({onDataChange}) {
+  const handleFieldChange = (field, value) => {
+    onDataChange(prevData => ({ ...prevData, [field]: value }));
+  };
+
     const SvgMail = `
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
     <rect x="3.33325" y="5" width="13.3333" height="10" rx="2" stroke="#8090A7"/>
@@ -30,6 +34,7 @@ export default function Contact() {
           <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('address', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -44,6 +49,7 @@ export default function Contact() {
               <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('phoneNumber', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -59,6 +65,8 @@ export default function Contact() {
                 fullWidth
                 type='email'
                 size='small'
+                onChange={(e) => handleFieldChange('email', e.target.value)}
+
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>

@@ -3,15 +3,24 @@ import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
 
-export default function Info() {
+export default function Info({onDataChange}) {
+
+  const handleFieldChange = (field, value) => {
+    onDataChange(prevData => ({ ...prevData, [field]: value }));
+  };
   const [Status, setStatus] = useState('');
   const [Marital, setMarital] = useState('');
 
   const handleStatusChange = (e) => {
+
     setStatus(e.target.value);
+    handleFieldChange('militaryStatus',e.target.value)
+
   };
   const handleMaritalChange = (e) => {
     setMarital(e.target.value);
+    handleFieldChange('maritalStatus',e.target.value)
+
   };
   const SvgDate = `
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -50,6 +59,8 @@ export default function Info() {
               <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('birthDate', e.target.value)}
+
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -64,6 +75,7 @@ export default function Info() {
               <TextField
                 fullWidth
                 size='small'
+                onChange={(e) => handleFieldChange('idNumber', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -88,8 +100,8 @@ export default function Info() {
                     size='small'
                   >
                     <MenuItem value=''>{`${t("Military Status")}`}</MenuItem>
-                    <MenuItem value='admin'>{`${t("Done")}`}</MenuItem>
-                    <MenuItem value='customer'>{`${t("Not Done")}`}</MenuItem>
+                    <MenuItem value='Done'>{`${t("Done")}`}</MenuItem>
+                    <MenuItem value='NotDone'>{`${t("Not Done")}`}</MenuItem>
                 </TextField>
 
               <TextField

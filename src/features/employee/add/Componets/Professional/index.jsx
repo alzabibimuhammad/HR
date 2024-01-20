@@ -3,21 +3,27 @@ import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
 
-export default function Professional() {
-
+export default function Professional({onDataChange}) {
+  const handleFieldChange = (field, value) => {
+    onDataChange(prevData => ({ ...prevData, [field]: value }));
+  };
   const [role, setRole] = useState('');
   const [specialization, setSpecialization] = useState('');
   const [team, setTeam] = useState('');
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
+    handleFieldChange('role',e.target.value)
   };
 
   const handleSpecializationChange = (e) => {
     setSpecialization(e.target.value);
+    handleFieldChange('specialization',e.target.value)
+
   };
   const handleteamChange = (e) => {
     setTeam(e.target.value);
+    handleFieldChange('team',e.target.value)
   };
   return (
     <Card>

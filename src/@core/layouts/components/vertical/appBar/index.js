@@ -5,6 +5,7 @@ import MuiToolbar from '@mui/material/Toolbar'
 
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
+import Breadcrumbs from 'src/features/Breadcrumbs'
 
 // import Breadcrumbs from 'src/features/Breadcrumbs'
 
@@ -96,8 +97,8 @@ const LayoutAppBar = props => {
 
       </Toolbar>
     </AppBar>
-    
-    {/* <Breadcrumbs /> */}
+
+    <Breadcrumbs />
     </>
   )
 }

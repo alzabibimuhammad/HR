@@ -21,7 +21,7 @@ const [Data,setData]=useState([])
   return(
     <>
     {/* {true ? <ReportGrid rows={store?.data?.data} /> : <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'50vh' }} ><CircularProgress /></Box>} */}
-    {true ? <CollapsibleTable   rows={[{id: 1, employee: 'muhammad', role: 'admin',spcialization:'test',team:'back' } ,{id:2, employee: 'muhammad', role: 'admin',spcialization:'test',team:'back' }]} /> : <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'50vh' }} ><CircularProgress /></Box>}
+    {true ? <CollapsibleTable   rows={'s'} /> : <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'50vh' }} ><CircularProgress /></Box>}
     </>
   )
 }

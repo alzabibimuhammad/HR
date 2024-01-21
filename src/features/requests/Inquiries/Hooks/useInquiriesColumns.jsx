@@ -22,6 +22,7 @@ import Divider from '@mui/material/Divider';
 import { useDeleteRequest } from './useDeleteRequest';
 import { useAccepteRequest } from './useAccepteRequest'; // Import the new hook
 import { useRejectRequest } from './useRejectRequest';
+import { Stack } from '@mui/system';
 
 
 const ITEM_HEIGHT = 162;
@@ -117,19 +118,54 @@ console.log(rowData);
       headerName: t("Employee"),
       flex: 1,
       disableClickEventBubbling: true,
+      renderCell:(params)=>{
+        return(
+            <Box>
+              <Typography sx={{ fontSize:'14px' }} >
+              {params?.row?.employee}
+              </Typography>
+              </Box>
+        )
+      }
     },
     {
       field: 'Date',
       headerName: t(" Date"),
       flex: 1,
       disableClickEventBubbling: true,
+      renderCell:(params)=>{
+        return(
+          <Stack direction={'column'} >
+            <Box>
+              <Typography sx={{ fontSize:'14px' }} >
+
+              {params?.row?.Date}
+              </Typography>
+              </Box>
+            <Box>
+              <Typography sx={{ color:'#8090A7',fontSize:'12px' }} >
+                {params?.row?.time}
+              </Typography>
+              </Box>
+          </Stack>
+        )
+      }
     },
+
     {
       field: 'Title',
       headerName: t("title"),
       flex: 1,
       disableClickEventBubbling: true,
-
+      renderCell:(params)=>{
+        return(
+            <Box>
+              <Typography sx={{ fontSize:'14px' }} >
+              {params?.row?.Title}
+              </Typography>
+              </Box>
+        )
+      }
     },
     {
       field: 'CONTENT',
@@ -145,7 +181,7 @@ console.log(rowData);
         return (
           <Box sx={{ display: 'flex', flexDirection: 'row',  }}>
             <div style={{ display:"flex", flexDirection:"row", alignItems:"center" }}>
-              {showMoreMap[id] ? content : content.slice(0, 40) + '...'}
+              <Typography sx={{ fontSize:'14px' }} >{showMoreMap[id] ? content : content.slice(0, 40) + '...'}</Typography>
             </div>
             {shouldShowMore && (
 

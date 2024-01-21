@@ -74,7 +74,9 @@ export default function CollapsibleTable(Data) {
             <Stack direction={'column'}  justifyContent={'start'} alignItems={'start'} sx={{ padding:'0',margin:'0' }}  >
 
             <Box>
+              <Typography sx={{ fontSize:'14px' }}>
               {row.name}
+              </Typography>
             </Box>
 
             <Box >
@@ -90,8 +92,8 @@ export default function CollapsibleTable(Data) {
             >
 
               <Stack direction={'row'} >
-                <Typography sx={{ fontSize:'13px',marginRight:'3px'  }} >{row?.user?.length}</Typography>
-                <Typography sx={{ fontSize:'13px' }} >Members</Typography>
+                <Typography sx={{ fontSize:'14px',marginRight:'3px'  }} >{row?.user?.length}</Typography>
+                <Typography sx={{ fontSize:'14px' }} >Members</Typography>
               </Stack>
 
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -101,7 +103,12 @@ export default function CollapsibleTable(Data) {
             </Stack>
 
           </TableCell>
-          <TableCell >{row.id}</TableCell>
+          <TableCell >
+          <Typography sx={{ fontSize:'14px' }} >
+
+            {row.id}
+            </Typography>
+            </TableCell>
           <TableCell sx={{ textAlign:'right' }}>
               <Box>
                 <IconButton>

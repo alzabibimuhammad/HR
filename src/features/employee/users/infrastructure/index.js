@@ -1,5 +1,4 @@
 export const UsersData = elements => {
-  console.log('elefff',elements);
   return elements?.data?.data?.map(element => {
     return {
       id: element?.id,

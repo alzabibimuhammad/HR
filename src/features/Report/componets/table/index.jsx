@@ -76,7 +76,11 @@ export default function CollapsibleTable(Data) {
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
               <TableCell component="th">
                 <Stack direction={'column'} justifyContent={'start'} alignItems={'start'} sx={{ padding: '0', margin: '0' }}>
-                  <Box>{row.employee}</Box>
+                  <Box>
+                    <Typography sx={{ fontSize:'14px' }} >
+                    {row.employee}
+                    </Typography>
+                    </Box>
                   <Box>
                     <IconButton
                       size="small"
@@ -92,16 +96,31 @@ export default function CollapsibleTable(Data) {
                     >
                       <Stack direction={'row'}>
                         <Typography sx={{ fontSize: '13px', marginRight: '3px' }}>{row?.user?.length}</Typography>
-                        <Typography sx={{ fontSize: '13px' }}>Daily Report</Typography>
+                        <Typography sx={{ fontSize: '14px' }}>Daily Report</Typography>
                       </Stack>
                       {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                   </Box>
                 </Stack>
               </TableCell>
-              <TableCell>{row.role}</TableCell>
-              <TableCell>{row.specialization}</TableCell>
-              <TableCell>{row.team}</TableCell>
+              <TableCell>
+              <Typography sx={{ fontSize:'14px' }} >
+
+                {row.role}
+                </Typography>
+                </TableCell>
+              <TableCell>
+              <Typography sx={{ fontSize:'14px' }} >
+
+                {row.specialization}
+                </Typography>
+                </TableCell>
+              <TableCell>
+              <Typography sx={{ fontSize:'14px' }} >
+
+                {row.team}
+                </Typography>
+                </TableCell>
               <TableCell>
                 <Box>
                   <Link href={`/coach/coachProfile/${row.id}`}>

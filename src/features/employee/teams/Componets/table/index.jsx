@@ -22,10 +22,10 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import Link from 'next/link';
 import AlertDialog from '../dialog';
 import { useState } from 'react';
-function createData(name,id,user) {
+function createData(id,name,user) {
   return {
-    name,
     id,
+    name,
     user,
 
   };
@@ -101,7 +101,7 @@ export default function CollapsibleTable(Data) {
             </Stack>
 
           </TableCell>
-          <TableCell >{row.user.length}</TableCell>
+          <TableCell >{row.id}</TableCell>
           <TableCell sx={{ textAlign:'right' }}>
               <Box>
                 <IconButton>
@@ -177,19 +177,41 @@ export default function CollapsibleTable(Data) {
 
 
   const rows = Data?.Data?.data?.data?.map((item) => {
-    return createData(item.name, item.id,item.user);
+    return createData(item.id,item.name, item.user);
   });
 
 
+  const [fdata, setFdata] = useState();
 
 
 
-  const [openParent, setOpenParent] = React.useState(false);
+
+
+  const [openParent, setOpenParent] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
   };
 
+  const handelSearch = event =>{
+    console.log('test id',event.target.value == rows?.[0]?.id);
+    if (event.target.value){
+    const searchFilter = rows?.filter((row)=>{
+
+      if( row?.name.toLowerCase()?.includes(event.target.value.toLowerCase()) )
+        return row?.name.toLowerCase()?.includes(event.target.value.toLowerCase());
+
+      else if( row?.id == event.target.value)
+        return  row?.id == event.target.value
+
+    })
+
+    setFdata(searchFilter)
+  }
+  else
+    setFdata(null)
+
+  }
 
 
   return (
@@ -211,7 +233,7 @@ export default function CollapsibleTable(Data) {
                           </Box>
                         ),
                       }}
-                      // onChange={handelSearch}
+                      onChange={handelSearch}
           sx={{ paddingLeft: '8px',width:'50%',backgroundColor:'#F5F7FA',border:"none",boxShadow:"none" }}
           size='small'
         />
@@ -246,7 +268,7 @@ export default function CollapsibleTable(Data) {
           </TableRow>
         </TableHead>
         <TableBody>
-            <Row  row={rows} />
+          {fdata ? <Row  row={fdata} /> :<Row  row={rows} />}
         </TableBody>
       </Table>
     </TableContainer>

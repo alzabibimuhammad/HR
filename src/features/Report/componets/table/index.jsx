@@ -24,6 +24,7 @@ import AlertDialog from '../dialog';
 import { useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 function createData(id,employee,role,spcialization,team) {
   return {
@@ -45,7 +46,6 @@ export default function CollapsibleTable(Data) {
 
     const [data , setData] = useState(row)
 
-    console.log("datafff",data.rows);
 
     const [open, setOpen] = useState(false);
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
@@ -72,6 +72,7 @@ export default function CollapsibleTable(Data) {
       <>
         {data?.rows?.map((row) => (
           <>
+
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
               <TableCell component="th">
                 <Stack direction={'column'} justifyContent={'start'} alignItems={'start'} sx={{ padding: '0', margin: '0' }}>
@@ -182,36 +183,36 @@ export default function CollapsibleTable(Data) {
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
-
-    if (e.target.value !== '') {
-      const filteredData = originalData.filter((row) => {
-        return row.role === e.target.value;
-      });
-
-      setTeams({ rows: filteredData });
-
-    } else {
-      setTeams({ rows: originalData });
-    }
   };
-
-
-
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
-
-    if (e.target.value !== '') {
-      const filteredData = originalData.filter((row) => {
-        return row.team === e.target.value;
-      });
-
-      setTeams({ rows: filteredData });
-
-    } else {
-      setTeams({ rows: originalData });
-    }
   };
+  useEffect(()=>{
+    let filteredData;
+    if(role && status){
+      filteredData = originalData.filter((row) => {
+        return row.team === status && row.role===role;
+      });
+    setTeams({ rows: filteredData });
 
+    }
+    else if(role && !status){
+      filteredData = originalData.filter((row) => {
+        return row.role===role;
+      });
+    setTeams({ rows: filteredData });
+
+    }
+    else if(status && !role){
+      filteredData = originalData.filter((row) => {
+        return row.team === status ;
+      });
+     setTeams({ rows: filteredData });
+
+    }
+    else
+    setTeams({ rows: originalData });
+},[role,status])
 
   return (
 

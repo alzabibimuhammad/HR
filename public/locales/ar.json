@@ -191,6 +191,14 @@
   "Status":"الحالة",
   "Active":"نشط",
   "paid":"مدفوع",
-  "unpaid":"غير مدفوع"
-
+  "unpaid":"غير مدفوع",
+  "Employee":"الموظف",
+  "Start Date":"تاريخ البداية",
+  "End Date":"تاريخ النهاية",
+  "Action":"تعديل",
+  "Contracts":"العقود",
+  "Report":"تقرير",
+  "Employees":"الموظفين",
+  "Requests":"الطلبات",
+  "Tree":"التراتبية"
 }

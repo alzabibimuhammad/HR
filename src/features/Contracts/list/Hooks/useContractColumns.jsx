@@ -51,7 +51,7 @@ const useContractColumns = () => {
   return useMemo(() => [
     {
       field: 'id',
-      headerName: t("ID"),
+      headerName: 'ID',
       flex: 2,
       disableClickEventBubbling: true,
       renderCell:(params)=>{
@@ -119,7 +119,7 @@ const useContractColumns = () => {
         return (
           <Box>
             <Typography sx={{ fontSize:'14px' }} >
-              {params?.row?.status}
+              {t(params?.row?.status)}
             </Typography>
           </Box>
         )

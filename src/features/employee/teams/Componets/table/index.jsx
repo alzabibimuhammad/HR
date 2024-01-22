@@ -34,6 +34,7 @@ function createData(id,name,user) {
 
 
 export default function CollapsibleTable(Data) {
+
   function Row(props) {
 
     const { row } = props;
@@ -65,8 +66,6 @@ export default function CollapsibleTable(Data) {
     return (
 
       <>
-        {row?.map((row) => (
-          <>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
 
           <TableCell  component="th" >
@@ -171,8 +170,6 @@ export default function CollapsibleTable(Data) {
           </TableCell>
 
         </TableRow>
-        </>
-        ))}
       </>
     );
 
@@ -275,7 +272,21 @@ export default function CollapsibleTable(Data) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {fdata ? <Row  row={fdata} /> :<Row  row={rows} />}
+
+          {fdata ?
+          fdata.map((row) => (
+              <Row key={row.id} row={row} />
+          ))
+
+          :rows?.map((row) => (
+            <Row key={row.id} row={row} />
+            ))
+
+
+          }
+
+
+
         </TableBody>
       </Table>
     </TableContainer>

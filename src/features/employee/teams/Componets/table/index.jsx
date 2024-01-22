@@ -23,6 +23,7 @@ import Link from 'next/link';
 import AlertDialog from '../dialog';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import AlertDialogMember from '../dialogTeamUser';
 function createData(id,name,user) {
   return {
     id,
@@ -45,23 +46,37 @@ export default function CollapsibleTable(Data) {
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
 
+
+    const [openMember, setOpenMember] = useState(false);
+    const [isMemberPopupOpen, setIsMemberPopupOpen] = useState(false);
+    const [memberdeleteId, setMemberDeleteId] = useState(null);
+
     const handleEditClick = (row) => {
       setEditData(row);
       setIsDrawerOpenEdit(true);
     };
 
     const handleClickOpen = (params) => {
-      console.log('dssdds oiiii',params) ;
       setDeleteId(params);
       setIsDeletePopupOpen(true);
-
-
     };
 
     const handleClose = () => {
       setIsDeletePopupOpen(false)
     };
-    console.log('opp',row);
+
+    const handleMemberOpen = (params) => {
+      console.log('dssdds oiiii',params);
+      setMemberDeleteId(params);
+      setIsMemberPopupOpen(true);
+
+      // setDeleteId(params);
+      // setIsDeletePopupOpen(true);
+    };
+
+    const handleMemberClose = () => {
+      setIsMemberPopupOpen(false)
+    };
 
     return (
 
@@ -121,9 +136,7 @@ export default function CollapsibleTable(Data) {
               </Box>
 
 
-              {/* <Box>
-                <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
-              </Box> */}
+
               {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
 
 
@@ -140,7 +153,8 @@ export default function CollapsibleTable(Data) {
                     <TableRow>
                       <TableCell>{t('ID')}</TableCell>
                       <TableCell>{t('Name')}</TableCell>
-                      <TableCell align="right">{t('Email')}</TableCell>
+                      <TableCell >{t('Email')}</TableCell>
+                      <TableCell align="right">{t('Action')}</TableCell>
                     </TableRow>
                   </TableHead>
 
@@ -161,9 +175,16 @@ export default function CollapsibleTable(Data) {
                               </Typography>
                               </Stack>
                               </TableCell>
-                        <TableCell align="right">
+                        <TableCell >
                           {user.email}
                         </TableCell>
+                        <TableCell align='right'>
+                            <IconButton  onClick={() => handleMemberOpen(user.id)}>
+                                <DeleteOutlinedIcon style={{ color:'#8090A7'  }} variant color="error" size='small'>Delete</DeleteOutlinedIcon>
+                            </IconButton>
+                            {isMemberPopupOpen && <AlertDialogMember id={memberdeleteId} open={isMemberPopupOpen} handleClose={handleMemberClose} />}
+
+                          </TableCell>
                       </TableRow>
                     ))}
 

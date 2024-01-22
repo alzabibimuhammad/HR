@@ -5,13 +5,13 @@ import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { useDeleteTeam } from "../../hooks/useDeleteTeam";
+import { useRemoveMember } from "../../hooks/useRemoveMember";
 
-export default function AlertDialog({ id, open, handleClose }) {
- const { mutate: DeleteTeam, isLoading } = useDeleteTeam();
+export default function AlertDialogMember({ id, open, handleClose }) {
+ const { mutate: RemoveMember, isLoading } = useRemoveMember();
 
   const handleDeleteAPI = () => {
-    DeleteTeam(id)
+    RemoveMember(id)
     handleClose()
   };
 
@@ -44,7 +44,7 @@ export default function AlertDialog({ id, open, handleClose }) {
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {"Are you sure you want to delete team?"}
+        {"Are you sure you want to remove member?"}
       </DialogTitle>
 
 

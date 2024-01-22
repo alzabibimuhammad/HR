@@ -1,7 +1,7 @@
 import { request } from "../../../../utiltis/AxiosUtilitis";
 
-const deleteEmployee = (id) => {
+const DeleteTeam = (id) => {
   return request({ url: `/api/Team/deleteTeam/${id}`, method: "delete" });
 };
 
-export default deleteEmployee;
+export default DeleteTeam;

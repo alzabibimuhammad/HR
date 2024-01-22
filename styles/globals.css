@@ -203,3 +203,17 @@ border-radius: 12px;
 .css-as200-MuiFormControl-root-MuiTextField-root .MuiInputBase-input{
   color: #8090A7;
 }
+
+
+.node__root > circle {
+  fill: red;
+}
+
+.node__branch > circle {
+  fill: yellow;
+}
+
+.node__leaf > circle {
+  fill: green;
+  r: 40;
+}

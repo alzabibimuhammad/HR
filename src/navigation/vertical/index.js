@@ -89,6 +89,11 @@ const navigation = () => {
 
       ]
     },
+    {
+      title: 'Tree',
+      icon: 'tabler:report',
+      path: '/tree'
+    },
   ]
 
 }

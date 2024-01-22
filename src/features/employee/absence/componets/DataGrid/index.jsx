@@ -120,7 +120,7 @@ const Absence = ({ rows }) => {
               >
 
             <TextField
-              placeholder='Search'
+              placeholder={t('Search')}
               fullWidth
 
               InputProps={{

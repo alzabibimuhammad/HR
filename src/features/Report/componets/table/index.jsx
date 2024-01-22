@@ -26,13 +26,14 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
 
-function createData(id,employee,role,spcialization,team) {
+function createData(id,employee,role,spcialization,team,user) {
   return {
     employee,
     role,
     spcialization,
     team,
-    id
+    id,
+    user
 
 
   };
@@ -42,11 +43,11 @@ function createData(id,employee,role,spcialization,team) {
 
 export default function CollapsibleTable(Data) {
   function Row(props) {
-    const { row } = props;
 
-    const [data , setData] = useState(row)
+    console.log('props',props.row);
 
-
+    const [row, setrow] = useState(props.row);
+    console.log('rossss',row);
     const [open, setOpen] = useState(false);
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
@@ -70,8 +71,6 @@ export default function CollapsibleTable(Data) {
     };
     return (
       <>
-        {data?.rows?.map((row) => (
-          <>
 
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
               <TableCell component="th">
@@ -172,17 +171,15 @@ export default function CollapsibleTable(Data) {
                 </Collapse>
               </TableCell>
             </TableRow>
-          </>
-        ))}
       </>
     );
 
   }
   const rows = [
-    createData(1,'muhammad','admin','sss','front'),
+    createData(1,'muhammad','admin','sss','front',[{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'},{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'}]),
     createData(2,'muhammad','admin','sss','back'),
     createData(3,'muhammad','customer','sss','ui'),
-    createData(4,'muhammad','employee','sss','ui')
+    createData(4,'muhammad','employee','sss','ui',[{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'},{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'}])
     ];
 
 
@@ -195,7 +192,7 @@ export default function CollapsibleTable(Data) {
   const [originalData, setOriginalData] = useState(rows);
   const [teams, setTeams] = useState({ rows: rows });
 
-
+  console.log('ttter',teams.rows);
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
 
@@ -332,7 +329,13 @@ export default function CollapsibleTable(Data) {
         </TableHead>
         <TableBody>
 
-            <Row row={teams} />
+
+          {teams?
+          teams?.rows?.map((row) => (
+              <Row row={row} />
+          ))
+          :null
+          }
 
         </TableBody>
       </Table>

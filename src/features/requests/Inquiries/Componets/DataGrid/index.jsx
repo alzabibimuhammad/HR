@@ -10,6 +10,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { InquiriesData } from '../../infrastructure';
+import { useTranslation } from 'react-i18next';
+import { Stack } from '@mui/system';
 
 const Inquiries = ({ rows }) => {
   const columns = useInquiriesColumns(rows);
@@ -18,6 +20,7 @@ const Inquiries = ({ rows }) => {
   const [status, setStatus] = useState('');
   const [cleared, setCleared] = useState(false);
 
+  const {t} = useTranslation()
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
@@ -73,12 +76,12 @@ const Inquiries = ({ rows }) => {
       <Grid container spacing={4}>
         <Grid  item xs={12}>
           <Card>
-            <CardHeader title="Filters" />
+            <CardHeader title={t("Filters")} />
             <CardContent>
-              <Box
+              <Stack
+                direction={{ sm:'row',xs:'column' }}
+                width={'100%'}
                 sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
                   gap: '10px',
                   width: '100%',
                   mb:"12px"
@@ -88,59 +91,36 @@ const Inquiries = ({ rows }) => {
                   select
                   value={role}
                   onChange={handleRoleChange}
-                  label="Title"
-                  size='medium'
-                  sx={{width:"25%"}}
+                  label={t('Title')}
+                  size='small'
+                  fullWidth
                 >
-                  <MenuItem value="">Select Role</MenuItem>
-                  <MenuItem value="admin">Admin</MenuItem>
-                  <MenuItem value="customer">Customer</MenuItem>
-                  <MenuItem value="employee">Employee</MenuItem>
+                  <MenuItem value="">{t('Select Role')}</MenuItem>
+                  <MenuItem value="admin">{t('Admin')}</MenuItem>
+                  <MenuItem value="customer">{t('Customer')}</MenuItem>
+                  <MenuItem value="employee">{t('Employee')}</MenuItem>
                 </TextField>
 
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    sx={{width:"25%" }}
-                    onChange={handleDateChange}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        label="Select Date"
-                        helperText="Clearable"
-                        InputProps={{
-                          ...params.InputProps,
-                          endAdornment: (
-                            <React.Fragment>
-                              {cleared && (
-                                <Alert
-                                  sx={{ position: 'absolute', bottom: 0, right: 0 }}
-                                  severity="success"
-                                >
-                                  Field cleared!
-                                </Alert>
-                              )}
-                            </React.Fragment>
-                          ),
-                        }}
-                      />
-                    )}
-                  />
-                </LocalizationProvider>
                 <TextField
                   select
+                  size='small'
+                  fullWidth
                   value={status}
                   onChange={handleStatusChange}
-                  label="Select Status"
-                  size='medium'
-                  sx={{width:"25%"}}
+                  label={t('Select Status')}
 
                 >
-                  <MenuItem value="">Select Status</MenuItem>
-                  <MenuItem value="active">Active</MenuItem>
-                  <MenuItem value="not-active">Not Active</MenuItem>
+                  <MenuItem value="">{t('Select Status')}</MenuItem>
+                  <MenuItem value="active">{t('Active')}</MenuItem>
+                  <MenuItem value="notActive">{t('Not Active')}</MenuItem>
                 </TextField>
+                <TextField
+                type='date'
+                size='small'
+                fullWidth
+                />
 
-              </Box>
+              </Stack>
 
               <Divider sx={{ m: '0 !important' }} />
 

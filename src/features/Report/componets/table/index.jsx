@@ -23,8 +23,8 @@ import Link from 'next/link';
 import AlertDialog from '../dialog';
 import { useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function createData(id,employee,role,spcialization,team,user) {
   return {
@@ -40,8 +40,8 @@ function createData(id,employee,role,spcialization,team,user) {
 }
 
 
-
 export default function CollapsibleTable(Data) {
+  const {t} = useTranslation()
   function Row(props) {
 
     console.log('props',props.row);
@@ -95,7 +95,7 @@ export default function CollapsibleTable(Data) {
                     >
                       <Stack direction={'row'}>
                         <Typography sx={{ fontSize: '13px', marginRight: '3px' }}>{row?.user?.length}</Typography>
-                        <Typography sx={{ fontSize: '14px' }}>Daily Report</Typography>
+                        <Typography sx={{ fontSize: '14px' }}>{t('Daily Report')}</Typography>
                       </Stack>
                       {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
@@ -105,7 +105,7 @@ export default function CollapsibleTable(Data) {
               <TableCell>
               <Typography sx={{ fontSize:'14px' }} >
 
-                {row.role}
+                {t(row.role)}
                 </Typography>
                 </TableCell>
               <TableCell>
@@ -142,16 +142,13 @@ export default function CollapsibleTable(Data) {
               <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   <Box sx={{ margin: 1 }}>
-                    <Typography variant="h6" gutterBottom component="div">
-                      History
-                    </Typography>
+
                     <Table size="small" aria-label="purchases">
                       <TableHead>
                         <TableRow>
-                          <TableCell>ID</TableCell>
-                          <TableCell>First Name</TableCell>
-                          <TableCell align="right">Last Name</TableCell>
-                          <TableCell align="right">Email</TableCell>
+                          <TableCell>{t('ID')}</TableCell>
+                          <TableCell>{t('Name')}</TableCell>
+                          <TableCell align="right">{t('Email')}</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -160,8 +157,16 @@ export default function CollapsibleTable(Data) {
                             <TableCell component="th" scope="row">
                               {user.id}
                             </TableCell>
-                            <TableCell>{user.first_name}</TableCell>
-                            <TableCell align="right">{user.last_name}</TableCell>
+                            <TableCell>
+                              <Stack direction={'row'} spacing={2}>
+                              <Typography>
+                              {user.first_name}
+                              </Typography>
+                              <Typography>
+                              {user.last_name}
+                              </Typography>
+                              </Stack>
+                              </TableCell>
                             <TableCell align="right">{user.email}</TableCell>
                           </TableRow>
                         ))}
@@ -176,10 +181,10 @@ export default function CollapsibleTable(Data) {
 
   }
   const rows = [
-    createData(1,'muhammad','admin','sss','front',[{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'},{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'}]),
+    createData(1,'muhammad','admin','sss','front',[{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'},{'id':2,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'}]),
     createData(2,'muhammad','admin','sss','back'),
     createData(3,'muhammad','customer','sss','ui'),
-    createData(4,'muhammad','employee','sss','ui',[{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'},{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'}])
+    createData(4,'muhammad','employee','sss','ui',[{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'},{'id':2,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'}])
     ];
 
 
@@ -271,7 +276,7 @@ export default function CollapsibleTable(Data) {
 
               >
 
-                <Typography>Filter</Typography>
+                <Typography>{t('Filter')}</Typography>
                   <TextField
                     size='small'
                     select
@@ -283,10 +288,10 @@ export default function CollapsibleTable(Data) {
                       onChange: handleRoleChange,
                     }}
                   >
-                    <MenuItem value=''>Select Role</MenuItem>
-                    <MenuItem value='admin'>admin</MenuItem>
-                    <MenuItem value='customer'>customer</MenuItem>
-                    <MenuItem value='employee'>employee</MenuItem>
+                    <MenuItem value=''>{t('Select Role')}</MenuItem>
+                    <MenuItem value='admin'>{t('admin')}</MenuItem>
+                    <MenuItem value='customer'>{t('customer')}</MenuItem>
+                    <MenuItem value='employee'>{t('employee')}</MenuItem>
                   </TextField>
                   <TextField
                     select
@@ -300,7 +305,7 @@ export default function CollapsibleTable(Data) {
                       onChange: handleStatusChange,
                     }}
                   >
-                    <MenuItem value=''>Specialization</MenuItem>
+                    <MenuItem value=''>{t('Specialization')}</MenuItem>
                     <MenuItem value='back'>back</MenuItem>
                     <MenuItem value='front'>front</MenuItem>
                     <MenuItem value='ui'>UI/UX</MenuItem>
@@ -314,16 +319,16 @@ export default function CollapsibleTable(Data) {
                 </Stack>
                 </Stack>
     <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
+      <Table aria-label="collapsible table"  >
         <TableHead>
 
           <TableRow>
 
-            <TableCell sx={{ width:'20%',marginLeft:'10%' }} >Employee</TableCell>
-            <TableCell sx={{ width:'10%' }} >Role</TableCell>
-            <TableCell sx={{ left:0,width:'10%' }} >Specialization</TableCell>
-            <TableCell sx={{ left:0,width:'10%' }} >Team</TableCell>
-            <TableCell sx={{ left:0,width:'10%' }} >Action</TableCell>
+            <TableCell sx={{ width:'20%',marginLeft:'10%' }} >{t('Employee')}</TableCell>
+            <TableCell sx={{ width:'10%' }} >{t('Role')}</TableCell>
+            <TableCell sx={{ left:0,width:'10%' }} >{t('Specialization')}</TableCell>
+            <TableCell sx={{ left:0,width:'10%' }} >{t('Team')}</TableCell>
+            <TableCell sx={{ left:0,width:'10%' }} >{t('Action')}</TableCell>
 
           </TableRow>
         </TableHead>

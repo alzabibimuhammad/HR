@@ -22,6 +22,7 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import Link from 'next/link';
 import AlertDialog from '../dialog';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 function createData(id,name,user) {
   return {
     id,
@@ -36,7 +37,6 @@ function createData(id,name,user) {
 export default function CollapsibleTable(Data) {
 
   function Row(props) {
-
     const { row } = props;
     console.log('rowss',row);
     const [open, setOpen] = useState(false);
@@ -92,7 +92,7 @@ export default function CollapsibleTable(Data) {
 
               <Stack direction={'row'} >
                 <Typography sx={{ fontSize:'14px',marginRight:'3px'  }} >{row?.user?.length}</Typography>
-                <Typography sx={{ fontSize:'14px' }} >Members</Typography>
+                <Typography sx={{ fontSize:'14px' }} >{t('Members')}</Typography>
               </Stack>
 
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -135,16 +135,12 @@ export default function CollapsibleTable(Data) {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
            <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
-                 <Typography variant="h6" gutterBottom component="div">
-                  History
-                </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
-                      <TableCell>ID</TableCell>
-                      <TableCell>First Name</TableCell>
-                      <TableCell align="right">Last Name</TableCell>
-                      <TableCell align="right">Email</TableCell>
+                      <TableCell>{t('ID')}</TableCell>
+                      <TableCell>{t('Name')}</TableCell>
+                      <TableCell align="right">{t('Email')}</TableCell>
                     </TableRow>
                   </TableHead>
 
@@ -155,8 +151,16 @@ export default function CollapsibleTable(Data) {
                         <TableCell component="th" scope="row">
                           {user.id}
                         </TableCell>
-                        <TableCell>{user.first_name}</TableCell>
-                        <TableCell align="right">{user.last_name}</TableCell>
+                        <TableCell>
+                              <Stack direction={'row'} spacing={2}>
+                              <Typography>
+                              {user.first_name}
+                              </Typography>
+                              <Typography>
+                              {user.last_name}
+                              </Typography>
+                              </Stack>
+                              </TableCell>
                         <TableCell align="right">
                           {user.email}
                         </TableCell>
@@ -216,6 +220,7 @@ export default function CollapsibleTable(Data) {
     setFdata(null)
 
   }
+  const {t} = useTranslation()
 
 
   return (
@@ -224,7 +229,7 @@ export default function CollapsibleTable(Data) {
 
     <Box width={{ sm:'70%' ,xs:'100%'}} >
       <TextField
-          placeholder='Search'
+          placeholder={t('Search')}
           fullWidth
           InputProps={{
           startAdornment: (
@@ -245,9 +250,9 @@ export default function CollapsibleTable(Data) {
 
         <Box  width={{ sm:'30%',xs:'100%' }} >
       <Button
-          sx={{ marginLeft:'60%',fontSize:'13px',color:'white',backgroundColor:'#6AB2DF' ,     ":hover": {color:'#6D6B77'}, }}
+          sx={{ marginLeft:'60%',fontSize:'13px',color:'white',backgroundColor:'#6AB2DF' ,":hover": {color:'#6D6B77'}, }}
           onClick={handleDrawerOpen}
-          >+ ADD TEAM
+          >+ {t('ADD TEAM')}
       </Button>
 
       </Box>
@@ -265,9 +270,9 @@ export default function CollapsibleTable(Data) {
 
           <TableRow>
 
-            <TableCell sx={{ width:'20%',marginLeft:'10%' }} >TEAM NAME</TableCell>
-            <TableCell sx={{ width:'10%' }} >TEAM ID</TableCell>
-            <TableCell sx={{ left:0,width:'70%',textAlign:'right' }} >ACTION</TableCell>
+            <TableCell sx={{ width:'20%',marginLeft:'10%' }} >{t('Team Name')}</TableCell>
+            <TableCell sx={{ width:'10%' }} >{t('Team ID')}</TableCell>
+            <TableCell sx={{ left:0,width:'70%',textAlign:'right' }} >{t('Action')}</TableCell>
 
           </TableRow>
         </TableHead>

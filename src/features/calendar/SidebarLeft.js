@@ -19,6 +19,8 @@ import { RequestPage } from '@mui/icons-material'
 import { FormateDate } from 'src/utiltis/DateFormate'
 import { useGetEventByDay } from './hooks/useGetEventByDay'
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
+
 
 const SidebarLeft = props => {
   const {
@@ -36,6 +38,7 @@ const SidebarLeft = props => {
     handleAddEventSidebarToggle
 
   } = props
+  const {t} = useTranslation()
 
   const colorsArr = calendarsColor ? Object.entries(calendarsColor) : []
 const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
@@ -106,7 +109,7 @@ const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
       >
 
         <Box sx={{ p: 6, width: '100%' }}>
-        <Typography sx={{color:"#8090A7",width:"93px",height:"24px",marginLeft:"10px"}} variant='h3'>Calendar</Typography>
+        <Typography sx={{color:"#8090A7",width:"93px",height:"24px",marginLeft:"10px"}} variant='h3'>{t('Calendar')}</Typography>
         </Box>
 
         {/* calender show data <Divider sx={{ width: '100%', m: '0 !important' }} /> */}
@@ -124,14 +127,14 @@ const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
         <Box sx={{ p: 7, width: '100%' }}>
           <Button fullWidth variant='contained' sx={{ '& svg': { mr: 2 } }} onClick={handleSidebarToggleSidebar}>
             <Icon icon='tabler:plus' fontSize='1.125rem' />
-            Add Event
+            {t('Add Event')}
           </Button>
         </Box>
         <Divider sx={{ width: '100%', m: '0 !important' }} />
         <Box sx={{ p: 7, width: '100%' }}>
 
 
-        <Typography sx={{fontWeight:"600",fontSize:"20px",color:"#131627"}}>Today Event</Typography>
+        <Typography sx={{fontWeight:"600",fontSize:"20px",color:"#131627"}}>{t('Today Event')}</Typography>
         <Box sx={{width:"100%"}}>
 
         {Array.isArray(DataEventByDay?.data?.data) && DataEventByDay.data.data.length > 0 ? (

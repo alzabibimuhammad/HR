@@ -130,7 +130,7 @@ console.log(rowData);
     },
     {
       field: 'Date',
-      headerName: t(" Date"),
+      headerName: t("Date"),
       flex: 1,
       disableClickEventBubbling: true,
       renderCell:(params)=>{
@@ -154,7 +154,7 @@ console.log(rowData);
 
     {
       field: 'Title',
-      headerName: t("title"),
+      headerName: t("Title"),
       flex: 1,
       disableClickEventBubbling: true,
       renderCell:(params)=>{
@@ -169,7 +169,7 @@ console.log(rowData);
     },
     {
       field: 'CONTENT',
-      headerName: t("content"),
+      headerName: t("Content"),
       flex: 3,
 
       disableClickEventBubbling: true,
@@ -286,7 +286,7 @@ console.log(rowData);
       onClick={() => handleRejectClick(params)}
       disabled={true}
     >
-      Decline
+      {t('Decline')}
     </Button>
       </>
 
@@ -298,7 +298,7 @@ console.log(rowData);
         disabled={true}
 
       >
-        Approve
+        {t('Approve')}
       </Button>
       )
 
@@ -329,8 +329,10 @@ console.log(rowData);
 
       {params.row.status === 'waiting' ? (
   <>
-    <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}> Approve </Button>
-    <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}  onClick={() => handleRejectClick(params)} > Decline </Button>
+    <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>{t('Approve')}
+ </Button>
+    <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}  onClick={() => handleRejectClick(params)} >{t('Decline')}
+ </Button>
   </>
 ) : params.row.status === 'rejected' ? (
   <>
@@ -339,7 +341,8 @@ console.log(rowData);
       onClick={() => handleRejectClick(params)}
       disabled={true}
     >
-      Decline
+    {t('Decline')}
+
     </Button>  </>
 ) : (
   <Button
@@ -348,7 +351,8 @@ console.log(rowData);
     disabled={true}
 
   >
-    Approve
+  {t('Approve')}
+
   </Button>
 )}
 

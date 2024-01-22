@@ -54,7 +54,7 @@ const navigation = () => {
 
       children:[
         {
-          title:"All Users",
+          title:"All Employees",
           path:"/employees/users"
 
         },

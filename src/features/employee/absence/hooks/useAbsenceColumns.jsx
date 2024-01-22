@@ -63,7 +63,7 @@ const useAbsenceColumns = () => {
     },
     {
       field: 'justified',
-      headerName: t("justified"),
+      headerName: t("Justified"),
       disableClickEventBubbling: true,
       flex: 1.1,
     },

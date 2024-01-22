@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
          });
       })
        .catch(err => {
-         toast.error(`${err.response.status === 401 ? "Unauthorized":err.message}  `, {
+         toast.error(`${err?.response?.status === 401 ? "Unauthorized":err?.message}  `, {
            position: "top-left",
            style: {
              backgroundColor: "#e20d29",

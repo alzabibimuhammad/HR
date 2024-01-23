@@ -6,7 +6,6 @@ import Registration from 'src/features/dashboard/registration/components/DataGri
 import Requests from 'src/features/dashboard/requests'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAttendancePercentage, getRegisteration } from './store'
-import { Grid } from '@mui/material'
 
 export default function Dashboard() {
 
@@ -21,7 +20,7 @@ export default function Dashboard() {
     dispatch(getAttendancePercentage())
     setpercentageData(store?.AttendancePercentage)
 
-    dispatch(getRegisteration())
+    dispatch(getRegisteration('2024-01-18'))
     setRegistration(store?.Registertion)
 
  }, [dispatch,store?.AttendancePercentage?.length,store?.Registertion?.length])

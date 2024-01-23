@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 
-import { Avatar, IconButton, Rating } from '@mui/material';
+import { Avatar, Button, IconButton, Rating } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Box } from '@mui/system';
 
 
 const useRegistrationColumn = () => {
@@ -66,28 +67,74 @@ const useRegistrationColumn = () => {
     {
       field: 'status',
       headerName: t('Status '),
-      flex: 3
+      flex: 3,
+      renderCell: (params) => {
+        return (
+          <>
+            {params?.row?.status === 'Arrived' ? (
+              <Button
+                sx={{
+                  backgroundColor: 'rgba(145, 196, 131, 0.20)',
+                  color: 'var(--green, #91C483)',
+                  fontSize:'12px',
+                  width:'100%',
+                  height:'14px'
+                }}
+              >
+                {params?.row?.status}
+              </Button>
+            ) : params?.row?.status === 'Late' ? (
+              <Button
+                sx={{
+                  backgroundColor: 'rgba(106, 178, 223, 0.20)',
+                  color: '#6AB2DF',
+                  fontSize:'12px',
+                  width:'100%',
+                  height:'14px'
+
+                }}
+              >
+                {params?.row?.status}
+              </Button>
+            ) : params?.row?.status === 'Checked Out' ? (
+              <Button
+                sx={{
+                  backgroundColor: 'rgba(106, 178, 223, 0.20)',
+                  color: '#6AB2DF',
+
+                  height:'14px',
+                  fontSize:'10px',
+                  width:'100%',
+                }}
+              >
+                {params?.row?.status}
+              </Button>
+            ) :params?.row?.status === 'Absent' ? (
+              <Button
+                sx={{
+                  backgroundColor: 'rgba(223, 46, 56, 0.20)',
+                  color: '#DF2E38',
+                  fontSize:'12px',
+                  height:'14px',
+                  width:'100%',
+                }}
+              >
+                {params?.row?.status}
+              </Button>)
+              :null
+            }
+          </>
+        );
+      },
     },
+
     {
-      field: 'Check in',
+      field: 'checkIn',
       headerName: t('Check in'),
       flex: 3
-
-    //   renderCell: (params) => {
-    //     return(
-    //       <>
-    //       <Stack direction={"row"} spacing={2} justifyContent={"center"} marginTop={"10px"} >
-
-
-
-
-    //     </Stack>
-    //   </>
-    //   );
-    // }
     },
     {
-      field: 'Check out',
+      field: 'checkOut',
       headerName: t('Check out'),
       flex: 3
 

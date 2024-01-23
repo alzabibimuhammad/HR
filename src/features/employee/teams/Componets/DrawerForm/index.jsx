@@ -43,7 +43,6 @@ export default function DrawerForm({ open, setOpenParent,Data }) {
     // dispatch(getContractsData())
     setOpenParent(false)
     open = false
-    // reset();
   }
 
 //   const defaultValues = {

@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import { useTranslation } from 'react-i18next';
 
 const steps = [
   {
@@ -32,6 +33,7 @@ export default function SidebarLeft() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = steps.length;
+  const { t } = useTranslation()
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -64,7 +66,7 @@ export default function SidebarLeft() {
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
           >
-            Next
+            {t('Next')}
             {theme.direction === 'rtl' ? (
               <KeyboardArrowLeft />
             ) : (
@@ -79,7 +81,7 @@ export default function SidebarLeft() {
             ) : (
               <KeyboardArrowLeft />
             )}
-            Back
+            {t('Back')}
           </Button>
         }
       />

@@ -41,14 +41,14 @@ const useRegistrationColumn = () => {
     },
     {
       field: 'status',
-      headerName: t('Status '),
+      headerName: t('Status'),
       flex: 3,
       renderCell: (params) => {
         return (
           <>
             {params?.row?.status === 'Arrived' ? (
               <Chip
-                label={params?.row?.status}
+                label={t(params?.row?.status)}
                 sx={{
                   backgroundColor: 'rgba(145, 196, 131, 0.20)',
                   color: 'var(--green, #91C483)',
@@ -70,7 +70,7 @@ const useRegistrationColumn = () => {
                   height:'14px'
 
                 }}
-                label={params?.row?.status}
+                label={t(params?.row?.status)}
 
               />
             ) : params?.row?.status === 'Checked Out' ? (
@@ -82,7 +82,7 @@ const useRegistrationColumn = () => {
                   fontSize:'13px',
                   width:'100%',
                 }}
-                label='out'
+                label={t('out')}
               />
 
             ) :params?.row?.status === 'Absent' ? (
@@ -94,7 +94,7 @@ const useRegistrationColumn = () => {
                   height:'14px',
                   width:'100%',
                 }}
-                label={params?.row?.status}
+                label={t(params?.row?.status)}
 
               />
               )

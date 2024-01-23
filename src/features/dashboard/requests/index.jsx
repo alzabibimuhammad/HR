@@ -7,11 +7,13 @@ import Divider from '@mui/material/Divider';
 import useGetAllInquiries from 'src/features/requests/Inquiries/Hooks/useGetAllInquiries';
 import RejectRequest from 'src/features/requests/api/RejectRequest';
 import AccepteRequest from 'src/features/requests/api/AccepteRequest';
+import { useTranslation } from 'react-i18next';
 
 export default function Requests() {
 
   const { data } = useGetAllInquiries();
 
+  const { t } = useTranslation()
 
   const requestsData = data?.data?.data || [];
   const handleApproveClick = (params) => {
@@ -26,7 +28,7 @@ export default function Requests() {
     <>
       <Stack sx={{ width: '100%',borderRadius:'6px',height:'100%' ,backgroundColor: "#fff", p: "15px" ,overflowY: 'auto' }} spacing={2}>
 
-        <Typography variant="h3" marginTop={"25px"} marginLeft={"10px"} color="#8090A7">Requests</Typography>
+        <Typography variant="h3" marginTop={"25px"} marginLeft={"10px"} color="#8090A7">{t('Requests')}</Typography>
         {requestsData.map((request, index) => (
           <>
           {request.status=="waiting" ?
@@ -66,12 +68,12 @@ export default function Requests() {
             <Stack spacing={{sm:2,xs:1}} direction={{ sm:'row',xs:'row' }}  justifyContent={'end'}>
               <Box>
                 <Button size='medium' variant="outlined" color="error" onClick={() => handleRejectClick(request?.id)}>
-                  Decline
+                  {t('Decline')}
                 </Button>
               </Box>
               <Box>
                 <Button variant="outlined" color="success" onClick={() => handleApproveClick(request?.id)} >
-                  Approve
+                  {t('Approve')}
                 </Button>
               </Box>
             </Stack>

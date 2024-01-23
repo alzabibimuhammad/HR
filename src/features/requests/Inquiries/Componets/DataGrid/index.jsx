@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { Stack } from '@mui/system';
 
 const Inquiries = ({ rows }) => {
-  const columns = useInquiriesColumns(rows);
+  const columns = useInquiriesColumns();
   const [openParent, setOpenParent] = useState(false);
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');

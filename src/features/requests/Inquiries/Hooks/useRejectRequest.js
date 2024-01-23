@@ -6,9 +6,9 @@ export const useRejectRequest = () => {
 
   return useMutation({
     mutationFn:RejectRequest,
-    queryKey: ['Requests'],
+    queryKey: ['Request'],
     onSuccess: () => {
-      queryClient.invalidateQueries("Requests");
+      queryClient.invalidateQueries("Request");
     },
   });
 };

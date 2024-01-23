@@ -33,6 +33,10 @@ export default function DrawerForm({ open, setOpenParent,Data }) {
   const theme = useTheme()
   const {t} = useTranslation()
 const dispatch=useDispatch()
+<<<<<<< HEAD
+=======
+  console.log(Data);
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 
   const handleDrawerClose = () => {
     dispatch(getContractsData())

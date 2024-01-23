@@ -37,7 +37,10 @@
     "@mui/system": "5.12.1",
     "@mui/x-charts": "^6.18.7",
     "@mui/x-data-grid": "^6.0.3",
+<<<<<<< HEAD
     "@mui/x-data-grid-generator": "^6.18.7",
+=======
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
     "@mui/x-data-grid-premium": "^6.18.7",
     "@mui/x-data-grid-pro": "^6.18.7",
     "@mui/x-date-pickers": "^6.18.6",

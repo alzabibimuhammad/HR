@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 import React, { useRef } from 'react'
+=======
+import React from 'react'
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 import { Box, Stack } from '@mui/system'
 import Typography from '@mui/material/Typography'
 
 import Image from 'next/image';
 import Button from '@mui/material/Button';
+<<<<<<< HEAD
 import PDFViewer from '../list/Profile/PdfViwer';
 import useViewContract from '../list/Hooks/useViewContracts';
 import { useRouter } from 'next/router';
@@ -42,6 +47,10 @@ export default function View({id}) {
     downloadLink.click();
     document.body.removeChild(downloadLink);
   };
+=======
+
+export default function View() {
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 
 
 
@@ -66,6 +75,7 @@ San Diego Country, CA 91905, USA
 
 
 
+<<<<<<< HEAD
 
 
     <Stack  marginTop={"20px"} direction={"row"} justifyContent={"space-between"}  spacing={12}>
@@ -82,10 +92,28 @@ San Diego Country, CA 91905, USA
   />
 
 </Box>
+=======
+{/*           */}
+
+
+    <Stack  marginTop={"20px"} direction={"row"} justifyContent={"space-between"}  spacing={12}>
+    <Box sx={{width:"100%",height:"100%",borderRadius:"12px",backgroundColor:"#FFFFFF",textAlign:"center",padding:"35px 0px"}}>
+
+  <Image
+    src='/images/A4 - 1.png'
+    alt='contract Image'
+
+    width={900}
+    height={900}
+  />
+</Box>
+
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
       <Box sx={{display:"flex",flexDirection:"column",gap:"18px"}}>
       <Box sx={{width:"380px",height:"131px", backgroundColor:"#FFFFFF",borderRadius:"12PX",padding:"12px 19px"}}>
 
       <Typography sx={{marginTop:"4px",fontWeight:"600",fontSize:"16px",color:"#3F4458"}}>
+<<<<<<< HEAD
       Contract #{ele.id}
 </Typography>
 
@@ -103,10 +131,26 @@ Start Date : {ele.startTime}
       <Typography sx={{marginTop:"4px",fontWeight:"600",fontSize:"14px",color:"#8090A7"}}>
 
 End Date : {ele.endTime}
+=======
+      Contract #12
+</Typography>
+
+      <Typography sx={{marginTop:"4px",fontWeight:"600",fontSize:"14px",color:"#8090A7"}}>
+      Name : Raya Scott
+
+</Typography>
+      <Typography sx={{marginTop:"4px",fontWeight:"600",fontSize:"14px",color:"#8090A7"}}>
+Start Date : 23 - August - 2024
+</Typography>
+      <Typography sx={{marginTop:"4px",fontWeight:"600",fontSize:"14px",color:"#8090A7"}}>
+
+End Date : 23 - August - 2024
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 </Typography>
       </Box>
 
       <Box sx={{backgroundColor:"#FFFFFF",width:"380px",height:"240px",borderRadius:"12px",display:"flex",flexDirection:"column",justifyContent:"space-around",padding:"0 15px"}}>
+<<<<<<< HEAD
       <Button sx={{width:"100%"}} size='large' variant="contained" onClick={handlePrint}> Print</Button>
       <Button sx={{width:"100%"}} size='large' variant="contained"onClick={handleDownloadClick} > Download</Button>
       <Button sx={{width:"100%",backgroundColor:"#DF2E38"}} size='large' variant="contained"onClick={() => deleteContractt(id)}> Delete</Button>
@@ -118,5 +162,14 @@ End Date : {ele.endTime}
 
 
     </Stack>
+=======
+      <Button sx={{width:"100%"}} size='large' variant="contained" > Print</Button>
+      <Button sx={{width:"100%"}} size='large' variant="contained"> Download</Button>
+      <Button sx={{width:"100%",backgroundColor:"#DF2E38"}} size='large' variant="contained"> Delete</Button>
+
+      </Box>
+      </Box>
+    </Stack>
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 </>
 }

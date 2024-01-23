@@ -52,6 +52,10 @@ const AuthProvider = ({ children }) => {
          setUser(response.data?.data?.user)
          const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
          router.replace(redirectURL)
+<<<<<<< HEAD
+=======
+         console.log(response)
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
          toast.success(`${response.data.message} `, {
            position: "top-left",
            style: {
@@ -61,7 +65,12 @@ const AuthProvider = ({ children }) => {
          });
       })
        .catch(err => {
+<<<<<<< HEAD
          toast.error(`${err?.response?.status === 401 ? "Unauthorized":err?.message}  `, {
+=======
+        console.log(err);
+         toast.error(`${err.response.status === 401 ? "Unauthorized":err.message}  `, {
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
            position: "top-left",
            style: {
              backgroundColor: "#e20d29",

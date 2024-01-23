@@ -18,6 +18,10 @@ const useReportColumns = (CustomDetailPanelToggle) => {
   const { t } = useTranslation()
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
+<<<<<<< HEAD
+=======
+  // data table
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 
 
       const handleClickOpen = (id) => {

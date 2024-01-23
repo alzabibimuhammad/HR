@@ -39,10 +39,10 @@ const Registration = Data => {
 
                 <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"} m={"14px 0"}>
                   <Box>
-                    <Typography sx={{color:"#8090A7"}} variant="h3" color="initial"> Registration</Typography>
+                    <Typography sx={{color:"#8090A7"}} variant="h3" color="initial">{t('Registration')}</Typography>
                   </Box>
                   <Box>
-                      search
+                      {t('Search')}
                   </Box>
                 </Stack>
                 <CustomDataGrid   columns={columns}   rows={RegistrationData(data)||[]}/>

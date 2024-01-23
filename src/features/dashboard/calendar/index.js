@@ -29,8 +29,8 @@ import CalendarWrapper from 'src/@core/styles/libs/fullcalendar'
 import SidebarLeft from './SidebarLeft.jsx'
 
 import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next';
 
-// ** CalendarColors
 const calendarsColor = {
   Personal: 'error',
   Business: 'primary',
@@ -44,6 +44,7 @@ const AppCalendar = () => {
   const [calendarApi, setCalendarApi] = useState(null)
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false)
   const [addEventSidebarOpen, setAddEventSidebarOpen] = useState(false)
+  const { t } = useTranslation()
 
   // ** Hooks
   const { settings } = useSettings()
@@ -72,13 +73,13 @@ const AppCalendar = () => {
 
 
       <Box sx={{   p: 6, pb: 0,  borderRadius: 1, height:"360px",width:"50%"}}>
-        <Typography variant="body1" color="initial">Calendar</Typography>
+        <Typography variant="body1" color="initial">{t('Calendar')}</Typography>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DateCalendar/>
      </LocalizationProvider>
       </Box>
       <Box sx={{   p: 6, pb: 0,  borderRadius: 1,width:"100%",marginLeft:"30px" }} >
-      <Typography variant="body1" color="initial">Events</Typography>
+      <Typography variant="body1" color="initial">{t('Events')}</Typography>
          <SidebarLeft/>
       </Box>
       </Stack>

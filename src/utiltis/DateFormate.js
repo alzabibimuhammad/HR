@@ -2,7 +2,6 @@ export function FormateDate(date) {
   // Check if the input date is valid
   if (isNaN(new Date(date).getTime())) {
     // Handle invalid date, you might want to throw an error or return an appropriate value
-    console.error("Invalid date format");
 
     return null; // or throw new Error("Invalid date format");
   }

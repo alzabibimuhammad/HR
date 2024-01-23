@@ -40,7 +40,6 @@ const restoreSettings = () => {
       settings = initialSettings
     }
   } catch (err) {
-    console.error(err)
   }
 
   return settings

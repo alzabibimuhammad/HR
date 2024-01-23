@@ -92,7 +92,6 @@ if(!EditData)
   try {
     const response =  axios.post('http://192.168.2.138:8000/api/register', data)
   } catch (error) {
-    console.error('Error submitting form:', error)
   }
 }
 else

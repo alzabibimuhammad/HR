@@ -64,7 +64,6 @@ const LoginPage = () => {
     try {
       const userData = await auth.login(data, rememberMe);
     } catch (error) {
-      console.error('Login error:', error);
     }
   };
 

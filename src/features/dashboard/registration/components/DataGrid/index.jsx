@@ -11,7 +11,6 @@ import { Box, Stack } from '@mui/system'
 
 const Registration = Data => {
   const columns = useRegistrationColumn();
-  console.log('reg',Data);
 
   const {data} = Data?.Data
 

@@ -18,7 +18,6 @@ export const getReportsData = createAsyncThunk('ReportStore/getReportsData', asy
   }
 })
 
-<<<<<<< HEAD
 // export const RemoveReport = createAsyncThunk('ReportStore/RemoveReport', async id => {
 //  try{
 //   const response = await axios.delete(process.env.NEXT_PUBLIC_BASE_URL+`/api/deletereport/${id}`, {
@@ -39,28 +38,6 @@ export const getReportsData = createAsyncThunk('ReportStore/getReportsData', asy
 //  }
 
 // })
-=======
-export const RemoveReport = createAsyncThunk('ReportStore/RemoveReport', async id => {
- try{
-  const response = await axios.delete(process.env.NEXT_PUBLIC_BASE_URL+`/api/deletereport/${id}`, {
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${localStorage.accessToken}`
-    }
-  })
-  showSuccesToast(response.data.data.message)
-   
-  return response.data
- }
- catch(error){
-  showErrorToast(error.response?.data?.message);
-  
-  return rejectWithValue(error.response?.data);
-
- }
-  
-})
->>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 
 const appReportSlice = createSlice({
   name: 'ReportStore',
@@ -71,7 +48,7 @@ const appReportSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-<<<<<<< HEAD
+
       // .addCase(getReportsData.pending, state => {
       //   // Set loading to true when the request starts
       //   state.loading = true
@@ -85,21 +62,6 @@ const appReportSlice = createSlice({
       // .addCase(RemoveReport.fulfilled, state => {
       //   state.status = 'succeeded'
       // })
-=======
-      .addCase(getReportsData.pending, state => {
-        // Set loading to true when the request starts
-        state.loading = true
-      })
-      .addCase(getReportsData.fulfilled, (state, action) => {
-        // Set loading to false when the request is fulfilled
-        state.loading = false
-        state.data = action.payload.data
-      })
-
-      .addCase(RemoveReport.fulfilled, state => {
-        state.status = 'succeeded'
-      })
->>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
   }
 })
 

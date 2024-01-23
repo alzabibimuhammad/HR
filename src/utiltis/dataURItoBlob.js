@@ -1,4 +1,8 @@
 export default function dataURItoBlob(dataURI) {
+<<<<<<< HEAD
+=======
+  console.log("🚀 ~ dataURItoBlob ~ dataURI:", dataURI)
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
   if (typeof dataURI !== 'string') {
     console.error('Invalid dataURI. Expected a string.');
 

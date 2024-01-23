@@ -20,12 +20,20 @@ const navigation = () => {
           path:"/contracts/list"
 
         },
+<<<<<<< HEAD
 
         // {
         //   title:"View",
         //   path:"/contracts/view"
 
         // },
+=======
+        {
+          title:"View",
+          path:"/contracts/view"
+
+        },
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
         {
           title:"Add",
           path:"/contracts/add"
@@ -43,6 +51,7 @@ const navigation = () => {
       icon: 'tabler:report',
       path: '/report'
     },
+<<<<<<< HEAD
     {
       title: 'Calendar',
       icon: 'tabler:report',
@@ -97,5 +106,9 @@ const navigation = () => {
   ]
 
 }
+=======
+  ]
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 
+}
 export default navigation

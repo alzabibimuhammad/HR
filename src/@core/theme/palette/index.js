@@ -36,7 +36,11 @@ const DefaultPalette = (mode, skin) => {
     primary: {
       light: '#8479F2',
       main: '#6AB2DF',
+<<<<<<< HEAD
       dark: '#2A4759', /* edit hover color of button  */
+=======
+      dark: '#9C001C', /* edit hover color of button  */
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
       contrastText: whiteColor
     },
     secondary: {

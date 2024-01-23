@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { RemoveReport, getReportsData } from "src/pages/report/store";
@@ -7,6 +8,12 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+=======
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import { useDispatch } from "react-redux";
+import { RemoveReport, getReportsData } from "src/pages/report/store";
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 
 export default function AlertDialog({ id ,open ,handleClose , handleDelete }) {
   const [localId, setLocalId] = useState(id);
@@ -18,6 +25,7 @@ export default function AlertDialog({ id ,open ,handleClose , handleDelete }) {
       handleClose()
   };
 
+<<<<<<< HEAD
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -64,5 +72,32 @@ export default function AlertDialog({ id ,open ,handleClose , handleDelete }) {
       </Grid>
     </Box>
     </>
+=======
+  return (
+
+    <React.Fragment>
+      <Dialog
+        onClose={handleClose}
+        open={open}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        >
+        <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
+          {"Are you sure you want to delete report?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <ErrorOutlineIcon style={{ color: '#A20D29', marginLeft: '80px', fontSize: 140 }} />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
+          <Button onClick={handleClose} style={{ color: '#B4B4B3' }}>Cancel</Button>
+          <Button onClick={()=>handleDeleteAPI()} autoFocus>
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+>>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
   );
 }

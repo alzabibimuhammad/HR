@@ -7,7 +7,6 @@ import Avatar from 'src/@core/components/mui/avatar';
 export default function Employment({onDataChange}) {
   const [contract, setContract] = useState(null);
 
-console.log(contract);
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
@@ -23,7 +22,6 @@ console.log(contract);
         onDataChange("contract"+reader.result);
       };
       reader.readAsDataURL(file);
-      console.log("done");
     }
   };
 

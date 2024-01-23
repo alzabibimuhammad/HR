@@ -44,10 +44,8 @@ export default function CollapsibleTable(Data) {
   const {t} = useTranslation()
   function Row(props) {
 
-    console.log('props',props.row);
 
     const [row, setrow] = useState(props.row);
-    console.log('rossss',row);
     const [open, setOpen] = useState(false);
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
@@ -180,6 +178,7 @@ export default function CollapsibleTable(Data) {
     );
 
   }
+
   const rows = [
     createData(1,'muhammad','admin','sss','front',[{'id':1,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'},{'id':2,'first_name':'dani','last_name':'dani','email':'muhammad@gmail.com'}]),
     createData(2,'muhammad','admin','sss','back'),
@@ -197,7 +196,6 @@ export default function CollapsibleTable(Data) {
   const [originalData, setOriginalData] = useState(rows);
   const [teams, setTeams] = useState({ rows: rows });
 
-  console.log('ttter',teams.rows);
   const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
 
@@ -205,6 +203,7 @@ export default function CollapsibleTable(Data) {
   const handleRoleChange = (e) => {
     setRole(e.target.value);
   };
+
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };

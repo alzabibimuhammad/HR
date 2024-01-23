@@ -52,20 +52,6 @@ export default function Dashboard() {
 
       </Stack>
 
-<<<<<<< HEAD
       </Stack>
  </>
-=======
-<Requests/>
-</Box>
-
-</Stack>
-
-
-
-  </Stack>
-
-
-  </>
->>>>>>> 4a81c8b5a9fd5b9d8b7beafb87cc015fd480857c
 }

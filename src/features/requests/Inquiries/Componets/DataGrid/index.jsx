@@ -35,7 +35,6 @@ const Inquiries = ({ rows }) => {
   };
 
   const handleDateChange = (date) => {
-    console.log('Selected Date:', date);
   };
 
   const gridStyles = {

@@ -27,7 +27,6 @@ export default function Skills({onDataChange,Controller,control}) {
 
  const handleAddClick = () => {
   append('education', { study: '', degree: '' });
-  console.log("here");
 
   };
 

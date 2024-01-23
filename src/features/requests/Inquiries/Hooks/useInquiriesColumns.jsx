@@ -38,7 +38,6 @@ const useInquiriesColumns = () => {
   const [showMoreMap, setShowMoreMap] = useState({});
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [rowData, setrowData] = React.useState(null);
-console.log(rowData);
   const open = Boolean(anchorEl);
 
   const deleteContractMutation = useDeleteRequest();
@@ -50,12 +49,10 @@ console.log(rowData);
 
   const handleApproveClick = (params) => {
      AccepteRequest(params?.row?.id)
-    console.log(params?.row?.id);
   };
 
   const handleRejectClick = (params) => {
     RejectRequest(params?.row?.id)
-    console.log(params?.row?.id);
   };
 
 
@@ -106,7 +103,7 @@ console.log(rowData);
 
 //     // handleCloseAnchor();
 
-//     console.log("foot");
+//
 
 //     // handleDeleteClick()
 //  }

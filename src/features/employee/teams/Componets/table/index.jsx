@@ -24,6 +24,7 @@ import AlertDialog from '../dialog';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import AlertDialogMember from '../dialogTeamUser';
+
 function createData(id,name,user) {
   return {
     id,
@@ -39,7 +40,6 @@ export default function CollapsibleTable(Data) {
 
   function Row(props) {
     const { row } = props;
-    console.log('rowss',row);
     const [open, setOpen] = useState(false);
 
 
@@ -66,7 +66,6 @@ export default function CollapsibleTable(Data) {
     };
 
     const handleMemberOpen = (params) => {
-      console.log('dssdds oiiii',params);
       setMemberDeleteId(params);
       setIsMemberPopupOpen(true);
 
@@ -223,7 +222,6 @@ export default function CollapsibleTable(Data) {
   };
 
   const handelSearch = event =>{
-    console.log('test id',event.target.value == rows?.[0]?.id);
     if (event.target.value){
     const searchFilter = rows?.filter((row)=>{
 

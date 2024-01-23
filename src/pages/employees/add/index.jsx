@@ -132,7 +132,7 @@ export default function Add() {
             <Skills handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
           </Box>
           <Box>
-            <Employment onDataChange={setEmploymentData} />
+            <Employment onDataChange={setEmploymentData}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller}/>
           </Box>
         </Stack>
       </Stack>

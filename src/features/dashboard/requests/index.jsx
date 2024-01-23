@@ -4,134 +4,75 @@ import Typography from '@mui/material/Typography'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Divider from 'src/@core/theme/overrides/divider';
+import useGetAllInquiries from 'src/features/requests/Inquiries/Hooks/useGetAllInquiries';
+import RejectRequest from 'src/features/requests/api/RejectRequest';
+import AccepteRequest from 'src/features/requests/api/AccepteRequest';
 
 export default function Requests() {
-  return <>
-    <Stack sx={{ width: '100%',height:"100%",backgroundColor:"#fff", p:"15px" }} spacing={2}>
-<Typography variant="h3" marginTop={"25px"} marginLeft={"10px"} color="#8090A7">Requests</Typography>
+  
+  const { data } = useGetAllInquiries();
 
-<Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-    <Box marginTop={"10px"} display={"flex"}alignItems={"center"} gap={"12px"}>
-    <Avatar
-        alt="Remy Sharp"
-        src="/static/images/avatar/1.jpg"
-        sx={{ width: 45, height: 45 }}
-      />
-      <Typography variant="h5">Rene Wells</Typography>
-    </Box>
-    <Box >
+  console.log('dasdsa', data?.data?.data);
 
-      <Typography variant="span">7:21AM</Typography>
-    </Box>
+  const requestsData = data?.data?.data || [];
 
+  const handleApproveClick = (params) => {
+    AccepteRequest(params)
+ };
 
-</Box>
-      <Stack  gap={5} flexDirection={"row-reverse"}>
-        <Box>
+ const handleRejectClick = (params) => {
+   RejectRequest(params)
+ };
 
-      <Button size='medium' variant="outlined" color="error">
-        cancel
-      </Button>
-        </Box>
-        <Box>
-        <Button variant="outlined" color="success">
-        Aprove
-      </Button>
-        </Box>
+  return (
+    <>
+      <Stack sx={{ width: '100%', height: "100%", backgroundColor: "#fff", p: "15px" }} spacing={2}>
+
+        <Typography variant="h3" marginTop={"25px"} marginLeft={"10px"} color="#8090A7">Requests</Typography>
+
+        {requestsData.map((request, index) => (
+          <>
+          {request.status=="waiting" ?
+          <Box key={index}>
+            {console.log('iddddd',request.id)}
+            <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
+              <Box marginTop={"10px"} display={"flex"} alignItems={"center"} gap={"12px"}>
+                <Avatar
+                  alt="Remy Sharp"
+                  src="/static/images/avatar/1.jpg"
+                  sx={{ width: 45, height: 45 }}
+                />
+                <Stack direction={'row'}  spacing={2}>
+                  <Typography>
+                    {request.id}{request?.user?.first_name}
+                  </Typography>
+                  <Typography >
+                    {request?.user?.last_name}
+                  </Typography>
+                </Stack>
+              </Box>
+              <Box>
+                <Typography variant="span">{request?.date}</Typography>
+              </Box>
+            </Box>
+            <Stack gap={5} flexDirection={"row-reverse"}>
+              <Box>
+                <Button size='medium' variant="outlined" color="error" onClick={() => handleRejectClick(request?.id)}>
+                  Decline
+                </Button>
+              </Box>
+              <Box>
+                <Button variant="outlined" color="success" onClick={() => handleApproveClick(request?.id)} >
+                  Approve
+                </Button>
+              </Box>
+            </Stack>
+          </Box>
+          : null }
+          </>
+          ))}
+
       </Stack>
-
-
-
-<Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-    <Box marginTop={"10px"} display={"flex"}alignItems={"center"} gap={"12px"}>
-    <Avatar
-        alt="Remy Sharp"
-        src="/static/images/avatar/1.jpg"
-        sx={{ width: 45, height: 45 }}
-      />
-      <Typography variant="h5">Rene Wells</Typography>
-    </Box>
-    <Box >
-
-      <Typography variant="span">7:21AM</Typography>
-    </Box>
-
-
-</Box>
-      <Stack  gap={5} flexDirection={"row-reverse"}>
-        <Box>
-
-      <Button size='medium' variant="outlined" color="error">
-        cancel
-      </Button>
-        </Box>
-        <Box>
-        <Button variant="outlined" color="success">
-        Aprove
-      </Button>
-        </Box>
-      </Stack>
-<Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-    <Box marginTop={"10px"} display={"flex"}alignItems={"center"} gap={"12px"}>
-    <Avatar
-        alt="Remy Sharp"
-        src="/static/images/avatar/1.jpg"
-        sx={{ width: 45, height: 45 }}
-      />
-      <Typography variant="h5">Rene Wells</Typography>
-    </Box>
-    <Box >
-
-      <Typography variant="span">7:21AM</Typography>
-    </Box>
-
-
-</Box>
-      <Stack  gap={5} flexDirection={"row-reverse"}>
-        <Box>
-
-      <Button size='medium' variant="outlined" color="error">
-        cancel
-      </Button>
-        </Box>
-        <Box>
-        <Button variant="outlined" color="success">
-        Aprove
-      </Button>
-        </Box>
-      </Stack>
-<Box display={"flex"} alignItems={"center"} justifyContent={"space-between"}>
-    <Box marginTop={"10px"} display={"flex"}alignItems={"center"} gap={"12px"}>
-    <Avatar
-        alt="Remy Sharp"
-        src="/static/images/avatar/1.jpg"
-        sx={{ width: 45, height: 45 }}
-      />
-      <Typography variant="h5">Rene Wells</Typography>
-    </Box>
-    <Box >
-
-      <Typography variant="span">7:21AM</Typography>
-    </Box>
-
-
-</Box>
-      <Stack  gap={5} flexDirection={"row-reverse"}>
-        <Box>
-
-      <Button size='medium' variant="outlined" color="error">
-        cancel
-      </Button>
-        </Box>
-        <Box>
-        <Button variant="outlined" color="success">
-        Aprove
-      </Button>
-        </Box>
-      </Stack>
-
-
-    </Stack>
-
     </>
+  );
 }

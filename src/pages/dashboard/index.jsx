@@ -41,7 +41,7 @@ export default function Dashboard() {
 
       </Stack>
 
-      <Stack justifyContent={"center"}  spacing={5} direction={{ xs:'column' , sm:'row'}} >
+      <Stack spacing={5}  height={{sm:'600px'}} direction={{ xs:'column' , sm:'row'}} >
 
           <Box width={{sm:"65%",xs:'100%'}}  >
             <Registration Data={registration} />

@@ -9,7 +9,7 @@ import RejectRequest from 'src/features/requests/api/RejectRequest';
 import AccepteRequest from 'src/features/requests/api/AccepteRequest';
 
 export default function Requests() {
-  
+
   const { data } = useGetAllInquiries();
 
   console.log('dasdsa', data?.data?.data);
@@ -44,7 +44,7 @@ export default function Requests() {
                 />
                 <Stack direction={'row'}  spacing={2}>
                   <Typography>
-                    {request.id}{request?.user?.first_name}
+                    {request?.user?.first_name}
                   </Typography>
                   <Typography >
                     {request?.user?.last_name}

@@ -15,8 +15,9 @@ export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendance
     data: response.data
   }
 })
-export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async () => {
-  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/api/showAttendanceLogs', {
+
+export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async date => {
+  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + `/api/DayAttendance/${date}`, {
     headers: {
       Authorization: `Bearer ${localStorage.accessToken}`
     }

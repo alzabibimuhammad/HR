@@ -23,6 +23,8 @@ export default function Add() {
   const [professionalData, setProfessionalData] = useState({});
   const [skillsData, setSkillsData] = useState({});
   const [employmentData, setEmploymentData] = useState({});
+  const [AdditionalFilesData, setAdditionalFilesData] = useState({});
+  const [EmergencyContactData, setEmergencyContacttData] = useState({});
 
 
 
@@ -35,33 +37,39 @@ export default function Add() {
   };
 
   const defaultValues = {
-    password: 'password',
-    email: [
-
-    ],
-    address: [
-
-    ],
-    name: [
-
-    ],
-    phoneNumber:[],
-    file:[],
-    description:[],
-    study:[],
-    certificate:[],
-    experience:[],
-    skills:[],
-    languages:[],
-    education:[]
+    // first_name:"",
+    // image:"",
+    // middle_name:"",
+    // last_name:"",
+    // email: "",
+    // password: '',
+    // confirm_password:"",
+    // birth_date:"",
+    // nationalID:"",
+    // military_situation:"",
+    // social_situation:"",
+    // specialization:"",
+    // department_id:"",
+    // address: "",
+    // salary:"",
+    // contract:"",
+    // name: [],
+    // phoneNumbers:[],
+    // description:[],
+    // study:[],
+    // certificate:[],
+    // experience:[],
+    // education:[]
   };
 
   const {
     control,
     setError,
     handleSubmit,
+    getValues,
+    setValue,
     register,
-    formState: { errors },
+    formState: { errors, },
   } = useForm({
     defaultValues,
     mode: 'onBlur',
@@ -75,10 +83,20 @@ export default function Add() {
     // } catch (error) {
     //
     // }
-
+    console.log(data);
   };
 
+  const handleRatingChange = (index, newValue) => {
+    const updatedSkills = [...getValues('skills')];
+    updatedSkills[index].rating = newValue;
+    setValue('skills', updatedSkills);
+  };
 
+  const handleLanguageChange = (index, newValue) => {
+    const updatedLanguages = [...getValues('languages')];
+    updatedLanguages[index].rating = newValue;
+    setValue('languages', updatedLanguages);
+  };
 
 
   return (
@@ -103,31 +121,31 @@ export default function Add() {
       <Stack direction={{ sm: 'row', xs: 'column' }} spacing={2}>
         <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
           <Box>
-            <Snapshot onDataChange={setSnapshotData} />
+            <Snapshot defaultValues={defaultValues} onDataChange={setSnapshotData}  setError={setError} control={control} Controller={Controller}/>
           </Box>
           <Box>
-            <Account onDataChange={setAccountData} />
+            <Account onDataChange={setAccountData} setError={setError} control={control} Controller={Controller}/>
           </Box>
           <Box>
-            <Info onDataChange={setInfoData} />
+            <Info onDataChange={setInfoData} setError={setError} control={control} Controller={Controller}/>
           </Box>
           <Box>
             <Contact defaultValues={defaultValues}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
           </Box>
           <Box>
-            <EmergencyContact handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
+            <EmergencyContact handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setEmergencyContacttData} />
           </Box>
           <Box>
-            <AdditionalFiles handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
+            <AdditionalFiles handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setAdditionalFilesData} />
           </Box>
         </Stack>
 
         <Stack flex={1} direction={'column'} spacing={2}>
           <Box>
-            <Professional onDataChange={setProfessionalData} />
+            <Professional onDataChange={setProfessionalData}setError={setError} control={control} Controller={Controller} />
           </Box>
           <Box>
-            <Skills handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
+            <Skills handleLanguageChange={handleLanguageChange} handleRatingChange={handleRatingChange} handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setSkillsData} />
           </Box>
           <Box>
             <Employment onDataChange={setEmploymentData}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller}/>

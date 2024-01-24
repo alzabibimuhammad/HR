@@ -3,7 +3,7 @@ import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
 
-export default function Professional({onDataChange}) {
+export default function Professional({onDataChange,Controller,control}) {
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -21,10 +21,12 @@ export default function Professional({onDataChange}) {
     handleFieldChange('specialization',e.target.value)
 
   };
+
   const handleteamChange = (e) => {
     setTeam(e.target.value);
     handleFieldChange('team',e.target.value)
   };
+
   return (
     <Card>
         <CardContent>
@@ -32,16 +34,30 @@ export default function Professional({onDataChange}) {
           <Typography >Professional</Typography>
           <br/>
 
+
+
+
+
           <Stack direction={'column'} spacing={3} width={'100%'} >
               <Typography>Specialization</Typography>
+
+
+            <Controller
+            name={`specialization`}
+            control={control}
+            render={({ field }) => (
               <TextField
+              {...field}
                     select
                     fullWidth
                     defaultValue="work specialization"
                     SelectProps={{
-                      value: specialization,
+                      value: field.value,
                       displayEmpty: true,
-                      onChange: handleSpecializationChange,
+                      onChange: (e) => {
+                        field.onChange(e);
+                        handleSpecializationChange(e);
+                      },
                     }}
                     size='small'
                   >
@@ -50,16 +66,30 @@ export default function Professional({onDataChange}) {
                     <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
                     <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
                 </TextField>
+  )}
+  />
+
+
+
+
               <Typography>Role</Typography>
 
+              <Controller
+            name={`role`}
+            control={control}
+            render={({ field }) => (
               <TextField
+              {...field}
                     select
                     fullWidth
                     defaultValue="Role"
                     SelectProps={{
-                      value: role,
+                      value: field.value,
                       displayEmpty: true,
-                      onChange: handleRoleChange,
+                      onChange: (e) => {
+                        field.onChange(e);
+                        handleRoleChange(e);
+                      },
                     }}
                     size='small'
                   >
@@ -68,16 +98,26 @@ export default function Professional({onDataChange}) {
                     <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
                     <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
                 </TextField>
-
+  )}
+  />
               <Typography>Team/Department</Typography>
+
+                <Controller
+            name={`department_id`}
+            control={control}
+            render={({ field }) => (
               <TextField
+              {...field}
                     select
                     fullWidth
                     defaultValue="Team"
                     SelectProps={{
-                      value: team,
+                      value: field.value,
                       displayEmpty: true,
-                      onChange: handleteamChange,
+                      onChange: (e) => {
+                        field.onChange(e);
+                        handleteamChange(e);
+                      },
                     }}
                     size='small'
                   >
@@ -86,6 +126,8 @@ export default function Professional({onDataChange}) {
                     <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
                     <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
                 </TextField>
+                  )}
+                  />
 
           </Stack>
         </CardContent>

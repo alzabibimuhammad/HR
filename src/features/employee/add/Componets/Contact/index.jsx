@@ -19,6 +19,7 @@ export default function Contact({onDataChange,Controller,control,defaultValues }
 
 
 
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'phoneNumbers', // Name of the array field
@@ -87,12 +88,10 @@ const isFirstEmail = EmailFields.length === 1;
 
 
 
-      {addressFields.map((address, index) => (
-        <Box sx={{margin:"5px 0px"}} key={address.id}>
+        <Box sx={{margin:"5px 0px"}} >
           <Controller
-            name={`address.${index}.number`}
+            name={`address`}
             control={control}
-            defaultValue={address.number}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -105,9 +104,7 @@ const isFirstEmail = EmailFields.length === 1;
           />
 
 
-
         </Box>
-      ))}
       {fields.map((phoneNumber, index) => (
         <Box key={phoneNumber.id}>
           <Controller
@@ -140,7 +137,7 @@ const isFirstEmail = EmailFields.length === 1;
               type="button"
               sx={{ fontSize: "12px", fontWeight: "400", color: "#6ab2df", padding: "0" }}
               onClick={() => remove(index)}
-              disabled={isFirstInput} // لتعطيل زر "delete" في الـinput الأول
+              disabled={isFirstInput}
             >
               delete
             </Button>

@@ -1,11 +1,12 @@
 
 import { useQuery } from '@tanstack/react-query'
-import GetAllUsers from '../api/GetAllUsers'
+import GetAllAbsence from '../api/GetAllAbsence'
 
-const useGetAllUsers = () => {
-  const query = useQuery({ queryKey: ['Users'], queryFn: GetAllUsers })
+
+const useGetAllAbsence = () => {
+  const query = useQuery({ queryKey: ['Absence'], queryFn: GetAllAbsence })
 
   return query
 }
 
-export default useGetAllUsers
+export default useGetAllAbsence

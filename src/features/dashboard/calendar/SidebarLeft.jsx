@@ -44,47 +44,18 @@ export default function SidebarLeft() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1, borderRadius: 1, }}>
-      <Paper
-        square
-        elevation={0}
-
-      >
-        <Typography>{steps[activeStep].label}</Typography>
-      </Paper>
-      <Box sx={{ height: 180, maxWidth: 400, width: '100%', p: 2 ,marginTop:"33px"}}>
-        {steps[activeStep].description}
-      </Box>
-      <MobileStepper
-        variant="text"
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-          >
-            {t('Next')}
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            {t('Back')}
-          </Button>
-        }
-      />
+    <Box sx={{ backgroundColor:"#E9ECF3" }}>
+  <div className="parent" key={"event.id"}>
+          <div>
+            <p><span className="child">19</span>2022-1-1</p>
+             <p>08:32</p>
+          </div>
+          <div>
+            <p className='description'>
+              Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+        </div>
     </Box>
   );
 }

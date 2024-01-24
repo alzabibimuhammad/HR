@@ -3,10 +3,12 @@ import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography } fr
 import { Box, Stack } from '@mui/system'
 import { useState } from 'react';
 import Avatar from 'src/@core/components/mui/avatar';
+import { useFieldArray, useForm, Controller } from 'react-hook-form';
+import { useEffect } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
 
-export default function Employment({onDataChange}) {
+export default function Employment({onDataChange,Controller,control}) {
   const [contract, setContract] = useState(null);
-
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
@@ -24,6 +26,29 @@ export default function Employment({onDataChange}) {
       reader.readAsDataURL(file);
     }
   };
+
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "secretariats"
+  });
+
+  const handleAddClick = () => {
+   append('secretariats', { secretariats: '', deliveryDate: '' });
+   };
+
+   const handleRemoveClick = (index) => {
+     remove(index);
+   };
+
+
+   useEffect(()=>{
+    append('secretariats', { secretariats: '', deliveryDate: '' });
+
+
+  },[append])
+
+
 
   const SvgDate = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -104,30 +129,65 @@ export default function Employment({onDataChange}) {
 
     </Box>
 
+
+
+
+
               <Typography>Secretariats</Typography>
-              <TextField
-                fullWidth
-                size='small'
-                onChange={(e) => handleFieldChange('secretariats', e.target.value)}
-                required
-                placeholder='Secretariats'
-              />
-               <Typography>Delivery date</Typography>
-               <TextField
-                fullWidth
-                size='small'
-                onChange={(e) => handleFieldChange('deliveryDate', e.target.value)}
-                label={
-                  <Stack direction={'row'} spacing={2} >
-                    <Box>
-                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`}/>
-                      </Box>
-                      <Box>
-                        {'Delivery Date'}
-                    </Box>
-                  </Stack>
-                }
-              />
+              {fields.map((field, index) => (
+  <Stack direction={"column"} spacing={4} key={index}>
+    {index === 1 && (
+      <CloseIcon
+        sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
+        onClick={() => handleRemoveClick(index)}
+      />
+    )}
+    <Box>
+      <Controller
+        name={`secretariats[${index}].secretariats`}
+        control={control}
+        defaultValue={field.secretariats}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            fullWidth
+            size='small'
+            placeholder='Secretariats'
+          />
+        )}
+      />
+    </Box>
+
+    <Controller
+      name={`secretariats[${index}].deliveryDate`}
+      control={control}
+      defaultValue={field.deliveryDate}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          fullWidth
+          size='small'
+          label={
+            <Stack direction={'row'} spacing={2}>
+              <Box>
+                <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`} />
+              </Box>
+              <Box>
+                {'Delivery Date'}
+              </Box>
+            </Stack>
+          }
+        />
+      )}
+    />
+  </Stack>
+))}
+
+
+<Typography sx={{cursor:"pointer",width:"20%",}} color="primary" onClick={handleAddClick}>
+            Add Secretariats
+          </Typography>
+
           </Stack>
         </CardContent>
     </Card>

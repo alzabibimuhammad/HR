@@ -5,14 +5,14 @@ import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { useDeleteEmployee } from "../../hooks/useDeleteEmployee";
+import { useDeleteTeam } from "../../hooks/useDeleteTeam";
 
 export default function AlertDialog({ id, open, handleClose }) {
- const { mutate: deleteEmployee, isLoading } = useDeleteEmployee();
+ const { mutate: DeleteTeam, isLoading } = useDeleteTeam();
 
   const handleDeleteAPI = () => {
-    deleteEmployee(id)
-      handleClose()
+    DeleteTeam(id)
+    handleClose()
   };
 
   const Item = styled(Paper)(({ theme }) => ({
@@ -44,7 +44,7 @@ export default function AlertDialog({ id, open, handleClose }) {
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {"Are you sure you want to delete Contract?"}
+        {"Are you sure you want to delete team?"}
       </DialogTitle>
 
 

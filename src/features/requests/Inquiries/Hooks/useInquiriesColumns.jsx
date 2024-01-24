@@ -22,6 +22,7 @@ import Divider from '@mui/material/Divider';
 import { useDeleteRequest } from './useDeleteRequest';
 import { useAccepteRequest } from './useAccepteRequest'; // Import the new hook
 import { useRejectRequest } from './useRejectRequest';
+import { Stack } from '@mui/system';
 
 
 const ITEM_HEIGHT = 162;
@@ -37,7 +38,6 @@ const useInquiriesColumns = () => {
   const [showMoreMap, setShowMoreMap] = useState({});
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [rowData, setrowData] = React.useState(null);
-console.log(rowData);
   const open = Boolean(anchorEl);
 
   const deleteContractMutation = useDeleteRequest();
@@ -49,12 +49,10 @@ console.log(rowData);
 
   const handleApproveClick = (params) => {
      AccepteRequest(params?.row?.id)
-    console.log(params?.row?.id);
   };
 
   const handleRejectClick = (params) => {
     RejectRequest(params?.row?.id)
-    console.log(params?.row?.id);
   };
 
 
@@ -105,7 +103,7 @@ console.log(rowData);
 
 //     // handleCloseAnchor();
 
-//     console.log("foot");
+//
 
 //     // handleDeleteClick()
 //  }
@@ -117,23 +115,58 @@ console.log(rowData);
       headerName: t("Employee"),
       flex: 1,
       disableClickEventBubbling: true,
+      renderCell:(params)=>{
+        return(
+            <Box>
+              <Typography sx={{ fontSize:'14px' }} >
+              {params?.row?.employee}
+              </Typography>
+              </Box>
+        )
+      }
     },
     {
       field: 'Date',
-      headerName: t(" Date"),
+      headerName: t("Date"),
       flex: 1,
       disableClickEventBubbling: true,
+      renderCell:(params)=>{
+        return(
+          <Stack direction={'column'} >
+            <Box>
+              <Typography sx={{ fontSize:'14px' }} >
+
+              {params?.row?.Date}
+              </Typography>
+              </Box>
+            <Box>
+              <Typography sx={{ color:'#8090A7',fontSize:'12px' }} >
+                {params?.row?.time}
+              </Typography>
+              </Box>
+          </Stack>
+        )
+      }
     },
+
     {
       field: 'Title',
-      headerName: t("title"),
+      headerName: t("Title"),
       flex: 1,
       disableClickEventBubbling: true,
-
+      renderCell:(params)=>{
+        return(
+            <Box>
+              <Typography sx={{ fontSize:'14px' }} >
+              {params?.row?.Title}
+              </Typography>
+              </Box>
+        )
+      }
     },
     {
       field: 'CONTENT',
-      headerName: t("content"),
+      headerName: t("Content"),
       flex: 3,
 
       disableClickEventBubbling: true,
@@ -145,7 +178,7 @@ console.log(rowData);
         return (
           <Box sx={{ display: 'flex', flexDirection: 'row',  }}>
             <div style={{ display:"flex", flexDirection:"row", alignItems:"center" }}>
-              {showMoreMap[id] ? content : content.slice(0, 40) + '...'}
+              <Typography sx={{ fontSize:'14px' }} >{showMoreMap[id] ? content : content.slice(0, 40) + '...'}</Typography>
             </div>
             {shouldShowMore && (
 
@@ -250,7 +283,7 @@ console.log(rowData);
       onClick={() => handleRejectClick(params)}
       disabled={true}
     >
-      Decline
+      {t('Decline')}
     </Button>
       </>
 
@@ -262,7 +295,7 @@ console.log(rowData);
         disabled={true}
 
       >
-        Approve
+        {t('Approve')}
       </Button>
       )
 
@@ -293,8 +326,10 @@ console.log(rowData);
 
       {params.row.status === 'waiting' ? (
   <>
-    <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}> Approve </Button>
-    <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}  onClick={() => handleRejectClick(params)} > Decline </Button>
+    <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>{t('Approve')}
+ </Button>
+    <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}  onClick={() => handleRejectClick(params)} >{t('Decline')}
+ </Button>
   </>
 ) : params.row.status === 'rejected' ? (
   <>
@@ -303,7 +338,8 @@ console.log(rowData);
       onClick={() => handleRejectClick(params)}
       disabled={true}
     >
-      Decline
+    {t('Decline')}
+
     </Button>  </>
 ) : (
   <Button
@@ -312,7 +348,8 @@ console.log(rowData);
     disabled={true}
 
   >
-    Approve
+  {t('Approve')}
+
   </Button>
 )}
 

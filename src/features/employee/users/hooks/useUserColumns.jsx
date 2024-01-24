@@ -58,8 +58,8 @@ const useUserColumns = () => {
               return (
               <>
               <Avatar alt=''  />
-              <p style={{ marginLeft:'2px' }} >{params?.row?.first_name}</p>
-              <p style={{ marginLeft:'3px' }} >{params?.row?.last_name}</p>
+              <Typography  style={{fontSize:'14px', marginLeft:'2px' }} >{params?.row?.first_name}</Typography>
+              <Typography style={{ fontSize:'14px',marginLeft:'3px' }} >{params?.row?.last_name}</Typography>
               </>
             );
           },
@@ -69,13 +69,26 @@ const useUserColumns = () => {
       headerName: t("Role"),
       disableClickEventBubbling: true,
       flex:1,
-
+      renderCell: (params) => {
+        return (
+        <Typography sx={{ fontSize:'14px' }} >
+          {params?.row?.role}
+        </Typography>
+      );
+    },
     },
     {
       field: 'specialization',
       headerName: t("SPECIALIZATION"),
       disableClickEventBubbling: true,
       flex:1,
+      renderCell: (params) => {
+        return (
+          <Typography sx={{ fontSize:'14px' }} >
+          {params?.row?.specialization}
+        </Typography>
+      );
+    },
 
     },
     {
@@ -83,29 +96,17 @@ const useUserColumns = () => {
       headerName: t("Team"),
       disableClickEventBubbling: true,
       flex:1,
-
+      renderCell: (params) => {
+        return (
+          <Typography sx={{ fontSize:'14px' }} >
+          {params?.row?.specialization}
+        </Typography>
+      );
+    },
     },
 
 
-    // {
-    //   field: 'image',
-    //   headerName: '',
-    //   renderCell: (params) => {
-    //     return (
-    //       <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + params.row?.image?.image} alt='' />
-    //     );
-    //   },
-    // },
-    // {
-    //   field: 'rate',
-    //   headerName: t("Rate"),
-    //   flex: 2,
-    //   renderCell: (params) => {
-    //     return (
-    //       <Rating name="read-only" value={params.row.rate} readOnly />
-    //     );
-    //   },
-    // },
+
     {
       field: 'action',
       headerName: t("Action"),

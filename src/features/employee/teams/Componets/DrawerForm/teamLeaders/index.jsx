@@ -12,7 +12,9 @@ import Icon from 'src/@core/components/icon'
 // ** Custom Components Imports
 import CustomChip from 'src/@core/components/mui/chip'
 import OptionsMenu from 'src/@core/components/option-menu'
-import { Input, TextField } from '@mui/material'
+import { Checkbox, Input, TextField } from '@mui/material'
+import useGetEmployeeDropDown from 'src/features/Contracts/list/Hooks/useEmployee'
+import { useMemo, useState } from 'react'
 
 const data = [
   {
@@ -60,11 +62,30 @@ const data = [
   }
 ]
 
-const Members = () => {
+const Members = ({SetteamLeader}) => {
+  const {data:UserData,isloading}=useGetEmployeeDropDown()
+  const [selectedTeamLeader,SetTeamLeader]=useState()
+  const [searchText, setSearchText] = useState('');
+
+  const handleCheckboxChange = (id) => {
+    SetTeamLeader(id);
+    SetteamLeader(id)
+  };
+
+  const filteredData = useMemo(() => {
+    if (!searchText || !UserData || !UserData.data || !UserData.data.data) {
+      return UserData?.data.data||[]; 
+    }
+  
+    return UserData.data.data.filter((item) =>
+      item.first_name.toLowerCase().includes(searchText.toLowerCase())
+    );
+  }, [searchText, UserData]);
+
   return (
     <>
       <Typography>
-        Members
+        TeamLeader
       </Typography>
 
       <TextField
@@ -86,7 +107,7 @@ const Members = () => {
       />
 
 
-        {data.map((item, index) => {
+        {filteredData.map((item, index) => {
           return (
             <Box
               key={index}
@@ -97,7 +118,7 @@ const Members = () => {
               }}
             >
               <Avatar variant='rounded' sx={{ mr: 4, width: 34, height: 34 }}>
-                <Icon icon={item.icon} />
+                <Icon icon={item.first_name} />
               </Avatar>
               <Box
                 sx={{
@@ -111,16 +132,17 @@ const Members = () => {
                 }}
               >
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                  <Typography variant='h6'>{item.title}</Typography>
+                  <Typography variant='h6'>{item.first_name + '\u00A0\u00A0' + item.last_name}</Typography>
                   <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-                    {item.subtitle}
+                    {item.role}
                   </Typography>
                 </Box>
                 <Box>
-                  <Input
-                  type='checkbox'
-                  />
-                </Box>
+              <Checkbox
+                checked={selectedTeamLeader === item.id}
+                onChange={() => handleCheckboxChange(item.id)}
+              />
+            </Box>
               </Box>
             </Box>
           )

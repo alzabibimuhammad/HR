@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import deleteRequest from "../../api/DeleteRequest";
 import AccepteRequest from "../../api/AccepteRequest";
 
 export const useAccepteRequest = () => {
@@ -7,9 +6,9 @@ export const useAccepteRequest = () => {
 
   return useMutation({
     mutationFn:AccepteRequest,
-    queryKey: ['Requests'],
+    queryKey: ['Request'],
     onSuccess: () => {
-      queryClient.invalidateQueries("Requests");
+      queryClient.invalidateQueries("Request");
     },
   });
 };

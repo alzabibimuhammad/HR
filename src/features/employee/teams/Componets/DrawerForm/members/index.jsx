@@ -18,6 +18,9 @@ import { Input, TextField } from '@mui/material'
 import { useEffect, useMemo, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from '@mui/material';
+import useGetEmployeeDropDown from 'src/features/Contracts/list/Hooks/useEmployee'
+
+
 
 const data = [
   {
@@ -65,10 +68,11 @@ const data = [
   }
 ]
 
-const Members = () => {
+const Members = ({SetMembers}) => {
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const {data:UserData,isloading}=useGetEmployeeDropDown()
 
   const deletee = (index) => {
     setSelectedItems((prevItems) => prevItems.filter((_, i) => i !== index));
@@ -78,19 +82,22 @@ const Members = () => {
     const isSelected = selectedItems.includes(icon);
     if (isSelected) {
       setSelectedItems(selectedItems.filter((item) => item !== icon));
+      SetMembers(selectedItems.filter((item) => item !== icon))
     } else {
+      SetMembers([...selectedItems, icon])
       setSelectedItems([...selectedItems, icon]);
     }
   };
-console.log("selectedItems",selectedItems);
 
 const filteredData = useMemo(() => {
-  if (!searchText) return data;
+  if (!searchText || !UserData || !UserData.data || !UserData.data.data) {
+    return UserData?.data.data||[]; 
+  }
 
-  return data.filter((item) =>
-    item.title.toLowerCase().includes(searchText.toLowerCase())
+  return UserData.data.data.filter((item) =>
+    item.first_name.toLowerCase().includes(searchText.toLowerCase())
   );
-}, [searchText]);
+}, [searchText, UserData]);
 
   return (
     <Box>
@@ -132,45 +139,47 @@ value={searchText}
         fullWidth
       />
 
-
-  {filteredData.map((item, index) => (
-        <Box
-          key={index}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            mb: index !== filteredData.length - 1 ? [6.25, 6.25, 5.5, 6.25] : undefined
-          }}
-        >
-          <Avatar variant="rounded" sx={{ mr: 4, width: 34, height: 34 }}>
-            <Icon icon={item.icon} />
-          </Avatar>
-          <Box
-            sx={{
-              rowGap: 1,
-              columnGap: 4,
-              width: '100%',
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              justifyContent: 'space-between'
-            }}
-          >
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-              <Typography variant="h6">{item.title}</Typography>
-              <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-                {item.subtitle}
-              </Typography>
-            </Box>
-            <Box>
-              <Checkbox
-                checked={selectedItems.includes(item.icon)}
-                onChange={() => toggleSelect(item.icon)}
-              />
-            </Box>
-          </Box>
+{
+  filteredData.map((item, index) => (
+    <Box
+      key={index}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        mb: index !== filteredData.length - 1 ? [6.25, 6.25, 5.5, 6.25] : []
+      }}
+    >
+      <Avatar variant="rounded" sx={{ mr: 4, width: 34, height: 34 }}>
+        <Icon icon={item.first_name} />
+      </Avatar>
+      <Box
+        sx={{
+          rowGap: 1,
+          columnGap: 4,
+          width: '100%',
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}
+      >
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <Typography variant="h6">{item.first_name + '\u00A0\u00A0' + item.last_name}</Typography>
+          <Typography variant="body2" sx={{ color: 'text.disabled' }}>
+            {item.role}
+          </Typography>
         </Box>
-      ))}
+        <Box>
+          <Checkbox
+            checked={selectedItems.includes(item.id)}
+            onChange={() => toggleSelect(item.id)}
+          />
+        </Box>
+      </Box>
+    </Box>
+  ))}
+
+
     </Box>
   );
 }

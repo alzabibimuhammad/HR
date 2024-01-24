@@ -22,10 +22,13 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import Link from 'next/link';
 import AlertDialog from '../dialog';
 import { useState } from 'react';
-function createData(name,id,user) {
+import { useTranslation } from 'react-i18next';
+import AlertDialogMember from '../dialogTeamUser';
+
+function createData(id,name,user) {
   return {
-    name,
     id,
+    name,
     user,
 
   };
@@ -34,15 +37,19 @@ function createData(name,id,user) {
 
 
 export default function CollapsibleTable(Data) {
-  function Row(props) {
 
+  function Row(props) {
     const { row } = props;
-    console.log('rowss',row);
     const [open, setOpen] = useState(false);
 
 
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
     const [deleteId, setDeleteId] = useState(null);
+
+
+    const [openMember, setOpenMember] = useState(false);
+    const [isMemberPopupOpen, setIsMemberPopupOpen] = useState(false);
+    const [memberdeleteId, setMemberDeleteId] = useState(null);
 
     const handleEditClick = (row) => {
       setEditData(row);
@@ -50,23 +57,29 @@ export default function CollapsibleTable(Data) {
     };
 
     const handleClickOpen = (params) => {
-      console.log('dssdds oiiii',params) ;
       setDeleteId(params);
       setIsDeletePopupOpen(true);
-
-
     };
 
     const handleClose = () => {
       setIsDeletePopupOpen(false)
     };
-    console.log('opp',row);
+
+    const handleMemberOpen = (params) => {
+      setMemberDeleteId(params);
+      setIsMemberPopupOpen(true);
+
+      // setDeleteId(params);
+      // setIsDeletePopupOpen(true);
+    };
+
+    const handleMemberClose = () => {
+      setIsMemberPopupOpen(false)
+    };
 
     return (
 
       <>
-        {row?.map((row) => (
-          <>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
 
           <TableCell  component="th" >
@@ -74,7 +87,9 @@ export default function CollapsibleTable(Data) {
             <Stack direction={'column'}  justifyContent={'start'} alignItems={'start'} sx={{ padding:'0',margin:'0' }}  >
 
             <Box>
+              <Typography sx={{ fontSize:'14px' }}>
               {row.name}
+              </Typography>
             </Box>
 
             <Box >
@@ -90,8 +105,8 @@ export default function CollapsibleTable(Data) {
             >
 
               <Stack direction={'row'} >
-                <Typography sx={{ fontSize:'13px',marginRight:'3px'  }} >{row?.user?.length}</Typography>
-                <Typography sx={{ fontSize:'13px' }} >Members</Typography>
+                <Typography sx={{ fontSize:'14px',marginRight:'3px'  }} >{row?.user?.length}</Typography>
+                <Typography sx={{ fontSize:'14px' }} >{t('Members')}</Typography>
               </Stack>
 
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -101,7 +116,12 @@ export default function CollapsibleTable(Data) {
             </Stack>
 
           </TableCell>
-          <TableCell >{row.user.length}</TableCell>
+          <TableCell >
+          <Typography sx={{ fontSize:'14px' }} >
+
+            {row.id}
+            </Typography>
+            </TableCell>
           <TableCell sx={{ textAlign:'right' }}>
               <Box>
                 <IconButton>
@@ -115,9 +135,7 @@ export default function CollapsibleTable(Data) {
               </Box>
 
 
-              {/* <Box>
-                <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
-              </Box> */}
+
               {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
 
 
@@ -129,16 +147,13 @@ export default function CollapsibleTable(Data) {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
            <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1 }}>
-                 <Typography variant="h6" gutterBottom component="div">
-                  History
-                </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
-                      <TableCell>ID</TableCell>
-                      <TableCell>First Name</TableCell>
-                      <TableCell align="right">Last Name</TableCell>
-                      <TableCell align="right">Email</TableCell>
+                      <TableCell>{t('ID')}</TableCell>
+                      <TableCell>{t('Name')}</TableCell>
+                      <TableCell >{t('Email')}</TableCell>
+                      <TableCell align="right">{t('Action')}</TableCell>
                     </TableRow>
                   </TableHead>
 
@@ -149,11 +164,26 @@ export default function CollapsibleTable(Data) {
                         <TableCell component="th" scope="row">
                           {user.id}
                         </TableCell>
-                        <TableCell>{user.first_name}</TableCell>
-                        <TableCell align="right">{user.last_name}</TableCell>
-                        <TableCell align="right">
+                        <TableCell>
+                              <Stack direction={'row'} spacing={2}>
+                              <Typography>
+                              {user.first_name}
+                              </Typography>
+                              <Typography>
+                              {user.last_name}
+                              </Typography>
+                              </Stack>
+                              </TableCell>
+                        <TableCell >
                           {user.email}
                         </TableCell>
+                        <TableCell align='right'>
+                            <IconButton  onClick={() => handleMemberOpen(user.id)}>
+                                <DeleteOutlinedIcon style={{ color:'#8090A7'  }} variant color="error" size='small'>Delete</DeleteOutlinedIcon>
+                            </IconButton>
+                            {isMemberPopupOpen && <AlertDialogMember id={memberdeleteId} open={isMemberPopupOpen} handleClose={handleMemberClose} />}
+
+                          </TableCell>
                       </TableRow>
                     ))}
 
@@ -164,8 +194,6 @@ export default function CollapsibleTable(Data) {
           </TableCell>
 
         </TableRow>
-        </>
-        ))}
       </>
     );
 
@@ -177,19 +205,41 @@ export default function CollapsibleTable(Data) {
 
 
   const rows = Data?.Data?.data?.data?.map((item) => {
-    return createData(item.name, item.id,item.user);
+    return createData(item.id,item.name, item.user);
   });
 
 
+  const [fdata, setFdata] = useState();
 
 
 
-  const [openParent, setOpenParent] = React.useState(false);
+
+
+  const [openParent, setOpenParent] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
   };
 
+  const handelSearch = event =>{
+    if (event.target.value){
+    const searchFilter = rows?.filter((row)=>{
+
+      if( row?.name.toLowerCase()?.includes(event.target.value.toLowerCase()) )
+        return row?.name.toLowerCase()?.includes(event.target.value.toLowerCase());
+
+      else if( row?.id == event.target.value)
+        return  row?.id == event.target.value
+
+    })
+
+    setFdata(searchFilter)
+  }
+  else
+    setFdata(null)
+
+  }
+  const {t} = useTranslation()
 
 
   return (
@@ -198,7 +248,7 @@ export default function CollapsibleTable(Data) {
 
     <Box width={{ sm:'70%' ,xs:'100%'}} >
       <TextField
-          placeholder='Search'
+          placeholder={t('Search')}
           fullWidth
           InputProps={{
           startAdornment: (
@@ -211,7 +261,7 @@ export default function CollapsibleTable(Data) {
                           </Box>
                         ),
                       }}
-                      // onChange={handelSearch}
+                      onChange={handelSearch}
           sx={{ paddingLeft: '8px',width:'50%',backgroundColor:'#F5F7FA',border:"none",boxShadow:"none" }}
           size='small'
         />
@@ -219,9 +269,9 @@ export default function CollapsibleTable(Data) {
 
         <Box  width={{ sm:'30%',xs:'100%' }} >
       <Button
-          sx={{ marginLeft:'60%',fontSize:'13px',color:'white',backgroundColor:'#6AB2DF' ,     ":hover": {color:'#6D6B77'}, }}
+          sx={{ marginLeft:'60%',fontSize:'13px',color:'white',backgroundColor:'#6AB2DF' ,":hover": {color:'#6D6B77'}, }}
           onClick={handleDrawerOpen}
-          >+ ADD TEAM
+          >+ {t('ADD TEAM')}
       </Button>
 
       </Box>
@@ -239,14 +289,28 @@ export default function CollapsibleTable(Data) {
 
           <TableRow>
 
-            <TableCell sx={{ width:'20%',marginLeft:'10%' }} >TEAM NAME</TableCell>
-            <TableCell sx={{ width:'10%' }} >TEAM ID</TableCell>
-            <TableCell sx={{ left:0,width:'70%',textAlign:'right' }} >ACTION</TableCell>
+            <TableCell sx={{ width:'20%',marginLeft:'10%' }} >{t('Team Name')}</TableCell>
+            <TableCell sx={{ width:'10%' }} >{t('Team ID')}</TableCell>
+            <TableCell sx={{ left:0,width:'70%',textAlign:'right' }} >{t('Action')}</TableCell>
 
           </TableRow>
         </TableHead>
         <TableBody>
-            <Row  row={rows} />
+
+          {fdata ?
+          fdata.map((row) => (
+              <Row key={row.id} row={row} />
+          ))
+
+          :rows?.map((row) => (
+            <Row key={row.id} row={row} />
+            ))
+
+
+          }
+
+
+
         </TableBody>
       </Table>
     </TableContainer>

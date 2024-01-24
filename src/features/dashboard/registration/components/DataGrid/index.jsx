@@ -11,7 +11,6 @@ import { Box, Stack } from '@mui/system'
 
 const Registration = Data => {
   const columns = useRegistrationColumn();
-  console.log('reg',Data);
 
   const {data} = Data?.Data
 
@@ -29,61 +28,27 @@ const Registration = Data => {
 
 
 
-  const gridStyles = {
-    root: {
-      '& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell': {
-        borderRight: '0px solid #000',
-      },
-      '& .MuiDataGrid-columnsContainer': {
-        backgroundColor: '#f0f0f0',
-      },
-      '& .MuiDataGrid-root': {
-        scrollbarWidth: 'thin',
-        scrollbarColor: '#000 #000',
-        '&::-webkit-scrollbar': {
-          width: '1px',
-        },
-        '&::-webkit-scrollbar-thumb': {
-          backgroundColor: '#000',
-        },
-
-      },
-
-
-    },
-
-  };
 
 
 
 
   return (
-    <>
-      <Grid container spacing={4}>
-        <Grid item xs={12}>
-          <Card>
-            <CardContent>
+          <Stack height={'100%'} >
+            <Card>
+              <CardContent>
 
-              <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"} m={"14px 0"}>
-                <Box>
-                  <Typography sx={{color:"#8090A7"}} variant="h3" color="initial"> Registration</Typography>
-
-                </Box>
-                <Box>
-                          search
-                </Box>
-              </Stack>
-
-
-
-
-              <CustomDataGrid  columns={columns}  sx={gridStyles.root} rows={RegistrationData(data)||[]}/>
-
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-    </>
+                <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"} m={"14px 0"}>
+                  <Box>
+                    <Typography sx={{color:"#8090A7"}} variant="h3" color="initial">{t('Registration')}</Typography>
+                  </Box>
+                  <Box>
+                      {t('Search')}
+                  </Box>
+                </Stack>
+                <CustomDataGrid   columns={columns}   rows={RegistrationData(data)||[]}/>
+              </CardContent>
+            </Card>
+          </Stack>
   );
 };
 

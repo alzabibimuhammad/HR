@@ -12,12 +12,14 @@ import CustomTextField from 'src/@core/components/mui/text-field';
 import useGetEmployeeDropDown from '../list/Hooks/useEmployee';
 import { useAddContract } from '../list/Hooks/useAddContract';
 import PDFViewer from '../list/Profile/PdfViwer';
+import { useTranslation } from 'react-i18next';
 
 export default function Add() {
   const [age, setAge] = React.useState('');
   const [files, setFiles] = useState([])
   const { mutate: addContract, isLoading } = useAddContract();
  const {data,isloading}=useGetEmployeeDropDown()
+  const {t} = useTranslation()
 
  // ** Hooks
  const onDrop = (acceptedFiles) => {
@@ -62,7 +64,6 @@ const { getRootProps, getInputProps } = useDropzone({
    formData.append('user_id', data.user_id);
    addContract(formData)
   } catch (error) {
-    console.error('Login error:', error);
   }
 };
 
@@ -169,7 +170,7 @@ San Diego Country, CA 91905, USA
       </FormControl>
 
 
-      <Typography sx={{color:"#3F4458",fontSize:"16px",fontWeight:"600",marginTop:"20px"}}>Contract File :</Typography>
+      <Typography sx={{color:"#3F4458",fontSize:"16px",fontWeight:"600",marginTop:"20px"}}>{t('Contract File')} :</Typography>
 
       <Box sx={{ display: "flex", justifyContent: "center" }} marginTop={"25px"}>
     <Box sx={{ width: "754px", height: "380px", borderRadius: "26px", border: "7px dashed #8090A7" }}>
@@ -181,7 +182,7 @@ San Diego Country, CA 91905, USA
           <Box sx={{ display: 'flex', textAlign: 'center', alignItems: 'center', flexDirection: 'column', marginTop: "12%" }}>
             <CloudDoneOutlinedIcon sx={{ width: "56px", height: "56px" }} />
             <Typography variant='h4' sx={{ width: "421px", height: "77px", fontSize: "24px", fontWeight: "500", my: "10px" }}>
-              Choose a file or drag & drop it here PDF, up to 50MB
+              {t('Choose a file or drag & drop it here PDF, up to 50MB')}
             </Typography>
             <Box
               sx={{
@@ -197,7 +198,7 @@ San Diego Country, CA 91905, USA
                 cursor: "pointer"
               }}
             >
-              <Typography> Browse File</Typography>
+              <Typography>{t('Browse File')}</Typography>
             </Box>
           </Box>
         )}
@@ -207,7 +208,7 @@ San Diego Country, CA 91905, USA
 
   <Box sx={{width:"100%",mt:"24px"}} textAlign={"end"}>
   <Button  sx={{padding:"16px 33px 16px 33px"}}  type='submit' variant='contained' >
-  Add Contract
+  {t('Add Contract')}
 </Button>
   </Box>
 

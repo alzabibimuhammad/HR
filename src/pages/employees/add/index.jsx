@@ -32,7 +32,6 @@ export default function Add() {
 
   const onSubmit = (formData) => {
     // Handle form submission here
-    console.log('Form Data:', formData);
   };
 
   const defaultValues = {
@@ -74,9 +73,8 @@ export default function Add() {
     // try {
     //   const userData = await auth.login(data, rememberMe);
     // } catch (error) {
-    //   console.error('Login error:', error);
+    //
     // }
-    console.log("handleDataSubmit",data);
 
   };
 

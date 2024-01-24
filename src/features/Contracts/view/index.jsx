@@ -22,10 +22,8 @@ export default function View({id}) {
   const deleteContractt = async (id) => {
     try {
       await deleteContract(id);
-      console.log('Contract deleted successfully');
       router.push('/contracts/list');
     } catch (error) {
-      console.error('Failed to delete contract', error);
     }
   };
 

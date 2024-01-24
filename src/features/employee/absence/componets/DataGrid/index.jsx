@@ -32,36 +32,35 @@ const Absence = ({ rows }) => {
   };
 
   const handelSearch = (event) => {
-    const searchText = event.target.value;
-    let searchData;
-    if (!searchText) {
-      setRow(rows);
-    }
-    else {
-      searchData= rows?.data?.data?.filter((element) => {
-        if( element?.first_name?.includes(searchText) ){
-          return element?.first_name?.includes(searchText);
-        }
-        else if( element?.last_name?.includes(searchText) ){
-          return element?.last_name?.includes(searchText);
-        }
-        else if( element?.role?.includes(searchText) ){
-          return element?.role?.includes(searchText);
-        }
-        else if(element?.email?.includes(searchText) ){
-          return element?.email?.includes(searchText);
-        }
-        else if(element?.department?.name?.includes(searchText) ){
-          return element?.department?.name?.includes(searchText);
-        }
-      });
+    // const searchText = event.target.value;
+    // let searchData;
+    // if (!searchText) {
+    //   setRow(rows);
+    // }
+    // else {
+    //   searchData= rows?.data?.data?.filter((element) => {
+    //     if( element?.first_name?.includes(searchText) ){
+    //       return element?.first_name?.includes(searchText);
+    //     }
+    //     else if( element?.last_name?.includes(searchText) ){
+    //       return element?.last_name?.includes(searchText);
+    //     }
+    //     else if( element?.role?.includes(searchText) ){
+    //       return element?.role?.includes(searchText);
+    //     }
+    //     else if(element?.email?.includes(searchText) ){
+    //       return element?.email?.includes(searchText);
+    //     }
+    //     else if(element?.department?.name?.includes(searchText) ){
+    //       return element?.department?.name?.includes(searchText);
+    //     }
+    //   });
 
-      setRow({'data':{'data':searchData}});
+    //   setRow({'data':{'data':searchData}});
 
-    }
+    // }
   };
 
-  console.log("rows after search",row);
 
   const gridStyles = {
     root: {
@@ -121,7 +120,7 @@ const Absence = ({ rows }) => {
               >
 
             <TextField
-              placeholder='Search'
+              placeholder={t('Search')}
               fullWidth
 
               InputProps={{

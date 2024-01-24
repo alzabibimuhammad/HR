@@ -184,7 +184,6 @@ const target = 'src/iconify-bundle/icons-bundle-react.js'
           await runSVGO(svg)
         } catch (err) {
           // Invalid icon
-          console.error(`Error parsing ${name} from ${source.dir}:`, err)
           iconSet.remove(name)
 
           return
@@ -203,7 +202,6 @@ const target = 'src/iconify-bundle/icons-bundle-react.js'
   // Save to file
   await fs.writeFile(target, bundle, 'utf8')
 })().catch(err => {
-  console.error(err)
 })
 
 /**

@@ -24,7 +24,6 @@ export default function Employment({onDataChange,Controller,control}) {
         onDataChange("contract"+reader.result);
       };
       reader.readAsDataURL(file);
-      console.log("done");
     }
   };
 

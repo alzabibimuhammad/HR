@@ -98,7 +98,6 @@ const List = ({ rows }) => {
                     <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
                   </TextField>
                 </Item>
-
                 <Item>
                   <TextField
                     select
@@ -115,7 +114,6 @@ const List = ({ rows }) => {
                     <MenuItem value='not-active'>{`${t("not active")}`}</MenuItem>
                   </TextField>
                 </Item>
-
 
 
               </Stack>

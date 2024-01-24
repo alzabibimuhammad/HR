@@ -11,6 +11,7 @@ import { UsersData } from '../../infrastructure';
 import { Box } from '@mui/system';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FallbackSpinner from '../spinner';
+import { useEffect } from 'react';
 
 const Users = ({ rows }) => {
 
@@ -24,48 +25,80 @@ const Users = ({ rows }) => {
   };
 
 
+  const [fdata , setfdata] = useState(rows);
+
   const [role, setRole] = useState('');
-  const [status, setStatus] = useState('');
+
+  const [department, setDepartment] = useState('');
+
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
   };
 
-  const handleStatusChange = (e) => {
-    setStatus(e.target.value);
+  const handledepartmentChange = (e) => {
+    setDepartment(e.target.value);
   };
+
+    useEffect(()=>{
+      let filteredData;
+      if(role && department){
+        filteredData = rows?.data?.data?.filter((row) => {
+          return row?.department?.name === department && row.role===role;
+        });
+        setfdata({'data':{'data':filteredData}});
+
+      }
+      else if(role && department==''){
+        filteredData = rows?.data?.data?.filter((row) => {
+          return row.role===role;
+        });
+        setfdata({'data':{'data':filteredData}});
+
+      }
+      else if(department && role==''){
+        filteredData = rows?.data?.data?.filter((row) => {
+          return row?.department?.name === department ;
+        });
+        setfdata({'data':{'data':filteredData}});
+
+      }
+      else
+        setfdata(rows);
+
+    },[role,department])
 
   const handelSearch = (event) => {
     const searchText = event.target.value;
     let searchData;
     if (!searchText) {
-      setRow(rows);
+      setfdata(rows);
     }
     else {
+
       searchData= rows?.data?.data?.filter((element) => {
-        if( element?.first_name?.includes(searchText) ){
-          return element?.first_name?.includes(searchText);
+        if( element?.first_name.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.first_name.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if( element?.last_name?.includes(searchText) ){
-          return element?.last_name?.includes(searchText);
+        else if( element?.last_name.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.last_name.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if( element?.role?.includes(searchText) ){
-          return element?.role?.includes(searchText);
+        else if( element?.role.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.role.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if(element?.email?.includes(searchText) ){
-          return element?.email?.includes(searchText);
+        else if(element?.email.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.email.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if(element?.department?.name?.includes(searchText) ){
-          return element?.department?.name?.includes(searchText);
+        else if(element?.department?.name.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.department?.name.toLowerCase()?.includes(searchText.toLowerCase());
         }
       });
 
-      setRow({'data':{'data':searchData}});
 
+      setfdata({'data':{'data':searchData}});
     }
   };
 
-  console.log("rows after search",row);
 
   const gridStyles = {
     root: {
@@ -150,7 +183,7 @@ const Users = ({ rows }) => {
               >
 
             <TextField
-              placeholder='Search'
+              placeholder={t("Search")}
               fullWidth
 
               InputProps={{
@@ -197,25 +230,25 @@ const Users = ({ rows }) => {
                     fullWidth
                     defaultValue='Specialization'
                     SelectProps={{
-                      value: status,
+                      value: department,
                       displayEmpty: true,
-                      onChange: handleStatusChange,
+                      onChange: handledepartmentChange,
                     }}
                     size='small'
 
                   >
                     <MenuItem value=''>{`${t("Specialization")}`}</MenuItem>
-                    <MenuItem value='active'>{`${t("active")}`}</MenuItem>
-                    <MenuItem value='not-active'>{`${t("not active")}`}</MenuItem>
+                    <MenuItem value='Front_End'>{`${t("Front End")}`}</MenuItem>
+                    <MenuItem value='Back_End'>{`${t("Back End")}`}</MenuItem>
                   </TextField>
                   <TextField
                     select
                     fullWidth
                     defaultValue='Team'
                     SelectProps={{
-                      value: status,
+                      // value: department,
                       displayEmpty: true,
-                      onChange: handleStatusChange,
+                      // onChange: handledepartmentChange,
                     }}
                     size='small'
 
@@ -226,7 +259,7 @@ const Users = ({ rows }) => {
                   </TextField>
                   </Stack>
 
-                <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(row)|| []}  />
+                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(fdata)|| []}    />: null }
 
               </Stack>
               </CardContent>

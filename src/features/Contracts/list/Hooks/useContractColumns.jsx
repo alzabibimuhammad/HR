@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import DrawerForm from '../Componets/DrawerForm/index';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { Avatar, Button, IconButton, Rating } from '@mui/material';
+import { Avatar, Button, IconButton, Rating, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import { useTranslation } from 'react-i18next';
@@ -51,54 +51,82 @@ const useContractColumns = () => {
   return useMemo(() => [
     {
       field: 'id',
-      headerName: t("ID"),
+      headerName: 'ID',
       flex: 2,
       disableClickEventBubbling: true,
+      renderCell:(params)=>{
+        return (
+          <Box>
+            <Typography sx={{ fontSize:'14px' }} >
+              {params?.row?.id}
+            </Typography>
+          </Box>
+        )
+      }
     },
     {
       field: 'employee',
       headerName: t("Employee"),
       flex: 2,
       disableClickEventBubbling: true,
+      renderCell:(params)=>{
+        return (
+          <Box>
+            <Typography sx={{ fontSize:'14px' }} >
+              {params?.row?.employee}
+            </Typography>
+          </Box>
+        )
+      }
     },
     {
       field: 'startDate',
       headerName: t("Start Date"),
       flex: 2,
       disableClickEventBubbling: true,
+      renderCell:(params)=>{
+        return (
+          <Box>
+            <Typography sx={{ fontSize:'14px' }} >
+              {params?.row?.startDate}
+            </Typography>
+          </Box>
+        )
+      }
+
     },
     {
       field: 'endDate',
       headerName: t("End Date"),
       flex: 2,
       disableClickEventBubbling: true,
+      renderCell:(params)=>{
+        return (
+          <Box>
+            <Typography sx={{ fontSize:'14px' }} >
+              {params?.row?.endDate}
+            </Typography>
+          </Box>
+        )
+      }
     },
     {
       field: 'status',
       headerName: t("Status"),
       flex: 2,
       disableClickEventBubbling: true,
+      renderCell:(params)=>{
+        return (
+          <Box>
+            <Typography sx={{ fontSize:'14px' }} >
+              {t(params?.row?.status)}
+            </Typography>
+          </Box>
+        )
+      }
     },
 
-    // {
-    //   field: 'image',
-    //   headerName: '',
-    //   renderCell: (params) => {
-    //     return (
-    //       <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + params.row?.image?.image} alt='' />
-    //     );
-    //   },
-    // },
-    // {
-    //   field: 'rate',
-    //   headerName: t("Rate"),
-    //   flex: 2,
-    //   renderCell: (params) => {
-    //     return (
-    //       <Rating name="read-only" value={params.row.rate} readOnly />
-    //     );
-    //   },
-    // },
+
     {
       field: 'action',
       headerName: t("Action"),
@@ -107,18 +135,11 @@ const useContractColumns = () => {
         return (
           <>
           <Stack >
-
-
-     
-
               <Link href={`/contracts/view/${params.row.id}`} >
               <IconButton >
               <VisibilityIcon  variant="contained" sx={{ color:'#FF9F43' }} size='small'>Details</VisibilityIcon>
               </IconButton>
-
               </Link>
-
-
           </Stack>
             {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
 

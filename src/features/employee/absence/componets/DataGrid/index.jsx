@@ -20,45 +20,25 @@ const Absence = ({ rows }) => {
   };
 
 
-  const [role, setRole] = useState('');
-  const [status, setStatus] = useState('');
 
-  const handleRoleChange = (e) => {
-    setRole(e.target.value);
-  };
-
-  const handleStatusChange = (e) => {
-    setStatus(e.target.value);
-  };
 
   const handelSearch = (event) => {
-    // const searchText = event.target.value;
-    // let searchData;
-    // if (!searchText) {
-    //   setRow(rows);
-    // }
-    // else {
-    //   searchData= rows?.data?.data?.filter((element) => {
-    //     if( element?.first_name?.includes(searchText) ){
-    //       return element?.first_name?.includes(searchText);
-    //     }
-    //     else if( element?.last_name?.includes(searchText) ){
-    //       return element?.last_name?.includes(searchText);
-    //     }
-    //     else if( element?.role?.includes(searchText) ){
-    //       return element?.role?.includes(searchText);
-    //     }
-    //     else if(element?.email?.includes(searchText) ){
-    //       return element?.email?.includes(searchText);
-    //     }
-    //     else if(element?.department?.name?.includes(searchText) ){
-    //       return element?.department?.name?.includes(searchText);
-    //     }
-    //   });
 
-    //   setRow({'data':{'data':searchData}});
+    const searchText = event.target.value;
+    let searchData;
+    if (!searchText) {
+      setRow(rows);
+    }
+    else {
+      searchData= rows?.data?.data?.filter((element) => {
+        if( element?.username?.toLowerCase()?.includes(searchText?.toLowerCase()) ){
+          return element?.username?.toLowerCase()?.includes(searchText?.toLowerCase());
+        }
+      });
 
-    // }
+      setRow({'data':{'data':searchData}});
+
+    }
   };
 
 
@@ -116,8 +96,15 @@ const Absence = ({ rows }) => {
                 spacing={3}
                 alignContent={'center'}
                 justifyContent={'center'}
-                my={"30px"}
               >
+
+          <Stack
+                direction={{ xs: 'column', sm: 'column' }}
+                spacing={2}
+              >
+              <Typography sx={{ fontSize:'16px',marginTop:'5px' }} >{t("Search")}</Typography>
+
+                  <Box width={{ sm:'35%',xs:'100%' }} >
 
             <TextField
               placeholder={t('Search')}
@@ -140,19 +127,6 @@ const Absence = ({ rows }) => {
 
 
             />
-          <Stack
-                direction={{ xs: 'column', sm: 'column' }}
-                spacing={2}
-              >
-              <Typography sx={{ fontSize:'16px',marginTop:'5px' }} >{t("Filters")}</Typography>
-
-                  <Box width={{ sm:'35%',xs:'100%' }} >
-                      <TextField
-                        type='date'
-                        size='small'
-                        fullWidth
-
-                      />
                 </Box>
                   </Stack>
 

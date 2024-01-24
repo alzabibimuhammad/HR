@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton, Avatar } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
@@ -12,13 +12,17 @@ import { Box } from '@mui/system';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import FallbackSpinner from '../spinner';
 import { useEffect } from 'react';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import DrawerForm from '../spinner/DrawerForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAttendancePercentage } from 'src/pages/dashboard/store';
+import useGetMvp from '../../hooks/useGetMvp';
 
 const Users = ({ rows }) => {
 
   const columns = useUserColumns();
   const [openParent, setOpenParent] = React.useState(false);
   const { t } = useTranslation()
-  const [row,setRow] = useState(rows);
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
@@ -123,18 +127,25 @@ const Users = ({ rows }) => {
     },
   };
 
-  const  Data = {
+ const [percentageData,setpercentageData]=useState([])
 
-    "success": true,
-    "message": "success",
-    "data":
-        {
-          'total':10,
-          'active':3
-        }
+ const dispatch = useDispatch()
+ const store = useSelector(state => state.Dashboard)
 
-    }
+ useEffect(() => {
+    dispatch(getAttendancePercentage())
+    setpercentageData(store?.AttendancePercentage)
 
+ }, [dispatch,store?.AttendancePercentage?.length])
+
+
+    const handleClick = () => {
+      console.log('hi dani');
+    };
+
+    const {data , loading } = useGetMvp()
+
+    console.log('mvp',data?.data?.data);
   return    <>
 
     <Box sx={{ margin:0,padding:0 }} >
@@ -147,29 +158,50 @@ const Users = ({ rows }) => {
               <Stack  width={'50%'}  direction={'row'} >
 
                 <Stack direction={'row'}>
-                <Typography>{Data.data.active}</Typography>/
+                <Typography>{percentageData?.data?.present_employees}</Typography>/
 
-                <Typography>{Data.data.total}</Typography>
+                <Typography>{percentageData?.data?.total_employees}</Typography>
                 </Stack>
 
                 <Box marginTop={'5px'} marginLeft={'5px'} width={'50%'} >
-                <FallbackSpinner total={Data.data.total} active={Data.data.active} />
+                  <FallbackSpinner total={percentageData?.data?.total_employees} active={percentageData?.data?.present_employees} />
                 </Box>
 
-                <Typography marginLeft={'5px'}>{(Data.data.active/Data.data.total)*100}%</Typography>
+                <Typography marginLeft={'5px'}>{(percentageData?.data?.present_employees/percentageData?.data?.total_employees)*100}%</Typography>
 
               </Stack>
             </AccordionSummary>
 
             <AccordionDetails>
+              <Stack direction={'row'} justifyContent={'start'} alignItems={'center'} >
+                <Typography>Employee of the month</Typography>
+              <IconButton
+                aria-label="more"
+                id="long-button"
+                aria-controls={open ? 'long-menu' : undefined}
+                aria-expanded={open ? 'true' : undefined}
+                aria-haspopup="true"
+                onClick={handleDrawerOpen}
+                sx={{ border:'none' }}
+              >
+            <MoreHorizIcon />
+          </IconButton>
+          </Stack>
+              <Stack direction={'row'} justifyContent={'start'} alignItems={'center'} spacing={2} >
+              <Avatar/>
+
               <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                malesuada lacus ex, sit amet blandit leo lobortis eget.
+                {data?.data?.data?.user?.first_name}
               </Typography>
+              <Typography>
+                {data?.data?.data?.user?.last_name}
+              </Typography>
+              </Stack>
             </AccordionDetails>
 
           </Accordion>
-    </Box>
+          <DrawerForm  open={openParent} setOpenParent={setOpenParent} />
+          </Box>
 
 
             <Card>

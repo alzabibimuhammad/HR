@@ -27,15 +27,15 @@ export default function Dashboard() {
 
 
  return <>
-      <Stack spacing={5} sx={{ overflow:'hidden' }} >
+      <Stack spacing={5} sx={{ overflow:'hidden' }}  >
 
-      <Stack justifyContent={"center"}  spacing={5} direction={{sm:'row',xs:'column'}} >
+      <Stack justifyContent={"center"}   spacing={5} direction={{sm:'row',xs:'column'}} >
 
           <Box width={{ sm:"30%",xs:'100%' }}>
             <Attendance Data={percentageData} />
           </Box>
 
-          <Box width={{sm:'70%',xs:'100%'}}>
+          <Box width={{sm:'70%',xs:'100%',}} sx={{backgroundColor:"#fff"}}>
             <AppCalendar  />
           </Box>
 

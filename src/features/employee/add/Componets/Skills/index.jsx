@@ -3,12 +3,12 @@ import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
 import {    List, ListItem, } from '@mui/material';
-import { useFieldArray, useForm, Controller } from 'react-hook-form';
+import { useFieldArray ,setValue, useFormContext } from 'react-hook-form';
 import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { color } from '@mui/system';
 
-export default function Skills({onDataChange,Controller,control}) {
+export default function Skills({onDataChange,Controller,control,handleRatingChange,handleLanguageChange}) {
   const [degree, setDegree] = useState('');
 
   const handleFieldChange = (field, value) => {
@@ -76,7 +76,7 @@ export default function Skills({onDataChange,Controller,control}) {
   });
 
  const handleAddClickSkills = () => {
-  skillsAppend('skills', { skills: '' });
+  skillsAppend('skills', { skills: '', rating: 0 });
   };
 
 
@@ -84,16 +84,18 @@ export default function Skills({onDataChange,Controller,control}) {
     skillsRemove(index);
   };
 
+
+
   // *********************************************************************************************************************************
 
 
   const { fields:fieldsLanguage, append:LanguageAppend, remove:LanguageRemove } = useFieldArray({
     control,
-    name: "language"
+    name: "languages"
   });
 
  const handleAddClickLanguage = () => {
-  LanguageAppend('skills', { skills: '' });
+  LanguageAppend('languages', { language: '',rating:0 });
   };
 
 
@@ -111,8 +113,8 @@ useEffect(()=>{
   append('education', { study: '', degree: '' });
   certificateAppend('certificate', { certificate: '' });
   experienceAppend('experience', { experience: '' });
-  skillsAppend('skills', { skills: '' });
-  LanguageAppend('language', { language: '' });
+  skillsAppend('skills', { skills: '', rating: "" });
+  LanguageAppend('languages', { languages: '',rating:"" });
 
 },[append,certificateAppend,experienceAppend,skillsAppend,LanguageAppend])
 
@@ -200,7 +202,14 @@ useEffect(()=>{
                   {...field}
                   select
                   label="Degree"
-                  onChange={(e) => handleDegreeChange(e, index)}
+                  SelectProps={{
+                    value: field.value,  // Use field.value here
+                    displayEmpty: true,
+                    onChange: (e) => {
+                      field.onChange(e);  // Ensure field.onChange is called
+                      handleDegreeChange(e);
+                    },
+                  }}
                   variant="outlined"
                   fullWidth
                   size="small"
@@ -332,7 +341,14 @@ useEffect(()=>{
         )}
       />
       <Box marginTop={'1%'}>
-        <Rating name="read-only" value={2} />
+      <Rating
+              name={`skills[${index}].rating`}
+              value={field.rating}
+              onChange={(event, newValue) => {
+                handleRatingChange(index, newValue);
+              }}
+            />
+
       </Box>
 </Stack>
   ))}
@@ -374,8 +390,13 @@ useEffect(()=>{
         )}
       />
       <Box marginTop={'1%'}>
-        <Rating name="read-only" value={2} />
-      </Box>
+      <Rating
+              name={`languages[${index}].rating`}
+              value={field.rating}
+              onChange={(event, newValue) => {
+                handleLanguageChange(index, newValue);
+              }}
+            />      </Box>
 </Stack>
   ))}
      <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickLanguage}>

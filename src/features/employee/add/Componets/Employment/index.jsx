@@ -77,10 +77,15 @@ export default function Employment({onDataChange,Controller,control}) {
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
               <Typography>Salary</Typography>
-              <TextField
+
+              <Controller
+                name={`salary`}
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                  {...field}
                 fullWidth
                 size='small'
-                onChange={(e) => handleFieldChange('salary', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2}  >
                     <Box>
@@ -95,35 +100,30 @@ export default function Employment({onDataChange,Controller,control}) {
                   </Stack>
                 }
               />
-              <Typography>Start date</Typography>
-              <TextField
-                fullWidth
-                size='small'
-                onChange={(e) => handleFieldChange('startDate', e.target.value)}
-                label={
-                  <Stack direction={'row'} spacing={2} >
-                    <Box>
-                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`}/>
-                      </Box>
-                      <Box>
-                        {'Start Date'}
-                    </Box>
-                  </Stack>
-                }
-              />
+                )}
+                />
+
               <Box sx={{display:"flex",alignItems:"center",gap:"16px"}}>
               <Typography>Contract</Typography>
               <Box>
       <label htmlFor="contractInput" style={{border:"3px solid red",padding:"2px",cursor:"pointer"}}>
                     choose file
       </label>
-      <input
+
+     <Controller
+                name={`contract`}
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                  {...field}
         id="contractInput"
         type="file"
         accept="contract/*"
         style={{ display: 'none' }}
         onChange={handleImageChange}
       />
+                )}
+                />
     </Box>
     {contract?.slice(17,27)}
 

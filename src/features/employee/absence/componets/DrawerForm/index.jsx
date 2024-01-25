@@ -6,7 +6,7 @@ import List from '@mui/material/List'
 import IconButton from '@mui/material/IconButton'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import { Button, TextField } from '@mui/material'
+import { Button, MenuItem, TextField, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -14,6 +14,9 @@ import { useTranslation } from 'react-i18next'
 import { getContractsData,addContract, EditContract } from 'src/pages/contracts/store'
 import { useDispatch  } from 'react-redux'
 import { Schema } from '../../validation'
+import { Stack } from '@mui/system'
+import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
 
 const drawerWidth = 440
 
@@ -42,12 +45,7 @@ const dispatch=useDispatch()
   }
 
   const defaultValues = {
-    name: Data?.name,
-    birthDate: Data?.birthDate,
-    password: Data?.password,
-    phoneNumber: Data?.phoneNumber,
-    finance: '',
-    role:'coach'
+    type:''
   }
 
   useEffect(() => {
@@ -85,132 +83,205 @@ const dispatch=useDispatch()
 
   }
 
+  const handleDeleteAbsence=user_id=>{
+    console.log(user_id);
+  }
+
+
   return (
-    <Box sx={{ display: 'flex' }}>
 
       <Drawer
-        sx={{
-          width: drawerWidth,
+      backgroundColor='#fff'
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth
+        },
+        overflow:'visible',
+        borderRadius:'15px',
+      }}
+      anchor='right'
+      open={open}
+      variant='temporary'
+      ModalProps={{
+        keepMounted: true
+      }}
 
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth
-          }
-        }}
-        anchor='right'
-        open={open}
-        variant='temporary'
-        ModalProps={{
-          keepMounted: true
-        }}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <List>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container sx={{ padding: '12px' }} spacing={3}>
-              <Grid item xs={12}>
-                <Controller
-                  name='name'
-                  defaultValue=''
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                       autoFocus
-                      label={`${t("COACH NAME")}`}
-                      variant='outlined'
-                      error={!!errors.name}
-                      helperText={errors.name ? errors.name.message : ''}
-                    />
-                  )}
-                />
-              </Grid>
-{!Data ?               <Grid item xs={12}>
-                <Controller
-                  name='password'
-                  control={control}
-                  defaultValue=''
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                      label='PASSWORD'
-                      variant='outlined'
-                      error={!!errors.password}
-                      helperText={errors.password ? errors.password.message : ''}
-                    />
-                  )}
-                />
-              </Grid>
-:null
+    >
 
-}
 
-              <Grid item xs={12}>
-                <Controller
-                  name='phoneNumber'
-                  control={control}
-                  defaultValue=''
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                      label='PHONE NUMBER'
-                      variant='outlined'
-                      error={!!errors.phoneNumber}
-                      helperText={errors.phoneNumber ? errors.phoneNumber.message : ''}
-                    />
-                  )}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Controller
-                  name='finance'
-                  control={control}
-                  defaultValue=''
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                      label='finance'
-                      variant='outlined'
-                      error={!!errors.finance}
-                      helperText={errors.finance ? errors.finance.message : ''}
-                    />
-                  )}
-                />
-                              </Grid>
-                              <Grid item xs={12}>
-                <Controller
-                  name='birthDate'
-                  control={control}
-                  defaultValue=''
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                      label={`${t("BIRTH DATE")}`}
-                      variant='outlined'
-                      error={!!errors.birthDate}
-                      helperText={errors.birthDate ? errors.birthDate.message : ''}
-                    />
-                  )}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button disabled={!isDirty} type='submit' variant='contained' color='primary'>
-                  {`${t("Submit")}`}
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
-        </List>
+    <Box  sx={{width:'100%',backgroundColor:'#DCE1E6' , fontSize:'20px' ,gap: '10px',padding:'15px',borderRadius:'10px',fontFamily:'Montserrat'  }}>Add team</Box>
+    <Stack marginLeft={{ sm:'3%' }} marginTop={{sm:'2%'}}direction={{ sm:'column' }}spacing={3} >
+        <Typography >UnJustified</Typography>
+          <Box width={{ sm:'94%' }} >
+          <TextField
+          fullWidth
+          type='date'
+          size='small'
+          />
+          </Box>
+    </Stack>
+
+    <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
+
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+
+      </Stack>
+    <Stack marginLeft={{ sm:'3%' }} marginTop={{sm:'2%'}}direction={{ sm:'column' }}spacing={3} >
+        <Typography >Justified</Typography>
+          <Box width={{ sm:'94%' }} >
+          <TextField
+          fullWidth
+          type='date'
+          size='small'
+          />
+          </Box>
+    </Stack>
+      <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
+
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+          <Typography marginLeft={'3%'} >
+            1/2/2024
+          </Typography>
+          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
+        </Stack>
+
+
+        </Stack>
+
+
+        <Box width={"90%"} marginLeft={'3%'}>
+        <Controller
+            name='type'
+            control={control}
+
+            render={({ field }) => (
+              <TextField
+
+                select
+                {...field}
+                defaultValue=''
+                variant="outlined"
+                fullWidth
+                size='small'
+              >
+                <MenuItem value='' >Type</MenuItem>
+                <MenuItem value='justified' >Justified</MenuItem>
+                <MenuItem value='unjustified' >UnJustified</MenuItem>
+              </TextField>
+            )}
+          />
+          <Controller
+            name='date'
+            control={control}
+
+            render={({ field }) => (
+              <TextField
+                type='date'
+                {...field}
+                variant="outlined"
+                fullWidth
+                size='small'
+              />
+            )}
+          />
+          </Box>
+        <Stack marginLeft={{ sm:'3%'  }}>
+          <Box display={'flex'}> <AddIcon sx={{ color:'#6AB2DF' }} />  <Typography sx={{ color:'#6AB2DF' }}>Add Absence</Typography> </Box>
+        </Stack>
+
+
+      <Box sx={{ display:'flex', width:'100%',padding:'10px'}} >
+          <Stack sx={{ marginLeft:'50%' }} direction={'row'} spacing={2} >
+            <Button onClick={handleDrawerClose} sx={{ backgroundColor:'#DCE1E6',color:'#8090A7',borderRadius:'4px', padding: '8px 24px' }}>Cancle</Button>
+            <Button /*onClick={handlerSendData}*/ sx={{ backgroundColor:'#6AB2DF',color:'#fff' ,borderRadius:'4px', padding: '8px 24px' ,   '&:hover': {
+              backgroundColor: '#3F4458', },}} >Add</Button>
+          </Stack>
+
+      </Box>
+
       </Drawer>
-    </Box>
   )
 }

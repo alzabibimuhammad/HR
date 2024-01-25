@@ -121,7 +121,7 @@ const LoginPage = () => {
                         value={value}
                         onBlur={onBlur}
                         onChange={onChange}
-                        placeholder=''
+                        placeholder='samy16@gmail.com'
                         error={Boolean(errors.email)}
                         {...(errors.email && { helperText: errors.email.message })}
                       />

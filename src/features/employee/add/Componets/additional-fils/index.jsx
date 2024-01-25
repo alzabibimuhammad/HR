@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { color } from '@mui/system';
 
-export default function AdditionalFiles({ onDataChange, Controller, control }) {
+export default function AdditionalFiles({ onDataChange, Controller, control , errors }) {
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -69,6 +69,8 @@ export default function AdditionalFiles({ onDataChange, Controller, control }) {
                     variant="outlined"
                     fullWidth
                     size="small"
+                    error={Boolean(errors?.additionalfiles?.[index]?.description)}
+                    {...(errors?.additionalfiles?.[index]?.description && { helperText: errors?.additionalfiles?.[index]?.description.message })}
                   />
                 )}
               />

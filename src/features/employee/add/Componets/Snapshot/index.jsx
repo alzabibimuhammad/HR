@@ -3,7 +3,7 @@ import { Box, Stack } from '@mui/system'
 import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 
-export default function Snapshot({onDataChange,Controller,control,defaultValues}) {
+export default function Snapshot({onDataChange,Controller,control,defaultValues,errors}) {
 
   const [image, setImage] = useState(null);
 
@@ -62,6 +62,7 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues}
         accept="image/*"
         style={{ display: 'none' }}
         onChange={handleImageChange}
+
       />
         )}
         />
@@ -75,6 +76,8 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues}
             <TextField
             {...field}
               fullWidth
+              error={Boolean(errors.first_name)}
+                        {...(errors.first_name && { helperText: errors.first_name.message })}
               size='small'
               label={
                 <Stack direction={'row'} spacing={2} >
@@ -98,6 +101,8 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues}
             <TextField
             {...field}
                 fullWidth
+                error={Boolean(errors.middle_name)}
+                {...(errors.middle_name && { helperText: errors.middle_name?.message })}
                 size='small'
 
                 label={
@@ -117,6 +122,7 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues}
 
 
 
+
              <Controller
              name={`last_name`}
              control={control}
@@ -125,6 +131,8 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues}
             {...field}
             size='small'
             fullWidth
+            error={Boolean(errors.last_name)}
+            {...(errors.last_name && { helperText: errors.last_name?.message })}
             label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>

@@ -3,7 +3,7 @@ import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
 
-export default function Info({onDataChange,Controller,control}) {
+export default function Info({onDataChange,Controller,control,errors}) {
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
@@ -70,6 +70,8 @@ export default function Info({onDataChange,Controller,control}) {
               <TextField
                 {...field}
                 fullWidth
+                error={Boolean(errors.birth_date)}
+                {...(errors.birth_date && { helperText: errors.birth_date.message })}
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2} >
@@ -93,6 +95,8 @@ export default function Info({onDataChange,Controller,control}) {
               <TextField
                 {...field}
                 fullWidth
+                error={Boolean(errors.nationalID)}
+                {...(errors.nationalID && { helperText: errors.nationalID.message })}
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2} >
@@ -116,6 +120,8 @@ export default function Info({onDataChange,Controller,control}) {
               {...field}
               select
               fullWidth
+              error={Boolean(errors.military_situation)}
+              {...(errors.military_situation && { helperText: errors.military_situation.message })}
               defaultValue="Military Status"
               SelectProps={{
                 value: field.value,  // Use field.value here
@@ -143,6 +149,8 @@ export default function Info({onDataChange,Controller,control}) {
             render={({ field }) => (
               <TextField
               {...field}
+              error={Boolean(errors.social_situation)}
+              {...(errors.social_situation && { helperText: errors.social_situation.message })}
                     select
                     fullWidth
                     defaultValue="Marital Status"

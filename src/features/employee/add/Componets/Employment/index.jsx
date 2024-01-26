@@ -7,7 +7,7 @@ import { useFieldArray, useForm, Controller } from 'react-hook-form';
 import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function Employment({onDataChange,Controller,control}) {
+export default function Employment({onDataChange,Controller,control,errors}) {
   const [contract, setContract] = useState(null);
 
   const handleFieldChange = (field, value) => {
@@ -85,6 +85,8 @@ export default function Employment({onDataChange,Controller,control}) {
                   <TextField
                   {...field}
                 fullWidth
+                error={Boolean(errors.salary)}
+                {...(errors.salary && { helperText: errors.salary.message })}
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2}  >
@@ -133,6 +135,7 @@ export default function Employment({onDataChange,Controller,control}) {
 
 
 
+
               <Typography>Secretariats</Typography>
               {fields.map((field, index) => (
   <Stack direction={"column"} spacing={4} key={index}>
@@ -149,6 +152,8 @@ export default function Employment({onDataChange,Controller,control}) {
         defaultValue={field.secretariats}
         render={({ field }) => (
           <TextField
+          error={Boolean(errors?.secretariats?.[index]?.secretariats)}
+          {...(errors?.secretariats?.[index]?.secretariats && { helperText: errors?.secretariats?.[index]?.secretariats.message })}
             {...field}
             fullWidth
             size='small'
@@ -166,6 +171,8 @@ export default function Employment({onDataChange,Controller,control}) {
         <TextField
           {...field}
           fullWidth
+          error={Boolean(errors?.secretariats?.[index]?.deliveryDate)}
+          {...(errors?.secretariats?.[index]?.deliveryDate && { helperText: errors?.secretariats?.[index]?.deliveryDate.message })}
           size='small'
           label={
             <Stack direction={'row'} spacing={2}>

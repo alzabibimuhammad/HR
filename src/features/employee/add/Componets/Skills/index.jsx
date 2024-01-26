@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { color } from '@mui/system';
 
-export default function Skills({onDataChange,Controller,control,handleRatingChange,handleLanguageChange}) {
+export default function Skills({onDataChange,Controller,control,handleRatingChange,handleLanguageChange,errors}) {
   const [degree, setDegree] = useState('');
 
   const handleFieldChange = (field, value) => {
@@ -190,6 +190,8 @@ useEffect(()=>{
                     variant="outlined"
                     fullWidth
                     size="small"
+                    error={Boolean(errors?.education?.[index]?.study)}
+                    {...(errors?.education?.[index]?.study && { helperText: errors?.education?.[index]?.study.message })}
                     />
                     )}
                     />
@@ -248,6 +250,8 @@ useEffect(()=>{
               <TextField
                 {...field}
                 fullWidth
+                error={Boolean(errors?.certificate?.[index]?.certificate)}
+                {...(errors?.certificate?.[index]?.certificate && { helperText: errors?.certificate?.[index]?.certificate.message })}
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2} >
@@ -288,6 +292,8 @@ useEffect(()=>{
               <TextField
                 {...field}
                 fullWidth
+                error={Boolean(errors?.experience?.[index]?.experience)}
+                {...(errors?.experience?.[index]?.experience && { helperText: errors?.experience?.[index]?.experience.message })}
                 size="small"
                 label={
                   <Stack direction={'row'} spacing={2}>
@@ -326,6 +332,8 @@ useEffect(()=>{
           <TextField
             {...field}
             fullWidth
+            error={Boolean(errors?.skills?.[index]?.skills)}
+            {...(errors?.skills?.[index]?.skills && { helperText: errors?.skills?.[index]?.skills.message })}
             size='small'
             label={
               <Stack direction={'row'} spacing={2}>
@@ -346,6 +354,7 @@ useEffect(()=>{
               value={field.rating}
               onChange={(event, newValue) => {
                 handleRatingChange(index, newValue);
+
               }}
             />
 
@@ -375,6 +384,8 @@ useEffect(()=>{
           <TextField
             {...field}
             fullWidth
+            error={Boolean(errors?.languages?.[index]?.languages)}
+            {...(errors?.languages?.[index]?.languages && { helperText: errors?.languages?.[index]?.languages.message })}
             size='small'
             label={
               <Stack direction={'row'} spacing={2}>

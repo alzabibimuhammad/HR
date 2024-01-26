@@ -10,10 +10,11 @@ import Skills from 'src/features/employee/add/Componets/Skills';
 import Snapshot from 'src/features/employee/add/Componets/Snapshot';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Schema } from '@mui/icons-material';
 import { useFieldArray} from 'react-hook-form';
 import EmergencyContact from 'src/features/employee/add/Componets/emergenc-contact';
 import AdditionalFiles from 'src/features/employee/add/Componets/additional-fils';
+import { Schema } from './validation';
+import { useAddUsers } from './hook/useAddUsers';
 
 export default function Add() {
   const [snapshotData, setSnapshotData] = useState({});
@@ -26,22 +27,30 @@ export default function Add() {
   const [AdditionalFilesData, setAdditionalFilesData] = useState({});
   const [EmergencyContactData, setEmergencyContacttData] = useState({});
 
+  const { mutate: addUsers, isLoading } = useAddUsers();
+
+
+
+
 
 
   const handleFieldChange = (field, value) => {
     onDataChange((prevData) => ({ ...prevData, [field]: value }));
   };
 
-  const onSubmit = (formData) => {
-    // Handle form submission here
-  };
+
 
   const defaultValues = {
-    // first_name:"",
+     first_name:"",
+
     // image:"",
-    // middle_name:"",
-    // last_name:"",
-    // email: "",
+
+     middle_name:"",
+
+     last_name:"",
+
+     email: "",
+
     // password: '',
     // confirm_password:"",
     // birth_date:"",
@@ -74,17 +83,37 @@ export default function Add() {
     defaultValues,
     mode: 'onBlur',
 
-    // resolver: yupResolver(Schema),
+    //  resolver: yupResolver(Schema),
   });
 
-  const handleDataSubmit =  (data) => {
-    // try {
-    //   const userData = await auth.login(data, rememberMe);
-    // } catch (error) {
-    //
+ const handleDataSubmit =  (data) => {
+    try {
+      addUsers(data)
+    } catch (error) {
+
+    }
+   console.log(data);
+ };
+
+  //  const handleDataSubmit = async (data) => {
+  //      try {
+  //      const formData = new FormData();
+
+      //  formData.append('path', files[0]);
+      // formData.append('startTime', data.startTime);
+      //  formData.append('endTime', data.endTime);
+      //  formData.append('user_id', data.user_id);
+      //  formData.append('first_name', data.first_name);
+      //  formData.append('first_name', data.middle_name);
+
+      // addUsers(formData)
+//  }
+     //   catch (error) {
+      //    console.log(error);
+    //    }
     // }
-    console.log(data);
-  };
+
+
 
   const handleRatingChange = (index, newValue) => {
     const updatedSkills = [...getValues('skills')];
@@ -121,22 +150,22 @@ export default function Add() {
       <Stack direction={{ sm: 'row', xs: 'column' }} spacing={2}>
         <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
           <Box>
-            <Snapshot defaultValues={defaultValues} onDataChange={setSnapshotData}  setError={setError} control={control} Controller={Controller}/>
+            <Snapshot errors={errors} defaultValues={defaultValues} onDataChange={setSnapshotData}  setError={setError} control={control} Controller={Controller}/>
           </Box>
           <Box>
-            <Account onDataChange={setAccountData} setError={setError} control={control} Controller={Controller}/>
+            <Account errors={errors} onDataChange={setAccountData} setError={setError} control={control} Controller={Controller}/>
           </Box>
           <Box>
-            <Info onDataChange={setInfoData} setError={setError} control={control} Controller={Controller}/>
+            <Info errors={errors} onDataChange={setInfoData} setError={setError} control={control} Controller={Controller}/>
           </Box>
           <Box>
-            <Contact defaultValues={defaultValues}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
+            <Contact errors={errors} defaultValues={defaultValues}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
           </Box>
           <Box>
-            <EmergencyContact handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setEmergencyContacttData} />
+            <EmergencyContact errors={errors} handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setEmergencyContacttData} />
           </Box>
           <Box>
-            <AdditionalFiles handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setAdditionalFilesData} />
+            <AdditionalFiles errors={errors} handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setAdditionalFilesData} />
           </Box>
         </Stack>
 
@@ -145,10 +174,10 @@ export default function Add() {
             <Professional onDataChange={setProfessionalData}setError={setError} control={control} Controller={Controller} />
           </Box>
           <Box>
-            <Skills handleLanguageChange={handleLanguageChange} handleRatingChange={handleRatingChange} handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setSkillsData} />
+            <Skills errors={errors} handleLanguageChange={handleLanguageChange} handleRatingChange={handleRatingChange} handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setSkillsData} />
           </Box>
           <Box>
-            <Employment onDataChange={setEmploymentData}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller}/>
+            <Employment errors={errors} onDataChange={setEmploymentData}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller}/>
           </Box>
         </Stack>
       </Stack>

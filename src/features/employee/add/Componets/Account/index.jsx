@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export default function Account({onDataChange,Controller,control}) {
+export default function Account({onDataChange,Controller,control,errors}) {
 
 
   const SvgMail = `
@@ -56,6 +56,7 @@ export default function Account({onDataChange,Controller,control}) {
       setpasswordsMatch(false)
   }
 
+
   return (
     <Card>
         <CardContent>
@@ -74,7 +75,8 @@ export default function Account({onDataChange,Controller,control}) {
                 fullWidth
                 type='email'
                 size='small'
-
+                error={Boolean(errors.email)}
+                {...(errors.email && { helperText: errors.email.message })}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -101,6 +103,8 @@ export default function Account({onDataChange,Controller,control}) {
                 {...field}
                   fullWidth
                   size='small'
+                  error={Boolean(errors.password)}
+                {...(errors.password && { helperText: errors.password.message })}
                   type={showPassword ? 'text' : 'password'}
 
                   label={
@@ -137,6 +141,8 @@ export default function Account({onDataChange,Controller,control}) {
                 {...field}
             fullWidth
             size="small"
+            error={Boolean(errors.confirm_password)}
+            {...(errors.confirm_password && { helperText: errors.confirm_password.message })}
 
             label={
               <Stack direction={'row'} spacing={2}>

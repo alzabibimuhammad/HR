@@ -32,11 +32,13 @@ code[class*='language-'] {
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
+
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #E9ece3;
+  padding: 10px;
+
 }
 
 /* Handle */

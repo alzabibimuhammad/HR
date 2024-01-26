@@ -3,7 +3,6 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 import React from 'react';
-import { Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 
 const FallbackSpinner = ({ total, active }) => {
@@ -16,7 +15,7 @@ const FallbackSpinner = ({ total, active }) => {
         if (oldProgress === 100) {
           return 0;
         }
-        const diff = (active / total) * 100; // Calculate the progress based on total and active
+        const diff = (active / total) * 100;
         return diff;
       });
     }, 800);
@@ -28,6 +27,7 @@ const FallbackSpinner = ({ total, active }) => {
 
   return (
     <Stack >
+
       <LinearProgress variant="determinate" value={progress} />
 
     </Stack>

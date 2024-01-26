@@ -11,8 +11,8 @@ export default function Dashboard() {
 
  const store = useSelector(state => state.Dashboard)
 
- const [percentageData,setpercentageData]=useState([])
  const [registration,setRegistration]=useState([])
+ const [percentageData,setpercentageData]=useState([])
 
  const dispatch = useDispatch()
 

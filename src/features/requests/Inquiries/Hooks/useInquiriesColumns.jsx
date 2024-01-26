@@ -207,15 +207,15 @@ const useInquiriesColumns = () => {
           <Box sx={{display:"flex",flexDirection:"column",justifyContent:"flex-start"}}>
             <div style={{marginLeft:"100px"}}>
             <IconButton
-  aria-label="more"
-  id="long-button"
-  aria-controls={open ? 'long-menu' : undefined}
-  aria-expanded={open ? 'true' : undefined}
-  aria-haspopup="true"
-  onClick={(event) => handleClick(event, params.row)}
->
-  <MoreVertIcon />
-</IconButton>
+              aria-label="more"
+              id="long-button"
+              aria-controls={open ? 'long-menu' : undefined}
+              aria-expanded={open ? 'true' : undefined}
+              aria-haspopup="true"
+              onClick={(event) => handleClick(event, params.row)}
+            >
+              <MoreVertIcon />
+          </IconButton>
 <Menu
   params={params.row.id}
   id="long-menu"

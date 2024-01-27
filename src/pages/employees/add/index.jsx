@@ -43,7 +43,7 @@ export default function Add() {
   const defaultValues = {
      first_name:"",
 
-    // image:"",
+    image:"",
 
      middle_name:"",
 
@@ -128,6 +128,7 @@ export default function Add() {
   };
 
 
+
   return (
     <>
 
@@ -150,7 +151,14 @@ export default function Add() {
       <Stack direction={{ sm: 'row', xs: 'column' }} spacing={2}>
         <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
           <Box>
-            <Snapshot errors={errors} defaultValues={defaultValues} onDataChange={setSnapshotData}  setError={setError} control={control} Controller={Controller}/>
+            <Snapshot
+           onDataChange={setSnapshotData}
+           errors={errors}
+           defaultValues={defaultValues}
+           setError={setError}
+           control={control}
+              Controller={Controller}
+              />
           </Box>
           <Box>
             <Account errors={errors} onDataChange={setAccountData} setError={setError} control={control} Controller={Controller}/>

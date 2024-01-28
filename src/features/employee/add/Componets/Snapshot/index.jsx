@@ -3,7 +3,7 @@ import { Box, Stack } from '@mui/system'
 import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 
-export default function Snapshot({onDataChange,Controller,control,defaultValues,errors}) {
+export default function Snapshot({onDataChange,Controller,control,defaultValues,errors,setProfileImage}) {
 
   const [image, setImage] = useState(null);
 
@@ -21,12 +21,13 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues,
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
+
         onDataChange(reader.result)
       };
       reader.readAsDataURL(file);
     }
-    console.log(file);
-     }
+    setProfileImage(image)
+  }
 
   const svgContent = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

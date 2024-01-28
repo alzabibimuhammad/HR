@@ -2,6 +2,7 @@ import { Card, CardContent, MenuItem, TextField, Typography } from '@mui/materia
 import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
+import useSelectInput from 'src/pages/employees/add/hook/useSelectInput';
 
 export default function Professional({onDataChange,Controller,control}) {
   const handleFieldChange = (field, value) => {
@@ -10,6 +11,10 @@ export default function Professional({onDataChange,Controller,control}) {
   const [role, setRole] = useState('');
   const [specialization, setSpecialization] = useState('');
   const [team, setTeam] = useState('');
+
+  const {data}=useSelectInput()
+  console.log(data?.data?.data);
+
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
@@ -41,65 +46,75 @@ export default function Professional({onDataChange,Controller,control}) {
           <Stack direction={'column'} spacing={3} width={'100%'} >
               <Typography>Specialization</Typography>
 
+              <Controller
+  name="specialization"
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      select
+      fullWidth
+      defaultValue="work specialization"
+      SelectProps={{
+        value: field.value,
+        displayEmpty: true,
+        onChange: (e) => {
+          field.onChange(e);
+          handleSpecializationChange(e);
+        },
+      }}
+      size='small'
+    >
+      <MenuItem value="" disabled>
+        work specialization
+      </MenuItem>
+       <MenuItem value='work specialization'>{`${t("work specialization")}`}</MenuItem>
 
-            <Controller
-            name={`specialization`}
-            control={control}
-            render={({ field }) => (
-              <TextField
-              {...field}
-                    select
-                    fullWidth
-                    defaultValue="work specialization"
-                    SelectProps={{
-                      value: field.value,
-                      displayEmpty: true,
-                      onChange: (e) => {
-                        field.onChange(e);
-                        handleSpecializationChange(e);
-                      },
-                    }}
-                    size='small'
-                  >
-                    <MenuItem value=''>{`${t("work specialization")}`}</MenuItem>
-                    <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
-                    <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
-                    <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
-                </TextField>
+      {data?.data?.data?.specialisation?.map((val, index) => (
+        <MenuItem key={index} value={val}>
+          {val}
+        </MenuItem>
+      ))}
+    </TextField>
   )}
-  />
+/>
 
 
 
-
-              <Typography>Role</Typography>
+              <Typography>Level</Typography>
 
               <Controller
-            name={`role`}
-            control={control}
-            render={({ field }) => (
-              <TextField
-              {...field}
-                    select
-                    fullWidth
-                    defaultValue="Role"
-                    SelectProps={{
-                      value: field.value,
-                      displayEmpty: true,
-                      onChange: (e) => {
-                        field.onChange(e);
-                        handleRoleChange(e);
-                      },
-                    }}
-                    size='small'
-                  >
-                    <MenuItem value=''>{`${t("Role")}`}</MenuItem>
-                    <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
-                    <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
-                    <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
-                </TextField>
+  name={`level`}
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      select
+      fullWidth
+      defaultValue="Level"
+      SelectProps={{
+        value: field.value,
+        displayEmpty: true,
+        onChange: (e) => {
+          field.onChange(e);
+          handleRoleChange(e);
+        },
+      }}
+      size='small'
+    >
+             <MenuItem value='Level'>{`${t("Level")}`}</MenuItem>
+
+      {data?.data?.data?.levels?.map((val, index) => (
+
+
+        <MenuItem key={index} value={val}>
+          {val}
+        </MenuItem>
+      ))}
+    </TextField>
   )}
-  />
+/>
+
               <Typography>Team/Department</Typography>
 
                 <Controller
@@ -121,10 +136,13 @@ export default function Professional({onDataChange,Controller,control}) {
                     }}
                     size='small'
                   >
-                    <MenuItem value=''>{`${t("Team")}`}</MenuItem>
-                    <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
-                    <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
-                    <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
+                                 <MenuItem value='Team'>{`${t("Team")}`}</MenuItem>
+
+         {data?.data?.data?.departments?.map((val, index) => (
+          <MenuItem key={index} value={val.id}>
+            {val.name}
+          </MenuItem>
+))}
                 </TextField>
                   )}
                   />

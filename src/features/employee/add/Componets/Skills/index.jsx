@@ -22,11 +22,11 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "education"
+    name: "educations"
   });
 
   const handleAddClick = () => {
-   append('education', { study: '', degree: '' });
+   append('educations', { study: '', degree: '' });
    };
 
    const handleRemoveClick = (index) => {
@@ -37,11 +37,11 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
 
   const { fields:fieldsCertificate, append:certificateAppend, remove:certificateRemove } = useFieldArray({
     control,
-    name: "certificate"
+    name: "certificates"
   });
 
  const handleAddClickCertificate = () => {
-  certificateAppend('certificate', { certificate: '' });
+  certificateAppend('certificates', { certificate: '' });
   };
 
 
@@ -54,11 +54,11 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
 
   const { fields:fieldsExperience, append:experienceAppend, remove:ExperienceRemove } = useFieldArray({
     control,
-    name: "experience"
+    name: "experiences"
   });
 
  const handleAddClickExperience = () => {
-  experienceAppend('experience', { experience: '' });
+  experienceAppend('experiences', { experience: '' });
   };
 
 
@@ -76,7 +76,7 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
   });
 
  const handleAddClickSkills = () => {
-  skillsAppend('skills', { skills: '', rating: 0 });
+  skillsAppend('skills', { skills: '', rate: 0 });
   };
 
 
@@ -95,7 +95,7 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
   });
 
  const handleAddClickLanguage = () => {
-  LanguageAppend('languages', { language: '',rating:0 });
+  LanguageAppend('languages', { language: '',rate:0 });
   };
 
 
@@ -110,11 +110,11 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
 
 
 useEffect(()=>{
-  append('education', { study: '', degree: '' });
-  certificateAppend('certificate', { certificate: '' });
-  experienceAppend('experience', { experience: '' });
-  skillsAppend('skills', { skills: '', rating: "" });
-  LanguageAppend('languages', { languages: '',rating:"" });
+  append('educations', { study: '', degree: '' });
+  certificateAppend('certificates', { certificate: '' });
+  experienceAppend('experiences', { experience: '' });
+  skillsAppend('skills', { skills: '', rate: "" });
+  LanguageAppend('languages', { languages: '',rate:"" });
 
 },[append,certificateAppend,experienceAppend,skillsAppend,LanguageAppend])
 
@@ -180,7 +180,7 @@ useEffect(()=>{
   <CloseIcon sx={{cursor:"pointer",'&:hover': { color: 'red' }}} onClick={() => handleRemoveClick(index)} />
               )}
              <Controller
-                name={`education[${index}].study`}
+                name={`educations[${index}].study`}
                 control={control}
                 defaultValue={field.study}
                 render={({ field }) => (
@@ -196,7 +196,7 @@ useEffect(()=>{
                     )}
                     />
                 <Controller
-                name={`education[${index}].degree`}
+                name={`educations[${index}].degree`}
                 control={control}
                 defaultValue={field.degree}
                 render={({ field }) => (
@@ -243,7 +243,7 @@ useEffect(()=>{
                   <CloseIcon sx={{cursor:"pointer",'&:hover': { color: 'red' }}} onClick={() => handleRemoveClickcertificate(index)} />
                  )}
               <Controller
-                name={`certificate[${index}].certificate`}
+                name={`certificates[${index}].certificate`}
                 control={control}
                 defaultValue={field.certificate}
                 render={({ field }) => (
@@ -259,7 +259,7 @@ useEffect(()=>{
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgCertificate)}`}/>
                       </Box>
                       <Box>
-                        {'Certificate'}
+                        {'Certificates'}
                     </Box>
                   </Stack>
                 }
@@ -285,9 +285,9 @@ useEffect(()=>{
             />
           )}
           <Controller
-            name={`experience[${index}].experience`}
+            name={`experiences[${index}].experience`}
             control={control}
-            defaultValue={field.experience}
+            defaultValue={field.experiences}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -350,8 +350,8 @@ useEffect(()=>{
       />
       <Box marginTop={'1%'}>
       <Rating
-              name={`skills[${index}].rating`}
-              value={field.rating}
+              name={`skills[${index}].rate`}
+              value={field.rate}
               onChange={(event, newValue) => {
                 handleRatingChange(index, newValue);
 
@@ -402,8 +402,8 @@ useEffect(()=>{
       />
       <Box marginTop={'1%'}>
       <Rating
-              name={`languages[${index}].rating`}
-              value={field.rating}
+              name={`languages[${index}].rate`}
+              value={field.rate}
               onChange={(event, newValue) => {
                 handleLanguageChange(index, newValue);
               }}

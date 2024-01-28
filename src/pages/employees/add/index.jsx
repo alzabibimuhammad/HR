@@ -26,6 +26,7 @@ export default function Add() {
   const [employmentData, setEmploymentData] = useState({});
   const [AdditionalFilesData, setAdditionalFilesData] = useState({});
   const [EmergencyContactData, setEmergencyContacttData] = useState({});
+  const [ProfileImage,setProfileImage] = useState();
 
   const { mutate: addUsers, isLoading } = useAddUsers();
 
@@ -43,13 +44,13 @@ export default function Add() {
   const defaultValues = {
      first_name:"",
 
-    image:"",
 
      middle_name:"",
 
      last_name:"",
 
      email: "",
+     role:"admin"
 
     // password: '',
     // confirm_password:"",
@@ -88,11 +89,16 @@ export default function Add() {
 
  const handleDataSubmit =  (data) => {
     try {
+      const formData = new FormData();
+      formData.append('image',ProfileImage)
+
+      data.image = ProfileImage;
       addUsers(data)
     } catch (error) {
 
     }
-   console.log(data);
+      console.log("🚀 ~ handleDataSubmit ~ data:", data)
+
  };
 
   //  const handleDataSubmit = async (data) => {
@@ -117,13 +123,13 @@ export default function Add() {
 
   const handleRatingChange = (index, newValue) => {
     const updatedSkills = [...getValues('skills')];
-    updatedSkills[index].rating = newValue;
+    updatedSkills[index].rate = newValue;
     setValue('skills', updatedSkills);
   };
 
   const handleLanguageChange = (index, newValue) => {
     const updatedLanguages = [...getValues('languages')];
-    updatedLanguages[index].rating = newValue;
+    updatedLanguages[index].rate = newValue;
     setValue('languages', updatedLanguages);
   };
 
@@ -158,6 +164,7 @@ export default function Add() {
            setError={setError}
            control={control}
               Controller={Controller}
+              setProfileImage={setProfileImage}
               />
           </Box>
           <Box>

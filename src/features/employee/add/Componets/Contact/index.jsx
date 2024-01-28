@@ -21,17 +21,17 @@ export default function Contact({onDataChange,Controller,control,defaultValues }
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'contact',
+    name: 'contacts',
   });
 
   const { fields:phoneNumbersfields, append:phoneNumbersappend, remove:phoneNumbersremove } = useFieldArray({
     control,
-    name: 'contact.phoneNumbers',
+    name: 'contacts.phonenumbers',
   });
 
   const { fields:EmailFields, append:EmailAppend, remove:EmailRemove } = useFieldArray({
     control,
-    name: 'contact.email',
+    name: 'contacts.emails',
   });
 
 
@@ -50,7 +50,7 @@ const CustomTextField = styled(TextField)({
 });
 
 React.useEffect(() => {
-  phoneNumbersappend({ number: '' });
+  phoneNumbersappend({ phonenumber: '' });
   EmailAppend({email: [{ email: '' }] });
 
 }, [phoneNumbersappend,EmailAppend]);
@@ -109,7 +109,7 @@ React.useEffect(() => {
       {phoneNumbersfields.map((phoneNumber, index) => (
         <Box key={phoneNumber.id}>
           <Controller
-            name={`contact.phoneNumbers.${index}.number`}
+            name={`contacts.phonenumbers.${index}.phonenumber`}
             control={control}
             defaultValue={phoneNumber.number}
             render={({ field }) => (
@@ -128,7 +128,7 @@ React.useEffect(() => {
 
   <Button
     type="button"
-    onClick={() => phoneNumbersappend({ number: '' })}
+    onClick={() => phoneNumbersappend({ phonenumber: '' })}
     sx={{ fontSize: "12px", fontWeight: "400", color: "#6ab2df", padding: "0" }}
   >
     Add phoneNumbers
@@ -143,7 +143,7 @@ React.useEffect(() => {
       {EmailFields.map((Email, index) => (
         <Box key={Email.id}>
           <Controller
-            name={`contact.email.${index}.email`}
+            name={`contacts.emails.${index}.email`}
             control={control}
             defaultValue={Email.id}
             render={({ field }) => (

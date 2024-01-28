@@ -25,6 +25,7 @@ export default function Dashboard() {
 
  }, [dispatch,store?.AttendancePercentage?.length,store?.Registertion?.length])
 
+console.log("percentageData",percentageData);
 
  return <>
       <Stack spacing={5} sx={{ overflow:'hidden' }}  >

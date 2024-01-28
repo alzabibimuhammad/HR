@@ -10,18 +10,21 @@ export default function Info({onDataChange,Controller,control,errors}) {
   };
   const [Status, setStatus] = useState('');
   const [Marital, setMarital] = useState('');
+  const [Gender, setGender] = useState('');
 
   const handleStatusChange = (e) => {
-
     setStatus(e.target.value);
     handleFieldChange('militaryStatus',e.target.value)
-
   };
 
   const handleMaritalChange = (e) => {
     setMarital(e.target.value);
     handleFieldChange('maritalStatus',e.target.value)
+  };
 
+  const handleGenderChange = (e) => {
+    setGender(e.target.value);
+    handleFieldChange('gender',e.target.value)
   };
 
   console.log(Status);
@@ -113,6 +116,31 @@ export default function Info({onDataChange,Controller,control,errors}) {
               />
 
             <Controller
+            name={`gender`}
+            control={control}
+            render={({ field }) => (
+              <TextField
+              {...field}
+              select
+              fullWidth
+              defaultValue="gender"
+              SelectProps={{
+                value: field.value,
+                displayEmpty: true,
+                onChange: (e) => {
+                  field.onChange(e);
+                  handleGenderChange(e);
+                },
+              }}
+              size='small'
+                  >
+                    <MenuItem value='gender'>{`${t("gender")}`}</MenuItem>
+                    <MenuItem value='Male'>{`${t("Male")}`}</MenuItem>
+                    <MenuItem value='feMale'>{`${t(" feMale")}`}</MenuItem>
+                </TextField>
+  )}
+/>
+            <Controller
             name={`military_situation`}
             control={control}
             render={({ field }) => (
@@ -133,9 +161,9 @@ export default function Info({onDataChange,Controller,control,errors}) {
               }}
               size='small'
                   >
-                    <MenuItem value=''>{`${t("Military Status")}`}</MenuItem>
-                    <MenuItem value='Done'>{`${t("Done")}`}</MenuItem>
-                    <MenuItem value='NotDone'>{`${t("Not Done")}`}</MenuItem>
+                    <MenuItem value='Finished'>{`${t("Finished")}`}</MenuItem>
+                    <MenuItem value='Postponed'>{`${t("Postponed")}`}</MenuItem>
+                    <MenuItem value='Exempt'>{`${t("Exempt")}`}</MenuItem>
                 </TextField>
   )}
 />
@@ -153,7 +181,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
               {...(errors.social_situation && { helperText: errors.social_situation.message })}
                     select
                     fullWidth
-                    defaultValue="Marital Status"
+                    defaultValue="social_situation"
                     SelectProps={{
                       value: field.value,
                       displayEmpty: true,
@@ -164,10 +192,8 @@ export default function Info({onDataChange,Controller,control,errors}) {
                     }}
                     size='small'
                   >
-                    <MenuItem value=''>{`${t("Marital Status")}`}</MenuItem>
-                    <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
-                    <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
-                    <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
+                    <MenuItem value='Single'>{`${t("Single")}`}</MenuItem>
+                    <MenuItem value='Married'>{`${t("Married")}`}</MenuItem>
                 </TextField>
                   )}
                   />

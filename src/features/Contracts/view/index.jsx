@@ -9,6 +9,7 @@ import useViewContract from '../list/Hooks/useViewContracts';
 import { useRouter } from 'next/router';
 import { useDeleteContract } from '../list/Hooks/useDeleteContract';
 import { useReactToPrint } from 'react-to-print';
+import Logo from './logo';
 
 export default function View({id}) {
   const componentRef = useRef();
@@ -45,25 +46,10 @@ export default function View({id}) {
 
 
   return <>
-    <Stack sx={{backgroundColor:"#FFFFFF",p:"30px",borderRadius:"12px"}}>
-      <Box sx={{width:"246px",height:"100px",}}>
 
 
 
-      <Typography variant='h2'>
-      <span style={{color: '#6AB2DF'}}>A</span><span style={{color:"#131627"}}>xis</span> <span style={{color: '#6AB2DF'}}>Code</span>
-    </Typography>
-
-
-      <Typography sx={{marginTop:"4px",fontWeight:"500",fontSize:"12px",color:"#8090A7"}}>Office 149, 450 South Brand Brooklyn
-San Diego Country, CA 91905, USA
-+1 (123) 456 7894, +44 (789) 54222</Typography>
-
-      </Box>
-    </Stack>
-
-
-
+    <Logo/>
 
 
     <Stack  marginTop={"20px"} direction={"row"} justifyContent={"space-between"}  spacing={12}>

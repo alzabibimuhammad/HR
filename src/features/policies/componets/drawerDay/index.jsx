@@ -46,6 +46,7 @@ export default function DrawerForm({ open, setOpenParent ,setDays }) {
     );
   };
   console.log('selected date',selectedDays);
+
   return (
     <>
       <CenteredDrawer

@@ -44,7 +44,10 @@ export default function Add() {
   const defaultValues = {
      first_name:"",
 
-
+     contact:{
+      phonenumbers:[],
+      emails:[]
+    },
      middle_name:"",
 
      last_name:"",
@@ -52,24 +55,7 @@ export default function Add() {
      email: "",
      role:"admin"
 
-    // password: '',
-    // confirm_password:"",
-    // birth_date:"",
-    // nationalID:"",
-    // military_situation:"",
-    // social_situation:"",
-    // specialization:"",
-    // department_id:"",
-    // address: "",
-    // salary:"",
-    // contract:"",
-    // name: [],
-    // phoneNumbers:[],
-    // description:[],
-    // study:[],
-    // certificate:[],
-    // experience:[],
-    // education:[]
+
   };
 
   const {
@@ -93,11 +79,12 @@ export default function Add() {
       formData.append('image',ProfileImage)
 
       data.image = ProfileImage;
+      console.log("🚀 ~ handleDataSubmit ~ data:", data)
       addUsers(data)
     } catch (error) {
 
     }
-      console.log("🚀 ~ handleDataSubmit ~ data:", data)
+
 
  };
 

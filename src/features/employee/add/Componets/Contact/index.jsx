@@ -5,6 +5,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import ListItemSelected from 'src/views/components/list/ListItemSelected';
 import IconButton from 'src/@core/theme/overrides/icon-button';
+import email from 'src/store/apps/email';
 
 export default function Contact({onDataChange,Controller,control,defaultValues }) {
   const handleFieldChange = (field, value) => {
@@ -19,10 +20,6 @@ export default function Contact({onDataChange,Controller,control,defaultValues }
 
 
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'contacts',
-  });
 
   const { fields:phoneNumbersfields, append:phoneNumbersappend, remove:phoneNumbersremove } = useFieldArray({
     control,

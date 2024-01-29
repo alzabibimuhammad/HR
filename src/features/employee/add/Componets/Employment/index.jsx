@@ -30,11 +30,11 @@ export default function Employment({onDataChange,Controller,control,errors}) {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "secretariats"
+    name: "secretaraits"
   });
 
   const handleAddClick = () => {
-   append('secretariats', { object: '', delivery_date: '' });
+   append('secretaraits', { object: '', delivery_date: '' });
    };
 
    const handleRemoveClick = (index) => {
@@ -43,7 +43,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
 
 
    useEffect(()=>{
-    append('secretariats', { object: '', delivery_date: '' });
+    append('secretaraits', { object: '', delivery_date: '' });
 
 
   },[append])
@@ -153,7 +153,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
     )}
     <Box>
       <Controller
-        name={`secretariats[${index}].object`}
+        name={`secretaraits[${index}].object`}
         control={control}
         defaultValue={field.secretariats}
         render={({ field }) => (
@@ -170,7 +170,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
     </Box>
 
     <Controller
-      name={`secretariats[${index}].delivery_date`}
+      name={`secretaraits[${index}].delivery_date`}
       control={control}
       defaultValue={field.deliveryDate}
       render={({ field }) => (

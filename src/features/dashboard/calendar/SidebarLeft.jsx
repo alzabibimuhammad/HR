@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 const steps = [
   {
@@ -29,7 +30,8 @@ const steps = [
   },
 ];
 
-export default function SidebarLeft() {
+export default function SidebarLeft({DataEventByDay}) {
+  console.log("🚀 ~ SidebarLeft ~ DataEventByDay:", DataEventByDay)
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = steps.length;
@@ -44,18 +46,29 @@ export default function SidebarLeft() {
   };
 
   return (
-    <Box sx={{ backgroundColor:"#E9ECF3" }}>
-  <div className="parent" key={"event.id"}>
+    <Box sx={{ backgroundColor:"#E9ECF3",marginTop:"15px" }}>
+       {Array.isArray(DataEventByDay?.data?.data) && DataEventByDay.data.data.length > 0 ? (
+      DataEventByDay.data.data.map(event => (
+        <div className="parent" key={event.id}>
           <div>
-            <p><span className="child">19</span>2022-1-1</p>
-             <p>08:32</p>
+            <p><span className="child">{event.day}</span>{event.start}</p>
+            {/* <p>{event.time}</p> */}
           </div>
           <div>
             <p className='description'>
-              Lorem ipsum dolor sit amet.
+              {event.description}
             </p>
           </div>
         </div>
+      ))
+    ) : (
+      <Image
+        width={250}
+        height={250}
+        src="/images/notRequest.svg"
+        alt="Alternate Text"
+      />
+    )}
     </Box>
   );
 }

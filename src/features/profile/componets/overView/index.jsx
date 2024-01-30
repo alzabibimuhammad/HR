@@ -11,7 +11,9 @@ import { Divider, Rating } from '@mui/material'
 import { Stack } from '@mui/system'
 import { useTranslation } from 'react-i18next'
 import { styled } from '@mui/material/styles'
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useState } from 'react'
 const renderList = arr => {
   if (arr && arr.length) {
     return arr.map((item, index) => {
@@ -75,7 +77,15 @@ const renderTeams = arr => {
 
 const AboutOverivew = (Data) => {
   const {t} = useTranslation();
-
+  const [isWarDetails,setisWarDetails] = useState(false)
+  const [isAlertDetails,setisAlertDetails] = useState(false)
+  const [isoverDetails,setisoverDetails] = useState(false)
+  const [isRewardDetails,setisRewardDetails] = useState(false)
+  const [isAdvanceDetails,setisAdvanceDetails] = useState(false)
+  const [isDeductionDetails,setisDeductionDetails] = useState(false)
+  const [isCheckin,setisCheckin] = useState(false)
+  const [isCheckout,setisCheckout] = useState(false)
+  const [isAbsences,setisAbsences] = useState(false)
 
 
   const Header = styled('p')(({ }) => ({
@@ -88,18 +98,7 @@ const AboutOverivew = (Data) => {
     fontStyle:'normal'
   }));
 
-  const DIV = styled('div')(({  }) => ({
-    display:'flex',
-    marginLeft:4,
-    '& > :first-child': {  // Fix here
-      fontSize:'14px',
-      fontWeight:600,
-      fontStyle:'normal',
-      color:'#3F4458',
-      margin:0
-    },
-  }));
-  
+
   const Text = styled('p')(({  }) => ({
     margin:0,
     fontSize:'14px',
@@ -107,7 +106,95 @@ const AboutOverivew = (Data) => {
     color:'#8090A7',
     marginLeft:3
   }));
+  const Detail = styled('p')(({  }) => ({
+    margin:0,
+    marginLeft:6,
+    fontSize:'10px',
+    color:'#8090A7',
+  }));
 
+  const StackRow = styled(Stack)(({  }) => ({
+    flexDirection:'row',
+    marginLeft:4,
+  }));
+  const Typo = styled(Typography)(({ }) => ({
+    fontSize:'14px',
+    fontWeight:600,
+    fontStyle:'normal',
+    color:'#3F4458',
+    margin:0
+  }))
+  const handleDetails =_=>{
+    setisWarDetails(true)
+  }
+
+  const handleLessDetails=_=>{
+    setisWarDetails(false)
+  }
+
+  const handleAlertSee =_=>{
+    setisAlertDetails(true)
+  }
+
+  const handleAlertLess=_=>{
+    setisAlertDetails(false)
+  }
+
+  const handleOverSee =_=>{
+    setisoverDetails(true)
+  }
+
+  const handleOverLess=_=>{
+    setisoverDetails(false)
+  }
+
+  const handleRewardSee =_=>{
+    setisRewardDetails(true)
+  }
+
+  const handleRewardLess=_=>{
+    setisRewardDetails(false)
+  }
+
+  const handleAdvancesSee =_=>{
+    setisAdvanceDetails(true)
+  }
+
+  const handleAdvancesLess=_=>{
+    setisAdvanceDetails(false)
+  }
+
+  const handleDeductionSee =_=>{
+    setisDeductionDetails(true)
+  }
+
+  const handleDeductionLess=_=>{
+    setisDeductionDetails(false)
+  }
+
+  const handleCheckinSee =_=>{
+    setisCheckin(true)
+  }
+
+  const handleCheckinLess=_=>{
+    setisCheckin(false)
+  }
+
+  const handleCheckoutSee =_=>{
+    setisCheckout(true)
+  }
+
+  const handleCheckoutLess=_=>{
+    setisCheckout(false)
+  }
+
+  const handleAbsencesSee =_=>{
+    setisAbsences(true)
+  }
+
+  const handleAbsencesLess=_=>{
+    setisAbsences(false)
+  }
 
   return Object.keys(Data).length > 0 ? (
     <div>
@@ -135,18 +222,80 @@ const AboutOverivew = (Data) => {
                 <Divider sx={{ width:'85%' }} style={{ background: '#8090A7' }}/>
               </Box>
               <Stack direction={'column'}  >
-                <DIV   >
-                <Typography  >Warnings:</Typography>
+
+                <StackRow >
+
+                <Typo >Warnings:</Typo>
                 <Text style={{ color:'red' }} >late 2 hours</Text>
-                </DIV>
-                <DIV>
-                  <Typography>Alerts:</Typography>
+                {/* for data see details arrow  */}
+
+                {!isWarDetails?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  See Details
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleDetails}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  Less Details
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleLessDetails} fontSize='10px'/>
+                </Stack>
+                  </>
+              }
+              </StackRow>
+              {/* for data inside warning  */}
+              {isWarDetails ?
+                <Stack direction={'column'} justifyContent={'start'}>
+
+                <Stack  marginLeft={6} direction={'row'} justifyContent={'space-between'}>
+                  <Typography>2 hour late</Typography>
+                  <Typography>Febsb</Typography>
+                </Stack>
+                <Stack  marginLeft={6} direction={'row'} justifyContent={'space-between'}>
+                  <Typography>2 hour late</Typography>
+                  <Typography>july</Typography>
+                </Stack>
+                </Stack>
+              :
+              null
+              }
+
+              <StackRow>
+                  <Typo>Alerts:</Typo>
                   <Text >oooo</Text>
-                </DIV>
-                <DIV>
-                  <Typography>Penalties:</Typography>
+                {/* for data see details arrow  */}
+
+                {!isAlertDetails?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  See Details
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleAlertSee}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  Less Details
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleAlertLess} fontSize='10px'/>
+                </Stack>
+                </>
+              }
+              </StackRow>
+                <StackRow>
+                  <Typo>Penalties:</Typo>
                   <Text   >late 2 hours</Text>
-                </DIV>
+
+                </StackRow>
               </Stack>
             </Box>
             {/* second section */ }
@@ -166,37 +315,118 @@ const AboutOverivew = (Data) => {
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.1331 9.05165C10.0297 9.01718 9.94353 8.98271 9.84013 8.93101C9.68503 8.86208 9.5127 8.79315 9.4093 8.65528C9.32313 8.55188 9.32313 8.37954 9.37483 8.25891C9.461 8.0521 9.70227 8.0004 9.90907 8.0004C10.2537 8.0004 10.5812 8.24167 10.6501 8.24167C10.788 8.24167 10.7707 7.8453 10.6501 7.77637C10.5467 7.6385 10.2537 7.56957 10.0814 7.55233V7.34553C10.0814 7.25936 10.0125 7.19043 9.9263 7.19043H9.70227C9.6161 7.19043 9.54716 7.25936 9.54716 7.34553V7.5868C9.2542 7.65573 8.99569 7.82807 8.87506 8.10381C8.78889 8.31061 8.77166 8.58634 8.87506 8.81038C9.01293 9.12058 9.28866 9.25845 9.58163 9.37908C9.68503 9.41355 9.7712 9.44802 9.85737 9.48249C10.0814 9.56865 10.3399 9.70652 10.3399 9.98226C10.3399 10.2408 10.202 10.3786 9.96077 10.4476C9.78843 10.4993 9.54717 10.482 9.3576 10.4303C9.23696 10.3959 8.84059 10.1891 8.80612 10.1891C8.66826 10.1891 8.68549 10.6027 8.78889 10.6888C8.94399 10.8267 9.34036 10.9129 9.52993 10.9301V11.1369C9.52993 11.2231 9.59886 11.292 9.68503 11.292H9.90907C9.99524 11.292 10.0642 11.2231 10.0642 11.1369V10.8956C10.5467 10.7922 10.8914 10.4648 10.8914 9.94779C10.9086 9.43079 10.5639 9.22398 10.1331 9.05165Z" fill="black"/>
               </svg>
                 <Header ariant='body2'  sx={{   textTransform: 'uppercase' }}>
-                Financial
+                  Financial
                 </Header>
                 <Divider sx={{ width:'80%' }} style={{ background: '#8090A7' }}/>
               </Box>
               <Stack direction={'column'}  >
-                <DIV   >
-                <Typography  >Salary:</Typography>
+                <StackRow   >
+                <Typo  >Salary:</Typo>
                 <Text >15000 sp</Text>
-                </DIV>
-                <DIV>
-                  <Typography>Overtime:</Typography>
+                </StackRow>
+                <StackRow>
+                  <Typo>Overtime:</Typo>
                   <Text >10 hours</Text>
-                </DIV>
-                <DIV>
-                  <Typography>Rewards:</Typography>
-                  <Text   >50000 sp</Text>
-                </DIV>
+                {/* for data see details arrow  */}
 
-                <DIV>
-                  <Typography>Advances:</Typography>
+                {!isoverDetails?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  See Details
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleOverSee}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  Less Details
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleOverLess} fontSize='10px'/>
+                </Stack>
+                  </>
+              }
+                </StackRow>
+                <StackRow>
+                  <Typo>Rewards:</Typo>
                   <Text   >50000 sp</Text>
-                </DIV>
+              {/* for data see details arrow  */}
 
-                <DIV>
-                  <Typography>Deduction:</Typography>
+              {!isRewardDetails?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  See Details
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleRewardSee}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  Less Details
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleRewardLess} fontSize='10px'/>
+                </Stack>
+                  </>
+              }
+                </StackRow>
+
+                <StackRow>
+                  <Typo>Advances:</Typo>
                   <Text   >50000 sp</Text>
-                </DIV>
-                <DIV>
-                  <Typography>Total Salary:</Typography>
+
+                {!isAdvanceDetails?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  See Details
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleAdvancesSee}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  Less Details
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleAdvancesLess} fontSize='10px'/>
+                </Stack>
+                </>
+              }
+                </StackRow>
+
+                <StackRow>
+                  <Typo>Deduction:</Typo>
+                  <Text   >50000 sp</Text>
+                {!isDeductionDetails?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  See Details
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleDeductionSee}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  Less Details
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleDeductionLess} fontSize='10px'/>
+                </Stack>
+                  </>
+              }
+                </StackRow>
+                <StackRow>
+                  <Typo>Total Salary:</Typo>
                   <Text   >5000000 sp</Text>
-                </DIV>
+                </StackRow>
               </Stack>
             </Box>
 
@@ -214,18 +444,75 @@ const AboutOverivew = (Data) => {
                 <Divider sx={{ width:'80%' }} style={{ background: '#8090A7' }}/>
               </Box>
               <Stack direction={'column'}  >
-                <DIV   >
-                <Typography  >Check-in:</Typography>
+                <StackRow   >
+                <Typo  >Check-in:</Typo>
                 <Text >95% on time</Text>
-                </DIV>
-                <DIV>
-                  <Typography>Check-out:</Typography>
+                {!isCheckin?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  See Details
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleCheckinSee}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  Less Details
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleCheckinLess} fontSize='10px'/>
+                </Stack>
+                  </>
+              }
+                </StackRow>
+                <StackRow>
+                  <Typo>Check-out:</Typo>
                   <Text >95% on time</Text>
-                </DIV>
-                <DIV>
-                  <Typography>Absences:</Typography>
+                  {!isCheckout?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  See Details
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleCheckoutSee}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  Less Details
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleCheckoutLess} fontSize='10px'/>
+                </Stack>
+                  </>
+              }
+                </StackRow>
+                <StackRow>
+                  <Typo>Absences:</Typo>
                   <Text   >2 days</Text>
-                </DIV>
+                  {!isAbsences?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  See Details
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleAbsencesSee}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  Less Details
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleAbsencesLess} fontSize='10px'/>
+                </Stack>
+                  </>
+              }
+                </StackRow>
               </Stack>
             </Box>
             {/*fourth section */}
@@ -242,10 +529,10 @@ const AboutOverivew = (Data) => {
                 <Divider sx={{ width:'74%' }} style={{ background: '#8090A7' }}/>
               </Box>
               <Stack direction={'column'}  >
-                <DIV   >
-                <Typography  >Laptop</Typography>
+                <StackRow   >
+                <Typo>Laptop:</Typo>
                 <Text >Asus xd834</Text>
-                </DIV>
+                </StackRow>
               </Stack>
             </Box>
 

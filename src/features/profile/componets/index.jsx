@@ -14,13 +14,17 @@ import ActivityTimeline from './timeLine'
 import UserProfileHeader from './header'
 import { Box, Stack } from '@mui/system'
 import TeamLeader from './teamLeader'
-import { Button, ButtonGroup, Tab, Tabs } from '@mui/material'
+import { Button, ButtonGroup, Card, CardContent, Tab, Tabs } from '@mui/material'
 import { TabContext, TabPanel } from '@mui/lab'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import DatePicker from 'react-datepicker'
 import { FormateDate } from 'src/utiltis/DateFormate'
 import { date } from 'yup'
 import { CustomDatePicker } from 'src/@core/components/customPickerDate'
+import PersonalInfo from './personalInformation'
+import Skills from './skills'
+import Employment from './employment'
+import Notes from './notes'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   borderBottom: '0 !important',
@@ -67,7 +71,7 @@ console.log("🚀 ~ Profiles ~ values:", value)
     console.log("🚀 ~ handleDateChoose ~ date:", date)
     const formattedDate = FormateDate(date);
     SetSelectedDate(date)
- 
+
 
 
 }
@@ -119,7 +123,7 @@ console.log("🚀 ~ Profiles ~ values:", value)
 
 
     <Box item xs={12} sx={{ height:'120px',zIndex:999 }} marginTop={{sm:'0' ,xs:'25px' }}>
-      
+
      <UserProfileHeader Data={data} setValues={setValues} values={value} />
     </Box>
     <TabPanel value="1">
@@ -128,21 +132,37 @@ console.log("🚀 ~ Profiles ~ values:", value)
       <AboutOverivew Data={data} />
     </Box>
       <Box sx={{ flex:0 }}>
-     
+
      <CustomDatePicker selectedDate={SelecetedDate} />
-      
+
       </Box>
 
     </Stack>
     </TabPanel>
+
     <TabPanel value="2">
-  Daniel
+
+    <Stack direction={{ sm:'row',xs:'column' }} spacing={6}>
+
+    <Stack spacing={6} width={{sm:'40%',xs:'100%'}} direction={'column'}>
+      <PersonalInfo/>
+      <Notes/>
+    </Stack>
+
+    <Stack width={{sm:'60%',xs:'100%'}} spacing={6} direction={'column'}>
+      <Skills/>
+      <Employment/>
+    </Stack>
+    </Stack>
+
     </TabPanel>
-    
+
+
+
     <TabPanel value="3">
-    Daniel
+    Danielsss
     </TabPanel>
-    
+
 
 </Stack>
 </TabContext>

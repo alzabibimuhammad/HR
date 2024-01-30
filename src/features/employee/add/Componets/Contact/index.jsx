@@ -5,6 +5,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import ListItemSelected from 'src/views/components/list/ListItemSelected';
 import IconButton from 'src/@core/theme/overrides/icon-button';
+import email from 'src/store/apps/email';
 
 export default function Contact({onDataChange,Controller,control,defaultValues }) {
   const handleFieldChange = (field, value) => {
@@ -19,20 +20,17 @@ export default function Contact({onDataChange,Controller,control,defaultValues }
 
 
 
-  const { fields, append, remove } = useFieldArray({
+
+  const { fields:phoneNumbersfields, append:phoneNumbersappend, remove:phoneNumbersremove } = useFieldArray({
     control,
-    name: 'phoneNumbers', // Name of the array field
+    name: 'contacts.phonenumbers',
   });
 
   const { fields:EmailFields, append:EmailAppend, remove:EmailRemove } = useFieldArray({
     control,
-    name: 'email', // Name of the array field
+    name: 'contacts.emails',
   });
 
-  const { fields:addressFields, append:addressAppend, remove:addressRemove } = useFieldArray({
-    control,
-    name: 'address', // Name of the array field
-  });
 
 
 
@@ -47,14 +45,14 @@ const CustomTextField = styled(TextField)({
   },
 
 });
-React.useEffect(() => {
-  append({ number: '' });
-  EmailAppend({ email: '' });
-  addressAppend({address :''})
 
-}, [append,EmailAppend,addressAppend]);
-const isFirstInput = fields.length === 1;
-const isFirstEmail = EmailFields.length === 1;
+React.useEffect(() => {
+  phoneNumbersappend({ phonenumber: '' });
+  EmailAppend({email: [{ email: '' }] });
+
+}, [phoneNumbersappend,EmailAppend]);
+
+
 
     const SvgMail = `
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -87,12 +85,10 @@ const isFirstEmail = EmailFields.length === 1;
 
 
 
-      {addressFields.map((address, index) => (
-        <Box sx={{margin:"5px 0px"}} key={address.id}>
+        <Box sx={{margin:"5px 0px"}}>
           <Controller
-            name={`address.${index}.number`}
+            name={`address`}
             control={control}
-            defaultValue={address.number}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -107,11 +103,10 @@ const isFirstEmail = EmailFields.length === 1;
 
 
         </Box>
-      ))}
-      {fields.map((phoneNumber, index) => (
+      {phoneNumbersfields.map((phoneNumber, index) => (
         <Box key={phoneNumber.id}>
           <Controller
-            name={`phoneNumbers.${index}.number`}
+            name={`contacts.phonenumbers.${index}.phonenumber`}
             control={control}
             defaultValue={phoneNumber.number}
             render={({ field }) => (
@@ -121,30 +116,23 @@ const isFirstEmail = EmailFields.length === 1;
                 variant="outlined"
                 fullWidth
                 size='small'
+
+
               />
             )}
           />
-          <Box sx={{ display: "flex", justifyContent: "space-between",my:"10px" }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between",my:"10px" }}>
 
-            {isFirstInput && (
-              <Button
-                type="button"
-                onClick={() => append({ number: '' })}
-                sx={{ fontSize: "12px", fontWeight: "400", color: "#6ab2df", padding: "0" }}
-              >
-                Add Phone Number
-              </Button>
-            )}
+  <Button
+    type="button"
+    onClick={() => phoneNumbersappend({ phonenumber: '' })}
+    sx={{ fontSize: "12px", fontWeight: "400", color: "#6ab2df", padding: "0" }}
+  >
+    Add phoneNumbers
+  </Button>
 
-            <Button
-              type="button"
-              sx={{ fontSize: "12px", fontWeight: "400", color: "#6ab2df", padding: "0" }}
-              onClick={() => remove(index)}
-              disabled={isFirstInput} // لتعطيل زر "delete" في الـinput الأول
-            >
-              delete
-            </Button>
-          </Box>
+
+</Box>
         </Box>
       ))}
     </Box>
@@ -152,9 +140,9 @@ const isFirstEmail = EmailFields.length === 1;
       {EmailFields.map((Email, index) => (
         <Box key={Email.id}>
           <Controller
-            name={`email.${index}.email`}
+            name={`contacts.emails.${index}.email`}
             control={control}
-            defaultValue={Email.email}
+            defaultValue={Email.id}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -167,7 +155,6 @@ const isFirstEmail = EmailFields.length === 1;
           />
           <Box sx={{ display: "flex", justifyContent: "space-between",my:"10px" }}>
 
-            {isFirstEmail && (
               <Button
                 type="button"
                 onClick={() => EmailAppend({ email: '' })}
@@ -175,47 +162,19 @@ const isFirstEmail = EmailFields.length === 1;
               >
                 Add Email
               </Button>
-            )}
 
             <Button
               type="button"
               sx={{ fontSize: "12px", fontWeight: "400", color: "#6ab2df", padding: "0" }}
               onClick={() => EmailRemove(index)}
-              disabled={isFirstEmail}
             >
-              delete
+              delete Email
             </Button>
           </Box>
         </Box>
       ))}
     </Box>
 
-
-
-
-
-
-              {/* <Controller
-                    name='email'
-                    control={control}
-                    rules={{ required: true }}
-                    defaultValue={defaultValues.email}
-                    render={({ field: { value, onChange, onBlur } }) => (
-                      <CustomTextField
-                        fullWidth
-                        sx={{ color:'#8090A7' }}
-                        autoFocus
-                        label='email'
-                        value={value}
-                        onBlur={onBlur}
-                        onChange={onChange}
-                        placeholder=''
-
-                        // error={Boolean(errors.email)}
-                        // {...(errors.email && { helperText: errors.email.message })}
-                      />
-                    )}
-                  /> */}
 
           </Stack>
         </CardContent>

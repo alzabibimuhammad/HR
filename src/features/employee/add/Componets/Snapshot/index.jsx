@@ -3,7 +3,7 @@ import { Box, Stack } from '@mui/system'
 import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 
-export default function Snapshot({onDataChange}) {
+export default function Snapshot({onDataChange,Controller,control,defaultValues,errors,setProfileImage}) {
 
   const [image, setImage] = useState(null);
 
@@ -21,11 +21,13 @@ export default function Snapshot({onDataChange}) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
+
         onDataChange(reader.result)
       };
       reader.readAsDataURL(file);
     }
-     }
+    setProfileImage(image)
+  }
 
   const svgContent = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -48,22 +50,36 @@ export default function Snapshot({onDataChange}) {
           src={image || "/broken-image.jpg"}
         />
       </label>
-      <input
+
+      <Controller
+        name={`image`}
+        control={control}
+        defaultValues={defaultValues.image}
+        render={({ field }) => (
+            <TextField
+            {...field}
         id="imageInput"
         type="file"
         accept="image/*"
         style={{ display: 'none' }}
         onChange={handleImageChange}
+
       />
+        )}
+        />
     </Box>
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
-
+          <Controller
+        name={`first_name`}
+        control={control}
+        render={({ field }) => (
             <TextField
+            {...field}
               fullWidth
+              error={Boolean(errors.first_name)}
+                        {...(errors.first_name && { helperText: errors.first_name.message })}
               size='small'
-              onChange={(e) => handleFieldChange('firstName', e.target.value)}
-
               label={
                 <Stack direction={'row'} spacing={2} >
                   <Box>
@@ -75,13 +91,20 @@ export default function Snapshot({onDataChange}) {
                 </Stack>
               }
             />
+        )}
+/>
 
 
-
-              <TextField
+        <Controller
+        name={`middle_name`}
+        control={control}
+        render={({ field }) => (
+            <TextField
+            {...field}
                 fullWidth
+                error={Boolean(errors.middle_name)}
+                {...(errors.middle_name && { helperText: errors.middle_name?.message })}
                 size='small'
-                onChange={(e) => handleFieldChange('middleName', e.target.value)}
 
                 label={
                   <Stack direction={'row'} spacing={2} >
@@ -94,13 +117,24 @@ export default function Snapshot({onDataChange}) {
                   </Stack>
                 }
               />
-              <TextField
+  )}
+  />
 
-                size='small'
-                fullWidth
-                onChange={(e) => handleFieldChange('lastName', e.target.value)}
 
-                label={
+
+
+
+             <Controller
+             name={`last_name`}
+             control={control}
+             render={({ field }) => (
+            <TextField
+            {...field}
+            size='small'
+            fullWidth
+            error={Boolean(errors.last_name)}
+            {...(errors.last_name && { helperText: errors.last_name?.message })}
+            label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`}/>
@@ -110,6 +144,8 @@ export default function Snapshot({onDataChange}) {
                     </Box>
                   </Stack>
                 }
+                />
+             ) }
               />
 
           </Stack>

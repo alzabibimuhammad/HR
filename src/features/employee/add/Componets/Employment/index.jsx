@@ -3,10 +3,12 @@ import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography } fr
 import { Box, Stack } from '@mui/system'
 import { useState } from 'react';
 import Avatar from 'src/@core/components/mui/avatar';
+import { useFieldArray, useForm, Controller } from 'react-hook-form';
+import { useEffect } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
 
-export default function Employment({onDataChange}) {
+export default function Employment({onDataChange,Controller,control,errors}) {
   const [contract, setContract] = useState(null);
-
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
@@ -24,6 +26,29 @@ export default function Employment({onDataChange}) {
       reader.readAsDataURL(file);
     }
   };
+
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "secretaraits"
+  });
+
+  const handleAddClick = () => {
+   append('secretaraits', { object: '', delivery_date: '' });
+   };
+
+   const handleRemoveClick = (index) => {
+     remove(index);
+   };
+
+
+   useEffect(()=>{
+    append('secretaraits', { object: '', delivery_date: '' });
+
+
+  },[append])
+
+
 
   const SvgDate = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -52,10 +77,17 @@ export default function Employment({onDataChange}) {
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
               <Typography>Salary</Typography>
-              <TextField
+
+              <Controller
+                name={`salary`}
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                  {...field}
                 fullWidth
+                error={Boolean(errors.salary)}
+                {...(errors.salary && { helperText: errors.salary.message })}
                 size='small'
-                onChange={(e) => handleFieldChange('salary', e.target.value)}
                 label={
                   <Stack direction={'row'} spacing={2}  >
                     <Box>
@@ -70,64 +102,105 @@ export default function Employment({onDataChange}) {
                   </Stack>
                 }
               />
-              <Typography>Start date</Typography>
-              <TextField
-                fullWidth
-                size='small'
-                onChange={(e) => handleFieldChange('startDate', e.target.value)}
-                label={
-                  <Stack direction={'row'} spacing={2} >
-                    <Box>
-                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`}/>
-                      </Box>
-                      <Box>
-                        {'Start Date'}
-                    </Box>
-                  </Stack>
-                }
-              />
+                )}
+                />
+
+
+
+
+
+
+
               <Box sx={{display:"flex",alignItems:"center",gap:"16px"}}>
               <Typography>Contract</Typography>
               <Box>
       <label htmlFor="contractInput" style={{border:"3px solid red",padding:"2px",cursor:"pointer"}}>
                     choose file
       </label>
-      <input
+
+     <Controller
+                name={`contract`}
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                  {...field}
         id="contractInput"
         type="file"
         accept="contract/*"
         style={{ display: 'none' }}
         onChange={handleImageChange}
       />
+                )}
+                />
     </Box>
     {contract?.slice(17,27)}
 
     </Box>
 
+
+
+
+
+
               <Typography>Secretariats</Typography>
-              <TextField
-                fullWidth
-                size='small'
-                onChange={(e) => handleFieldChange('secretariats', e.target.value)}
-                required
-                placeholder='Secretariats'
-              />
-               <Typography>Delivery date</Typography>
-               <TextField
-                fullWidth
-                size='small'
-                onChange={(e) => handleFieldChange('deliveryDate', e.target.value)}
-                label={
-                  <Stack direction={'row'} spacing={2} >
-                    <Box>
-                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`}/>
-                      </Box>
-                      <Box>
-                        {'Delivery Date'}
-                    </Box>
-                  </Stack>
-                }
-              />
+              {fields.map((field, index) => (
+  <Stack direction={"column"} spacing={4} key={index}>
+    {index === 1 && (
+      <CloseIcon
+        sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
+        onClick={() => handleRemoveClick(index)}
+      />
+    )}
+    <Box>
+      <Controller
+        name={`secretaraits[${index}].object`}
+        control={control}
+        defaultValue={field.secretariats}
+        render={({ field }) => (
+          <TextField
+          error={Boolean(errors?.secretariats?.[index]?.secretariats)}
+          {...(errors?.secretariats?.[index]?.secretariats && { helperText: errors?.secretariats?.[index]?.secretariats.message })}
+            {...field}
+            fullWidth
+            size='small'
+            placeholder='Secretariats'
+          />
+        )}
+      />
+    </Box>
+
+    <Controller
+      name={`secretaraits[${index}].delivery_date`}
+      control={control}
+      defaultValue={field.deliveryDate}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          fullWidth
+          error={Boolean(errors?.secretariats?.[index]?.deliveryDate)}
+          {...(errors?.secretariats?.[index]?.deliveryDate && { helperText: errors?.secretariats?.[index]?.deliveryDate.message })}
+          size='small'
+          label={
+            <Stack direction={'row'} spacing={2}>
+              <Box>
+                <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`} />
+              </Box>
+              <Box>
+                {'Delivery Date'}
+              </Box>
+            </Stack>
+          }
+        />
+      )}
+    />
+  </Stack>
+))}
+
+
+<Typography sx={{cursor:"pointer",width:"20%",}} color="primary" onClick={handleAddClick}>
+            Add Secretariats
+          </Typography>
+
           </Stack>
         </CardContent>
     </Card>

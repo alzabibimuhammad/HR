@@ -90,6 +90,11 @@ const navigation = () => {
       ]
     },
     {
+      title: 'Policies',
+      icon: 'tabler:report',
+      path: '/policies'
+    },
+    {
       title: 'Tree',
       icon: 'tabler:report',
       path: '/tree'

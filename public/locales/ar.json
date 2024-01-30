@@ -206,7 +206,7 @@
   "Browse File":"استعراض ملف",
   "Add Contract":"اضافة عقد",
   "Contract File":"ملف العقد",
-  "Specialization":"التخصص",
+  "ecialization":"التخصص",
   "Role":"الصلاحية",
   "Team":"الفريق",
   "Daily Report":"التقرير اليومي",
@@ -234,7 +234,20 @@
   "Not Active":"غير نشط",
   "Customer":"الزبون",
   "Approve":"موافقة",
-  "Decline":"رفض"
-
-
+  "Decline":"رفض",
+  "Total Employees":"كل الموظفين",
+  "Active Employees":"الموظفين النشطين",
+  "Registration":"الاشتراكات",
+  "first Name":"الاسم",
+  "Last name":"الكنية",
+  "Department":"القسم",
+  "Check in":"الدخول",
+  "Check out":"الخروج",
+  "Arrived":"وصل",
+  "Late":"متأخر",
+  "Absent":"غائب",
+  "out":"خارج",
+  "Next":"التالي",
+  "Back":"السابق",
+  "Events":"الأحداث"
 }

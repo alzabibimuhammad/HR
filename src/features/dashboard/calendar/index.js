@@ -29,8 +29,10 @@ import CalendarWrapper from 'src/@core/styles/libs/fullcalendar'
 import SidebarLeft from './SidebarLeft.jsx'
 
 import Typography from '@mui/material/Typography'
+import { useTranslation } from 'react-i18next';
+import { FormateDate } from 'src/utiltis/DateFormate.js';
+import { useGetEventByDay } from 'src/features/calendar/hooks/useGetEventByDay.js';
 
-// ** CalendarColors
 const calendarsColor = {
   Personal: 'error',
   Business: 'primary',
@@ -44,11 +46,13 @@ const AppCalendar = () => {
   const [calendarApi, setCalendarApi] = useState(null)
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(false)
   const [addEventSidebarOpen, setAddEventSidebarOpen] = useState(false)
+  const { t } = useTranslation()
 
   // ** Hooks
   const { settings } = useSettings()
   const dispatch = useDispatch()
   const store = useSelector(state => state.calendar)
+  const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
 
   // ** Vars
 
@@ -57,6 +61,12 @@ const AppCalendar = () => {
   useEffect(() => {
     dispatch(fetchEvents(store?.selectedCalendars))
   }, [dispatch, store?.selectedCalendars])
+
+  const handleDateChange = (date) => {
+    const formattedDate = FormateDate(date);
+    getEvent(formattedDate)
+
+  };
 
   return (
     <CalendarWrapper
@@ -72,14 +82,14 @@ const AppCalendar = () => {
 
 
       <Box sx={{   p: 6, pb: 0,  borderRadius: 1, height:"360px",width:"50%"}}>
-        <Typography variant="body1" color="initial">Calendar</Typography>
+        <Typography variant="body1" color="initial">{t('Calendar')}</Typography>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar/>
+      <DateCalendar onChange={handleDateChange} />
      </LocalizationProvider>
       </Box>
       <Box sx={{   p: 6, pb: 0,  borderRadius: 1,width:"100%",marginLeft:"30px" }} >
-      <Typography variant="body1" color="initial">Events</Typography>
-         <SidebarLeft/>
+      <Typography variant="body1" color="initial">{t('Events')}</Typography>
+         <SidebarLeft DataEventByDay={DataEventByDay}/>
       </Box>
       </Stack>
 

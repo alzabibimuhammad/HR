@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 
-import { Avatar, Button, IconButton, Rating } from '@mui/material';
+import { Avatar, Button, Chip, IconButton, Rating } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/system';
 
@@ -14,22 +14,11 @@ const useRegistrationColumn = () => {
 
 
   return useMemo(() => [
-    // {
-    //   field: 'image',
-    //    headerName: '',
 
-    //     renderCell: (params)=>{
-
-    //   return (
-    //       <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/' + params.row?.image?.image} alt='' />
-
-    //   )
-    // } },
     {
       field: 'id',
       headerName: t("ID"),
 
-      // disableClickEventBubbling: true,
       flex:0
     },
 
@@ -43,20 +32,6 @@ const useRegistrationColumn = () => {
       field: 'last_name',
       headerName: t("Last name"),
       flex: 3
-
-    //   renderCell: (params) => {
-    //     return (
-    //       <Stack width={80}>
-    //       <Chip
-    //         label={params.value}
-    //         color={params.value === 'paid' ? 'success' : 'primary'}
-
-    //       />
-    //     </Stack>
-    //     );
-
-    // },
-
   },
     {
       field: 'department',
@@ -66,61 +41,63 @@ const useRegistrationColumn = () => {
     },
     {
       field: 'status',
-      headerName: t('Status '),
+      headerName: t('Status'),
       flex: 3,
       renderCell: (params) => {
         return (
           <>
             {params?.row?.status === 'Arrived' ? (
-              <Button
+              <Chip
+                label={t(params?.row?.status)}
                 sx={{
                   backgroundColor: 'rgba(145, 196, 131, 0.20)',
                   color: 'var(--green, #91C483)',
-                  fontSize:'12px',
+                  fontSize:'13px',
                   width:'100%',
                   height:'14px'
                 }}
-              >
-                {params?.row?.status}
-              </Button>
+
+              />
+
+
             ) : params?.row?.status === 'Late' ? (
-              <Button
+              <Chip
                 sx={{
                   backgroundColor: 'rgba(106, 178, 223, 0.20)',
                   color: '#6AB2DF',
-                  fontSize:'12px',
+                  fontSize:'13px',
                   width:'100%',
                   height:'14px'
 
                 }}
-              >
-                {params?.row?.status}
-              </Button>
+                label={t(params?.row?.status)}
+
+              />
             ) : params?.row?.status === 'Checked Out' ? (
-              <Button
+              <Chip
                 sx={{
                   backgroundColor: 'rgba(106, 178, 223, 0.20)',
                   color: '#6AB2DF',
-
-                  height:'14px',
-                  fontSize:'10px',
+                  height:'15px',
+                  fontSize:'13px',
                   width:'100%',
                 }}
-              >
-                {params?.row?.status}
-              </Button>
+                label={t('out')}
+              />
+
             ) :params?.row?.status === 'Absent' ? (
-              <Button
+              <Chip
                 sx={{
                   backgroundColor: 'rgba(223, 46, 56, 0.20)',
                   color: '#DF2E38',
-                  fontSize:'12px',
+                  fontSize:'13px',
                   height:'14px',
                   width:'100%',
                 }}
-              >
-                {params?.row?.status}
-              </Button>)
+                label={t(params?.row?.status)}
+
+              />
+              )
               :null
             }
           </>

@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export default function Account({onDataChange}) {
+export default function Account({onDataChange,Controller,control,errors}) {
 
 
   const SvgMail = `
@@ -56,6 +56,7 @@ export default function Account({onDataChange}) {
       setpasswordsMatch(false)
   }
 
+
   return (
     <Card>
         <CardContent>
@@ -65,12 +66,17 @@ export default function Account({onDataChange}) {
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
 
+          <Controller
+            name={`email`}
+            control={control}
+            render={({ field }) => (
               <TextField
+                {...field}
                 fullWidth
                 type='email'
                 size='small'
-                onChange={(e) => handleFieldChange('email', e.target.value)}
-
+                error={Boolean(errors.email)}
+                {...(errors.email && { helperText: errors.email.message })}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -82,12 +88,24 @@ export default function Account({onDataChange}) {
                   </Stack>
                 }
               />
+  )}
+/>
 
-            <TextField
+
+
+
+
+            <Controller
+            name={`password`}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
                   fullWidth
                   size='small'
+                  error={Boolean(errors.password)}
+                {...(errors.password && { helperText: errors.password.message })}
                   type={showPassword ? 'text' : 'password'}
-                  onChange={(e) => handlePasswordChange( e.target.value)}
 
                   label={
                     <Stack direction={'row'} spacing={2}>
@@ -112,14 +130,20 @@ export default function Account({onDataChange}) {
                     ),
                   }}
                 />
+            ) }
+            />
 
-      <TextField
+            <Controller
+            name={`confirm_password`}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
             fullWidth
             size="small"
-            type={showConfirm ? 'text' : 'password'}
-            onChange={(e) => handleConfirmationChange(e.target.value)}
-            error={!passwordsMatch}
-            helperText={!passwordsMatch ? 'Passwords do not match' : ''}
+            error={Boolean(errors.confirm_password)}
+            {...(errors.confirm_password && { helperText: errors.confirm_password.message })}
+
             label={
               <Stack direction={'row'} spacing={2}>
                 <Box>
@@ -138,6 +162,8 @@ export default function Account({onDataChange}) {
               ),
             }}
           />
+            )}
+            />
 
 
           </Stack>

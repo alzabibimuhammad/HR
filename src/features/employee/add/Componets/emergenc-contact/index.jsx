@@ -5,10 +5,13 @@ import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { color } from '@mui/system';
 
-export default function EmergencyContact({ onDataChange, Controller, control }) {
+export default function EmergencyContact({ onDataChange, Controller, control , errors }) {
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
+
+  // console.log(errors.emergencycontact[0].address);
+
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -59,7 +62,9 @@ export default function EmergencyContact({ onDataChange, Controller, control }) 
                     variant="outlined"
                     fullWidth
                     size="small"
-                  />
+                    error={Boolean(errors?.emergencycontact?.[index]?.address)}
+                    {...(errors?.emergencycontact?.[index]?.address && { helperText: errors?.emergencycontact?.[index]?.address.message })}
+                    />
                 )}
               />
           </Box>
@@ -75,6 +80,9 @@ export default function EmergencyContact({ onDataChange, Controller, control }) 
                     variant="outlined"
                     fullWidth
                     size="small"
+                    error={Boolean(errors?.emergencycontact?.[index]?.name)}
+                    {...(errors?.emergencycontact?.[index]?.name && { helperText: errors?.emergencycontact?.[index]?.name.message })}
+
                   />
                 )}
               />
@@ -91,6 +99,8 @@ export default function EmergencyContact({ onDataChange, Controller, control }) 
                     variant="outlined"
                     fullWidth
                     size="small"
+                    error={Boolean(errors?.emergencycontact?.[index]?.phonenumber)}
+                    {...(errors?.emergencycontact?.[index]?.phonenumber && { helperText: errors?.emergencycontact?.[index]?.phonenumber.message })}
                   />
                 )}
               />
@@ -107,6 +117,8 @@ export default function EmergencyContact({ onDataChange, Controller, control }) 
                     variant="outlined"
                     fullWidth
                     size="small"
+                    error={Boolean(errors?.emergencycontact?.[index]?.email)}
+                    {...(errors?.emergencycontact?.[index]?.email && { helperText: errors?.emergencycontact?.[index]?.email.message })}
                   />
                 )}
               />

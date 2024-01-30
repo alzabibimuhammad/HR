@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import * as agCharts from 'ag-charts-community';
+import { useTranslation } from 'react-i18next';
 
 function Attendance(Data) {
+  const {t} = useTranslation()
 
   useEffect(() => {
 
     function getData() {
       return [
-        { type: 'Total Employees', count: Data?.Data?.data?.total_employees },
-        { type: 'Active Employees', count: Data?.Data?.data?.present_employees  },
+        { type: t('Total Employees'), count: Data?.Data?.data?.total_employees },
+        { type: t('Active'), count: Data?.Data?.data?.present_employees  },
       ];
     }
 
@@ -22,7 +24,7 @@ function Attendance(Data) {
 
       data,
       title: {
-        text: 'Employees',
+        text: t('Employees'),
       },
 
       series: [
@@ -51,7 +53,7 @@ function Attendance(Data) {
               fontSize: 24,
             },
             {
-              text: 'Active',
+              text: t('Active'),
               fontSize: 16,
               margin: 10,
             },

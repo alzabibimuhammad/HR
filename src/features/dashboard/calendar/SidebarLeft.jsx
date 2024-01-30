@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 const steps = [
   {
@@ -28,10 +30,12 @@ const steps = [
   },
 ];
 
-export default function SidebarLeft() {
+export default function SidebarLeft({DataEventByDay}) {
+  console.log("🚀 ~ SidebarLeft ~ DataEventByDay:", DataEventByDay)
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = steps.length;
+  const { t } = useTranslation()
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -42,47 +46,29 @@ export default function SidebarLeft() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1, borderRadius: 1, }}>
-      <Paper
-        square
-        elevation={0}
-
-      >
-        <Typography>{steps[activeStep].label}</Typography>
-      </Paper>
-      <Box sx={{ height: 180, maxWidth: 400, width: '100%', p: 2 ,marginTop:"33px"}}>
-        {steps[activeStep].description}
-      </Box>
-      <MobileStepper
-        variant="text"
-        steps={maxSteps}
-        position="static"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-          >
-            Next
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            Back
-          </Button>
-        }
+    <Box sx={{ backgroundColor:"#E9ECF3",marginTop:"15px" }}>
+       {Array.isArray(DataEventByDay?.data?.data) && DataEventByDay.data.data.length > 0 ? (
+      DataEventByDay.data.data.map(event => (
+        <div className="parent" key={event.id}>
+          <div>
+            <p><span className="child">{event.day}</span>{event.start}</p>
+            {/* <p>{event.time}</p> */}
+          </div>
+          <div>
+            <p className='description'>
+              {event.description}
+            </p>
+          </div>
+        </div>
+      ))
+    ) : (
+      <Image
+        width={250}
+        height={250}
+        src="/images/notRequest.svg"
+        alt="Alternate Text"
       />
+    )}
     </Box>
   );
 }

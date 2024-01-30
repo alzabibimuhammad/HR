@@ -1,5 +1,14 @@
 export const RegistrationData = elements => {
   const targetTime = "09:15"
+  const currentDate = new Date();
+  const endTime = "16:45"
+
+  const CurrentHours = currentDate?.getHours()?.toString()?.padStart(2, '0');
+  const CurrentMinutes = currentDate?.getMinutes()?.toString()?.padStart(2, '0');
+  const CurrentFormattedTime = `${CurrentHours}:${CurrentMinutes}`;
+
+
+  console.log('currentDate',CurrentFormattedTime<endTime);
 
   return elements?.[0]?.map(element => {
     let checkinDate = element?.attendance?.[0]?.datetime;
@@ -21,9 +30,12 @@ export const RegistrationData = elements => {
         statusX = "Late";
       }
     }
-    else{
+    else if(CurrentFormattedTime>endTime) {
       statusX="Absent"
     }
+    else
+      statusX="Late"
+
 
     if(Number(element.attendance?.[1]?.status) === 1) {
       statusX = "Checked Out";

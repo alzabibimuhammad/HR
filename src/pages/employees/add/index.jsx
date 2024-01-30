@@ -10,10 +10,11 @@ import Skills from 'src/features/employee/add/Componets/Skills';
 import Snapshot from 'src/features/employee/add/Componets/Snapshot';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Schema } from '@mui/icons-material';
 import { useFieldArray} from 'react-hook-form';
 import EmergencyContact from 'src/features/employee/add/Componets/emergenc-contact';
 import AdditionalFiles from 'src/features/employee/add/Componets/additional-fils';
+import { Schema } from './validation';
+import { useAddUsers } from './hook/useAddUsers';
 
 export default function Add() {
   const [snapshotData, setSnapshotData] = useState({});
@@ -23,6 +24,14 @@ export default function Add() {
   const [professionalData, setProfessionalData] = useState({});
   const [skillsData, setSkillsData] = useState({});
   const [employmentData, setEmploymentData] = useState({});
+  const [AdditionalFilesData, setAdditionalFilesData] = useState({});
+  const [EmergencyContactData, setEmergencyContacttData] = useState({});
+  const [ProfileImage,setProfileImage] = useState();
+
+  const { mutate: addUsers, isLoading } = useAddUsers();
+
+
+
 
 
 
@@ -30,54 +39,86 @@ export default function Add() {
     onDataChange((prevData) => ({ ...prevData, [field]: value }));
   };
 
-  const onSubmit = (formData) => {
-    // Handle form submission here
-  };
+
 
   const defaultValues = {
-    password: 'password',
-    email: [
+     first_name:"",
 
-    ],
-    address: [
+     contact:{
+      phonenumbers:[],
+      emails:[]
+    },
+     middle_name:"",
 
-    ],
-    name: [
+     last_name:"",
 
-    ],
-    phoneNumber:[],
-    file:[],
-    description:[],
-    study:[],
-    certificate:[],
-    experience:[],
-    skills:[],
-    languages:[],
-    education:[]
+     email: "",
+     role:"admin"
+
+
   };
 
   const {
     control,
     setError,
     handleSubmit,
+    getValues,
+    setValue,
     register,
-    formState: { errors },
+    formState: { errors, },
   } = useForm({
     defaultValues,
     mode: 'onBlur',
 
-    // resolver: yupResolver(Schema),
+    //  resolver: yupResolver(Schema),
   });
 
-  const handleDataSubmit =  (data) => {
-    // try {
-    //   const userData = await auth.login(data, rememberMe);
-    // } catch (error) {
-    //
+ const handleDataSubmit =  (data) => {
+    try {
+      const formData = new FormData();
+      formData.append('image',ProfileImage)
+
+      data.image = ProfileImage;
+      console.log("🚀 ~ handleDataSubmit ~ data:", data)
+      addUsers(data)
+    } catch (error) {
+
+    }
+
+
+ };
+
+  //  const handleDataSubmit = async (data) => {
+  //      try {
+  //      const formData = new FormData();
+
+      //  formData.append('path', files[0]);
+      // formData.append('startTime', data.startTime);
+      //  formData.append('endTime', data.endTime);
+      //  formData.append('user_id', data.user_id);
+      //  formData.append('first_name', data.first_name);
+      //  formData.append('first_name', data.middle_name);
+
+      // addUsers(formData)
+//  }
+     //   catch (error) {
+      //    console.log(error);
+    //    }
     // }
 
+
+
+  const handleRatingChange = (index, newValue) => {
+    const updatedSkills = [...getValues('skills')];
+    updatedSkills[index].rate = newValue;
+    setValue('skills', updatedSkills);
   };
 
+  const handleLanguageChange = (index, newValue) => {
+    const updatedLanguages = [...getValues('languages')];
+    updatedLanguages[index].rate = newValue;
+    setValue('languages', updatedLanguages);
+  };
 
 
 
@@ -103,34 +144,42 @@ export default function Add() {
       <Stack direction={{ sm: 'row', xs: 'column' }} spacing={2}>
         <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
           <Box>
-            <Snapshot onDataChange={setSnapshotData} />
+            <Snapshot
+           onDataChange={setSnapshotData}
+           errors={errors}
+           defaultValues={defaultValues}
+           setError={setError}
+           control={control}
+              Controller={Controller}
+              setProfileImage={setProfileImage}
+              />
           </Box>
           <Box>
-            <Account onDataChange={setAccountData} />
+            <Account errors={errors} onDataChange={setAccountData} setError={setError} control={control} Controller={Controller}/>
           </Box>
           <Box>
-            <Info onDataChange={setInfoData} />
+            <Info errors={errors} onDataChange={setInfoData} setError={setError} control={control} Controller={Controller}/>
           </Box>
           <Box>
-            <Contact defaultValues={defaultValues}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
+            <Contact errors={errors} defaultValues={defaultValues}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
           </Box>
           <Box>
-            <EmergencyContact handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
+            <EmergencyContact errors={errors} handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setEmergencyContacttData} />
           </Box>
           <Box>
-            <AdditionalFiles handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
+            <AdditionalFiles errors={errors} handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setAdditionalFilesData} />
           </Box>
         </Stack>
 
         <Stack flex={1} direction={'column'} spacing={2}>
           <Box>
-            <Professional onDataChange={setProfessionalData} />
+            <Professional onDataChange={setProfessionalData}setError={setError} control={control} Controller={Controller} />
           </Box>
           <Box>
-            <Skills handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setContactData} />
+            <Skills errors={errors} handleLanguageChange={handleLanguageChange} handleRatingChange={handleRatingChange} handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller} onDataChange={setSkillsData} />
           </Box>
           <Box>
-            <Employment onDataChange={setEmploymentData} />
+            <Employment errors={errors} onDataChange={setEmploymentData}  handleFieldChange={handleFieldChange}  setError={setError} control={control} Controller={Controller}/>
           </Box>
         </Stack>
       </Stack>

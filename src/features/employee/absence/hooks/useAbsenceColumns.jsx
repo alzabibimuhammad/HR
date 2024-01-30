@@ -6,11 +6,13 @@ import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import { Avatar,IconButton } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
+import DrawerForm from '../componets/DrawerForm';
 
 const useAbsenceColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false);
 
   const [EditData, setEditData] = useState(null);
+
 
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
@@ -55,8 +57,7 @@ const useAbsenceColumns = () => {
         return (
           <>
             <Avatar alt='' />
-            <p style={{ marginLeft: '2px' }}>{params?.row?.first_name}</p>
-            <p style={{ marginLeft: '3px' }}>{params?.row?.last_name}</p>
+            <p style={{ marginLeft: '2px' }}>{params?.row?.name}</p>
           </>
         );
       },
@@ -102,6 +103,9 @@ const useAbsenceColumns = () => {
                     Edit
                   </BorderColorOutlinedIcon>
                 </IconButton>
+              </Box>
+              <Box>
+                <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
               </Box>
             </Stack>
           </>

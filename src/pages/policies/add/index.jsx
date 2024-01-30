@@ -2,15 +2,16 @@ import { Grid } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import React, { useState } from 'react'
 import Logo from 'src/features/Contracts/view/logo'
-import AbsencesManagement from 'src/features/policies/componets/absences'
-import Annual from 'src/features/policies/componets/annual'
-import Deductions from 'src/features/policies/componets/deductions'
-import Reviews from 'src/features/policies/componets/reviews'
-import Warnings from 'src/features/policies/componets/warnings'
-import WorkTime from 'src/features/policies/componets/workTime'
+
 import {  Button, Card, CardContent, Chip,  TextField, Typography } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { useAddPolicies } from '../hook/useAddPolicies'
+import WorkTime from 'src/features/policies/add/componets/workTime';
+import Annual from 'src/features/policies/add/componets/annual';
+import Reviews from 'src/features/policies/add/componets/reviews';
+import Warnings from 'src/features/policies/add/componets/warnings';
+import AbsencesManagement from 'src/features/policies/add/componets/absences';
+import Deductions from 'src/features/policies/add/componets/deductions';
 
 
 

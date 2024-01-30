@@ -8,12 +8,23 @@ import Link from 'next/link';
 
 export default function Employment() {
   const Typo = styled(Typography)(() => ({
-    fontSize:'14px'
+    fontSize:'14px',
+    fontWeight:'500',
+    textTransform:'capitalize',
+    color:'#131627'
 
   }))
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
     marginLeft:'3px'
+
+  }))
+  const TypoHeader = styled(Typography)(() => ({
+    fontSize:'16px',
+    marginLeft:'5px',
+    fontWeight:'500',
+    textTransform:'capitalize',
+    color:'#131627'
 
   }))
   const StackRow = styled(Stack)(({ direction }) => ({
@@ -29,7 +40,7 @@ export default function Employment() {
 
             <StackRow  >
               <img src='/images/pesonalProfile/employment/icon.svg'/>
-              <Typography marginLeft={'5px'} fontSize={'16px'} >Employment:</Typography>
+              <TypoHeader >Employment:</TypoHeader>
             </StackRow>
 
             <StackRow>

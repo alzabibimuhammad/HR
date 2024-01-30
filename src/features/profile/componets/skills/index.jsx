@@ -6,9 +6,11 @@ import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 
 export default function Skills() {
-
   const Typo = styled(Typography)(() => ({
-    fontSize:'14px'
+    fontSize:'14px',
+    fontWeight:'500',
+    textTransform:'capitalize',
+    color:'#131627'
 
   }))
   const TypoVal = styled(Typography)(() => ({
@@ -16,9 +18,18 @@ export default function Skills() {
     marginLeft:'3px'
 
   }))
+  const TypoHeader = styled(Typography)(() => ({
+    fontSize:'16px',
+    marginLeft:'5px',
+    fontWeight:'500',
+    textTransform:'capitalize',
+    color:'#131627'
+
+  }))
   const StackRow = styled(Stack)(({ direction }) => ({
     flexDirection: direction === 'column' ? 'column' : 'row',
   }));
+
 
 
   return (
@@ -29,17 +40,17 @@ export default function Skills() {
 
         <StackRow  >
           <img  src='/images/pesonalProfile/skills/icon.svg'/>
-          <Typography marginLeft={'5px'} fontSize={'16px'} >Skills & Career:</Typography>
+          <TypoHeader >Skills & Career:</TypoHeader>
         </StackRow>
 
         <Stack direction={'column'}>
           <Typo >Education:</Typo>
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <Typo>Master Degree in Computer Science at Damascus University</Typo>
+            <TypoVal>Master Degree in Computer Science at Damascus University</TypoVal>
           </li>
           <li>
-            <Typo >Master Degree in Computer Science at Damascus University</Typo>
+            <TypoVal >Master Degree in Computer Science at Damascus University</TypoVal>
           </li>
           </ul>
         </Stack>
@@ -48,10 +59,10 @@ export default function Skills() {
           <Typo >Certifications:</Typo>
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <Typo>UX Design Google Certificate </Typo>
+            <TypoVal>UX Design Google Certificate </TypoVal>
           </li>
           <li>
-            <Typo >UX Design Google Certificate </Typo>
+            <TypoVal >UX Design Google Certificate </TypoVal>
           </li>
           </ul>
         </Stack>
@@ -59,10 +70,10 @@ export default function Skills() {
           <Typo >Career:</Typo>
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <Typo>Former UI UX Designer at Idealize </Typo>
+            <TypoVal>Former UI UX Designer at Idealize </TypoVal>
           </li>
           <li>
-            <Typo >Former UI UX Designer at Idealize </Typo>
+            <TypoVal >Former UI UX Designer at Idealize </TypoVal>
           </li>
           </ul>
         </Stack>
@@ -71,19 +82,19 @@ export default function Skills() {
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li >
             <StackRow>
-              <Typo>Figma</Typo>
+              <TypoVal>Figma</TypoVal>
               <Rating name="size-medium" defaultValue={2} />
             </StackRow>
           </li>
           <li >
             <StackRow>
-              <Typo>Figma</Typo>
+              <TypoVal>Figma</TypoVal>
               <Rating name="size-medium" defaultValue={2} />
             </StackRow>
           </li>
           <li >
             <StackRow>
-              <Typo>Figma</Typo>
+              <TypoVal>Figma</TypoVal>
               <Rating name="size-medium" defaultValue={2} />
             </StackRow>
           </li>
@@ -94,13 +105,13 @@ export default function Skills() {
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li >
             <StackRow>
-              <Typo>ara</Typo>
+              <TypoVal>ara</TypoVal>
               <Rating name="size-medium" defaultValue={2} />
             </StackRow>
           </li>
           <li >
             <StackRow>
-              <Typo>eng</Typo>
+              <TypoVal>eng</TypoVal>
               <Rating name="size-medium" defaultValue={2} />
             </StackRow>
           </li>

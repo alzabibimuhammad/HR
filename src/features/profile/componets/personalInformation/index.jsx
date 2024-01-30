@@ -8,12 +8,23 @@ import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 export default function PersonalInfo() {
 
   const Typo = styled(Typography)(() => ({
-    fontSize:'14px'
+    fontSize:'14px',
+    fontWeight:'500',
+    textTransform:'capitalize',
+    color:'#131627'
 
   }))
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
     marginLeft:'3px'
+
+  }))
+  const TypoHeader = styled(Typography)(() => ({
+    fontSize:'16px',
+    marginLeft:'5px',
+    fontWeight:'500',
+    textTransform:'capitalize',
+    color:'#131627'
 
   }))
   const StackRow = styled(Stack)(({ direction }) => ({
@@ -29,7 +40,7 @@ export default function PersonalInfo() {
 
         <StackRow  >
           <img src='/images/pesonalProfile/personalInfo/icon.svg'/>
-          <Typography marginLeft={'5px'} fontSize={'16px'} >Personal Information:</Typography>
+          <TypoHeader  >Personal Information:</TypoHeader>
         </StackRow>
 
         <StackRow>
@@ -54,7 +65,7 @@ export default function PersonalInfo() {
 
         <StackRow>
           <img src='/images/pesonalProfile/contact/icon.svg'/>
-          <Typography marginLeft={'5px'} fontSize={'16px'} >Contact Information:</Typography>
+          <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Contact Information:</TypoHeader>
         </StackRow>
 
         <StackRow>
@@ -70,7 +81,7 @@ export default function PersonalInfo() {
           <TypoVal>muhammad@gmail.com</TypoVal>
         </StackRow>
 
-        <Typography marginLeft={'5px'} fontSize={'16px'} >Emergency:</Typography>
+        <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Emergency:</TypoHeader>
         <ul style={{ padding:0,margin:0,marginLeft:'6%'}} >
           <li>
         <StackRow>
@@ -100,7 +111,7 @@ export default function PersonalInfo() {
 
         <StackRow>
           <img src='/images/pesonalProfile/professional/icon.svg'/>
-          <Typography marginLeft={'5px'} fontSize={'16px'} >Professional:</Typography>
+          <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Professional:</TypoHeader>
         </StackRow>
 
         <StackRow>

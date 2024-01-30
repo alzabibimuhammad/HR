@@ -29,10 +29,10 @@ const ProfilePicture = styled('img')(({ theme }) => ({
 }));
 
 const TabsProfile = styled(Tabs)(({ theme }) => ({
- 
+
   position: 'absolute',  // Change to 'absolute' to position relative to the parent
   top: '25%',            // Center vertically
-  left: '27%',           // Center horizontally
+  left: '35%',           // Center horizontally
   zIndex: 1,
   [theme.breakpoints.down('md')]: {
     marginBottom: theme.spacing(4),
@@ -41,9 +41,9 @@ const TabsProfile = styled(Tabs)(({ theme }) => ({
 
 const UserProfileHeader = ({Data,setValues,value}) => {
   const {t} = useTranslation()
- 
+
   const handleChange = (event, newValue) => {
-    
+
     setValues(newValue);
   };
 
@@ -51,53 +51,54 @@ const UserProfileHeader = ({Data,setValues,value}) => {
     < >
 
 
+          <Box sx={{ marginTop:'5%',marginLeft:'3%' }} >
 
-          <Box sx={{ marginTop:'5%',marginLeft:'1%' }} >
-         
             <ProfilePicture src='/images/avatars/3.png' alt='profile-picture' />
             <TabsProfile
-  value={value}
-  onChange={handleChange}
-  textColor="secondary"
-  indicatorColor="secondary"
-  aria-label="secondary tabs example"
->
-  <Tab value="1" label="Profile" />
-  <Tab value="2" label="Reports" />
-  <Tab value="3" label="Item Section" />
-</TabsProfile>
-        
+              value={value}
+              onChange={handleChange}
+              textColor="secondary"
+              indicatorColor="secondary"
+              aria-label="secondary tabs example"
+            >
+              <Tab value="1" label="Reports" />
+              <Tab value="2" label="Profile" />
+              <Tab value="3" label="Item Section" />
+            </TabsProfile>
+
           </Box>
-          
-       
+
+
 
           <CardContent
-  sx={{
-    pt: 0,
-    mt: -20,
-    display: 'flex',
-    alignItems: 'flex-end',
-    flexWrap: { xs: 'wrap', md: 'nowrap' },
-    justifyContent: { xs: 'center', md: 'flex-start' },
-    height: '110px',
-    zIndex: 0,
-    position: 'relative',
-    backgroundColor: 'white',
-    borderRadius: '10px',
-    width: '100%',
-    bottom: 40
-  }}
->
-  <Box
-    sx={{
-      width: '100%',
-      display: 'flex',
-      ml: { xs: 0, md: 6 },
-      alignItems: 'flex-end',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between',
-    }}
-  >
+            sx={{
+              pt: 0,
+              mt: -20,
+              display: 'flex',
+              alignItems: 'flex-end',
+              flexWrap: { xs: 'wrap', md: 'nowrap' },
+              justifyContent: { xs: 'center', md: 'flex-start' },
+              height: '110px',
+              zIndex: 0,
+              position: 'relative',
+              backgroundColor: 'white',
+              borderRadius: '10px',
+              width: '95.5%',
+              marginLeft:'2%',
+              padding:0,
+              bottom: 40
+            }}
+          >
+        <Box
+          sx={{
+            width: '100%',
+            display: 'flex',
+            ml: { xs: 0, md: 6 },
+            alignItems: 'flex-end',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}
+        >
     <Box
       sx={{
         mb: [6, 0],
@@ -122,12 +123,11 @@ const UserProfileHeader = ({Data,setValues,value}) => {
         <Box sx={{ mr: 4, display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'text.secondary' } }}>
           <Typography sx={{ color: 'text.secondary' }}>{t('Damascus')}</Typography>
         </Box>
-       
+
       </Box>
     </Box>
   </Box>
 </CardContent>
-
 
 
 

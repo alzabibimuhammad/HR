@@ -6,29 +6,34 @@ import styled from 'styled-components'
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 import Checkbox from '@mui/material/Checkbox';
+import Divider from '@mui/material/Divider';
+import {  List } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import { useFieldArray } from 'react-hook-form'
 
 
 
+export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpaid,setUnpaid,setSick,Sick}) {
 
-export default function AbsencesManagement(props) {
-  const [Paid  , setPaid ] = useState(0);
-  const [Unpaid  , setUnpaid ] = useState(0);
-  const [Sick , setSick] = useState(0);
-  const [checkedPaid, setCheckedPaid] = React.useState(true);
-  const [checkedUnpaid, setCheckedUnpaid] = React.useState(true);
-  const [checkedSick, setCheckedSick] = React.useState(true);
+  const [noteAdded, setNoteAdded] = useState(false);
 
-  const handleChangePaid = (event) => {
-    setCheckedPaid(event.target.checked);
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'absence_management.notes',
+  });
+
+  const handleAddClick = () => {
+    append({ });
+    setNoteAdded(true);
   };
 
-  const handleChangeUnpaid = (event) => {
-    setCheckedUnpaid(event.target.checked);
+  const handleRemoveClick = (index) => {
+    remove(index);
+    setNoteAdded(false);
+
   };
 
-  const handleChangeSick = (event) => {
-    setCheckedSick(event.target.checked);
-  };
+
 
 
   const Typo = styled(Typography)(({ theme }) => ({
@@ -78,7 +83,12 @@ export default function AbsencesManagement(props) {
         <Box sx={{width:"100%"}}>
         <Typo>Paid absence days</Typo>
 
-        <TextField
+        <Controller
+        name={`absence_management.paid_absence_days[count]`}
+        control={control}
+        render={({ field }) => (
+            <TextField
+            {...field}
               value={Paid !== 0 ? Paid : 'none'}
               disabled
         fullWidth
@@ -97,13 +107,20 @@ export default function AbsencesManagement(props) {
         }}
 
     />
+        )}
+        />
+
     <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"7px"}>
-    <Checkbox
-  checked={checkedPaid}
-  onChange={handleChangePaid}
-  inputProps={{ 'aria-label': 'controlled' }}
-  sx={{padding:"0px"}}
-/>
+    <Controller
+      name={`absence_management.paid_absence_days[compensatory_time]`}
+      control={control}
+        render={({ field }) => (
+      <input
+      {...field}
+          type='checkbox'
+       />
+        ) }
+        />
 <Typo>
 
    Compensatory time
@@ -115,7 +132,12 @@ export default function AbsencesManagement(props) {
     <Box sx={{width:"100%",marginTop:"15px !important"}}>
 
       <Typo>Unpaid absence days</Typo>
-      <TextField
+      <Controller
+        name={`absence_management.unpaid_absence_days[count]`}
+        control={control}
+        render={({ field }) => (
+            <TextField
+            {...field}
               value={Unpaid !== 0 ? Unpaid : 'none'}
               disabled
         fullWidth
@@ -132,15 +154,21 @@ export default function AbsencesManagement(props) {
             </Box>
           ),
         }}
-
     />
+        )}
+        />
+
        <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"7px"}>
-    <Checkbox
-  checked={checkedUnpaid}
-  onChange={handleChangeUnpaid}
-  inputProps={{ 'aria-label': 'controlled' }}
-  sx={{padding:"0px"}}
-/>
+    <Controller
+      name={`absence_management.unpaid_absence_days[compensatory_time]`}
+      control={control}
+        render={({ field }) => (
+      <input
+      {...field}
+          type='checkbox'
+       />
+        ) }
+        />
 <Typo>
 
 Compensatory time
@@ -150,7 +178,12 @@ Compensatory time
     <Box sx={{width:"100%",marginTop:"15px !important"}}>
 
       <Typo>Sick absence days </Typo>
-      <TextField
+      <Controller
+        name={`absence_management.sick_absence_days[count]`}
+        control={control}
+        render={({ field }) => (
+            <TextField
+            {...field}
               value={Sick !== 0 ? Sick : 'none'}
               disabled
         fullWidth
@@ -167,21 +200,81 @@ Compensatory time
             </Box>
           ),
         }}
-
     />
+        )}
+        />
        <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"7px"}>
-    <Checkbox
-  checked={checkedSick}
-  onChange={handleChangeSick}
-  inputProps={{ 'aria-label': 'controlled' }}
-  sx={{padding:"0px"}}
-/>
+       <Controller
+      name={`absence_management.sick_absence_days[compensatory_time]`}
+      control={control}
+        render={({ field }) => (
+      <input
+      {...field}
+          type='checkbox'
+       />
+        ) }
+        />
 <Typo>
 
 Compensatory time
 </Typo>
     </Box>
     </Box>
+
+
+ <List  sx={{lineHeight:"50px",margin:"0px 20px"}}>
+    <Divider />
+
+  <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} width={"106%"}>
+
+<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >Notes</Typography>
+
+
+{!noteAdded && (
+      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ add</Typography>
+
+      )}
+
+  </Stack>
+
+{fields.map((field, index) => ( <>
+<Typography sx={{textAlign:"end",marginRight:"10px",cursor:"pointer"}}>
+
+   <CloseIcon sx={{ color:"#8090A7",'&:hover': { color: 'red' },marginTop:"14px"}} onClick={() => handleRemoveClick(index)} />
+
+</Typography>
+
+<Typography sx={{fontWeight:"500",fontSize:"16px",color:"#8090a7",marginBottom:"7px"}}>
+notes {index + 1}
+</Typography>
+<Box sx={{width:"100%"}} key={index}>
+
+    <Controller
+      name={`absence_management.[notes]`}
+      control={control}
+      defaultValue={field.notes}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          label="notes"
+          variant="outlined"
+          fullWidth
+          size="small"
+
+        />
+      )}
+    />
+</Box>
+
+
+ </>
+
+))}
+
+</List>
+
+
+
         </Stack>
     </CardContent>
     </Card>

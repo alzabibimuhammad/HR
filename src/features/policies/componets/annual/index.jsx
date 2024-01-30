@@ -77,7 +77,7 @@ console.log(checked);
       name={`annual_salary_increase.allow_advance_request`}
       control={control}
         render={({ field }) => (
-      <TextField
+      <input
       {...field}
           type='checkbox'
        />

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 
 export default function Skills() {
+  
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',

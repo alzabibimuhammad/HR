@@ -10,7 +10,7 @@ import Warnings from 'src/features/policies/componets/warnings'
 import WorkTime from 'src/features/policies/componets/workTime'
 import {  Button, Card, CardContent, Chip,  TextField, Typography } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
-import { useAddPolicies } from './hook/useAddPolicies'
+import { useAddPolicies } from '../hook/useAddPolicies'
 
 
 

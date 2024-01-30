@@ -99,6 +99,7 @@ const AboutOverivew = (Data) => {
       margin:0
     },
   }));
+  
   const Text = styled('p')(({  }) => ({
     margin:0,
     fontSize:'14px',

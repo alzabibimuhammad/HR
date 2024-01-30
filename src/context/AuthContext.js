@@ -38,18 +38,18 @@ const AuthProvider = ({ children }) => {
       setLoading(false)
     }
     initAuth()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+ 
   }, [])
 
 
   const handleLogin = (params, errorCallback) => {
     axios
-      .post('http://91.144.20.117:6001/api/login', params)
+      .post('http://192.168.2.138:800/api/login', params)
       .then(async response => {
         localStorage.setItem('accessToken', response.data?.data?.authorization.token);
         localStorage.setItem('userData', JSON.stringify(response.data?.data?.user));
          const returnUrl = router.query.returnUrl
-         setUser(response.data?.data?.user)
+         setUser(response.data.data?.user)
          const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
          router.replace(redirectURL)
          toast.success(`${response.data.message} `, {
@@ -61,7 +61,7 @@ const AuthProvider = ({ children }) => {
          });
       })
        .catch(err => {
-         toast.error(`${err?.response?.status === 401 ? "Unauthorized":err?.message}  `, {
+         toast.error(`${err.response?.status === 401 ? "Unauthorized":err?.message}  `, {
            position: "top-left",
            style: {
              backgroundColor: "#e20d29",

@@ -1,6 +1,7 @@
 import { Stack } from '@mui/system'
 import dynamic from 'next/dynamic';
 import React from 'react'
+import useGetMembersHierarchy from 'src/features/tree/hooks/useGetMembersHierarchy';
 
 
 const TreeComponent = dynamic(
@@ -9,7 +10,11 @@ const TreeComponent = dynamic(
     ssr: false,
   }
 );
+
 export default function Tree() {
+
+
+
   return (
 
       <Stack height={'100%'} >

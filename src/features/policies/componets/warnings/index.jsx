@@ -1,13 +1,38 @@
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import {  List } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import Divider from '@mui/material/Divider';
+import { useFieldArray } from 'react-hook-form';
 
-export default function Warnings() {
-  const [alert , setAlert] = useState(0);
-  const [warnings , setWarnings] = useState(0);
+export default function Warnings({Controller,control,defaultValues,setAlert ,alert,warningsto,setWarningsto}) {
+
+
+  const [noteAdded, setNoteAdded] = useState(false);
+
+  const { fields, append, remove } = useFieldArray({
+
+
+
+    control,
+    name: 'warnings.notes',
+  });
+
+  const handleAddClick = () => {
+    append({ });
+    setNoteAdded(true);
+  };
+
+  const handleRemoveClick = (index) => {
+    remove(index);
+    setNoteAdded(false);
+
+  };
+
 
   const Typo = styled(Typography)(({ theme }) => ({
     fontSize:'14px'
@@ -17,17 +42,20 @@ export default function Warnings() {
       console.log(alert);
       setAlert(alert+1)
     }
+
     const handleDownAlert = _=>{
       if(alert != 0)
         setAlert(alert-1)
     }
+
     const handleUpWaring = _=>{
-      console.log(warnings);
-      setWarnings(warnings+1)
+      console.log(warningsto);
+      setWarningsto(warningsto+1)
     }
+
     const handleDownWarning = _=>{
-      if(warnings != 0)
-        setWarnings(warnings-1)
+      if(warningsto != 0)
+      setWarningsto(warningsto-1)
     }
 
   return (
@@ -38,7 +66,12 @@ export default function Warnings() {
 
         <Typo>Alerts to warning</Typo>
 
-        <TextField
+        <Controller
+        name={`warnings.alerts_to_warnings`}
+        control={control}
+        render={({ field }) => (
+            <TextField
+            {...field}
         value={alert!=0 ? alert : 'none'}
         disabled
 
@@ -56,11 +89,19 @@ export default function Warnings() {
           ),
         }}
     />
+  )}
+      />
       <Typo>Warnings to dismissal</Typo>
-      <TextField
-        value={warnings!=0 ? warnings : 'none'}
-        disabled
 
+      <Controller
+        name={`warnings.warningsto_dismissal`}
+        control={control}
+        render={({ field }) => (
+            <TextField
+            {...field}
+            value={warningsto!=0 ? warningsto : 'none'}
+
+        disabled
         size='small'
         InputProps={{
           endAdornment: (
@@ -75,7 +116,63 @@ export default function Warnings() {
           ),
         }}
     />
+        )}
+        />
+
+
+<List  sx={{lineHeight:"50px",margin:"0px 20px"}}>
+  <Divider />
+  <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} width={"106%"}>
+
+<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >Notes</Typography>
+
+
+{!noteAdded && (
+      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ add</Typography>
+
+      )}
+
+  </Stack>
+
+{fields.map((field, index) => ( <>
+<Typography sx={{textAlign:"end",marginRight:"10px",cursor:"pointer"}}>
+
+   <CloseIcon sx={{ color:"#8090A7",'&:hover': { color: 'red' },marginTop:"14px"}} onClick={() => handleRemoveClick(index)} />
+
+</Typography>
+
+<Typography sx={{fontWeight:"500",fontSize:"16px",color:"#8090a7",marginBottom:"7px"}}>
+notes {index + 1}
+</Typography>
+<Box sx={{width:"100%"}} key={index}>
+
+    <Controller
+      name={`warnings.notes`}
+      control={control}
+      defaultValue={field.notes}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          label="notes"
+          variant="outlined"
+          fullWidth
+          size="small"
+
+        />
+      )}
+    />
+</Box>
+
+
+ </>
+
+))}
+
+</List>
+
+
         </Stack>
+
     </CardContent>
     </Card>
   )

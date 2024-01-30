@@ -8,9 +8,8 @@ import {  List } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Divider from '@mui/material/Divider';
 
-export default function WorkTime({Controller,control}) {
+export default function WorkTime({Controller,control,days,setDays}) {
   const [openParent, setOpenParent] = React.useState(false);
-  const [days, setDays] = React.useState([]);
   const [noteAdded, setNoteAdded] = useState(false);
 
   const handleDayPicker = (date) => {

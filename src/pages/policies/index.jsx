@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material'
 import { Box, Stack } from '@mui/system'
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from 'src/features/Contracts/view/logo'
 import AbsencesManagement from 'src/features/policies/componets/absences'
 import Annual from 'src/features/policies/componets/annual'
@@ -10,30 +10,71 @@ import Warnings from 'src/features/policies/componets/warnings'
 import WorkTime from 'src/features/policies/componets/workTime'
 import {  Button, Card, CardContent, Chip,  TextField, Typography } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
+import { useAddPolicies } from './hook/useAddPolicies'
 
 
 
 
 export default function Policies() {
+  const { mutate: AddPolicies, isLoading } = useAddPolicies();
+  const [days, setDays] = React.useState([]);
+  const [alert , setAlert] = useState(0);
+  const [warningsto , setWarningsto] = useState(0);
+  const [Paid  , setPaid ] = useState(0);
+  const [Unpaid  , setUnpaid ] = useState(0);
+  const [Sick , setSick] = useState(0);
+
+  console.log("🚀 ~ Policies ~ alert:", alert)
+
+
 
   const defaultValues = {
     // work_time:[{
       // work_days:[],
 
-    //   // start_time:"",
-    //   // cut_off_time:"",
-    //   // end_time:"",
-      notes:[],
+      //   // start_time:"",
+      //   // cut_off_time:"",
+      //   // end_time:"",
+      // }],
+      // notes:[],
 
-    // }],
 
-    annual_salary_increase:{
-      allow_advance_request:"",
-      annual_salary_percentage:""
+    // annual_salary_increase:{
+    //   allow_advance_request:"",
+    //   annual_salary_percentage:""
 
-    }
+    // }
+    warnings:{
+      alerts_to_warnings:0,
+      warningsto_dismissal:0,
+      notes:[]
+    },
+
  };
 
+ const handleDataSubmit =  (data) => {
+   try {
+     // const formData = new FormData();
+     // formData.append('image',ProfileImage)
+
+     // data.image = ProfileImage;
+     // console.log("🚀 ~ handleDataSubmit ~ data:", data)
+
+     data.warnings.alerts_to_warnings=alert
+     data.warnings.warningsto_dismissal=warningsto
+     data.absence_management.paid_absence_days.count=Paid
+     data.absence_management.unpaid_absence_days.count=Unpaid
+     data.absence_management.sick_absence_days.count=Sick
+     data.work_time.work_days=days
+
+      AddPolicies(data)
+     console.log(data);
+   } catch (error) {
+
+   }
+
+
+};
 
 
   const {
@@ -51,21 +92,6 @@ export default function Policies() {
     //  resolver: yupResolver(Schema),
   });
 
-  const handleDataSubmit =  (data) => {
-    try {
-      // const formData = new FormData();
-      // formData.append('image',ProfileImage)
-
-      // data.image = ProfileImage;
-      // console.log("🚀 ~ handleDataSubmit ~ data:", data)
-      // addUsers(data)
-      console.log(data);
-    } catch (error) {
-
-    }
-
-
- };
 
 
 
@@ -99,7 +125,7 @@ export default function Policies() {
 
         <Stack  spacing={6} direction={'column'}>
           <Box  >
-            <WorkTime defaultValues={defaultValues} control={control} Controller={Controller}/>
+            <WorkTime defaultValues={defaultValues} control={control} Controller={Controller} setDays={setDays} days={days}/>
           </Box>
 
           <Box >
@@ -114,8 +140,8 @@ export default function Policies() {
     <Grid item sm={6}  xs={12} marginTop={'24px'}>
 
       <Stack spacing={6} direction={'column'}>
-        <Warnings/>
-        <AbsencesManagement/>
+        <Warnings   defaultValues={defaultValues} control={control} Controller={Controller} setAlert={setAlert} alert={alert} setWarningsto={setWarningsto} warningsto={warningsto}/>
+        <AbsencesManagement control={control} Controller={Controller} setPaid={setPaid} Paid={Paid} Unpaid={Unpaid} setUnpaid={setUnpaid} setSick={setSick} Sick={Sick}/>
         <Deductions/>
       </Stack>
 

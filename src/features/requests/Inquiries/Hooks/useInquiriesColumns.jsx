@@ -38,6 +38,7 @@ const useInquiriesColumns = () => {
   const [showMoreMap, setShowMoreMap] = useState({});
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [rowData, setrowData] = React.useState(null);
+console.log(rowData);
   const open = Boolean(anchorEl);
 
   const deleteContractMutation = useDeleteRequest();
@@ -49,10 +50,12 @@ const useInquiriesColumns = () => {
 
   const handleApproveClick = (params) => {
      AccepteRequest(params?.row?.id)
+    console.log(params?.row?.id);
   };
 
   const handleRejectClick = (params) => {
     RejectRequest(params?.row?.id)
+    console.log(params?.row?.id);
   };
 
 
@@ -103,7 +106,7 @@ const useInquiriesColumns = () => {
 
 //     // handleCloseAnchor();
 
-//
+//     console.log("foot");
 
 //     // handleDeleteClick()
 //  }
@@ -176,22 +179,40 @@ const useInquiriesColumns = () => {
         const shouldShowMore = content.length > 40;
 
         return (
-          <Box sx={{ display: 'flex', flexDirection: 'row',  }}>
-            <div style={{ display:"flex", flexDirection:"row", alignItems:"center" }}>
-              <Typography sx={{ fontSize:'14px' }} >{showMoreMap[id] ? content : content.slice(0, 40) + '...'}</Typography>
-            </div>
-            {shouldShowMore && (
-
-              <Typography variant="span" sx={{ cursor: "pointer",width:"10px" }} color="#8090A7" onClick={() => handleShowMoreClick(params)}>
-                  <p>
-
-                {showMoreMap[id] ? "Show Less" : "Show More"}
-                  </p>
-
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+            <Typography sx={{ fontSize: '14px' }}>
+              { content.slice(0, 40) + '...'}
+            </Typography>
+          </div>
+          {showMoreMap[id] && (
+                <div>
+                
+                  <Typography sx={{ fontSize: '14px' }}>
+                  {content.slice(40)}
+            </Typography>
+                </div>
+              )}
+        
+          {shouldShowMore && (
+            <>
+              <Typography
+                variant="span"
+                sx={{ cursor: "pointer", width: "10px" }}
+                color="#8090A7"
+                onClick={() => handleShowMoreClick(params)}
+              >
+                <p>
+                  {showMoreMap[id] ? "Show Less" : "Show More"}
+                </p>
               </Typography>
-
-            )}
-          </Box>
+        
+       
+            </>
+          )}
+        </Box>
+        
+        
         );
       },
     },
@@ -321,36 +342,39 @@ const useInquiriesColumns = () => {
     </div>
     <Box
 
-      sx={{marginTop:"19px",display:"flex",gap:"10px"}}
+      sx={{marginTop:"19px",display:"flex",gap:"10px",justifyContent:'center',marginRight:'2px'}}
     >
 
       {params.row.status === 'waiting' ? (
   <>
-    <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>{t('Approve')}
+    <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "14px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>{t('Approve')}
  </Button>
-    <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}  onClick={() => handleRejectClick(params)} >{t('Decline')}
+    <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "14px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}  onClick={() => handleRejectClick(params)} >{t('Decline')}
  </Button>
   </>
 ) : params.row.status === 'rejected' ? (
-  <>
- <Button
-      sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}
-      onClick={() => handleRejectClick(params)}
-      disabled={true}
+  
+  <Box sx={{display:'flex', justifyContent:'center'}}>
+ <Typography
+      sx={{   fontWeight: "500", fontSize: "14px", color:'#DF2E38' }}
     >
-    {t('Decline')}
+      {t('Decline')}
+    
 
-    </Button>  </>
+    </Typography>  
+    </Box>
+  
 ) : (
-  <Button
-    sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }}
-    onClick={() => handleApproveClick(params)}
-    disabled={true}
-
-  >
-  {t('Approve')}
-
-  </Button>
+  <Box sx={{display:'flex', justifyContent:'center'}}>
+  <Typography
+       sx={{   fontWeight: "500", fontSize: "14px", color:'#91C483' }}
+     >
+       {t('Approve')}
+     
+ 
+     </Typography>  
+     </Box>
+ 
 )}
 
     </Box>

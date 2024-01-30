@@ -20,6 +20,7 @@ import { FormateDate } from 'src/utiltis/DateFormate'
 import { useGetEventByDay } from './hooks/useGetEventByDay'
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react'
 
 
 const SidebarLeft = props => {
@@ -42,7 +43,7 @@ const SidebarLeft = props => {
 
   const colorsArr = calendarsColor ? Object.entries(calendarsColor) : []
 const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
-
+const[selectedDate,SetSelectedDate]=useState()
 
   const renderFilters = colorsArr.length
     ? colorsArr.map(([key, value]) => {
@@ -69,6 +70,7 @@ const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
   }
 
   const handleDateChoose = (date) => {
+    SetSelectedDate(date)
     const formattedDate = FormateDate(date);
     getEvent(formattedDate)
     calendarApi.gotoDate(date)
@@ -122,7 +124,7 @@ const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
             '& .react-datepicker': { boxShadow: 'none !important', border: 'none !important' }
           }}
         >
-          <DatePicker inline onChange={date => handleDateChoose(date)} />
+          <DatePicker selected={selectedDate} inline onChange={date => handleDateChoose(date)} />
         </DatePickerWrapper>
         <Box sx={{ p: 7, width: '100%' }}>
           <Button fullWidth variant='contained' sx={{ '& svg': { mr: 2 } }} onClick={handleSidebarToggleSidebar}>

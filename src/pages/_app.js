@@ -32,6 +32,7 @@ import GuestGuard from 'src/@core/components/auth/GuestGuard'
 
 // ** Spinner Import
 import Spinner from 'src/@core/components/spinner'
+import "@fontsource/montserrat";
 
 // ** Contexts
 import { AuthProvider } from 'src/context/AuthContext'

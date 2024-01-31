@@ -111,6 +111,11 @@ const navigation = () => {
       icon: 'tabler:report',
       path: '/tree'
     },
+    {
+      title: 'Registeration',
+      icon: 'tabler:report',
+      path: '/registeration'
+    },
   ]
 
 }

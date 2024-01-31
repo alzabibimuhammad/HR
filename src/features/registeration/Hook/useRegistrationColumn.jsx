@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react'
 
-import { Avatar, Button, Chip, IconButton, Rating } from '@mui/material';
+import { Avatar, Button, Chip, IconButton, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { Box } from '@mui/system';
+import { Box, Stack } from '@mui/system';
 
 
 const useRegistrationColumn = () => {
@@ -16,33 +16,37 @@ const useRegistrationColumn = () => {
   return useMemo(() => [
 
     {
-      field: 'id',
-      headerName: t("ID"),
-
-      flex:0
-    },
-
-    {
       field: 'first_name',
-      headerName: t("first Name"),
-      flex: 3
-    },
-
-    {
-      field: 'last_name',
-      headerName: t("Last name"),
-      flex: 3
+      headerName: t("Name"),
+      flex:2.5,
+        renderCell: (params)=>{
+      return (
+        <Stack spacing={1} direction={'row'}  alignItems={'center'} >
+          <Box>
+          <Avatar src={'sdsd'} alt='' />
+          </Box>
+          <Stack spacing={2} direction={'row'}>
+            <Typography>
+              {params.row.first_name}
+            </Typography>
+            <Typography>
+              {params.row.last_name}
+            </Typography>
+          </Stack>
+        </Stack>
+      )
+    }
   },
     {
       field: 'department',
       headerName: t('Department'),
-      flex: 3
+      flex: 2
 
     },
     {
       field: 'status',
       headerName: t('Status'),
-      flex: 3,
+      flex: 1,
       renderCell: (params) => {
         return (
           <>
@@ -116,18 +120,15 @@ const useRegistrationColumn = () => {
         );
       },
     },
-
     {
       field: 'checkIn',
       headerName: t('Check in'),
-      flex: 3
+      flex: 2
     },
     {
       field: 'checkOut',
       headerName: t('Check out'),
-      flex: 3
-
-
+      flex: 2
     }
   ])
 

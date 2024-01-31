@@ -31,7 +31,6 @@ const steps = [
 ];
 
 export default function SidebarLeft({DataEventByDay}) {
-  console.log("🚀 ~ SidebarLeft ~ DataEventByDay:", DataEventByDay)
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = steps.length;

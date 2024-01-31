@@ -51,21 +51,21 @@ const useReportColumns = (CustomDetailPanelToggle) => {
   },
 
     {
-      field: 'role',
+      field: 'roleeee',
       headerName: t("Role"),
       flex: 1,
       disableClickEventBubbling: true,
 
     },
     {
-      field: 'spcialization',
+      field: 'specialization',
       headerName: t("SPECIALIZATION"),
       flex: 1,
       disableClickEventBubbling: true,
 
     },
     {
-      field: 'team',
+      field: 'department_id',
       headerName: t("TEAM"),
       flex: 1,
       disableClickEventBubbling: true,

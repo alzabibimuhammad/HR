@@ -128,7 +128,6 @@ const dispatch=useDispatch()
                   )}
                 />
               </Grid>
-              {!Data ?
                <Grid item xs={12}>
                 <Controller
                   name='last_name'
@@ -146,9 +145,7 @@ const dispatch=useDispatch()
                   )}
                 />
               </Grid>
-            :null
 
-            }
 
               <Grid item xs={12}>
                 <Controller

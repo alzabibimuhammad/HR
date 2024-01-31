@@ -92,7 +92,19 @@ const navigation = () => {
     {
       title: 'Policies',
       icon: 'tabler:report',
-      path: '/policies'
+      path: '/policies',
+      children:[
+        {
+          title:"Add",
+          path:"/policies/add"
+
+        },
+        {
+          title:"View",
+          path:"/policies/view"
+
+        },
+      ]
     },
     {
       title: 'Tree',

@@ -3,6 +3,9 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 // ** Axios Imports
 import axios from 'axios'
+import toast from 'react-hot-toast'
+import { FormateDate } from 'src/utiltis/DateFormate'
+import { FormateDateTime } from 'src/utiltis/DateTimeFormat'
 
 // ** Fetch Events
 export const fetchEvents = createAsyncThunk('appCalendar/fetchEvents', async calendars => {
@@ -16,11 +19,32 @@ export const fetchEvents = createAsyncThunk('appCalendar/fetchEvents', async cal
 })
 
 // ** Add Event
-export const addEvent = createAsyncThunk('appCalendar/addEvent', async (event, { dispatch }) => {
-  const response = await axios.post('/apps/calendar/add-event', {
-    data: {
-      event
-    }
+export const addEvent = createAsyncThunk('/Calendar/Add', async (event, { dispatch }) => {
+  console.log("🚀 ~ addEvent ~ event:", event)
+  const formData =new FormData()
+  const end_date=FormateDateTime(event.end)
+  const start_date=FormateDateTime(event.start)
+  console.log("🚀 ~ addEvent ~ start_date:", start_date)
+
+  console.log("🚀 ~ addEvent ~ start_date:", end_date)
+  
+  formData.append('title',event.title)
+  formData.append('description',event.extendedProps.description)
+  formData.append('end',end_date)
+  formData.append('start',start_date)
+  
+
+  const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL +'/api/Calendar/Add',
+formData
+   ,{
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${localStorage.accessToken}`
+    },
+  } 
+  
+  ).then(()=>{
+    toast.success('Event Added ......')
   })
   await dispatch(fetchEvents(['Personal', 'Business', 'Family', 'Holiday', 'ETC']))
 

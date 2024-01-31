@@ -87,6 +87,7 @@ const AddEventSidebar = props => {
       }
     }
     if (store.selectedEvent === null || (store.selectedEvent !== null && !store.selectedEvent.title.length)) {
+      console.log(modifiedEvent)
       dispatch(addEvent(modifiedEvent))
     } else {
       dispatch(updateEvent({ id: store.selectedEvent.id, ...modifiedEvent }))
@@ -244,22 +245,7 @@ const AddEventSidebar = props => {
                 />
               )}
             />
-            <CustomTextField
-              select
-              fullWidth
-              sx={{ mb: 4 }}
-              label='Calendar'
-              SelectProps={{
-                value: values.calendar,
-                onChange: e => setValues({ ...values, calendar: e.target.value })
-              }}
-            >
-              <MenuItem value='Personal'>Personal</MenuItem>
-              <MenuItem value='Business'>Business</MenuItem>
-              <MenuItem value='Family'>Family</MenuItem>
-              <MenuItem value='Holiday'>Holiday</MenuItem>
-              <MenuItem value='ETC'>ETC</MenuItem>
-            </CustomTextField>
+
             <Box sx={{ mb: 4 }}>
               <DatePicker
                 selectsStart
@@ -267,8 +253,8 @@ const AddEventSidebar = props => {
                 endDate={values.endDate}
                 selected={values.startDate}
                 startDate={values.startDate}
-                showTimeSelect={!values.allDay}
-                dateFormat={!values.allDay ? 'yyyy-MM-dd hh:mm' : 'yyyy-MM-dd'}
+                showTimeSelect={true}
+                dateFormat={ 'yyyy-MM-dd hh:mm' }
                 customInput={<PickersComponent label='Start Date' registername='startDate' />}
                 onChange={date => setValues({ ...values, startDate: new Date(date) })}
                 onSelect={handleStartDate}
@@ -282,48 +268,16 @@ const AddEventSidebar = props => {
                 selected={values.endDate}
                 minDate={values.startDate}
                 startDate={values.startDate}
-                showTimeSelect={!values.allDay}
-                dateFormat={!values.allDay ? 'yyyy-MM-dd hh:mm' : 'yyyy-MM-dd'}
+                showTimeSelect={true}
+                dateFormat={ 'yyyy-MM-dd hh:mm' }
                 customInput={<PickersComponent label='End Date' registername='endDate' />}
                 onChange={date => setValues({ ...values, endDate: new Date(date) })}
               />
             </Box>
-            <FormControl sx={{ mb: 4 }}>
-              <FormControlLabel
-                label='All Day'
-                control={
-                  <Switch checked={values.allDay} onChange={e => setValues({ ...values, allDay: e.target.checked })} />
-                }
-              />
-            </FormControl>
-            <CustomTextField
-              fullWidth
-              type='url'
-              id='event-url'
-              sx={{ mb: 4 }}
-              label='Event URL'
-              value={values.url}
-              placeholder='https://www.google.com'
-              onChange={e => setValues({ ...values, url: e.target.value })}
-            />
+    
+      
 
-            <CustomTextField
-              select
-              fullWidth
-              label='Guests'
-              sx={{ mb: 4 }}
-              SelectProps={{
-                multiple: true,
-                value: values.guests,
-                onChange: e => setValues({ ...values, guests: e.target.value })
-              }}
-            >
-              <MenuItem value='bruce'>Bruce</MenuItem>
-              <MenuItem value='clark'>Clark</MenuItem>
-              <MenuItem value='diana'>Diana</MenuItem>
-              <MenuItem value='john'>John</MenuItem>
-              <MenuItem value='barry'>Barry</MenuItem>
-            </CustomTextField>
+   
             <CustomTextField
               rows={4}
               multiline

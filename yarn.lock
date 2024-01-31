@@ -475,6 +475,11 @@
   resolved "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.1.tgz"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
+"@fontsource/montserrat@^5.0.16":
+  version "5.0.16"
+  resolved "https://registry.npmjs.org/@fontsource/montserrat/-/montserrat-5.0.16.tgz"
+  integrity sha512-g27g1cvkyVm74QM0HKOCnI4iifMqf/3cSJYedjbjtW/Ygb271qfDz5gGMJCl9MinD4nimDdENsU3K1vGR50S2Q==
+
 "@fullcalendar/bootstrap5@6.1.6":
   version "6.1.6"
   resolved "https://registry.npmjs.org/@fullcalendar/bootstrap5/-/bootstrap5-6.1.6.tgz"
@@ -929,6 +934,13 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@pbe/react-yandex-maps@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.npmjs.org/@pbe/react-yandex-maps/-/react-yandex-maps-1.2.5.tgz"
+  integrity sha512-cBojin5e1fPx9XVCAqHQJsCnHGMeBNsP0TrNfpWCrPFfxb30ye+JgcGr2mn767Gbr1d+RufBLRiUcX2kaiAwjQ==
+  dependencies:
+    "@types/yandex-maps" "2.1.29"
 
 "@pkgr/core@^0.1.0":
   version "0.1.1"
@@ -1458,6 +1470,11 @@
   version "0.0.3"
   resolved "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz"
   integrity sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==
+
+"@types/yandex-maps@2.1.29":
+  version "2.1.29"
+  resolved "https://registry.npmjs.org/@types/yandex-maps/-/yandex-maps-2.1.29.tgz"
+  integrity sha512-nuibRWj3RU/9KXlCzTrRtDE+n6V9l7NbT9JakicqZ5OXIdwyb6blvV2Uwn6lB58WYm3DSUDP2I2AWlnWMc8z2w==
 
 "@types/yauzl@^2.9.1":
   version "2.10.3"

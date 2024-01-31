@@ -45,7 +45,6 @@ export default function DrawerForm({ open, setOpenParent ,setDays }) {
         : [...prevSelectedDays, day]
     );
   };
-  console.log('selected date',selectedDays);
 
   return (
     <>

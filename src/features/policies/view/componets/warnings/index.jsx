@@ -3,7 +3,9 @@ import { Stack } from '@mui/system';
 import React from 'react'
 import styled from 'styled-components';
 
-export default function Warning() {
+export default function Warning({data}) {
+console.log("🚀 ~ Warning ~ data:", data)
+
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -32,7 +34,10 @@ export default function Warning() {
     alignItems:'center'
   }));
 
-  return (
+  return ( <>
+
+
+{data?.data?.map((item, index) => ( <>
     <Card>
 
       <CardContent>
@@ -47,12 +52,12 @@ export default function Warning() {
 
         <StackRow  marginTop={'2%'}>
           <Typo>Warnings To Alert:</Typo>
-          <TypoVal>3</TypoVal>
+          <TypoVal>{item.warnings?.alerts_to_warnings}</TypoVal>
         </StackRow>
 
         <StackRow>
           <Typo>Warnings To Dismissal:</Typo>
-          <TypoVal>3</TypoVal>
+          <TypoVal>{item.warnings?.warningsto_dismissal}</TypoVal>
         </StackRow>
 
           <Typography component={'li'}>
@@ -61,8 +66,12 @@ export default function Warning() {
           </Typography>
 
           <Typo marginLeft={'21px'} >Note 1:</Typo>
-          <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, repudiandae!</TypoVal>
+          <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >{item.warnings?.notes}</TypoVal>
       </CardContent>
     </Card>
+    </>
+    ))}
+
+  </>
   )
 }

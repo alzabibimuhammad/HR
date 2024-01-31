@@ -17,6 +17,7 @@ import useReportColumns from '../../hooks/useReportColumns';
 import { ReportData } from '../../infrstructure';
 
 const ReportGrid = ({ rows }) => {
+  console.log("🚀 ~ ReportGrid ~ rows:", rows)
   const columns = useReportColumns();
   const [reportDataGrid, setReportData] = useState([]);
   const [expandedRow, setExpandedRow] = useState(null);
@@ -42,7 +43,7 @@ const ReportGrid = ({ rows }) => {
 
               <CustomDataGrid
         columns={columns}
-        rows={ReportData(reportDataGrid)}
+        rows={ReportData(rows)||[]}
 
       />
 

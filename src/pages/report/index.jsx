@@ -7,21 +7,26 @@ import { CircularProgress } from '@mui/material'
 import CollapsibleTable from 'src/features/Report/componets/table'
 
 const PlayersPage = () => {
+  const [Data,setData]=useState([])
+
   const store = useSelector(state => state.ReportStore)
-const [Data,setData]=useState([])
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getReportsData())
-    setData(store?.data?.data)
+    setData(store.data?.data)
   }, [dispatch, store?.data.length])
+
+  console.log("data",Data);
+
 
 
   return(
+
     <>
-    {/* {true ? <ReportGrid rows={store?.data?.data} /> : <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'50vh' }} ><CircularProgress /></Box>} */}
-    {true ? <CollapsibleTable   rows={'s'} /> : <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'50vh' }} ><CircularProgress /></Box>}
+     {/* {Data ? <ReportGrid rows={Data} /> : <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'50vh' }} ><CircularProgress /></Box>} */}
+    {Data ? <CollapsibleTable   Data={Data} /> : <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'50vh' }} ><CircularProgress /></Box>}
     </>
   )
 }

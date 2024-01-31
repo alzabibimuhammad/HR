@@ -1,4 +1,6 @@
 export const RegistrationData = elements => {
+
+
   const targetTime = "09:15"
   const currentDate = new Date();
   const endTime = "16:45"
@@ -6,7 +8,6 @@ export const RegistrationData = elements => {
   const CurrentHours = currentDate?.getHours()?.toString()?.padStart(2, '0');
   const CurrentMinutes = currentDate?.getMinutes()?.toString()?.padStart(2, '0');
   const CurrentFormattedTime = `${CurrentHours}:${CurrentMinutes}`;
-
 
   console.log('currentDate',CurrentFormattedTime<endTime);
 

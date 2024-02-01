@@ -70,7 +70,8 @@ const[selectedDate,SetSelectedDate]=useState()
   }
 
   const handleDateChoose = (date) => {
-    SetSelectedDate(date)
+    console.log("🚀 ~ handleDateChoose ~ date:", date)
+    SetSelectedDate(date) 
     const formattedDate = FormateDate(date);
     getEvent(formattedDate)
     calendarApi.gotoDate(date)

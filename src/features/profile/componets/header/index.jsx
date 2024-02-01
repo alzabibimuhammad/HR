@@ -39,7 +39,7 @@ const TabsProfile = styled(Tabs)(({ theme }) => ({
   },
 }));
 
-const UserProfileHeader = ({Data,setValues,value}) => {
+const UserProfileHeader = ({Data,setValues,value,ProfileData}) => {
   const {t} = useTranslation()
 
   const handleChange = (event, newValue) => {
@@ -63,7 +63,7 @@ const UserProfileHeader = ({Data,setValues,value}) => {
             >
               <Tab value="1" label="Reports" />
               <Tab value="2" label="Profile" />
-              <Tab value="3" label="Item Section" />
+              <Tab value="3" label="manage" />
             </TabsProfile>
 
           </Box>
@@ -110,7 +110,7 @@ const UserProfileHeader = ({Data,setValues,value}) => {
       }}
     >
       <Typography variant='h5' sx={{ mb: 2.5 }}>
-        Daniel
+        {ProfileData?.first_name} {ProfileData?.last_name} 
       </Typography>
 
       <Box
@@ -121,7 +121,7 @@ const UserProfileHeader = ({Data,setValues,value}) => {
         }}
       >
         <Box sx={{ mr: 4, display: 'flex', alignItems: 'center', '& svg': { mr: 1.5, color: 'text.secondary' } }}>
-          <Typography sx={{ color: 'text.secondary' }}>{t('Damascus')}</Typography>
+          <Typography sx={{ color: 'text.secondary' }}>{ProfileData?.address}</Typography>
         </Box>
 
       </Box>

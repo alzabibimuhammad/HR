@@ -116,7 +116,7 @@ const useUserColumns = () => {
           <>
           <Stack direction={{ sm:'row' }}  >
 
-              <Link href={`/profile/id`} >
+              <Link href={`/profile/${params.row.id}`} >
               <IconButton >
               <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'>Details</VisibilityIcon>
               </IconButton>

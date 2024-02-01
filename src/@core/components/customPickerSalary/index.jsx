@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker';
 
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
 
-export  const CustomDatePicker = ({ selectedDate, handleDateChoose }) => {
+export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
   const [view, setView] = useState('month');
   const [startDate, setStartDate] = useState(new Date());
   const [showMonthPicker, setShowMonthPicker] = useState('day');
@@ -40,9 +40,7 @@ export  const CustomDatePicker = ({ selectedDate, handleDateChoose }) => {
         Filter
             </Typography>
             <Box sx={{display:'flex', justifyContent:'end' }}>
-            <Button variant='contained' color='secondary'  sx={{mr:2 ,backgroundColor: showMonthPicker === 'day' ? '#6AB2DF' : 'secondary'}} onClick={toggleDatePickerDay}>
-        Day
-      </Button>
+
       <Button variant='contained' color='secondary' onClick={toggleDatePickerMonth}  sx={{mr:2, backgroundColor: showMonthPicker === 'month' ? '#6AB2DF' : 'secondary'}}>
 Month      </Button>
       <Button variant='contained' color='secondary'  onClick={toggleDatePickerYear} sx={{mr:2,backgroundColor: showMonthPicker === 'year' ? '#6AB2DF' : 'secondary'}}>

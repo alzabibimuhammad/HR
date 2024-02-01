@@ -1,14 +1,17 @@
 import Users from 'src/features/employee/users/componets/DataGrid'
-import useGetAllUsers from 'src/features/employee/users/hooks/useGetAllUsers'
+import SalaryDataGrid from 'src/features/salary/users/componets/DataGrid'
+import useGetAllSalary from 'src/features/salary/users/hooks/useGetAllSalary'
 
 export default function Employees() {
 
-  const {data , loading } = useGetAllUsers()
+  const {data , loading } = useGetAllSalary()
+
+
 
 
   return (
     <>
-    {data ? <Users rows = {data}/>:null}
+    {data ? <SalaryDataGrid rows = {data}/>:null}
     </>
   )
 

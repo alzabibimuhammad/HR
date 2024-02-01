@@ -106,6 +106,7 @@ const AboutOverivew = (Data) => {
     color:'#8090A7',
     marginLeft:3
   }));
+
   const Detail = styled('p')(({  }) => ({
     margin:0,
     marginLeft:6,
@@ -117,6 +118,7 @@ const AboutOverivew = (Data) => {
     flexDirection:'row',
     marginLeft:4,
   }));
+
   const Typo = styled(Typography)(({ }) => ({
     fontSize:'14px',
     fontWeight:600,
@@ -124,6 +126,7 @@ const AboutOverivew = (Data) => {
     color:'#3F4458',
     margin:0
   }))
+  
   const handleDetails =_=>{
     setisWarDetails(true)
   }

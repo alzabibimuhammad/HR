@@ -14,7 +14,7 @@ import ActivityTimeline from './timeLine'
 import UserProfileHeader from './header'
 import { Box, Stack } from '@mui/system'
 import TeamLeader from './teamLeader'
-import { Button, ButtonGroup, Card, CardContent, Tab, Tabs } from '@mui/material'
+import { Button, ButtonGroup, Card, CardContent, Tab, Tabs, Typography } from '@mui/material'
 import { TabContext, TabPanel } from '@mui/lab'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import DatePicker from 'react-datepicker'
@@ -25,6 +25,7 @@ import PersonalInfo from './personalInformation'
 import Skills from './skills'
 import Employment from './employment'
 import Notes from './notes'
+import { useGetEmployeeById } from 'src/features/employee/hooks/useGetEmployeeById'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   borderBottom: '0 !important',
@@ -65,6 +66,11 @@ console.log("🚀 ~ Profiles ~ values:", value)
 
   // ** Hooks
   const router = useRouter()
+ const id =router.query.id
+  console.log("🚀 ~ Profiles ~ router:", router.query.id)
+  const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
+  console.log("🚀 ~ Profiles ~ DataEmployee:", DataEmployee?.data?.data[0])
+  const ProfileData = DataEmployee?.data?.data[0]
   const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
   const handleDateChoose = (date) => {
@@ -80,6 +86,7 @@ console.log("🚀 ~ Profiles ~ values:", value)
     if (data) {
       setIsLoading(false)
     }
+    getEmployee(id)
   }, [data])
   useEffect(() => {
     if (tab && tab !== activeTab) {
@@ -124,12 +131,12 @@ console.log("🚀 ~ Profiles ~ values:", value)
 
     <Box item xs={12} sx={{ height:'120px',zIndex:999 }} marginTop={{sm:'0' ,xs:'25px' }}>
 
-     <UserProfileHeader Data={data} setValues={setValues} values={value} />
+     <UserProfileHeader  Data={data} ProfileData={ProfileData} setValues={setValues} values={value}  />
     </Box>
     <TabPanel value="1">
     <Stack direction={{sm:'row',xs:'column'}} spacing={5} >
     <Box sx={{ flex:1 }}>
-      <AboutOverivew Data={data} />
+      <AboutOverivew Data={data}  />
     </Box>
       <Box sx={{ flex:0 }}>
 
@@ -145,11 +152,12 @@ console.log("🚀 ~ Profiles ~ values:", value)
     <Stack direction={{ sm:'row',xs:'column' }} spacing={6}>
 
     <Stack spacing={6} width={{sm:'40%',xs:'100%'}} direction={'column'}>
-      <PersonalInfo/>
+      <PersonalInfo ProfileData={ProfileData}/>
       <Notes/>
     </Stack>
 
     <Stack width={{sm:'60%',xs:'100%'}} spacing={6} direction={'column'}>
+      
       <Skills/>
       <Employment/>
     </Stack>
@@ -160,7 +168,18 @@ console.log("🚀 ~ Profiles ~ values:", value)
 
 
     <TabPanel value="3">
-      Danielsss
+      
+    <Stack direction={{sm:'row',xs:'column'}} spacing={5} >
+    <Box sx={{ flex:1 }}>
+      <AboutOverivew Data={data} />
+    </Box>
+      <Box sx={{ flex:0 }}>
+
+     <CustomDatePicker selectedDate={SelecetedDate} />
+
+      </Box>
+
+    </Stack>
     </TabPanel>
 
 

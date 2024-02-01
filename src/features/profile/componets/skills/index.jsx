@@ -14,11 +14,13 @@ export default function Skills() {
     color:'#131627'
 
   }))
+
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
     marginLeft:'3px'
 
   }))
+
   const TypoHeader = styled(Typography)(() => ({
     fontSize:'16px',
     marginLeft:'5px',
@@ -27,6 +29,7 @@ export default function Skills() {
     color:'#131627'
 
   }))
+  
   const StackRow = styled(Stack)(({ direction }) => ({
     flexDirection: direction === 'column' ? 'column' : 'row',
   }));

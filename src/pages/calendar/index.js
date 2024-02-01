@@ -55,9 +55,11 @@ const AppCalendar = () => {
   const { skin, direction } = settings
   const mdAbove = useMediaQuery(theme => theme.breakpoints.up('md'))
   useEffect(() => {
-    dispatch(fetchEvents(store.selectedCalendars))
+    dispatch(fetchEvents())
   }, [dispatch, store.selectedCalendars])
 
+  console.log(store.events.data)
+  
   const {data,loading}=useGetEventByMonth()
   const handleLeftSidebarToggle = () => setLeftSidebarOpen(!leftSidebarOpen)
   const handleAddEventSidebarToggle = () => setAddEventSidebarOpen(!addEventSidebarOpen)
@@ -97,7 +99,7 @@ const AppCalendar = () => {
         }}
       >
         <Calendar
-        data={data?.data?.data}
+        data={store.events?.data}
           store={store}
           dispatch={dispatch}
           direction={direction}

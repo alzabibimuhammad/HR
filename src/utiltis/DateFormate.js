@@ -12,7 +12,8 @@ export function FormateDate(date) {
   var year = originalDate.getUTCFullYear();
  
 
-  var formattedDate = (day < 10 ? '0' : '') + year + '-' + (month < 10 ? '0' : '') + month + '-' + day +'';
+  var formattedDate =year + '-' + (month < 10 ? '0' : '') + month + '-' + day +'';
+
 
   return formattedDate;
 }

@@ -87,8 +87,9 @@ const AddEventSidebar = props => {
       }
     }
     if (store.selectedEvent === null || (store.selectedEvent !== null && !store.selectedEvent.title.length)) {
-      console.log(modifiedEvent)
+    
       dispatch(addEvent(modifiedEvent))
+      
     } else {
       dispatch(updateEvent({ id: store.selectedEvent.id, ...modifiedEvent }))
     }

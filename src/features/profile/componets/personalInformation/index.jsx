@@ -5,7 +5,7 @@ import { Box, Stack } from '@mui/system';
 import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 
-export default function PersonalInfo() {
+export default function PersonalInfo({ProfileData}) {
 
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
@@ -14,11 +14,13 @@ export default function PersonalInfo() {
     color:'#131627'
 
   }))
+
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
     marginLeft:'3px'
 
   }))
+
   const TypoHeader = styled(Typography)(() => ({
     fontSize:'16px',
     marginLeft:'5px',
@@ -27,6 +29,7 @@ export default function PersonalInfo() {
     color:'#131627'
 
   }))
+
   const StackRow = styled(Stack)(({ direction }) => ({
     flexDirection: direction === 'column' ? 'column' : 'row',
   }));
@@ -45,7 +48,7 @@ export default function PersonalInfo() {
 
         <StackRow>
           <Typo>ID Number: </Typo>
-          <TypoVal>1000</TypoVal>
+          <TypoVal>{ProfileData.}</TypoVal>
         </StackRow>
 
         <StackRow>

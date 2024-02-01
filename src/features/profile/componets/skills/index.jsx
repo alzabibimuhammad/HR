@@ -5,8 +5,8 @@ import { Box, Stack } from '@mui/system';
 import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 
-export default function Skills() {
-  
+export default function Skills({ProfileData}) {
+
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -29,7 +29,7 @@ export default function Skills() {
     color:'#131627'
 
   }))
-  
+
   const StackRow = styled(Stack)(({ direction }) => ({
     flexDirection: direction === 'column' ? 'column' : 'row',
   }));
@@ -51,11 +51,12 @@ export default function Skills() {
           <Typo >Education:</Typo>
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <TypoVal>Master Degree in Computer Science at Damascus University</TypoVal>
+            <TypoVal>{ProfileData?.study_situations[0]?.study}</TypoVal>
           </li>
-          <li>
-            <TypoVal >Master Degree in Computer Science at Damascus University</TypoVal>
+            <li>
+            <TypoVal>{ProfileData?.study_situations[0]?.degree}</TypoVal>
           </li>
+
           </ul>
         </Stack>
 
@@ -63,22 +64,18 @@ export default function Skills() {
           <Typo >Certifications:</Typo>
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <TypoVal>UX Design Google Certificate </TypoVal>
+            <TypoVal>{ProfileData?.certificates[0]?.content} </TypoVal>
           </li>
-          <li>
-            <TypoVal >UX Design Google Certificate </TypoVal>
-          </li>
+
           </ul>
         </Stack>
         <Stack direction={'column'}>
           <Typo >Career:</Typo>
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <TypoVal>Former UI UX Designer at Idealize </TypoVal>
+            <TypoVal>{ProfileData?.careers[0]?.content}</TypoVal>
           </li>
-          <li>
-            <TypoVal >Former UI UX Designer at Idealize </TypoVal>
-          </li>
+
           </ul>
         </Stack>
         <Stack direction={'column'}>
@@ -86,7 +83,7 @@ export default function Skills() {
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li >
             <StackRow>
-              <TypoVal>Figma</TypoVal>
+              <TypoVal>{ProfileData?.careers[0]?.content}</TypoVal>
               <Rating name="size-medium" defaultValue={2} />
             </StackRow>
           </li>
@@ -109,16 +106,11 @@ export default function Skills() {
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li >
             <StackRow>
-              <TypoVal>ara</TypoVal>
-              <Rating name="size-medium" defaultValue={2} />
+              <TypoVal>{ProfileData.languages[0].name}</TypoVal>
+              <Rating name="size-medium" defaultValue={ProfileData.languages[0].rate} />
             </StackRow>
           </li>
-          <li >
-            <StackRow>
-              <TypoVal>eng</TypoVal>
-              <Rating name="size-medium" defaultValue={2} />
-            </StackRow>
-          </li>
+
 
           </ul>
         </Stack>

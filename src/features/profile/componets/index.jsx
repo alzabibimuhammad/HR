@@ -157,8 +157,8 @@ console.log("🚀 ~ Profiles ~ values:", value)
     </Stack>
 
     <Stack width={{sm:'60%',xs:'100%'}} spacing={6} direction={'column'}>
-      
-      <Skills/>
+
+      <Skills ProfileData={ProfileData}/>
       <Employment/>
     </Stack>
     </Stack>
@@ -168,7 +168,7 @@ console.log("🚀 ~ Profiles ~ values:", value)
 
 
     <TabPanel value="3">
-      
+
     <Stack direction={{sm:'row',xs:'column'}} spacing={5} >
     <Box sx={{ flex:1 }}>
       <AboutOverivew Data={data} />

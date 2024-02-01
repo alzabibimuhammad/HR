@@ -51,7 +51,7 @@ const navigation = () => {
     {
       title: 'Salary',
       icon: 'tabler:cash-banknote',
-      path: '/calendar'
+      path: '/salary'
     },
     {
       title: 'Employees',

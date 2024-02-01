@@ -47,8 +47,8 @@ const CustomTextField = styled(TextField)({
 });
 
 React.useEffect(() => {
-  phoneNumbersappend({ phonenumber: '' });
-  EmailAppend({email: [{ email: '' }] });
+  phoneNumbersappend();
+  EmailAppend();
 
 }, [phoneNumbersappend,EmailAppend]);
 
@@ -106,7 +106,7 @@ React.useEffect(() => {
       {phoneNumbersfields.map((phoneNumber, index) => (
         <Box key={phoneNumber.id}>
           <Controller
-            name={`contacts.phonenumbers.${index}.phonenumber`}
+            name={`contacts.phonenumbers.${index}`}
             control={control}
             defaultValue={phoneNumber.number}
             render={({ field }) => (
@@ -140,7 +140,7 @@ React.useEffect(() => {
       {EmailFields.map((Email, index) => (
         <Box key={Email.id}>
           <Controller
-            name={`contacts.emails.${index}.email`}
+            name={`contacts.emails.${index}`}
             control={control}
             defaultValue={Email.id}
             render={({ field }) => (

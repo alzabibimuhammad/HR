@@ -41,7 +41,7 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
   });
 
  const handleAddClickCertificate = () => {
-  certificateAppend('certificates', { certificate: '' });
+  certificateAppend('certificates', { });
   };
 
 
@@ -58,7 +58,7 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
   });
 
  const handleAddClickExperience = () => {
-  experienceAppend('experiences', { experience: '' });
+  experienceAppend('experiences', {  });
   };
 
 
@@ -111,7 +111,7 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
 
 useEffect(()=>{
   append('educations', { study: '', degree: '' });
-  certificateAppend('certificates', { certificate: '' });
+  certificateAppend('certificates', {  });
   experienceAppend('experiences', { experience: '' });
   skillsAppend('skills', { skills: '', rate: "" });
   LanguageAppend('languages', { languages: '',rate:"" });
@@ -243,7 +243,7 @@ useEffect(()=>{
                   <CloseIcon sx={{cursor:"pointer",'&:hover': { color: 'red' }}} onClick={() => handleRemoveClickcertificate(index)} />
                  )}
               <Controller
-                name={`certificates[${index}].certificate`}
+                name={`certificates[${index}]`}
                 control={control}
                 defaultValue={field.certificate}
                 render={({ field }) => (
@@ -285,7 +285,7 @@ useEffect(()=>{
             />
           )}
           <Controller
-            name={`experiences[${index}].experience`}
+            name={`experiences[${index}]`}
             control={control}
             defaultValue={field.experiences}
             render={({ field }) => (

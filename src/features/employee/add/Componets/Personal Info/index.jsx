@@ -114,6 +114,28 @@ export default function Info({onDataChange,Controller,control,errors}) {
                 />
                 )}
               />
+            <Controller
+            name={`health_status`}
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                fullWidth
+
+                size='small'
+                label={
+                  <Stack direction={'row'} spacing={2} >
+                    <Box>
+                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgID)}`}/>
+                      </Box>
+                      <Box>
+                        {'Health Status'}
+                    </Box>
+                  </Stack>
+                }
+                />
+                )}
+              />
 
             <Controller
             name={`gender`}
@@ -134,9 +156,9 @@ export default function Info({onDataChange,Controller,control,errors}) {
               }}
               size='small'
                   >
-                    <MenuItem value='gender'>{`${t("gender")}`}</MenuItem>
-                    <MenuItem value='Male'>{`${t("Male")}`}</MenuItem>
-                    <MenuItem value='feMale'>{`${t(" feMale")}`}</MenuItem>
+                    <MenuItem value='gender'>{`${t("Gender")}`}</MenuItem>
+                    <MenuItem value='male'>{`${t("Male")}`}</MenuItem>
+                    <MenuItem value='female'>{`${t(" Female")}`}</MenuItem>
                 </TextField>
   )}
 />

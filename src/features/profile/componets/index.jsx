@@ -62,19 +62,15 @@ const Profiles = ({ tab, data }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [SelecetedDate,SetSelectedDate]=useState()
 const [value,setValues]=useState('1')
-console.log("🚀 ~ Profiles ~ values:", value)
 
   // ** Hooks
   const router = useRouter()
  const id =router.query.id
-  console.log("🚀 ~ Profiles ~ router:", router.query.id)
   const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
-  console.log("🚀 ~ Profiles ~ DataEmployee:", DataEmployee?.data?.data[0])
   const ProfileData = DataEmployee?.data?.data[0]
   const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
   const handleDateChoose = (date) => {
-    console.log("🚀 ~ handleDateChoose ~ date:", date)
     const formattedDate = FormateDate(date);
     SetSelectedDate(date)
 

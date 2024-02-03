@@ -18,7 +18,6 @@ const PlayersPage = () => {
     setData(store.data?.data)
   }, [dispatch, store?.data.length])
 
-  console.log("data",Data);
 
 
 

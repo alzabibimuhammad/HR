@@ -139,12 +139,10 @@ const Users = ({ rows }) => {
 
 
     const handleClick = () => {
-      console.log('hi dani');
     };
 
     const {data , loading } = useGetMvp()
 
-    console.log('mvp',data?.data?.data);
   return    <>
 
     <Box sx={{ margin:0,padding:0 }} >

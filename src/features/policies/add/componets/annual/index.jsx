@@ -24,7 +24,6 @@ export default function Annual({Controller,control}) {
       setChecked(event.target.checked);
     };
 
-console.log(checked);
 
     const { fields, append, remove } = useFieldArray({
       control,

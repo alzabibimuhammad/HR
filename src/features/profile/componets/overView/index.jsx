@@ -14,6 +14,7 @@ import { styled } from '@mui/material/styles'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useState } from 'react'
+
 const renderList = arr => {
   if (arr && arr.length) {
     return arr.map((item, index) => {
@@ -87,6 +88,7 @@ const AboutOverivew = (Data) => {
   const [isCheckout,setisCheckout] = useState(false)
   const [isAbsences,setisAbsences] = useState(false)
 
+console.log(Data);
 
   const Header = styled('p')(({ }) => ({
     fontSize:'16px',
@@ -126,7 +128,7 @@ const AboutOverivew = (Data) => {
     color:'#3F4458',
     margin:0
   }))
-  
+
   const handleDetails =_=>{
     setisWarDetails(true)
   }

@@ -33,7 +33,6 @@ const useSalaryColumns = () => {
               <Avatar alt=''  />
               <Typography  style={{fontSize:'14px', marginLeft:'2px' }} >{params?.row?.first_name}</Typography>
               <Typography style={{ fontSize:'14px',marginLeft:'3px' }} >{params?.row?.last_name}</Typography>
-                {console.log(params)}
               </>
 
             );

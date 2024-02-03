@@ -29,7 +29,7 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
     width: '600px', // Set your desired width
   };
 
-
+console.log(startDate);
 
 
   return (
@@ -39,7 +39,7 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
         <Typography sx={{ fontSize:'20px',fontWeight:'600',color:'#8090A7' }}>
         Filter
             </Typography>
-            <Box sx={{display:'flex', justifyContent:'end' }}>
+            <Box sx={{display:'flex', justifyContent:'center' }}>
 
       <Button variant='contained' color='secondary' onClick={toggleDatePickerMonth}  sx={{mr:2, backgroundColor: showMonthPicker === 'month' ? '#6AB2DF' : 'secondary'}}>
 Month      </Button>

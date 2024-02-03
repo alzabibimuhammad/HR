@@ -146,7 +146,6 @@ const SalaryDataGrid = ({ rows }) => {
 
 
     const handleClick = () => {
-      console.log('hi dani');
     };
 
 

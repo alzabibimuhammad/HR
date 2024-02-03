@@ -42,7 +42,6 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
     const handleUpPaid = () => {
-      console.log(Paid);
       setPaid(Paid + 1);
     }
 
@@ -53,7 +52,6 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
     }
 
     const handleUpUnpaid = () => {
-      console.log(Unpaid);
       setUnpaid(Unpaid + 1);
     }
 
@@ -64,7 +62,6 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
     }
 
     const handleUpSick = () => {
-      console.log(Sick);
       setSick(Sick + 1);
     }
 

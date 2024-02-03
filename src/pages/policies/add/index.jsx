@@ -25,7 +25,6 @@ export default function Policies() {
   const [Unpaid  , setUnpaid ] = useState(0);
   const [Sick , setSick] = useState(0);
 
-  console.log("🚀 ~ Policies ~ alert:", alert)
 
 
 
@@ -59,7 +58,6 @@ export default function Policies() {
      // formData.append('image',ProfileImage)
 
      // data.image = ProfileImage;
-     // console.log("🚀 ~ handleDataSubmit ~ data:", data)
 
      data.warnings.alerts_to_warnings=alert
      data.warnings.warningsto_dismissal=warningsto
@@ -69,7 +67,6 @@ export default function Policies() {
      data.work_time.work_days=days
 
       AddPolicies(data)
-     console.log(data);
    } catch (error) {
 
    }

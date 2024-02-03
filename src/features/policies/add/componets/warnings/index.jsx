@@ -39,7 +39,6 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
     }))
 
     const handleUpAlert = _=>{
-      console.log(alert);
       setAlert(alert+1)
     }
 
@@ -49,7 +48,6 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
     }
 
     const handleUpWaring = _=>{
-      console.log(warningsto);
       setWarningsto(warningsto+1)
     }
 

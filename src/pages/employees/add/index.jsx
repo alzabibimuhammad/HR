@@ -79,7 +79,6 @@ export default function Add() {
       formData.append('image',ProfileImage)
 
       data.image = ProfileImage;
-      console.log("🚀 ~ handleDataSubmit ~ data:", data)
       addUsers(data)
     } catch (error) {
 
@@ -102,7 +101,6 @@ export default function Add() {
       // addUsers(formData)
 //  }
      //   catch (error) {
-      //    console.log(error);
     //    }
     // }
 

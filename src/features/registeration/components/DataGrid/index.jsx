@@ -139,7 +139,6 @@ const Registration = ({ Data, setFilterDate }) => {
     </Stack>
   )
 }
-  console.log("🚀 ~ Registration ~ RegistrationData:", RegistrationData)
-  console.log("🚀 ~ Registration ~ RegistrationData:", RegistrationData)
+
 
 export default Registration

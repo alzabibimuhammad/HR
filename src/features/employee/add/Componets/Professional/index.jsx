@@ -13,7 +13,6 @@ export default function Professional({onDataChange,Controller,control}) {
   const [team, setTeam] = useState('');
 
   const {data}=useSelectInput()
-  console.log(data?.data?.data);
 
 
   const handleRoleChange = (e) => {

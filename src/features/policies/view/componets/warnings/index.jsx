@@ -4,7 +4,6 @@ import React from 'react'
 import styled from 'styled-components';
 
 export default function Warning({data}) {
-console.log("🚀 ~ Warning ~ data:", data)
 
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',

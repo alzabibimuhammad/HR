@@ -13,7 +13,6 @@ const Registration = Data => {
   const columns = useRegistrationColumn();
 
   let {data} = Data?.Data
-  console.log("🚀 ~ Registration ~ data:", data)
 
   const [rows,setRows] = useState(data)
 

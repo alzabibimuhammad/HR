@@ -10,7 +10,6 @@ export const RegistrationData = elements => {
   const CurrentFormattedTime = `${CurrentHours}:${CurrentMinutes}`;
 
 
-  console.log('currentDate',CurrentFormattedTime<endTime);
 
   return elements?.[0]?.map(element => {
     let checkinDate,checkoutDate;

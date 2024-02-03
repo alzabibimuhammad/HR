@@ -38,7 +38,6 @@ const useInquiriesColumns = () => {
   const [showMoreMap, setShowMoreMap] = useState({});
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [rowData, setrowData] = React.useState(null);
-console.log(rowData);
   const open = Boolean(anchorEl);
 
   const deleteContractMutation = useDeleteRequest();
@@ -50,12 +49,10 @@ console.log(rowData);
 
   const handleApproveClick = (params) => {
      AccepteRequest(params?.row?.id)
-    console.log(params?.row?.id);
   };
 
   const handleRejectClick = (params) => {
     RejectRequest(params?.row?.id)
-    console.log(params?.row?.id);
   };
 
 
@@ -106,7 +103,6 @@ console.log(rowData);
 
 //     // handleCloseAnchor();
 
-//     console.log("foot");
 
 //     // handleDeleteClick()
 //  }
@@ -187,13 +183,13 @@ console.log(rowData);
           </div>
           {showMoreMap[id] && (
                 <div>
-                
+
                   <Typography sx={{ fontSize: '14px' }}>
                   {content.slice(40)}
             </Typography>
                 </div>
               )}
-        
+
           {shouldShowMore && (
             <>
               <Typography
@@ -206,13 +202,13 @@ console.log(rowData);
                   {showMoreMap[id] ? "Show Less" : "Show More"}
                 </p>
               </Typography>
-        
-       
+
+
             </>
           )}
         </Box>
-        
-        
+
+
         );
       },
     },
@@ -353,28 +349,28 @@ console.log(rowData);
  </Button>
   </>
 ) : params.row.status === 'rejected' ? (
-  
+
   <Box sx={{display:'flex', justifyContent:'center'}}>
  <Typography
       sx={{   fontWeight: "500", fontSize: "14px", color:'#DF2E38' }}
     >
       {t('Decline')}
-    
 
-    </Typography>  
+
+    </Typography>
     </Box>
-  
+
 ) : (
   <Box sx={{display:'flex', justifyContent:'center'}}>
   <Typography
        sx={{   fontWeight: "500", fontSize: "14px", color:'#91C483' }}
      >
        {t('Approve')}
-     
- 
-     </Typography>  
+
+
+     </Typography>
      </Box>
- 
+
 )}
 
     </Box>

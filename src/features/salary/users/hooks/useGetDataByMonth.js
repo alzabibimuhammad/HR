@@ -1,13 +1,14 @@
 
-import { useQuery } from '@tanstack/react-query'
-import GetEventByMonth from '../api/EventByMonth'
-import GetDataByMonth from '../api/DataByMonth'
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import DataByMonth from "../api/DataByMonth";
 
-const useGetDataByMonth = () => {
-  const query = useQuery({ queryKey: ['date'], queryFn: GetDataByMonth })
+export const useGetDataByMonth = () => {
+  const queryClient = useQueryClient();
 
-  return query
-}
-
-export default useGetDataByMonth
-
+  return useMutation({
+    mutationFn:DataByMonth,
+    onSuccess: () => {
+      queryClient.invalidateQueries("salary");
+    },
+  });
+};

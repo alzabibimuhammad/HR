@@ -4,25 +4,50 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
+import { FormateDate } from 'src/utiltis/DateFormate';
+import { DateFormateOfMonth } from 'src/utiltis/DateFormateOfMonth';
+import { DateFormateOfYear } from 'src/utiltis/DateFormateOfYear';
 
 export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
   const [view, setView] = useState('month');
   const [startDate, setStartDate] = useState(new Date());
-  const [showMonthPicker, setShowMonthPicker] = useState('day');
+  const [showMonthPicker, setShowMonthPicker] = useState('month');
 
   const toggleDatePickerMonth = () => {
     setStartDate(new Date());
     setShowMonthPicker('month');
+
   };
 
-  const toggleDatePickerDay = () => {
-    setStartDate(new Date());
-    setShowMonthPicker('day');
-  };
+
 
   const toggleDatePickerYear = () => {
     setStartDate(new Date());
     setShowMonthPicker('year');
+  };
+
+  const handleDateSend = (date) => {
+
+    if(showMonthPicker==='year'){
+      console.log("🚀 ~ handleDateSend ~ showMonthPicker:", showMonthPicker)
+
+      const formattedDate = DateFormateOfYear(date);
+      setStartDate(date)
+      handleDateChoose(formattedDate)
+    }
+    if(showMonthPicker==='month'){
+      const formattedDate = DateFormateOfMonth(date);
+      setStartDate(date)
+      handleDateChoose(formattedDate)
+    }
+
+  };
+
+  const handleDateSendMonth = (date) => {
+    console.log("🚀 ~ handleDateSendMonth ~ date:", date)
+    const formattedDate = DateFormateOfMonth(date);
+    setStartDate(date)
+    handleDateChoose(formattedDate)
   };
 
   const datePickerStyle = {
@@ -61,7 +86,7 @@ Month      </Button>
         >
 
           <DatePicker inline selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            onChange={(date) => handleDateSend(date)}
             dateFormat={showMonthPicker ? 'MMM' : 'yyyy'}
             showMonthYearPicker={showMonthPicker==='month'}
             showYearPicker={showMonthPicker==='year'}

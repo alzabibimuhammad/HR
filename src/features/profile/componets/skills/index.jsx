@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 
 export default function Skills({ProfileData}) {
+console.log("🚀 ~ Skills ~ ProfileData:", ProfileData)
 
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
@@ -49,70 +50,83 @@ export default function Skills({ProfileData}) {
 
         <Stack direction={'column'}>
           <Typo >Education:</Typo>
+          {ProfileData && ProfileData.study_situations && ProfileData.study_situations.map((val, index) => ( <>
+
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <TypoVal>{ProfileData?.study_situations[0]?.study}</TypoVal>
+            <TypoVal>{val?.study}</TypoVal>
           </li>
             <li>
-            <TypoVal>{ProfileData?.study_situations[0]?.degree}</TypoVal>
+            <TypoVal>{val?.degree}</TypoVal>
           </li>
 
           </ul>
+            </>
+  ))}
         </Stack>
 
         <Stack direction={'column'}>
           <Typo >Certifications:</Typo>
+          {ProfileData && ProfileData.certificates && ProfileData.certificates.map((val, index) => ( <>
+
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <TypoVal>{ProfileData?.certificates[0]?.content} </TypoVal>
+            <TypoVal>{val.content} </TypoVal>
           </li>
-
           </ul>
+            </>
+  ))}
+
         </Stack>
         <Stack direction={'column'}>
           <Typo >Career:</Typo>
+        {ProfileData && ProfileData.careers && ProfileData.careers.map((val, index) => ( <>
+
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <TypoVal>{ProfileData?.careers[0]?.content}</TypoVal>
+            <TypoVal>{val?.content}</TypoVal>
           </li>
 
           </ul>
+          </>
+  ))}
         </Stack>
         <Stack direction={'column'}>
           <Typo >Skills:</Typo>
-          <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
-            <li >
-            <StackRow>
-              <TypoVal>{ProfileData?.careers[0]?.content}</TypoVal>
-              <Rating name="size-medium" defaultValue={2} />
-            </StackRow>
-          </li>
+          {ProfileData && ProfileData.skills
+ && ProfileData.skills
+ .map((val, index) => ( <>
+
+  <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
+
           <li >
             <StackRow>
-              <TypoVal>Figma</TypoVal>
-              <Rating name="size-medium" defaultValue={2} />
-            </StackRow>
-          </li>
-          <li >
-            <StackRow>
-              <TypoVal>Figma</TypoVal>
-              <Rating name="size-medium" defaultValue={2} />
+              <TypoVal>{val?.name}</TypoVal>
+              <Rating name="size-medium" defaultValue={val?.rate} />
             </StackRow>
           </li>
           </ul>
+
+ </>
+  ))}
         </Stack>
         <Stack direction={'column'}>
           <Typo >Languages:</Typo>
-          <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
-            <li >
-            <StackRow>
-              <TypoVal>{ProfileData.languages[0].name}</TypoVal>
-              <Rating name="size-medium" defaultValue={ProfileData.languages[0].rate} />
-            </StackRow>
+            {ProfileData && ProfileData.languages && ProfileData.languages.map((val, index) => ( <>
+              <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
+              <li >
+  <StackRow key={index}>
+    <TypoVal>{val?.name}</TypoVal>
+    <Rating name="size-medium" defaultValue={val?.rate} />
+  </StackRow>
           </li>
-
-
           </ul>
+            </>
+))}
+
+
+
+
         </Stack>
 
         </Stack>

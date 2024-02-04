@@ -162,7 +162,7 @@ const [value,setValues]=useState('1')
     <Stack width={{sm:'60%',xs:'100%'}} spacing={6} direction={'column'}>
 
       <Skills ProfileData={ProfileData}/>
-      <Employment/>
+      <Employment ProfileData={ProfileData}/>
     </Stack>
     </Stack>
 

@@ -75,14 +75,33 @@ export default function PersonalInfo({ProfileData}) {
           <Typo>Address:</Typo>
           <TypoVal>{ProfileData?.address}</TypoVal>
         </StackRow>
-        <StackRow>
-          <Typo>Phone Number:</Typo>
-          <TypoVal>{ProfileData?.user_info?.contact}</TypoVal>
+        <Stack>
+        {ProfileData?.my_contacts?.map((contact, index) => (
+  contact.type === 'user_num' && (
+    <StackRow sx={{padding:"3px"}}  key={index}>
+      <Typo>Phone Number{index -1}:</Typo>
+      <TypoVal>{contact.contact}</TypoVal>
+    </StackRow>
+  )
+))}
+
+        </Stack>
+        <StackRow >
+
+        <Typo>Email:</Typo>
+
+        <TypoVal>{ProfileData.email}</TypoVal>
         </StackRow>
-        <StackRow>
-          <Typo>Email:</Typo>
-          <TypoVal>{ProfileData?.email}</TypoVal>
-        </StackRow>
+
+        {ProfileData?.my_contacts?.map((contact, index) => (
+  contact.type === 'email' && (
+    <StackRow key={index}>
+      <Typo>Email {index +1}:</Typo>
+
+      <TypoVal>{contact.contact}</TypoVal>
+    </StackRow>
+  )
+))}
 
         <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Emergency:</TypoHeader>
         <ul style={{ padding:0,margin:0,marginLeft:'6%'}} >

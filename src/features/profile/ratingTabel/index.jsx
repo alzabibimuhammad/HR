@@ -2,34 +2,27 @@ import React, { useState } from 'react';
 import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton, Avatar } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import { useTranslation } from 'react-i18next';
 import CustomDataGrid from 'src/@core/components/custom-datagrid'
-import useUserColumns from '../../hooks/useUserColumns';
-import { UsersData } from '../../infrastructure';
+import { RatingData } from '../ratingTabel/infrastructure';
 import { Box } from '@mui/system';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import FallbackSpinner from '../spinner';
 import { useEffect } from 'react';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import DrawerForm from '../spinner/DrawerForm';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAttendancePercentage } from 'src/pages/dashboard/store';
-import useGetMvp from '../../hooks/useGetMvp';
+import { useGetRatingById } from './hooks/useGetRatingById';
 
-const Users = ({ rows }) => {
+const RatingTabel = () => {
 
-  const columns = useUserColumns();
+  const columns = useGetRatingById();
   const [openParent, setOpenParent] = React.useState(false);
   const { t } = useTranslation()
+const {data,isloading}=useGetRatingById()
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
   };
 
 
-  const [fdata , setfdata] = useState(rows);
+  const [fdata , setfdata] = useState(data);
 
   const [role, setRole] = useState('');
 
@@ -47,28 +40,28 @@ const Users = ({ rows }) => {
     useEffect(()=>{
       let filteredData;
       if(role && department){
-        filteredData = rows?.data?.data?.filter((row) => {
+        filteredData = data?.data?.data?.filter((row) => {
           return row?.department?.name === department && row.role===role;
         });
         setfdata({'data':{'data':filteredData}});
 
       }
       else if(role && department==''){
-        filteredData = rows?.data?.data?.filter((row) => {
+        filteredData = data?.data?.data?.filter((row) => {
           return row.role===role;
         });
         setfdata({'data':{'data':filteredData}});
 
       }
       else if(department && role==''){
-        filteredData = rows?.data?.data?.filter((row) => {
+        filteredData = data?.data?.data?.filter((row) => {
           return row?.department?.name === department ;
         });
         setfdata({'data':{'data':filteredData}});
 
       }
       else
-        setfdata(rows);
+        setfdata(data);
 
     },[role,department])
 
@@ -76,11 +69,11 @@ const Users = ({ rows }) => {
     const searchText = event.target.value;
     let searchData;
     if (!searchText) {
-      setfdata(rows);
+      setfdata(data);
     }
     else {
 
-      searchData= rows?.data?.data?.filter((element) => {
+      searchData= data?.data?.data?.filter((element) => {
         if( element?.first_name.toLowerCase()?.includes(searchText.toLowerCase()) ){
           return element?.first_name.toLowerCase()?.includes(searchText.toLowerCase());
         }
@@ -132,77 +125,18 @@ const Users = ({ rows }) => {
  const dispatch = useDispatch()
  const store = useSelector(state => state.Dashboard)
 
- useEffect(() => {
-    dispatch(getAttendancePercentage())
-    setpercentageData(store?.AttendancePercentage)
-
- }, [dispatch,store?.AttendancePercentage?.length])
-
 
     const handleClick = () => {
       console.log('hi dani');
     };
 
-    const {data , loading } = useGetMvp()
+  
 
-    console.log('mvp',data?.data?.data);
+
 
   return    <>
 
-    <Box sx={{ margin:0,padding:0 }} >
-        <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2-content"
-              id="panel2-header"
-              >
-              <Stack  width={'50%'}  direction={'row'} >
-
-                <Stack direction={'row'}>
-                <Typography>{percentageData?.data?.present_employees}</Typography>/
-
-                <Typography>{percentageData?.data?.total_employees}</Typography>
-                </Stack>
-
-                <Box marginTop={'5px'} marginLeft={'5px'} width={'50%'} >
-                  <FallbackSpinner total={percentageData?.data?.total_employees} active={percentageData?.data?.present_employees} />
-                </Box>
-
-                <Typography marginLeft={'5px'}>{(percentageData?.data?.present_employees/percentageData?.data?.total_employees)*100}%</Typography>
-
-              </Stack>
-            </AccordionSummary>
-
-            <AccordionDetails>
-              <Stack direction={'row'} justifyContent={'start'} alignItems={'center'} >
-                <Typography>Employee of the month</Typography>
-              <IconButton
-                aria-label="more"
-                id="long-button"
-                aria-controls={open ? 'long-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-haspopup="true"
-                onClick={handleDrawerOpen}
-                sx={{ border:'none' }}
-              >
-            <MoreHorizIcon />
-          </IconButton>
-          </Stack>
-              <Stack direction={'row'} justifyContent={'start'} alignItems={'center'} spacing={2} >
-              <Avatar/>
-
-              <Typography>
-                {data?.data?.data?.user?.first_name}
-              </Typography>
-              <Typography>
-                {data?.data?.data?.user?.last_name}
-              </Typography>
-              </Stack>
-            </AccordionDetails>
-
-          </Accordion>
-          <DrawerForm  open={openParent} setOpenParent={setOpenParent} />
-          </Box>
+    
 
 
             <Card>
@@ -292,7 +226,7 @@ const Users = ({ rows }) => {
                   </TextField>
                   </Stack>
 
-                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(fdata)|| []}    />: null }
+                {fdata ? <CustomDataGrid columns={columns}  sx={gridStyles.root} data={RatingData(fdata)|| []}    />: null }
 
               </Stack>
               </CardContent>
@@ -301,4 +235,4 @@ const Users = ({ rows }) => {
 
 };
 
-export default Users;
+export default RatingTabel;

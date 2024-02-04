@@ -14,7 +14,7 @@ import ActivityTimeline from './timeLine'
 import UserProfileHeader from './header'
 import { Box, Stack } from '@mui/system'
 import TeamLeader from './teamLeader'
-import { Button, ButtonGroup, Card, CardContent, Tab, Tabs, Typography } from '@mui/material'
+import { Button, ButtonGroup, Card, CardContent, CardHeader, Tab, Tabs, Typography } from '@mui/material'
 import { TabContext, TabPanel } from '@mui/lab'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import DatePicker from 'react-datepicker'
@@ -26,6 +26,10 @@ import Skills from './skills'
 import Employment from './employment'
 import Notes from './notes'
 import { useGetEmployeeById } from 'src/features/employee/hooks/useGetEmployeeById'
+import { useDispatch } from 'react-redux'
+import{setUserId } from '../../../store/apps/user'
+import RatingTabel from '../ratingTabel'
+import Mange from './manage'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   borderBottom: '0 !important',
@@ -67,6 +71,8 @@ console.log("🚀 ~ Profiles ~ values:", value)
   // ** Hooks
   const router = useRouter()
  const id =router.query.id
+ const dispatch = useDispatch();
+ dispatch(setUserId(id));
   console.log("🚀 ~ Profiles ~ router:", router.query.id)
   const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
   console.log("🚀 ~ Profiles ~ DataEmployee:", DataEmployee?.data?.data[0])
@@ -169,19 +175,13 @@ console.log("🚀 ~ Profiles ~ values:", value)
 
     <TabPanel value="3">
       
-    <Stack direction={{sm:'row',xs:'column'}} spacing={5} >
-    <Box sx={{ flex:1 }}>
-      <AboutOverivew Data={data} />
-    </Box>
-      <Box sx={{ flex:0 }}>
-
-     <CustomDatePicker selectedDate={SelecetedDate} />
-
-      </Box>
-
-    </Stack>
+  <Mange/>
     </TabPanel>
 
+    <TabPanel value="4">
+      
+   <RatingTabel/>
+      </TabPanel>
 
 </Stack>
 </TabContext>

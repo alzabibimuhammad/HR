@@ -10,7 +10,8 @@ export const store = configureStore({
   reducer: {
     calendar,
     email,
-    Dashboard
+    Dashboard,
+    user
 
 
   },

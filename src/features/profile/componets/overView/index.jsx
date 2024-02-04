@@ -14,6 +14,8 @@ import { styled } from '@mui/material/styles'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useState } from 'react'
+import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
+
 const renderList = arr => {
   if (arr && arr.length) {
     return arr.map((item, index) => {
@@ -75,7 +77,8 @@ const renderTeams = arr => {
   }
 }
 
-const AboutOverivew = (Data) => {
+const AboutOverivew = ({Data,ProfileData}) => {
+
   const {t} = useTranslation();
   const [isWarDetails,setisWarDetails] = useState(false)
   const [isAlertDetails,setisAlertDetails] = useState(false)
@@ -86,7 +89,8 @@ const AboutOverivew = (Data) => {
   const [isCheckin,setisCheckin] = useState(false)
   const [isCheckout,setisCheckout] = useState(false)
   const [isAbsences,setisAbsences] = useState(false)
-
+  const {mutate:ReportDay,data,isloading}=useReportByDay()
+  console.log("🚀 ~ AboutOverivew ~ data:", data)
 
   const Header = styled('p')(({ }) => ({
     fontSize:'16px',
@@ -126,7 +130,7 @@ const AboutOverivew = (Data) => {
     color:'#3F4458',
     margin:0
   }))
-  
+
   const handleDetails =_=>{
     setisWarDetails(true)
   }

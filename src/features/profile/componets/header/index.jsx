@@ -14,6 +14,7 @@ import Icon from 'src/@core/components/icon'
 import { useTranslation } from 'react-i18next'
 import { Tab, Tabs } from '@mui/material'
 import { TabPanel } from '@mui/lab'
+import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
 
 const ProfilePicture = styled('img')(({ theme }) => ({
   width: 108,
@@ -63,7 +64,8 @@ const UserProfileHeader = ({Data,setValues,value,ProfileData}) => {
             >
               <Tab value="1" label="Reports" />
               <Tab value="2" label="Profile" />
-              <Tab value="3" label="manage" />
+              <Tab value="3" label="Manage" />
+              <Tab value="4" label="Reviews" />
             </TabsProfile>
 
           </Box>

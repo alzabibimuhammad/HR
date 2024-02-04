@@ -48,7 +48,7 @@ export default function PersonalInfo({ProfileData}) {
 
         <StackRow>
           <Typo>ID Number: </Typo>
-          <TypoVal>{ProfileData.}</TypoVal>
+          {/* <TypoVal>{ProfileData.}</TypoVal> */}
         </StackRow>
 
         <StackRow>

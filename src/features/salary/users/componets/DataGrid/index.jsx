@@ -14,12 +14,18 @@ import { CustomDatePicker } from 'src/@core/components/customPickerDate';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { CustomDatePickerSalary } from 'src/@core/components/customPickerSalary';
+import { useGetDataByMonth } from '../../hooks/useGetDataByMonth';
+
 
 const SalaryDataGrid = ({ rows }) => {
+console.log("🚀 ~ SalaryDataGrid ~ rows:", rows)
 
   const columns = useSalaryColumns();
   const { t } = useTranslation()
 
+ const {data:GetDataByMonth,mutate:getData}= useGetDataByMonth()
+
+console.log(GetDataByMonth);
 
   const [fdata , setfdata] = useState(rows);
 
@@ -240,7 +246,7 @@ const SalaryDataGrid = ({ rows }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-        <CustomDatePickerSalary selectedDate={1} />
+        <CustomDatePickerSalary selectedDate={1} handleDateChoose={getData} />
         </Box>
       </Modal>
 
@@ -255,7 +261,7 @@ const SalaryDataGrid = ({ rows }) => {
 
 
 
-                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={SalaryData(fdata)|| []}    />: null }
+                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={SalaryData(rows)|| []}    />: null }
 
               </Stack>
               </CardContent>

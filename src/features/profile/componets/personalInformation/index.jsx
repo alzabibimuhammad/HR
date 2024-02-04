@@ -53,17 +53,17 @@ export default function PersonalInfo({ProfileData}) {
 
         <StackRow>
           <Typo>Birth Date: </Typo>
-          <TypoVal>2001-12-24</TypoVal>
+          <TypoVal>{ProfileData?.user_info?.birth_date}</TypoVal>
         </StackRow>
 
         <StackRow>
           <Typo>Marital Status:</Typo>
-          <TypoVal>-</TypoVal>
+          <TypoVal>{ProfileData?.user_info?.military_situation}</TypoVal>
         </StackRow>
 
         <StackRow>
           <Typo>Social status:</Typo>
-          <TypoVal>Single</TypoVal>
+          <TypoVal>{ProfileData?.user_info?.social_situation}</TypoVal>
         </StackRow>
 
         <StackRow>
@@ -73,15 +73,15 @@ export default function PersonalInfo({ProfileData}) {
 
         <StackRow>
           <Typo>Address:</Typo>
-          <TypoVal>babtomma</TypoVal>
+          <TypoVal>{ProfileData?.address}</TypoVal>
         </StackRow>
         <StackRow>
           <Typo>Phone Number:</Typo>
-          <TypoVal>0932392808</TypoVal>
+          <TypoVal>{ProfileData?.user_info?.contact}</TypoVal>
         </StackRow>
         <StackRow>
           <Typo>Email:</Typo>
-          <TypoVal>muhammad@gmail.com</TypoVal>
+          <TypoVal>{ProfileData?.email}</TypoVal>
         </StackRow>
 
         <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Emergency:</TypoHeader>
@@ -119,15 +119,15 @@ export default function PersonalInfo({ProfileData}) {
 
         <StackRow>
           <Typo>Specialization:</Typo>
-          <TypoVal>Front-end</TypoVal>
+          <TypoVal>{ProfileData?.specialization}</TypoVal>
         </StackRow>
         <StackRow>
           <Typo>Role:</Typo>
-          <TypoVal>Admin</TypoVal>
+          <TypoVal>{ProfileData?.role}</TypoVal>
         </StackRow>
         <StackRow>
           <Typo>team:</Typo>
-          <TypoVal>Front-end</TypoVal>
+          <TypoVal>{ProfileData?.department?.name}</TypoVal>
         </StackRow>
 
         </Stack>

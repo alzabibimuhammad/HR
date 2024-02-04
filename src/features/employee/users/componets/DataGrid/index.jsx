@@ -79,22 +79,21 @@ const Users = ({ rows }) => {
       setfdata(rows);
     }
     else {
-
       searchData= rows?.data?.data?.filter((element) => {
-        if( element?.first_name.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.first_name.toLowerCase()?.includes(searchText.toLowerCase());
+        if( element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if( element?.last_name.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.last_name.toLowerCase()?.includes(searchText.toLowerCase());
+        else if( element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if( element?.role.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.role.toLowerCase()?.includes(searchText.toLowerCase());
+        else if( element?.role?.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.role?.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if(element?.email.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.email.toLowerCase()?.includes(searchText.toLowerCase());
+        else if(element?.email?.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.email?.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if(element?.department?.name.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.department?.name.toLowerCase()?.includes(searchText.toLowerCase());
+        else if(element?.department?.name?.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.department?.name?.toLowerCase()?.includes(searchText.toLowerCase());
         }
       });
 
@@ -140,7 +139,6 @@ const Users = ({ rows }) => {
 
 
     const handleClick = () => {
-      console.log('hi dani');
     };
 
     const {data , loading } = useGetMvp()

@@ -33,7 +33,6 @@ export default function DrawerForm({ open, setOpenParent ,setDays }) {
   };
 
   const handleDrawerDone = () => {
-    console.log('Selected Days:', selectedDays);
     setDays(selectedDays)
     handleDrawerClose();
   };

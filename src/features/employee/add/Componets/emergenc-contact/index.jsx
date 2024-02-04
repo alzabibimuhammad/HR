@@ -10,7 +10,6 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
 
-  // console.log(errors.emergencycontact[0].address);
 
 
   const { fields, append, remove } = useFieldArray({

@@ -15,17 +15,25 @@ export default function Dashboard() {
  const [percentageData,setpercentageData]=useState([])
 
  const dispatch = useDispatch()
+ const date = new Date();
+
+ const year = date.getFullYear();
+ const month = String(date.getMonth() + 1).padStart(2, '0');
+ const day = String(date.getDate()).padStart(2, '0');
+
+ const formattedDate = `${year}-${month}-${day}`;
+
+
 
  useEffect(() => {
     dispatch(getAttendancePercentage())
     setpercentageData(store?.AttendancePercentage)
 
-    dispatch(getRegisteration('2024-01-18'))
+    dispatch(getRegisteration(formattedDate))
     setRegistration(store?.Registertion)
 
  }, [dispatch,store?.AttendancePercentage?.length,store?.Registertion?.length])
 
-console.log("percentageData",percentageData);
 
  return <>
       <Stack spacing={5} sx={{ overflow:'hidden' }}  >

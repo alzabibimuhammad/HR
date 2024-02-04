@@ -66,7 +66,6 @@ const Profiles = ({ tab, data }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [SelecetedDate,SetSelectedDate]=useState()
 const [value,setValues]=useState('1')
-console.log("🚀 ~ Profiles ~ values:", value)
 
   // ** Hooks
   const router = useRouter()
@@ -75,12 +74,10 @@ console.log("🚀 ~ Profiles ~ values:", value)
  dispatch(setUserId(id));
   console.log("🚀 ~ Profiles ~ router:", router.query.id)
   const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
-  console.log("🚀 ~ Profiles ~ DataEmployee:", DataEmployee?.data?.data[0])
   const ProfileData = DataEmployee?.data?.data[0]
   const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
   const handleDateChoose = (date) => {
-    console.log("🚀 ~ handleDateChoose ~ date:", date)
     const formattedDate = FormateDate(date);
     SetSelectedDate(date)
 
@@ -163,8 +160,8 @@ console.log("🚀 ~ Profiles ~ values:", value)
     </Stack>
 
     <Stack width={{sm:'60%',xs:'100%'}} spacing={6} direction={'column'}>
-      
-      <Skills/>
+
+      <Skills ProfileData={ProfileData}/>
       <Employment/>
     </Stack>
     </Stack>

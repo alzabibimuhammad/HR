@@ -98,7 +98,19 @@ const useRegistrationColumn = () => {
 
               />
               )
-              :null
+              :params?.row?.status === 'Wrong' ? (
+                <Chip
+                  sx={{
+                    backgroundColor: 'rgba(223, 46, 56, 0.20)',
+                    color: '#DF2E38',
+                    fontSize:'13px',
+                    height:'14px',
+                    width:'100%',
+                  }}
+                  label={t(params?.row?.status)}
+
+                />
+                ):null
             }
           </>
         );

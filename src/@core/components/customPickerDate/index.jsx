@@ -39,7 +39,7 @@ export  const CustomDatePicker = ({ selectedDate, handleDateChoose }) => {
     console.log(startDate)
     setShowMonthPicker('day');
   };
-  
+
   const toggleDatePickerYear = () => {
     setStartDate(new Date());
     setShowMonthPicker('year');
@@ -68,10 +68,10 @@ Month      </Button>
       <Button variant='contained' color='secondary'  onClick={toggleDatePickerYear} sx={{mr:2,backgroundColor: showMonthPicker === 'year' ? '#6AB2DF' : 'secondary'}}>
         Year
       </Button>
-      
+
         </Box>
         </CardContent>
-       
+
           <DatePickerWrapper
           sx={{
             width: '100%',
@@ -96,11 +96,11 @@ Month      </Button>
                 fontWeight: 'bold', // Set the font weight
                 // Add any other inline styles as needed
               }}
-           
+
           />
         </DatePickerWrapper>
-    
-   
+
+
   </Card>
   );
 };

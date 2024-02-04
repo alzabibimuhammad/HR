@@ -2,21 +2,41 @@ import { Button, ButtonGroup, Card, CardContent, CardHeader, Typography } from '
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
+import { useSelector } from 'react-redux';
 
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
+import { useReportByDay } from 'src/features/Report/hooks/useReportByDay';
+import { FormateDate } from 'src/utiltis/DateFormate';
 
 export  const CustomDatePicker = ({ selectedDate, handleDateChoose }) => {
   const [view, setView] = useState('month');
   const [startDate, setStartDate] = useState(new Date());
   const [showMonthPicker, setShowMonthPicker] = useState('day');
+  const {mutate:ReportDay,data,isloading}=useReportByDay()
+  const store = useSelector(state => state.user)
+   console.log("🚀 ~ CustomDatePicker ~ userId:", store)
+  console.log(startDate)
 
   const toggleDatePickerMonth = () => {
     setStartDate(new Date());
+  
     setShowMonthPicker('month');
+  };
+
+  
+  const handelSendReport = (date) => {
+    const formattedDate = FormateDate(date);
+    const formData = new FormData()
+    formData.append('user_id',store.userId)
+    formData.append('date',formattedDate)
+    
+    ReportDay(formData)
+  
   };
 
   const toggleDatePickerDay = () => {
     setStartDate(new Date());
+    console.log(startDate)
     setShowMonthPicker('day');
   };
 
@@ -61,9 +81,9 @@ Month      </Button>
             '& .react-datepicker': { boxShadow: 'none !important', border: 'none !important' }
           }}
         >
-
-          <DatePicker inline selected={startDate}
-            onChange={(date) => setStartDate(date)}
+           
+          <DatePicker inline selected={startDate} 
+            onChange={(date) => handelSendReport(date)}
             dateFormat={showMonthPicker ? 'MMM' : 'yyyy'}
             showMonthYearPicker={showMonthPicker==='month'}
             showYearPicker={showMonthPicker==='year'}

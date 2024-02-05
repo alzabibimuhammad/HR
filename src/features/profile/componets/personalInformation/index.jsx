@@ -104,7 +104,6 @@ export default function PersonalInfo({ProfileData}) {
 ))}
 
         <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Emergency:</TypoHeader>
-        {console.log(ProfileData.emergency)}
         {ProfileData?.emergency?.map((val, index) => {
   return (
     <React.Fragment key={index}>

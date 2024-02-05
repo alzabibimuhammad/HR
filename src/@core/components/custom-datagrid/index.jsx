@@ -41,7 +41,7 @@ const CustomDataGrid = ({ rows ,columns }) => {
             <DataGrid
             columns={columns}
             classes={gridStyles}
-            rows={rows}
+            rows={rows||[]}
             pageSizeOptions={[7, 10, 25, 50]}
             paginationModel={paginationModel}
             onPaginationModelChange={setPaginationModel}

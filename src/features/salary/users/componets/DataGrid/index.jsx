@@ -18,14 +18,12 @@ import { useGetDataByMonth } from '../../hooks/useGetDataByMonth';
 
 
 const SalaryDataGrid = ({ rows }) => {
-console.log("🚀 ~ SalaryDataGrid ~ rows:", rows)
 
   const columns = useSalaryColumns();
   const { t } = useTranslation()
 
  const {data:GetDataByMonth,mutate:getData}= useGetDataByMonth()
 
-console.log(GetDataByMonth);
 
   const [fdata , setfdata] = useState(rows);
 

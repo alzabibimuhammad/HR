@@ -6,95 +6,20 @@ import { useTranslation } from 'react-i18next';
 import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { RatingData } from '../ratingTabel/infrastructure';
 import { Box } from '@mui/system';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useGetRatingById } from './hooks/useGetRatingById';
 
-const RatingTabel = () => {
+import useUserColumns from './hooks/useRatingUser';
+import useGetRatingById from './hooks/useGetRatingById';
 
-  const columns = useGetRatingById();
-  const [openParent, setOpenParent] = React.useState(false);
+const RatingTabel = ({rows}) => {
+console.log("🚀 ~ RatingTabel ~ rows:", rows)
+
+  const columns = useUserColumns();
   const { t } = useTranslation()
-const {data,isloading}=useGetRatingById()
-
-  const handleDrawerOpen = () => {
-    setOpenParent(true);
-  };
 
 
-  const [fdata , setfdata] = useState(data);
-
-  const [role, setRole] = useState('');
-
-  const [department, setDepartment] = useState('');
 
 
-  const handleRoleChange = (e) => {
-    setRole(e.target.value);
-  };
 
-  const handledepartmentChange = (e) => {
-    setDepartment(e.target.value);
-  };
-
-    useEffect(()=>{
-      let filteredData;
-      if(role && department){
-        filteredData = data?.data?.data?.filter((row) => {
-          return row?.department?.name === department && row.role===role;
-        });
-        setfdata({'data':{'data':filteredData}});
-
-      }
-      else if(role && department==''){
-        filteredData = data?.data?.data?.filter((row) => {
-          return row.role===role;
-        });
-        setfdata({'data':{'data':filteredData}});
-
-      }
-      else if(department && role==''){
-        filteredData = data?.data?.data?.filter((row) => {
-          return row?.department?.name === department ;
-        });
-        setfdata({'data':{'data':filteredData}});
-
-      }
-      else
-        setfdata(data);
-
-    },[role,department])
-
-  const handelSearch = (event) => {
-    const searchText = event.target.value;
-    let searchData;
-    if (!searchText) {
-      setfdata(data);
-    }
-    else {
-
-      searchData= data?.data?.data?.filter((element) => {
-        if( element?.first_name.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.first_name.toLowerCase()?.includes(searchText.toLowerCase());
-        }
-        else if( element?.last_name.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.last_name.toLowerCase()?.includes(searchText.toLowerCase());
-        }
-        else if( element?.role.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.role.toLowerCase()?.includes(searchText.toLowerCase());
-        }
-        else if(element?.email.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.email.toLowerCase()?.includes(searchText.toLowerCase());
-        }
-        else if(element?.department?.name.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.department?.name.toLowerCase()?.includes(searchText.toLowerCase());
-        }
-      });
-
-
-      setfdata({'data':{'data':searchData}});
-    }
-  };
 
 
   const gridStyles = {
@@ -120,23 +45,14 @@ const {data,isloading}=useGetRatingById()
     },
   };
 
- const [percentageData,setpercentageData]=useState([])
-
- const dispatch = useDispatch()
- const store = useSelector(state => state.Dashboard)
 
 
-    const handleClick = () => {
-      console.log('hi dani');
-    };
-
-  
 
 
 
   return    <>
 
-    
+
 
 
             <Card>
@@ -164,7 +80,6 @@ const {data,isloading}=useGetRatingById()
                   </Box>
                 ),
               }}
-              onChange={handelSearch}
               sx={{ paddingLeft: '8px',backgroundColor:'#F5F7FA',border:"none",boxShadow:"none" }}
               size='small'
 
@@ -180,9 +95,7 @@ const {data,isloading}=useGetRatingById()
                     fullWidth
                     defaultValue="Role"
                     SelectProps={{
-                      value: role,
                       displayEmpty: true,
-                      onChange: handleRoleChange,
                     }}
                     size='small'
                   >
@@ -197,9 +110,7 @@ const {data,isloading}=useGetRatingById()
                     fullWidth
                     defaultValue='Specialization'
                     SelectProps={{
-                      value: department,
                       displayEmpty: true,
-                      onChange: handledepartmentChange,
                     }}
                     size='small'
 
@@ -215,7 +126,7 @@ const {data,isloading}=useGetRatingById()
                     SelectProps={{
                       // value: department,
                       displayEmpty: true,
-                    
+
                     }}
                     size='small'
 
@@ -226,7 +137,7 @@ const {data,isloading}=useGetRatingById()
                   </TextField>
                   </Stack>
 
-                {fdata ? <CustomDataGrid columns={columns}  sx={gridStyles.root} data={RatingData(fdata)|| []}    />: null }
+                  {<CustomDataGrid columns={[]} sx={gridStyles.root} data={ RatingData(rows)} />}
 
               </Stack>
               </CardContent>

@@ -21,7 +21,7 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues,
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
-        setProfileImage(reader.result);
+        setProfileImage(file);
 
         handleFieldChange('image', reader.result);
       };

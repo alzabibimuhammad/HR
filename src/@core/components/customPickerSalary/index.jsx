@@ -29,7 +29,6 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
   const handleDateSend = (date) => {
 
     if(showMonthPicker==='year'){
-      console.log("🚀 ~ handleDateSend ~ showMonthPicker:", showMonthPicker)
 
       const formattedDate = DateFormateOfYear(date);
       setStartDate(date)
@@ -44,7 +43,6 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
   };
 
   const handleDateSendMonth = (date) => {
-    console.log("🚀 ~ handleDateSendMonth ~ date:", date)
     const formattedDate = DateFormateOfMonth(date);
     setStartDate(date)
     handleDateChoose(formattedDate)
@@ -54,7 +52,6 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
     width: '600px', // Set your desired width
   };
 
-console.log(startDate);
 
 
   return (

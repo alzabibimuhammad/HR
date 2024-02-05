@@ -90,7 +90,6 @@ const AboutOverivew = ({Data,ProfileData}) => {
   const [isCheckout,setisCheckout] = useState(false)
   const [isAbsences,setisAbsences] = useState(false)
   const {mutate:ReportDay,data,isloading}=useReportByDay()
-  console.log("🚀 ~ AboutOverivew ~ data:", data)
 
   const Header = styled('p')(({ }) => ({
     fontSize:'16px',

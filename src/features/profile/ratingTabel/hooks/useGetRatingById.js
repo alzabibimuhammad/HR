@@ -1,13 +1,11 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import getRatingById from "../api/GetRatingById";
+import { useQuery } from '@tanstack/react-query'
+import getRatingById from '../api/GetRatingById'
 
-export const useGetRatingById = () => {
-  const queryClient = useQueryClient();
+const useGetRatingById = () => {
+  const query = useQuery({ queryKey: ['Rating'], queryFn: getRatingById })
 
-  return useMutation({
-    mutationFn:getRatingById,
-    onSuccess: () => {
-      queryClient.invalidateQueries("Rating");
-    },
-  });
-};
+  return query
+}
+
+export default useGetRatingById
+

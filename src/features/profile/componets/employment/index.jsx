@@ -7,7 +7,6 @@ import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import Link from 'next/link';
 
 export default function Employment({ProfileData}) {
-  console.log("🚀 ~ Employment ~ ProfileData:", ProfileData)
 
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',

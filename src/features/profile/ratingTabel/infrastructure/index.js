@@ -1,12 +1,22 @@
 export const RatingData = elements => {
-    return elements?.data?.data?.map(element => {
+    console.log("🚀 ~ RatingData ~ elements:", elements?.data?.data?.user_rates)
+
+    elements?.data?.data?.user_rates?.map(element => {
+      if(element.rate_type.rate_type==="creativity"){
+      const creativity =element.rate
+      console.log("🚀 ~ RatingData ~ creativity:", creativity)
+      }
+      if(element.rate_type.rate_type==="tecnical"){
+        const creativity =element.rate
+        console.log("🚀 ~ RatingData ~ creativity:", creativity)
+        }
+    })
+
+    return elements?.data?.data?.user_rates?.map(element => {
+
       return {
-        id: element?.id,
-        first_name:element?.first_name,
-        last_name: element?.last_name,
-        role: element?.role,
-        specialization:element?.department?.name,
+
+        creativity:element.email,
       }
     })
   }
-  

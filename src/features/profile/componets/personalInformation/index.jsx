@@ -104,32 +104,40 @@ export default function PersonalInfo({ProfileData}) {
 ))}
 
         <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Emergency:</TypoHeader>
-        <ul style={{ padding:0,margin:0,marginLeft:'6%'}} >
-          <li>
-        <StackRow>
-          <Typo>Name:</Typo>
-          <TypoVal>muhammad</TypoVal>
-        </StackRow>
-        </li>
-          <li>
-        <StackRow>
-          <Typo>Address:</Typo>
-          <TypoVal>bobtomma</TypoVal>
-        </StackRow>
-        </li>
-          <li>
-        <StackRow>
-          <Typo>Phone number:</Typo>
-          <TypoVal>0932392808</TypoVal>
-        </StackRow>
+        {console.log(ProfileData.emergency)}
+        {ProfileData?.emergency?.map((val, index) => {
+  return (
+    <React.Fragment key={index}>
+      <ul style={{ padding: 2, margin: 0, marginLeft: '6%' }}>
+        <li>
+          <StackRow>
+            <Typo>Name:</Typo>
+            <TypoVal>{val.name}</TypoVal>
+          </StackRow>
         </li>
         <li>
-        <StackRow>
-          <Typo>Email:</Typo>
-          <TypoVal>muhammad@gmail.com</TypoVal>
-        </StackRow>
+          <StackRow>
+            <Typo>Address:</Typo>
+            <TypoVal>{val.address}</TypoVal>
+          </StackRow>
         </li>
-        </ul>
+        <li>
+          <StackRow>
+            <Typo>Phone number:</Typo>
+            <TypoVal>{val.contact}</TypoVal>
+          </StackRow>
+        </li>
+        <li>
+          <StackRow>
+            <Typo>Email:</Typo>
+            <TypoVal>{val?.email}</TypoVal>
+          </StackRow>
+        </li>
+      </ul>
+    </React.Fragment>
+  );
+})}
+
 
         <StackRow>
           <img src='/images/pesonalProfile/professional/icon.svg'/>

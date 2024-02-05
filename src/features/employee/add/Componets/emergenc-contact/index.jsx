@@ -106,7 +106,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
            </Box>
           <Box sx={{width:"100%"}} key={index}>
               <Controller
-                name={`emergency_contact[${index}].email`}
+                name={`emergency_contact[${index + 1}].email`}
                 control={control}
                 defaultValue={field.email}
                 render={({ field }) => (

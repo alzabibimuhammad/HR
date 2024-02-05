@@ -21,13 +21,15 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues,
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
+        setProfileImage(reader.result);
 
-        onDataChange(reader.result)
+        handleFieldChange('image', reader.result);
       };
       reader.readAsDataURL(file);
     }
-    setProfileImage(image)
-  }
+  };
+
+
 
   const svgContent = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

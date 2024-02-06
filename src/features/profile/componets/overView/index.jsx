@@ -16,66 +16,9 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useState } from 'react'
 import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
 
-const renderList = arr => {
-  if (arr && arr.length) {
-    return arr.map((item, index) => {
-      return (
-        <Box
-          key={index}
-          sx={{
-            display: 'flex',
-            '&:not(:last-of-type)': { mb: 3 },
-            '& svg': { color: 'text.secondary' }
-          }}
-        >
-          <Box sx={{ display: 'flex', mr: 2 }}>
-            <Icon fontSize='1.25rem' icon={item.icon} />
-          </Box>
 
-          <Box sx={{ columnGap: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-            <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>
-              {`${item.property.charAt(0).toUpperCase() + item.property.slice(1)}:`}
-            </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>
-              {item.value.charAt(0).toUpperCase() + item.value.slice(1)}
-            </Typography>
-          </Box>
-        </Box>
-      )
-    })
-  } else {
-    return null
-  }
-}
 
-const renderTeams = arr => {
-  if (arr && arr.length) {
-    return arr.map((item, index) => {
-      return (
-        <Box
-          key={index}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            '&:not(:last-of-type)': { mb: 3 },
-            '& svg': { color: `${item.color}.main` }
-          }}
-        >
-          <Icon fontSize='1.25rem' icon={item.icon} />
 
-          <Typography sx={{ mx: 2, fontWeight: 500, color: 'text.secondary' }}>
-            {item.property.charAt(0).toUpperCase() + item.property.slice(1)}
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            {item.value.charAt(0).toUpperCase() + item.value.slice(1)}
-          </Typography>
-        </Box>
-      )
-    })
-  } else {
-    return null
-  }
-}
 
 const AboutOverivew = ({Data,ProfileData}) => {
 

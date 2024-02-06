@@ -3,7 +3,11 @@ import { useMemo, useState } from 'react'
 import { Avatar,  IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Box, Stack } from '@mui/system';
+import Link from 'next/link';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
+import DrawerForm from '../components/DrawerForm';
 
 const useRegistrationColumn = () => {
 
@@ -40,24 +44,6 @@ const useRegistrationColumn = () => {
         field: 'first_name',
         headerName: t("Name"),
         flex:2,
-        renderCell: (params)=>{
-        return (
-          <Stack spacing={1} direction={'row'}  alignItems={'center'} >
-            <Box>
-            <Avatar src={'sdsd'} alt='' />
-            </Box>
-            <Stack spacing={2} direction={'row'}>
-              <Typography>
-                {params.row.first_name}
-              </Typography>
-              <Typography>
-                
-                {params.row.last_name}
-              </Typography>
-            </Stack>
-          </Stack>
-        )
-      }
     },
     {
       field: 'date',

@@ -3,64 +3,53 @@ import { Card, CardContent, MenuItem, TextField } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { Box, Stack } from '@mui/system'
-import useReviewColumn from '../Hook/useReviewColumn'
-import { RegistrationData } from '../infrastructure'
+import useReviewColumn from '../../Hook/useReviewColumn'
+import { ReviewData } from '../../infrastructure'
 
-const ReviewFeature = ({ Data, setFilterDate }) => {
+const ReviewFeature = ({ Data }) => {
   const columns = useReviewColumn()
 
-  let data  = Data?.data
+  let data  = Data?.data?.data
+
   const [rows, setRows] = useState(data)
+  const [date, setDate] = useState()
 
   useEffect(() => {
-    setRows(RegistrationData(data))
+    setRows(ReviewData(data))
 
   }, [Data])
   const { t } = useTranslation()
 
   const handelSearch = event => {
-    let searchData
+    // let searchData
 
-    const searchText = event.target.value
-    if (!searchText) {
-      setRows(RegistrationData(data))
-    } else {
-      searchData = RegistrationData(data)?.filter(element => {
-        if (element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase())) {
-          return element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase())
-        } else if (element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase())) {
-          return element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase())
-        } else if (element?.id == searchText) {
-          return element?.id == searchText
-        }
-      })
+    // const searchText = event.target.value
+    // if (!searchText) {
+    //   setRows(ReviewData(data))
+    // } else {
+    //   searchData = ReviewData(data)?.filter(element => {
+    //     if (element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase())) {
+    //       return element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase())
+    //     } else if (element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase())) {
+    //       return element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase())
+    //     } else if (element?.id == searchText) {
+    //       return element?.id == searchText
+    //     }
+    //   })
 
-      setRows(searchData)
-    }
+    //   setRows(searchData)
+    // }
   }
   const handelDate = event=>{
-    setFilterDate(event.target.value)
+    setDate(event.target.value)
   }
-  const [status, setStatus] = useState('');
-
-  const handleStatusChange = (e) => {
-    setStatus(e.target.value);
-    setRows(RegistrationData(data))
-  };
 
   useEffect(()=>{
-    let filteredData;
-    if(status){
-      filteredData = rows?.filter((row) => {
-        return row?.status === status;
+      const filterDate = data?.[0]?.filter((element)=>{
+        return element?.date === date
       })
-      setRows(filteredData)
-    }
-    else
-      setRows(RegistrationData(data))
-
-
-  },[status])
+      setRows(ReviewData([filterDate]))
+  },[date])
 
   return (
     <Stack height={'100%'}>

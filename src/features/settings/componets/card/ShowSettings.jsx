@@ -9,6 +9,7 @@ import AlertDialogEdit from '../editDialog'
 import AddIcon from '@mui/icons-material/Add'
 import AlertDialogAdd from '../addDialog'
 export default function ShowSetting() {
+
   const { data, isloading } = useShowAllBranches()
 
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)

@@ -53,10 +53,10 @@ export default function Skills({ProfileData}) {
 
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <TypoVal>{val?.study}</TypoVal>
+            <TypoVal>{ProfileData?.study_situations[0]?.study}</TypoVal>
           </li>
             <li>
-            <TypoVal>{val?.degree}</TypoVal>
+            <TypoVal>{ProfileData?.study_situations[0]?.degree}</TypoVal>
           </li>
 
           </ul>
@@ -72,6 +72,7 @@ export default function Skills({ProfileData}) {
             <li>
             <TypoVal>{val.content} </TypoVal>
           </li>
+
           </ul>
             </>
   ))}
@@ -83,8 +84,44 @@ export default function Skills({ProfileData}) {
 
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <TypoVal>{val?.content}</TypoVal>
+            <TypoVal>{ProfileData?.careers[0]?.content}</TypoVal>
           </li>
+
+          </ul>
+        </Stack>
+        <Stack direction={'column'}>
+          <Typo >Skills:</Typo>
+          <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
+            <li >
+            <StackRow>
+              <TypoVal>{ProfileData?.careers[0]?.content}</TypoVal>
+              <Rating name="size-medium" defaultValue={2} />
+            </StackRow>
+          </li>
+          <li >
+            <StackRow>
+              <TypoVal>Figma</TypoVal>
+              <Rating name="size-medium" defaultValue={2} />
+            </StackRow>
+          </li>
+          <li >
+            <StackRow>
+              <TypoVal>Figma</TypoVal>
+              <Rating name="size-medium" defaultValue={2} />
+            </StackRow>
+          </li>
+          </ul>
+        </Stack>
+        <Stack direction={'column'}>
+          <Typo >Languages:</Typo>
+          <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
+            <li >
+            <StackRow>
+              <TypoVal>{ProfileData.languages[0].name}</TypoVal>
+              <Rating name="size-medium" defaultValue={ProfileData.languages[0].rate} />
+            </StackRow>
+          </li>
+
 
           </ul>
           </>

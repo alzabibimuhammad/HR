@@ -143,8 +143,6 @@ const Users = ({ rows }) => {
 
     const {data , loading } = useGetMvp()
 
-    console.log('mvp',data?.data?.data);
-
   return    <>
 
     <Box sx={{ margin:0,padding:0 }} >

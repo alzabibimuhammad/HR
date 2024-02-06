@@ -12,7 +12,7 @@ export const store = configureStore({
     calendar,
     email,
     Dashboard,
-    user
+    ReportStore
 
 
   },

@@ -82,8 +82,9 @@ export default function Add() {
       const formData = new FormData();
       formData.append('image',ProfileImage)
 
-      data.image = ProfileImage;
-
+      data.image = formData.get('image');
+      
+      console.log("🚀 ~ handleDataSubmit ~ image:", formData)
       addUsers(data)
 
     } catch (error) {

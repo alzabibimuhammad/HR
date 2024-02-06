@@ -81,7 +81,7 @@ Month      </Button>
         >
 
           <DatePicker inline selected={startDate}
-            onChange={(date) => handelSendReport(date)}
+            onChange={(date) => setStartDate(date)}
             dateFormat={showMonthPicker ? 'MMM' : 'yyyy'}
             showMonthYearPicker={showMonthPicker==='month'}
             showYearPicker={showMonthPicker==='year'}

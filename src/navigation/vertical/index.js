@@ -39,6 +39,11 @@ const navigation = () => {
       path: '/apps/email'
     },
     {
+      title: 'Review',
+      icon: 'tabler:mail',
+      path: '/apps/email'
+    },
+    {
       title: 'Report',
       icon: 'tabler:report',
       path: '/report'
@@ -120,6 +125,11 @@ const navigation = () => {
       title: 'Registeration',
       icon: 'tabler:report',
       path: '/registeration'
+    },
+    {
+      title: 'Settings',
+      icon: 'tabler:settings',
+      path: '/Settings'
     },
   ]
 

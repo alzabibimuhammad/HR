@@ -7,6 +7,7 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues,
 
   const [image, setImage] = useState(null);
 const[fileName,setFileName]=useState(null)
+console.log("🚀 ~ Snapshot ~ fileName:", fileName)
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
@@ -23,7 +24,7 @@ const[fileName,setFileName]=useState(null)
       reader.onloadend = () => {
         setImage(reader.result);
         setFileName(event.target.files[0].name)
-
+        setProfileImage(event.target.files[0])
         handleFieldChange('image', reader.result);
       };
       reader.readAsDataURL(file);

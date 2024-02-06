@@ -2,6 +2,7 @@ import { Card, CardContent, MenuItem, TextField, Typography } from '@mui/materia
 import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
+import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch';
 import useSelectInput from 'src/pages/employees/add/hook/useSelectInput';
 
 export default function Professional({onDataChange,Controller,control}) {
@@ -14,6 +15,9 @@ export default function Professional({onDataChange,Controller,control}) {
 
   const {data}=useSelectInput()
 
+  const {data:SelectBranch}=useSelectBranch()
+  console.log("🚀 ~ Professional ~ SelectBranch:", SelectBranch)
+
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
@@ -23,6 +27,12 @@ export default function Professional({onDataChange,Controller,control}) {
   const handleSpecializationChange = (e) => {
     setSpecialization(e.target.value);
     handleFieldChange('specialization',e.target.value)
+
+  };
+
+  const handleSelectBranchChange = (e) => {
+    setSpecialization(e.target.value);
+    handleFieldChange('SelectBranch',e.target.value)
 
   };
 
@@ -43,6 +53,47 @@ export default function Professional({onDataChange,Controller,control}) {
 
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
+
+          <Typography>Branch</Typography>
+
+<Controller
+name="branch_id"
+control={control}
+render={({ field }) => (
+<TextField
+{...field}
+select
+fullWidth
+defaultValue="Branch"
+SelectProps={{
+value: field.value,
+displayEmpty: true,
+onChange: (e) => {
+field.onChange(e);
+handleSelectBranchChange(e);
+},
+}}
+size='small'
+>
+<MenuItem value="" disabled>
+Branch
+</MenuItem>
+<MenuItem value='branch_id'>{`${t("Branch")}`}</MenuItem>
+
+{SelectBranch?.data?.data?.data?.map((val, index) => (
+<MenuItem key={index} value={val.id}>
+{val.name}
+</MenuItem>
+))}
+</TextField>
+)}
+/>
+
+
+
+
+
+
               <Typography>Specialization</Typography>
 
               <Controller

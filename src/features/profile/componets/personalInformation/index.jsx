@@ -90,7 +90,7 @@ export default function PersonalInfo({ProfileData}) {
 
         <Typo>Email:</Typo>
 
-        <TypoVal>{ProfileData.email}</TypoVal>
+        <TypoVal>{ProfileData?.email}</TypoVal>
         </StackRow>
 
         {ProfileData?.my_contacts?.map((contact, index) => (

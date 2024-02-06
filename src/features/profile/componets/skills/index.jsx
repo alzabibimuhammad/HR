@@ -49,6 +49,8 @@ export default function Skills({ProfileData}) {
 
         <Stack direction={'column'}>
           <Typo >Education:</Typo>
+          {ProfileData && ProfileData.study_situations && ProfileData.study_situations.map((val, index) => ( <>
+
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
             <TypoVal>{ProfileData?.study_situations[0]?.study}</TypoVal>
@@ -58,19 +60,28 @@ export default function Skills({ProfileData}) {
           </li>
 
           </ul>
+            </>
+  ))}
         </Stack>
 
         <Stack direction={'column'}>
           <Typo >Certifications:</Typo>
+          {ProfileData && ProfileData.certificates && ProfileData.certificates.map((val, index) => ( <>
+
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
-            <TypoVal>{ProfileData?.certificates[0]?.content} </TypoVal>
+            <TypoVal>{val.content} </TypoVal>
           </li>
 
           </ul>
+            </>
+  ))}
+
         </Stack>
         <Stack direction={'column'}>
           <Typo >Career:</Typo>
+        {ProfileData && ProfileData.careers && ProfileData.careers.map((val, index) => ( <>
+
           <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
             <li>
             <TypoVal>{ProfileData?.careers[0]?.content}</TypoVal>
@@ -113,6 +124,45 @@ export default function Skills({ProfileData}) {
 
 
           </ul>
+          </>
+  ))}
+        </Stack>
+        <Stack direction={'column'}>
+          <Typo >Skills:</Typo>
+          {ProfileData && ProfileData.skills
+ && ProfileData.skills
+ .map((val, index) => ( <>
+
+  <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
+
+          <li >
+            <StackRow>
+              <TypoVal>{val?.name}</TypoVal>
+              <Rating name="size-medium" defaultValue={val?.rate} />
+            </StackRow>
+          </li>
+          </ul>
+
+ </>
+  ))}
+        </Stack>
+        <Stack direction={'column'}>
+          <Typo >Languages:</Typo>
+            {ProfileData && ProfileData.languages && ProfileData.languages.map((val, index) => ( <>
+              <ul style={{ padding:0,margin:0,marginLeft:'5%'}} >
+              <li >
+  <StackRow key={index}>
+    <TypoVal>{val?.name}</TypoVal>
+    <Rating name="size-medium" defaultValue={val?.rate} />
+  </StackRow>
+          </li>
+          </ul>
+            </>
+))}
+
+
+
+
         </Stack>
 
         </Stack>

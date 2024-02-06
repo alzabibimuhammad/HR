@@ -30,6 +30,7 @@ import { useDispatch } from 'react-redux'
 import{setUserId } from '../../../store/apps/user'
 import RatingTabel from '../ratingTabel'
 import Mange from './manage'
+import useGetRatingById from '../ratingTabel/hooks/useGetRatingById'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   borderBottom: '0 !important',
@@ -72,8 +73,9 @@ const [value,setValues]=useState('1')
  const id =router.query.id
  const dispatch = useDispatch();
  dispatch(setUserId(id));
-  console.log("🚀 ~ Profiles ~ router:", router.query.id)
   const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
+  const {data:DataReview,isloading}=useGetRatingById();
+  console.log("🚀 ~ Profiles ~ DataReview:", DataReview)
   const ProfileData = DataEmployee?.data?.data[0]
   const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
@@ -162,7 +164,7 @@ const [value,setValues]=useState('1')
     <Stack width={{sm:'60%',xs:'100%'}} spacing={6} direction={'column'}>
 
       <Skills ProfileData={ProfileData}/>
-      <Employment/>
+      <Employment ProfileData={ProfileData}/>
     </Stack>
     </Stack>
 
@@ -171,13 +173,15 @@ const [value,setValues]=useState('1')
 
 
     <TabPanel value="3">
-      
+
   <Mange/>
     </TabPanel>
 
     <TabPanel value="4">
-      
-   <RatingTabel/>
+ {DataReview?
+   <RatingTabel rows={DataReview}/>
+   :null
+ }
       </TabPanel>
 
 </Stack>

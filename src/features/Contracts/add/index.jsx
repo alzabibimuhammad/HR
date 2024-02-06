@@ -56,6 +56,7 @@ const { getRootProps, getInputProps } = useDropzone({
 
 
  const onSubmit = async (data) => {
+
   try {
    const formData = new FormData();
    formData.append('path', files[0]);

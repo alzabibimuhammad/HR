@@ -14,29 +14,27 @@ export  const CustomDatePicker = ({ selectedDate, handleDateChoose }) => {
   const [showMonthPicker, setShowMonthPicker] = useState('day');
   const {mutate:ReportDay,data,isloading}=useReportByDay()
   const store = useSelector(state => state.user)
-   console.log("🚀 ~ CustomDatePicker ~ userId:", store)
-  console.log(startDate)
+
 
   const toggleDatePickerMonth = () => {
     setStartDate(new Date());
-  
+
     setShowMonthPicker('month');
   };
 
-  
+
   const handelSendReport = (date) => {
     const formattedDate = FormateDate(date);
     const formData = new FormData()
     formData.append('user_id',store.userId)
     formData.append('date',formattedDate)
-    
+
     ReportDay(formData)
-  
+
   };
 
   const toggleDatePickerDay = () => {
     setStartDate(new Date());
-    console.log(startDate)
     setShowMonthPicker('day');
   };
 

@@ -28,7 +28,11 @@ export default function Add() {
   const [EmergencyContactData, setEmergencyContacttData] = useState({});
   const [ProfileImage,setProfileImage] = useState();
 
+
+
+
   const { mutate: addUsers, isLoading } = useAddUsers();
+
 
 
 
@@ -82,6 +86,7 @@ export default function Add() {
       
       console.log("🚀 ~ handleDataSubmit ~ image:", formData)
       addUsers(data)
+
     } catch (error) {
 
     }

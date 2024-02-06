@@ -24,12 +24,13 @@ const[fileName,setFileName]=useState(null)
         setImage(reader.result);
         setFileName(event.target.files[0].name)
 
-        onDataChange(reader.result)
+        handleFieldChange('image', reader.result);
       };
       reader.readAsDataURL(file);
     }
-    setProfileImage(image)
-  }
+  };
+
+
 
   const svgContent = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">

@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import Link from 'next/link';
 
-export default function Employment() {
+export default function Employment({ProfileData}) {
+
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -14,11 +15,13 @@ export default function Employment() {
     color:'#131627'
 
   }))
+
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
     marginLeft:'3px'
 
   }))
+
   const TypoHeader = styled(Typography)(() => ({
     fontSize:'16px',
     marginLeft:'5px',
@@ -27,6 +30,7 @@ export default function Employment() {
     color:'#131627'
 
   }))
+
   const StackRow = styled(Stack)(({ direction }) => ({
     flexDirection: direction === 'column' ? 'column' : 'row',
   }));
@@ -38,17 +42,26 @@ export default function Employment() {
           <CardContent>
             <Stack spacing={2} direction={'column'}>
 
+
             <StackRow  >
               <img src='/images/pesonalProfile/employment/icon.svg'/>
               <TypoHeader >Employment:</TypoHeader>
             </StackRow>
 
+              {ProfileData?.deposits?.map((deposit, index) => (
+                  <Box sx={{}} key={index}>
+                    <StackRow>
+                      <Typo>Start Date:</Typo>
+                      <TypoVal>{deposit.received_date}</TypoVal>
+                    </StackRow>
+                    <Stack direction={"row"}>
+                      <Typo>Secretariats</Typo>
+                      <TypoVal>{deposit.description}</TypoVal>
+                    </Stack>
+                  </Box>
+))}
             <StackRow>
-              <Typo>Start Date:</Typo>
-              <TypoVal>2001-12-24</TypoVal>
-            </StackRow>
 
-            <StackRow>
               <Typo>Tenure:</Typo>
               <TypoVal>12 months</TypoVal>
             </StackRow>
@@ -66,12 +79,9 @@ export default function Employment() {
 
             <StackRow>
               <Typo>Salary</Typo>
-              <TypoVal>1500.00</TypoVal>
+              <TypoVal> {ProfileData?.user_info?.salary}</TypoVal>
             </StackRow>
-            <StackRow>
-              <Typo>Secretariats</Typo>
-              <TypoVal>labtop</TypoVal>
-            </StackRow>
+
 
             </Stack>
           </CardContent>

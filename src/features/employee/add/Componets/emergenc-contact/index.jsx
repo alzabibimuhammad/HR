@@ -14,11 +14,11 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "emergencycontact"
+    name: "emergency_contact"
   });
 
   const handleAddClick = () => {
-    append('emergencycontact', { address: '', name: '', phonenumber: '',email:'' });
+    append('emergency_contact', { address: '', name: '', phonenumber: '',email:'' });
   };
 
   const handleRemoveClick = (index) => {
@@ -51,7 +51,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
           <Box sx={{width:"100%"}} key={index}>
 
               <Controller
-                name={`emergencycontact[${index}].address`}
+                name={`emergency_contact[${index}].address`}
                 control={control}
                 defaultValue={field.address}
                 render={({ field }) => (
@@ -69,7 +69,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
           </Box>
           <Box sx={{width:"100%"}} key={index}>
               <Controller
-                name={`emergencycontact[${index}].name`}
+                name={`emergency_contact[${index}].name`}
                 control={control}
                 defaultValue={field.name}
                 render={({ field }) => (
@@ -88,7 +88,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
           </Box>
           <Box sx={{width:"100%"}} key={index}>
               <Controller
-                name={`emergencycontact[${index}].phonenumber`}
+                name={`emergency_contact[${index}].phonenumber`}
                 control={control}
                 defaultValue={field.phonenumber}
                 render={({ field }) => (
@@ -106,7 +106,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
            </Box>
           <Box sx={{width:"100%"}} key={index}>
               <Controller
-                name={`emergencycontact[${index}].email`}
+                name={`emergency_contact[${index + 1}].email`}
                 control={control}
                 defaultValue={field.email}
                 render={({ field }) => (

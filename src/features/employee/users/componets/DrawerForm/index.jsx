@@ -33,7 +33,6 @@ export default function DrawerForm({ open, setOpenParent,Data }) {
   const theme = useTheme()
   const {t} = useTranslation()
 const dispatch=useDispatch()
-
   const handleDrawerClose = () => {
     dispatch(getContractsData())
     setOpenParent(false)
@@ -42,12 +41,10 @@ const dispatch=useDispatch()
   }
 
   const defaultValues = {
-    name: Data?.name,
-    birthDate: Data?.birthDate,
-    password: Data?.password,
-    phoneNumber: Data?.phoneNumber,
-    finance: '',
-    role:'coach'
+    first_name: Data?.first_name,
+    last_name: Data?.last_name,
+    team: Data?.specialization,
+    role:Data?.role
   }
 
   useEffect(() => {
@@ -114,7 +111,7 @@ const dispatch=useDispatch()
             <Grid container sx={{ padding: '12px' }} spacing={3}>
               <Grid item xs={12}>
                 <Controller
-                  name='name'
+                  name='first_name'
                   defaultValue=''
                   control={control}
                   render={({ field }) => (
@@ -122,7 +119,7 @@ const dispatch=useDispatch()
                       {...field}
                       fullWidth
                        autoFocus
-                      label={`${t("COACH NAME")}`}
+                      label={`${t("First NAME")}`}
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}
@@ -130,47 +127,45 @@ const dispatch=useDispatch()
                   )}
                 />
               </Grid>
-{!Data ?               <Grid item xs={12}>
+               <Grid item xs={12}>
                 <Controller
-                  name='password'
+                  name='last_name'
                   control={control}
                   defaultValue=''
                   render={({ field }) => (
                     <TextField
                       {...field}
                       fullWidth
-                      label='PASSWORD'
+                      label='Last Name'
                       variant='outlined'
-                      error={!!errors.password}
-                      helperText={errors.password ? errors.password.message : ''}
+                      error={!!errors.name}
+                      helperText={errors.name ? errors.name.message : ''}
                     />
                   )}
                 />
               </Grid>
-:null
 
-}
 
               <Grid item xs={12}>
                 <Controller
-                  name='phoneNumber'
+                  name='team'
                   control={control}
                   defaultValue=''
                   render={({ field }) => (
                     <TextField
                       {...field}
                       fullWidth
-                      label='PHONE NUMBER'
+                      label='Team'
                       variant='outlined'
-                      error={!!errors.phoneNumber}
-                      helperText={errors.phoneNumber ? errors.phoneNumber.message : ''}
+                      error={!!errors.name}
+                      helperText={errors.name ? errors.name.message : ''}
                     />
                   )}
                 />
               </Grid>
               <Grid item xs={12}>
                 <Controller
-                  name='finance'
+                  name='role'
                   control={control}
                   defaultValue=''
                   render={({ field }) => (
@@ -179,29 +174,13 @@ const dispatch=useDispatch()
                       fullWidth
                       label='finance'
                       variant='outlined'
-                      error={!!errors.finance}
-                      helperText={errors.finance ? errors.finance.message : ''}
+                      error={!!errors.name}
+                      helperText={errors.name ? errors.name.message : ''}
                     />
                   )}
                 />
                               </Grid>
-                              <Grid item xs={12}>
-                <Controller
-                  name='birthDate'
-                  control={control}
-                  defaultValue=''
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                      label={`${t("BIRTH DATE")}`}
-                      variant='outlined'
-                      error={!!errors.birthDate}
-                      helperText={errors.birthDate ? errors.birthDate.message : ''}
-                    />
-                  )}
-                />
-              </Grid>
+
               <Grid item xs={12}>
                 <Button disabled={!isDirty} type='submit' variant='contained' color='primary'>
                   {`${t("Submit")}`}

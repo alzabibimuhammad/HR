@@ -30,13 +30,7 @@ const useReportColumns = (CustomDetailPanelToggle) => {
       };
 
   return useMemo(() => [
-    // {
-    //   field: 'employee',
-    //   headerName: t("Employee"),
-    //   flex: 1,
-    //   disableClickEventBubbling: true,
 
-    // },
     {
       field: 'employee',
       headerName: t("Employee"),
@@ -57,21 +51,21 @@ const useReportColumns = (CustomDetailPanelToggle) => {
   },
 
     {
-      field: 'role',
+      field: 'roleeee',
       headerName: t("Role"),
       flex: 1,
       disableClickEventBubbling: true,
 
     },
     {
-      field: 'spcialization',
+      field: 'specialization',
       headerName: t("SPECIALIZATION"),
       flex: 1,
       disableClickEventBubbling: true,
 
     },
     {
-      field: 'team',
+      field: 'department_id',
       headerName: t("TEAM"),
       flex: 1,
       disableClickEventBubbling: true,

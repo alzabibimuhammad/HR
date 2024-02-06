@@ -42,7 +42,7 @@ const ReportGrid = ({ rows }) => {
 
               <CustomDataGrid
         columns={columns}
-        rows={ReportData(reportDataGrid)}
+        rows={ReportData(rows)||[]}
 
       />
 

@@ -7,7 +7,7 @@ import { showSuccesToast } from 'src/utiltis/toastSecces'
 import { showErrorToast } from 'src/utiltis/toastUtils'
 
 export const getReportsData = createAsyncThunk('ReportStore/getReportsData', async () => {
-  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/api/indexreport', {
+  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/api/Users/allUser', {
     headers: {
       Authorization: `Bearer ${localStorage.accessToken}`
     }
@@ -49,19 +49,19 @@ const appReportSlice = createSlice({
   extraReducers: builder => {
     builder
 
-      // .addCase(getReportsData.pending, state => {
-      //   // Set loading to true when the request starts
-      //   state.loading = true
-      // })
-      // .addCase(getReportsData.fulfilled, (state, action) => {
+       .addCase(getReportsData.pending, state => {
+        // Set loading to true when the request starts
+         state.loading = true
+      })
+       .addCase(getReportsData.fulfilled, (state, action) => {
       //   // Set loading to false when the request is fulfilled
-      //   state.loading = false
-      //   state.data = action.payload.data
-      // })
+         state.loading = false
+         state.data = action.payload.data
+       })
 
-      // .addCase(RemoveReport.fulfilled, state => {
-      //   state.status = 'succeeded'
-      // })
+      //  .addCase(RemoveReport.fulfilled, state => {
+      //    state.status = 'succeeded'
+      //  })
   }
 })
 

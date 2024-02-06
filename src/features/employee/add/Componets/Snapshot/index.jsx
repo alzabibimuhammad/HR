@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 export default function Snapshot({onDataChange,Controller,control,defaultValues,errors,setProfileImage}) {
 
   const [image, setImage] = useState(null);
-
+const[fileName,setFileName]=useState(null)
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
@@ -16,11 +16,13 @@ export default function Snapshot({onDataChange,Controller,control,defaultValues,
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
+    console.log("🚀 ~ handleImageChange ~ event.target.files[0]:", event.target.files[0].name)
 
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
+        setFileName(event.target.files[0].name)
 
         onDataChange(reader.result)
       };

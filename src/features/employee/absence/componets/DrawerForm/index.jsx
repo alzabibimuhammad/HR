@@ -84,7 +84,6 @@ const dispatch=useDispatch()
   }
 
   const handleDeleteAbsence=user_id=>{
-    console.log(user_id);
   }
 
 

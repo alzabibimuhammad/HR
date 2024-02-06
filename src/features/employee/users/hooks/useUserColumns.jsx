@@ -135,7 +135,9 @@ const useUserColumns = () => {
           </Stack>
             {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
 
-
+            <Box>
+              <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
+            </Box>
           </>
         );
       },

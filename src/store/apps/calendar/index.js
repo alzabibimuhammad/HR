@@ -16,19 +16,16 @@ export const fetchEvents = createAsyncThunk('appCalendar/fetchEvents', async cal
 
 // ** Add Event
 export const addEvent = createAsyncThunk('/Calendar/Add', async (event, { dispatch }) => {
-  console.log("🚀 ~ addEvent ~ event:", event)
   const formData =new FormData()
   const end_date=FormateDateTime(event.end)
   const start_date=FormateDateTime(event.start)
-  console.log("🚀 ~ addEvent ~ start_date:", start_date)
 
-  console.log("🚀 ~ addEvent ~ start_date:", end_date)
-  
+
   formData.append('title',event.title)
   formData.append('description',event.extendedProps.description)
   formData.append('end',end_date)
   formData.append('start',start_date)
-  
+
 
   const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL +'/api/Calendar/Add',
 formData
@@ -37,8 +34,8 @@ formData
       Accept: 'application/json',
       Authorization: `Bearer ${localStorage.accessToken}`
     },
-  } 
-  
+  }
+
   ).then(()=>{
     toast.success('Event Added ......')
   })
@@ -49,14 +46,11 @@ formData
 
 // ** Update Event
 export const updateEvent = createAsyncThunk('appCalendar/updateEvent', async (event, { dispatch }) => {
-  console.log("🚀 ~ updateEvent ~ event:", event)
   const formData =new FormData()
   const end_date=FormateDateTime(event.end)
   const start_date=FormateDateTime(event.start)
-  console.log("🚀 ~ addEvent ~ start_date:", start_date)
 
-  console.log("🚀 ~ addEvent ~ start_date:", end_date)
-  
+
   formData.append('title',event.title)
   formData.append('description',event.extendedProps.description)
   formData.append('end',end_date)
@@ -70,8 +64,7 @@ export const updateEvent = createAsyncThunk('appCalendar/updateEvent', async (ev
 
 // ** Delete Event
 export const deleteEvent = createAsyncThunk('appCalendar/deleteEvent', async (id, { dispatch }) => {
-  console.log("🚀 ~ deleteEvent ~ id:", id)
-  
+
   const response = await axios.delete(process.env.NEXT_PUBLIC_BASE_URL+`/api/Calendar/Remove/${ id }`)
   await dispatch(fetchEvents())
 

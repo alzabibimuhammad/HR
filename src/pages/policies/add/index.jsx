@@ -104,14 +104,14 @@ export default function Policies() {
     </Box>
     <Stack direction={"row"} alignItems={"center"} gap={"5px"}>
       <Box>
-        <Button sx={{fontWeight:"500",backgroundColor:"#8090a7",color:"#fff"}}>
+        <Button sx={{fontWeight:"500",backgroundColor:"#8090a7",color:"#fff",':hover': { color: '#fff', backgroundColor: '#2A4759' }}}>
         Cancel
         </Button>
       </Box>
       <Box >
         <Button
          onClick={handleSubmit(handleDataSubmit)}
-        sx={{color:"#fff",borderRadius:"8px",padding:"10px",backgroundColor:"#6ab2df",fontWeight:"600"}}>
+        sx={{color:"#fff",borderRadius:"8px",padding:"10px",backgroundColor:"#6ab2df",fontWeight:"600" ,':hover': { color: 'inhert', backgroundColor: '#2A4759' }      }}>
         Save changes
         </Button>
       </Box>

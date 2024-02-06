@@ -102,7 +102,7 @@ const Registration = ({ Data, setFilterDate }) => {
               sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
               size='small'
             />
-              <Stack direction={'row'} spacing={6} >
+              <Stack direction={{sm:'row',xs:'column'}} spacing={6} >
                   <TextField
                   type='date'
                   fullWidth

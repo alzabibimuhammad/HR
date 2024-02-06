@@ -39,11 +39,6 @@ const navigation = () => {
       path: '/apps/email'
     },
     {
-      title: 'Review',
-      icon: 'tabler:mail',
-      path: '/apps/email'
-    },
-    {
       title: 'Report',
       icon: 'tabler:report',
       path: '/report'

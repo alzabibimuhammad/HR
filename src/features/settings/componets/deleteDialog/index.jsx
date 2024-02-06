@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded'
 import Grid from '@mui/material/Grid'
@@ -8,10 +8,19 @@ import Paper from '@mui/material/Paper'
 import useDeleteBranch from '../../hooks/useDelete'
 
 export default function AlertDialog({ Branch, open, handleClose }) {
-  const { mutate: deleteBranch, isLoading } = useDeleteBranch();
 
-  const handleDeleteAPI = () => {
-    deleteBranch(Branch?.id)
+  const { mutate: deleteBranch, isLoading } = useDeleteBranch();
+  const [confirm , setConfirm] = useState(false);
+
+
+  const handleDelete = () => {
+
+    setConfirm(true)
+
+  }
+  const handleSubmit=event=>{
+    event.preventDefault()
+    deleteBranch({id:Branch?.id,password:event.target[0].value})
     handleClose()
   }
 
@@ -31,19 +40,35 @@ export default function AlertDialog({ Branch, open, handleClose }) {
       <Grid  columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Dialog onClose={handleClose} open={open}>
           <Grid item xs={12}>
+            <form onSubmit={handleSubmit} >
             <Item>
-              <Typography sx={{ fontWeight: '600', fontSize: '20px', color: '#131627' }}>Delete</Typography>
-
+              {!confirm?<Typography sx={{ fontWeight: '600', fontSize: '20px', color: '#131627' }}>Delete</Typography>:null}
+              {!confirm ?
               <DialogTitle style={{ fontSize: '14px', color: '#3F4458' }}>
                 Are you sure you want to delete [{Branch && Branch && Branch.name}] ? This action is irreversible and
                 will permanently remove all associated data and configurations for this branch.
               </DialogTitle>
+              :
+              <DialogTitle style={{ fontSize: '14px', color: '#3F4458' }}>
 
+              Please, Enter your password to confirm the deletion.
+
+              <TextField
+                sx={{ marginTop:'3%' }}
+                type='password'
+                label='password'
+                required
+                fullWidth
+                size='small'
+              />
+              </DialogTitle>
+              }
               <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
                 <Button onClick={handleClose} sx={{ backgroundColor: 'rgba(128, 144, 167,0.2)', color: '#8090A7' }}>
                   Cancel
                 </Button>
 
+                {!confirm?
                 <Button
                   autoFocus
                   sx={{
@@ -52,12 +77,27 @@ export default function AlertDialog({ Branch, open, handleClose }) {
                     border: '1px solid #DF2E38',
                     '&:hover': { color: '#fff', background: '#DF2E38' }
                   }}
-                  onClick={() => handleDeleteAPI()}
+                  onClick={handleDelete}
                 >
                   Delete
                 </Button>
+                :
+                <Button
+                autoFocus
+                  type='submit'
+                sx={{
+                  color: '#fff',
+                  backgroundColor: '#DF2E38',
+                  border: '1px solid #DF2E38',
+                  '&:hover': { color: '#fff', background: '#DF2E38' }
+                }}
+              >
+                Confirm
+              </Button>
+              }
               </DialogActions>
             </Item>
+            </form>
           </Grid>
         </Dialog>
       </Grid>

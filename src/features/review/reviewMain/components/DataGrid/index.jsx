@@ -58,7 +58,7 @@ const ReviewFeature = ({ Data }) => {
 
           <Stack direction={'column'} spacing={3} >
 
-              <Stack direction={'row'} spacing={6} >
+              <Stack direction={{sm:'row',xs:'column'}} spacing={6} >
 
               <TextField
               placeholder={t('Search')}

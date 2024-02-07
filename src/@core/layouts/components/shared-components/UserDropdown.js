@@ -40,7 +40,6 @@ const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
 const UserDropdown = props => {
   const { data, isloading } = useShowAllBranches()
   const branches = data?.data?.data
-  console.log('🚀 ~ UserDropdown ~ branch:', branches)
 
   // ** Props
   const { settings } = props
@@ -59,10 +58,8 @@ const UserDropdown = props => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleDropdownClose = url => {
-    if (url) {
-      router.push(url)
-    }
+  const handleDropdownClose = branch => {
+    localStorage.setItem('branch', JSON.stringify(branch))
     setAnchorEl(null)
   }
 
@@ -141,40 +138,14 @@ const UserDropdown = props => {
         </Box>
         <Divider sx={{ my: theme => `${theme.spacing(2)} !important` }} />
 
-        {branches && branches.map((branch, index) => (
-          <MenuItemStyled key={index} sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/user-profile/profile')}>
-            <Box sx={styles}>
-              <Typography>{branch?.name}</Typography>
-            </Box>
-          </MenuItemStyled>
-        ))}
-
-        {/* <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/account-settings/account')}>
-          <Box sx={styles}>
-            <Icon icon='tabler:settings' />
-            {`${t("Setting")}`}
-          </Box>
-        </MenuItemStyled>
-
-        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/account-settings/billing')}>
-          <Box sx={styles}>
-            <Icon icon='tabler:credit-card' />
-            {`${t("Billing")}`}
-          </Box>
-        </MenuItemStyled>
-        <Divider sx={{ my: theme => `${theme.spacing(2)} !important` }} />
-        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/help-center')}>
-          <Box sx={styles}>
-            <Icon icon='tabler:lifebuoy' />
-            {`${t("Help")}`}
-          </Box>
-        </MenuItemStyled>
-        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/pricing')}>
-          <Box sx={styles}>
-            <Icon icon='tabler:currency-dollar' />
-            {`${t("Pricing")}`}
-          </Box>
-        </MenuItemStyled> */}
+        {branches &&
+          branches.map((branch, index) => (
+            <MenuItemStyled key={index} sx={{ p: 0 }} onClick={() => handleDropdownClose(branch)}>
+              <Box sx={styles}>
+                <Typography>{branch?.name}</Typography>
+              </Box>
+            </MenuItemStyled>
+          ))}
         <Divider sx={{ my: theme => `${theme.spacing(2)} !important` }} />
         <MenuItemStyled sx={{ p: 0 }} onClick={handleLogout}>
           <Box sx={styles}>

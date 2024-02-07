@@ -40,7 +40,7 @@ const TabsProfile = styled(Tabs)(({ theme }) => ({
   },
 }));
 
-const UserProfileHeader = ({Data,setValues,value,ProfileData}) => {
+const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
   const {t} = useTranslation()
 
   const handleChange = (event, newValue) => {
@@ -111,10 +111,14 @@ const UserProfileHeader = ({Data,setValues,value,ProfileData}) => {
         marginTop: { sm: '0', xs: '2%' },
       }}
     >
-      <Typography variant='h5' sx={{ mb: 2.5 }}>
-        {ProfileData?.first_name} {ProfileData?.last_name} 
-      </Typography>
-
+      <Box>
+        <Typography variant='h5' sx={{ mb: 2.5 }}>
+          {ProfileData?.first_name} {ProfileData?.last_name}
+        </Typography>
+        <Typography color={'#8090A7'} fontSize={'14px'} >
+          {userData?.specialization}
+        </Typography>
+      </Box>
       <Box
         sx={{
           display: 'flex',

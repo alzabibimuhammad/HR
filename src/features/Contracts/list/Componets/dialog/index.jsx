@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,Typography } from "@mui/material";
-import { useDeleteContract } from "../../Hooks/useDeleteContract";
 import { Box, Stack } from '@mui/system'
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import { useDeleteContract } from "../../Hooks/useDeleteContract";
 
 export default function AlertDialog({ id, open, handleClose }) {
  const { mutate: deleteContract, isLoading } = useDeleteContract();

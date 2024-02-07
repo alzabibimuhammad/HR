@@ -5,11 +5,37 @@ import React, { forwardRef, useState } from 'react'
 import CustomTextField from 'src/@core/components/mui/text-field';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker'
-import { ST } from 'next/dist/shared/lib/utils';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import { useForm,Controller } from 'react-hook-form';
+import { useAddDecision } from './hook/useAddDecision';
+import { useDeleteDecision } from './hook/useDeleteDecision';
 
-export default function Mange() {
+export default function Mange({DataDecision}) {
+  const {data} = DataDecision?.data
+  const {mutate:AddDecision}=useAddDecision()
+  const { mutate: DeleteDecision, isLoading } = useDeleteDecision();
+  const [startDate,setStartDate]=useState()
+  const [openAdd, setOpenAdd] = React.useState(false);
+  const [openEdit, setOpenEdit] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+
+  const handleDeleteAPI = (id) => {
+    DeleteDecision(id)
+  };
+
+
+
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -18,20 +44,25 @@ export default function Mange() {
 
   }))
 
-  const [startDate,setStartDate]=useState()
+  const handleClickOpenEdit = () => {
+    setOpenEdit(true);
+  };
 
-  const PickersComponent = forwardRef(({ ...props }, ref) => {
-    return (
-      <CustomTextField
-        inputRef={ref}
-        fullWidth
-        {...props}
-        label={props.label || ''}
-        sx={{ width: '100%' }}
-        error={props.error}
-      />
-    )
-  })
+  const handleClickOpenAdd = () => {
+    setOpenAdd(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
+  };
+
+  const handleCloseAdd = () => {
+    setOpenAdd(false);
+  };
+
+
+
+
 
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
@@ -56,14 +87,60 @@ export default function Mange() {
   }));
 
 
+
+ ;
+
+ const defaultValues = {
+  dateTime: '',
+  content: '',
+  user_id:1,
+  type:"reward"
+
+};
+
+
+
+ const onSubmit = async (data) => {
+
+  try {
+   const formData = new FormData();
+   formData.append('dateTime', data.dateTime);
+   formData.append('content', data.content);
+   formData.append('user_id', data.user_id);
+   formData.append('type', data.type);
+   AddDecision(formData)
+   reset()
+   handleClose()
+  } catch (error) {
+  }
+};
+
+ const {
+  control,
+  setError,
+  handleSubmit,
+  reset,
+  formState: { errors },
+} = useForm({
+  defaultValues,
+  mode: 'onBlur',
+});
+
+
+
   return (
 
     <Grid  container spacing={2}>
   <Grid   item xs={6}>
   {/* section  Warnings*/}
-  <Card>
+
+
+    <Card >
       <CardContent >
+
+
         <Stack spacing={8} >
+
 
   <StackRow >
     <Box>
@@ -79,53 +156,167 @@ export default function Mange() {
        isClearable
        placeholderText="Choose Calendar"
        />
+
        </Box>
   </StackRow>
   <StackRow >
     <Box>
 
-   <TypoHeader>Total 2 Warnings</TypoHeader>
+   <TypoHeader>Total {data?.warnings?.length} Warnings</TypoHeader>
     </Box>
     <Box sx={{display:"flex",gap:"10px"}}>
 
- <Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>+ Add</Button>
+ <Button onClick={handleClickOpenAdd} sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>+ Add</Button>
+
+      <Dialog
+        fullScreen={fullScreen}
+        open={openAdd}
+        onClose={handleCloseAdd}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
+        Add Warning
+        </DialogTitle>
+        <DialogContent sx={{width:"100vh"}}>
+          <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
+          <Controller
+                  name='dateTime'
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <CustomTextField
+                      fullWidth
+                      autoFocus
+                      variant='outlined'
+                      InputLabelProps={{ shrink: true }}
+                      type='date'
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={onChange}
+                    />
+                  )}
+                />
+          <Controller
+                  name='content'
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <CustomTextField
+                      fullWidth
+                      autoFocus
+                      variant='outlined'
+                      InputLabelProps={{ shrink: true }}
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      label="description"
+                      multiline
+                      rows={7}
+                      placeholder='Description ...'
+
+                    />
+                  )}
+                />
+
+
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button sx={{padding:"8px 24px 8px 24px",borderRadius:"4px",backgroundColor:"#dce1e6",color:"#8090a7",fontSize:"14px",fontWeight:"500","&:hover": {backgroundColor: "#dce1e6"}}} autoFocus onClick={handleCloseAdd}>
+          Cancel
+          </Button>
+          <Button sx={{backgroundColor:"#6ab2df",padding:"8px 34px 8px 34px",borderRadius:"4px",fontWeight:"500",color:"#fff",fontSize:"14px","&:hover": {backgroundColor: "#6ab2df"}}} onClick={handleSubmit(onSubmit)} autoFocus>
+          Add
+          </Button>
+        </DialogActions>
+      </Dialog>
  <Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>Select</Button>
        </Box>
   </StackRow>
-  <StackRow >
+  {data?.warnings?.map((val,index)=>{
+    return (
+  <StackRow key={val.id}>
     <Box>
 
-   <Typography>2 hours late</Typography>
+   <Typography>{val.content} hours late</Typography>
     </Box>
     <Box>
 
  <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
+ <TypoVal>{val.dateTime}</TypoVal>
 
- <TypoVal><DeleteOutlinedIcon/></TypoVal>
+ <TypoVal  onClick={()=>handleDeleteAPI(val.id)} sx={{cursor:"pointer"}}><DeleteOutlinedIcon/></TypoVal>
  <TypoVal><CreateOutlinedIcon/></TypoVal>
+ <Dialog
+        fullScreen={fullScreen}
+        open={openEdit}
+        onClose={handleCloseEdit}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
+        Edit Warning
+        </DialogTitle>
+        <DialogContent sx={{width:"100vh"}}>
+          <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
+          <Controller
+                  name='dateTime'
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <CustomTextField
+                      fullWidth
+                      autoFocus
+                      variant='outlined'
+                      InputLabelProps={{ shrink: true }}
+                      type='date'
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={onChange}
+                    />
+                  )}
+                />
+          <Controller
+                  name='content'
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field: { value, onChange, onBlur } }) => (
+                    <CustomTextField
+                      fullWidth
+                      autoFocus
+                      variant='outlined'
+                      InputLabelProps={{ shrink: true }}
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={onChange}
+                      label="description"
+                      multiline
+                      rows={7}
+                      placeholder='Description ...'
+
+                    />
+                  )}
+                />
+
+
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button sx={{padding:"8px 24px 8px 24px",borderRadius:"4px",backgroundColor:"#dce1e6",color:"#8090a7",fontSize:"14px",fontWeight:"500","&:hover": {backgroundColor: "#dce1e6"}}} autoFocus onClick={handleCloseAdd}>
+          Cancel
+          </Button>
+          <Button sx={{backgroundColor:"#6ab2df",padding:"8px 34px 8px 34px",borderRadius:"4px",fontWeight:"500",color:"#fff",fontSize:"14px","&:hover": {backgroundColor: "#6ab2df"}}} onClick={handleSubmit(onSubmit)} autoFocus>
+          Edit
+          </Button>
+        </DialogActions>
+      </Dialog>
  </StackRow>
 
 
        </Box>
   </StackRow>
-  <StackRow >
-    <Box>
+ )
 
-   <Typography>2 hours late</Typography>
-    </Box>
-    <Box>
-
- <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
-
- <TypoVal><DeleteOutlinedIcon/></TypoVal>
- <TypoVal><CreateOutlinedIcon/></TypoVal>
- </StackRow>
-
-
-       </Box>
-  </StackRow>
+})}
 
   </Stack>
 
@@ -133,11 +324,14 @@ export default function Mange() {
 
 
    </Card>
+
+
    {/* End section Warnings */}
 
    {/* ******************************* */}
    {/* section  Alerts */}
-  <Card sx={{marginTop:"20px"}}>
+
+  <Card  sx={{marginTop:"20px"}}>
       <CardContent >
         <Stack spacing={8} >
 
@@ -161,23 +355,27 @@ export default function Mange() {
   <StackRow >
     <Box>
 
-   <TypoHeader>Total 2 Alert</TypoHeader>
-    </Box>
+{data?.alerts?.length > 0 && (
+  <TypoHeader>Total {data?.alerts?.length} Alert</TypoHeader>
+  )}    </Box>
     <Box sx={{display:"flex",gap:"10px"}}>
 
  <Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>+ Add</Button>
  <Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>Select</Button>
        </Box>
   </StackRow>
-  <StackRow >
+  {data?.alerts?.map((val,index)=>{
+   return (
+
+  <StackRow key={val.id}>
     <Box>
 
-   <Typography>For not cleaning</Typography>
+   <Typography>{val.content}</Typography>
     </Box>
     <Box>
 
  <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
+ <TypoVal> {val.dateTime}</TypoVal>
 
  <TypoVal><DeleteOutlinedIcon/></TypoVal>
  <TypoVal><CreateOutlinedIcon/></TypoVal>
@@ -186,23 +384,9 @@ export default function Mange() {
 
        </Box>
   </StackRow>
-  <StackRow >
-    <Box>
 
-   <Typography>For not cleaning</Typography>
-    </Box>
-    <Box>
-
- <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
-
- <TypoVal><DeleteOutlinedIcon/></TypoVal>
- <TypoVal><CreateOutlinedIcon/></TypoVal>
- </StackRow>
-
-
-       </Box>
-  </StackRow>
+       )
+       })}
 
   </Stack>
 
@@ -210,9 +394,12 @@ export default function Mange() {
 
 
    </Card>
+
       {/* End section Alerts */}
 
    {/* ******************************* */}
+
+
    {/* section  Alerts */}
    <Card sx={{marginTop:"20px"}}>
       <CardContent >
@@ -238,7 +425,9 @@ export default function Mange() {
   <StackRow >
     <Box>
 
-   <TypoHeader>Total 2 Penalties</TypoHeader>
+   {data?.penalty?.length > -1 && (
+  <TypoHeader>Total {data?.penalty?.length} Penalties</TypoHeader>
+)}
     </Box>
     <Box sx={{display:"flex",gap:"10px"}}>
 
@@ -246,15 +435,18 @@ export default function Mange() {
  <Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>Select</Button>
        </Box>
   </StackRow>
-  <StackRow >
+  {data?.penalty?.map((val,index)=>{
+   return (
+
+  <StackRow key={val.id}>
     <Box>
 
-   <Typography> 50.000 s.p deduction</Typography>
+   <Typography> {val.content} s.p deduction</Typography>
     </Box>
     <Box>
 
  <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
+ <TypoVal> {val.dateTime}</TypoVal>
 
  <TypoVal><DeleteOutlinedIcon/></TypoVal>
  <TypoVal><CreateOutlinedIcon/></TypoVal>
@@ -263,23 +455,9 @@ export default function Mange() {
 
        </Box>
   </StackRow>
-  <StackRow >
-    <Box>
+      )
+  })}
 
-   <Typography> 50.000 s.p deduction</Typography>
-    </Box>
-    <Box>
-
- <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
-
- <TypoVal><DeleteOutlinedIcon/></TypoVal>
- <TypoVal><CreateOutlinedIcon/></TypoVal>
- </StackRow>
-
-
-       </Box>
-  </StackRow>
 
   </Stack>
 
@@ -317,7 +495,9 @@ export default function Mange() {
   <StackRow >
     <Box>
 
-   <TypoHeader>Total 2 Deduction</TypoHeader>
+   {data?.deductions?.length > -1 && (
+  <TypoHeader>Total {data?.deductions?.length} Deduction</TypoHeader>
+)}
     </Box>
     <Box sx={{display:"flex",gap:"10px"}}>
 
@@ -325,15 +505,18 @@ export default function Mange() {
  <Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>Select</Button>
        </Box>
   </StackRow>
-  <StackRow >
+  {data?.deductions?.map((val,index)=>{
+   return (
+
+  <StackRow key={val.id}>
     <Box>
 
-   <Typography> 50.000 s.p deduction</Typography>
+   <Typography> {val.content} s.p deduction</Typography>
     </Box>
     <Box>
 
  <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
+ <TypoVal> {val.dateTime}</TypoVal>
 
  <TypoVal><DeleteOutlinedIcon/></TypoVal>
  <TypoVal><CreateOutlinedIcon/></TypoVal>
@@ -342,6 +525,10 @@ export default function Mange() {
 
        </Box>
   </StackRow>
+
+     )
+  })}
+
 
 
   </Stack>
@@ -358,6 +545,7 @@ export default function Mange() {
     <Box>
 
    <TypoHeader sx={{color:"#131627",fontWeight:"500"}}> Absence </TypoHeader>
+
     </Box>
     <Box>
 
@@ -375,6 +563,7 @@ export default function Mange() {
     <Box>
 
    <TypoHeader>Total 2 Absence</TypoHeader>
+
     </Box>
     <Box sx={{display:"flex",gap:"10px"}}>
 
@@ -466,7 +655,9 @@ export default function Mange() {
   <StackRow >
     <Box>
 
-   <TypoHeader>Total 1 Reward</TypoHeader>
+   {data?.rewards?.length > -1 && (
+  <TypoHeader>Total {data?.rewards?.length} Reward</TypoHeader>
+)}
     </Box>
     <Box sx={{display:"flex",gap:"10px"}}>
 
@@ -474,15 +665,18 @@ export default function Mange() {
  <Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>Select</Button>
        </Box>
   </StackRow>
-  <StackRow >
+  {data?.rewards?.map((val,index)=>{
+   return (
+
+  <StackRow key={val.id}>
     <Box>
 
-   <Typography> 50.000 s.p</Typography>
+   <Typography> {val.content} s.p</Typography>
     </Box>
     <Box>
 
  <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
+ <TypoVal> {val.dateTime}</TypoVal>
 
  <TypoVal><DeleteOutlinedIcon/></TypoVal>
  <TypoVal><CreateOutlinedIcon/></TypoVal>
@@ -491,6 +685,10 @@ export default function Mange() {
 
        </Box>
   </StackRow>
+  )
+  })}
+
+
 
 
   </Stack>
@@ -504,3 +702,4 @@ export default function Mange() {
 
   )
 }
+

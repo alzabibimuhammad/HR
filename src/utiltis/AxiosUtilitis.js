@@ -11,7 +11,7 @@ export const request = async ({ url, params = {}, ...rest }) => {
   const onSuccess = response => response;
 
   const onError = error => {
-    alert(error);
+    // alert(error)
 
     //   const errorMessage =
     //     error.response && error.response.data && error.response.data.userMessage

@@ -39,11 +39,6 @@ const navigation = () => {
       path: '/apps/email'
     },
     {
-      title: 'Review',
-      icon: 'tabler:mail',
-      path: '/apps/email'
-    },
-    {
       title: 'Report',
       icon: 'tabler:report',
       path: '/report'
@@ -57,6 +52,11 @@ const navigation = () => {
       title: 'Salary',
       icon: 'tabler:cash-banknote',
       path: '/salary'
+    },
+    {
+      title: 'Review',
+      icon: 'tabler:cash-banknote',
+      path: '/review'
     },
     {
       title: 'Employees',

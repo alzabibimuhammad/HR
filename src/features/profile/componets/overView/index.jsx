@@ -16,68 +16,13 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useState } from 'react'
 import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
 
-const renderList = arr => {
-  if (arr && arr.length) {
-    return arr.map((item, index) => {
-      return (
-        <Box
-          key={index}
-          sx={{
-            display: 'flex',
-            '&:not(:last-of-type)': { mb: 3 },
-            '& svg': { color: 'text.secondary' }
-          }}
-        >
-          <Box sx={{ display: 'flex', mr: 2 }}>
-            <Icon fontSize='1.25rem' icon={item.icon} />
-          </Box>
 
-          <Box sx={{ columnGap: 2, display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
-            <Typography sx={{ fontWeight: 500, color: 'text.secondary' }}>
-              {`${item.property.charAt(0).toUpperCase() + item.property.slice(1)}:`}
-            </Typography>
-            <Typography sx={{ color: 'text.secondary' }}>
-              {item.value.charAt(0).toUpperCase() + item.value.slice(1)}
-            </Typography>
-          </Box>
-        </Box>
-      )
-    })
-  } else {
-    return null
-  }
-}
 
-const renderTeams = arr => {
-  if (arr && arr.length) {
-    return arr.map((item, index) => {
-      return (
-        <Box
-          key={index}
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            '&:not(:last-of-type)': { mb: 3 },
-            '& svg': { color: `${item.color}.main` }
-          }}
-        >
-          <Icon fontSize='1.25rem' icon={item.icon} />
 
-          <Typography sx={{ mx: 2, fontWeight: 500, color: 'text.secondary' }}>
-            {item.property.charAt(0).toUpperCase() + item.property.slice(1)}
-          </Typography>
-          <Typography sx={{ color: 'text.secondary' }}>
-            {item.value.charAt(0).toUpperCase() + item.value.slice(1)}
-          </Typography>
-        </Box>
-      )
-    })
-  } else {
-    return null
-  }
-}
 
-const AboutOverivew = ({Data,ProfileData}) => {
+const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
+
+
 
   const {t} = useTranslation();
   const [isWarDetails,setisWarDetails] = useState(false)
@@ -89,9 +34,10 @@ const AboutOverivew = ({Data,ProfileData}) => {
   const [isCheckin,setisCheckin] = useState(false)
   const [isCheckout,setisCheckout] = useState(false)
   const [isAbsences,setisAbsences] = useState(false)
-  const {mutate:ReportDay,data,isloading}=useReportByDay()
-  console.log("🚀 ~ AboutOverivew ~ data:", data)
-  console.log("🚀 ~ AboutOverivew ~ Data:", Data)
+
+  const {data,isloading}=useReportByDay()
+
+
 
   const Header = styled('p')(({ }) => ({
     fontSize:'16px',
@@ -234,7 +180,7 @@ const AboutOverivew = ({Data,ProfileData}) => {
                 <StackRow >
 
                 <Typo >Warnings:</Typo>
-                <Text style={{ color:'red' }} >late 2 hours</Text>
+                <Text style={{ color:'red' }} >late {userDataClean?.late} Houres</Text>
                 {/* for data see details arrow  */}
 
                 {!isWarDetails?
@@ -301,7 +247,7 @@ const AboutOverivew = ({Data,ProfileData}) => {
               </StackRow>
                 <StackRow>
                   <Typo>Penalties:</Typo>
-                  <Text   >late 2 hours</Text>
+                  <Text   >late {userDataClean?.deduction} hours</Text>
 
                 </StackRow>
               </Stack>
@@ -330,11 +276,11 @@ const AboutOverivew = ({Data,ProfileData}) => {
               <Stack direction={'column'}  >
                 <StackRow   >
                 <Typo  >Salary:</Typo>
-                <Text >15000 sp</Text>
+                <Text>{userDataClean?.BaseSalary} L.S</Text>
                 </StackRow>
                 <StackRow>
                   <Typo>Overtime:</Typo>
-                  <Text >10 hours</Text>
+                  <Text >{userDataClean?.overtime} hours</Text>
                 {/* for data see details arrow  */}
 
                 {!isoverDetails?
@@ -359,7 +305,7 @@ const AboutOverivew = ({Data,ProfileData}) => {
                 </StackRow>
                 <StackRow>
                   <Typo>Rewards:</Typo>
-                  <Text   >50000 sp</Text>
+                  <Text   >{userDataClean?.reward} L.S</Text>
               {/* for data see details arrow  */}
 
               {!isRewardDetails?
@@ -385,7 +331,7 @@ const AboutOverivew = ({Data,ProfileData}) => {
 
                 <StackRow>
                   <Typo>Advances:</Typo>
-                  <Text   >50000 sp</Text>
+                  <Text   >{userDataClean?.advance} L.S</Text>
 
                 {!isAdvanceDetails?
                 <>
@@ -410,7 +356,7 @@ const AboutOverivew = ({Data,ProfileData}) => {
 
                 <StackRow>
                   <Typo>Deduction:</Typo>
-                  <Text   >50000 sp</Text>
+                  <Text   >{userDataClean?.deduction} L.S</Text>
                 {!isDeductionDetails?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
@@ -433,7 +379,7 @@ const AboutOverivew = ({Data,ProfileData}) => {
                 </StackRow>
                 <StackRow>
                   <Typo>Total Salary:</Typo>
-                  <Text   >5000000 sp</Text>
+                  <Text   >{userDataClean?.BaseSalary} L.S</Text>
                 </StackRow>
               </Stack>
             </Box>
@@ -454,7 +400,7 @@ const AboutOverivew = ({Data,ProfileData}) => {
               <Stack direction={'column'}  >
                 <StackRow   >
                 <Typo  >Check-in:</Typo>
-                <Text >95% on time</Text>
+                <Text >{userDataClean?.CheckInPercentage}% on time</Text>
                 {!isCheckin?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
@@ -477,7 +423,7 @@ const AboutOverivew = ({Data,ProfileData}) => {
                 </StackRow>
                 <StackRow>
                   <Typo>Check-out:</Typo>
-                  <Text >95% on time</Text>
+                  <Text >{userDataClean?.CheckOutPercentage}% on time</Text>
                   {!isCheckout?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
@@ -500,7 +446,7 @@ const AboutOverivew = ({Data,ProfileData}) => {
                 </StackRow>
                 <StackRow>
                   <Typo>Absences:</Typo>
-                  <Text   >2 days</Text>
+                  <Text   >{userDataClean?.absence} days</Text>
                   {!isAbsences?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
@@ -536,12 +482,15 @@ const AboutOverivew = ({Data,ProfileData}) => {
                 </Header>
                 <Divider sx={{ width:'74%' }} style={{ background: '#8090A7' }}/>
               </Box>
+
+              {userDataClean?.deposits?.map((element)=>(
               <Stack direction={'column'}  >
-                <StackRow   >
-                <Typo>Laptop:</Typo>
-                <Text >Asus xd834</Text>
+                <StackRow justifyContent={'space-between'} >
+                <Typo>{element?.description}</Typo>
+                <Text >{element?.received_date}</Text>
                 </StackRow>
               </Stack>
+              ))}
             </Box>
 
           </CardContent>

@@ -1,11 +1,20 @@
-import { useQuery } from '@tanstack/react-query'
-import getRatingById from '../api/GetRatingById'
 
-const useGetRatingById = () => {
-  const query = useQuery({ queryKey: ['Rating'], queryFn: getRatingById })
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import getRatingById from "../api/GetRatingById";
+import { useDispatch } from "react-redux";
+import { setRatingUser } from "src/store/apps/user";
 
-  return query
-}
+export const useGetRatingById = () => {
+  const queryClient = useQueryClient();
+const dispatch=useDispatch()
 
-export default useGetRatingById
+  return useMutation({
+    mutationFn:getRatingById,
+    onSuccess: (data) => {
+      dispatch(setRatingUser(data));
+      queryClient.invalidateQueries("rating");
+    },
+  });
+};
+
 

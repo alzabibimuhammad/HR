@@ -31,10 +31,6 @@ import { setUserId } from '../../../store/apps/user'
 import RatingTabel from '../ratingTabel'
 import Mange from './manage'
 import useGetRatingById from '../ratingTabel/hooks/useGetRatingById'
-import useGetDecision from './manage/hook/useGetDecision'
-import NoteReport from './notesReport'
-import Download from './download'
-import ReviewsReport from './reviews'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   borderBottom: '0 !important',
@@ -164,11 +160,15 @@ const Profiles = ({ tab, data }) => {
           </Stack>
         </TabPanel>
 
-        <TabPanel value='3'>{DataDecision ? <Mange id={id} DataDecision={DataDecision} /> : null}</TabPanel>
+    <TabPanel value="4">
+ {DataReview?
+   <RatingTabel rows={DataReview}/>
+   :null
+ }
+      </TabPanel>
 
-        <TabPanel value='4'>{DataReview ? <RatingTabel rows={DataReview} /> : null}</TabPanel>
-      </Stack>
-    </TabContext>
+</Stack>
+</TabContext>
   )
 }
 

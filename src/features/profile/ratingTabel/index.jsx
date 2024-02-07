@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton, Avatar } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton, Avatar, Button, Modal } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { useTranslation } from 'react-i18next';
@@ -8,17 +8,41 @@ import { RatingData } from '../ratingTabel/infrastructure';
 import { Box } from '@mui/system';
 
 import useUserColumns from './hooks/useRatingUser';
-import useGetRatingById from './hooks/useGetRatingById';
+import {useGetRatingById} from './hooks/useGetRatingById';
+import { CustomDatePickerSalary } from 'src/@core/components/customPickerSalary';
+import { useGetDataByMonth } from 'src/features/salary/users/hooks/useGetDataByMonth';
+import { CustomDatePicker } from 'src/@core/components/customPickerDate';
+import { CustomDatePickerRating } from 'src/@core/components/customPickerRating';
+import useGetRattingtype from './hooks/useGetRatingType';
+import { useSelector } from 'react-redux';
+import useGetAllContracts from 'src/features/Contracts/list/Hooks/useGetAllContracts';
 
 const RatingTabel = ({rows}) => {
-console.log("🚀 ~ RatingTabel ~ rows:", rows)
-
+  const{data,isloading}=useGetRattingtype()
+  console.log("🚀 ~ useUserColumns ~ data:", data?.data?.data)
   const columns = useUserColumns();
   const { t } = useTranslation()
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const {data:rateData, isloading:isloadingData}= useGetRatingById()
+  console.log("🚀 ~ RatingTabel ~ rateData:", rateData)
+
+const[ChoosedDate,setChooseDate]=useState()
+const[RatingDate,setRatingData]=useState()
+
+const store = useSelector(state => state.user)
 
 
 
-
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+  };
 
 
 
@@ -45,7 +69,46 @@ console.log("🚀 ~ RatingTabel ~ rows:", rows)
     },
   };
 
+  const arr1 =data?.data?.data
 
+const arr2 = store?.RatingUser?.data?.data?.user_rates
+console.log("🚀 ~ RatingTabel ~ arr2:", arr2)
+
+let output;
+
+
+if (!arr1 || !arr2) {
+  console.error("Arrays cannot be empty");
+  
+} else {
+  // Map rate_type_id to id
+  const map = arr1.reduce((acc, obj) => {
+      acc[obj.id] = obj.rate_type;
+
+      return acc;
+
+  }, {});
+
+  // Create output array
+   output = arr2.map(obj => {
+      const newObj = {
+          date: obj.date,
+          id: obj.id,
+          f_name:obj.evaluators.first_name,
+          l_name:obj.evaluators.last_name,
+          ...arr1.reduce((acc, { id }) => {
+              acc[`rate${id}`] = obj.rate_type_id === id ? obj.rate : 0;
+
+              return acc;
+          }, {})
+      };
+
+      return newObj;
+  });
+
+  console.log(output);
+  
+}
 
 
 
@@ -90,54 +153,23 @@ console.log("🚀 ~ RatingTabel ~ rows:", rows)
                 spacing={2}
               >
               <Typography sx={{ fontSize:'16px',marginTop:'5px' }} >{t("Filters")}</Typography>
-                  <TextField
-                    select
-                    fullWidth
-                    defaultValue="Role"
-                    SelectProps={{
-                      displayEmpty: true,
-                    }}
-                    size='small'
-                  >
-                    <MenuItem value=''>{`${t("Role")}`}</MenuItem>
-                    <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
-                    <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
-                    <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
-                  </TextField>
+              
 
-                  <TextField
-                    select
-                    fullWidth
-                    defaultValue='Specialization'
-                    SelectProps={{
-                      displayEmpty: true,
-                    }}
-                    size='small'
-
-                  >
-                    <MenuItem value=''>{`${t("Specialization")}`}</MenuItem>
-                    <MenuItem value='Front_End'>{`${t("Front End")}`}</MenuItem>
-                    <MenuItem value='Back_End'>{`${t("Back End")}`}</MenuItem>
-                  </TextField>
-                  <TextField
-                    select
-                    fullWidth
-                    defaultValue='Team'
-                    SelectProps={{
-                      // value: department,
-                      displayEmpty: true,
-
-                    }}
-                    size='small'
-
-                  >
-                    <MenuItem value=''>{`${t("Team")}`}</MenuItem>
-                    <MenuItem value='active'>{`${t("active")}`}</MenuItem>
-                    <MenuItem value='not-active'>{`${t("not active")}`}</MenuItem>
-                  </TextField>
+     
+                  <Button sx={{border:"1px solid"}} fullWidth onClick={handleOpen}>Select Date</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <CustomDatePickerRating selectedDate={1} handleDateChoose={setChooseDate} />
+        </Box>
+      </Modal>
                   </Stack>
 
-                  {<CustomDataGrid columns={[]} sx={gridStyles.root} data={ RatingData(rows)} />}
+                  {output && <CustomDataGrid columns={columns} sx={gridStyles.root} rows={ RatingData(output)} />}
 
               </Stack>
               </CardContent>

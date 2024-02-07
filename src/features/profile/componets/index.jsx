@@ -30,7 +30,7 @@ import { useDispatch } from 'react-redux'
 import{setUserId } from '../../../store/apps/user'
 import RatingTabel from '../ratingTabel'
 import Mange from './manage'
-import useGetRatingById from '../ratingTabel/hooks/useGetRatingById'
+import { useGetRatingById } from '../ratingTabel/hooks/useGetRatingById'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   borderBottom: '0 !important',
@@ -178,10 +178,9 @@ const [value,setValues]=useState('1')
     </TabPanel>
 
     <TabPanel value="4">
- {DataReview?
+ 
    <RatingTabel rows={DataReview}/>
-   :null
- }
+
       </TabPanel>
 
 </Stack>

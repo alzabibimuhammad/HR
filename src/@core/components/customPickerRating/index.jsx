@@ -2,19 +2,23 @@ import { Button, ButtonGroup, Card, CardContent, CardHeader, Typography } from '
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
 import { useReportByDay } from 'src/features/Report/hooks/useReportByDay';
+import { useGetRatingById } from 'src/features/profile/ratingTabel/hooks/useGetRatingById';
+import { setRatingUser } from 'src/store/apps/user';
+
+
 import { FormateDate } from 'src/utiltis/DateFormate';
 
-export  const CustomDatePicker = ({ selectedDate, handleDateChoose }) => {
+export  const CustomDatePickerRating = ({ selectedDate, handleDateChoose }) => {
   const [view, setView] = useState('month');
   const [startDate, setStartDate] = useState(new Date());
   const [showMonthPicker, setShowMonthPicker] = useState('day');
-  const {mutate:ReportDay,data,isloading}=useReportByDay()
+  const {mutate:getData ,data:rateData, isloading}= useGetRatingById()
   const store = useSelector(state => state.user)
-
+ 
 
   const toggleDatePickerMonth = () => {
     setStartDate(new Date());
@@ -25,13 +29,15 @@ export  const CustomDatePicker = ({ selectedDate, handleDateChoose }) => {
 
   const handelSendReport = (date) => {
     const formattedDate = FormateDate(date);
-    
     const formData = new FormData()
-
     formData.append('user_id',store.userId)
     formData.append('date',formattedDate)
+    setStartDate(date)
 
-    ReportDay(formData)
+
+    getData({user_id:store.userId,date:formattedDate})
+    handleDateChoose(rateData)
+  
 
   };
 
@@ -83,7 +89,7 @@ Month      </Button>
         >
 
           <DatePicker inline selected={startDate}
-            onChange={(date) => setStartDate(date)}
+            onChange={(date) => handelSendReport(date)}
             dateFormat={showMonthPicker ? 'MMM' : 'yyyy'}
             showMonthYearPicker={showMonthPicker==='month'}
             showYearPicker={showMonthPicker==='year'}

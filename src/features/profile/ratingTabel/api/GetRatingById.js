@@ -1,7 +1,9 @@
 import { request } from "../../../../utiltis/AxiosUtilitis";
 
-const getRatingById = async () => {
-  return request({ url: '/api/Rate/getRate/11?date=2024-02-05' })
+const getRatingById = async (payload) => {
+  console.log("🚀 ~ getRatingById ~ payload:", payload)
+
+  return request({ url: `/api/Rate/getRate/${payload.user_id}?date=${payload.date}` })
 
 };
 

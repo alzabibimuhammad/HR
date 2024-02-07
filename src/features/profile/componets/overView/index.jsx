@@ -482,12 +482,15 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 </Header>
                 <Divider sx={{ width:'74%' }} style={{ background: '#8090A7' }}/>
               </Box>
+
+              {userDataClean?.deposits?.map((element)=>(
               <Stack direction={'column'}  >
-                <StackRow   >
-                <Typo>Laptop:</Typo>
-                <Text >Asus xd834</Text>
+                <StackRow justifyContent={'space-between'} >
+                <Typo>{element?.description}</Typo>
+                <Text >{element?.received_date}</Text>
                 </StackRow>
               </Stack>
+              ))}
             </Box>
 
           </CardContent>

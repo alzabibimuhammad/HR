@@ -82,6 +82,7 @@ const Profiles = ({ tab, data }) => {
   const id = router.query.id
   const dispatch = useDispatch()
   dispatch(setUserId(id))
+
   const { mutate: getEmployee, data: DataEmployee } = useGetEmployeeById()
   const { data: DataReview, isloading } = useGetRatingById(id)
   const { data: DataDecision } = useGetDecision(id)
@@ -141,7 +142,7 @@ const Profiles = ({ tab, data }) => {
               </Box>
 
               <Box width={'100%'}>
-                <NoteReport />
+                <NoteReport user_id={id} />
               </Box>
 
             </Stack>

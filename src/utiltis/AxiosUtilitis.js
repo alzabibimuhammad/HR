@@ -10,7 +10,7 @@ export const request = async ({ ...options }) => {
   }
 
   const onError = error => {
-    alert(error)
+    // alert(error)
 
     //   const errorMessage =
     //     error.response && error.response.data && error.response.data.userMessage

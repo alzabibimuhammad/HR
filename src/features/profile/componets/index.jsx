@@ -75,9 +75,15 @@ const Profiles = ({ tab, data }) => {
 
   // ** Hooks
   const router = useRouter()
-  const id = router.query.id
-  const dispatch = useDispatch()
-  dispatch(setUserId(id))
+ const id =router.query.id
+ const dispatch = useDispatch();
+ dispatch(setUserId(id));
+  const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
+  const {data:DataReview,isloading}=useGetRatingById(id);
+
+  const {data:DataDecision}=useGetDecision(id);
+
+
 
   const { mutate: getEmployee, data: DataEmployee } = useGetEmployeeById()
   const { data: DataReview, isloading } = useGetRatingById(id)

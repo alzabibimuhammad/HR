@@ -76,8 +76,8 @@ const [value,setValues]=useState('1')
  dispatch(setUserId(id));
   const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
   const {data:DataReview,isloading}=useGetRatingById(id);
+
   const {data:DataDecision}=useGetDecision(id);
-  console.log("🚀 ~ Mange ~ DataDecision:", DataDecision)
 
 
 

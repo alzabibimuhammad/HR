@@ -154,7 +154,7 @@ const Profiles = ({ tab, data }) => {
           <Stack direction={{ sm: 'row', xs: 'column' }} spacing={6}>
             <Stack spacing={6} width={{ sm: '40%', xs: '100%' }} direction={'column'}>
               <PersonalInfo ProfileData={ProfileData} />
-              <Notes />
+              <NoteReport user_id={id} />
             </Stack>
 
             <Stack width={{ sm: '60%', xs: '100%' }} spacing={6} direction={'column'}>

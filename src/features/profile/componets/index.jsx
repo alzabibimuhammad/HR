@@ -80,14 +80,11 @@ const Profiles = ({ tab, data }) => {
  dispatch(setUserId(id));
   const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
   const {data:DataReview,isloading}=useGetRatingById(id);
-
   const {data:DataDecision}=useGetDecision(id);
+  console.log("🚀 ~ Mange ~ DataDecision:", DataDecision)
 
 
 
-  const { mutate: getEmployee, data: DataEmployee } = useGetEmployeeById()
-  const { data: DataReview, isloading } = useGetRatingById(id)
-  const { data: DataDecision } = useGetDecision(id)
 
   const ProfileData = DataEmployee?.data?.data[0]
   const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))

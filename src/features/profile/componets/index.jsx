@@ -27,11 +27,10 @@ import Employment from './employment'
 import Notes from './notes'
 import { useGetEmployeeById } from 'src/features/employee/hooks/useGetEmployeeById'
 import { useDispatch } from 'react-redux'
-import{setUserId } from '../../../store/apps/user'
+import { setUserId } from '../../../store/apps/user'
 import RatingTabel from '../ratingTabel'
 import Mange from './manage'
 import useGetRatingById from '../ratingTabel/hooks/useGetRatingById'
-import useGetDecision from './manage/hook/useGetDecision'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   borderBottom: '0 !important',
@@ -66,8 +65,13 @@ const Profiles = ({ tab, data }) => {
   // ** State
   const [activeTab, setActiveTab] = useState(tab)
   const [isLoading, setIsLoading] = useState(true)
-  const [SelecetedDate,SetSelectedDate]=useState()
-const [value,setValues]=useState('1')
+  const [SelecetedDate, SetSelectedDate] = useState()
+
+  const [userData, setuserData] = useState()
+
+  const userDataClean = userData?.data?.data[0]
+
+  const [value, setValues] = useState('1')
 
   // ** Hooks
   const router = useRouter()
@@ -81,17 +85,17 @@ const [value,setValues]=useState('1')
 
 
 
+  const { mutate: getEmployee, data: DataEmployee } = useGetEmployeeById()
+  const { data: DataReview, isloading } = useGetRatingById(id)
+  const { data: DataDecision } = useGetDecision(id)
 
   const ProfileData = DataEmployee?.data?.data[0]
   const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
-  const handleDateChoose = (date) => {
-    const formattedDate = FormateDate(date);
+  const handleDateChoose = date => {
+    const formattedDate = FormateDate(date)
     SetSelectedDate(date)
-
-
-
-}
+  }
 
   useEffect(() => {
     if (data) {
@@ -105,88 +109,62 @@ const [value,setValues]=useState('1')
     }
   }, [tab])
 
-
-  const  Data = {
-
-    "success": true,
-    "message": "success",
-    "teamLeader": [
-        {
-          'total_employees':7,
-          'present_employees':6
-        },
-
-      ],
-
-    }
-
-    const  Data2 = {
-
-      "success": true,
-      "message": "success",
-
-        "projectManeger": [
-          {
-            'total_employees':20,
-            'present_employees':19
-          },
-
-        ]
-
-      }
-
-  return(
+  return (
     <TabContext value={value}>
-  <Stack direction={'column'} container spacing={15}>
+      <Stack direction={'column'} container spacing={15}>
+        <Box item xs={12} sx={{ height: '120px', zIndex: 999 }} marginTop={{ sm: '0', xs: '25px' }}>
+          <UserProfileHeader
+            userData={userDataClean}
+            Data={data}
+            ProfileData={ProfileData}
+            setValues={setValues}
+            values={value}
+          />
+        </Box>
 
+        <TabPanel value='1'>
 
-    <Box item xs={12} sx={{ height:'120px',zIndex:999 }} marginTop={{sm:'0' ,xs:'25px' }}>
+          <Stack direction={{ sm: 'row', xs: 'column' }}  width={'100%'} spacing={5}>
 
-     <UserProfileHeader  Data={data} ProfileData={ProfileData} setValues={setValues} values={value}  />
-    </Box>
-    <TabPanel value="1">
-    <Stack direction={{sm:'row',xs:'column'}} spacing={5} >
-    <Box sx={{ flex:1 }}>
-      <AboutOverivew Data={data}  />
-    </Box>
-      <Box sx={{ flex:0 }}>
+          <Stack direction={'column'}width={{ sm:'50%',xs:'100%' }} spacing={2} >
+            <Box  >
+              <AboutOverivew userDataClean={userDataClean} Data={data} />
+            </Box>
+            <Box>
+            <ReviewsReport/>
+            </Box>
+            </Stack>
+            <Stack width={{ sm:'50%',xs:'100%' }} spacing={2} direction={'column'}>
 
-     <CustomDatePicker selectedDate={SelecetedDate} />
+              <Box width={'100%'} >
+                <CustomDatePicker setUserData={setuserData} selectedDate={SelecetedDate} />
+              </Box>
+              <Box>
+                <Download user={userData} />
+              </Box>
 
-      </Box>
+              <Box width={'100%'}>
+                <NoteReport user_id={id} />
+              </Box>
 
-    </Stack>
-    </TabPanel>
+            </Stack>
+          </Stack>
 
-    <TabPanel value="2">
+        </TabPanel>
 
-    <Stack direction={{ sm:'row',xs:'column' }} spacing={6}>
+        <TabPanel value='2'>
+          <Stack direction={{ sm: 'row', xs: 'column' }} spacing={6}>
+            <Stack spacing={6} width={{ sm: '40%', xs: '100%' }} direction={'column'}>
+              <PersonalInfo ProfileData={ProfileData} />
+              <Notes />
+            </Stack>
 
-    <Stack spacing={6} width={{sm:'40%',xs:'100%'}} direction={'column'}>
-      <PersonalInfo ProfileData={ProfileData}/>
-      <Notes/>
-    </Stack>
-
-    <Stack width={{sm:'60%',xs:'100%'}} spacing={6} direction={'column'}>
-
-      <Skills ProfileData={ProfileData}/>
-      <Employment ProfileData={ProfileData}/>
-    </Stack>
-    </Stack>
-
-    </TabPanel>
-
-
-
-    <TabPanel value="3">
-
-{DataDecision ?
-
-
-<Mange id={id} DataDecision={DataDecision}/>
-:null
-}
-    </TabPanel>
+            <Stack width={{ sm: '60%', xs: '100%' }} spacing={6} direction={'column'}>
+              <Skills ProfileData={ProfileData} />
+              <Employment ProfileData={ProfileData} />
+            </Stack>
+          </Stack>
+        </TabPanel>
 
     <TabPanel value="4">
  {DataReview?

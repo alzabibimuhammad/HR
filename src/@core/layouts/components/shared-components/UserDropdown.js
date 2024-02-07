@@ -20,6 +20,7 @@ import Icon from 'src/@core/components/icon'
 // ** Context
 import { useAuth } from 'src/hooks/useAuth'
 import { useTranslation } from 'react-i18next'
+import useShowAllBranches from 'src/features/settings/hooks/useShowAllBranches'
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -37,9 +38,12 @@ const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
 }))
 
 const UserDropdown = props => {
+  const { data, isloading } = useShowAllBranches()
+  const branches = data?.data?.data
+
   // ** Props
   const { settings } = props
-  const {t} = useTranslation();
+  const { t } = useTranslation()
   // ** States
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -54,10 +58,8 @@ const UserDropdown = props => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleDropdownClose = url => {
-    if (url) {
-      router.push(url)
-    }
+  const handleDropdownClose = branch => {
+    localStorage.setItem('branch', JSON.stringify(branch))
     setAnchorEl(null)
   }
 
@@ -80,10 +82,10 @@ const UserDropdown = props => {
     logout()
     handleDropdownClose()
   }
-  const userData = JSON.parse(localStorage.getItem('userData'));
+  const userData = JSON.parse(localStorage.getItem('userData'))
 
   // Check if userData exists and has the 'image' property with at least one element
-  const imageSrc = userData && userData.image && userData.image[0] && userData.image[0].image;
+  const imageSrc = userData && userData.image && userData.image[0] && userData.image[0].image
 
   return (
     <Fragment>
@@ -99,7 +101,7 @@ const UserDropdown = props => {
       >
         <Avatar
           alt='John Doe'
-          src={process.env.NEXT_PUBLIC_IMAGES +'/'+imageSrc}
+          src={process.env.NEXT_PUBLIC_IMAGES + '/' + imageSrc}
           onClick={handleDropdownOpen}
           sx={{ width: 38, height: 38 }}
         />
@@ -122,51 +124,33 @@ const UserDropdown = props => {
                 horizontal: 'right'
               }}
             >
-              <Avatar alt='John Doe' src={process.env.NEXT_PUBLIC_IMAGES +'/'+imageSrc} sx={{ width: '2.5rem', height: '2.5rem' }} />
+              <Avatar
+                alt='John Doe'
+                src={process.env.NEXT_PUBLIC_IMAGES + '/' + imageSrc}
+                sx={{ width: '2.5rem', height: '2.5rem' }}
+              />
             </Badge>
             <Box sx={{ display: 'flex', ml: 2.5, alignItems: 'flex-start', flexDirection: 'column' }}>
               <Typography sx={{ fontWeight: 500 }}>{JSON.parse(localStorage.getItem('userData')).name}</Typography>
-              <Typography variant='body2'>{`${t("Admin")}`}</Typography>
+              <Typography variant='body2'>{`${t('Admin')}`}</Typography>
             </Box>
           </Box>
         </Box>
         <Divider sx={{ my: theme => `${theme.spacing(2)} !important` }} />
-        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/user-profile/profile')}>
-          <Box sx={styles}>
-            <Icon icon='tabler:user-check' />
-            {`${t("My Profile")}`}
-          </Box>
-        </MenuItemStyled>
-        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/account-settings/account')}>
-          <Box sx={styles}>
-            <Icon icon='tabler:settings' />
-            {`${t("Setting")}`}
-          </Box>
-        </MenuItemStyled>
-        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/account-settings/billing')}>
-          <Box sx={styles}>
-            <Icon icon='tabler:credit-card' />
-            {`${t("Billing")}`}
-          </Box>
-        </MenuItemStyled>
-        <Divider sx={{ my: theme => `${theme.spacing(2)} !important` }} />
-        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/help-center')}>
-          <Box sx={styles}>
-            <Icon icon='tabler:lifebuoy' />
-            {`${t("Help")}`}
-          </Box>
-        </MenuItemStyled>
-        <MenuItemStyled sx={{ p: 0 }} onClick={() => handleDropdownClose('/pages/pricing')}>
-          <Box sx={styles}>
-            <Icon icon='tabler:currency-dollar' />
-            {`${t("Pricing")}`}
-          </Box>
-        </MenuItemStyled>
+
+        {branches &&
+          branches.map((branch, index) => (
+            <MenuItemStyled key={index} sx={{ p: 0 }} onClick={() => handleDropdownClose(branch)}>
+              <Box sx={styles}>
+                <Typography>{branch?.name}</Typography>
+              </Box>
+            </MenuItemStyled>
+          ))}
         <Divider sx={{ my: theme => `${theme.spacing(2)} !important` }} />
         <MenuItemStyled sx={{ p: 0 }} onClick={handleLogout}>
           <Box sx={styles}>
             <Icon icon='tabler:logout' />
-            {`${t("Sign Out")}`}
+            {`${t('Sign Out')}`}
           </Box>
         </MenuItemStyled>
       </Menu>

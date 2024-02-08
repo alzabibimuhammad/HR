@@ -146,7 +146,7 @@ const Profiles = ({ tab, data }) => {
                 <Download user={userData} />
               </Box>
 
-              <Box width={'100%'}>
+              <Box width={'100%'} height={'20% !important '}>
                 <NoteReport user_id={id} />
               </Box>
 

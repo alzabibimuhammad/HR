@@ -41,7 +41,7 @@ export default function NoteReport(user_id) {
   }
 
   return (
-    <Box height={{ sm: '500px !important', xs: '100% !important' }} overflow={{ sm: 'auto', xs: 'hidden' }}>
+    <Box height={'100%'} overflow={{ sm: 'auto', xs: 'hidden' }}>
       <Card>
         <CardContent>
           <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} >

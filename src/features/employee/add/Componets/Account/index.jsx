@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 export default function Account({onDataChange,Controller,control,errors}) {
 
   const {t} = useTranslation()
+
   const SvgMail = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
   <rect x="3.33325" y="5" width="13.3333" height="10" rx="2" stroke="#8090A7"/>
@@ -76,8 +77,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
                 fullWidth
                 type='email'
                 size='small'
-                error={Boolean(errors.email)}
-                {...(errors.email && { helperText: errors.email.message })}
+
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>

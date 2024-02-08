@@ -120,7 +120,6 @@ export default function Warnings({DataDecision,id}) {
 
    const onSubmit = async (data) => {
 
-    try {
      const formData = new FormData();
      formData.append('dateTime', data.dateTime);
      formData.append('content', data.content);
@@ -129,12 +128,6 @@ export default function Warnings({DataDecision,id}) {
      AddDecision(formData)
      reset()
      handleCloseAdd()
-    } catch (error) {
-    }
-
-
-
-
 
 
   };

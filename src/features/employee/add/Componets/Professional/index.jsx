@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch'
 import useSelectInput from 'src/pages/employees/add/hook/useSelectInput'
+import useSelectLevel from 'src/pages/employees/add/hook/useSelectLevel'
 
 export default function Professional({ onDataChange, Controller, control }) {
   const handleFieldChange = (field, value) => {
@@ -15,6 +16,8 @@ export default function Professional({ onDataChange, Controller, control }) {
   const [team, setTeam] = useState('')
   const { t } = useTranslation()
   const { data } = useSelectInput()
+
+   const {data:LevelData}=useSelectLevel()
 
   const { data: SelectBranch } = useSelectBranch()
 
@@ -134,9 +137,9 @@ export default function Professional({ onDataChange, Controller, control }) {
                 size='small'
               >
                 <MenuItem value='Level'>{`${t('Level')}`}</MenuItem>
-                {SelectBranch?.data?.data?.map((val, index) => (
-                  <MenuItem key={index} value={val.id}>
-                    {val.name}
+                {LevelData?.data?.data?.levels?.map((val, index) => (
+                  <MenuItem key={index} value={val}>
+                    {val}
                   </MenuItem>
                 ))}
               </TextField>

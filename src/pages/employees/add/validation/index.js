@@ -4,7 +4,7 @@ export const Schema = yup.object().shape({
   first_name: yup.string().required('first_name is required').min(3, ' min 3 char').max(20, '20 max char'),
   middle_name: yup.string().required('middle_name is required').min(3, ' min 3 char').max(20, '20 max char'),
   last_name: yup.string().required('last_name is required').min(3, ' min 3 char').max(20, '20 max char'),
-  email: yup.string().matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/,' email is Invalid'),
+
    password: yup.string().matches(/^\d{4,8}$/ ,'password is required'),
    confirm_password: yup.string().oneOf([yup.ref('password'), null], 'password in not matches').required(),
    birth_date: yup.string().matches(/^\d{4}-\d{2}-\d{2}$/,'Date of registration is required exampe:2020-02-06'),

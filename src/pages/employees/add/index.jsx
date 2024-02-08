@@ -17,6 +17,7 @@ import { Schema } from './validation'
 import { useAddUsers } from './hook/useAddUsers'
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next'
+
 export default function Add() {
   const [snapshotData, setSnapshotData] = useState({})
   const [accountData, setAccountData] = useState({})
@@ -36,17 +37,17 @@ export default function Add() {
   }
 
   const defaultValues = {
-    first_name: '',
+    // first_name: '',
 
-    contact: {
-      phonenumbers: [],
-      emails: []
-    },
-    middle_name: '',
+    // contact: {
+    //   phonenumbers: [],
+    //   emails: []
+    // },
+    // middle_name: '',
 
-    last_name: '',
+    // last_name: '',
 
-    email: '',
+    // email: '',
     role: 'admin'
   }
 
@@ -60,9 +61,10 @@ export default function Add() {
     formState: { errors }
   } = useForm({
     defaultValues,
-    mode: 'onBlur'
+    mode: 'onBlur',
 
-    //  resolver: yupResolver(Schema),
+      // resolver: yupResolver(Schema),
+
   })
 
   const handleDataSubmit = data => {
@@ -72,9 +74,10 @@ export default function Add() {
 
       data.image = ProfileImage
 
-      console.log('🚀 ~ handleDataSubmit ~ image:', formData)
       addUsers(data)
-    } catch (error) {}
+    } catch (error) {
+      console.log(errors);
+    }
   }
 
   //  const handleDataSubmit = async (data) => {

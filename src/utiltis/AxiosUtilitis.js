@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios from 'axios'
+import { showErrorToast } from './toastUtils'
 
 const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_BASE_URL });
 
@@ -12,7 +13,7 @@ export const request = async ({ url, params = {}, ...rest }) => {
 
   const onError = error => {
     // alert(error)
-
+    showErrorToast(error)
     //   const errorMessage =
     //     error.response && error.response.data && error.response.data.userMessage
     //       ? error.response.data.userMessage

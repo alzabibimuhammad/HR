@@ -128,8 +128,6 @@ export default function Warnings({DataDecision,id}) {
      formData.append('content', data.content);
      formData.append('user_id', data.user_id);
      formData.append('type', data.type);
-     formData.append('branch_id', 1);
-     
      AddDecision(formData)
      reset()
      handleCloseAdd()
@@ -168,23 +166,51 @@ export default function Warnings({DataDecision,id}) {
   });
 
 
+  // const handleButtonClick =  (event) => {
+
+  //   event.preventDefault()
+
+  //   EditDecision({id:idUser,data:{
+  //     dateTime:event.target[0].value,
+  //     content:event.target[1].value,
+  //     user_id:idUser,
+  //     type:'warning'
+  //   }});
 
 
-  const handleButtonClick =  (id) => {
-  
+
+  // };
+
+
+  const handleButtonClick =  (event,id) => {
+    event.preventDefault();
     console.log("🚀 ~ handleButtonClick ~ id:", id)
 
 
-    
+    // try {
+    //   const response =  EditDecision({
+    //     id: dataRow?.id,
+    //     data: {
+    //       dateTime: event.target[0].value,
+    //       content: event.target[1].value,
+    //       user_id: idUser,
+    //       type: 'warning',
+    //     },
+    //   });
+
+    //   console.log('API Response:', response);
+    // } catch (error) {
+    //   console.error('API Error:', error);
+    // }
   };
 
 
 
-  // useEffect(() => {
-  //   console.log("Edit in useEffect:", Edit);
-  //   setValue('dateTime', Edit?.dateTime || '');
-  //   setValue('content', Edit?.content || '');
-  // }, [Edit, setValue]);
+  useEffect(() => {
+    console.log("Edit in useEffect:", Edit);
+    setValue('dateTime', Edit?.dateTime || '');
+    setValue('content', Edit?.content || '');
+  }, [Edit, setValue]);
 
 
   return (

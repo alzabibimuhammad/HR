@@ -8,6 +8,7 @@ import AlertDialog from '../deleteDialog'
 import AlertDialogEdit from '../editDialog'
 import AddIcon from '@mui/icons-material/Add'
 import AlertDialogAdd from '../addDialog'
+
 export default function ShowSetting() {
 
   const { data, isloading } = useShowAllBranches()
@@ -35,12 +36,15 @@ export default function ShowSetting() {
   const handleCloseEdit = () => {
     setisEditPopupOpen(false)
   }
+
   const handleAdd=_=>{
     setisAdd(true)
   }
+
   const handleCloseAdd = _=>{
     setisAdd(false)
   }
+
   return (
     <>
     <Stack direction={'row'} spacing={2} width={'100%'} flex={'end'} justifyContent={'end'} >

@@ -79,9 +79,17 @@ const Profiles = ({ tab, data }) => {
 
   // ** Hooks
   const router = useRouter()
-  const id = router.query.id
-  const dispatch = useDispatch()
-  dispatch(setUserId(id))
+ const id =router.query.id
+ const dispatch = useDispatch();
+ dispatch(setUserId(id));
+  const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
+
+
+  const {data:DataDecision}=useGetDecision(id);
+
+  console.log("🚀 ~ Mange ~ DataDecision:", DataDecision)
+
+
 
   const { mutate: getEmployee, data: DataEmployee } = useGetEmployeeById()
 
@@ -141,7 +149,7 @@ const Profiles = ({ tab, data }) => {
                 <Download user={userData} />
               </Box>
 
-              <Box width={'100%'}>
+              <Box width={'100%'} height={'20% !important '}>
                 <NoteReport user_id={id} />
               </Box>
 
@@ -154,7 +162,7 @@ const Profiles = ({ tab, data }) => {
           <Stack direction={{ sm: 'row', xs: 'column' }} spacing={6}>
             <Stack spacing={6} width={{ sm: '40%', xs: '100%' }} direction={'column'}>
               <PersonalInfo ProfileData={ProfileData} />
-              <Notes />
+              <NoteReport user_id={id} />
             </Stack>
 
             <Stack width={{ sm: '60%', xs: '100%' }} spacing={6} direction={'column'}>
@@ -169,7 +177,6 @@ const Profiles = ({ tab, data }) => {
         </TabPanel>
 
     <TabPanel value="4">
-
    <RatingTabel />
 
       </TabPanel>

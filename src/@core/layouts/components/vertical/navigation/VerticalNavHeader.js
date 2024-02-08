@@ -78,25 +78,22 @@ const VerticalNavHeader = props => {
       ) : (
         <LinkStyled href='/'>
 
-          <Box  sx={{ position:"relative" ,left:"50px " }}>
 
 
-          <Box>
-
-
-
-
-             {/* 
-             
-             logo sidebar
-             
-             */}
+          <Box sx={{marginLeft:"22px",width:"100%",display:"flex",alignItems:"center",gap:"5px"}}>
 
 
 
 
 
-          </Box>
+<img width="30px" height="30px"  src='/images/policesIcon/pageLogo/logo.svg'/>
+
+            <Typography sx={{fontWeight:"700",color:"#8090a7",fontSize:"16px"}}>
+             Company Name
+
+            </Typography>
+
+
           </Box>
 
 

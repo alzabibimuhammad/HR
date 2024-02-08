@@ -16,7 +16,6 @@ export default function Professional({onDataChange,Controller,control}) {
   const {data}=useSelectInput()
 
   const {data:SelectBranch}=useSelectBranch()
-  console.log("🚀 ~ Professional ~ SelectBranch:", SelectBranch)
 
 
   const handleRoleChange = (e) => {
@@ -64,7 +63,7 @@ render={({ field }) => (
 {...field}
 select
 fullWidth
-defaultValue="Branch"
+defaultValue={"Branch"}
 SelectProps={{
 value: field.value,
 displayEmpty: true,
@@ -75,16 +74,13 @@ handleSelectBranchChange(e);
 }}
 size='small'
 >
-<MenuItem value="" disabled>
-Branch
-</MenuItem>
-<MenuItem value='branch_id'>{`${t("Branch")}`}</MenuItem>
 
 {SelectBranch?.data?.data?.map((val, index) => (
 <MenuItem key={index} value={val.id}>
 {val.name}
 </MenuItem>
-))}
+     })}
+
 </TextField>
 )}
 />

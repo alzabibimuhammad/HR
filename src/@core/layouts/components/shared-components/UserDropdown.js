@@ -61,7 +61,7 @@ const UserDropdown = props => {
 
   const handleDropdownClose = branch => {
     localStorage.setItem('branch', JSON.stringify(branch))
-    setAnchorEl(null)
+    window.location.reload(false);
   }
 
   const styles = {

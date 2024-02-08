@@ -6,8 +6,6 @@ import Typography from '@mui/material/Typography'
 import CardSnippet from 'src/@core/components/card-snippet'
 
 // ** Demo Component Import
-import TextareaCustom from 'src/views/forms/form-elements/textarea/TextareaCustom'
-import TextareaVariant from 'src/views/forms/form-elements/textarea/TextareaVariant'
 
 // ** Source code imports
 import * as source from 'src/views/forms/form-elements/textarea/TextareaSourceCode'

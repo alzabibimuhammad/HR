@@ -1,10 +1,11 @@
-import axios from 'axios';
+import axios from 'axios'
+import { showErrorToast } from './showErrorToast'
 
 const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_BASE_URL });
 
 export const request = async ({ url, params = {}, ...rest }) => {
   // Add the branch_id query parameter to the params object
-  params = { ...params, branch_id: 1 };
+  params = { ...params, branch_id: JSON.parse(localStorage.getItem('branch'))?.id };
 
   client.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
 
@@ -12,7 +13,7 @@ export const request = async ({ url, params = {}, ...rest }) => {
 
   const onError = error => {
     // alert(error)
-
+    showErrorToast(error)
     //   const errorMessage =
     //     error.response && error.response.data && error.response.data.userMessage
     //       ? error.response.data.userMessage

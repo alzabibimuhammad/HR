@@ -31,10 +31,10 @@ import { setUserId } from '../../../store/apps/user'
 import RatingTabel from '../ratingTabel'
 import Mange from './manage'
 import useGetRatingById from '../ratingTabel/hooks/useGetRatingById'
-import NoteReport from './notesReport'
-import Download from './download'
-import ReviewsReport from './reviews'
 import useGetDecision from './manage/hook/useGetDecision'
+import ReviewsReport from './reviews'
+import Download from './download'
+import NoteReport from './notesReport'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   borderBottom: '0 !important',
@@ -88,6 +88,7 @@ const Profiles = ({ tab, data }) => {
   const {data:DataDecision}=useGetDecision(id);
 
   console.log("🚀 ~ Mange ~ DataDecision:", DataDecision)
+
 
 
 
@@ -168,6 +169,7 @@ const Profiles = ({ tab, data }) => {
             </Stack>
           </Stack>
         </TabPanel>
+        
         <TabPanel value='3'>
           {DataDecision ? <Mange id={id} DataDecision={DataDecision} /> : null}
         </TabPanel>

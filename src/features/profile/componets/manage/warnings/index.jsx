@@ -36,6 +36,7 @@ export default function Warnings({DataDecision,id}) {
   const [openEdit, setOpenEdit] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
   const [Edit , setEdit] = useState({})
+  console.log("🚀 ~ Warnings ~ Edit:", Edit)
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -79,6 +80,7 @@ export default function Warnings({DataDecision,id}) {
   }));
 
   const handleClickOpenEdit = (dataRow) => {
+  console.log("🚀 ~ handleClickOpenEdit ~ dataRow:", dataRow)
 
     setOpenEdit(true);
     setEdit(dataRow)
@@ -119,6 +121,7 @@ export default function Warnings({DataDecision,id}) {
 
 
    const onSubmit = async (data) => {
+   console.log("🚀 ~ onSubmit ~ data:", Edit)
 
      const formData = new FormData();
      formData.append('dateTime', data.dateTime);
@@ -132,16 +135,33 @@ export default function Warnings({DataDecision,id}) {
 
   };
 
+  const onSubmit2 = async (data) => {
+    console.log("🚀 ~ onSubmit ~ data:", Edit.id)
+ 
+      const formData = new FormData();
+      formData.append('dateTime', data.dateTime);
+      formData.append('content', data.content);
+      formData.append('user_id', data.user_id);
+      formData.append('type', data.type);
+      formData.append('branch_id', 1);
+      
+      EditDecision({id:Edit.id,formData:formData})
+      reset()
+      handleCloseEdit()
+ 
+ 
+   };
+
    const {
     control,
     setError,
     handleSubmit,
     reset,
     setValue,
-    getValues,
+
     formState: { errors },
   } = useForm({
-    defaultValues,
+    defaultValues: defaultValues ,
     mode: 'onBlur',
   });
 
@@ -347,13 +367,14 @@ export default function Warnings({DataDecision,id}) {
       <DialogTitle sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
       Edit Warning
       </DialogTitle>
-          <form onSubmit={()=>{handleButtonClick(val.id)}} >
+      
       <DialogContent sx={{width:"100vh"}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
-       <Controller
+        <Controller
   name='dateTime'
   control={control}
   rules={{ required: true }}
+  defaultValue={defaultValues.dateTime} // Provide your default date value here
   render={({ field: { value, onChange, onBlur } }) => (
     <CustomTextField
       fullWidth
@@ -361,7 +382,7 @@ export default function Warnings({DataDecision,id}) {
       variant='outlined'
       InputLabelProps={{ shrink: true }}
       type='date'
-      value={value}
+      value={value} // This value will be the default or updated value
       onBlur={onBlur}
       onChange={onChange}
     />
@@ -371,6 +392,7 @@ export default function Warnings({DataDecision,id}) {
                 name='content'
                 control={control}
                 rules={{ required: true }}
+                defaultValue={defaultValues.content}
                 render={({ field: { value, onChange, onBlur } }) => (
                   <CustomTextField
                     fullWidth
@@ -396,11 +418,11 @@ export default function Warnings({DataDecision,id}) {
         <Button  sx={{padding:"8px 24px 8px 24px",borderRadius:"4px",backgroundColor:"#dce1e6",color:"#8090a7",fontSize:"14px",fontWeight:"500","&:hover": {backgroundColor: "#dce1e6"}}} autoFocus onClick={handleCloseEdit}>
         Cancel
         </Button>
-        <Button type='submit' sx={{backgroundColor:"#6ab2df",padding:"8px 34px 8px 34px",borderRadius:"4px",fontWeight:"500",color:"#fff",fontSize:"14px","&:hover": {backgroundColor: "#6ab2df"}}} autoFocus>
+        <Button type='submit' sx={{backgroundColor:"#6ab2df",padding:"8px 34px 8px 34px",borderRadius:"4px",fontWeight:"500",color:"#fff",fontSize:"14px","&:hover": {backgroundColor: "#6ab2df"}}} autoFocus onClick={handleSubmit(onSubmit2)}>
         Edit
         </Button>
       </DialogActions>
-        </form>
+
     </Dialog>
 </StackRow>
 

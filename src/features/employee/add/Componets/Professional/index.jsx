@@ -137,18 +137,95 @@ export default function Professional({ onDataChange, Controller, control }) {
               >
                 <MenuItem value='Level'>{`${t('Level')}`}</MenuItem>
 
-                {data?.data?.data?.levels?.map((val, index) => (
-                  <MenuItem key={index} value={val}>
-                    {val}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-          />
+{SelectBranch?.data?.data?.map((val, index) => (
+<MenuItem key={index} value={val.id}>
+{val.name}
+</MenuItem>
+     })}
 
-          <Typography>{t("Team/Department")}</Typography>
+</TextField>
+)}
+/>
 
-          <Controller
+
+
+
+
+
+              <Typography>Specialization</Typography>
+
+              <Controller
+  name="specialization"
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      select
+      fullWidth
+      defaultValue="work specialization"
+      SelectProps={{
+        value: field.value,
+        displayEmpty: true,
+        onChange: (e) => {
+          field.onChange(e);
+          handleSpecializationChange(e);
+        },
+      }}
+      size='small'
+    >
+      <MenuItem value="" disabled>
+        work specialization
+      </MenuItem>
+       <MenuItem value='work specialization'>{`${t("work specialization")}`}</MenuItem>
+
+      {data?.data?.data?.specialisation?.map((val, index) => (
+        <MenuItem key={index} value={val}>
+          {val}
+        </MenuItem>
+      ))}
+    </TextField>
+  )}
+/>
+
+
+
+              <Typography>Level</Typography>
+
+              <Controller
+  name={`level`}
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      select
+      fullWidth
+      defaultValue="Level"
+      SelectProps={{
+        value: field.value,
+        displayEmpty: true,
+        onChange: (e) => {
+          field.onChange(e);
+          handleRoleChange(e);
+        },
+      }}
+      size='small'
+    >
+             <MenuItem value='Level'>{`${t("Level")}`}</MenuItem>
+
+      {data?.data?.data?.levels?.map((val, index) => (
+
+
+        <MenuItem key={index} value={val}>
+          {val}
+        </MenuItem>
+      ))}
+    </TextField>
+  )}
+/>
+
+              <Typography>Team/Department</Typography>
+
+                <Controller
             name={`department_id`}
             control={control}
             render={({ field }) => (

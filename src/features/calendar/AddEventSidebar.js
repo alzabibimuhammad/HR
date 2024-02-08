@@ -24,6 +24,7 @@ import Icon from 'src/@core/components/icon'
 
 // ** Styled Components
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import { showSuccesToast } from 'src/utiltis/toastSecces'
 
 const capitalize = string => string && string[0].toUpperCase() + string.slice(1)
 
@@ -87,11 +88,12 @@ const AddEventSidebar = props => {
       }
     }
     if (store.selectedEvent === null || (store.selectedEvent !== null && !store.selectedEvent.title.length)) {
-    
+
       dispatch(addEvent(modifiedEvent))
-      
+      showSuccesToast("Add Event",store?.events?.success)
     } else {
       dispatch(updateEvent({ id: store.selectedEvent.id, ...modifiedEvent }))
+
     }
     calendarApi.refetchEvents()
     handleSidebarClose()
@@ -232,7 +234,7 @@ const AddEventSidebar = props => {
             <Controller
               name='title'
               control={control}
-              rules={{ required: true }}
+              rules={{ required: true,minLength:"10" }}
               render={({ field: { value, onChange } }) => (
                 <CustomTextField
                   fullWidth
@@ -242,7 +244,7 @@ const AddEventSidebar = props => {
                   onChange={onChange}
                   placeholder='Event Title'
                   error={Boolean(errors.title)}
-                  {...(errors.title && { helperText: 'This field is required' })}
+                  {...(errors.title && { helperText: 'minLength 10 ' })}
                 />
               )}
             />
@@ -275,10 +277,10 @@ const AddEventSidebar = props => {
                 onChange={date => setValues({ ...values, endDate: new Date(date) })}
               />
             </Box>
-    
-      
 
-   
+
+
+
             <CustomTextField
               rows={4}
               multiline

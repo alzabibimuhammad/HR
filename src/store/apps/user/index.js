@@ -40,10 +40,14 @@ export const appUsersSlice = createSlice({
     params: {},
     allData: [],
     userId: null,
+    RatingUser:null
   },
   reducers: {
     setUserId: (state, action) => {
       state.userId = action.payload;
+    },
+    setRatingUser: (state, action) => {
+      state.RatingUser = action.payload;
     },
   },
   extraReducers: builder => {
@@ -56,7 +60,7 @@ export const appUsersSlice = createSlice({
   }
 })
 
-export const { setUserId } = appUsersSlice.actions;
+export const { setUserId,setRatingUser } = appUsersSlice.actions;
 
 
 

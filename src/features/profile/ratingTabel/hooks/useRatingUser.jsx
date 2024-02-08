@@ -9,10 +9,12 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
+import useGetRattingtype from './useGetRatingType';
 
 const useUserColumns = () => {
 
-
+const{data,isloading}=useGetRattingtype()
+  
   const { t } = useTranslation();
 
 
@@ -26,40 +28,41 @@ const useUserColumns = () => {
 
   return useMemo(() => [
 
-
     {
-      field: 'team',
-      headerName: t("Team"),
+      field: 'FirstName',
+      headerName: 'Employee Name',
       disableClickEventBubbling: true,
       flex:1,
 
     },
     {
-      field: 'technical',
-      headerName: t("Technical"),
+      field: 'rate1',
+      headerName: data?.data?.data[0]?.rate_type,
+      disableClickEventBubbling: true,
+      flex:1,
+
+    },
+    {
+      field: 'rate2',
+      headerName: data?.data?.data[1]?.rate_type,
       disableClickEventBubbling: true,
       flex:1,
 
 
     },
     {
-      field: 'communication',
-      headerName: t("Communication"),
+      field: 'rate3',
+      headerName: data?.data?.data[2]?.rate_type,
       disableClickEventBubbling: true,
       flex:1,
 
-    },
 
+    },
+    
 
 
     {
-      field: 'creativity',
-      headerName: t("Creativity"),
-      flex:1,
-
-    },
-    {
-      field: 'total',
+      field: 'date',
       headerName: t("Total"),
       flex:1,
 

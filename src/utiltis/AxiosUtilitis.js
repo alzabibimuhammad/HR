@@ -1,14 +1,15 @@
 import axios from 'axios'
 import { showErrorToast } from './toastUtils'
 
-const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_BASE_URL })
+const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_BASE_URL });
 
-export const request = async ({ ...options }) => {
-  client.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('accessToken')}`
+export const request = async ({ url, params = {}, ...rest }) => {
+  // Add the branch_id query parameter to the params object
+  params = { ...params, branch_id: 1 };
 
-  const onSuccess = response => {
-    return response
-  }
+  client.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+
+  const onSuccess = response => response;
 
   const onError = error => {
     // alert(error)
@@ -19,8 +20,8 @@ export const request = async ({ ...options }) => {
     //       : error.response.data.message;
     //   store.dispatch(actions.logError(errorMessage));
     //   return Promise.reject(error);
-    return Promise.reject(error)
-  }
+    return Promise.reject(error);
+  };
 
-  return client(options).then(onSuccess).catch(onError)
-}
+  return client({ url, params, ...rest }).then(onSuccess).catch(onError);
+};

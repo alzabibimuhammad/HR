@@ -7,7 +7,7 @@ export const useDeleteDecision = () => {
   return useMutation({
     mutationFn:DeleteDecision,
     onSuccess: () => {
-      queryClient.invalidateQueries("DeleteDecision");
+      queryClient.invalidateQueries("Decision");
     },
   });
 };

@@ -91,12 +91,10 @@ const Profiles = ({ tab, data }) => {
 
 
 
-  const { mutate: getEmployee, data: DataEmployee } = useGetEmployeeById()
 
 
   const ProfileData = DataEmployee?.data?.data[0]
   const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))
-  const {data:DataDecision}=useGetDecision(id);
 
   const handleDateChoose = date => {
     const formattedDate = FormateDate(date)

@@ -75,12 +75,8 @@ handleSelectBranchChange(e);
 size='small'
 >
 
-<MenuItem  disabled={true}>{`${t("Branch")}`}</MenuItem>
-
-{SelectBranch?.data?.data?.map((val, index) => {
-
-
-     return <MenuItem key={val.id} value={val.id}>
+{SelectBranch?.data?.data?.map((val, index) => (
+<MenuItem key={index} value={val.id}>
 {val.name}
 </MenuItem>
      })}

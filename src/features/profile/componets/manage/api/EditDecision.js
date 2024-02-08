@@ -1,12 +1,12 @@
 import { request } from "src/utiltis/AxiosUtilitis";
 
 const EditDecision = (obj) => {
-  console.log("🚀 ~ EditDecision ~ payload:", obj.data)
+  console.log("🚀 ~ EditDecision ~ payload:", obj)
 
   return request({
     url: `/api/Decision/edit/${obj.id}`,
     method: "post",
-    data: obj.data,
+    data: obj.formData,
     headers: {
       "Content-Type": "multipart/form-data",
     },

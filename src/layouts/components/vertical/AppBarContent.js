@@ -133,7 +133,7 @@ const AppBarContent = props => {
       <Box className='actions-right' sx={{ display: 'flex', alignItems: 'center' }}>
         <FullScreen />
         <LanguageDropdown settings={settings} saveSettings={saveSettings} />
-        <ModeToggler settings={settings} saveSettings={saveSettings} />
+      
         {auth.user && (
           <>
             {/* <ShortcutsDropdown settings={settings} shortcuts={shortcuts} /> */}

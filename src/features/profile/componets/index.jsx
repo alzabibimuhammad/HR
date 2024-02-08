@@ -31,6 +31,10 @@ import { setUserId } from '../../../store/apps/user'
 import RatingTabel from '../ratingTabel'
 import Mange from './manage'
 import useGetRatingById from '../ratingTabel/hooks/useGetRatingById'
+import useGetDecision from './manage/hook/useGetDecision'
+import ReviewsReport from './reviews'
+import Download from './download'
+import NoteReport from './notesReport'
 
 const TabList = styled(MuiTabList)(({ theme }) => ({
   borderBottom: '0 !important',
@@ -80,11 +84,11 @@ const Profiles = ({ tab, data }) => {
   dispatch(setUserId(id))
 
   const { mutate: getEmployee, data: DataEmployee } = useGetEmployeeById()
-  const { data: DataReview, isloading } = useGetRatingById(id)
-  const { data: DataDecision } = useGetDecision(id)
+
 
   const ProfileData = DataEmployee?.data?.data[0]
   const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))
+  const {data:DataDecision}=useGetDecision(id);
 
   const handleDateChoose = date => {
     const formattedDate = FormateDate(date)
@@ -159,12 +163,15 @@ const Profiles = ({ tab, data }) => {
             </Stack>
           </Stack>
         </TabPanel>
+        
+        <TabPanel value='3'>
+          {DataDecision ? <Mange id={id} DataDecision={DataDecision} /> : null}
+        </TabPanel>
 
     <TabPanel value="4">
- {DataReview?
-   <RatingTabel rows={DataReview}/>
-   :null
- }
+
+   <RatingTabel />
+
       </TabPanel>
 
 </Stack>

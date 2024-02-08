@@ -80,7 +80,7 @@ Branch
 </MenuItem>
 <MenuItem value='branch_id'>{`${t("Branch")}`}</MenuItem>
 
-{SelectBranch?.data?.data?.data?.map((val, index) => (
+{SelectBranch?.data?.data?.map((val, index) => (
 <MenuItem key={index} value={val.id}>
 {val.name}
 </MenuItem>

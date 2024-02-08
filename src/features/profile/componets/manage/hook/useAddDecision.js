@@ -8,7 +8,7 @@ export const useAddDecision = () => {
   return useMutation({
     mutationFn:AddDecision,
     onSuccess: () => {
-      queryClient.invalidateQueries("AddDecision");
+      queryClient.invalidateQueries("Decision");
       toast.success('Decision added successfully')
     },
   });

@@ -19,11 +19,13 @@ const LanguageDropdown = ({ settings, saveSettings }) => {
   const { t, i18n } = useTranslation()
 
   const handleLangItemClick = (lang) => {
+    localStorage.setItem('lang',lang)
     i18n.changeLanguage(lang)
   }
 
   // ** Change html `lang` attribute when changing locale
   useEffect(() => {
+    
     document.documentElement.setAttribute('lang', i18n.language)
   }, [i18n.language])
 

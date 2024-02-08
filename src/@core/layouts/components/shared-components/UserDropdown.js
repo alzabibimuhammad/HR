@@ -38,7 +38,7 @@ const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
 }))
 
 const UserDropdown = props => {
-  
+
   const { data, isloading } = useShowAllBranches()
   const branches = data?.data?.data
 
@@ -60,7 +60,7 @@ const UserDropdown = props => {
   }
 
   const handleDropdownClose = branch => {
-    localStorage.setItem('branch', JSON.stringify(branch))
+    localStorage.setItem('branch', branch?.id)
     window.location.reload(false);
   }
 

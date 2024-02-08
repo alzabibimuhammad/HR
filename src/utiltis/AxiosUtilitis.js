@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { showErrorToast } from './toastUtils'
+import { showErrorToast } from './showErrorToast'
 
 const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_BASE_URL });
 

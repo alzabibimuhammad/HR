@@ -1,11 +1,16 @@
 // toastUtils.js
 import toast from 'react-hot-toast';
 
-export const showSuccesToast = (errorMessage) => {
-    toast.success(`${errorMessage} `, {
+export const showSuccesToast = (message,SuccessMessageApi) => {
+    toast.success(`${message}    ${SuccessMessageApi} `, {
         position: "top-left",
         style: {
-          backgroundColor: "green",
+          backgroundColor: "#91C483",
           width: "500px",
+          color:"#fff",
+          fontSize:"16px",
+          fontWeight:"600",
+
         }})
 };
+

@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 // ** Axios Imports
 import axios from 'axios'
 import { showSuccesToast } from 'src/utiltis/toastSecces'
-import { showErrorToast } from 'src/utiltis/toastUtils'
+import { showErrorToast } from 'src/utiltis/showErrorToast'
 
 export const getContractsData = createAsyncThunk('ContractsStore/getContractsData', async () => {
   const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/api/showCoach', {
@@ -47,6 +47,7 @@ export const addContract = createAsyncThunk('ContractsStore/addContract', async 
       }
     })
     showSuccesToast(response.data.message)
+    console.log(response.data.message);
 
     return response.data
   } catch (error) {

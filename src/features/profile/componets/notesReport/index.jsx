@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Divider, Typography } from '@mui/material'
+import { Button, Card, CardContent, CircularProgress, Divider, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
@@ -6,11 +6,13 @@ import EditIcon from '@mui/icons-material/Edit'
 import useGetNotes from './hooks/useGetUserNotes'
 import { useDeleteNote } from './hooks/useDeleteNote'
 import EditNote from './componets/edit'
-
+import AddIcon from '@mui/icons-material/Add';
+import AddNote from './componets/add'
 export default function NoteReport(user_id) {
-  const [Data, setData] = useState()
   const [open, setOpen] = useState(false)
   const [editData, setEditData] = useState()
+
+  const [openAdd, setOpenAdd] = useState(false)
 
 
   const NoteSvg = `<svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,9 +25,10 @@ export default function NoteReport(user_id) {
   const { mutate: deleteNote, isLoading } = useDeleteNote();
 
 
+
   const handleDelete = id => {
     deleteNote(id)
-    
+
     console.log('del',id)
   }
 
@@ -33,16 +36,27 @@ export default function NoteReport(user_id) {
     setOpen(true)
     setEditData(note)
   }
+  const handleAdd =_=>{
+    setOpenAdd(true)
+  }
 
   return (
-    <Box height={{ sm: '50%', xs: '100%' }} overflow={{ sm: 'auto', xs: 'hidden' }}>
+    <Box height={{ sm: '500px !important', xs: '100% !important' }} overflow={{ sm: 'auto', xs: 'hidden' }}>
       <Card>
         <CardContent>
-          <Stack direction={'row'} alignItems={'center'} spacing={1}>
+          <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} >
+            <Stack direction={'row'} spacing={1} alignItems={'center'} >
             <div dangerouslySetInnerHTML={{ __html: NoteSvg }} />
             <Typography fontSize={'16px'} color={'#131627'}>
               Notes
             </Typography>
+            </Stack>
+            <Button onClick={handleAdd} sx={{ backgroundColor:'none','&:hover': { backgroundColor:'inherit !important ' } }} >
+              <Box display={'flex'}  >
+                <AddIcon sx={{ color:'#6AB2DF' }} />
+               <Typography sx={{ color:'#6AB2DF' }} > Add</Typography>
+              </Box>
+            </Button>
           </Stack>
 
           {notes?.map((element, index) => (
@@ -72,10 +86,11 @@ export default function NoteReport(user_id) {
               <Divider />
             </Stack>
           ))}
+
         </CardContent>
       </Card>
         {editData?<EditNote oldNote={editData} open={open} setOpen={setOpen} />:null}
-
+        {openAdd?<AddNote user_id={user_id?.user_id} open={openAdd} setOpen={setOpenAdd} />:null}
     </Box>
   )
 }

@@ -2,13 +2,13 @@ import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
+import { useTranslation } from 'react-i18next';
 
 export default function Snapshot({onDataChange,Controller,control,defaultValues,errors,setProfileImage}) {
 
   const [image, setImage] = useState(null);
 const[fileName,setFileName]=useState(null)
-console.log("🚀 ~ Snapshot ~ fileName:", fileName)
-
+const {t} = useTranslation()
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -17,7 +17,6 @@ console.log("🚀 ~ Snapshot ~ fileName:", fileName)
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    console.log("🚀 ~ handleImageChange ~ event.target.files[0]:", event.target.files[0].name)
 
     if (file) {
       const reader = new FileReader();
@@ -44,7 +43,7 @@ console.log("🚀 ~ Snapshot ~ fileName:", fileName)
     <Card>
         <CardContent>
 
-          <Typography >Snapshot</Typography>
+          <Typography >{t("Snapshot")}</Typography>
           <br/>
           <Stack direction={'row'} alignItems={"center"} spacing={3} >
           <Box>
@@ -90,7 +89,7 @@ console.log("🚀 ~ Snapshot ~ fileName:", fileName)
                   <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`}/>
                     </Box>
                     <Box>
-                      {' First Name'}
+                      {t('First Name')}
                   </Box>
                 </Stack>
               }
@@ -116,7 +115,7 @@ console.log("🚀 ~ Snapshot ~ fileName:", fileName)
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`}/>
                       </Box>
                       <Box>
-                        {' Midlle Name'}
+                        {t('Midle Name')}
                     </Box>
                   </Stack>
                 }
@@ -144,7 +143,7 @@ console.log("🚀 ~ Snapshot ~ fileName:", fileName)
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`}/>
                       </Box>
                       <Box>
-                        {' Last Name'}
+                        {t('Last Name')}
                     </Box>
                   </Stack>
                 }

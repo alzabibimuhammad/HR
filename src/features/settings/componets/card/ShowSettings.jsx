@@ -8,11 +8,12 @@ import AlertDialog from '../deleteDialog'
 import AlertDialogEdit from '../editDialog'
 import AddIcon from '@mui/icons-material/Add'
 import AlertDialogAdd from '../addDialog'
+import { useTranslation } from 'react-i18next'
 
 export default function ShowSetting() {
 
   const { data, isloading } = useShowAllBranches()
-
+  const {t} = useTranslation()
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
   const [isEditPopupOpen, setisEditPopupOpen] = useState(false)
   const [isAdd, setisAdd] = useState(false)
@@ -58,7 +59,7 @@ export default function ShowSetting() {
       >
         <Stack direction={'row'}>
           <AddIcon />
-          <Typography>Add new branch</Typography>
+          <Typography>{t("Add new branch")}</Typography>
         </Stack>
       </Button>
       <Button
@@ -68,7 +69,7 @@ export default function ShowSetting() {
           '&:hover': { color: '#fff', background: '#DF2E38' }
         }}
       >
-        <Typography color={'#fff'} >Logout</Typography>
+        <Typography color={'#fff'} >{t("Logout")}</Typography>
     </Button>
       </Stack>
 
@@ -80,7 +81,7 @@ export default function ShowSetting() {
                 <Stack direction='row' justifyContent='space-between'>
                   <Box sx={{ marginBottom: 20 }}>
                     <Typography>{branch.name}</Typography>
-                    <Typography>{branch.users_count} Employees</Typography>
+                    <Typography>{branch.users_count} {t("Employees")}</Typography>
                   </Box>
                 </Stack>
                 <Stack direction='row' spacing={2} justifyContent='flex-end'>
@@ -95,7 +96,7 @@ export default function ShowSetting() {
                   >
                     <Stack direction={'row'} spacing={2}>
                       <EditIcon sx={{ color: '#8090A7', fontSize: '20px' }} />
-                      <Typography sx={{ color: '#8090A7' }}>Edit</Typography>
+                      <Typography sx={{ color: '#8090A7' }}>{t("Logout")}</Typography>
                     </Stack>
                   </Button>
                   <Button
@@ -108,7 +109,7 @@ export default function ShowSetting() {
                       handleDelete(branch)
                     }}
                   >
-                    Delete
+                    {t("Delete")}
                   </Button>
                 </Stack>
 

@@ -12,6 +12,7 @@ import Reviews from 'src/features/policies/add/componets/reviews';
 import Warnings from 'src/features/policies/add/componets/warnings';
 import AbsencesManagement from 'src/features/policies/add/componets/absences';
 import Deductions from 'src/features/policies/add/componets/deductions';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -24,7 +25,7 @@ export default function Policies() {
   const [Paid  , setPaid ] = useState(0);
   const [Unpaid  , setUnpaid ] = useState(0);
   const [Sick , setSick] = useState(0);
-
+  const {t} = useTranslation()
 
 
 
@@ -99,20 +100,20 @@ export default function Policies() {
     <Stack direction={"row"} justifyContent={"space-between"} padding={"20px"}>
     <Box>
       <Typography sx={{fontSize:"24px",fontWeight:"600",color:"#8090a7"}}>
-      Policies & Procedures
+      {t("Policies & Procedures")}
       </Typography>
     </Box>
     <Stack direction={"row"} alignItems={"center"} gap={"5px"}>
       <Box>
         <Button sx={{fontWeight:"500",backgroundColor:"#8090a7",color:"#fff",':hover': { color: '#fff', backgroundColor: '#2A4759' }}}>
-        Cancel
+        {t("Cancel")}
         </Button>
       </Box>
       <Box >
         <Button
          onClick={handleSubmit(handleDataSubmit)}
         sx={{color:"#fff",borderRadius:"8px",padding:"10px",backgroundColor:"#6ab2df",fontWeight:"600" ,':hover': { color: 'inhert', backgroundColor: '#2A4759' }      }}>
-        Save changes
+        {t("Save changes")}
         </Button>
       </Box>
     </Stack>
@@ -138,7 +139,7 @@ export default function Policies() {
     <Grid item sm={6}  xs={12} marginTop={'24px'}>
 
       <Stack spacing={6} direction={'column'}>
-        <Warnings   defaultValues={defaultValues} control={control} Controller={Controller} setAlert={setAlert} alert={alert} setWarningsto={setWarningsto} warningsto={warningsto}/>
+        <Warnings defaultValues={defaultValues} control={control} Controller={Controller} setAlert={setAlert} alert={alert} setWarningsto={setWarningsto} warningsto={warningsto}/>
         <AbsencesManagement control={control} Controller={Controller} setPaid={setPaid} Paid={Paid} Unpaid={Unpaid} setUnpaid={setUnpaid} setSick={setSick} Sick={Sick}/>
         <Deductions/>
       </Stack>

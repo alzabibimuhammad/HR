@@ -37,6 +37,7 @@ import { getInitials } from 'src/@core/utils/get-initials'
 
 // ** Styles
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import { useTranslation } from 'react-i18next'
 
 const menuItemsArr = [
   {
@@ -75,7 +76,7 @@ const filter = createFilterOptions()
 const ComposePopup = props => {
   // ** Props
   const { mdAbove, composeOpen, composePopupWidth, toggleComposeOpen } = props
-
+  const {t} = useTranslation()
   // ** States
   const [emailTo, setEmailTo] = useState([])
   const [ccValue, setccValue] = useState([])
@@ -199,7 +200,7 @@ const ComposePopup = props => {
         }}
       >
         <Typography variant='h5' sx={{ fontWeight: 500 }}>
-          Compose Mail
+        {t("Compose Mail")}
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <IconButton sx={{ p: 1, mr: 2 }} onClick={handleMinimize}>
@@ -225,7 +226,7 @@ const ComposePopup = props => {
               htmlFor='email-to-select'
               sx={{ mr: 3, fontSize: theme => theme.typography.body2.fontSize, lineHeight: 1.539 }}
             >
-              To:
+              {t("To:")}
             </InputLabel>
           </div>
           <CustomAutocomplete
@@ -330,7 +331,7 @@ const ComposePopup = props => {
             htmlFor='email-subject-input'
             sx={{ mr: 3, fontSize: theme => theme.typography.body2.fontSize, lineHeight: 1.539 }}
           >
-            Subject:
+            {t('Subject')}:
           </InputLabel>
         </div>
         <Input
@@ -350,7 +351,7 @@ const ComposePopup = props => {
         <ReactDraftWysiwyg
           editorState={messageValue}
           onEditorStateChange={editorState => setMessageValue(editorState)}
-          placeholder='Write your message...'
+          placeholder={t('Write your message...')}
           toolbar={{
             options: ['inline', 'list', 'link', 'image'],
             inline: {
@@ -381,7 +382,7 @@ const ComposePopup = props => {
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Button variant='contained' onClick={handlePopupClose} sx={{ '& svg': { mr: 2 } }}>
             <Icon icon='tabler:send' fontSize='1.125rem' />
-            Send
+            {t("Send")}
           </Button>
           <IconButton size='small' sx={{ ml: 3, color: 'text.secondary' }}>
             <Icon icon='tabler:paperclip' fontSize='1.25rem' />

@@ -8,14 +8,15 @@ import {  List } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Divider from '@mui/material/Divider';
 import { useFieldArray } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 export default function Warnings({Controller,control,defaultValues,setAlert ,alert,warningsto,setWarningsto}) {
 
 
   const [noteAdded, setNoteAdded] = useState(false);
+  const{t} = useTranslation()
 
   const { fields, append, remove } = useFieldArray({
-
 
 
     control,
@@ -60,9 +61,9 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
     <Card>
       <CardContent>
         <Stack direction={'column'} spacing={2}>
-        <Typography fontSize={'20px'}>Warnings Management</Typography>
+        <Typography fontSize={'20px'}>{t("Warnings Management")}</Typography>
 
-        <Typo>Alerts to warning</Typo>
+        <Typo>{t("Alerts to warning")}</Typo>
 
         <Controller
         name={`warnings.alerts_to_warnings`}
@@ -70,7 +71,7 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
         render={({ field }) => (
             <TextField
             {...field}
-        value={alert!=0 ? alert : 'none'}
+        value={alert!=0 ? alert : t('none')}
         disabled
 
         size='small'
@@ -89,7 +90,7 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
     />
   )}
       />
-      <Typo>Warnings to dismissal</Typo>
+      <Typo>{t("Warnings to dismissal")}</Typo>
 
       <Controller
         name={`warnings.warningsto_dismissal`}
@@ -97,7 +98,7 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
         render={({ field }) => (
             <TextField
             {...field}
-            value={warningsto!=0 ? warningsto : 'none'}
+            value={warningsto!=0 ? warningsto : t('none')}
 
         disabled
         size='small'
@@ -122,11 +123,11 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
   <Divider />
   <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} width={"106%"}>
 
-<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >Notes</Typography>
+<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >{t("Notes")}</Typography>
 
 
 {!noteAdded && (
-      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ add</Typography>
+      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ {t("add")}</Typography>
 
       )}
 
@@ -140,7 +141,7 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
 </Typography>
 
 <Typography sx={{fontWeight:"500",fontSize:"16px",color:"#8090a7",marginBottom:"7px"}}>
-notes {index + 1}
+{t("notes")} {index + 1}
 </Typography>
 <Box sx={{width:"100%"}} key={index}>
 

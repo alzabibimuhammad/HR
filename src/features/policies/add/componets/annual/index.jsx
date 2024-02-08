@@ -8,11 +8,12 @@ import Divider from '@mui/material/Divider';
 
 import CloseIcon from '@mui/icons-material/Close';
 import { useFieldArray } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 export default function Annual({Controller,control}) {
   const [noteAdded, setNoteAdded] = useState(false);
 
-
+  const {t} = useTranslation()
 
   const Typo = styled(Typography)(({ theme }) => ({
     fontSize:'14px'
@@ -45,10 +46,10 @@ export default function Annual({Controller,control}) {
     <Card>
       <CardContent>
         <Stack spacing={2}>
-        <Typography fontSize={'20px'} >Annual Salary Increase</Typography>
+        <Typography fontSize={'20px'} >{t("Annual Salary Increase")}</Typography>
 
 
-        <Typo style={{ marginTop:'24px' }}>Annual percentage increase</Typo>
+        <Typo style={{ marginTop:'24px' }}>{t("Annual percentage increase")}</Typo>
     <Stack>
 
         <Controller
@@ -84,7 +85,7 @@ export default function Annual({Controller,control}) {
 
   )}
        />
-        <Typography>Allow advance requests</Typography>
+        <Typography>{t("Allow advance requests")}</Typography>
          </Box>
     </Stack>
 
@@ -97,11 +98,11 @@ export default function Annual({Controller,control}) {
 
   <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} width={"106%"}>
 
-<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >Notes</Typography>
+<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >{t("Notes")}</Typography>
 
 
 {!noteAdded && (
-      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ add</Typography>
+      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ {t("add")}</Typography>
 
       )}
 
@@ -115,7 +116,7 @@ export default function Annual({Controller,control}) {
 </Typography>
 
 <Typography sx={{fontWeight:"500",fontSize:"16px",color:"#8090a7",marginBottom:"7px"}}>
-notes {index + 1}
+{t("notes")} {index + 1}
 </Typography>
 <Box sx={{width:"100%"}} key={index}>
 

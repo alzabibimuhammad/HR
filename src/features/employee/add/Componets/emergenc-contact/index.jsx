@@ -4,6 +4,7 @@ import { useFieldArray, useForm, Controller } from 'react-hook-form';
 import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { color } from '@mui/system';
+import { useTranslation } from 'react-i18next';
 
 export default function EmergencyContact({ onDataChange, Controller, control , errors }) {
   const handleFieldChange = (field, value) => {
@@ -11,7 +12,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
   };
 
 
-
+  const {t} = useTranslation()
   const { fields, append, remove } = useFieldArray({
     control,
     name: "emergency_contact"
@@ -30,10 +31,10 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
       <CardContent sx={{padding:"0px !important",}}>
         <Stack direction={"row"} sx={{padding:"0px"}} alignItems={"center"} justifyContent={"space-between"}>
           <Box>
-            <Typography sx={{marginLeft:"30px",marginTop:"9px",fontWeight:"600",fontSize:"20px",color:"#8090a7"}} >Emergency Contact</Typography>
+            <Typography sx={{marginLeft:"30px",marginTop:"9px",fontWeight:"600",fontSize:"20px",color:"#8090a7"}} >{t("Emergency Contact")}</Typography>
           </Box>
           <Box>
-          <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ add</Typography>
+          <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ {t("add")}</Typography>
 
           </Box>
         </Stack>
@@ -46,7 +47,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
 
           </Typography>
           <Typography sx={{fontWeight:"500",fontSize:"16px",color:"#8090a7",marginBottom:"7px"}}>
-            Contacts {index + 1}
+          {t("Contact")} {index + 1}
           </Typography>
           <Box sx={{width:"100%"}} key={index}>
 
@@ -57,7 +58,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="Address"
+                    label={t("Address")}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -75,7 +76,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="Name"
+                    label={t("Name")}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -94,7 +95,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="Phone Number"
+                    label={t("Phone Number")}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -112,7 +113,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="Email"
+                    label={t("Email")}
                     variant="outlined"
                     fullWidth
                     size="small"

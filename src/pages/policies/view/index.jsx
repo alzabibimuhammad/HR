@@ -14,7 +14,7 @@ import useShowPolicies from 'src/features/policies/hook/useShowPolicies';
 export default function View() {
 
   const {data}=useShowPolicies()
-
+  
 
   return (<>
 

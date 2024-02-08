@@ -13,6 +13,7 @@ export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', a
   }
 })
 
+
 const appRegiterSlice = createSlice({
   name: 'RegisterStore',
   initialState: {

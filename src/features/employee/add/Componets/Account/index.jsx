@@ -5,10 +5,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useTranslation } from 'react-i18next';
 
 export default function Account({onDataChange,Controller,control,errors}) {
 
-
+  const {t} = useTranslation()
   const SvgMail = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
   <rect x="3.33325" y="5" width="13.3333" height="10" rx="2" stroke="#8090A7"/>
@@ -61,7 +62,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
     <Card>
         <CardContent>
 
-          <Typography >Account</Typography>
+          <Typography >{t("Account")}</Typography>
           <br/>
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
@@ -83,7 +84,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgMail)}`}/>
                       </Box>
                       <Box>
-                        {'Email'}
+                        {t('Email')}
                     </Box>
                   </Stack>
                 }
@@ -113,7 +114,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
                         <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
                       </Box>
                       <Box>
-                        {'Password'}
+                        {t('Password')}
                       </Box>
                     </Stack>
                   }
@@ -149,7 +150,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
                 <Box>
                   <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
                 </Box>
-                <Box>{'Confirm Password'}</Box>
+                <Box>{t('Confirm Password')}</Box>
               </Stack>
             }
             InputProps={{

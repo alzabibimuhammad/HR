@@ -7,11 +7,12 @@ import { useFieldArray } from 'react-hook-form';
 import {  List } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Divider from '@mui/material/Divider';
+import { useTranslation } from 'react-i18next';
 
 export default function WorkTime({Controller,control,days,setDays}) {
   const [openParent, setOpenParent] = React.useState(false);
   const [noteAdded, setNoteAdded] = useState(false);
-
+  const {t} = useTranslation()
   const handleDayPicker = (date) => {
     setOpenParent(true);
   };
@@ -44,8 +45,8 @@ export default function WorkTime({Controller,control,days,setDays}) {
       <CardContent>
 
         <Stack spacing={2} direction={'column'}>
-          <Typography fontSize={'20px'}>Work Time</Typography>
-          <Typo style={{ marginTop:'24px' }} >Work days</Typo>
+          <Typography fontSize={'20px'}>{t("Work Time")}</Typography>
+          <Typo style={{ marginTop:'24px' }} >{t("Work days")}</Typo>
           <Controller
   name={`work_time.work_days`}
   control={control}
@@ -83,7 +84,7 @@ export default function WorkTime({Controller,control,days,setDays}) {
       ) : (
         <Stack direction={'row'} width={'100%'} justifyContent={'space-between'}>
           <Box>
-            <Typo>Work days</Typo>
+            <Typo>{t("Work days")}</Typo>
           </Box>
           <Box>
             <CalendarMonthIcon sx={{ color: '#8090A7' }} />
@@ -95,7 +96,7 @@ export default function WorkTime({Controller,control,days,setDays}) {
 />
 
 
-          <Typo>Start time</Typo>
+          <Typo>{t("Start time")}</Typo>
 
 
         <Controller
@@ -113,7 +114,7 @@ export default function WorkTime({Controller,control,days,setDays}) {
         />
 
 
-            <Typo>Cut-off time</Typo>
+            <Typo>{t("Cut-off time")}</Typo>
 
 
             <Controller
@@ -129,7 +130,7 @@ export default function WorkTime({Controller,control,days,setDays}) {
             />
         ) }
 />
-            <Typo>End time</Typo>
+            <Typo>{t("End time")}</Typo>
             <Controller
         name={`work_time.end_time`}
         control={control}
@@ -149,11 +150,11 @@ export default function WorkTime({Controller,control,days,setDays}) {
   <Divider />
   <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} width={"106%"}>
 
-<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >Notes</Typography>
+<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >{t("Notes")}</Typography>
 
 
 {!noteAdded && (
-      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ add</Typography>
+      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ {t("add")}</Typography>
 
       )}
 
@@ -167,7 +168,7 @@ export default function WorkTime({Controller,control,days,setDays}) {
 </Typography>
 
 <Typography sx={{fontWeight:"500",fontSize:"16px",color:"#8090a7",marginBottom:"7px"}}>
-notes {index + 1}
+{t("notes")} {index + 1}
 </Typography>
 <Box sx={{width:"100%"}} key={index}>
 

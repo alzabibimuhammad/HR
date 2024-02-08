@@ -16,6 +16,7 @@ import AdditionalFiles from 'src/features/employee/add/Componets/additional-fils
 import { Schema } from './validation'
 import { useAddUsers } from './hook/useAddUsers'
 import AddIcon from '@mui/icons-material/Add';
+import { useTranslation } from 'react-i18next'
 export default function Add() {
   const [snapshotData, setSnapshotData] = useState({})
   const [accountData, setAccountData] = useState({})
@@ -27,7 +28,7 @@ export default function Add() {
   const [AdditionalFilesData, setAdditionalFilesData] = useState({})
   const [EmergencyContactData, setEmergencyContacttData] = useState({})
   const [ProfileImage, setProfileImage] = useState()
-
+  const {t} = useTranslation()
   const { mutate: addUsers, isLoading } = useAddUsers()
 
   const handleFieldChange = (field, value) => {
@@ -120,7 +121,7 @@ export default function Add() {
         <Stack direction={'row'}>
           <AddIcon/>
           <Typography color={'inherit'} >
-            Add Employee
+          {t("Add Employee")}
           </Typography>
         </Stack>
       </Button>

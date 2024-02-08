@@ -236,7 +236,7 @@ const SalaryDataGrid = ({ rows }) => {
 
 
 
-      <Button sx={{border:"1px solid"}} fullWidth onClick={handleOpen}>Select Date</Button>
+      <Button sx={{border:"1px solid"}} fullWidth onClick={handleOpen}>{t("Select Date")}</Button>
       <Modal
         open={open}
         onClose={handleClose}

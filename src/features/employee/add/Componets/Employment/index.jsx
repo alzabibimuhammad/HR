@@ -6,10 +6,11 @@ import Avatar from 'src/@core/components/mui/avatar';
 import { useFieldArray, useForm, Controller } from 'react-hook-form';
 import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTranslation } from 'react-i18next';
 
 export default function Employment({onDataChange,Controller,control,errors}) {
   const [contract, setContract] = useState(null);
-
+  const {t} = useTranslation()
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -72,11 +73,11 @@ export default function Employment({onDataChange,Controller,control,errors}) {
     <Card>
         <CardContent>
 
-          <Typography >Employment</Typography>
+          <Typography >{t("Employment")}</Typography>
           <br/>
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
-              <Typography>Salary</Typography>
+              <Typography>{t("Salary")}</Typography>
 
               <Controller
                 name={`salary`}
@@ -94,7 +95,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgSalary)}`}/>
                       </Box>
                       <Box>
-                        {'Salary'}
+                        {t('Salary')}
                     </Box>
                     <Box width={'100%'} >
                       <Typography sx={{ marginLeft:'410px' }} >s.p</Typography>
@@ -112,10 +113,10 @@ export default function Employment({onDataChange,Controller,control,errors}) {
 
 
               <Box sx={{display:"flex",alignItems:"center",gap:"16px"}}>
-              <Typography>Contract</Typography>
+              <Typography>{t("Contract")}</Typography>
               <Box>
       <label htmlFor="contractInput" style={{border:"3px solid red",padding:"2px",cursor:"pointer"}}>
-                    choose file
+      {t("choose file")}
       </label>
 
      <Controller
@@ -142,7 +143,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
 
 
 
-              <Typography>Secretariats</Typography>
+              <Typography>{t("Secretariats")}</Typography>
               {fields.map((field, index) => (
   <Stack direction={"column"} spacing={4} key={index}>
     {index === 1 && (
@@ -163,7 +164,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
             {...field}
             fullWidth
             size='small'
-            placeholder='Secretariats'
+            placeholder={t('Secretariats')}
           />
         )}
       />
@@ -186,7 +187,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
                 <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`} />
               </Box>
               <Box>
-                {'Delivery Date'}
+                {t('Delivery Date')}
               </Box>
             </Stack>
           }
@@ -198,7 +199,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
 
 
 <Typography sx={{cursor:"pointer",width:"20%",}} color="primary" onClick={handleAddClick}>
-            Add Secretariats
+{t("Add Secretariats")}
           </Typography>
 
           </Stack>

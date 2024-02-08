@@ -20,6 +20,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 
 // ** Custom Components Imports
 import CustomBadge from 'src/@core/components/mui/badge'
+import { useTranslation } from 'react-i18next'
 
 // ** Styled Components
 const ListItemStyled = styled(ListItem)(({ theme }) => ({
@@ -41,6 +42,7 @@ const ListBadge = styled(CustomBadge)(() => ({
 }))
 
 const SidebarLeft = props => {
+  const {t} = useTranslation()
   // ** Props
   const {
     store,
@@ -114,7 +116,7 @@ const SidebarLeft = props => {
     >
       <Box sx={{ p: 6, overflowY: 'hidden' }}>
         <Button fullWidth variant='contained' onClick={toggleComposeOpen}>
-          Compose
+        {t("Compose")}
         </Button>
       </Box>
       <ScrollWrapper>
@@ -130,7 +132,7 @@ const SidebarLeft = props => {
                 <Icon icon='tabler:mail' />
               </ListItemIcon>
               <ListItemText
-                primary='Inbox'
+                primary={t('Inbox')}
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(activeInboxCondition && { color: 'primary.main' }) }
@@ -155,7 +157,7 @@ const SidebarLeft = props => {
                 <Icon icon='tabler:send' />
               </ListItemIcon>
               <ListItemText
-                primary='Sent'
+                primary={t('Sent')}
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(handleActiveItem('folder', 'sent') && { color: 'primary.main' }) }
@@ -179,7 +181,7 @@ const SidebarLeft = props => {
                 <Icon icon='tabler:file' />
               </ListItemIcon>
               <ListItemText
-                primary='Draft'
+                primary={t('Draft')}
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(handleActiveItem('folder', 'draft') && { color: 'primary.main' }) }
@@ -204,7 +206,7 @@ const SidebarLeft = props => {
                 <Icon icon='tabler:star' />
               </ListItemIcon>
               <ListItemText
-                primary='Starred'
+                primary={t('Starred')}
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(handleActiveItem('folder', 'starred') && { color: 'primary.main' }) }
@@ -228,7 +230,7 @@ const SidebarLeft = props => {
                 <Icon icon='tabler:info-circle' />
               </ListItemIcon>
               <ListItemText
-                primary='Spam'
+                primary={t('Spam')}
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(handleActiveItem('folder', 'spam') && { color: 'primary.main' }) }
@@ -253,7 +255,7 @@ const SidebarLeft = props => {
                 <Icon icon='tabler:trash' />
               </ListItemIcon>
               <ListItemText
-                primary='Trash'
+                primary={t('Trash')}
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(handleActiveItem('folder', 'trash') && { color: 'primary.main' }) }
@@ -281,7 +283,7 @@ const SidebarLeft = props => {
                 <Icon icon='mdi:circle' fontSize='0.625rem' />
               </ListItemIcon>
               <ListItemText
-                primary='Work'
+                primary={t('Work')}
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(handleActiveItem('label', 'personal') && { color: 'primary.main' }) }
@@ -301,7 +303,7 @@ const SidebarLeft = props => {
                 <Icon icon='mdi:circle' fontSize='0.625rem' />
               </ListItemIcon>
               <ListItemText
-                primary='Company'
+                primary={t('Company')}
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(handleActiveItem('label', 'company') && { color: 'primary.main' }) }
@@ -322,7 +324,7 @@ const SidebarLeft = props => {
                 <Icon icon='mdi:circle' fontSize='0.625rem' />
               </ListItemIcon>
               <ListItemText
-                primary='Private'
+                primary={t('Private')}
                 primaryTypographyProps={{
                   noWrap: true,
                   sx: { fontWeight: 500, ...(handleActiveItem('label', 'private') && { color: 'primary.main' }) }

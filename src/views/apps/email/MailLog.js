@@ -29,6 +29,7 @@ import OptionsMenu from 'src/@core/components/option-menu'
 // ** Email App Component Imports
 import { setTimeout } from 'timers'
 import MailDetails from './MailDetails'
+import { useTranslation } from 'react-i18next'
 
 const MailItem = styled(ListItem)(({ theme }) => ({
   cursor: 'pointer',
@@ -58,6 +59,7 @@ const MailItem = styled(ListItem)(({ theme }) => ({
 }))
 
 const ScrollWrapper = ({ children, hidden }) => {
+
   if (hidden) {
     return <Box sx={{ height: '100%', overflowY: 'auto', overflowX: 'hidden' }}>{children}</Box>
   } else {
@@ -66,6 +68,7 @@ const ScrollWrapper = ({ children, hidden }) => {
 }
 
 const MailLog = props => {
+  const {t} = useTranslation()
   // ** Props
   const {
     store,
@@ -312,7 +315,7 @@ const MailLog = props => {
             )}
             <Input
               value={query}
-              placeholder='Search mail'
+              placeholder={t('Search mail')}
               onChange={e => setQuery(e.target.value)}
               sx={{ width: '100%', '&:before, &:after': { display: 'none' } }}
               startAdornment={
@@ -498,7 +501,7 @@ const MailLog = props => {
             ) : (
               <Box sx={{ mt: 6, display: 'flex', justifyContent: 'center', alignItems: 'center', '& svg': { mr: 2 } }}>
                 <Icon icon='tabler:alert-octagon' />
-                <Typography>No Mails Found</Typography>
+                <Typography>{t("No Mails Found")}</Typography>
               </Box>
             )}
           </ScrollWrapper>

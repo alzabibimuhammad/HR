@@ -10,13 +10,14 @@ import Divider from '@mui/material/Divider';
 import {  List } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useFieldArray } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 
 
 export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpaid,setUnpaid,setSick,Sick}) {
 
   const [noteAdded, setNoteAdded] = useState(false);
-
+  const {t} = useTranslation()
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'absence_management.notes',
@@ -75,10 +76,10 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
     <Card>
       <CardContent>
         <Stack direction={'column'} spacing={2}>
-        <Typography fontSize={'20px'}>Absences Management</Typography>
+        <Typography fontSize={'20px'}>{t("Absences Management")}</Typography>
 
         <Box sx={{width:"100%"}}>
-        <Typo>Paid absence days</Typo>
+        <Typo>{t("Paid absence days")}</Typo>
 
         <Controller
         name={`absence_management.paid_absence_days[count]`}
@@ -86,7 +87,7 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
         render={({ field }) => (
             <TextField
             {...field}
-              value={Paid !== 0 ? Paid : 'none'}
+              value={Paid !== 0 ? Paid : t('none')}
               disabled
         fullWidth
         size='small'
@@ -120,7 +121,7 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
         />
 <Typo>
 
-   Compensatory time
+{t("Compensatory time")}
 </Typo>
     </Box>
     </Box>
@@ -128,14 +129,14 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
 
     <Box sx={{width:"100%",marginTop:"15px !important"}}>
 
-      <Typo>Unpaid absence days</Typo>
+      <Typo>{t("Unpaid absence days")}</Typo>
       <Controller
         name={`absence_management.unpaid_absence_days[count]`}
         control={control}
         render={({ field }) => (
             <TextField
             {...field}
-              value={Unpaid !== 0 ? Unpaid : 'none'}
+              value={Unpaid !== 0 ? Unpaid : t('none')}
               disabled
         fullWidth
         size='small'
@@ -168,20 +169,20 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
         />
 <Typo>
 
-Compensatory time
+{t('Compensatory time')}
 </Typo>
     </Box>
     </Box>
     <Box sx={{width:"100%",marginTop:"15px !important"}}>
 
-      <Typo>Sick absence days </Typo>
+      <Typo>{t("Sick absence days")}</Typo>
       <Controller
         name={`absence_management.sick_absence_days[count]`}
         control={control}
         render={({ field }) => (
             <TextField
             {...field}
-              value={Sick !== 0 ? Sick : 'none'}
+              value={Sick !== 0 ? Sick : t('none')}
               disabled
         fullWidth
         size='small'
@@ -213,7 +214,7 @@ Compensatory time
         />
 <Typo>
 
-Compensatory time
+{t("Compensatory time")}
 </Typo>
     </Box>
     </Box>
@@ -224,11 +225,11 @@ Compensatory time
 
   <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"} width={"106%"}>
 
-<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >Notes</Typography>
+<Typography sx={{fontWeight:"600",fontSize:"16px",color:"#8090a7"}} >{t("Notes")}</Typography>
 
 
 {!noteAdded && (
-      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ add</Typography>
+      <Typography sx={{marginRight:"30px",marginTop:"9px",fontWeight:"600",fontSize:"16px",color:"#6ab2df",cursor:"pointer"}} onClick={handleAddClick}>+ {t("add")}</Typography>
 
       )}
 
@@ -242,7 +243,7 @@ Compensatory time
 </Typography>
 
 <Typography sx={{fontWeight:"500",fontSize:"16px",color:"#8090a7",marginBottom:"7px"}}>
-notes {index + 1}
+{t("notes")} {index + 1}
 </Typography>
 <Box sx={{width:"100%"}} key={index}>
 

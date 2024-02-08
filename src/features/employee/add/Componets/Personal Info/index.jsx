@@ -2,9 +2,10 @@ import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography } fr
 import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next';
 
 export default function Info({onDataChange,Controller,control,errors}) {
-
+    const {t} = useTranslation()
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -61,7 +62,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
     <Card>
         <CardContent>
 
-          <Typography >Personal Info</Typography>
+          <Typography >{t("Personal Info")}</Typography>
           <br/>
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
@@ -81,7 +82,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`}/>
                       </Box>
                       <Box>
-                        {'Birth Date'}
+                        {t('Birth Date')}
                     </Box>
                   </Stack>
                 }
@@ -106,7 +107,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgID)}`}/>
                       </Box>
                       <Box>
-                        {'ID Number'}
+                        {t('ID Number')}
                     </Box>
                   </Stack>
                 }
@@ -128,7 +129,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgID)}`}/>
                       </Box>
                       <Box>
-                        {'Health Status'}
+                        {t('Health Status')}
                     </Box>
                   </Stack>
                 }
@@ -157,7 +158,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
                   >
                     <MenuItem value='gender'>{`${t("Gender")}`}</MenuItem>
                     <MenuItem value='male'>{`${t("Male")}`}</MenuItem>
-                    <MenuItem value='female'>{`${t(" Female")}`}</MenuItem>
+                    <MenuItem value='female'>{`${t("Female")}`}</MenuItem>
                 </TextField>
   )}
 />
@@ -182,6 +183,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
               }}
               size='small'
                   >
+                    <MenuItem value='Military Status'>{`${t("Military Status")}`}</MenuItem>
                     <MenuItem value='Finished'>{`${t("Finished")}`}</MenuItem>
                     <MenuItem value='Postponed'>{`${t("Postponed")}`}</MenuItem>
                     <MenuItem value='Exempt'>{`${t("Exempt")}`}</MenuItem>
@@ -213,6 +215,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
                     }}
                     size='small'
                   >
+                    <MenuItem value='social_situation'>{`${t("social_situation")}`}</MenuItem>
                     <MenuItem value='Single'>{`${t("Single")}`}</MenuItem>
                     <MenuItem value='Married'>{`${t("Married")}`}</MenuItem>
                 </TextField>

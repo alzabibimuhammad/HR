@@ -40,14 +40,14 @@ const useSalaryColumns = () => {
       },
     {
       field: 'base',
-      headerName: t("BASE"),
+      headerName: t("base"),
       disableClickEventBubbling: true,
       flex:1,
 
     },
     {
       field: 'overtime',
-      headerName: t("OVERTIME"),
+      headerName: t("base"),
       disableClickEventBubbling: true,
       flex:1,
 
@@ -55,7 +55,7 @@ const useSalaryColumns = () => {
     },
     {
       field: 'reward',
-      headerName: t("REWARD"),
+      headerName: t("reward"),
       disableClickEventBubbling: true,
       flex:1,
 
@@ -65,19 +65,19 @@ const useSalaryColumns = () => {
 
     {
       field: 'deducations',
-      headerName: t("DEDUCATIONS"),
+      headerName: t("deducations"),
       flex:1,
 
     },
     {
       field: 'advances',
-      headerName: t("ADVANCES"),
+      headerName: t("advances"),
       flex:1,
 
     },
     {
       field: 'total',
-      headerName: t("TOTAL"),
+      headerName: t("total"),
       flex:1,
 
     },

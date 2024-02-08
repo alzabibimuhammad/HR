@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import ListItemSelected from 'src/views/components/list/ListItemSelected';
 import IconButton from 'src/@core/theme/overrides/icon-button';
 import email from 'src/store/apps/email';
+import { useTranslation } from 'react-i18next';
 
 export default function Contact({onDataChange,Controller,control,defaultValues }) {
   const handleFieldChange = (field, value) => {
@@ -13,7 +14,7 @@ export default function Contact({onDataChange,Controller,control,defaultValues }
   };
 
 
-
+  const {t} = useTranslation()
 
 
 
@@ -77,7 +78,7 @@ React.useEffect(() => {
     <Card >
         <CardContent>
 
-          <Typography >Contact</Typography>
+          <Typography >{t("Contact")}</Typography>
           <br/>
 
           <Stack sx={{padding:"0"}}  direction={'column'} spacing={2} width={'100%'} >
@@ -92,7 +93,7 @@ React.useEffect(() => {
             render={({ field }) => (
               <TextField
                 {...field}
-                label={`address `}
+                label={t(`address`)}
                 variant="outlined"
                 fullWidth
                 size='small'
@@ -112,7 +113,7 @@ React.useEffect(() => {
             render={({ field }) => (
               <TextField
                 {...field}
-                label={`Phone Number ${index + 1}`}
+                label={`${t('Phone Number')} ${index + 1}`}
                 variant="outlined"
                 fullWidth
                 size='small'
@@ -128,7 +129,7 @@ React.useEffect(() => {
     onClick={() => phoneNumbersappend({ phonenumber: '' })}
     sx={{ fontSize: "12px", fontWeight: "400", color: "#6ab2df", padding: "0" }}
   >
-    Add phoneNumbers
+    {t("Add phoneNumbers")}
   </Button>
 
 
@@ -146,7 +147,7 @@ React.useEffect(() => {
             render={({ field }) => (
               <TextField
                 {...field}
-                label={`Email ${index + 1}`}
+                label={`${t('Email')} ${index + 1}`}
                 variant="outlined"
                 fullWidth
                 size='small'
@@ -160,7 +161,7 @@ React.useEffect(() => {
                 onClick={() => EmailAppend({ email: '' })}
                 sx={{ fontSize: "12px", fontWeight: "400", color: "#6ab2df", padding: "0" }}
               >
-                Add Email
+                {t("Add Email")}
               </Button>
 
             <Button
@@ -168,7 +169,7 @@ React.useEffect(() => {
               sx={{ fontSize: "12px", fontWeight: "400", color: "#6ab2df", padding: "0" }}
               onClick={() => EmailRemove(index)}
             >
-              delete Email
+              {t("delete Email")}
             </Button>
           </Box>
         </Box>

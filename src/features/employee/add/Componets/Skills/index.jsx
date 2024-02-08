@@ -7,10 +7,11 @@ import { useFieldArray ,setValue, useFormContext } from 'react-hook-form';
 import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { color } from '@mui/system';
+import { useTranslation } from 'react-i18next';
 
 export default function Skills({onDataChange,Controller,control,handleRatingChange,handleLanguageChange,errors}) {
   const [degree, setDegree] = useState('');
-
+  const {t} = useTranslation()
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -163,11 +164,11 @@ useEffect(()=>{
     <Card>
         <CardContent>
 
-          <Typography >Skills & Career</Typography>
+          <Typography >{t("Skills & Career")}</Typography>
           <br/>
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
-              <Typography>Education</Typography>
+              <Typography>{t("Education")}</Typography>
 
 
 
@@ -186,7 +187,7 @@ useEffect(()=>{
                 render={({ field }) => (
                   <TextField
                   {...field}
-                    label="study"
+                    label={t("study")}
                     variant="outlined"
                     fullWidth
                     size="small"
@@ -203,7 +204,7 @@ useEffect(()=>{
                   <TextField
                   {...field}
                   select
-                  label="Degree"
+                  label={t("Degree")}
                   SelectProps={{
                     value: field.value,  // Use field.value here
                     displayEmpty: true,
@@ -216,9 +217,10 @@ useEffect(()=>{
                   fullWidth
                   size="small"
                   >
-                <MenuItem value="bachelor">Bachelor</MenuItem>
-                <MenuItem value="master">Master</MenuItem>
-                <MenuItem value="phd">PhD</MenuItem>
+                <MenuItem value="Degree">{t("Degree")}</MenuItem>
+                <MenuItem value="bachelor">{t("Bachelor")}</MenuItem>
+                <MenuItem value="master">{t("Master")}</MenuItem>
+                <MenuItem value="phd">{t("PhD")}</MenuItem>
               </TextField>
                  )}
                  />
@@ -227,7 +229,7 @@ useEffect(()=>{
                  </>
           ))}
           <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClick}>
-            Add Education
+          {t("Add Education")}
           </Typography>
 
 
@@ -236,7 +238,7 @@ useEffect(()=>{
 
 {/*  *********************************************************************                                          */}
 
-              <Typography>Certificates</Typography>
+              <Typography>{t("Certificates")}</Typography>
 
               {fieldsCertificate.map((field, index) => ( <>
                 {index === 1 && (
@@ -245,7 +247,6 @@ useEffect(()=>{
               <Controller
                 name={`certificates[${index}]`}
                 control={control}
-                defaultValue={field.certificate}
                 render={({ field }) => (
               <TextField
                 {...field}
@@ -259,7 +260,7 @@ useEffect(()=>{
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgCertificate)}`}/>
                       </Box>
                       <Box>
-                        {'Certificates'}
+                        {t('Certificates')}
                     </Box>
                   </Stack>
                 }
@@ -269,13 +270,13 @@ useEffect(()=>{
               </>
           ))}
    <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickCertificate}>
-            Add Certificate
+   {t("Add Certificate")}
           </Typography>
 
 
               {/* *********************************************************************                                          */}
 
-              <Typography>Experience</Typography>
+              <Typography>{t("Experience")}</Typography>
       {fieldsExperience.map((field, index) => (
         <React.Fragment key={index}>
           {index === 1 && (
@@ -287,7 +288,6 @@ useEffect(()=>{
           <Controller
             name={`experiences[${index}]`}
             control={control}
-            defaultValue={field.experiences}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -300,7 +300,7 @@ useEffect(()=>{
                     <Box>
                       <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgExperience)}`} />
                     </Box>
-                    <Box>{'Experience'}</Box>
+                    <Box>{t('Experience')}</Box>
                   </Stack>
                 }
               />
@@ -310,12 +310,12 @@ useEffect(()=>{
       ))}
 
    <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickExperience}>
-            Add Experience
+   {t("Add Experience")}
           </Typography>
 
 
                   {/* *********************************************************************************** */}
-              <Typography>Skills</Typography>
+              <Typography>{t("Skills")}</Typography>
   {fieldsSkills.map((field, index) => (
               <Stack direction={'row'} key={index}>
            {index === 1 && (
@@ -341,7 +341,7 @@ useEffect(()=>{
                   <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgSkills)}`} alt="Skills Icon" />
                 </Box>
                 <Box>
-                  {'Skills'}
+                  {t('Skills')}
                 </Box>
               </Stack>
             }
@@ -363,11 +363,11 @@ useEffect(()=>{
   ))}
 
               <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickSkills}>
-            Add Skills
+              {t("Add Skills")}
           </Typography>
 
 
-              <Typography>Languages</Typography>
+              <Typography>{t("Languages")}</Typography>
               {fieldsLanguage.map((field, index) => (
               <Stack direction={'row'} key={index}>
            {index === 1 && (
@@ -393,7 +393,7 @@ useEffect(()=>{
                   <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgLanguage)}`} alt="Language Icon" />
                 </Box>
                 <Box>
-                  {'Language'}
+                  {t('Language')}
                 </Box>
               </Stack>
             }
@@ -411,7 +411,7 @@ useEffect(()=>{
 </Stack>
   ))}
      <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickLanguage}>
-            Add Language
+     {t("Add Language")}
           </Typography>
 
           </Stack>

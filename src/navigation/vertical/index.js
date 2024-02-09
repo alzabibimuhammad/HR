@@ -1,139 +1,112 @@
-
-
 const navigation = () => {
-
   return [
     {
-      title: 'Dashboard',
+      title: 'Home',
       icon: 'tabler:home',
-
       path: '/dashboard'
     },
     {
-      title: 'Contracts',
-      icon: 'tabler:file-pencil',
-
-
+      title: 'Employees',
+      icon: 'tabler:users',
       children:[
         {
           title:"List",
-          path:"/contracts/list"
-
-        },
-
-        // {
-        //   title:"View",
-        //   path:"/contracts/view"
-
-        // },
-        {
-          title:"Add",
-          path:"/contracts/add"
-
-        },
-      ]
-    },
-    {
-      title: 'Email',
-      icon: 'tabler:mail',
-      path: '/apps/email'
-    },
-    {
-      title: 'Report',
-      icon: 'tabler:report',
-      path: '/report'
-    },
-    {
-      title: 'Calendar',
-      icon: 'tabler:report',
-      path: '/calendar'
-    },
-    {
-      title: 'Salary',
-      icon: 'tabler:cash-banknote',
-      path: '/salary'
-    },
-    {
-      title: 'Review',
-      icon: 'tabler:cash-banknote',
-      path: '/review'
-    },
-    {
-      title: 'Employees',
-      icon: 'tabler:file-pencil',
-
-      children:[
-        {
-          title:"All Employees",
           path:"/employees/users"
-
         },
         {
-          title:"Team",
+          title:"Teams",
           path:"/employees/team"
-
+        },
+        {
+          title: 'Registration',
+          path: '/registration'
         },
         {
           title:"Absence",
           path:"/employees/absence"
-
         },
         {
           title:"Add",
           path:"/employees/add"
-
         },
-
       ]
     },
     {
+      title: 'Contracts',
+      icon: 'tabler:file-text',
+      children:[
+        {
+          title:"List",
+          path:"/contracts/list"
+        },
+        {
+          title:"Add",
+          path:"/contracts/add"
+        },
+      ]
+    },
+    {
+      title: 'Report',
+      icon: 'tabler:file-report',
+      path: '/report'
+    },
+    {
+      title: 'Reviews',
+      icon: 'tabler:stars',
+      path: '/review'
+    },
+    {
+      title: 'Salaries',
+      icon: 'tabler:coin',
+      path: '/salary'
+    },
+    {
       title: 'Requests',
-      icon: 'tabler:file-pencil',
-
+      icon: 'tabler:alert-circle',
       children:[
         {
           title:"Inquiries",
           path:"/requests/Inquiries"
-
         },
-
       ]
     },
     {
+      title: 'Calendar',
+      icon: 'tabler:calendar',
+      path: '/calendar'
+    },
+    {
+      title: 'Hierarchy',
+      icon: 'tabler:tree',
+      path: '/tree'
+    },
+    {
+      title: 'Emails',
+      icon: 'tabler:mail',
+      path: '/apps/email'
+    },
+    {
       title: 'Policies',
-      icon: 'tabler:report',
+      icon: 'tabler:file-text',
       path: '/policies',
       children:[
         {
           title:"Add",
           path:"/policies/add"
-
         },
         {
           title:"View",
           path:"/policies/view"
-
         },
       ]
     },
-    {
-      title: 'Tree',
-      icon: 'tabler:report',
-      path: '/tree'
-    },
-    {
-      title: 'Registeration',
-      icon: 'tabler:report',
-      path: '/registeration'
-    },
+
     {
       title: 'Settings',
       icon: 'tabler:settings',
       path: '/Settings'
     },
-  ]
+  ];
+};
 
-}
-
-
-export default navigation
+export default navigation;

@@ -7,10 +7,19 @@ import { useFieldArray, useForm, Controller } from 'react-hook-form';
 import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
-
+import AttachmentIcon from '@mui/icons-material/Attachment';
 export default function Employment({onDataChange,Controller,control,errors}) {
   const [contract, setContract] = useState(null);
   const {t} = useTranslation()
+  const date = new Date();
+
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+
+  const formattedDate = `${day}-${month}-${year}`;
+
+
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -115,8 +124,13 @@ export default function Employment({onDataChange,Controller,control,errors}) {
               <Box sx={{display:"flex",alignItems:"center",gap:"16px"}}>
               <Typography>{t("Contract")}</Typography>
               <Box>
-      <label htmlFor="contractInput" style={{border:"3px solid red",padding:"2px",cursor:"pointer"}}>
-      {t("choose file")}
+      <label htmlFor="contractInput" style={{padding:"2px",cursor:"pointer"}}>
+        <Stack spacing={1}  direction={'row'} justifyContent={'center'} >
+          <Typography>
+        {t("choose file")}
+        </Typography>
+          <AttachmentIcon/>
+        </Stack>
       </label>
 
      <Controller
@@ -187,7 +201,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
                 <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`} />
               </Box>
               <Box>
-                {t('Delivery Date')}
+                {t('Delivery Date')} {formattedDate}
               </Box>
             </Stack>
           }

@@ -40,22 +40,22 @@ export default function Dashboard() {
 
       <Stack justifyContent={"center"}   spacing={5} direction={{sm:'row',xs:'column'}} >
 
-          <Box width={{ sm:"30%",xs:'100%' }}>
-            <Attendance Data={percentageData} />
-          </Box>
-
           <Box width={{sm:'70%',xs:'100%',}} sx={{backgroundColor:"#fff"}}>
             <AppCalendar  />
+          </Box>
+
+          <Box width={{ sm:"30%",xs:'100%' }}>
+            <Attendance Data={percentageData} />
           </Box>
 
       </Stack>
 
       <Stack spacing={5}  height={{sm:'600px'}} direction={{ xs:'column' , sm:'row'}} >
 
-          <Box width={{sm:"65%",xs:'100%'}}  >
+          <Box width={{sm:"69.5%",xs:'100%'}}  >
             <Registration Data={registration} />
           </Box>
-          <Box width={{sm:"35%",xs:'100%'}}>
+          <Box width={{sm:"30.5%",xs:'100%'}}>
             <Requests/>
           </Box>
 

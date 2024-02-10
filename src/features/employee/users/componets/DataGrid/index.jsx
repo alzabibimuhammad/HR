@@ -24,6 +24,16 @@ const Users = ({ rows }) => {
   const [openParent, setOpenParent] = React.useState(false);
   const { t } = useTranslation()
 
+  let roleData = new Set([]) ;
+  rows?.data?.data?.forEach(element => {
+      roleData.add(element?.role)
+  });
+
+  let specialization = new Set([])
+  rows?.data?.data?.forEach(element => {
+    specialization.add(element?.specialization)
+});
+
   const handleDrawerOpen = () => {
     setOpenParent(true);
   };
@@ -71,6 +81,7 @@ const Users = ({ rows }) => {
         setfdata(rows);
 
     },[role,department])
+
 
   const handelSearch = (event) => {
     const searchText = event.target.value;
@@ -247,10 +258,17 @@ const Users = ({ rows }) => {
                     }}
                     size='small'
                   >
+
                     <MenuItem value=''>{`${t("Role")}`}</MenuItem>
-                    <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
-                    <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
-                    <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
+
+                    {Array.from(roleData).map(element => (
+                      <MenuItem key={element} value={element}>{element}</MenuItem>
+                    ))}
+
+
+
+
+
                   </TextField>
 
                   <TextField
@@ -266,13 +284,14 @@ const Users = ({ rows }) => {
 
                   >
                     <MenuItem value=''>{`${t("Specialization")}`}</MenuItem>
-                    <MenuItem value='Front_End'>{`${t("Front End")}`}</MenuItem>
-                    <MenuItem value='Back_End'>{`${t("Back End")}`}</MenuItem>
+                    {Array.from(specialization).map(element => (
+                      <MenuItem key={element} value={element}>{element}</MenuItem>
+                    ))}
                   </TextField>
 
                   </Stack>
 
-                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(fdata)|| []}    />: null }
+                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(fdata)|| []}   />: null }
 
               </Stack>
               </CardContent>

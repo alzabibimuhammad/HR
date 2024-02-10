@@ -16,8 +16,10 @@ function Attendance(Data) {
 
     const data = getData();
     const numFormatter = new Intl.NumberFormat('en-US');
-    const total = ((Data?.Data?.data?.present_employees/Data?.Data?.data?.total_employees)*100).toFixed(1);
+    let total = ((Data?.Data?.data?.present_employees/Data?.Data?.data?.total_employees)*100).toFixed(1);
 
+    if(isNaN(total))
+      total = 0
 
     const options = {
       container: document.getElementById('myChart'),

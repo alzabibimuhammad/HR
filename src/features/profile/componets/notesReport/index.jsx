@@ -29,7 +29,6 @@ export default function NoteReport(user_id) {
   const handleDelete = id => {
     deleteNote(id)
 
-    console.log('del',id)
   }
 
   const handleEdit = note => {

@@ -9,10 +9,8 @@ export const useGetEventByDay = () => {
     mutationFn:GetEventDay,
     onSuccess: (data) => {
       queryClient.invalidateQueries("event");
-      console.log("useGetEventByDay ** onSuccess",data);
     },
     onError(error){
-      console.log("🚀 ~ useGetEventByDay ~ error:", error)
       showErrorToast(data?.data?.message)
     }
   });

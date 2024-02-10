@@ -79,7 +79,6 @@ export default function Penalties({DataDecision,id}) {
   }));
 
   const handleClickOpenEdit = (dataRow) => {
-    console.log("🚀 ~ handleClickOpenEdit ~ dataRow:", dataRow)
     setOpenEdit(true);
     setEdit(dataRow)
   };
@@ -133,11 +132,25 @@ export default function Penalties({DataDecision,id}) {
     }
 
 
-
-
-
-
   };
+
+
+
+
+  const onSubmit2 = async (data) => {
+
+      const formData = new FormData();
+      formData.append('dateTime', data.dateTime);
+      formData.append('content', data.content);
+      formData.append('user_id', data.user_id);
+      formData.append('type', data.type);
+      formData.append('branch_id', 1);
+
+      EditDecision({id:Edit.id,formData:formData})
+      reset()
+      handleCloseEdit()
+
+   };
 
    const {
     control,
@@ -166,7 +179,6 @@ export default function Penalties({DataDecision,id}) {
         },
       });
 
-      console.log('API Response:', response);
     } catch (error) {
       console.error('API Error:', error);
     }
@@ -175,7 +187,6 @@ export default function Penalties({DataDecision,id}) {
 
 
   useEffect(() => {
-    console.log("Edit in useEffect:", Edit);
     setValue('dateTime', Edit?.dateTime || '');
     setValue('content', Edit?.content || '');
   }, [Edit, setValue]);
@@ -247,7 +258,7 @@ export default function Penalties({DataDecision,id}) {
         <Controller
                 name='content'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true ,minLength:8}}
                 render={({ field: { value, onChange, onBlur } }) => (
                   <CustomTextField
                     fullWidth
@@ -261,7 +272,8 @@ export default function Penalties({DataDecision,id}) {
                     multiline
                     rows={7}
                     placeholder='Description ...'
-
+                    error={Boolean(errors?.content)}
+                    helperText={errors?.content?.message}
                   />
                 )}
               />
@@ -342,6 +354,8 @@ export default function Penalties({DataDecision,id}) {
        <Controller
   name='dateTime'
   control={control}
+  defaultValue={defaultValues.dateTime} // Provide your default date value here
+
   rules={{ required: true }}
   render={({ field: { value, onChange, onBlur } }) => (
     <CustomTextField
@@ -359,7 +373,9 @@ export default function Penalties({DataDecision,id}) {
         <Controller
                 name='content'
                 control={control}
-                rules={{ required: true }}
+                defaultValue={defaultValues.content} // Provide your default date value here
+
+                rules={{ required: true ,minLength:8}}
                 render={({ field: { value, onChange, onBlur } }) => (
                   <CustomTextField
                     fullWidth
@@ -373,6 +389,8 @@ export default function Penalties({DataDecision,id}) {
                     multiline
                     rows={7}
                     placeholder='Description ...'
+                    error={Boolean(errors?.content)}
+                    helperText={errors?.content?.message}
 
                   />
                 )}
@@ -385,7 +403,7 @@ export default function Penalties({DataDecision,id}) {
         <Button  sx={{padding:"8px 24px 8px 24px",borderRadius:"4px",backgroundColor:"#dce1e6",color:"#8090a7",fontSize:"14px",fontWeight:"500","&:hover": {backgroundColor: "#dce1e6"}}} autoFocus onClick={handleCloseEdit}>
         Cancel
         </Button>
-        <Button type='submit' sx={{backgroundColor:"#6ab2df",padding:"8px 34px 8px 34px",borderRadius:"4px",fontWeight:"500",color:"#fff",fontSize:"14px","&:hover": {backgroundColor: "#6ab2df"}}} autoFocus>
+        <Button type='submit' sx={{backgroundColor:"#6ab2df",padding:"8px 34px 8px 34px",borderRadius:"4px",fontWeight:"500",color:"#fff",fontSize:"14px","&:hover": {backgroundColor: "#6ab2df"}}} autoFocus onClick={handleSubmit(onSubmit2)}>
         Edit
         </Button>
       </DialogActions>

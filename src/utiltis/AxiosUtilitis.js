@@ -12,8 +12,9 @@ export const request = async ({ url, params = {}, ...rest }) => {
   const onSuccess = response => response;
 
   const onError = error => {
-    console.log("🚀 ~ onError ~ error:", error)
-     alert(error)
+    showErrorToast(error)
+
+    //  alert(error)
 
 
     //   const errorMessage =

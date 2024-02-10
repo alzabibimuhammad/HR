@@ -31,7 +31,6 @@ export default function View({ id }) {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current
   })
-  console.log('🚀 ~ handleDownloadClick ~ data:', data)
 
   const handleDownloadClick = () => {
     const downloadLink = document.createElement('a')

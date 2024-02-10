@@ -77,7 +77,8 @@ export default function Account({onDataChange,Controller,control,errors}) {
                 fullWidth
                 type='email'
                 size='small'
-
+                error={Boolean(errors.email)}
+      {...(errors.email && { helperText: errors.email.message })}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>

@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 export default function Employment({onDataChange,Controller,control,errors}) {
   const [contract, setContract] = useState(null);
   const {t} = useTranslation()
+
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -88,6 +89,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
                 fullWidth
                 error={Boolean(errors.salary)}
                 {...(errors.salary && { helperText: errors.salary.message })}
+
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2}  >
@@ -159,8 +161,8 @@ export default function Employment({onDataChange,Controller,control,errors}) {
         defaultValue={field.secretariats}
         render={({ field }) => (
           <TextField
-          error={Boolean(errors?.secretariats?.[index]?.secretariats)}
-          {...(errors?.secretariats?.[index]?.secretariats && { helperText: errors?.secretariats?.[index]?.secretariats.message })}
+          error={Boolean(errors?.secretariats?.[index]?.object)}
+          {...(errors?.secretariats?.[index]?.object && { helperText: errors?.secretariats?.[index]?.object.message })}
             {...field}
             fullWidth
             size='small'
@@ -178,8 +180,8 @@ export default function Employment({onDataChange,Controller,control,errors}) {
         <TextField
           {...field}
           fullWidth
-          error={Boolean(errors?.secretariats?.[index]?.deliveryDate)}
-          {...(errors?.secretariats?.[index]?.deliveryDate && { helperText: errors?.secretariats?.[index]?.deliveryDate.message })}
+          error={Boolean(errors?.secretariats?.[index]?.delivery_date)}
+          {...(errors?.secretariats?.[index]?.delivery_date && { helperText: errors?.secretariats?.[index]?.delivery_date.message })}
           size='small'
           label={
             <Stack direction={'row'} spacing={2}>

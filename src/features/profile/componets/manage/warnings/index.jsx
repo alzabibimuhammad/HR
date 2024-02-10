@@ -36,7 +36,6 @@ export default function Warnings({DataDecision,id}) {
   const [openEdit, setOpenEdit] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
   const [Edit , setEdit] = useState({})
-  console.log("🚀 ~ Warnings ~ Edit:", Edit)
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -80,7 +79,6 @@ export default function Warnings({DataDecision,id}) {
   }));
 
   const handleClickOpenEdit = (dataRow) => {
-  console.log("🚀 ~ handleClickOpenEdit ~ dataRow:", dataRow)
 
     setOpenEdit(true);
     setEdit(dataRow)
@@ -121,7 +119,6 @@ export default function Warnings({DataDecision,id}) {
 
 
    const onSubmit = async (data) => {
-   console.log("🚀 ~ onSubmit ~ data:", Edit)
 
      const formData = new FormData();
      formData.append('dateTime', data.dateTime);
@@ -136,20 +133,19 @@ export default function Warnings({DataDecision,id}) {
   };
 
   const onSubmit2 = async (data) => {
-    console.log("🚀 ~ onSubmit ~ data:", Edit.id)
- 
+
       const formData = new FormData();
       formData.append('dateTime', data.dateTime);
       formData.append('content', data.content);
       formData.append('user_id', data.user_id);
       formData.append('type', data.type);
       formData.append('branch_id', 1);
-      
+
       EditDecision({id:Edit.id,formData:formData})
       reset()
       handleCloseEdit()
- 
- 
+
+
    };
 
    const {
@@ -166,48 +162,10 @@ export default function Warnings({DataDecision,id}) {
   });
 
 
-  // const handleButtonClick =  (event) => {
-
-  //   event.preventDefault()
-
-  //   EditDecision({id:idUser,data:{
-  //     dateTime:event.target[0].value,
-  //     content:event.target[1].value,
-  //     user_id:idUser,
-  //     type:'warning'
-  //   }});
-
-
-
-  // };
-
-
-  const handleButtonClick =  (event,id) => {
-    event.preventDefault();
-    console.log("🚀 ~ handleButtonClick ~ id:", id)
-
-
-    // try {
-    //   const response =  EditDecision({
-    //     id: dataRow?.id,
-    //     data: {
-    //       dateTime: event.target[0].value,
-    //       content: event.target[1].value,
-    //       user_id: idUser,
-    //       type: 'warning',
-    //     },
-    //   });
-
-    //   console.log('API Response:', response);
-    // } catch (error) {
-    //   console.error('API Error:', error);
-    // }
-  };
 
 
 
   useEffect(() => {
-    console.log("Edit in useEffect:", Edit);
     setValue('dateTime', Edit?.dateTime || '');
     setValue('content', Edit?.content || '');
   }, [Edit, setValue]);
@@ -278,7 +236,7 @@ export default function Warnings({DataDecision,id}) {
         <Controller
                 name='content'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true,minLength: 8 }}
                 render={({ field: { value, onChange, onBlur } }) => (
                   <CustomTextField
                     fullWidth
@@ -292,6 +250,8 @@ export default function Warnings({DataDecision,id}) {
                     multiline
                     rows={7}
                     placeholder='Description ...'
+                    error={Boolean(errors?.content)}
+                    helperText={errors?.content?.message}
 
                   />
                 )}
@@ -367,7 +327,7 @@ export default function Warnings({DataDecision,id}) {
       <DialogTitle sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
       Edit Warning
       </DialogTitle>
-      
+
       <DialogContent sx={{width:"100vh"}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
         <Controller
@@ -391,7 +351,7 @@ export default function Warnings({DataDecision,id}) {
         <Controller
                 name='content'
                 control={control}
-                rules={{ required: true }}
+                rules={{ required: true ,minLength:8}}
                 defaultValue={defaultValues.content}
                 render={({ field: { value, onChange, onBlur } }) => (
                   <CustomTextField
@@ -406,6 +366,8 @@ export default function Warnings({DataDecision,id}) {
                     multiline
                     rows={7}
                     placeholder='Description ...'
+                    error={Boolean(errors?.content)}
+                    helperText={errors?.content?.message}
 
                   />
                 )}

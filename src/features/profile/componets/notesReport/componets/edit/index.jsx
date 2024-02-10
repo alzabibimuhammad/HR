@@ -39,7 +39,6 @@ export default function EditNote({oldNote, open, setOpen }) {
   }
   const handleSubmit = event => {
     event.preventDefault()
-    console.log('submit');
     EditNote({id:oldNote?.id,content:event.target[0].value})
     setOpen(false)
 

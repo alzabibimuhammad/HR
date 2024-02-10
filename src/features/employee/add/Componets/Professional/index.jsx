@@ -7,7 +7,7 @@ import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch'
 import useSelectInput from 'src/pages/employees/add/hook/useSelectInput'
 import useSelectLevel from 'src/pages/employees/add/hook/useSelectLevel'
 
-export default function Professional({ onDataChange, Controller, control }) {
+export default function Professional({ onDataChange, Controller, control,errors }) {
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
   }
@@ -58,6 +58,8 @@ export default function Professional({ onDataChange, Controller, control }) {
                 {...field}
                 select
                 fullWidth
+                error={Boolean(errors?.branch_id)}
+                helperText={errors?.branch_id?.message}
                 defaultValue={'Branch'}
                 SelectProps={{
                   value: field.value,
@@ -90,6 +92,8 @@ export default function Professional({ onDataChange, Controller, control }) {
                 {...field}
                 select
                 fullWidth
+                error={Boolean(errors?.specialization)}
+      helperText={errors?.specialization?.message}
                 defaultValue='work specialization'
                 SelectProps={{
                   value: field.value,
@@ -125,6 +129,8 @@ export default function Professional({ onDataChange, Controller, control }) {
                 {...field}
                 select
                 fullWidth
+                error={Boolean(errors?.level)}
+                helperText={errors?.level?.message}
                 defaultValue='Level'
                 SelectProps={{
                   value: field.value,
@@ -156,6 +162,8 @@ export default function Professional({ onDataChange, Controller, control }) {
                 {...field}
                 select
                 fullWidth
+                error={Boolean(errors?.department_id)}
+                helperText={errors?.department_id?.message}
                 defaultValue='Team'
                 SelectProps={{
                   value: field.value,

@@ -13,6 +13,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
 
 
   const {t} = useTranslation()
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "emergency_contact"
@@ -25,6 +26,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
   const handleRemoveClick = (index) => {
     remove(index);
   };
+
 
   return (
     <Card >
@@ -62,8 +64,7 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
                     variant="outlined"
                     fullWidth
                     size="small"
-                    error={Boolean(errors?.emergencycontact?.[index]?.address)}
-                    {...(errors?.emergencycontact?.[index]?.address && { helperText: errors?.emergencycontact?.[index]?.address.message })}
+
                     />
                 )}
               />
@@ -80,8 +81,8 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
                     variant="outlined"
                     fullWidth
                     size="small"
-                    error={Boolean(errors?.emergencycontact?.[index]?.name)}
-                    {...(errors?.emergencycontact?.[index]?.name && { helperText: errors?.emergencycontact?.[index]?.name.message })}
+                    error={Boolean(errors?.emergency_contact?.[index]?.name)}
+                    {...(errors?.emergency_contact?.[index]?.name && { helperText: errors?.emergency_contact?.[index]?.name.message })}
 
                   />
                 )}
@@ -99,8 +100,9 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
                     variant="outlined"
                     fullWidth
                     size="small"
-                    error={Boolean(errors?.emergencycontact?.[index]?.phonenumber)}
-                    {...(errors?.emergencycontact?.[index]?.phonenumber && { helperText: errors?.emergencycontact?.[index]?.phonenumber.message })}
+                    error={Boolean(errors?.emergency_contact?.[index]?.phonenumber)}
+                    {...(errors?.emergency_contact?.[index]?.phonenumber && { helperText: errors?.emergency_contact?.[index]?.phonenumber.message })}
+
                   />
                 )}
               />
@@ -117,8 +119,8 @@ export default function EmergencyContact({ onDataChange, Controller, control , e
                     variant="outlined"
                     fullWidth
                     size="small"
-                    error={Boolean(errors?.emergencycontact?.[index]?.email)}
-                    {...(errors?.emergencycontact?.[index]?.email && { helperText: errors?.emergencycontact?.[index]?.email.message })}
+                    error={Boolean(errors?.emergency_contact?.[index]?.email)}
+                    {...(errors?.emergency_contact?.[index]?.email && { helperText: errors?.emergency_contact?.[index]?.email.message })}
                   />
                 )}
               />

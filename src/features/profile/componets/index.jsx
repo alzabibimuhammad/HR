@@ -87,7 +87,6 @@ const Profiles = ({ tab, data }) => {
 
   const {data:DataDecision}=useGetDecision(id);
 
-  console.log("🚀 ~ Mange ~ DataDecision:", DataDecision)
 
 
 
@@ -169,7 +168,7 @@ const Profiles = ({ tab, data }) => {
             </Stack>
           </Stack>
         </TabPanel>
-        
+
         <TabPanel value='3'>
           {DataDecision ? <Mange id={id} DataDecision={DataDecision} /> : null}
         </TabPanel>

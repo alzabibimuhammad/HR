@@ -19,14 +19,12 @@ import useGetAllContracts from 'src/features/Contracts/list/Hooks/useGetAllContr
 
 const RatingTabel = ({rows}) => {
   const{data,isloading}=useGetRattingtype()
-  console.log("🚀 ~ useUserColumns ~ data:", data?.data?.data)
   const columns = useUserColumns();
   const { t } = useTranslation()
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const {data:rateData, isloading:isloadingData}= useGetRatingById()
-  console.log("🚀 ~ RatingTabel ~ rateData:", rateData)
 
 const[ChoosedDate,setChooseDate]=useState()
 const[RatingDate,setRatingData]=useState()
@@ -72,14 +70,13 @@ const store = useSelector(state => state.user)
   const arr1 =data?.data?.data
 
 const arr2 = store?.RatingUser?.data?.data?.user_rates
-console.log("🚀 ~ RatingTabel ~ arr2:", arr2)
 
 let output;
 
 
 if (!arr1 || !arr2) {
   console.error("Arrays cannot be empty");
-  
+
 } else {
   // Map rate_type_id to id
   const map = arr1.reduce((acc, obj) => {
@@ -106,8 +103,7 @@ if (!arr1 || !arr2) {
       return newObj;
   });
 
-  console.log(output);
-  
+
 }
 
 
@@ -153,9 +149,9 @@ if (!arr1 || !arr2) {
                 spacing={2}
               >
               <Typography sx={{ fontSize:'16px',marginTop:'5px' }} >{t("Filters")}</Typography>
-              
 
-     
+
+
                   <Button sx={{border:"1px solid"}} fullWidth onClick={handleOpen}>Select Date</Button>
       <Modal
         open={open}

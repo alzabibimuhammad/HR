@@ -53,6 +53,7 @@ members.forEach((user, index) => {
   formData.append(`users_array[${index}]`, user);
 });
 AddTeam(formData)
+handleDrawerClose()
 }
 
   return (
@@ -107,8 +108,8 @@ AddTeam(formData)
 
           <Box sx={{ display:'flex', width:'100%',padding:'10px'}} >
             <Stack sx={{ marginLeft:'50%' }} direction={'row'} spacing={2} >
-              <Button onClick={handleDrawerClose} sx={{ backgroundColor:'#DCE1E6',color:'#8090A7',borderRadius:'4px', padding: '8px 24px' }}>Cancle</Button>
-              <Button onClick={handlerSendData} sx={{ backgroundColor:'#6AB2DF',color:'#fff' ,borderRadius:'4px', padding: '8px 24px'}} >Add</Button>
+              <Button onClick={handleDrawerClose} sx={{ backgroundColor:'#DCE1E6',color:'#8090A7',borderRadius:'4px', padding: '8px 24px','&:hover': {backgroundColor: '#DCE1E6'} }}>Cancle</Button>
+              <Button onClick={handlerSendData} sx={{ backgroundColor:'#6AB2DF',color:'#fff' ,borderRadius:'4px', padding: '8px 24px', '&:hover': {backgroundColor: '#6AB2DF'}}} >Add</Button>
               </Stack>
           </Box>
 

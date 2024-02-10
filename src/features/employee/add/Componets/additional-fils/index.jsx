@@ -90,6 +90,8 @@ export default function AdditionalFiles({ onDataChange, Controller, control , er
                     size="small"
                     type="file"
                     accept=".pdf"
+                    error={Boolean(errors?.additionalfiles?.[index]?.file)}
+                    {...(errors?.additionalfiles?.[index]?.file && { helperText: errors?.additionalfiles?.[index]?.file.message })}
 
                     // onChange={(event) => handleFileChange(index, event)}
                   />

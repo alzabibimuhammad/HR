@@ -10,8 +10,10 @@ import { color } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 
 export default function Skills({onDataChange,Controller,control,handleRatingChange,handleLanguageChange,errors}) {
+
   const [degree, setDegree] = useState('');
   const {t} = useTranslation()
+
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -191,8 +193,8 @@ useEffect(()=>{
                     variant="outlined"
                     fullWidth
                     size="small"
-                    error={Boolean(errors?.education?.[index]?.study)}
-                    {...(errors?.education?.[index]?.study && { helperText: errors?.education?.[index]?.study.message })}
+                    error={Boolean(errors?.educations?.[index]?.study)}
+                    {...(errors?.educations?.[index]?.study && { helperText: errors?.educations?.[index]?.study.message })}
                     />
                     )}
                     />
@@ -216,6 +218,8 @@ useEffect(()=>{
                   variant="outlined"
                   fullWidth
                   size="small"
+                  error={Boolean(errors?.educations?.[index]?.degree)}
+                  {...(errors?.educations?.[index]?.degree && { helperText: errors?.educations?.[index]?.degree.message })}
                   >
                 <MenuItem value="Degree">{t("Degree")}</MenuItem>
                 <MenuItem value="bachelor">{t("Bachelor")}</MenuItem>
@@ -251,8 +255,8 @@ useEffect(()=>{
               <TextField
                 {...field}
                 fullWidth
-                error={Boolean(errors?.certificate?.[index]?.certificate)}
-                {...(errors?.certificate?.[index]?.certificate && { helperText: errors?.certificate?.[index]?.certificate.message })}
+                error={Boolean(errors.certificates && errors.certificates[index])}
+                helperText={errors.certificates && errors.certificates[index]?.message}
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2} >
@@ -292,8 +296,9 @@ useEffect(()=>{
               <TextField
                 {...field}
                 fullWidth
-                error={Boolean(errors?.experience?.[index]?.experience)}
-                {...(errors?.experience?.[index]?.experience && { helperText: errors?.experience?.[index]?.experience.message })}
+                error={Boolean(errors.experiences && errors.experiences[index])}
+                helperText={errors.experiences && errors.experiences[index]?.message}
+
                 size="small"
                 label={
                   <Stack direction={'row'} spacing={2}>
@@ -332,8 +337,7 @@ useEffect(()=>{
           <TextField
             {...field}
             fullWidth
-            error={Boolean(errors?.skills?.[index]?.skills)}
-            {...(errors?.skills?.[index]?.skills && { helperText: errors?.skills?.[index]?.skills.message })}
+
             size='small'
             label={
               <Stack direction={'row'} spacing={2}>
@@ -384,8 +388,7 @@ useEffect(()=>{
           <TextField
             {...field}
             fullWidth
-            error={Boolean(errors?.languages?.[index]?.languages)}
-            {...(errors?.languages?.[index]?.languages && { helperText: errors?.languages?.[index]?.languages.message })}
+
             size='small'
             label={
               <Stack direction={'row'} spacing={2}>
@@ -396,7 +399,9 @@ useEffect(()=>{
                   {t('Language')}
                 </Box>
               </Stack>
+
             }
+
           />
         )}
       />
@@ -404,6 +409,7 @@ useEffect(()=>{
       <Rating
               name={`languages[${index}].rate`}
               value={field.rate}
+
               onChange={(event, newValue) => {
                 handleLanguageChange(index, newValue);
               }}

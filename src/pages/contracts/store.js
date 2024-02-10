@@ -47,7 +47,6 @@ export const addContract = createAsyncThunk('ContractsStore/addContract', async 
       }
     })
     showSuccesToast(response.data.message)
-    console.log(response.data.message);
 
     return response.data
   } catch (error) {

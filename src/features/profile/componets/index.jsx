@@ -86,7 +86,6 @@ const Profiles = ({ tab, data }) => {
 
   const {data:DataDecision}=useGetDecision(id);
 
-  console.log("🚀 ~ Mange ~ DataDecision:", DataDecision)
 
 
 

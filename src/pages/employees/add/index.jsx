@@ -17,6 +17,7 @@ import { Schema } from './validation'
 import { useAddUsers } from './hook/useAddUsers'
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next'
+import { showErrorToast } from 'src/utiltis/showErrorToast'
 
 export default function Add() {
   const [snapshotData, setSnapshotData] = useState({})
@@ -63,9 +64,10 @@ export default function Add() {
     defaultValues,
     mode: 'onBlur',
 
-      // resolver: yupResolver(Schema),
+       resolver: yupResolver(Schema),
 
-  })
+      })
+
 
   const handleDataSubmit = data => {
     try {
@@ -76,7 +78,8 @@ export default function Add() {
 
       addUsers(data)
     } catch (error) {
-      console.log(errors);
+      showErrorToast(error.message)
+
     }
   }
 

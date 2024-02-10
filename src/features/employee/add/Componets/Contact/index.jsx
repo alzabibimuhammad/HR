@@ -7,8 +7,10 @@ import ListItemSelected from 'src/views/components/list/ListItemSelected';
 import IconButton from 'src/@core/theme/overrides/icon-button';
 import email from 'src/store/apps/email';
 import { useTranslation } from 'react-i18next';
+import { ContactSchema } from 'src/pages/employees/add/validation';
 
-export default function Contact({onDataChange,Controller,control,defaultValues }) {
+
+export default function Contact({onDataChange,Controller,control,defaultValues ,errors}) {
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -97,6 +99,8 @@ React.useEffect(() => {
                 variant="outlined"
                 fullWidth
                 size='small'
+                error={Boolean(errors.address)}
+                helperText={errors.address?.message}
               />
             )}
           />
@@ -117,7 +121,8 @@ React.useEffect(() => {
                 variant="outlined"
                 fullWidth
                 size='small'
-
+                error={Boolean(errors?.contacts?.phonenumbers?.[index])}
+                {...(errors?.contacts?.phonenumbers?.[index] && { helperText: errors?.contacts?.phonenumbers?.[index].message })}
 
               />
             )}
@@ -151,6 +156,8 @@ React.useEffect(() => {
                 variant="outlined"
                 fullWidth
                 size='small'
+                error={Boolean(errors?.contacts?.emails?.[index])}
+                {...(errors?.contacts?.emails?.[index] && { helperText: errors?.contacts?.emails?.[index].message })}
               />
             )}
           />

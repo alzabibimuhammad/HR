@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function Info({onDataChange,Controller,control,errors}) {
     const {t} = useTranslation()
+
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
@@ -81,8 +82,8 @@ export default function Info({onDataChange,Controller,control,errors}) {
               <TextField
                 {...field}
                 fullWidth
-                error={Boolean(errors.birth_date)}
-                {...(errors.birth_date && { helperText: errors.birth_date.message })}
+                error={Boolean(errors?.birth_date)}
+                {...(errors?.birth_date && { helperText: errors?.birth_date.message })}
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2} >

@@ -12,13 +12,11 @@ export const useAddUsers = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries("AddUsers");
       showSuccesToast("Add Employee ",data?.data?.success)
-      console.log("onSuccess",data);
     },
     onError: (data) => {
-      console.log("🚀 ~ useAddUsers ~ data:", data.response.data.message)
       queryClient.invalidateQueries("AddUsers");
-      showErrorToast("Add Employee ",data.response.data.message)
-      console.log("onSuccess",data);
+      showErrorToast(error.message)
+
     }
   });
 };

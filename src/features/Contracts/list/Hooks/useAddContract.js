@@ -10,12 +10,10 @@ export const useAddContract = () => {
   return useMutation({
     mutationFn:AddContract,
     onSuccess: (data) => {
-      console.log("🚀 ~ useAddContract ~ data:", data.data.success)
       queryClient.invalidateQueries("contracts");
       showSuccesToast("Add Contract ",data?.data?.success)
     },
     onError(error){
-      console.log("🚀 ~ onError ~ error:", error)
       showErrorToast("Add Contract ",data?.data?.success)
     }
   });

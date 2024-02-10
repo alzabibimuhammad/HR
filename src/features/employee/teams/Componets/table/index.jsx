@@ -24,6 +24,7 @@ import AlertDialog from '../dialog'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import AlertDialogMember from '../dialogTeamUser'
+import EditeForm from '../EditeForm'
 
 function createData(id, name, user) {
   return {
@@ -33,7 +34,7 @@ function createData(id, name, user) {
   }
 }
 
-export default function CollapsibleTable(Data) {
+export default function CollapsibleTable(Data,setEditData) {
   function Row(props) {
     const { row } = props
     const [open, setOpen] = useState(false)
@@ -45,9 +46,11 @@ export default function CollapsibleTable(Data) {
     const [isMemberPopupOpen, setIsMemberPopupOpen] = useState(false)
     const [memberdeleteId, setMemberDeleteId] = useState(null)
 
+    const [DrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
+
     const handleEditClick = row => {
-      setEditData(row)
-      setIsDrawerOpenEdit(true)
+      // setEditData(row)
+      setOpenParent(true)
     }
 
     const handleClickOpen = params => {
@@ -119,11 +122,14 @@ export default function CollapsibleTable(Data) {
                   variant='contained'
                   color='primary'
                   size='small'
-                  onClick={() => handleEditClick(params.row)}
+                  onClick={() => handleEditClick(row)}
                 >
+                  {console.log(row)}
                   Edit
                 </BorderColorOutlinedIcon>
               </IconButton>
+
+              <EditeForm  open={openParent} setOpenParent={setOpenParent} Data={row}/>
 
               <IconButton onClick={() => handleClickOpen(row.id)}>
                 <DeleteOutlinedIcon style={{ color: '#8090A7' }} variant color='error' size='small'>
@@ -157,7 +163,7 @@ export default function CollapsibleTable(Data) {
                         </TableCell>
                         <TableCell>
                           <Stack direction={'row'} spacing={2}>
-                            <Typography>{user.first_name}</Typography>
+                            <Typography >{user.first_name}</Typography>
                             <Typography>{user.last_name}</Typography>
                           </Stack>
                         </TableCell>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, CardContent, MenuItem, TextField } from '@mui/material'
+import { Card, CardContent, MenuItem, TextField, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { Box, Stack } from '@mui/system'
@@ -55,7 +55,9 @@ const ReviewFeature = ({ Data }) => {
     <Stack height={'100%'}>
       <Card>
         <CardContent>
-
+        <Typography variant='h4' paddingBottom={'10px'}>
+        {t("Reviews List")}
+        </Typography>
           <Stack direction={'column'} spacing={3} >
 
               <Stack direction={{sm:'row',xs:'column'}} spacing={6} >

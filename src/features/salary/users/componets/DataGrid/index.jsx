@@ -76,8 +76,10 @@ const SalaryDataGrid = ({ rows }) => {
       setfdata(rows)
     } else {
       searchData = rows?.data?.data?.filter(element => {
+
         if (element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase())) {
           return element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase())
+
         } else if (element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase())) {
           return element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase())
         } else if (element?.role?.toLowerCase()?.includes(searchText.toLowerCase())) {
@@ -132,12 +134,14 @@ const SalaryDataGrid = ({ rows }) => {
 
       <Card>
         <CardContent>
+        <Typography variant='h4' paddingBottom={'10px'}>
+        {t("Salaries List")}
+        </Typography>
           <Stack
             direction={{ xs: 'column', sm: 'column' }}
             spacing={3}
             alignContent={'center'}
             justifyContent={'center'}
-            my={'30px'}
           >
             <TextField
               placeholder={t('Search')}

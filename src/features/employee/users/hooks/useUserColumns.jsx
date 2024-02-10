@@ -1,17 +1,15 @@
 // Import necessary components and libraries
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import DrawerForm from '../Componets/DrawerForm/index';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { Avatar, Button, IconButton, Rating, Typography } from '@mui/material';
+import { Avatar, IconButton, Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import AlertDialog from '../componets/dialog';
+import AlertDialogDeleteUser from '../componets/dialog';
 
 const useUserColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false);
@@ -34,8 +32,7 @@ const useUserColumns = () => {
   };
 
   const handleClickOpen = (params) => {
-    const { id } = params;
-    setDeleteId(id);
+    setDeleteId(params);
     setIsDeletePopupOpen(true);
 
 
@@ -91,19 +88,7 @@ const useUserColumns = () => {
     },
 
     },
-    {
-      field: 'specialization',
-      headerName: t("Team"),
-      disableClickEventBubbling: true,
-      flex:1,
-      renderCell: (params) => {
-        return (
-          <Typography sx={{ fontSize:'14px' }} >
-          {params?.row?.specialization}
-        </Typography>
-      );
-    },
-    },
+
 
 
 
@@ -133,7 +118,7 @@ const useUserColumns = () => {
               </Box>
 
           </Stack>
-            {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
+            {isDeletePopupOpen && <AlertDialogDeleteUser id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
 
             <Box>
               <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />

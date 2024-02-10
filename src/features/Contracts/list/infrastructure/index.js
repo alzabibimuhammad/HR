@@ -8,6 +8,7 @@ export const ContractsData = elements => {
       phoneNumber: element?.phoneNumber,
       status:element?.status,
       employee:element?.user?.first_name,
+      employeeLastName:element?.user?.last_name,
       role: element?.user?.role
     }
   })

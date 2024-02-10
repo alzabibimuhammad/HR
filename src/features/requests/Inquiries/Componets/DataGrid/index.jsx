@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Card, CardHeader, CardContent, MenuItem, Divider } from '@mui/material';
+import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 
@@ -75,8 +75,10 @@ const Inquiries = ({ rows }) => {
       <Grid container spacing={4}>
         <Grid  item xs={12}>
           <Card>
-            <CardHeader title={t("Filters")} />
             <CardContent>
+            <Typography  variant='h4' paddingBottom={'10px'}>
+        {t("Inquiries List")}
+        </Typography>
               <Stack
                 direction={{ sm:'row',xs:'column' }}
                 width={'100%'}

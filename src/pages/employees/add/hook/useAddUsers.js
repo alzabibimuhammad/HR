@@ -13,9 +13,8 @@ export const useAddUsers = () => {
       queryClient.invalidateQueries("AddUsers");
       showSuccesToast("Add Employee ",data?.data?.success)
     },
-    onError: (data) => {
-      queryClient.invalidateQueries("AddUsers");
-      showErrorToast(error.message)
+    onError: (error) => {
+      showErrorToast("There is an error in the input. Please correct the error and try again ..",error.message)
 
     }
   });

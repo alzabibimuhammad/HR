@@ -6,9 +6,10 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useTranslation } from 'react-i18next';
 
-export default function Deductions() {
+export default function Deductions({Controller,control}) {
   const [selectedOption, setSelectedOption] = useState(''); // State to keep track of the selected option
   const {t} = useTranslation()
+
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };

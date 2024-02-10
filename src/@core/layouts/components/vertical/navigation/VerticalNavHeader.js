@@ -14,6 +14,7 @@ import Icon from 'src/@core/components/icon'
 // ** Configs
 import themeConfig from 'src/configs/themeConfig'
 import { Stack } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 // ** Styled Components
 const MenuHeaderWrapper = styled(Box)(({ theme }) => ({
@@ -54,6 +55,7 @@ const VerticalNavHeader = props => {
 
   // ** Hooks & Vars
   const theme = useTheme()
+  const {t} = useTranslation()
   const { navCollapsed } = settings
   const menuCollapsedStyles = navCollapsed && !navHover ? { opacity: 0 } : { opacity: 1 }
 
@@ -89,7 +91,7 @@ const VerticalNavHeader = props => {
 <img width="30px" height="30px"  src='/images/policesIcon/pageLogo/logo.svg'/>
 
             <Typography sx={{fontWeight:"700",color:"#8090a7",fontSize:"16px"}}>
-             Company Name
+             {t("Company Name")}
 
             </Typography>
 

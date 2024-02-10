@@ -10,8 +10,16 @@ export const Schema = yup.object().shape({
   last_name: yup.string().required('last_name is required').min(3, ' min 3 char').max(20, '20 max char'),
   email: yup.string().email('Invalid email address').required('Email is required'),
 
-   password: yup.string().matches(/^\d{4,18}$/ ,'password is required'),
-   confirm_password: yup.string().oneOf([yup.ref('password'), null], 'password in not matches').required(),
+  password: yup
+    .string()
+    .required('Password is required')
+    .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/, 'Password must contain at least 8 characters, one letter, and one number'),
+  confirm_password: yup
+    .string()
+    .required('Confirm Password is required')
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+
+
    birth_date: yup.string().matches(/^\d{4}-\d{2}-\d{2}$/,'Date of registration is required exampe:2020-02-06'),
    nationalID: yup.number().integer().positive().min(10000000000).max(99999999999).required(),
    military_situation: yup.string().required(),

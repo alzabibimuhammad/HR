@@ -59,12 +59,13 @@ export default function Add() {
     getValues,
     setValue,
     register,
+    watch,
     formState: { errors }
   } = useForm({
     defaultValues,
     mode: 'onBlur',
 
-       resolver: yupResolver(Schema),
+    resolver: yupResolver(Schema), // تحديد يوب ريزولفر هنا
 
       })
 
@@ -153,6 +154,8 @@ export default function Add() {
               setError={setError}
               control={control}
               Controller={Controller}
+              watch={watch}
+              register={register}
             />
           </Box>
           <Box>
@@ -162,6 +165,8 @@ export default function Add() {
               setError={setError}
               control={control}
               Controller={Controller}
+              passwordValue={getValues('password')} // Pass the password value
+
             />
           </Box>
           <Box>

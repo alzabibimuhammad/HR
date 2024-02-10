@@ -34,7 +34,7 @@ const List = ({ rows }) => {
   };
 
   useEffect(()=>{
-    const searchData = data?.data?.data?.filter(val => {
+    const searchData = data?.data?.data?.data?.filter(val => {
       return (
         val?.user?.first_name.toLowerCase().includes(searchText) ||
         val?.user?.last_name.toLowerCase().includes(searchText)

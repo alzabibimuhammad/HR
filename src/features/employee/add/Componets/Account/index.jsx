@@ -99,44 +99,42 @@ export default function Account({onDataChange,Controller,control,errors}) {
 
 
 
-            <Controller
-            name={`password`}
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                  fullWidth
-                  size='small'
-                  error={Boolean(errors.password)}
-                {...(errors.password && { helperText: errors.password.message })}
-                  type={showPassword ? 'text' : 'password'}
-                  onChange={handlePasswordChange}
-
-                  label={
-                    <Stack direction={'row'} spacing={2}>
-                      <Box>
-                        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
-                      </Box>
-                      <Box>
-                        {t('Password')}
-                      </Box>
-                    </Stack>
-                  }
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={handleTogglePasswordVisibility}
-                          edge="end"
-                        >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-            ) }
-            />
+<Controller
+  name={`password`}
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      fullWidth
+      size='small'
+      type={showPassword ? 'text' : 'password'}
+      error={Boolean(errors.password)}
+      helperText={errors.password?.message}
+      label={
+        <Stack direction={'row'} spacing={2}>
+          <Box>
+            <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
+          </Box>
+          <Box>
+            {t('Password')}
+          </Box>
+        </Stack>
+      }
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              onClick={handleTogglePasswordVisibility}
+              edge="end"
+            >
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+    />
+  )}
+/>
 
             <Controller
             name={`confirm_password`}
@@ -146,10 +144,10 @@ export default function Account({onDataChange,Controller,control,errors}) {
               {...field}
               fullWidth
               size="small"
-              onChange={handleConfirmationChange}
               type={showConfirm ? 'text' : 'password'}
-              error={!passwordsMatch} // Fix: Set error based on the negation of passwordsMatch
-              {...(errors.confirm_password && { helperText: errors.confirm_password.message })}
+
+              error={Boolean(errors.confirm_password)}
+              helperText={errors.confirm_password?.message}
 
               label={
                 <Stack direction={'row'} spacing={2}>

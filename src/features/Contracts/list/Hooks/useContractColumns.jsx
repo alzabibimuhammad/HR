@@ -73,7 +73,7 @@ const useContractColumns = () => {
         return (
           <Box>
             <Typography sx={{ fontSize:'14px' }} >
-              {params?.row?.employee}
+              {params?.row?.employee} {params?.row?.employeeLastName}
             </Typography>
           </Box>
         )

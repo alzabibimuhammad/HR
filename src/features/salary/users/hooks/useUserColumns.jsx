@@ -47,7 +47,7 @@ const useSalaryColumns = () => {
     },
     {
       field: 'overtime',
-      headerName: t("base"),
+      headerName: t("overtime"),
       disableClickEventBubbling: true,
       flex:1,
 

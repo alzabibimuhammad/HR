@@ -5,7 +5,7 @@ export const UsersData = elements => {
       first_name:element?.first_name,
       last_name: element?.last_name,
       role: element?.role,
-      specialization:element?.department?.name,
+      specialization:element?.specialization,
     }
   })
 }

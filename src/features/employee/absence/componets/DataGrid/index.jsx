@@ -88,6 +88,9 @@ const Absence = ({ rows }) => {
     <>
       <Card>
         <CardContent>
+        <Typography variant='h4' paddingBottom={'10px'}>
+        {t("Absence List")}
+        </Typography>
           <Stack
             direction={{ xs: 'column', sm: 'column' }}
             spacing={3}
@@ -95,7 +98,6 @@ const Absence = ({ rows }) => {
             justifyContent={'center'}
           >
             <Stack direction={{ xs: 'column', sm: 'column' }} spacing={2}>
-              <Typography sx={{ fontSize: '16px', marginTop: '5px' }}>{t('Search')}</Typography>
 
               <Box width={'100%'}>
                 <TextField

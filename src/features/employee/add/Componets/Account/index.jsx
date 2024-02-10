@@ -28,8 +28,10 @@ export default function Account({onDataChange,Controller,control,errors}) {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [password, setPassword] = useState(true);
+  const [password, setPassword] = useState();
+
   const [passwordsMatch, setpasswordsMatch] = useState(true);
+
 
 
   const handleFieldChange = (field, value) => {
@@ -45,18 +47,18 @@ export default function Account({onDataChange,Controller,control,errors}) {
   };
 
   const handlePasswordChange=value=>{
-      setPassword(value)
+      setPassword(value.target.value)
   }
 
-  const handleConfirmationChange=value=>{
-
-    if(value == password){
-      setpasswordsMatch(true)
-      handleFieldChange('password',value)
+  const handleConfirmationChange = (value) => {
+    if (value.target.value === password) {
+      setpasswordsMatch(true);
+      handleFieldChange('password', value);
+    } else {
+      setpasswordsMatch(false);
     }
-    else
-      setpasswordsMatch(false)
-  }
+  };
+
 
 
   return (
@@ -108,6 +110,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
                   error={Boolean(errors.password)}
                 {...(errors.password && { helperText: errors.password.message })}
                   type={showPassword ? 'text' : 'password'}
+                  onChange={handlePasswordChange}
 
                   label={
                     <Stack direction={'row'} spacing={2}>
@@ -140,30 +143,33 @@ export default function Account({onDataChange,Controller,control,errors}) {
             control={control}
             render={({ field }) => (
               <TextField
-                {...field}
-            fullWidth
-            size="small"
-            error={Boolean(errors.confirm_password)}
-            {...(errors.confirm_password && { helperText: errors.confirm_password.message })}
+              {...field}
+              fullWidth
+              size="small"
+              onChange={handleConfirmationChange}
+              type={showConfirm ? 'text' : 'password'}
+              error={!passwordsMatch} // Fix: Set error based on the negation of passwordsMatch
+              {...(errors.confirm_password && { helperText: errors.confirm_password.message })}
 
-            label={
-              <Stack direction={'row'} spacing={2}>
-                <Box>
-                  <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
-                </Box>
-                <Box>{t('Confirm Password')}</Box>
-              </Stack>
-            }
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleToggleConfirmVisibility} edge="end">
-                    {showConfirm ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+              label={
+                <Stack direction={'row'} spacing={2}>
+                  <Box>
+                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
+                  </Box>
+                  <Box>{t('Confirm Password')}</Box>
+                </Stack>
+              }
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleToggleConfirmVisibility} edge="end">
+                      {showConfirm ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+
             )}
             />
 

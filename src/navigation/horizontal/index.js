@@ -15,7 +15,7 @@ const navigation = () => {
         icon: 'tabler:layout-grid-add',
         title: 'Profile',
         path:'/profile/[id]'
-      }
+      },
 
 
   ]

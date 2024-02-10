@@ -89,11 +89,8 @@ const Users = ({ rows }) => {
         else if( element?.role?.toLowerCase()?.includes(searchText.toLowerCase()) ){
           return element?.role?.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if(element?.email?.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.email?.toLowerCase()?.includes(searchText.toLowerCase());
-        }
-        else if(element?.department?.name?.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.department?.name?.toLowerCase()?.includes(searchText.toLowerCase());
+        else if(element?.specialization?.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.specialization?.toLowerCase()?.includes(searchText.toLowerCase());
         }
       });
 
@@ -203,12 +200,14 @@ const Users = ({ rows }) => {
 
             <Card>
               <CardContent>
+              <Typography variant='h4' paddingBottom={'10px'}>
+        {t("Employees List")}
+        </Typography>
               <Stack
                 direction={{ xs: 'column', sm: 'column' }}
                 spacing={3}
                 alignContent={'center'}
                 justifyContent={'center'}
-                my={"30px"}
               >
 
             <TextField
@@ -270,22 +269,7 @@ const Users = ({ rows }) => {
                     <MenuItem value='Front_End'>{`${t("Front End")}`}</MenuItem>
                     <MenuItem value='Back_End'>{`${t("Back End")}`}</MenuItem>
                   </TextField>
-                  <TextField
-                    select
-                    fullWidth
-                    defaultValue='Team'
-                    SelectProps={{
-                      // value: department,
-                      displayEmpty: true,
 
-                    }}
-                    size='small'
-
-                  >
-                    <MenuItem value=''>{`${t("Team")}`}</MenuItem>
-                    <MenuItem value='active'>{`${t("active")}`}</MenuItem>
-                    <MenuItem value='not-active'>{`${t("not active")}`}</MenuItem>
-                  </TextField>
                   </Stack>
 
                 {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(fdata)|| []}    />: null }

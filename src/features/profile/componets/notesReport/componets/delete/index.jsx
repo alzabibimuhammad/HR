@@ -5,16 +5,14 @@ import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import useDeleteUser from "../../hooks/useDeleteUser";
+import { useDeleteNote } from "../../hooks/useDeleteNote";
 
-export default function AlertDialogDeleteUser({ id, open, handleClose }) {
-console.log("🚀 ~ AlertDialogDeleteUser ~ id:", id)
+export default function AlertDialogDeleteNote({ id, open, handleClose }) {
 
-
- const { mutate: DeleteUser, isLoading } = useDeleteUser();
+  const { mutate: deleteNote, isLoading } = useDeleteNote();
 
   const handleDeleteAPI = () => {
-    DeleteUser(id)
+      deleteNote(id)
       handleClose()
   };
 
@@ -47,13 +45,13 @@ console.log("🚀 ~ AlertDialogDeleteUser ~ id:", id)
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {"Are you sure you want to delete user?"}
+        {"Are you sure you want to delete note?"}
       </DialogTitle>
 
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
         <Button onClick={handleClose} style={{ color: '#B4B4B3' }}>Cancel</Button>
-        <Button  sx={{color:"#DF2E38"}}  onClick={()=>handleDeleteAPI()} autoFocus>
+        <Button  sx={{color:"#DF2E38"}}  onClick={handleDeleteAPI} autoFocus>
           Delete
         </Button>
       </DialogActions>

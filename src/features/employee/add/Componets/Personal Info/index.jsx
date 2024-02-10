@@ -14,6 +14,14 @@ export default function Info({onDataChange,Controller,control,errors}) {
   const [Marital, setMarital] = useState('');
   const [Gender, setGender] = useState('');
 
+  const date = new Date();
+
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+
+  const formattedDate = `${day}-${month}-${year}`;
+
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
     handleFieldChange('militaryStatus',e.target.value)
@@ -83,7 +91,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
                     <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgDate)}`}/>
                       </Box>
                       <Box>
-                        {t('Birth Date')}
+                        {t('Birth Date')} {formattedDate}
                     </Box>
                   </Stack>
                 }

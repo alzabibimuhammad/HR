@@ -76,7 +76,7 @@ const useUserColumns = () => {
     },
     {
       field: 'specialization',
-      headerName: t("SPECIALIZATION"),
+      headerName: t("Specialization"),
       disableClickEventBubbling: true,
       flex:1,
       renderCell: (params) => {

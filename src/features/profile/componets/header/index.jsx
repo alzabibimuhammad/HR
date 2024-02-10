@@ -55,6 +55,7 @@ const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
           <Box sx={{ marginTop:'5%',marginLeft:'3%' }} >
 
             <ProfilePicture src={ProfileData?.image} alt='profile-picture' />
+
             <TabsProfile
               value={value}
               onChange={handleChange}

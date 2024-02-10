@@ -9,6 +9,7 @@ import AlertDialogEdit from '../editDialog'
 import AddIcon from '@mui/icons-material/Add'
 import AlertDialogAdd from '../addDialog'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from 'src/hooks/useAuth'
 
 export default function ShowSetting() {
 
@@ -17,6 +18,7 @@ export default function ShowSetting() {
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
   const [isEditPopupOpen, setisEditPopupOpen] = useState(false)
   const [isAdd, setisAdd] = useState(false)
+  const { logout } = useAuth()
 
   const [branchRow, setBranch] = useState()
 
@@ -45,10 +47,18 @@ export default function ShowSetting() {
   const handleCloseAdd = _=>{
     setisAdd(false)
   }
+  const handleLogout=_=>{
+    logout()
+  }
 
   return (
     <>
-    <Stack direction={'row'} spacing={2} width={'100%'} flex={'end'} justifyContent={'end'} >
+    <Stack direction={'row'}  width={'100%'}  justifyContent={'space-between'} >
+
+    <Typography variant='h4' paddingBottom={'10px'}>
+        {t("Settings")}
+        </Typography>
+      <Stack direction={'row'} spacing={2}>
       <Button
         onClick={handleAdd}
         sx={{
@@ -63,6 +73,7 @@ export default function ShowSetting() {
         </Stack>
       </Button>
       <Button
+        onClick={handleLogout}
         sx={{
           color: '#fff',
           backgroundColor: '#DF2E38',
@@ -71,6 +82,7 @@ export default function ShowSetting() {
       >
         <Typography color={'#fff'} >{t("Logout")}</Typography>
     </Button>
+    </Stack>
       </Stack>
 
       <Grid marginTop={'0%'} container spacing={2}>

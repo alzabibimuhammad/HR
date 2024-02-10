@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,Typography } from "@mui/material";
-// import { useDeleteContract } from "../../Hooks/useDeleteContract";
 import { Box, Stack } from '@mui/system'
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import useDeleteUser from "../../hooks/useDeleteUser";
 
-export default function AlertDialog({ id, open, handleClose }) {
-//  const { mutate: deleteContract, isLoading } = useDeleteContract();
+export default function AlertDialogDeleteUser({ id, open, handleClose }) {
+console.log("🚀 ~ AlertDialogDeleteUser ~ id:", id)
+
+
+ const { mutate: DeleteUser, isLoading } = useDeleteUser();
 
   const handleDeleteAPI = () => {
-    deleteContract(id)
+    DeleteUser(id)
       handleClose()
   };
 
@@ -44,7 +47,7 @@ export default function AlertDialog({ id, open, handleClose }) {
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {"Are you sure you want to delete Contract?"}
+        {"Are you sure you want to delete user?"}
       </DialogTitle>
 
 

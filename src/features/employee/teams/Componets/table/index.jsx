@@ -215,6 +215,9 @@ export default function CollapsibleTable(Data) {
 
   return (
     <>
+                  <Typography variant='h4' paddingBottom={'10px'}>
+        {t("Teams")}
+        </Typography>
       <Stack spacing={{ xs:2 }} direction={{ sm:'row',xs:'column' }} width={'100%'} justifyContent={'space-between'} >
           <Box  width={{ sm:'50%',xs:'100%' }}>
           <TextField

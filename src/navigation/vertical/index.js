@@ -19,7 +19,7 @@ const navigation = () => {
         },
         {
           title: 'Registration',
-          path: '/registration'
+          path: '/employees/registeration'
         },
         {
           title:"Absence",
@@ -31,10 +31,12 @@ const navigation = () => {
         },
       ]
     },
+
     {
       title: 'Contracts',
       icon: 'tabler:file-text',
       children:[
+
         {
           title:"List",
           path:"/contracts/list"

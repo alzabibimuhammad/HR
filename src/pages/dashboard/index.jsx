@@ -6,61 +6,47 @@ import Registration from 'src/features/dashboard/registration/components/DataGri
 import Requests from 'src/features/dashboard/requests'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAttendancePercentage, getRegisteration } from './store'
+import { Grid } from '@mui/material'
 
 export default function Dashboard() {
+  const store = useSelector(state => state.Dashboard)
 
- const store = useSelector(state => state.Dashboard)
+  const [registration, setRegistration] = useState([])
+  const [percentageData, setpercentageData] = useState([])
 
- const [registration,setRegistration]=useState([])
- const [percentageData,setpercentageData]=useState([])
+  const dispatch = useDispatch()
+  const date = new Date()
 
- const dispatch = useDispatch()
- const date = new Date();
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
 
- const year = date.getFullYear();
- const month = String(date.getMonth() + 1).padStart(2, '0');
- const day = String(date.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`
 
- const formattedDate = `${year}-${month}-${day}`;
-
-
-
- useEffect(() => {
+  useEffect(() => {
     dispatch(getAttendancePercentage())
     setpercentageData(store?.AttendancePercentage)
 
     dispatch(getRegisteration(formattedDate))
     setRegistration(store?.Registertion)
+  }, [dispatch, store?.AttendancePercentage?.length, store?.Registertion?.length])
 
- }, [dispatch,store?.AttendancePercentage?.length,store?.Registertion?.length])
-
-
- return <>
-      <Stack spacing={5} sx={{ overflow:'hidden' }}  >
-
-      <Stack justifyContent={"center"}   spacing={5} direction={{sm:'row',xs:'column'}} >
-
-          <Box width={{sm:'70%',xs:'100%',}} sx={{backgroundColor:"#fff"}}>
-            <AppCalendar  />
-          </Box>
-
-          <Box width={{ sm:"30%",xs:'100%' }}>
-            <Attendance Data={percentageData} />
-          </Box>
-
-      </Stack>
-
-      <Stack spacing={5}  height={{sm:'600px'}} direction={{ xs:'column' , sm:'row'}} >
-
-          <Box width={{sm:"69.5%",xs:'100%'}}  >
-            <Registration Data={registration} />
-          </Box>
-          <Box width={{sm:"30.5%",xs:'100%'}}>
-            <Requests/>
-          </Box>
-
-      </Stack>
-
-      </Stack>
- </>
+  return (
+    <Grid container spacing={5} sx={{ overflow: 'hidden' }}>
+      <Grid item sm={8} xs={12}>
+        <Box  sx={{ backgroundColor: '#fff' }}>
+          <AppCalendar />
+        </Box>
+      </Grid>
+      <Grid item sm={4} xs={12}>
+        <Attendance Data={percentageData} />
+      </Grid>
+      <Grid item sm={8} xs={12}>
+        <Registration Data={registration} />
+      </Grid>
+      <Grid item sm={4} xs={12}>
+        <Requests />
+      </Grid>
+    </Grid>
+  )
 }

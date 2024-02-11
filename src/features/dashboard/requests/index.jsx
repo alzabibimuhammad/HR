@@ -16,7 +16,7 @@ export default function Requests() {
   const { data } = useGetAllInquiries();
   const {mutate:Rejected,isloading}=useRejectRequest()
   const {mutate:Accepted}=useAccepteRequest()
-  
+
   const { t } = useTranslation()
   const requestsData = data?.data?.data || [];
   let counter = 0;
@@ -35,8 +35,7 @@ export default function Requests() {
       <Stack sx={{ width: '100%',borderRadius:'6px',height:'100%' ,backgroundColor: "#fff", p: "15px" ,overflowY: 'auto' }} spacing={2}>
 
         <Typography variant="h3" marginTop={"25px"} marginLeft={"10px"} color="#8090A7">{t('Requests')}</Typography>
-        {requestsData != "No requests available"?
-          <>
+
         {requestsData?.map((request, index) => (
           <>
           {request.status=="waiting" ?
@@ -51,7 +50,7 @@ export default function Requests() {
                     alt="Remy Sharp"
                     src="/static/images/avatar/1.jpg"
                     sx={{ width: 45, height: 45 }}
-                    
+
                   />
                 </Box>
 
@@ -103,14 +102,7 @@ export default function Requests() {
               No Request Found
             </Typography>
           </Box>:null}
-          </>
 
-          :<Box height={'100%'} display={'flex'} justifyContent={'center'} alignItems={'center'} >
-            <Typography fontSize={'20px'} >
-              No Request Found
-            </Typography>
-          </Box>
-          }
 
       </Stack>
 

@@ -219,3 +219,29 @@ border-radius: 12px;
   fill: green;
   r: 40;
 }
+
+
+.login-images{
+  position: relative;
+  left: 53%;
+}
+
+@media (max-width: 1024px) and (max-height: 800px) {
+  .login-images {
+    margin-left: 19%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1000px) and (min-height: 420px) and (max-height: 420px) {
+  /* Your styles to hide elements within the specified screen size range */
+  .login-images {
+      display: none !important;
+  }
+}
+
+
+@media (min-width: 824px) and (max-width: 1031px) {
+  .login-images {
+      left:10% !important;
+  }
+}

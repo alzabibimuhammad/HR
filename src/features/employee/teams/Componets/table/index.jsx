@@ -112,7 +112,7 @@ export default function CollapsibleTable(Data,setEditData) {
             </Stack>
           </TableCell>
           <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{row.id}</Typography>
+            <Typography sx={{ fontSize: '14px' }}>#{row.id}</Typography>
           </TableCell>
           <TableCell sx={{ textAlign: 'right' }}>
             <Box>

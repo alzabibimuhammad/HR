@@ -108,7 +108,7 @@ export default function ShowSetting() {
                   >
                     <Stack direction={'row'} spacing={2}>
                       <EditIcon sx={{ color: '#8090A7', fontSize: '20px' }} />
-                      <Typography sx={{ color: '#8090A7' }}>{t("Logout")}</Typography>
+                      <Typography sx={{ color: '#8090A7' }}>{t("Edit")}</Typography>
                     </Stack>
                   </Button>
                   <Button

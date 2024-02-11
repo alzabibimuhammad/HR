@@ -14,7 +14,7 @@ import useShowPolicies from 'src/features/policies/hook/useShowPolicies';
 export default function View() {
 
   const {data}=useShowPolicies()
-  
+
 
   return (<>
 
@@ -27,7 +27,7 @@ export default function View() {
 
       <Stack direction={'column'}  spacing={6} width={{ sm:'50%',xs:'100%' }} >
 
-        <Warning data={data?.data}/>
+        {/* <Warning data={data?.data}/> */}
         <Reviews data={data?.data}/>
         <Deductions/>
       </Stack>

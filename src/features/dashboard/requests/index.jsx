@@ -8,20 +8,25 @@ import useGetAllInquiries from 'src/features/requests/Inquiries/Hooks/useGetAllI
 import RejectRequest from 'src/features/requests/api/RejectRequest';
 import AccepteRequest from 'src/features/requests/api/AccepteRequest';
 import { useTranslation } from 'react-i18next';
+import { useRejectRequest } from 'src/features/requests/Inquiries/Hooks/useRejectRequest';
+import { useAccepteRequest } from 'src/features/requests/Inquiries/Hooks/useAccepteRequest';
 
 export default function Requests() {
 
   const { data } = useGetAllInquiries();
-
+  const {mutate:Rejected,isloading}=useRejectRequest()
+  const {mutate:Accepted}=useAccepteRequest()
+  
   const { t } = useTranslation()
 
   const requestsData = data?.data?.data || [];
+  
   const handleApproveClick = (params) => {
-    AccepteRequest(params)
+    Accepted(params)
  };
 
  const handleRejectClick = (params) => {
-   RejectRequest(params)
+  Rejected(params)
  };
 
   return (
@@ -42,6 +47,7 @@ export default function Requests() {
                     alt="Remy Sharp"
                     src="/static/images/avatar/1.jpg"
                     sx={{ width: 45, height: 45 }}
+                    
                   />
                 </Box>
 

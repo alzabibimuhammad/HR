@@ -6,6 +6,7 @@ import Registration from 'src/features/dashboard/registration/components/DataGri
 import Requests from 'src/features/dashboard/requests'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAttendancePercentage, getRegisteration } from './store'
+import useGetAllData from 'src/features/dashboard/Registarion/hooks/useGetData'
 
 export default function Dashboard() {
 
@@ -13,7 +14,8 @@ export default function Dashboard() {
 
  const [registration,setRegistration]=useState([])
  const [percentageData,setpercentageData]=useState([])
-
+const {data,isloading}=useGetAllData()
+ console.log("🚀 ~ Dashboard ~ data:", data)
  const dispatch = useDispatch()
  const date = new Date();
 

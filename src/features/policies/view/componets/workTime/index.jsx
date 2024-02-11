@@ -6,6 +6,7 @@ import { Stack } from '@mui/system';
 import styled from 'styled-components';
 
 export default function WorkTimes({data}) {
+console.log("🚀 ~ WorkTimes ~ data:", data)
 
 
   const Typo = styled(Typography)(() => ({
@@ -41,7 +42,7 @@ export default function WorkTimes({data}) {
 
   return (<>
 
-  {data?.data?.map((item, index) => (
+  {data?.map((item, index) => (
 
   <>
 <Card>

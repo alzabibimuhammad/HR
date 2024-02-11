@@ -38,7 +38,7 @@ const MenuItemStyled = styled(MenuItem)(({ theme }) => ({
 }))
 
 const UserDropdown = props => {
-  
+
   const { data, isloading } = useShowAllBranches()
   const branches = data?.data?.data
 

@@ -20,9 +20,21 @@ import useGetMvp from '../../hooks/useGetMvp';
 
 const Users = ({ rows }) => {
 
+console.log(rows);
+
   const columns = useUserColumns();
   const [openParent, setOpenParent] = React.useState(false);
   const { t } = useTranslation()
+
+  let roleData = new Set([]) ;
+  rows?.data?.data?.forEach(element => {
+      roleData.add(element?.role)
+  });
+
+  let specialization = new Set([])
+  rows?.data?.data?.forEach(element => {
+    specialization.add(element?.specialization)
+});
 
   const handleDrawerOpen = () => {
     setOpenParent(true);
@@ -72,6 +84,7 @@ const Users = ({ rows }) => {
 
     },[role,department])
 
+
   const handelSearch = (event) => {
     const searchText = event.target.value;
     let searchData;
@@ -89,11 +102,8 @@ const Users = ({ rows }) => {
         else if( element?.role?.toLowerCase()?.includes(searchText.toLowerCase()) ){
           return element?.role?.toLowerCase()?.includes(searchText.toLowerCase());
         }
-        else if(element?.email?.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.email?.toLowerCase()?.includes(searchText.toLowerCase());
-        }
-        else if(element?.department?.name?.toLowerCase()?.includes(searchText.toLowerCase()) ){
-          return element?.department?.name?.toLowerCase()?.includes(searchText.toLowerCase());
+        else if(element?.specialization?.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.specialization?.toLowerCase()?.includes(searchText.toLowerCase());
         }
       });
 
@@ -203,12 +213,14 @@ const Users = ({ rows }) => {
 
             <Card>
               <CardContent>
+              <Typography variant='h4' paddingBottom={'10px'}>
+        {t("Employees List")}
+        </Typography>
               <Stack
                 direction={{ xs: 'column', sm: 'column' }}
                 spacing={3}
                 alignContent={'center'}
                 justifyContent={'center'}
-                my={"30px"}
               >
 
             <TextField
@@ -248,10 +260,17 @@ const Users = ({ rows }) => {
                     }}
                     size='small'
                   >
+
                     <MenuItem value=''>{`${t("Role")}`}</MenuItem>
-                    <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
-                    <MenuItem value='customer'>{`${t("customer")}`}</MenuItem>
-                    <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
+
+                    {Array.from(roleData).map(element => (
+                      <MenuItem key={element} value={element}>{element}</MenuItem>
+                    ))}
+
+
+
+
+
                   </TextField>
 
                   <TextField
@@ -267,28 +286,14 @@ const Users = ({ rows }) => {
 
                   >
                     <MenuItem value=''>{`${t("Specialization")}`}</MenuItem>
-                    <MenuItem value='Front_End'>{`${t("Front End")}`}</MenuItem>
-                    <MenuItem value='Back_End'>{`${t("Back End")}`}</MenuItem>
+                    {Array.from(specialization).map(element => (
+                      <MenuItem key={element} value={element}>{element}</MenuItem>
+                    ))}
                   </TextField>
-                  <TextField
-                    select
-                    fullWidth
-                    defaultValue='Team'
-                    SelectProps={{
-                      // value: department,
-                      displayEmpty: true,
 
-                    }}
-                    size='small'
-
-                  >
-                    <MenuItem value=''>{`${t("Team")}`}</MenuItem>
-                    <MenuItem value='active'>{`${t("active")}`}</MenuItem>
-                    <MenuItem value='not-active'>{`${t("not active")}`}</MenuItem>
-                  </TextField>
                   </Stack>
 
-                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(fdata)|| []}    />: null }
+                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(fdata)|| []}   />: null }
 
               </Stack>
               </CardContent>

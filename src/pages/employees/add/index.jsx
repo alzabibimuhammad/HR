@@ -17,6 +17,8 @@ import { Schema } from './validation'
 import { useAddUsers } from './hook/useAddUsers'
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next'
+import { showErrorToast } from 'src/utiltis/showErrorToast'
+
 export default function Add() {
   const [snapshotData, setSnapshotData] = useState({})
   const [accountData, setAccountData] = useState({})
@@ -36,17 +38,17 @@ export default function Add() {
   }
 
   const defaultValues = {
-    first_name: '',
+    // first_name: '',
 
-    contact: {
-      phonenumbers: [],
-      emails: []
-    },
-    middle_name: '',
+    // contact: {
+    //   phonenumbers: [],
+    //   emails: []
+    // },
+    // middle_name: '',
 
-    last_name: '',
+    // last_name: '',
 
-    email: '',
+    // email: '',
     role: 'admin'
   }
 
@@ -57,13 +59,16 @@ export default function Add() {
     getValues,
     setValue,
     register,
+    watch,
     formState: { errors }
   } = useForm({
     defaultValues,
-    mode: 'onBlur'
+    mode: 'onBlur',
 
-    //  resolver: yupResolver(Schema),
-  })
+    resolver: yupResolver(Schema), // تحديد يوب ريزولفر هنا
+
+      })
+
 
   const handleDataSubmit = data => {
     try {
@@ -72,9 +77,11 @@ export default function Add() {
 
       data.image = ProfileImage
 
-      console.log('🚀 ~ handleDataSubmit ~ image:', formData)
       addUsers(data)
-    } catch (error) {}
+    } catch (error) {
+      showErrorToast(error.message)
+
+    }
   }
 
   //  const handleDataSubmit = async (data) => {
@@ -147,6 +154,8 @@ export default function Add() {
               setError={setError}
               control={control}
               Controller={Controller}
+              watch={watch}
+              register={register}
             />
           </Box>
           <Box>
@@ -156,6 +165,8 @@ export default function Add() {
               setError={setError}
               control={control}
               Controller={Controller}
+              passwordValue={getValues('password')} // Pass the password value
+
             />
           </Box>
           <Box>

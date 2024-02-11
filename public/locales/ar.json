@@ -389,6 +389,19 @@
   "Compose Mail":"بريد",
   "Write your message...":"اكتب رسالتك...",
   "No Mails Found":"لم يتم العثور على رسائل",
-  "Search mail":"بحث في البريد"
+  "Search mail":"بحث في البريد",
+  "Employees List":"قائمة الموظفين",
+  "Registerations List":"قائمة الاشتراكات",
+  "Absence List":"قائمة الغيابات",
+  "Contract List":"قائمة العقود",
+  "Reports List":"قائمة التقارير",
+  "Reviews List":"قائمة المراجعات",
+  "Salaries":"الرواتب",
+  "Hierarchy":"هرمية الشركة",
+  "Emails":"البريد",
+  "Home":"الرئيسية",
+  "Company Name":"اسم الشركة"
+
+
 
 }

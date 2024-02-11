@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 export default function Account({onDataChange,Controller,control,errors}) {
 
   const {t} = useTranslation()
+
   const SvgMail = `
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
   <rect x="3.33325" y="5" width="13.3333" height="10" rx="2" stroke="#8090A7"/>
@@ -27,8 +28,10 @@ export default function Account({onDataChange,Controller,control,errors}) {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [password, setPassword] = useState(true);
+  const [password, setPassword] = useState();
+
   const [passwordsMatch, setpasswordsMatch] = useState(true);
+
 
 
   const handleFieldChange = (field, value) => {
@@ -44,18 +47,18 @@ export default function Account({onDataChange,Controller,control,errors}) {
   };
 
   const handlePasswordChange=value=>{
-      setPassword(value)
+      setPassword(value.target.value)
   }
 
-  const handleConfirmationChange=value=>{
-
-    if(value == password){
-      setpasswordsMatch(true)
-      handleFieldChange('password',value)
+  const handleConfirmationChange = (value) => {
+    if (value.target.value === password) {
+      setpasswordsMatch(true);
+      handleFieldChange('password', value);
+    } else {
+      setpasswordsMatch(false);
     }
-    else
-      setpasswordsMatch(false)
-  }
+  };
+
 
 
   return (
@@ -77,7 +80,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
                 type='email'
                 size='small'
                 error={Boolean(errors.email)}
-                {...(errors.email && { helperText: errors.email.message })}
+      {...(errors.email && { helperText: errors.email.message })}
                 label={
                   <Stack direction={'row'} spacing={2} >
                     <Box>
@@ -96,73 +99,75 @@ export default function Account({onDataChange,Controller,control,errors}) {
 
 
 
-            <Controller
-            name={`password`}
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                  fullWidth
-                  size='small'
-                  error={Boolean(errors.password)}
-                {...(errors.password && { helperText: errors.password.message })}
-                  type={showPassword ? 'text' : 'password'}
-
-                  label={
-                    <Stack direction={'row'} spacing={2}>
-                      <Box>
-                        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
-                      </Box>
-                      <Box>
-                        {t('Password')}
-                      </Box>
-                    </Stack>
-                  }
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton
-                          onClick={handleTogglePasswordVisibility}
-                          edge="end"
-                        >
-                          {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-            ) }
-            />
+<Controller
+  name={`password`}
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      fullWidth
+      size='small'
+      type={showPassword ? 'text' : 'password'}
+      error={Boolean(errors.password)}
+      helperText={errors.password?.message}
+      label={
+        <Stack direction={'row'} spacing={2}>
+          <Box>
+            <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
+          </Box>
+          <Box>
+            {t('Password')}
+          </Box>
+        </Stack>
+      }
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              onClick={handleTogglePasswordVisibility}
+              edge="end"
+            >
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+    />
+  )}
+/>
 
             <Controller
             name={`confirm_password`}
             control={control}
             render={({ field }) => (
               <TextField
-                {...field}
-            fullWidth
-            size="small"
-            error={Boolean(errors.confirm_password)}
-            {...(errors.confirm_password && { helperText: errors.confirm_password.message })}
+              {...field}
+              fullWidth
+              size="small"
+              type={showConfirm ? 'text' : 'password'}
 
-            label={
-              <Stack direction={'row'} spacing={2}>
-                <Box>
-                  <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
-                </Box>
-                <Box>{t('Confirm Password')}</Box>
-              </Stack>
-            }
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleToggleConfirmVisibility} edge="end">
-                    {showConfirm ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+              error={Boolean(errors.confirm_password)}
+              helperText={errors.confirm_password?.message}
+
+              label={
+                <Stack direction={'row'} spacing={2}>
+                  <Box>
+                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgPassword)}`} />
+                  </Box>
+                  <Box>{t('Confirm Password')}</Box>
+                </Stack>
+              }
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleToggleConfirmVisibility} edge="end">
+                      {showConfirm ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+
             )}
             />
 

@@ -24,7 +24,6 @@ import { CustomDatePicker } from 'src/@core/components/customPickerDate'
 import PersonalInfo from './personalInformation'
 import Skills from './skills'
 import Employment from './employment'
-import Notes from './notes'
 import { useGetEmployeeById } from 'src/features/employee/hooks/useGetEmployeeById'
 import { useDispatch } from 'react-redux'
 import { setUserId } from '../../../store/apps/user'
@@ -87,7 +86,6 @@ const Profiles = ({ tab, data }) => {
 
   const {data:DataDecision}=useGetDecision(id);
 
-  console.log("🚀 ~ Mange ~ DataDecision:", DataDecision)
 
 
 
@@ -169,7 +167,7 @@ const Profiles = ({ tab, data }) => {
             </Stack>
           </Stack>
         </TabPanel>
-        
+
         <TabPanel value='3'>
           {DataDecision ? <Mange id={id} DataDecision={DataDecision} /> : null}
         </TabPanel>

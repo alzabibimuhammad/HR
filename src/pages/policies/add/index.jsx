@@ -141,7 +141,7 @@ export default function Policies() {
       <Stack spacing={6} direction={'column'}>
         <Warnings defaultValues={defaultValues} control={control} Controller={Controller} setAlert={setAlert} alert={alert} setWarningsto={setWarningsto} warningsto={warningsto}/>
         <AbsencesManagement control={control} Controller={Controller} setPaid={setPaid} Paid={Paid} Unpaid={Unpaid} setUnpaid={setUnpaid} setSick={setSick} Sick={Sick}/>
-        <Deductions/>
+        <Deductions control={control} Controller={Controller} />
       </Stack>
 
     </Grid>

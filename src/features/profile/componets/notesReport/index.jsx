@@ -4,15 +4,17 @@ import React, { useEffect, useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import EditIcon from '@mui/icons-material/Edit'
 import useGetNotes from './hooks/useGetUserNotes'
-import { useDeleteNote } from './hooks/useDeleteNote'
 import EditNote from './componets/edit'
 import AddIcon from '@mui/icons-material/Add';
 import AddNote from './componets/add'
+import AlertDialogDeleteNote from './componets/delete'
 export default function NoteReport(user_id) {
   const [open, setOpen] = useState(false)
   const [editData, setEditData] = useState()
 
   const [openAdd, setOpenAdd] = useState(false)
+  const [Delete, setDelete] = useState(false)
+  const [DeleteID, setDeleteID] = useState()
 
 
   const NoteSvg = `<svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,14 +24,15 @@ export default function NoteReport(user_id) {
   const { data: DataDecision } = useGetNotes(user_id?.user_id)
   const notes = DataDecision?.data?.data
 
-  const { mutate: deleteNote, isLoading } = useDeleteNote();
 
+  const handleCloseDelete =_=>{
+    setDelete(false)
+  }
 
 
   const handleDelete = id => {
-    deleteNote(id)
-
-    console.log('del',id)
+    setDeleteID(id)
+    setDelete(true)
   }
 
   const handleEdit = note => {
@@ -91,6 +94,8 @@ export default function NoteReport(user_id) {
       </Card>
         {editData?<EditNote oldNote={editData} open={open} setOpen={setOpen} />:null}
         {openAdd?<AddNote user_id={user_id?.user_id} open={openAdd} setOpen={setOpenAdd} />:null}
+        {Delete?<AlertDialogDeleteNote id={DeleteID} open={Delete} handleClose={handleCloseDelete} />:null}
+
     </Box>
   )
 }

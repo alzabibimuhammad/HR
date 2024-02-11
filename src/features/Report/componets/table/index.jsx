@@ -163,6 +163,9 @@ export default function CollapsibleTable({ Data }) {
   return (
     <Card>
       <CardContent>
+      <Typography variant='h4' paddingBottom={'10px'}>
+        {t("Reports List")}
+        </Typography>
         <TableContainer component={Paper}>
           <Table aria-label="collapsible table">
             <TableHead>

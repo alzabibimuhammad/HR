@@ -76,7 +76,9 @@ const Registration = ({ Data, setFilterDate }) => {
     <Stack height={'100%'}>
       <Card>
         <CardContent>
-
+        <Typography variant='h4' paddingBottom={'10px'}>
+        {t("Registerations List")}
+        </Typography>
           <Stack direction={'column'} spacing={3} >
             <TextField
               placeholder={t('Search')}

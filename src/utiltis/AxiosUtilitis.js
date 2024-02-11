@@ -5,18 +5,18 @@ const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_BASE_URL });
 
 export const request = async ({ url, params = {}, ...rest }) => {
   // Add the branch_id query parameter to the params object
- 
-  const branchId = localStorage.getItem('branch')  || 1;
-  params = { ...params, branch_id: branchId };
+  params = { ...params, branch_id: localStorage.getItem('branch')||1};
 
   client.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
 
   const onSuccess = response => response;
 
   const onError = error => {
-    // alert(error)
-    showErrorToast(error)
-    
+    // showErrorToast(error)
+
+    //  alert(error)
+
+
     //   const errorMessage =
     //     error.response && error.response.data && error.response.data.userMessage
     //       ? error.response.data.userMessage

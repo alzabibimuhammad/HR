@@ -86,20 +86,25 @@ const LoginPage = () => {
 
   return <>
 
-      <Grid container spacing={0} columns={20} sx={{backgroundColor:"#E9ECF3",}}>
-        <Grid item xs={12}>
-          <Item sx={{ height: '100vh',backgroundColor:"#3f4458",position:"relative"}}>
-              <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",left:"72.8%",top:"3%", transform: "rotate(-90deg)" }} ></Box>
-              <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",left:"72.8%",top:"-10%", transform: "rotate(-92deg)" }} ></Box>
-              <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",bottom:"-12.8%", left:"-3%",transform: "rotate(70deg)" }} ></Box>
-              <Box sx={{  backgroundImage: `url('/images/Rectangle.svg')`,backgroundRepeat:"no-repeat",width:"30%",height:"30%",position:"absolute",bottom:"-1.8%", left:"-2%",transform: "rotate(70deg)" }} ></Box>
+      <Grid container spacing={0}  sx={{backgroundColor:"#E9ECF3",}}>
+        <Grid item   xs={0}   md={7} sm={7}>
 
-          </Item>
+          <Stack   width={'100%'} sx={{ height: '100vh',backgroundColor:"#3f4458"}}>
+              <Box  width={'100%'} height={'100%'}>
+                <Box className='login-images'  sx={{  backgroundImage: `url('/images/loginRectangel.svg')`,backgroundRepeat:"no-repeat",width:"100%",height:"100%" }} ></Box>
+              </Box>
+
+            <Box  display={'flex'} justifyContent={'start'} alignItems={'end'} width={'100%'} height={'100%'}>
+                <Box   sx={{  backgroundImage: `url('/images/loginRectangleButtom.svg')`,backgroundRepeat:"no-repeat",width:"100%",height:"100%" }} ></Box>
+            </Box>
+
+          </Stack>
+
         </Grid>
 
-        <Grid item xs={7} display={"flex"} direction={"row"} sx={{marginLeft:'5%',marginTop:'6.3%'}}  >
+        <Grid item xs={12} width={{  xs:'50%' }}  sm={5} md={5} display={"flex"} justifyContent={'center'} alignItems={'center'} >
         <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
-             <Box sx={{ my: 6,  }}>
+             <Box >
                 <Typography variant='h3' sx={{ color: '#000',fontSize:"24px",lineHeight: "130%" }}>
                   {`Hello! 👋🏻`}
                 </Typography>
@@ -107,7 +112,7 @@ const LoginPage = () => {
                 Log in to get started
                  </Typography>
               </Box>
-                <Box sx={{ mb: 4,  }}>
+                <Box sx={{ mt:5,mb: 4 }}>
                   <Controller
                     name='email'
                     control={control}
@@ -174,10 +179,10 @@ const LoginPage = () => {
                     Forgot Password?
                   </Typography>
                 </Box>
-                <Box sx={{ }}>
+                <Box >
                   <Button type='submit' variant='contained' sx={{
 
-                    width: "360px",
+                    width: "100%",
                     display: "flex",
                     padding: "15px 0px 16px 0px",
                     height: "52px",
@@ -186,7 +191,9 @@ const LoginPage = () => {
                     borderRadius: "8px",
                     background: "#3F4458",
                     justifyContent: "center",
-                   }}>
+
+                   }}
+                   >
                     Login
                   </Button>
                 </Box>

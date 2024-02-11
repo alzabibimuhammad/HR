@@ -18,11 +18,12 @@ export default function Requests() {
   const {mutate:Accepted}=useAccepteRequest()
   
   const { t } = useTranslation()
-
   const requestsData = data?.data?.data || [];
-  
-  const handleApproveClick = (params) => {
-    Accepted(params)
+  let counter = 0;
+  console.log("🚀 ~ Requests ~ requestsData:", requestsData=="No requests available")
+
+    const handleApproveClick = (params) => {
+    AccepteRequest(params)
  };
 
  const handleRejectClick = (params) => {
@@ -34,9 +35,12 @@ export default function Requests() {
       <Stack sx={{ width: '100%',borderRadius:'6px',height:'100%' ,backgroundColor: "#fff", p: "15px" ,overflowY: 'auto' }} spacing={2}>
 
         <Typography variant="h3" marginTop={"25px"} marginLeft={"10px"} color="#8090A7">{t('Requests')}</Typography>
-        {requestsData.map((request, index) => (
+        {requestsData != "No requests available"?
+          <>
+        {requestsData?.map((request, index) => (
           <>
           {request.status=="waiting" ?
+
 
           <Stack direction={{ sm:'column',xs:'column' }} key={index}>
 
@@ -86,11 +90,30 @@ export default function Requests() {
             {requestsData.length-1 == index ?
               null
             : <Divider  /> }
+
+            <p style={{ display:'none' }} >{counter++}</p>
           </Stack>
-          : null }
+
+          :null
+           }
           </>
           ))}
+          {counter==0?<Box height={'100%'} display={'flex'} justifyContent={'center'} alignItems={'center'} >
+            <Typography fontSize={'20px'} >
+              No Request Found
+            </Typography>
+          </Box>:null}
+          </>
+
+          :<Box height={'100%'} display={'flex'} justifyContent={'center'} alignItems={'center'} >
+            <Typography fontSize={'20px'} >
+              No Request Found
+            </Typography>
+          </Box>
+          }
+
       </Stack>
+
     </>
   );
 }

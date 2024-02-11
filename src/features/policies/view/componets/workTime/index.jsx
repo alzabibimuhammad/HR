@@ -6,8 +6,8 @@ import { Stack } from '@mui/system';
 import styled from 'styled-components';
 
 export default function WorkTimes({data}) {
-console.log("🚀 ~ WorkTimes ~ data:", data)
-
+console.log("🚀 ~ WorkTimes ~ data:", data?.data?.policy)
+  const Data =data?.data?.policy
 
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
@@ -42,9 +42,6 @@ console.log("🚀 ~ WorkTimes ~ data:", data)
 
   return (<>
 
-  {data?.map((item, index) => (
-
-  <>
 <Card>
 
 <CardContent>
@@ -58,31 +55,39 @@ console.log("🚀 ~ WorkTimes ~ data:", data)
   </StackRow>
 
 
-        <div key={index}>
+        <div >
 
           <StackRow marginTop={'2%'}>
             <Typo>Work days:</Typo>
-            <TypoVal>{item?.work_time?.work_days}</TypoVal>
+
+            {Data?.work_time?.work_days?.map((day) => (
+              <TypoVal>{day}</TypoVal>
+          ))}
+
           </StackRow>
 
           <StackRow sx={{ padding: "5px 0px" }}>
             <Typo>Start Date:</Typo>
-            <TypoVal>{item?.work_time?.start_time}</TypoVal>
+            <TypoVal>{Data?.work_time?.start_time}</TypoVal>
           </StackRow>
 
           <StackRow>
             <Typo>End Date:</Typo>
-            <TypoVal>{item?.work_time?.end_time}</TypoVal>
+            <TypoVal>{Data?.work_time?.end_time}</TypoVal>
           </StackRow>
         </div>
 
         <Typography component={'li'} sx={{margin:"5px"}}>
-
           Notes
         </Typography>
-
-        <Typo marginLeft={'25px'} >Note 1:</Typo>
-        <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >{item?.work_time?.notes}</TypoVal>
+            <Stack  direction={'column'} >
+              {Data?.work_time?.notes?.map((note, index) => (
+                <React.Fragment key={index}>
+                  <Typo marginLeft={'25px'}>Note {index + 1}:</Typo>
+                  <TypoVal style={{ maxWidth: '319px', marginLeft: '35px' }}>{note}</TypoVal>
+                </React.Fragment>
+              ))}
+    </Stack>
 
 </CardContent>
 
@@ -102,26 +107,26 @@ console.log("🚀 ~ WorkTimes ~ data:", data)
 
   <StackRow  marginTop={'2%'}>
     <Typo>Paid Absences Days:</Typo>
-    <TypoVal>{item?.absence_management?.paid_absence_days.count}</TypoVal>
+    <TypoVal>{Data?.absence_management?.sick_days+Data?.absence_management?.vacation_days}</TypoVal>
   </StackRow>
 
   <StackRow sx={{padding:"5px 0px"}}>
     <Typo>Unpaid Absences Days:</Typo>
-    <TypoVal>{item?.absence_management?.unpaid_absence_days.count}</TypoVal>
+    <TypoVal>{Number(365)-(Data?.absence_management?.sick_days+Data?.absence_management?.vacation_days)}</TypoVal>
   </StackRow>
 
   <StackRow>
     <Typo>Sick Absences Days:</Typo>
-    <TypoVal>{item?.absence_management?.sick_absence_days.count}</TypoVal>
+    <TypoVal>{Data?.absence_management?.sick_days}</TypoVal>
   </StackRow>
 
-    <Typography component={'li'} sx={{margin:"5px"}}>
 
+    <Typography component={'li'} sx={{margin:"5px"}}>
       Notes
     </Typography>
 
     <Typo marginLeft={'25px'} >Note 1:</Typo>
-    <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >{item?.absence_management?.notes}</TypoVal>
+    <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >{Data?.absence_management?.notes}</TypoVal>
 </CardContent>
 
 <CardContent>
@@ -136,7 +141,7 @@ console.log("🚀 ~ WorkTimes ~ data:", data)
 
   <StackRow  marginTop={'2%'}>
     <Typo>Annual percentage increase:</Typo>
-    <TypoVal>{item?.annual_salary_increase.annual_salary_percentage} %</TypoVal>
+    <TypoVal>{Data?.annual_salary_increase.percentage} %</TypoVal>
   </StackRow>
 
 
@@ -146,13 +151,11 @@ console.log("🚀 ~ WorkTimes ~ data:", data)
     </Typography>
 
     <Typo marginLeft={'25px'} >Note 1:</Typo>
-    <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >{item.annual_salary_increase.notes}</TypoVal>
+    <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >{Data?.notes}</TypoVal>
 </CardContent>
 
 </Card>
 </>
-    ))}
-  </>
   )
 }
 

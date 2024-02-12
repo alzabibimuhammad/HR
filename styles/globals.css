@@ -237,3 +237,7 @@ border-radius: 12px;
   fill: green;
   r: 40;
 }
+
+.css-1ppzk2g-MuiBackdrop-root-MuiModal-backdrop{
+  position: relative !important;
+}

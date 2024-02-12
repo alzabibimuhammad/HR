@@ -10,7 +10,7 @@ import Divider from '@mui/material/Divider';
 import { useFieldArray } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-export default function Warnings({Controller,control,defaultValues,setAlert ,alert,warningsto,setWarningsto}) {
+export default function Warnings({Controller,control,defaultValues,setAlert ,alert,warningsto,setWarningsto,errors}) {
 
 
   const [noteAdded, setNoteAdded] = useState(false);

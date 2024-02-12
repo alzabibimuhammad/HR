@@ -6,7 +6,9 @@ import { Stack } from '@mui/system';
 import styled from 'styled-components';
 
 export default function WorkTimes({data}) {
+console.log("🚀 ~ WorkTimes ~ data:", data?.data)
 
+console.log(data?.data?.policy?.annual_salary_increase.notes);
 
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
@@ -41,9 +43,6 @@ export default function WorkTimes({data}) {
 
   return (<>
 
-  {data?.data?.map((item, index) => (
-
-  <>
 <Card>
 
 <CardContent>
@@ -57,23 +56,29 @@ export default function WorkTimes({data}) {
   </StackRow>
 
 
-        <div key={index}>
+  {/* {Array.isArray(data?.data) &&
+  data?.data?.map((item, index) => (
+
+    ))} */}
+
+    <div >
 
           <StackRow marginTop={'2%'}>
             <Typo>Work days:</Typo>
-            <TypoVal>{item?.work_time?.work_days}</TypoVal>
+            <TypoVal>{data?.data?.policy.work_time?.work_days.map((day)=>( day+" "))}</TypoVal>
           </StackRow>
 
           <StackRow sx={{ padding: "5px 0px" }}>
             <Typo>Start Date:</Typo>
-            <TypoVal>{item?.work_time?.start_time}</TypoVal>
+             <TypoVal>{data?.data?.policy.work_time?.start_time}</TypoVal>
           </StackRow>
 
           <StackRow>
             <Typo>End Date:</Typo>
-            <TypoVal>{item?.work_time?.end_time}</TypoVal>
+            <TypoVal>{data?.data?.policy.work_time?.end_time}</TypoVal>
           </StackRow>
         </div>
+
 
         <Typography component={'li'} sx={{margin:"5px"}}>
 
@@ -81,7 +86,14 @@ export default function WorkTimes({data}) {
         </Typography>
 
         <Typo marginLeft={'25px'} >Note 1:</Typo>
-        <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >{item?.work_time?.notes}</TypoVal>
+        <TypoVal style={{ maxWidth:'319px', marginLeft:'21px',color:"red" }}>
+  {data?.data?.policy.work_time?.notes?.length > 0 ?
+    data?.data?.policy.work_time?.notes.map((note, index) => (
+      <span key={index}>{note}</span>
+    )) :
+    "not notes"
+  }
+</TypoVal>
 
 </CardContent>
 
@@ -101,17 +113,17 @@ export default function WorkTimes({data}) {
 
   <StackRow  marginTop={'2%'}>
     <Typo>Paid Absences Days:</Typo>
-    <TypoVal>{item?.absence_management?.paid_absence_days.count}</TypoVal>
+     <TypoVal>{data?.data?.policy?.absence_management?.paid_absence_days?.count}</TypoVal>
   </StackRow>
 
   <StackRow sx={{padding:"5px 0px"}}>
     <Typo>Unpaid Absences Days:</Typo>
-    <TypoVal>{item?.absence_management?.unpaid_absence_days.count}</TypoVal>
+    <TypoVal>{data?.data?.policy?.absence_management?.unpaid_absence_days?.count}</TypoVal>
   </StackRow>
 
   <StackRow>
     <Typo>Sick Absences Days:</Typo>
-    <TypoVal>{item?.absence_management?.sick_absence_days.count}</TypoVal>
+    <TypoVal>{data?.data?.policy?.absence_management?.sick_absence_days?.count}</TypoVal>
   </StackRow>
 
     <Typography component={'li'} sx={{margin:"5px"}}>
@@ -120,8 +132,16 @@ export default function WorkTimes({data}) {
     </Typography>
 
     <Typo marginLeft={'25px'} >Note 1:</Typo>
-    <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >{item?.absence_management?.notes}</TypoVal>
-</CardContent>
+    <TypoVal style={{ maxWidth:'319px', marginLeft:'21px',color:"red" }}>
+  {data?.data?.policy?.absence_management?.notes?.length > 0 ?
+    data?.data?.policy?.absence_management?.notes.map((note, index) => (
+      <div key={index}>
+        {note}
+      </div>
+    )) :
+    "not notes"
+  }
+</TypoVal></CardContent>
 
 <CardContent>
 
@@ -135,7 +155,7 @@ export default function WorkTimes({data}) {
 
   <StackRow  marginTop={'2%'}>
     <Typo>Annual percentage increase:</Typo>
-    <TypoVal>{item?.annual_salary_increase.annual_salary_percentage} %</TypoVal>
+     <TypoVal>{data?.data?.policy?.annual_salary_increase?.annual_salary_percentage} %</TypoVal>
   </StackRow>
 
 
@@ -145,13 +165,19 @@ export default function WorkTimes({data}) {
     </Typography>
 
     <Typo marginLeft={'25px'} >Note 1:</Typo>
-    <TypoVal  style={{ maxWidth:'319px',marginLeft:'21px' }} >{item.annual_salary_increase.notes}</TypoVal>
-</CardContent>
+    <TypoVal style={{ maxWidth:'319px', marginLeft:'21px',color:"red" }}>
+  {data?.data?.policy?.annual_salary_increase?.notes?.length > 0 ?
+    data?.data?.policy?.annual_salary_increase?.notes.map((note, index) => (
+      <div key={index}>
+        {note}
+      </div>
+    )) :
+    "not notes"
+  }
+</TypoVal></CardContent>
 
 </Card>
 </>
-    ))}
-  </>
   )
 }
 

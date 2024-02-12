@@ -8,11 +8,17 @@ import {  List } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Divider from '@mui/material/Divider';
 import { useTranslation } from 'react-i18next';
+import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch';
+import {  MenuItem } from '@mui/material'
 
-export default function WorkTime({Controller,control,days,setDays}) {
+export default function WorkTime({Controller,control,days,setDays,errors}) {
   const [openParent, setOpenParent] = React.useState(false);
   const [noteAdded, setNoteAdded] = useState(false);
   const {t} = useTranslation()
+  const { data } = useSelectBranch()
+
+
+
   const handleDayPicker = (date) => {
     setOpenParent(true);
   };
@@ -38,10 +44,13 @@ export default function WorkTime({Controller,control,days,setDays}) {
 
     };
 
-
+    // const handleSelectBranchChange = e => {
+    //   setSpecialization(e.target.value)
+    //   handleFieldChange('SelectBranch', e.target.value)
+    // }
 
   return (
-    <Card>
+    <Card >
       <CardContent>
 
         <Stack spacing={2} direction={'column'}>
@@ -51,6 +60,7 @@ export default function WorkTime({Controller,control,days,setDays}) {
   name={`work_time.work_days`}
   control={control}
   render={({ field }) => (
+    <>
     <Button
       onClick={() => {
         handleDayPicker();
@@ -66,23 +76,23 @@ export default function WorkTime({Controller,control,days,setDays}) {
         },
       }}
       fullWidth
-    >
+      >
       {days.length ? (
         days.map((day) => (
           <Chip
-            key={day}
-            label={day}
-            sx={{
-              marginLeft: '2px',
-              backgroundColor: '#6AB2DF',
-              color: '#fff',
-              fontSize: '13px',
-              width: 'auto',
-            }}
+          key={day}
+          label={day}
+          sx={{
+            marginLeft: '2px',
+            backgroundColor: '#6AB2DF',
+            color: '#fff',
+            fontSize: '13px',
+            width: 'auto',
+          }}
           />
-        ))
-      ) : (
-        <Stack direction={'row'} width={'100%'} justifyContent={'space-between'}>
+          ))
+          ) : (
+            <Stack direction={'row'} width={'100%'} justifyContent={'space-between'}>
           <Box>
             <Typo>{t("Work days")}</Typo>
           </Box>
@@ -92,6 +102,8 @@ export default function WorkTime({Controller,control,days,setDays}) {
         </Stack>
       )}
     </Button>
+
+      </>
   )}
 />
 
@@ -109,6 +121,8 @@ export default function WorkTime({Controller,control,days,setDays}) {
               placeholder="Start time"
               fullWidth
               size='small'
+              error={Boolean(errors.work_time?.start_time)}
+              helperText={errors.work_time?.start_time?.message}
             />
         )}
         />
@@ -127,6 +141,8 @@ export default function WorkTime({Controller,control,days,setDays}) {
               placeholder="Cut-off time"
               fullWidth
               size='small'
+              error={Boolean(errors.work_time?.cut_off_time)}
+              helperText={errors.work_time?.cut_off_time?.message}
             />
         ) }
 />
@@ -141,9 +157,50 @@ export default function WorkTime({Controller,control,days,setDays}) {
               placeholder="End time"
               fullWidth
               size='small'
+              error={Boolean(errors.work_time?.end_time)}
+              helperText={errors.work_time?.end_time?.message}
             />
         ) }
         />
+
+
+<Controller
+            name='branch_id'
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                select
+                sx={{marginTop:"5px"}}
+                fullWidth
+                error={Boolean(errors?.branch_id)}
+                helperText={errors?.branch_id?.message}
+                defaultValue={'Branch'}
+                SelectProps={{
+                  value: field.value,
+                  displayEmpty: true,
+                  onChange: e => {
+                    field.onChange(e)
+                    handleSelectBranchChange(e)
+                  }
+                }}
+                size='small'
+              >
+                <MenuItem disabled={true} value='Branch' >{`${t('Branch')}`}</MenuItem>
+
+                {data?.data?.data?.map((val, index) => (
+
+
+                  <MenuItem key={index} value={val.id}>
+                    {console.log("dataaaaaaaaaaaa",val.name)}
+                    {val.name}
+                  </MenuItem>
+                ))}
+              </TextField>
+            )}
+          />
+
+
 
 
 <List  sx={{lineHeight:"50px",margin:"0px 20px"}}>
@@ -160,12 +217,26 @@ export default function WorkTime({Controller,control,days,setDays}) {
 
   </Stack>
 
+
+
+
 {fields.map((field, index) => ( <>
+
 <Typography sx={{textAlign:"end",marginRight:"10px",cursor:"pointer"}}>
 
    <CloseIcon sx={{ color:"#8090A7",'&:hover': { color: 'red' },marginTop:"14px"}} onClick={() => handleRemoveClick(index)} />
 
 </Typography>
+
+
+
+
+
+
+
+
+
+
 
 <Typography sx={{fontWeight:"500",fontSize:"16px",color:"#8090a7",marginBottom:"7px"}}>
 {t("notes")} {index + 1}

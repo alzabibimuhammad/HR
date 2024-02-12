@@ -10,7 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useFieldArray } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-export default function Annual({Controller,control}) {
+export default function Annual({Controller,control,errors}) {
   const [noteAdded, setNoteAdded] = useState(false);
 
   const {t} = useTranslation()
@@ -58,6 +58,8 @@ export default function Annual({Controller,control}) {
         render={({ field }) => (
             <TextField
             {...field}
+            error={Boolean(errors?.annual_salary_increase?.annual_salary_percentage)}
+            helperText={errors?.annual_salary_increase?.annual_salary_percentage?.message}
           defaultValue={0}
           size='small'
           InputProps={{

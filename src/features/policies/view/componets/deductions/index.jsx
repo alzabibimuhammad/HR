@@ -4,8 +4,14 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-export default function Deductions() {
+export default function Deductions({data}) {
+console.log("🚀 ~ Deductions ~ data:", data?.data?.policy?.deduction_status === 1 ? "By choosing this option, the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.": "Automatic DeductionSelecting this option will enable automatic deduction of salary for specified cases, such as late arrivals. The system will apply deductions without requiring manual approval.")
+
+
+  console.log(Boolean(1));
+
   const {t} = useTranslation()
+
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -32,6 +38,7 @@ export default function Deductions() {
     flexDirection: direction === 'column' ? 'column' : 'row',
     alignItems:'center'
   }));
+
   return (
     <Card>
 
@@ -44,12 +51,13 @@ export default function Deductions() {
 
         </StackRow>
 
-        <Typo marginTop={'2%'}>{t("Request for Approval")}</Typo>
+        {}
+
+        <Typo marginTop={'2%'}>{data?.data?.policy?.deduction_status === 1 ?"Request for Approval":"Automatic Deduction"}</Typo>
 
 
-        <TypoVal>
-        {t("By choosing this option, the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.")}
-            </TypoVal>
+        <TypoVal sx={{marginTop:"5px"}}>{data?.data?.policy?.deduction_status === 1 ? "By choosing this option, the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.": "Automatic DeductionSelecting this option will enable automatic deduction of salary for specified cases, such as late arrivals. The system will apply deductions without requiring manual approval."  }
+        </TypoVal>
 
 
       </CardContent>

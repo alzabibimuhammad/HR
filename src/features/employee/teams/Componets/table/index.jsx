@@ -253,6 +253,7 @@ export default function CollapsibleTable(Data,setEditData) {
           </Box>
      <Button
             width={{ xs:'100%' }}
+
             sx={{
               fontSize: '13px',
               color: 'white',
@@ -267,7 +268,7 @@ export default function CollapsibleTable(Data,setEditData) {
       </Stack>
 
       <Box sx={{ borderRadius: '15px' }}>
-        <DrawerForm open={openParent} setOpenParent={setOpenParent} />
+        <DrawerForm  open={openParent} setOpenParent={setOpenParent} />
       </Box>
 
       <TableContainer component={Paper}>

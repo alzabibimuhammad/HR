@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import ReportByDay from "../api/reportByDay";
+import { showSuccesToast } from "src/utiltis/toastSecces";
 
 export const useReportByDay = () => {
   const queryClient = useQueryClient();
@@ -9,7 +9,8 @@ export const useReportByDay = () => {
     mutationFn:ReportByDay,
     onSuccess: () => {
       queryClient.invalidateQueries("ReportDay");
-      toast.success('Report Done')
+      showSuccesToast("","Report Done")
+
     },
   });
 };

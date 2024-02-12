@@ -23,6 +23,7 @@ import Alerts from './alerts';
 import Penalties from './penalties';
 import Deductions from './deductions';
 import Rewards from './rewards';
+import Absence from './absence';
 
 export default function Mange({DataDecision,id}) {
 
@@ -117,101 +118,9 @@ export default function Mange({DataDecision,id}) {
 <Deductions DataDecision={DataDecision} id={id}/>
 
 
-  <Card sx={{marginTop:"20px"}}>
-      <CardContent >
-        <Stack spacing={8} >
-
-  <StackRow >
-    <Box>
-
-   <TypoHeader sx={{color:"#131627",fontWeight:"500"}}> Absence </TypoHeader>
-
-    </Box>
-    <Box>
-
-  <DatePicker
-       showIcon
-       selected={startDate}
-       onChange={(date) => setStartDate(date)}
-       icon="fa fa-calendar"
-       isClearable
-       placeholderText="Choose Calendar"
-       />
-       </Box>
-  </StackRow>
-  <StackRow >
-    <Box>
-
-   <TypoHeader>Total 2 Absence</TypoHeader>
-
-    </Box>
-    <Box sx={{display:"flex",gap:"10px"}}>
-
- <Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>+ Add</Button>
- <Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>Select</Button>
-       </Box>
-  </StackRow>
-  <StackRow >
-    <Box>
-
-   <Typography sx={{fontWeight:"400",fontSize:"14px",color:"#131627"}}> 2 hours</Typography>
-    </Box>
-    <Box>
-
- <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
-
- <TypoVal><DeleteOutlinedIcon/></TypoVal>
- <TypoVal><CreateOutlinedIcon/></TypoVal>
- </StackRow>
 
 
-       </Box>
-  </StackRow>
-  <StackRow >
-    <Box>
-
-   <Typography sx={{fontWeight:"400",fontSize:"14px",color:"#131627"}}> 3 hours</Typography>
-    </Box>
-    <Box>
-
- <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
-
- <TypoVal><DeleteOutlinedIcon/></TypoVal>
- <TypoVal><CreateOutlinedIcon/></TypoVal>
- </StackRow>
-
-
-       </Box>
-  </StackRow>
-  <StackRow >
-    <Box>
-
-   <Typography sx={{fontWeight:"400",fontSize:"14px",color:"#131627"}}> 4 hours</Typography>
-    </Box>
-    <Box>
-
- <StackRow >
- <TypoVal> 3/ 6 / 2020</TypoVal>
-
- <TypoVal><DeleteOutlinedIcon/></TypoVal>
- <TypoVal><CreateOutlinedIcon/></TypoVal>
- </StackRow>
-
-
-       </Box>
-  </StackRow>
-
-
-
-  </Stack>
-
-      </CardContent>
-
-
-   </Card>
-
+<Absence DataDecision={DataDecision} id={id} />
 
 
 

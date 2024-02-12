@@ -7,9 +7,7 @@ const AddPolicies = (payload) => {
     url: `/api/Policy/Add`,
     method: "post",
     data: payload,
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
+
   });
 };
 

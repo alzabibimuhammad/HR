@@ -1,38 +1,30 @@
 import React, { useState } from 'react';
-import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton, Avatar } from '@mui/material';
+import { Card, CardContent, MenuItem, Typography} from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 import { useTranslation } from 'react-i18next';
 import CustomDataGrid from 'src/@core/components/custom-datagrid'
-import useUserColumns from '../../hooks/useUserColumns';
-import { UsersData } from '../../infrastructure';
 import { Box } from '@mui/system';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import FallbackSpinner from '../spinner';
 import { useEffect } from 'react';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import DrawerForm from '../spinner/DrawerForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAttendancePercentage } from 'src/pages/dashboard/store';
-import useGetMvp from '../../hooks/useGetMvp';
+import useResignedColumns from '../../hooks/useResignedColumns';
+import { ResignedData } from '../../infrastructure';
 
-const Users = ({ rows }) => {
+const ResignedTable = ({ rows }) => {
 
-console.log(rows);
 
-  const columns = useUserColumns();
+  const columns = useResignedColumns();
   const [openParent, setOpenParent] = React.useState(false);
   const { t } = useTranslation()
 
-  let roleData = new Set([]) ;
-  rows?.data?.data?.forEach(element => {
+  let roleData = new Set([]);
+  rows?.forEach(element => {
       roleData.add(element?.role)
   });
 
-  let specialization = new Set([])
-  rows?.data?.data?.forEach(element => {
+  let specialization = new Set([]);
+  rows?.forEach(element => {
     specialization.add(element?.specialization)
 });
 
@@ -41,7 +33,9 @@ console.log(rows);
   };
 
 
-  const [fdata , setfdata] = useState(rows);
+  const [fdata , setfdata] = useState({rows});
+  useEffect(()=>{setfdata(rows)},[rows])
+  console.log("🚀 ~ ResignedTable ~ fdata:", fdata)
 
   const [role, setRole] = useState('');
 
@@ -59,24 +53,24 @@ console.log(rows);
     useEffect(()=>{
       let filteredData;
       if(role && department){
-        filteredData = rows?.data?.data?.filter((row) => {
-          return row?.department?.name === department && row.role===role;
+        filteredData = rows?.filter((row) => {
+          return row?.specialization=== department && row.role===role;
         });
-        setfdata({'data':{'data':filteredData}});
+        setfdata(filteredData);
 
       }
       else if(role && department==''){
-        filteredData = rows?.data?.data?.filter((row) => {
+        filteredData = rows?.filter((row) => {
           return row.role===role;
         });
-        setfdata({'data':{'data':filteredData}});
+        setfdata(filteredData);
 
       }
       else if(department && role==''){
-        filteredData = rows?.data?.data?.filter((row) => {
-          return row?.department?.name === department ;
+        filteredData = rows?.filter((row) => {
+          return row?.specialization === department ;
         });
-        setfdata({'data':{'data':filteredData}});
+        setfdata(filteredData);
 
       }
       else
@@ -92,7 +86,7 @@ console.log(rows);
       setfdata(rows);
     }
     else {
-      searchData= rows?.data?.data?.filter((element) => {
+      searchData= rows?.filter((element) => {
         if( element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase()) ){
           return element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase());
         }
@@ -108,7 +102,7 @@ console.log(rows);
       });
 
 
-      setfdata({'data':{'data':searchData}});
+      setfdata(searchData);
     }
   };
 
@@ -149,70 +143,15 @@ console.log(rows);
 
 
 
-    const {data , loading } = useGetMvp()
 
-  return    <>
+  return (
 
-    <Box sx={{ margin:0,padding:0 }} >
-        <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2-content"
-              id="panel2-header"
-              >
-              <Stack  width={'50%'}  direction={'row'} >
-
-                <Stack direction={'row'}>
-                <Typography>{percentageData?.data?.present_employees}</Typography>/
-
-                <Typography>{percentageData?.data?.total_employees}</Typography>
-                </Stack>
-
-                <Box marginTop={'5px'} marginLeft={'5px'} width={'50%'} >
-                  <FallbackSpinner total={percentageData?.data?.total_employees} active={percentageData?.data?.present_employees} />
-                </Box>
-
-                <Typography marginLeft={'5px'}>{(percentageData?.data?.present_employees/percentageData?.data?.total_employees)*100}%</Typography>
-
-              </Stack>
-            </AccordionSummary>
-
-            <AccordionDetails>
-              <Stack direction={'row'} justifyContent={'start'} alignItems={'center'} >
-                <Typography>Employee of the month</Typography>
-              <IconButton
-                aria-label="more"
-                id="long-button"
-                aria-controls={open ? 'long-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-haspopup="true"
-                onClick={handleDrawerOpen}
-                sx={{ border:'none' }}
-              >
-            <MoreHorizIcon />
-          </IconButton>
-          </Stack>
-              <Stack direction={'row'} justifyContent={'start'} alignItems={'center'} spacing={2} >
-              <Avatar/>
-
-              <Typography>
-                {data?.data?.data?.user?.first_name}
-              </Typography>
-              <Typography>
-                {data?.data?.data?.user?.last_name}
-              </Typography>
-              </Stack>
-            </AccordionDetails>
-
-          </Accordion>
-          <DrawerForm  open={openParent} setOpenParent={setOpenParent} />
-          </Box>
 
 
             <Card>
               <CardContent>
               <Typography variant='h4' paddingBottom={'10px'}>
-        {t("Employees List")}
+        {t("Resigned List")}
         </Typography>
               <Stack
                 direction={{ xs: 'column', sm: 'column' }}
@@ -291,13 +230,13 @@ console.log(rows);
 
                   </Stack>
 
-                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(fdata)|| []}   />: null }
+                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={ResignedData(fdata)|| []}   />: null }
 
               </Stack>
               </CardContent>
               </Card>
-          </>
+          )
 
 };
 
-export default Users;
+export default ResignedTable;

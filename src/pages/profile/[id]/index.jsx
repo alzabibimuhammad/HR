@@ -9,7 +9,7 @@ export default function Profile() {
   const { id } = router.query;
   const dispatch=useDispatch()
   dispatch(setUserId(id));
- 
+
   const  Data = {
 
   "success": true,
@@ -25,12 +25,16 @@ export default function Profile() {
 
   }
   return (
+
     <div>
       {Data ? (
+
         <Profiles data={Data} />
         ) : (
+
           null
       )}
     </div>
+
   );
 }

@@ -13,6 +13,8 @@ import Warnings from 'src/features/policies/add/componets/warnings';
 import AbsencesManagement from 'src/features/policies/add/componets/absences';
 import Deductions from 'src/features/policies/add/componets/deductions';
 import { useTranslation } from 'react-i18next';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Schema } from '../validation';
 
 
 
@@ -68,6 +70,7 @@ export default function Policies() {
      data.work_time.work_days=days
 
       AddPolicies(data)
+      console.log(data);
    } catch (error) {
 
    }
@@ -83,14 +86,16 @@ export default function Policies() {
     getValues,
     setValue,
     register,
+    reset,
     formState: { errors, },
   } = useForm({
     defaultValues,
     mode: 'onBlur',
 
-    //  resolver: yupResolver(Schema),
+      resolver: yupResolver(Schema),
   });
 
+  console.log(errors);
 
 
 
@@ -105,9 +110,9 @@ export default function Policies() {
     </Box>
     <Stack direction={"row"} alignItems={"center"} gap={"5px"}>
       <Box>
-        <Button sx={{fontWeight:"500",backgroundColor:"#8090a7",color:"#fff",':hover': { color: '#fff', backgroundColor: '#2A4759' }}}>
+        {/* <Button   sx={{fontWeight:"500",backgroundColor:"#8090a7",color:"#fff",':hover': { color: '#fff', backgroundColor: '#2A4759' }}}>
         {t("Cancel")}
-        </Button>
+        </Button> */}
       </Box>
       <Box >
         <Button
@@ -124,14 +129,16 @@ export default function Policies() {
 
         <Stack  spacing={6} direction={'column'}>
           <Box  >
-            <WorkTime defaultValues={defaultValues} control={control} Controller={Controller} setDays={setDays} days={days}/>
+
+            <WorkTime errors={errors} defaultValues={defaultValues} control={control} Controller={Controller} setDays={setDays} days={days}/>
+
           </Box>
 
           <Box >
-            <Annual  defaultValues={defaultValues} control={control} Controller={Controller}/>
+            <Annual errors={errors}  defaultValues={defaultValues} control={control} Controller={Controller}/>
           </Box>
           <Box >
-            <Reviews/>
+            <Reviews errors={errors}  defaultValues={defaultValues} control={control} Controller={Controller}/>
           </Box>
         </Stack>
     </Grid>
@@ -139,7 +146,7 @@ export default function Policies() {
     <Grid item sm={6}  xs={12} marginTop={'24px'}>
 
       <Stack spacing={6} direction={'column'}>
-        <Warnings defaultValues={defaultValues} control={control} Controller={Controller} setAlert={setAlert} alert={alert} setWarningsto={setWarningsto} warningsto={warningsto}/>
+        <Warnings errors={errors} defaultValues={defaultValues} control={control} Controller={Controller} setAlert={setAlert} alert={alert} setWarningsto={setWarningsto} warningsto={warningsto}/>
         <AbsencesManagement control={control} Controller={Controller} setPaid={setPaid} Paid={Paid} Unpaid={Unpaid} setUnpaid={setUnpaid} setSick={setSick} Sick={Sick}/>
         <Deductions control={control} Controller={Controller} />
       </Stack>

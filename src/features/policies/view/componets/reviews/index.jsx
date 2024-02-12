@@ -4,8 +4,10 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
-export default function Reviews() {
+export default function Reviews({data}) {
+  console.log("🚀 ~ Reviews ~ data:", data?.data?.rateTypes)
   const {t} = useTranslation()
+
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -33,6 +35,7 @@ export default function Reviews() {
     flexDirection: direction === 'column' ? 'column' : 'row',
     alignItems:'center'
   }));
+
   return (
     <Card>
 
@@ -45,14 +48,16 @@ export default function Reviews() {
 
         </StackRow>
 
-        <Typo marginTop={'2%'}>{t("Review criteria")}</Typo>
-        <TypoVal>{t("Type")}1</TypoVal>
+
+        <Typo   marginTop={'2%'}>{t("Review criteria")}</Typo>
+
+        {data?.data?.rateTypes?.map((val,index)=>( <>
 
 
 
-        <Typography component={'li'}>{t("Notes")}</Typography>
-        <Typo marginLeft={'21px'} >{t("Note")} 1:</Typo>
-        <TypoVal style={{ maxWidth:'319px',marginLeft:'21px' }}>Lorem ipsum dolor sit amet consecteturtae tt nesciunt alias!</TypoVal>
+        <TypoVal sx={{my:"10px"}} key={index}>{t("Type")} {val?.rate_type}</TypoVal>
+        </>
+))}
 
 
       </CardContent>

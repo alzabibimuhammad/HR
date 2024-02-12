@@ -17,6 +17,7 @@ import { Schema } from '../../validation'
 import { Stack } from '@mui/system'
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
+import useViewGetAbsence from '../../hooks/useGetAbsenceById'
 
 const drawerWidth = 440
 
@@ -33,9 +34,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 export default function DrawerForm({ open, setOpenParent,Data }) {
+  const id =Data?.id
   const theme = useTheme()
   const {t} = useTranslation()
 const dispatch=useDispatch()
+const { data, isLoading, isError } = useViewGetAbsence(id)
 
   const handleDrawerClose = () => {
     dispatch(getContractsData())
@@ -110,7 +113,7 @@ const dispatch=useDispatch()
     >
 
 
-    <Box  sx={{width:'100%',backgroundColor:'#DCE1E6' , fontSize:'20px' ,gap: '10px',padding:'15px',borderRadius:'10px',fontFamily:'Montserrat'  }}>Add team</Box>
+    <Box  sx={{width:'100%',backgroundColor:'#DCE1E6' , fontSize:'20px' ,gap: '10px',padding:'15px',borderRadius:'10px',fontFamily:'Montserrat'  }}>Edit Absence</Box>
     <Stack marginLeft={{ sm:'3%' }} marginTop={{sm:'2%'}}direction={{ sm:'column' }}spacing={3} >
         <Typography >UnJustified</Typography>
           <Box width={{ sm:'94%' }} >
@@ -124,51 +127,10 @@ const dispatch=useDispatch()
 
     <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
 
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
+ 
 
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
 
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-
+   
       </Stack>
     <Stack marginLeft={{ sm:'3%' }} marginTop={{sm:'2%'}}direction={{ sm:'column' }}spacing={3} >
         <Typography >Justified</Typography>
@@ -182,50 +144,14 @@ const dispatch=useDispatch()
     </Stack>
       <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
 
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
-        <Stack direction={'row'} width={ '100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-          <Typography marginLeft={'3%'} >
-            1/2/2024
-          </Typography>
-          < CloseIcon sx={{ color:'#df2e38' }} onClick={()=>handleDeleteAbsence('hi')}  />
-        </Stack>
+      {data?.data?.data?.unjustified.map((date, index) => (
+  <Stack key={index} direction={'row'} width={'100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
+    <Typography marginLeft={'3%'}>
+      {date?.startDate}
+    </Typography>
+    <CloseIcon sx={{ color:'#df2e38' }} onClick={() => handleDeleteAbsence(date)} />
+  </Stack>
+))}
 
 
         </Stack>
@@ -276,7 +202,7 @@ const dispatch=useDispatch()
           <Stack sx={{ marginLeft:'50%' }} direction={'row'} spacing={2} >
             <Button onClick={handleDrawerClose} sx={{ backgroundColor:'#DCE1E6',color:'#8090A7',borderRadius:'4px', padding: '8px 24px' }}>Cancle</Button>
             <Button /*onClick={handlerSendData}*/ sx={{ backgroundColor:'#6AB2DF',color:'#fff' ,borderRadius:'4px', padding: '8px 24px' ,   '&:hover': {
-              backgroundColor: '#3F4458', },}} >Add</Button>
+              backgroundColor: '#3F4458', },}} >Edit</Button>
           </Stack>
 
       </Box>

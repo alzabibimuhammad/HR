@@ -25,6 +25,7 @@ const useAbsenceColumns = () => {
 
 
   const handleEditClick = (row) => {
+    console.log("🚀 ~ handleEditClick ~ row:", row)
     setEditData(row);
     setIsDrawerOpenEdit(true);
   };

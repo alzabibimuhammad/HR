@@ -148,8 +148,6 @@ console.log(rows);
  }, [dispatch,store?.AttendancePercentage?.length])
 
 
-    const handleClick = () => {
-    };
 
     const {data , loading } = useGetMvp()
 

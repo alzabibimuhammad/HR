@@ -81,7 +81,6 @@ console.log(data?.data?.policy?.annual_salary_increase.notes);
 
 
         <Typography component={'li'} sx={{margin:"5px"}}>
-
           Notes
         </Typography>
 
@@ -126,8 +125,8 @@ console.log(data?.data?.policy?.annual_salary_increase.notes);
     <TypoVal>{data?.data?.policy?.absence_management?.sick_absence_days?.count}</TypoVal>
   </StackRow>
 
-    <Typography component={'li'} sx={{margin:"5px"}}>
 
+    <Typography component={'li'} sx={{margin:"5px"}}>
       Notes
     </Typography>
 

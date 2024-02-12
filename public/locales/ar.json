@@ -400,8 +400,11 @@
   "Hierarchy":"هرمية الشركة",
   "Emails":"البريد",
   "Home":"الرئيسية",
-  "Company Name":"اسم الشركة"
-
-
+  "Company Name":"اسم الشركة",
+  "Secretariats List":"قائمة الأمانات",
+  "Received Date":"تاريخ الاستلام",
+  "Date of registration is required":"تاريخ الاشتراك مطلوب",
+  "Date format should be YYYY-MM-DD":"يجب ان يكون التاريخ سسسس-شش-يي",
+  "Description is required":"الوصف مطلوب"
 
 }

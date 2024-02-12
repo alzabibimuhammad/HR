@@ -11,7 +11,7 @@ export const ComplaintsData = elements => {
       date: date,
       description: element?.description,
       user_info:element?.user?.user_info?.image
-
+      
     };
 
   });

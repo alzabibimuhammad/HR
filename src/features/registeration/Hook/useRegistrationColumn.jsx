@@ -23,7 +23,7 @@ const useRegistrationColumn = () => {
       return (
         <Stack spacing={1} direction={'row'}  alignItems={'center'} >
           <Box>
-          <Avatar src={'sdsd'} alt='' />
+          <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
           </Box>
           <Stack spacing={2} direction={'row'}>
             <Typography>

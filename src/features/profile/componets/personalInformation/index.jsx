@@ -37,7 +37,7 @@ export default function PersonalInfo({ProfileData}) {
 
   return (
 
-    <Card>
+    <Card sx={{height:"1500px"}}>
       <CardContent>
         <Stack spacing={2} direction={'column'}>
 

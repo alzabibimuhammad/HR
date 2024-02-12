@@ -41,6 +41,7 @@ const UserDropdown = props => {
 
   const { data, isloading } = useShowAllBranches()
   const branches = data?.data?.data
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // ** Props
   const { settings } = props
@@ -59,10 +60,17 @@ const UserDropdown = props => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleDropdownClose = branch => {
-    localStorage.setItem('branch', branch?.id)
-    window.location.reload(false);
+  const handleDropdownClose = url => {
+    if (url) {
+      router.push(url)
+    }
+    setAnchorEl(null)
   }
+
+  const handleMenuItemClick = (branch) => {
+      localStorage.setItem('branch', branch?.id)
+    window.location.reload(false);
+  };
 
   const styles = {
     px: 4,
@@ -141,7 +149,7 @@ const UserDropdown = props => {
 
         {branches &&
           branches.map((branch, index) => (
-            <MenuItemStyled key={index} sx={{ p: 0 }} onClick={() => handleDropdownClose(branch)}>
+            <MenuItemStyled key={index} sx={{ p: 0 }} onClick={() =>handleMenuItemClick(branch)}>
               <Box sx={styles}>
                 <Typography>{branch?.name}</Typography>
               </Box>

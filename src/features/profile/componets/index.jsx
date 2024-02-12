@@ -128,7 +128,7 @@ const Profiles = ({ tab, data }) => {
 
           <Stack direction={{ sm: 'row', xs: 'column' }}  width={'100%'} spacing={5}>
 
-          <Stack direction={'column'}width={{ sm:'50%',xs:'100%' }} spacing={2} >
+          <Stack direction={'column'}width={{ sm:'50%',xs:'100%' }} height="1000px" spacing={2} >
             <Box  >
               <AboutOverivew userDataClean={userDataClean} Data={data} />
             </Box>
@@ -157,7 +157,7 @@ const Profiles = ({ tab, data }) => {
         <TabPanel value='2'>
           <Stack direction={{ sm: 'row', xs: 'column' }} spacing={6}>
             <Stack spacing={6} width={{ sm: '40%', xs: '100%' }} direction={'column'}>
-              <PersonalInfo ProfileData={ProfileData} />
+              <PersonalInfo ProfileData={ProfileData}   />
               <NoteReport user_id={id} />
             </Stack>
 

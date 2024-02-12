@@ -68,9 +68,10 @@ const data = [
   }
 ]
 
-const Members = ({SetMembers}) => {
+const Members = ({SetMembers,SelectedRow}) => {
+console.log("🚀 ~ Members ~ SelectedRow:", SelectedRow)
 
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState(SelectedRow);
   const [searchText, setSearchText] = useState('');
   const {data:UserData,isloading}=useGetEmployeeDropDown()
 
@@ -171,7 +172,7 @@ value={searchText}
         </Box>
         <Box>
           <Checkbox
-            checked={selectedItems.includes(item.id)}
+            checked={selectedItems?.includes(item.id)}
             onChange={() => toggleSelect(item.id)}
           />
         </Box>

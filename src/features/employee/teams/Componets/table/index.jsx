@@ -43,14 +43,20 @@ export default function CollapsibleTable(Data,setEditData) {
     const [deleteId, setDeleteId] = useState(null)
 
     const [openMember, setOpenMember] = useState(false)
+    const [SelectedRow, setSelectedRow] = useState('')
+    const [openParentEdit, setOpenParentEdit] = useState(false)
+    
     const [isMemberPopupOpen, setIsMemberPopupOpen] = useState(false)
     const [memberdeleteId, setMemberDeleteId] = useState(null)
 
     const [DrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
 
     const handleEditClick = row => {
-      // setEditData(row)
-      setOpenParent(true)
+      console.log("🚀 ~ handleEditClick ~ row:", row)
+      
+      setSelectedRow(row)
+   
+      setOpenParentEdit(true)
     }
 
     const handleClickOpen = params => {
@@ -124,12 +130,12 @@ export default function CollapsibleTable(Data,setEditData) {
                   size='small'
                   onClick={() => handleEditClick(row)}
                 >
-                  {console.log(row)}
+                
                   Edit
                 </BorderColorOutlinedIcon>
               </IconButton>
 
-              <EditeForm  open={openParent} setOpenParent={setOpenParent} Data={row}/>
+              {openParentEdit &&  <EditeForm  open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow}/>}
 
               <IconButton onClick={() => handleClickOpen(row.id)}>
                 <DeleteOutlinedIcon style={{ color: '#8090A7' }} variant color='error' size='small'>

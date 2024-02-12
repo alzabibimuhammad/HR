@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import { getContractsData,addContract, EditContract } from 'src/pages/contracts/store'
 import { useDispatch  } from 'react-redux'
 import { Schema } from '../../validation'
+import useEditEmployee from '../../hooks/useEditEmployee'
 
 const drawerWidth = 440
 
@@ -33,7 +34,9 @@ export default function DrawerForm({ open, setOpenParent,Data }) {
   const theme = useTheme()
   const {t} = useTranslation()
 const dispatch=useDispatch()
-  const handleDrawerClose = () => {
+const {mutate:EditEmployee,isloading}=useEditEmployee()
+  
+const handleDrawerClose = () => {
     dispatch(getContractsData())
     setOpenParent(false)
     open = false
@@ -43,7 +46,9 @@ const dispatch=useDispatch()
   const defaultValues = {
     first_name: Data?.first_name,
     last_name: Data?.last_name,
+    middle_name:Data?.middle_name,
     team: Data?.specialization,
+    email:Data?.email,
     role:Data?.role
   }
 
@@ -58,7 +63,7 @@ const dispatch=useDispatch()
     formState: { errors ,isDirty },
     reset
   } = useForm({
-    resolver: yupResolver(Schema),
+  
     defaultValues,
     mode: 'onBlur'
   })
@@ -75,7 +80,7 @@ const dispatch=useDispatch()
           data,
           Data
         };
-        dispatch(EditContract(EditData));
+        EditEmployee(EditData)
       }
       handleDrawerClose()
       reset();
@@ -120,6 +125,24 @@ const dispatch=useDispatch()
                       fullWidth
                        autoFocus
                       label={`${t("First NAME")}`}
+                      variant='outlined'
+                      error={!!errors.name}
+                      helperText={errors.name ? errors.name.message : ''}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Controller
+                  name='middle_name'
+                  defaultValue=''
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      fullWidth
+                       autoFocus
+                      label={`${t("middle_name")}`}
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}
@@ -172,7 +195,24 @@ const dispatch=useDispatch()
                     <TextField
                       {...field}
                       fullWidth
-                      label='finance'
+                      label='specialization'
+                      variant='outlined'
+                      error={!!errors.name}
+                      helperText={errors.name ? errors.name.message : ''}
+                    />
+                  )}
+                />
+                              </Grid>
+                              <Grid item xs={12}>
+                <Controller
+                  name='email'
+                  control={control}
+                  defaultValue=''
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      fullWidth
+                      label='E-Mail'
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}

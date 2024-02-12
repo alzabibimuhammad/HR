@@ -45,7 +45,7 @@ export default function SidebarLeft({DataEventByDay}) {
   };
 
   return (
-    <Box sx={{ backgroundColor:"#E9ECF3",marginTop:"15px" }}>
+    <Box sx={{ backgroundColor:"#E9ECF3" }}>
        {Array.isArray(DataEventByDay?.data?.data) && DataEventByDay.data.data.length > 0 ? (
       DataEventByDay.data.data.map(event => (
         <div className="parent" key={event.id}>

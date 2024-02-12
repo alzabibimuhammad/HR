@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next'
 import { Tab, Tabs } from '@mui/material'
 import { TabPanel } from '@mui/lab'
 import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
+import Avatar from '@mui/material/Avatar';
 
 const ProfilePicture = styled('img')(({ theme }) => ({
   width: 108,
@@ -52,24 +53,40 @@ const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
     < >
 
 
-          <Box sx={{ marginTop:'5%',marginLeft:'3%' }} >
+          <Box sx={{ marginTop:'3%',marginLeft:'3%',position:"relative" ,zIndex:"11",display:"flex",alignItems:"center",gap:"15px"}} >
+            <Avatar
+          sx={{ width: '130px', height: '130px', borderRadius: '5px',zIndex:"22222222",marginBottom:"26px" }}
+          src={ProfileData?.image || "/broken-image.jpg"}
+        />
 
-            <ProfilePicture src={ProfileData?.image} alt='profile-picture' />
+            {/* <ProfilePicture src={ || "/broken-image.jpg"} alt='profile-picture' /> */}
 
-            <TabsProfile
-              value={value}
-              onChange={handleChange}
-              textColor="secondary"
-              indicatorColor="secondary"
-              aria-label="secondary tabs example"
-            >
-              <Tab value="1" label="Reports" />
-              <Tab value="2" label="Profile" />
-              <Tab value="3" label="Manage" />
-              <Tab value="4" label="Reviews" />
-            </TabsProfile>
+            <Box>
+<TabsProfile
+          sx={{zIndex:"2222222222222222222222",marginBottom:"40px"}}
+          value={value}
+          onChange={handleChange}
+          textColor="secondary"
+          indicatorColor="secondary"
+          aria-label="secondary tabs example"
+>
+  <Tab value="1" label="Reports" />
+  <Tab value="2" label="Profile" />
+  <Tab value="3" label="Manage" />
+  <Tab value="4" label="Reviews" />
+</TabsProfile>
+        <Typography variant='h5' sx={{ mb: 2.5 }}>
+          {ProfileData?.first_name} {ProfileData?.last_name}
+        </Typography>
+        <Typography color={'#8090A7'} fontSize={'14px'} >
+          {userData?.specialization}
+        </Typography>
+      </Box>
+
+
 
           </Box>
+
 
 
 
@@ -112,14 +129,7 @@ const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
         marginTop: { sm: '0', xs: '2%' },
       }}
     >
-      <Box>
-        <Typography variant='h5' sx={{ mb: 2.5 }}>
-          {ProfileData?.first_name} {ProfileData?.last_name}
-        </Typography>
-        <Typography color={'#8090A7'} fontSize={'14px'} >
-          {userData?.specialization}
-        </Typography>
-      </Box>
+
       <Box
         sx={{
           display: 'flex',

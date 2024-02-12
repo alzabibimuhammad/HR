@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 
 export default function PersonalInfo({ProfileData}) {
+console.log("🚀 ~ PersonalInfo ~ ProfileData:", ProfileData)
 
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
@@ -37,8 +38,8 @@ export default function PersonalInfo({ProfileData}) {
 
   return (
 
-    <Card sx={{height:"1500px"}}>
-      <CardContent>
+    <Card >
+      <CardContent >
         <Stack spacing={2} direction={'column'}>
 
         <StackRow  >
@@ -104,38 +105,28 @@ export default function PersonalInfo({ProfileData}) {
 ))}
 
         <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Emergency:</TypoHeader>
-        {ProfileData?.emergency?.map((val, index) => {
-  return (
-    <React.Fragment key={index}>
-      <ul style={{ padding: 2, margin: 0, marginLeft: '6%' }}>
-        <li>
-          <StackRow>
-            <Typo>Name:</Typo>
-            <TypoVal>{val.name}</TypoVal>
-          </StackRow>
-        </li>
-        <li>
-          <StackRow>
-            <Typo>Address:</Typo>
-            <TypoVal>{val.address}</TypoVal>
-          </StackRow>
-        </li>
-        <li>
-          <StackRow>
-            <Typo>Phone number:</Typo>
-            <TypoVal>{val.contact}</TypoVal>
-          </StackRow>
-        </li>
-        <li>
-          <StackRow>
-            <Typo>Email:</Typo>
-            <TypoVal>{val?.email}</TypoVal>
-          </StackRow>
-        </li>
-      </ul>
-    </React.Fragment>
-  );
-})}
+        {ProfileData?.emergency?.map((val, index) => (
+  <Box  key={val.id}>
+    <StackRow>
+      <Typo>Name:</Typo>
+      <TypoVal>{val?.name}</TypoVal>
+    </StackRow>
+    <StackRow>
+      <Typo>Address:</Typo>
+      <TypoVal>{val?.address}</TypoVal>
+    </StackRow>
+    <StackRow>
+      <Typo>Phone number:</Typo>
+      <TypoVal>{val.contact}</TypoVal>
+    </StackRow>
+    <StackRow>
+      <Typo>Email:</Typo>
+      <TypoVal>{val?.email}</TypoVal>
+    </StackRow>
+  </Box>
+))}
+
+
 
 
         <StackRow>
@@ -154,8 +145,8 @@ export default function PersonalInfo({ProfileData}) {
         <StackRow>
           <Typo>team:</Typo>
           <TypoVal>{ProfileData?.department?.name}</TypoVal>
-        </StackRow>
 
+        </StackRow>
         </Stack>
       </CardContent>
     </Card>

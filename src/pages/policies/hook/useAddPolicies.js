@@ -1,15 +1,21 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import AddPolicies from "../api/AddPolicies";
+import { showErrorToast } from "src/utiltis/showErrorToast";
+import { showSuccesToast } from "src/utiltis/toastSecces";
 
 export const useAddPolicies = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn:AddPolicies,
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries("AddPolicies");
-      toast.success('Policies added successfully')
+      showSuccesToast("",'Policies added successfully')
+
     },
+    onError:(data)=>{
+      console.log(data);
+      showErrorToast("","Policies added Error , check input")
+    }
   });
 };

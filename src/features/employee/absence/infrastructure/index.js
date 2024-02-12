@@ -1,6 +1,6 @@
 export const AbsenceData = elements => {
 
-  return elements?.data?.data?.data?.map(element => {
+  return elements?.data?.data?.map(element => {
     return {
       id: element?.id,
       name:element?.username,

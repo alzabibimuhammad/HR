@@ -8,7 +8,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { Button, MenuItem, TextField, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
 import { getContractsData,addContract, EditContract } from 'src/pages/contracts/store'
@@ -39,14 +39,9 @@ export default function DrawerForm({ open, setOpenParent,Data }) {
   const {t} = useTranslation()
 const dispatch=useDispatch()
 const { data, isLoading, isError } = useViewGetAbsence(id)
-const [fdata, setfdata] = useState(data?.data?.data?.unjustified)
-const [fndata, setfndata] = useState(data?.data?.data?.justified)
-
-useEffect(() => {
-  setfdata(data?.data?.data?.unjustified)
-  setfndata(data?.data?.data?.justified)
-}, [data?.data?.data?.unjustified,data?.data?.data?.justified])
-
+const [selectedType, setSelectedType] = useState('');
+const [selectedDate, setSelectedDate] = useState('');
+480761bde283b1d320090fc083e5200db89107c
 
   const handleDrawerClose = () => {
     dispatch(getContractsData())
@@ -102,6 +97,12 @@ useEffect(() => {
     defaultValues,
     mode: 'onBlur'
   })
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'absences',
+  });
+
 
   const onSubmit =   data => {
       if(!Data)
@@ -162,21 +163,15 @@ useEffect(() => {
           />
           </Box>
     </Stack>
-    
-
-    <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
-
-      {fndata && fndata?.map((date, index) => (
-  <Stack key={index} direction={'row'} width={'100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-    <Typography marginLeft={'3%'}>
-      {date?.startDate}
-    </Typography>
-    <CloseIcon sx={{ color:'#df2e38' }} onClick={() => handleDeleteAbsence(date)} />
-  </Stack>
-))}
 
 
-        </Stack>
+    <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', ma
+
+
+
+
+      </Stack>
+480761bde283b1d320090fc083e5200db89107c
     <Stack marginLeft={{ sm:'3%' }} marginTop={{sm:'2%'}}direction={{ sm:'column' }}spacing={3} >
         <Typography >Justified</Typography>
           <Box width={{ sm:'94%' }} >
@@ -192,8 +187,7 @@ useEffect(() => {
       <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
 
       {fdata && fdata?.map((date, index) => (
-  <Stack key={index} direction={'row'} width={'100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-    <Typography marginLeft={'3%'}>
+%'}>
       {date?.startDate}
     </Typography>
     <CloseIcon sx={{ color:'#df2e38' }} onClick={() => handleDeleteAbsence(date)} />
@@ -205,49 +199,64 @@ useEffect(() => {
 
 
         <Box width={"90%"} marginLeft={'3%'}>
-        <Controller
-            name='type'
-            control={control}
-
-            render={({ field }) => (
-              <TextField
-
+        {fields.map((absence, index) => ( <>
+          <Box onClick={() => remove(index)}>
+              <CloseIcon sx={{cursor:"pointer",'&:hover': { color: 'red' }}} onClick={() => remove(index)} />
+            </Box>
+          <Box key={absence.id}>
+            <Controller
+              name={`absences[${index}].type`}
+              control={control}
+              render={({ field }) => (
+                <TextField
                 select
-                {...field}
-                defaultValue=''
-                variant="outlined"
-                fullWidth
-                size='small'
-              >
-                <MenuItem value='' >Type</MenuItem>
-                <MenuItem value='justified' >Justified</MenuItem>
-                <MenuItem value='unjustified' >UnJustified</MenuItem>
-              </TextField>
-            )}
-          />
-          <Controller
-            name='date'
-            control={control}
-
-            render={({ field }) => (
-              <TextField
+                  {...field}
+                  defaultValue=''
+                  variant='outlined'
+                  fullWidth
+                  size='small'
+                  onChange={(e) => {
+                    setSelectedType(e.target.value);
+                  }}
+                  >
+                  <MenuItem value=''>Type</MenuItem>
+                  <MenuItem value='justified'>Justified</MenuItem>
+                  <MenuItem value='unjustified'>Unjustified</MenuItem>
+                </TextField>
+              )}
+              />
+            <Controller
+              name={`absences[${index}].date`}
+              control={control}
+              render={({ field }) => (
+                <TextField
                 type='date'
                 {...field}
-                variant="outlined"
+                sx={{marginTop:"8px"}}
+                variant='outlined'
                 fullWidth
                 size='small'
-              />
-            )}
-          />
+                onChange={(e) => {
+                  setSelectedDate(e.target.value);
+                }}
+                />
+                )}
+                />
+
           </Box>
-        <Stack marginLeft={{ sm:'3%'  }}>
-          <Box display={'flex'}> <AddIcon sx={{ color:'#6AB2DF' }} />  <Typography sx={{ color:'#6AB2DF' }}>Add Absence</Typography> </Box>
+        </>
+        ))}
+          </Box>
+        <Stack marginLeft={{ sm:'3%'  }} sx={{marginTop:"15px"}}>
+          <Box  onClick={() => append({ type: '', date: '' })}sx={{ color: '#6AB2DF' ,cursor:"pointer"}} display={'flex'}> <AddIcon sx={{ color:'#6AB2DF' }} />  <Typography sx={{ color:'#6AB2DF' }}>Add Absence</Typography> </Box>
         </Stack>
 
 
       <Box sx={{ display:'flex', width:'100%',padding:'10px'}} >
           <Stack sx={{ marginLeft:'50%' }} direction={'row'} spacing={2} >
+
             <Button onClick={handleDrawerClose} sx={{ backgroundColor:'#DCE1E6',color:'#8090A7',borderRadius:'4px', padding: '8px 24px' }}>Cancle</Button>
+
             <Button /*onClick={handlerSendData}*/ sx={{ backgroundColor:'#6AB2DF',color:'#fff' ,borderRadius:'4px', padding: '8px 24px' ,   '&:hover': {
               backgroundColor: '#3F4458', },}} >Edit</Button>
           </Stack>

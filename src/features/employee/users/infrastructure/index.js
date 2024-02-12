@@ -8,6 +8,7 @@ export const UsersData = elements => {
       role: element?.role,
       specialization:element?.specialization,
       email:element?.email,
+      user_info:element?.user_info?.image
     }
   })
 }

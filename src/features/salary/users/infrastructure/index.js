@@ -10,7 +10,8 @@ export const SalaryData = elements => {
       reward:element?.reward,
       deducations:element?.deduction,
       advances:element?.advance,
-      total:total
+      total:total,
+      user_info:element?.user_info?.image
 
     }
   })

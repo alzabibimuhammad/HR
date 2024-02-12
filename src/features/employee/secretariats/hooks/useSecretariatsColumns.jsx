@@ -52,7 +52,7 @@ const useSecretariatsColumns = () => {
         renderCell: (params) => {
               return (
               <>
-              <Avatar alt=''  />
+              <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
               <Typography  style={{fontSize:'14px', marginLeft:'2px' }} >{params?.row?.first_name}</Typography>
               <Typography style={{ fontSize:'14px',marginLeft:'3px' }} >{params?.row?.last_name}</Typography>
               </>

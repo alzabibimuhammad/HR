@@ -44,6 +44,11 @@ const useRegistrationColumn = () => {
         field: 'first_name',
         headerName: t("Name"),
         flex:2,
+        renderCell:(params)=>{
+          return(
+            <Typography>#{params.row.first_name}</Typography>
+          )
+        }
     },
     {
       field: 'date',

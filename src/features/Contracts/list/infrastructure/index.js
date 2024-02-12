@@ -9,7 +9,8 @@ export const ContractsData = elements => {
       status:element?.status,
       employee:element?.user?.first_name,
       employeeLastName:element?.user?.last_name,
-      role: element?.user?.role
+      role: element?.user?.role,
+      user_info: element?.user?.user_info?.image
     }
   })
 }

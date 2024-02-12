@@ -3,7 +3,6 @@ import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import { useSelector } from 'react-redux'
-
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
 import { FormateDate } from 'src/utiltis/DateFormate'
@@ -15,6 +14,7 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
   const [showMonthPicker, setShowMonthPicker] = useState('day')
 
   const { mutate: ReportDay, data, isloading } = useReportByDay()
+
   const DayDate = new Date()
   const FormateDayDate = FormateDate(DayDate)
   const store = useSelector(state => state.user)
@@ -27,6 +27,7 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
     formData.append('date', FormateDayDate)
 
     ReportDay(formData)
+
   }, [store?.userId])
 
   useEffect(() => {

@@ -5,7 +5,8 @@ export const SecretariatsData = elements => {
       first_name:element?.user?.first_name,
       last_name: element?.user?.last_name,
       description:element?.description,
-      date:element?.received_date
+      date:element?.received_date,
+      user_info:element?.user?.user_info?.image,
 
     }
   })

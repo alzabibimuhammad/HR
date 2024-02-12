@@ -1,4 +1,5 @@
 export const RegistrationData = elements => {
+console.log("🚀 ~ RegistrationData ~ elements:", elements)
 
 
   const targetTime = "09:15"
@@ -71,7 +72,8 @@ export const RegistrationData = elements => {
       department: element?.department?.name,
       status: statusX,
       checkIn: checkinDate,
-      checkOut: checkoutDate
+      checkOut: checkoutDate,
+      user_info:element?.user_info?.image
     };
   });
 };

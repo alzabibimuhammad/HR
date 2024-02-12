@@ -106,6 +106,17 @@ const navigation = () => {
         },
       ]
     },
+    {
+      title: 'Archive',
+      icon: 'tabler:file-text',
+      path: '/Archive',
+      children:[
+        {
+          title:"Resigned",
+          path:"/archive/resigned"
+        },
+      ]
+    },
 
     {
       title: 'Settings',

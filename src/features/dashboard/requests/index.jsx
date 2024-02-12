@@ -23,7 +23,7 @@ export default function Requests() {
   console.log("🚀 ~ Requests ~ requestsData:", requestsData=="No requests available")
 
     const handleApproveClick = (params) => {
-    AccepteRequest(params)
+      Accepted(params)
  };
 
  const handleRejectClick = (params) => {

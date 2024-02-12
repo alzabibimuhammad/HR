@@ -41,6 +41,7 @@ const dispatch=useDispatch()
 const { data, isLoading, isError } = useViewGetAbsence(id)
 const [selectedType, setSelectedType] = useState('');
 const [selectedDate, setSelectedDate] = useState('');
+480761bde283b1d320090fc083e5200db89107c
 
   const handleDrawerClose = () => {
     dispatch(getContractsData())
@@ -51,6 +52,34 @@ const [selectedDate, setSelectedDate] = useState('');
 
   const defaultValues = {
     type:''
+  }
+
+  const handleDate = e => {
+    const date = e.target.value
+
+    let searchData
+    if (!date) {
+      setfdata(data?.data?.data?.unjustified)
+    } else {
+      searchData = data?.data?.data?.unjustified?.filter(element => {
+        return element?.startDate == date
+      })
+      setfdata(searchData)
+    }
+  }
+
+  const handleDateN = e => {
+    const date = e.target.value
+
+    let searchData
+    if (!date) {
+      setfndata(data?.data?.data?.justified)
+    } else {
+      searchData = data?.data?.data?.justified?.filter(element => {
+        return element?.startDate == date
+      })
+      setfndata(searchData)
+    }
   }
 
   useEffect(() => {
@@ -101,7 +130,7 @@ const [selectedDate, setSelectedDate] = useState('');
   return (
 
       <Drawer
-      backgroundColor='#fff'
+
       sx={{
         width: drawerWidth,
         flexShrink: 0,
@@ -126,26 +155,30 @@ const [selectedDate, setSelectedDate] = useState('');
         <Typography >UnJustified</Typography>
           <Box width={{ sm:'94%' }} >
           <TextField
+            onChange={handleDateN}
           fullWidth
           type='date'
           size='small'
+
           />
           </Box>
     </Stack>
 
-    <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
 
-
+    <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', ma
 
 
 
 
       </Stack>
+480761bde283b1d320090fc083e5200db89107c
     <Stack marginLeft={{ sm:'3%' }} marginTop={{sm:'2%'}}direction={{ sm:'column' }}spacing={3} >
         <Typography >Justified</Typography>
           <Box width={{ sm:'94%' }} >
+
           <TextField
           fullWidth
+          onChange={handleDate}
           type='date'
           size='small'
           />
@@ -153,9 +186,8 @@ const [selectedDate, setSelectedDate] = useState('');
     </Stack>
       <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
 
-      {data?.data?.data?.unjustified.map((date, index) => (
-  <Stack key={index} direction={'row'} width={'100%'} height={'49px'} justifyContent={'space-between'} alignItems={'center'}>
-    <Typography marginLeft={'3%'}>
+      {fdata && fdata?.map((date, index) => (
+%'}>
       {date?.startDate}
     </Typography>
     <CloseIcon sx={{ color:'#df2e38' }} onClick={() => handleDeleteAbsence(date)} />

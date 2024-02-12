@@ -71,7 +71,7 @@ const data = [
 const Members = ({SetMembers,SelectedRow}) => {
 console.log("🚀 ~ Members ~ SelectedRow:", SelectedRow)
 
-  const [selectedItems, setSelectedItems] = useState(SelectedRow);
+  const [selectedItems, setSelectedItems] = useState(SelectedRow||[]);
   const [searchText, setSearchText] = useState('');
   const {data:UserData,isloading}=useGetEmployeeDropDown()
 
@@ -80,6 +80,7 @@ console.log("🚀 ~ Members ~ SelectedRow:", SelectedRow)
   };
 
   const toggleSelect = (icon) => {
+    console.log("🚀 ~ toggleSelect ~ icon:", icon)
     const isSelected = selectedItems.includes(icon);
     if (isSelected) {
       setSelectedItems(selectedItems.filter((item) => item !== icon));

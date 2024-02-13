@@ -10,7 +10,8 @@ export const ContractsData = elements => {
       employee:element?.user?.first_name,
       employeeLastName:element?.user?.last_name,
       role: element?.user?.role,
-      user_info: element?.user?.user_info?.image
+      user_info: element?.user?.user_info?.image,
+      user_id:element?.user?.id
     }
   })
 }

@@ -10,8 +10,9 @@ export const ComplaintsData = elements => {
       last_name: element?.user?.last_name,
       date: date,
       description: element?.description,
-      user_info:element?.user?.user_info?.image
-      
+      user_info:element?.user?.user_info?.image,
+      user_id:element?.user?.id
+
     };
 
   });

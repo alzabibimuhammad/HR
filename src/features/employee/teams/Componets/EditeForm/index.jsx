@@ -35,7 +35,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 export default function EditeForm({ open, setOpenParent,SelectedRow }) {
-  console.log("🚀 ~ EditeForm ~ Data:", SelectedRow)
   const {data:UserData,isloading}=useGetEmployeeDropDown()
   const theme = useTheme()
   const{mutate:EditTeam}=useEditTeam()
@@ -150,9 +149,9 @@ return UserData.data.data.filter((item) =>
 
 
 
- 
+
 {/* ****************** */}
-       
+
           <Box sx={{ display:'flex', width:'100%',padding:'10px'}} >
             <Stack sx={{ marginLeft:'50%' }} direction={'row'} spacing={2} >
               <Button onClick={handleDrawerClose} sx={{ backgroundColor:'#DCE1E6',color:'#8090A7',borderRadius:'4px', padding: '8px 24px','&:hover': {backgroundColor: '#DCE1E6'} }}>Cancle</Button>

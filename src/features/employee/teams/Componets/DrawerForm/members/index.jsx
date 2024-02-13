@@ -69,7 +69,6 @@ const data = [
 ]
 
 const Members = ({SetMembers,SelectedRow}) => {
-console.log("🚀 ~ Members ~ SelectedRow:", SelectedRow)
 
   const [selectedItems, setSelectedItems] = useState(SelectedRow||[]);
   const [searchText, setSearchText] = useState('');
@@ -80,7 +79,6 @@ console.log("🚀 ~ Members ~ SelectedRow:", SelectedRow)
   };
 
   const toggleSelect = (icon) => {
-    console.log("🚀 ~ toggleSelect ~ icon:", icon)
     const isSelected = selectedItems.includes(icon);
     if (isSelected) {
       setSelectedItems(selectedItems.filter((item) => item !== icon));
@@ -93,7 +91,7 @@ console.log("🚀 ~ Members ~ SelectedRow:", SelectedRow)
 
 const filteredData = useMemo(() => {
   if (!searchText || !UserData || !UserData.data || !UserData.data.data) {
-    return UserData?.data.data||[]; 
+    return UserData?.data.data||[];
   }
 
   return UserData.data.data.filter((item) =>

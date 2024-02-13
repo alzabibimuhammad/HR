@@ -20,7 +20,6 @@ import useGetMvp from '../../hooks/useGetMvp';
 
 const Users = ({ rows }) => {
 
-console.log(rows);
 
   const columns = useUserColumns();
   const [openParent, setOpenParent] = React.useState(false);

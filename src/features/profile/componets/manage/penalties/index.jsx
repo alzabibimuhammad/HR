@@ -180,7 +180,6 @@ export default function Penalties({DataDecision,id}) {
       });
 
     } catch (error) {
-      console.error('API Error:', error);
     }
   };
 

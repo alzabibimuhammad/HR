@@ -32,6 +32,7 @@ import useGetRattingtype from './hooks/useGetRatingType'
 import { useSelector } from 'react-redux'
 import useGetAllContracts from 'src/features/Contracts/list/Hooks/useGetAllContracts'
 import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
+
 const RatingTabel = ({ rows }) => {
   const { data, isloading } = useGetRattingtype()
   const columns = useUserColumns()

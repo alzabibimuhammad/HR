@@ -181,7 +181,6 @@ export default function Alerts({DataDecision,id}) {
       });
 
     } catch (error) {
-      console.error('API Error:', error);
     }
   };
 

@@ -179,7 +179,6 @@ export default function Deductions({DataDecision,id}) {
       });
 
     } catch (error) {
-      console.error('API Error:', error);
     }
   };
 

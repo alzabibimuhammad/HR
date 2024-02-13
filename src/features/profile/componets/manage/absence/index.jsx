@@ -182,7 +182,6 @@ export default function Absence({DataDecision,id}) {
       });
 
     } catch (error) {
-      console.error('API Error:', error);
     }
   };
 

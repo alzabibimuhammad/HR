@@ -60,7 +60,6 @@ const AppCalendar = () => {
   }, [dispatch, store?.selectedCalendars])
 
   const handleDateChange = date => {
-    console.log("🚀 ~ handleDateChange ~ date:", date)
     let day = date.$D
     let month = (Number(date.$M+1) < 10 ? '0' : '') + Number(date.$M+1)
     let year = date.$y

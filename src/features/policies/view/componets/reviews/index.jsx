@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 export default function Reviews({data}) {
-  console.log("🚀 ~ Reviews ~ data:", data?.data?.rateTypes)
   const {t} = useTranslation()
 
   const Typo = styled(Typography)(() => ({

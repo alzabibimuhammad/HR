@@ -5,10 +5,8 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 export default function Deductions({data}) {
-console.log("🚀 ~ Deductions ~ data:", data?.data?.policy?.deduction_status === 1 ? "By choosing this option, the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.": "Automatic DeductionSelecting this option will enable automatic deduction of salary for specified cases, such as late arrivals. The system will apply deductions without requiring manual approval.")
 
 
-  console.log(Boolean(1));
 
   const {t} = useTranslation()
 

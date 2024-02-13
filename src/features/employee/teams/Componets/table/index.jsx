@@ -45,17 +45,16 @@ export default function CollapsibleTable(Data,setEditData) {
     const [openMember, setOpenMember] = useState(false)
     const [SelectedRow, setSelectedRow] = useState('')
     const [openParentEdit, setOpenParentEdit] = useState(false)
-    
+
     const [isMemberPopupOpen, setIsMemberPopupOpen] = useState(false)
     const [memberdeleteId, setMemberDeleteId] = useState(null)
 
     const [DrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
 
     const handleEditClick = row => {
-      console.log("🚀 ~ handleEditClick ~ row:", row)
-      
+
       setSelectedRow(row)
-   
+
       setOpenParentEdit(true)
     }
 
@@ -130,7 +129,7 @@ export default function CollapsibleTable(Data,setEditData) {
                   size='small'
                   onClick={() => handleEditClick(row)}
                 >
-                
+
                   Edit
                 </BorderColorOutlinedIcon>
               </IconButton>

@@ -25,9 +25,8 @@ import Deductions from './deductions';
 import Rewards from './rewards';
 import Absence from './absence';
 
-export default function Mange({DataDecision,id}) {
+export default function Mange({id}) {
 
-  const {data} = DataDecision?.data
 
   const [startDate,setStartDate]=useState()
 
@@ -89,7 +88,7 @@ export default function Mange({DataDecision,id}) {
 
 
 
-<Warnings DataDecision={DataDecision} id={id}/>
+<Warnings id={id} />
 
    {/* End section Warnings */}
 
@@ -98,7 +97,7 @@ export default function Mange({DataDecision,id}) {
 
 
 
-   <Alerts DataDecision={DataDecision} id={id}/>
+   {/* <Alerts DataDecision={DataDecision} id={id}/> */}
 
       {/* End section Alerts */}
 
@@ -107,7 +106,7 @@ export default function Mange({DataDecision,id}) {
 
    {/* section  Alerts */}
 
-   <Penalties DataDecision={DataDecision} id={id}/>
+   {/* <Penalties DataDecision={DataDecision} id={id}/> */}
       {/* End section Alerts */}
 
    {/* ******************************* */}
@@ -115,16 +114,16 @@ export default function Mange({DataDecision,id}) {
   </Grid>
   <Grid item xs={6}>
 
-<Deductions DataDecision={DataDecision} id={id}/>
+{/* <Deductions DataDecision={DataDecision} id={id}/> */}
 
 
 
 
-<Absence DataDecision={DataDecision} id={id} />
+{/* <Absence DataDecision={DataDecision} id={id} /> */}
 
 
 
-<Rewards DataDecision={DataDecision} id={id} />
+{/* <Rewards DataDecision={DataDecision} id={id} /> */}
 
   </Grid>
 </Grid>

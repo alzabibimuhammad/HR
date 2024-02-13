@@ -20,7 +20,6 @@ export default function Requests() {
   const { t } = useTranslation()
   const requestsData = data?.data?.data || [];
   let counter = 0;
-  console.log("🚀 ~ Requests ~ requestsData:", requestsData=="No requests available")
 
     const handleApproveClick = (params) => {
       Accepted(params)

@@ -180,7 +180,6 @@ export default function Rewards({DataDecision,id}) {
       });
 
     } catch (error) {
-      console.error('API Error:', error);
     }
   };
 

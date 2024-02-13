@@ -7,7 +7,6 @@ import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 
 export default function Show({ data, open, handleClose }) {
-  console.log('🚀 ~ Show ~ data:', data)
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

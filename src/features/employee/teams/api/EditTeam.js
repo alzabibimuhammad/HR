@@ -1,8 +1,7 @@
 import { request } from "../../../../utiltis/AxiosUtilitis";
 
 const EditTeam = (payload) => {
-  console.log("🚀 ~ EditTeam ~ payload:", payload)
-  
+
   return request({
     url: `/api/Team/updateTeam/${payload.id}`,
     method: "post",

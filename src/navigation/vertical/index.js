@@ -78,7 +78,7 @@ const navigation = () => {
     },
     {
       title: 'Complaints',
-      icon: 'tabler:alert-circle',
+      icon: 'tabler:alert-square',
       path:"/complaints"
     },
     {
@@ -113,7 +113,7 @@ const navigation = () => {
     },
     {
       title: 'Archive',
-      icon: 'tabler:file-text',
+      icon: 'tabler:archive',
       path: '/Archive',
       children:[
         {

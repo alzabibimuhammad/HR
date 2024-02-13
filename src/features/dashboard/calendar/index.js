@@ -50,9 +50,17 @@ const AppCalendar = () => {
   const dispatch = useDispatch()
   const store = useSelector(state => state.calendar)
   const { mutate: getEvent, isLoading, data: DataEventByDay } = useGetEventByDay()
-
+  const today = new Date()
+  const d = today.getDate()
+  const m =(Number(today.getMonth()+1) < 10 ? '0' : '') + Number(today.getMonth()+1)
+  const y = today.getFullYear()
+  const formattedDate = `${y}-${m}-${d}`
   // ** Vars
+  useEffect(()=>{
 
+    getEvent(formattedDate)
+
+  },[])
   const { skin, direction } = settings
   const mdAbove = useMediaQuery(theme => theme.breakpoints.up('md'))
   useEffect(() => {

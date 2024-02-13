@@ -7,7 +7,7 @@ export const SecretariatsData = elements => {
       description:element?.description,
       date:element?.received_date,
       user_info:element?.user?.user_info?.image,
-
+      user_id:element?.user?.id
     }
   })
 }

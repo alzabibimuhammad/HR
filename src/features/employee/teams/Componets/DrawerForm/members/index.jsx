@@ -71,6 +71,7 @@ const data = [
 const Members = ({SetMembers,SelectedRow}) => {
 
   const [selectedItems, setSelectedItems] = useState(SelectedRow||[]);
+  console.log("🚀 ~ Members ~ selectedItems:", selectedItems)
   const [searchText, setSearchText] = useState('');
   const {data:UserData,isloading}=useGetEmployeeDropDown()
 
@@ -107,11 +108,11 @@ const filteredData = useMemo(() => {
 
       <Stack direction="row" spacing={2} padding={"10px"} position={"relative"} >
           {selectedItems?.map((icon, index) => (
-    <Avatar key={index} variant='circular' sx={{  width: 34, height: 34 ,overflow:"visible"}}>
+      <Avatar key={index} src={process.env.NEXT_PUBLIC_IMAGES+'/'+icon?.user_info?.image}  variant='circular' sx={{  width: 34, height: 34 }}>
       <Icon icon={icon} />
       <Box onClick={()=>{deletee(index)}}>
 
-      <CloseIcon  sx={{position:"absolute",backgroundColor:"red",width:"10px",height:"10px",borderRadius:"50%",left:"0px",bottom:"23px",color:"#fff",cursor:"pointer"}} />
+      <CloseIcon  sx={{position:"absolute",backgroundColor:"red",width:"10px",height:"10px",borderRadius:"50%",left:"0px",bottom:"23px",color:"#fff",cursor:"pointer",zIndex:'999'}} />
       </Box>
     </Avatar>
   ))}
@@ -149,7 +150,7 @@ value={searchText}
         mb: index !== filteredData.length - 1 ? [6.25, 6.25, 5.5, 6.25] : []
       }}
     >
-      <Avatar variant="rounded" sx={{ mr: 4, width: 34, height: 34 }}>
+      <Avatar variant="rounded"  src={process.env.NEXT_PUBLIC_IMAGES+'/'+item?.user_info?.image}  sx={{ mr: 4, width: 34, height: 34 }}>
         <Icon icon={item.first_name} />
       </Avatar>
       <Box

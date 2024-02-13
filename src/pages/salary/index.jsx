@@ -1,3 +1,5 @@
+import { CircularProgress } from '@mui/material'
+import { Box } from '@mui/system'
 import { useEffect } from 'react'
 import Users from 'src/features/employee/users/componets/DataGrid'
 import SalaryDataGrid from 'src/features/salary/users/componets/DataGrid'
@@ -19,7 +21,10 @@ export default function Employees() {
 
   return (
     <>
-    {GetDataByMonth ? <SalaryDataGrid rows = {GetDataByMonth}/>:null}
+    {GetDataByMonth ? <SalaryDataGrid rows = {GetDataByMonth}/>:
+    <Box height={'100%'} display={'center'} justifyContent={'center'}  alignItems={'center'} >
+      <CircularProgress/>
+    </Box>}
     </>
   )
 

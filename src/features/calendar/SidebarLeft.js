@@ -13,7 +13,7 @@ import { FormateDate } from 'src/utiltis/DateFormate'
 import { useGetEventByDay } from './hooks/useGetEventByDay'
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Stack, padding } from '@mui/system'
 
 const SidebarLeft = props => {
@@ -35,6 +35,17 @@ const SidebarLeft = props => {
 
   const colorsArr = calendarsColor ? Object.entries(calendarsColor) : []
   const { mutate: getEvent, isLoading, data: DataEventByDay } = useGetEventByDay()
+  const today = new Date()
+  const d = today.getDate()
+  const m =(Number(today.getMonth()+1) < 10 ? '0' : '') + Number(today.getMonth()+1)
+  const y = today.getFullYear()
+  const formattedDate = `${y}-${m}-${d}`
+  // ** Vars
+  useEffect(()=>{
+
+    getEvent(formattedDate)
+
+  },[])
   const [selectedDate, SetSelectedDate] = useState()
 
   const renderFilters = colorsArr.length
@@ -62,6 +73,7 @@ const SidebarLeft = props => {
   }
 
   const handleDateChoose = date => {
+
     SetSelectedDate(date)
     const formattedDate = FormateDate(date)
     let formattedAfterformatted = new Date(formattedDate)
@@ -72,6 +84,7 @@ const SidebarLeft = props => {
     const FinalformattedDate = `${y}-${m}-${d}`
     getEvent(FinalformattedDate)
     calendarApi.gotoDate(date)
+
   }
   if (renderFilters) {
     return (
@@ -131,7 +144,7 @@ const SidebarLeft = props => {
         </Box>
         <Divider sx={{ width: '100%', m: '0 !important' }} />
 
-        <Box sx={{ p: 4, width: '100%' }} height={'350px'} style={{ overflow: 'auto' }}>
+        <Box sx={{ p: 4, width: '100%',overflow: 'auto' ,'&::-webkit-scrollbar': {width: '3px' } }} height={'350px'}  >
           <Typography mb={2} sx={{ fontWeight: '600', fontSize: '20px', color: '#131627' }}>
             {t('Today Event')}
           </Typography>

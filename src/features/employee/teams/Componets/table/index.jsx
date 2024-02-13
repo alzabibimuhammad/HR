@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import { Button, TextField } from '@mui/material'
+import { Avatar, Button, TextField } from '@mui/material'
 import DrawerForm from '../DrawerForm'
 import { Stack } from '@mui/system'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline'
@@ -25,6 +25,8 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import AlertDialogMember from '../dialogTeamUser'
 import EditeForm from '../EditeForm'
+import HighlightOffIcon from '@mui/icons-material/HighlightOff'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 
 function createData(id, name, user) {
   return {
@@ -34,7 +36,7 @@ function createData(id, name, user) {
   }
 }
 
-export default function CollapsibleTable(Data,setEditData) {
+export default function CollapsibleTable(Data, setEditData) {
   function Row(props) {
     const { row } = props
     const [open, setOpen] = useState(false)
@@ -52,6 +54,7 @@ export default function CollapsibleTable(Data,setEditData) {
     const [DrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
 
     const handleEditClick = row => {
+      console.log('🚀 ~ handleEditClick ~ row:', row)
 
       setSelectedRow(row)
 
@@ -129,12 +132,13 @@ export default function CollapsibleTable(Data,setEditData) {
                   size='small'
                   onClick={() => handleEditClick(row)}
                 >
-
                   Edit
                 </BorderColorOutlinedIcon>
               </IconButton>
 
-              {openParentEdit &&  <EditeForm  open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow}/>}
+              {SelectedRow && (
+                <EditeForm open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow} />
+              )}
 
               <IconButton onClick={() => handleClickOpen(row.id)}>
                 <DeleteOutlinedIcon style={{ color: '#8090A7' }} variant color='error' size='small'>
@@ -149,49 +153,40 @@ export default function CollapsibleTable(Data,setEditData) {
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout='auto' unmountOnExit>
-              <Box sx={{ margin: 1 }}>
-                <Table size='small' aria-label='purchases'>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>{t('ID')}</TableCell>
-                      <TableCell>{t('Name')}</TableCell>
-                      <TableCell>{t('Email')}</TableCell>
-                      <TableCell align='right'>{t('Action')}</TableCell>
-                    </TableRow>
-                  </TableHead>
+              <Stack spacing={3} sx={{ margin: 1 }}>
+                {row?.user?.map(user => (
 
-                  <TableBody>
-                    {row?.user?.map(user => (
-                      <TableRow key={user.date}>
-                        <TableCell component='th' scope='row'>
-                          {user.id}
-                        </TableCell>
-                        <TableCell>
-                          <Stack direction={'row'} spacing={2}>
-                            <Typography >{user.first_name}</Typography>
-                            <Typography>{user.last_name}</Typography>
-                          </Stack>
-                        </TableCell>
-                        <TableCell>{user.email}</TableCell>
-                        <TableCell align='right'>
-                          <IconButton onClick={() => handleMemberOpen(user.id)}>
-                            <DeleteOutlinedIcon style={{ color: '#8090A7' }} variant color='error' size='small'>
-                              Delete
-                            </DeleteOutlinedIcon>
-                          </IconButton>
-                          {isMemberPopupOpen && (
-                            <AlertDialogMember
-                              id={memberdeleteId}
-                              open={isMemberPopupOpen}
-                              handleClose={handleMemberClose}
-                            />
-                          )}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </Box>
+                  <Stack direction={'row'} justifyContent={'space-between'}>
+                    <Link style={{ textDecoration: 'none' }} href={`/profile/${user.id}`}>
+                      <Stack direction={'row'} alignItems={'center'} spacing={3}>
+                        <Avatar
+                          src={process.env.NEXT_PUBLIC_IMAGES + '/' + user?.user_info?.image}
+                          sx={{ width: 46, height: 46 }}
+                        />
+                        <Stack direction={'column'}>
+                          <Typography>
+                            {user.first_name} {user.last_name}
+                          </Typography>
+                          <Typography fontSize={'13px'} color={'#8090A7'}>
+                            {user.specialization}
+                          </Typography>
+                        </Stack>
+                      </Stack>
+                    </Link>
+                    <Stack direction={'row'} spacing={2} alignItems={'center'}>
+                      <IconButton onClick={() => handleMemberOpen(user.id)}>
+                        <HighlightOffIcon style={{ color: '#8090A7' }} variant color='error' size='small' />
+                      </IconButton>
+                      <Link href={`/profile/${user.id}`}>
+                        <IconButton>
+                          <VisibilityIcon variant='contained' size='small' />
+                        </IconButton>
+                      </Link>
+                    </Stack>
+                  </Stack>
+
+                ))}
+              </Stack>
             </Collapse>
           </TableCell>
         </TableRow>
@@ -226,17 +221,22 @@ export default function CollapsibleTable(Data,setEditData) {
 
   return (
     <>
-                  <Typography variant='h4' paddingBottom={'10px'}>
-        {t("Teams")}
-        </Typography>
-      <Stack spacing={{ xs:2 }} direction={{ sm:'row',xs:'column' }} width={'100%'} justifyContent={'space-between'} >
-          <Box  width={{ sm:'50%',xs:'100%' }}>
+      <Typography variant='h4' paddingBottom={'10px'}>
+        {t('Teams')}
+      </Typography>
+      <Stack
+        spacing={{ xs: 2 }}
+        direction={{ sm: 'row', xs: 'column' }}
+        width={'100%'}
+        justifyContent={'space-between'}
+      >
+        <Box width={{ sm: '50%', xs: '100%' }}>
           <TextField
             placeholder={t('Search')}
             fullWidth
             InputProps={{
               startAdornment: (
-                <Box marginRight={'1%'} >
+                <Box marginRight={'1%'}>
                   <svg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
                     <g id='zoom-split'>
                       <path
@@ -248,32 +248,30 @@ export default function CollapsibleTable(Data,setEditData) {
                       />
                     </g>
                   </svg>
-                  </Box>
+                </Box>
               )
             }}
             onChange={handelSearch}
-            sx={{  backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+            sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
             size='small'
           />
-          </Box>
-     <Button
-            width={{ xs:'100%' }}
-
-            sx={{
-              fontSize: '13px',
-              color: 'white',
-              backgroundColor: '#6AB2DF',
-              ':hover': { color: '#6D6B77' }
-            }}
-            onClick={handleDrawerOpen}
-          >
-            + {t('ADD TEAM')}
-          </Button>
-
+        </Box>
+        <Button
+          width={{ xs: '100%' }}
+          sx={{
+            fontSize: '13px',
+            color: 'white',
+            backgroundColor: '#6AB2DF',
+            ':hover': { color: '#6D6B77' }
+          }}
+          onClick={handleDrawerOpen}
+        >
+          + {t('ADD TEAM')}
+        </Button>
       </Stack>
 
       <Box sx={{ borderRadius: '15px' }}>
-        <DrawerForm  open={openParent} setOpenParent={setOpenParent} />
+        <DrawerForm open={openParent} setOpenParent={setOpenParent} />
       </Box>
 
       <TableContainer component={Paper}>

@@ -44,7 +44,7 @@ const useComplaintsColumn = () => {
       renderCell: params => {
         return (
 
-            <Link  style={{ display:'flex',textDecoration:'none',alignItems:'center' }} href={`profile/${params?.row?.user?.id}`}>
+            <Link  style={{ display:'flex',textDecoration:'none',alignItems:'center' }} href={`profile/${params?.row?.user_id}`}>
             <Box>
               <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt='' />
             </Box>

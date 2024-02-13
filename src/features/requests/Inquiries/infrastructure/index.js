@@ -9,9 +9,10 @@
         CONTENT: element?.description,
         Title: element?.title,
         Date:dateOnly,
-        employee:element?.user?.first_name  +" "+ element?.user?.last_name ,
+        employee:element?.user?.first_name+" "+element?.user?.last_name ,
         status:element?.status,
-        time:time
+        time:time,
+        user_id:element?.user?.id
 
       }
     })

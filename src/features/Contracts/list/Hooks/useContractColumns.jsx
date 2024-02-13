@@ -43,7 +43,7 @@ const useContractColumns = () => {
     {
       field: 'id',
       headerName: 'ID',
-      flex: 1,
+      flex: 0.5,
       disableClickEventBubbling: true,
       renderCell: params => {
         return (
@@ -60,12 +60,14 @@ const useContractColumns = () => {
       disableClickEventBubbling: true,
       renderCell: params => {
         return (
-          <Box display={'flex'} alignItems={'center'}  >
-            <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
-            <Typography ml={1} sx={{ fontSize: '14px' }}>
-              {params?.row?.employee} {params?.row?.employeeLastName}
-            </Typography>
-          </Box>
+        <Link style={{ textDecoration:'none' }} href={`/profile/${params?.row?.user_id}`}>
+            <Box display={'flex'} alignItems={'center'}  >
+              <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
+              <Typography ml={1} sx={{ fontSize: '14px' }}>
+                {params?.row?.employee} {params?.row?.employeeLastName}
+              </Typography>
+            </Box>
+        </Link>
         )
       }
     },

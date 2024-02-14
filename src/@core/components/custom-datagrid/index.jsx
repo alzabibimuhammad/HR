@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { DataGrid } from '@mui/x-data-grid'
-import { Box } from '@mui/system'
+import React, { useState, useEffect } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
-const CustomDataGrid = ({ rows ,columns }) => {
-  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 7 })
+const CustomDataGrid = ({ rows, columns, show }) => {
+
+  const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: show });
+
+  useEffect(() => {
+    setPaginationModel(prevModel => ({
+      ...prevModel,
+      pageSize: show
+    }));
+  }, [show]);
 
   const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
-    width:"30%",
+    width: "30%",
     color: theme.palette.text.secondary,
   }));
-
-
-
 
   const gridStyles = {
     root: {
@@ -30,26 +35,22 @@ const CustomDataGrid = ({ rows ,columns }) => {
         fontWeight: 'bold',
       }
     }
-  }
+  };
 
   return (
     <>
-
-
-            <Box sx={{ height: 500, width: '100%'}}>
-
-            <DataGrid
-            columns={columns}
-            classes={gridStyles}
-            rows={rows||[]}
-        
-            pageSizeOptions={[7, 10, 25, 50]}
-            paginationModel={paginationModel}
-            onPaginationModelChange={setPaginationModel}
-    />
-            </Box>
+      <Box sx={{ height: 500, width: '100%' }}>
+        <DataGrid
+          columns={columns}
+          classes={gridStyles}
+          rows={rows || []}
+          pageSizeOptions={[7, 10, 25, 50]}
+          paginationModel={paginationModel}
+          onPaginationModelChange={setPaginationModel}
+        />
+      </Box>
     </>
-  )
-}
+  );
+};
 
-export default CustomDataGrid
+export default CustomDataGrid;

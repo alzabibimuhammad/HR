@@ -71,6 +71,7 @@ const store = useSelector(state => state.user)
   const arr1 =data?.data?.data
 
 const arr2 = store?.RatingUser?.data?.data?.user_rates
+console.log("🚀 ~ RatingTabel ~ arr2:", arr2)
 
 let output;
 

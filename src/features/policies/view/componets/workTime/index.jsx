@@ -6,9 +6,7 @@ import { Stack } from '@mui/system';
 import styled from 'styled-components';
 
 export default function WorkTimes({data}) {
-console.log("🚀 ~ WorkTimes ~ data:", data?.data)
 
-console.log(data?.data?.policy?.annual_salary_increase.notes);
 
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',

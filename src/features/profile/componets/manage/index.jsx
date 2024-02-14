@@ -18,16 +18,20 @@ import TextField from '@mui/material/TextField';
 import { useForm,Controller } from 'react-hook-form';
 import { useAddDecision } from './hook/useAddDecision';
 import { useDeleteDecision } from './hook/useDeleteDecision';
-import Warnings from './warnings';
-import Alerts from './alerts';
+  import Alerts from './alerts';
 import Penalties from './penalties';
 import Deductions from './deductions';
 import Rewards from './rewards';
 import Absence from './absence';
+import dynamic from 'next/dynamic'
 
-export default function Mange({DataDecision,id}) {
+export default function Mange({id}) {
 
-  const {data} = DataDecision?.data
+
+  const Warnings = dynamic(
+    () => import('./warnings'),
+    { ssr: false }
+  )
 
   const [startDate,setStartDate]=useState()
 
@@ -89,7 +93,7 @@ export default function Mange({DataDecision,id}) {
 
 
 
-<Warnings DataDecision={DataDecision} id={id}/>
+<Warnings id={id} />
 
    {/* End section Warnings */}
 
@@ -97,8 +101,10 @@ export default function Mange({DataDecision,id}) {
    {/* section  Alerts */}
 
 
+<Box sx={{marginTop:"15px"}}>
 
-   <Alerts DataDecision={DataDecision} id={id}/>
+   <Alerts  id={id}/>
+</Box>
 
       {/* End section Alerts */}
 
@@ -106,8 +112,12 @@ export default function Mange({DataDecision,id}) {
 
 
    {/* section  Alerts */}
+   <Box sx={{marginTop:"15px"}}>
 
-   <Penalties DataDecision={DataDecision} id={id}/>
+    <Penalties id={id}/>
+
+   </Box>
+
       {/* End section Alerts */}
 
    {/* ******************************* */}
@@ -115,16 +125,20 @@ export default function Mange({DataDecision,id}) {
   </Grid>
   <Grid item xs={6}>
 
-<Deductions DataDecision={DataDecision} id={id}/>
+ <Deductions  id={id}/>
 
 
+ <Box sx={{marginTop:"15px"}}>
 
 
-<Absence DataDecision={DataDecision} id={id} />
+ <Absence  id={id} />
+ </Box>
+
+<Box sx={{marginTop:"15px"}}>
 
 
-
-<Rewards DataDecision={DataDecision} id={id} />
+ <Rewards  id={id} />
+</Box>
 
   </Grid>
 </Grid>

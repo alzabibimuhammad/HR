@@ -25,10 +25,9 @@ const useAbsenceColumns = () => {
 
 
   const handleEditClick = (row) => {
-    console.log("🚀 ~ handleEditClick ~ row:", row)
     setEditData(row);
     setIsDrawerOpenEdit(true);
- 
+
   };
 
   const handleClickOpen = (params) => {
@@ -106,9 +105,9 @@ const useAbsenceColumns = () => {
                   </BorderColorOutlinedIcon>
                 </IconButton>
               </Box>
-     
-              
-              
+
+
+
             </Stack>
             {isDrawerOpenEdit && (
       <DrawerForm
@@ -117,7 +116,7 @@ const useAbsenceColumns = () => {
         Data={EditData}
       />
     )}
-    
+
           </>
         );
       },

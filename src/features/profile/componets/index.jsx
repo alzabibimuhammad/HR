@@ -73,8 +73,7 @@ const Profiles = ({ data,tab }) => {
   const [userData, setuserData] = useState()
 
   const userDataClean = userData?.data?.data[0]
-  
-  console.log("🚀 ~ Profiles ~ userDataClean:", userDataClean)
+
 
   const [value, setValues] = useState('1')
 
@@ -171,7 +170,7 @@ const Profiles = ({ data,tab }) => {
         </TabPanel>
 
         <TabPanel value='3'>
-          {DataDecision ? <Mange id={id} DataDecision={DataDecision} /> : null}
+           <Mange id={id} DataDecision={DataDecision} />
         </TabPanel>
 
     <TabPanel value="4">

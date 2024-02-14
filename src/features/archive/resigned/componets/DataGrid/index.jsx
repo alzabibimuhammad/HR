@@ -37,7 +37,6 @@ const ResignedTable = ({ rows }) => {
 
   const [fdata , setfdata] = useState({rows});
   useEffect(()=>{setfdata(rows)},[rows])
-  console.log("🚀 ~ ResignedTable ~ fdata:", fdata)
 
   const [role, setRole] = useState('');
 

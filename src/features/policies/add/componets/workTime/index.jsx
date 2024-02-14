@@ -192,7 +192,6 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
 
 
                   <MenuItem key={index} value={val.id}>
-                    {console.log("dataaaaaaaaaaaa",val.name)}
                     {val.name}
                   </MenuItem>
                 ))}

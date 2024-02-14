@@ -41,7 +41,7 @@ const dispatch=useDispatch()
 const { data, isLoading, isError } = useViewGetAbsence(id)
 const [selectedType, setSelectedType] = useState('');
 const [selectedDate, setSelectedDate] = useState('');
-480761bde283b1d320090fc083e5200db89107c
+const [fdata, setfdata] = useState('');
 
   const handleDrawerClose = () => {
     dispatch(getContractsData())
@@ -129,6 +129,7 @@ const [selectedDate, setSelectedDate] = useState('');
 
   return (
 
+      <>
       <Drawer
       onClose={handleDrawerClose}
 
@@ -138,8 +139,8 @@ const [selectedDate, setSelectedDate] = useState('');
         '& .MuiDrawer-paper': {
           width: drawerWidth
         },
-        overflow:'visible',
-        borderRadius:'15px',
+        overflow: 'visible',
+        borderRadius: '15px',
       }}
       anchor='right'
       open={open}
@@ -151,57 +152,52 @@ const [selectedDate, setSelectedDate] = useState('');
     >
 
 
-    <Box  sx={{width:'100%',backgroundColor:'#DCE1E6' , fontSize:'20px' ,gap: '10px',padding:'15px',borderRadius:'10px',fontFamily:'Montserrat'  }}>Edit Absence</Box>
-    <Stack marginLeft={{ sm:'3%' }} marginTop={{sm:'2%'}}direction={{ sm:'column' }}spacing={3} >
-        <Typography >UnJustified</Typography>
-          <Box width={{ sm:'94%' }} >
+      <Box sx={{ width: '100%', backgroundColor: '#DCE1E6', fontSize: '20px', gap: '10px', padding: '15px', borderRadius: '10px', fontFamily: 'Montserrat' }}>Edit Absence</Box>
+      <Stack marginLeft={{ sm: '3%' }} marginTop={{ sm: '2%' }} direction={{ sm: 'column' }} spacing={3}>
+        <Typography>UnJustified</Typography>
+        <Box width={{ sm: '94%' }}>
           <TextField
             onChange={handleDateN}
-          fullWidth
-          type='date'
-          size='small'
-
-          />
-          </Box>
-    </Stack>
-
-
-    <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', ma
-
-
-
-
+            fullWidth
+            type='date'
+            size='small' />
+        </Box>
       </Stack>
-480761bde283b1d320090fc083e5200db89107c
-    <Stack marginLeft={{ sm:'3%' }} marginTop={{sm:'2%'}}direction={{ sm:'column' }}spacing={3} >
-        <Typography >Justified</Typography>
-          <Box width={{ sm:'94%' }} >
+
+
+    <Stack marginLeft={{ sm: '3%' }} marginTop={{ sm: '2%' }} direction={{ sm: 'column' }} spacing={3}>
+        <Typography>Justified</Typography>
+        <Box width={{ sm: '94%' }}>
 
           <TextField
-          fullWidth
-          onChange={handleDate}
-          type='date'
-          size='small'
-          />
-          </Box>
-    </Stack>
-      <Stack direction={'column'}   marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
+            fullWidth
+            onChange={handleDate}
+            type='date'
+            size='small' />
+        </Box>
+      </Stack>
 
-      {fdata && fdata?.map((date, index) => (
-%'}>
-      {date?.startDate}
-    </Typography>
-    <CloseIcon sx={{ color:'#df2e38' }} onClick={() => handleDeleteAbsence(date)} />
-  </Stack>
-))}
+      <Stack direction={'column'} marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
+
+        {fdata && fdata?.map((date, index) => (
+          <>
+          <Typography>
+
+            {date?.startDate}
+          </Typography>
+          <CloseIcon sx={{ color: '#df2e38' }} onClick={() => handleDeleteAbsence(date)} />
+          </>
+          ))}
+      </Stack>
 
 
-        </Stack>
 
 
         <Box width={"90%"} marginLeft={'3%'}>
         {fields.map((absence, index) => ( <>
+
           <Box onClick={() => remove(index)}>
+
               <CloseIcon sx={{cursor:"pointer",'&:hover': { color: 'red' }}} onClick={() => remove(index)} />
             </Box>
           <Box key={absence.id}>
@@ -226,6 +222,7 @@ const [selectedDate, setSelectedDate] = useState('');
                 </TextField>
               )}
               />
+
             <Controller
               name={`absences[${index}].date`}
               control={control}
@@ -246,6 +243,7 @@ const [selectedDate, setSelectedDate] = useState('');
 
           </Box>
         </>
+
         ))}
           </Box>
         <Stack marginLeft={{ sm:'3%'  }} sx={{marginTop:"15px"}}>
@@ -265,5 +263,6 @@ const [selectedDate, setSelectedDate] = useState('');
       </Box>
 
       </Drawer>
+      </>
   )
 }

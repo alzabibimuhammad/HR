@@ -21,7 +21,6 @@ import Show10 from 'src/@core/components/show10';
 
 const Users = ({ rows }) => {
 
-console.log(rows);
 
   const columns = useUserColumns();
   const [openParent, setOpenParent] = React.useState(false);

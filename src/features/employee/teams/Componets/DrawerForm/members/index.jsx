@@ -80,7 +80,6 @@ const Members = ({SetMembers,SelectedRow}) => {
   };
 
   const toggleSelect = (icon) => {
-    console.log("🚀 ~ toggleSelect ~ icon:", icon)
     const isSelected = selectedItems.includes(icon);
     if (isSelected) {
       setSelectedItems(selectedItems.filter((item) => item !== icon));

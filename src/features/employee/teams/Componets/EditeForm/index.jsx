@@ -30,16 +30,23 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start'
 }))
 
-export default function EditeForm({ open, setOpenParent, SelectedRow }) {
-  const { data: UserData, isloading } = useGetEmployeeDropDown()
-  const { mutate: EditTeam } = useEditTeam()
-  const [members, SetMembers] = useState([])
-  const [teamLeader, SetteamLeader] = useState()
-  const [teamName, setTeamName] = useState(SelectedRow.name)
 
-  const handleTeamNameChange = event => {
-    setTeamName(event.target.value)
-  }
+
+export default function EditeForm({ open, setOpenParent,SelectedRow }) {
+  const {data:UserData,isloading}=useGetEmployeeDropDown()
+  const theme = useTheme()
+  const{mutate:EditTeam}=useEditTeam()
+const[members,SetMembers]=useState([])
+const[teamLeader,SetteamLeader]=useState()
+const [teamName, setTeamName] = useState(SelectedRow.name);
+
+
+
+const handleTeamNameChange = (event) => {
+  setTeamName(event.target.value);
+};
+
+
 
   const handleDrawerClose = () => {
     setOpenParent(false)
@@ -53,7 +60,7 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
     members.forEach((user, index) => {
       formData.append(`users_array[${index}]`, user)
     })
-    
+
     EditTeam({ formData: formData, id: SelectedRow.id })
     handleDrawerClose()
   }

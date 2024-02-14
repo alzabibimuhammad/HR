@@ -8,7 +8,7 @@ export const useAddAbsence = () => {
   return useMutation({
     mutationFn:AddAbsence,
     onSuccess: (data) => {
-      queryClient.invalidateQueries("Decision");
+      queryClient.invalidateQueries("absence");
       showSuccesToast(data.data.message,"")
     },
   });

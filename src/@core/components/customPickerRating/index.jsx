@@ -12,7 +12,7 @@ import { setRatingUser } from 'src/store/apps/user';
 
 import { FormateDate } from 'src/utiltis/DateFormate';
 
-export  const CustomDatePickerRating = ({ selectedDate, handleDateChoose }) => {
+export  const CustomDatePickerRating = ({ }) => {
   const [view, setView] = useState('month');
   const [startDate, setStartDate] = useState(new Date());
   const [showMonthPicker, setShowMonthPicker] = useState('day');
@@ -36,7 +36,7 @@ export  const CustomDatePickerRating = ({ selectedDate, handleDateChoose }) => {
 
 
     getData({user_id:store.userId,date:formattedDate})
-    handleDateChoose(rateData)
+  
   
 
   };

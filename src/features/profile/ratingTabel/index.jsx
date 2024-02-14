@@ -34,16 +34,17 @@ import useGetAllContracts from 'src/features/Contracts/list/Hooks/useGetAllContr
 import useAbsenceColumns from './hooks/useRatingUser';
 
 const RatingTabel = ({rows}) => {
+  
   const{data,isloading}=useGetRattingtype()
   const columns = useAbsenceColumns();
   const { t } = useTranslation()
   const [open, setOpen] = React.useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const handleOpen = () => {setOpen(true)}
+  const handleClose = () => {setOpen(false)}
   const { data: rateData, isloading: isloadingData } = useGetRatingById()
-
+  const [show ,setShow]=useState(10)
   const [ChoosedDate, setChooseDate] = useState()
-  const [RatingDate, setRatingData] = useState()
+
 
   const store = useSelector(state => state.user)
 
@@ -86,7 +87,7 @@ const RatingTabel = ({rows}) => {
   if (!arr1 || !arr2) {
     console.error('Arrays cannot be empty')
   } else {
-    // Map rate_type_id to id
+   
     const map = arr1.reduce((acc, obj) => {
       acc[obj.id] = obj.rate_type
 
@@ -126,7 +127,7 @@ const RatingTabel = ({rows}) => {
             <Typography sx={{ fontSize: '16px', marginTop: '5px' }}>{t('Filters')}</Typography>
             <Button sx={{ border: '1px solid', width: '20%',backgroundColor:'#6AB2DF',color:'#fff', '&:hover': {backgroundColor:'#6AB2DF',color:'#fff' } }}  onClick={handleOpen}>
               <Stack direction={'row'} spacing={2} >
-                <InsertInvitationIcon/>
+             
               <Typography color={'#fff'} >
               Select Date
     </Typography>
@@ -140,16 +141,17 @@ const RatingTabel = ({rows}) => {
               aria-describedby='modal-modal-description'
             >
               <Box sx={style}>
-                <CustomDatePickerRating selectedDate={1} handleDateChoose={setChooseDate} />
+                <CustomDatePickerRating  />
               </Box>
             </Modal>
 
-          {output && <CustomDataGrid columns={columns} sx={gridStyles.root} rows={RatingData(output)} />}
+          {output && <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={RatingData(output)} />}
           </Stack>
         </CardContent>
       </Card>
     </>
   )
 }
+
 
 export default RatingTabel

@@ -12,45 +12,51 @@ import Link from 'next/link';
 import useGetRattingtype from './useGetRatingType';
 
 const useUserColumns = () => {
-
-const{data,isloading}=useGetRattingtype()
-  
+  const { data, isLoading } = useGetRattingtype();
   const { t } = useTranslation();
 
+  const columns = useMemo(() => {
+    if (!data || !data.data || !data.data.data || data.data.data.length === 0) {
+      return [
+        {
+          field: 'FirstName',
+          headerName: 'Employee Name',
+          disableClickEventBubbling: true,
+          flex: 1,
+        },
+        {
+          field: 'date',
+          headerName: t("Total"),
+          flex: 1,
+        },
+      ];
+    }
 
+    return [
+      {
+        field: 'FirstName',
+        headerName: 'Employee Name',
+        disableClickEventBubbling: true,
+        flex: 1,
+      },
+      ...data.data.data.map((item, index) => ({
+        field: `rate${index + 1}`,
+        headerName: item.rate_type,
+        disableClickEventBubbling: true,
+        flex: 1,
+      })),
+      {
+        field: 'date',
+        headerName: t("Total"),
+        flex: 1,
+      },
+    ];
+  }, [data, t]);
 
-
-
-
-
-
-
-
-  return useMemo(() => [
-
-    {
-      field: 'FirstName',
-      headerName: 'Employee Name',
-      disableClickEventBubbling: true,
-      flex:1,
-
-    },
-    ...data?.data?.data?.map((item, index) => ({
-      field: `rate${index + 1}`,
-      headerName: item.rate_type,
-      disableClickEventBubbling: true,
-      flex: 1,
-    })),
-    
-
-
-    {
-      field: 'date',
-      headerName: t("Total"),
-      flex:1,
-
-    },
-  ]);
+  return columns;
 };
 
 export default useUserColumns;
+
+
+

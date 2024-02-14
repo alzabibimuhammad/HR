@@ -1,7 +1,7 @@
 
 export const RatingData = elements => {
 
-    return elements.map(element => {
+    return elements?.map(element => {
 
       return {
         id: element?.id,

@@ -54,7 +54,7 @@ export default function SidebarLeft({DataEventByDay}) {
        <Stack
                direction={'row'}
                justifyContent={'start'}
-               sx={{ padding: 0, margin: 0, width: '100%', height: '160px'}}
+               sx={{ padding: 0, margin: 0, width: '100%', height: '70px'}}
                className='parent'
                key={event.id}
              >

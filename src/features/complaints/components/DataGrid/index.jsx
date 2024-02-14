@@ -44,7 +44,8 @@ const ComplaintsTable = ({ Data }) => {
     })
 
     if (searchData?.length) setRows(searchData)
-    else setRows([])
+    else if (searchText) setRows([])
+    else setRows(ComplaintsData(Data))
   }, [searchText])
 
   const [FilterDate, setFilterDate] = useState()
@@ -61,7 +62,10 @@ const ComplaintsTable = ({ Data }) => {
       return FilterDate == element?.date
     })
     if (date?.length) setRows(date)
-    else setRows([])
+    else {
+      if (FilterDate) setRows([])
+      else setRows(ComplaintsData(Data))
+    }
   }, [FilterDate])
 
   return (

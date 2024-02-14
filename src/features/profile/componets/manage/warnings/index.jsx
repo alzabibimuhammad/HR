@@ -30,14 +30,13 @@ import { DateFormateOfMonth } from 'src/utiltis/DateFormateOfMonth';
 import TextField from '@mui/material/TextField'
 import { CustomPickerManage } from 'src/@core/components/customPickerManage';
 import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
-
+import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 
 
 
 export default function Warnings({id}) {
   const idUser =id
 
-  // const {data} = DataDecision?.data
 
   const {mutate:AddDecision}=useAddDecision()
   const { mutate: DeleteDecision, isLoading } = useDeleteDecision();
@@ -48,22 +47,15 @@ export default function Warnings({id}) {
   const [Edit , setEdit] = useState({})
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-
   const [open, setOpen] = React.useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [startDate,setStartDate]=useState(null)
   const [state, setstate] = useState(null);
-
-
-  const [yearCalendarValue, setYearCalendarValue] = useState(null);
-  const [MonthCalendarValue, setMonthCalendarValue] = useState(null);
-  const { data: DataWarnings } = useGetWarnings(id, state);
+  const [Data, setData] = useState(null);
+  const { mutate:getWarningDate, data: DataWarnings } = useGetWarnings();
 
 
 
-  console.log("🚀 ~ Warnings ~ startDate:", state)
-
-  console.log("🚀 ~ Warnings ~ DataWarningsx:", DataWarnings)
+   console.log("🚀 ~ Warnings ~ DataWarningsx:", DataWarnings)
 
 
 
@@ -71,10 +63,14 @@ export default function Warnings({id}) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleDeleteAPI = (id) => {
-    DeleteDecision(id)
-    handleDeleteClose()
+  const handleDateChoose = (formattedDate) => {
+    console.log("🚀 ~ handleDateChoose ~ formattedDate:", formattedDate)
+    console.log('trueeeeeeeeeeeeeeeeeeeee')
+    getWarningDate({idUser,formattedDate})
+    setData({idUser,formattedDate})
+
   };
+
 
 
 
@@ -89,6 +85,14 @@ export default function Warnings({id}) {
 
   }))
 
+
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
 
   const style = {
@@ -135,7 +139,11 @@ export default function Warnings({id}) {
     };
 
 
-
+    const handleDeleteAPI = (id) => {
+      DeleteDecision(id)
+      handleDeleteClose()
+      getWarningDate(Data)
+    };
 
   const defaultValues = {
     dateTime: Edit.dateTime,
@@ -157,6 +165,7 @@ export default function Warnings({id}) {
      AddDecision(formData)
      reset()
      handleCloseAdd()
+     getWarningDate(Data)
 
 
   };
@@ -171,6 +180,8 @@ export default function Warnings({id}) {
       formData.append('branch_id', 1);
 
       EditDecision({id:Edit.id,formData:formData})
+      getWarningDate(Data)
+
       reset()
       handleCloseEdit()
 
@@ -197,19 +208,11 @@ export default function Warnings({id}) {
   useEffect(() => {
     setValue('dateTime', Edit?.dateTime || '');
     setValue('content', Edit?.content || '');
-  }, [Edit, setValue]);
+  }, [Edit, setValue ]);
 
+  useEffect(() => {
 
-
-  const handleYearCalendarChange = (value) => {
-    setYearCalendarValue(value.$y);
-    console.log('قيمة المدخلة في YearCalendar:', value.$y);
-
-  }
-
-  const handleMonthCalendarChange = (value) => {
-    setSelectedMonth(value.$M + 1); // Adding 1 because months are zero-based
-  };
+  }, [handleDeleteAPI ]);
 
 
   return (
@@ -246,19 +249,11 @@ export default function Warnings({id}) {
               aria-describedby='modal-modal-description'
             >
               <Box sx={style}>
-                <CustomPickerManage setstate={setstate} setStartDatee={setStartDate} state={state} startDate={startDate} />
+                <CustomPickerManage setstate={setstate} setStartDatee={setStartDate} state={state} startDate={startDate}  handleDateChoose={handleDateChoose}/>
               </Box>
             </Modal>
 
 
-{/*
-  <DatePicker
-        showIcon
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        isClearable
-        placeholderText="Choose Calendar"
-      /> */}
 
      </Box>
 </StackRow>
@@ -339,7 +334,6 @@ export default function Warnings({id}) {
      </Box>
 </StackRow>
 <>
-<Typography>{state}</Typography>
       {DataWarnings?.data?.data?.my_decisions?.map((val, index) => (
         <StackRow key={index}>
           <Box>
@@ -353,14 +347,35 @@ export default function Warnings({id}) {
                   <DeleteOutlinedIcon />
                 </Typography>
               </Button>
-              <Dialog onClose={handleDeleteClose} open={openDelete}>
-                <DialogContent sx={{ height: '99px', width: '100%', borderRadius: '10px', position: 'relative', overflow: 'visible' }}>
-                  <DialogContentText sx={{}}>
-                    {/* Delete Dialog Content */}
-                  </DialogContentText>
-                </DialogContent>
-                {/* ... Other parts of your Delete Dialog ... */}
-              </Dialog>
+              <Dialog
+      onClose={handleDeleteClose}
+      open={openDelete}
+      >
+      <Grid item xs={12}>
+        <Item>
+        <DialogContent sx={{height:"99px",width:"100%",borderRadius:"10px",position:"relative",overflow:"visible"}}>
+        <DialogContentText sx={{}}>
+          <CancelRoundedIcon  style={{ backgroundColor:"#FFFFFF",color: '#A20D29' ,fontSize: 160,position:"absolute",top: "50%", left: "50%", transform: "translate(-50%, -90%)",borderRadius:"50%" }} />
+
+        </DialogContentText>
+      </DialogContent>
+      <Typography  sx={{fontWeight:"600",fontSize:"16px",color:"#131627"}}>Delete</Typography>
+
+
+        <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
+        {"Are you sure you want to delete team?"}
+      </DialogTitle>
+
+
+        <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
+        <Button onClick={handleDeleteClose} style={{ color: '#B4B4B3' }}>Cancel</Button>
+        <Button  sx={{color:"#DF2E38"}}  onClick={()=>handleDeleteAPI(val.id)} autoFocus>
+          Delete
+        </Button>
+      </DialogActions>
+      </Item>
+      </Grid>
+    </Dialog>
               <Button sx={{ padding: '0' }}>
                 <Typography onClick={() => handleClickOpenEdit(val)} sx={{ cursor: 'pointer' }}>
                   <CreateOutlinedIcon />

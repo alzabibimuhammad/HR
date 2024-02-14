@@ -1,17 +1,18 @@
-import { useQuery } from '@tanstack/react-query'
-import GetWarnings from '../api/GetWarnings';
 
-const useGetWarnings = (id,date) => {
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import GetWarnings from "../api/GetWarnings";
 
-console.log(id);
+export const useGetWarnings = () => {
+  const queryClient = useQueryClient();
 
-  const query = useQuery({
-    queryKey: ['GetWarnings', id,date],
-    queryFn: () => GetWarnings(id,date),
+  return useMutation({
+    mutationFn:GetWarnings,
+    onSuccess: () => {
+      queryClient.invalidateQueries("warnings");
+    },
   });
+};
 
-  return query;
-}
 
 
 export default useGetWarnings

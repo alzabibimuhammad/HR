@@ -16,10 +16,11 @@ import { CustomDatePickerRating } from 'src/@core/components/customPickerRating'
 import useGetRattingtype from './hooks/useGetRatingType';
 import { useSelector } from 'react-redux';
 import useGetAllContracts from 'src/features/Contracts/list/Hooks/useGetAllContracts';
+import useAbsenceColumns from './hooks/useRatingUser';
 
 const RatingTabel = ({rows}) => {
   const{data,isloading}=useGetRattingtype()
-  const columns = useUserColumns();
+  const columns = useAbsenceColumns();
   const { t } = useTranslation()
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);

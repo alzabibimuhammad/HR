@@ -35,29 +35,12 @@ const{data,isloading}=useGetRattingtype()
       flex:1,
 
     },
-    {
-      field: 'rate1',
-      headerName: data?.data?.data[0]?.rate_type,
+    ...data?.data?.data?.map((item, index) => ({
+      field: `rate${index + 1}`,
+      headerName: item.rate_type,
       disableClickEventBubbling: true,
-      flex:1,
-
-    },
-    {
-      field: 'rate2',
-      headerName: data?.data?.data[1]?.rate_type,
-      disableClickEventBubbling: true,
-      flex:1,
-
-
-    },
-    {
-      field: 'rate3',
-      headerName: data?.data?.data[2]?.rate_type,
-      disableClickEventBubbling: true,
-      flex:1,
-
-
-    },
+      flex: 1,
+    })),
     
 
 

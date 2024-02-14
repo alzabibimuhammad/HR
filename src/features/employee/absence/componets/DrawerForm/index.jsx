@@ -129,6 +129,7 @@ useEffect(() => {
   return (
 
       <Drawer
+      onClose={handleDrawerClose}
 
       sx={{
         width: drawerWidth,

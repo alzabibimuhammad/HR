@@ -42,7 +42,7 @@ const navigation = () => {
       children:[
 
         {
-          title:"List",
+          title:"Employees",
           path:"/contracts/list"
         },
         {
@@ -108,7 +108,7 @@ const navigation = () => {
     },
     {
       title: 'Archive',
-      icon: 'tabler:file-text',
+      icon: 'tabler:archive',
       path: '/Archive',
       children:[
         {

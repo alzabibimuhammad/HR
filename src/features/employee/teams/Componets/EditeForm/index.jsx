@@ -100,6 +100,7 @@ return UserData.data.data.filter((item) =>
 
       <Drawer
         backgroundColor='#fff'
+      onClose={handleDrawerClose}
         sx={{
           width: drawerWidth,
           flexShrink: 0,

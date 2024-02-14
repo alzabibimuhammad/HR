@@ -1,6 +1,7 @@
 export const AbsenceData = elements => {
+console.log("🚀 ~ AbsenceData ~ elements:", elements)
 
-  return elements?.data?.data?.data?.map(element => {
+  return elements?.data?.data?.map(element => {
     return {
       id: element?.id,
       name:element?.username,

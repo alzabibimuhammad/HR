@@ -286,7 +286,7 @@ const useInquiriesColumns = () => {
     <p style={{ fontWeight: "400", fontSize: "14px", color: "#3e4458" }}>{rowData?.CONTENT}</p>
   </DialogContent>
   <DialogActions>
-    <Box sx={{ marginTop: "19px", display: "flex", gap: "19px" }}>
+    <Box sx={{ marginTop: "19px", display: "flex", gap: "19px", marginRight:"20px" }}>
       {params.row.status === "waiting"?(
         <>
 <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }} onClick={() => handleRejectClick(params)}>Decline</Button>

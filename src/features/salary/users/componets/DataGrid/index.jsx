@@ -18,6 +18,9 @@ import { useGetDataByMonth } from '../../hooks/useGetDataByMonth'
 import Show10 from 'src/@core/components/show10'
 
 const SalaryDataGrid = ({ rows }) => {
+
+  const totalSalaries = SalaryData(rows)?.reduce((sum, value) => sum + value.total, 0);
+
   const columns = useSalaryColumns()
   const { t } = useTranslation()
 
@@ -116,17 +119,18 @@ const SalaryDataGrid = ({ rows }) => {
     }
   }
 
-  const [percentageData, setpercentageData] = useState([])
+//  { // const [percentageData, setpercentageData] = useState([])
 
-  const dispatch = useDispatch()
-  const store = useSelector(state => state.Dashboard)
+//   // const dispatch = useDispatch()
+//   // const store = useSelector(state => state.Dashboard)
 
-  useEffect(() => {
-    dispatch(getAttendancePercentage())
-    setpercentageData(store?.AttendancePercentage)
-  }, [dispatch, store?.AttendancePercentage?.length])
+//   // useEffect(() => {
+//   //   dispatch(getAttendancePercentage())
+//   //   setpercentageData(store?.AttendancePercentage)
+//   // }, [dispatch, store?.AttendancePercentage?.length])
 
-  const handleClick = () => {}
+//   // const handleClick = () => {}
+//  }
 
   return (
     <>
@@ -143,6 +147,7 @@ const SalaryDataGrid = ({ rows }) => {
             alignContent={'center'}
             justifyContent={'center'}
           >
+            <Stack direction={{sm:'row',xs:'column'}} justifyContent={'space-between'} alignItems={'center'} >
             <Stack direction={'row'} width={{ sm: '50%', xs: '100%' }} spacing={3} alignItems={'center'}>
               <Box mb={2}>
                 <Show10 setShow={setShow} />
@@ -172,6 +177,10 @@ const SalaryDataGrid = ({ rows }) => {
                 size='small'
               />
             </Stack>
+            <Typography>{t('Total')}: {totalSalaries?totalSalaries:0} sp</Typography>
+
+            </Stack>
+
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
               <Typography sx={{ fontSize: '16px', marginTop: '5px' }}>{t('Filters')}</Typography>
               <TextField

@@ -9,9 +9,11 @@ import { useTranslation } from 'react-i18next'
 import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { ContractsData } from '../../infrastructure'
 import { Box } from '@mui/system'
+import Show10 from 'src/@core/components/show10'
 
 const List = ({ rows }) => {
   const [data , setData] = useState(rows)
+  const [show, setShow] = React.useState(10);
 
   const columns = useContractColumns()
   const { t } = useTranslation()
@@ -77,7 +79,10 @@ const List = ({ rows }) => {
         <Typography variant='h4' paddingBottom={'10px'}>
         {t("Contract List")}
         </Typography>
-
+        <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
+                <Box mb={2}>
+                  <Show10 setShow={setShow}/>
+                </Box>
         <TextField
           placeholder={t('Search')}
           fullWidth
@@ -102,9 +107,10 @@ const List = ({ rows }) => {
           sx={{ paddingLeft: '8px', backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
           size='small'
         />
+        </Stack>
         <Grid marginTop={'1%'} container spacing={2} alignItems={'center'} justifyContent={'space-around'}>
           <Grid item sm={12} xs={12}>
-            <CustomDataGrid columns={columns} sx={gridStyles.root} rows={ContractsData(data) || []}/>
+            <CustomDataGrid columns={columns} show={show}  sx={gridStyles.root} rows={ContractsData(data) || []}/>
           </Grid>
         </Grid>
       </CardContent>

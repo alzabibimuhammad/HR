@@ -104,40 +104,17 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
       }}
     >
       <Stack spacing={3}>
-        <Box
-          sx={{
-            width: '100%',
-            backgroundColor: '#DCE1E6',
-            fontSize: '20px',
-            gap: '10px',
-            padding: '15px',
-            borderRadius: '10px',
-            fontFamily: 'Montserrat'
-          }}
-        >
-          Add team
-        </Box>
-        <Box sx={{ padding: '12px' }}>
+      <Box sx={{ padding: '12px' }}>
           <Typography sx={{ fontFamily: 'Montserrat' }}>Name</Typography>
-
-      <Drawer
-        backgroundColor='#fff'
-      onClose={handleDrawerClose}
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth
-          },
-          overflow:'visible',
-          borderRadius:'15px',
-        }}
-        anchor='right'
-        open={open}
-        variant='temporary'
-        ModalProps={{
-          keepMounted: true
-        }}
+          <TextField
+            fullWidth
+            style={{ height: '10px' }}
+            placeholder="Team Name"
+            size='small'
+            value={teamName}
+            onChange={handleTeamNameChange}
+          />
+        </Box>
 
         <Box sx={{ padding: '12px' }}>
           <Members SetMembers={SetMembers} SelectedRow={SelectedRow.user} />
@@ -179,6 +156,6 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
           </Stack>
         </Box>
       </Stack>
-    </Drawer>
+      </Drawer>
   )
 }

@@ -111,9 +111,8 @@ const Members = ({ SetMembers, SelectedRow }) => {
   return (
     <Box sx={{ overflowX: 'hidden' }}>
       <Typography sx={{ fontFamily: 'Montserrat' }}>Members</Typography>
-      <div style={{ '&::-webkit-scrollbar': {width: '3px' }, overflowX: 'auto' }}>
 
-        <Stack direction='row' spacing={2} padding={'10px'} position={'relative'} width={'100%'}>
+        <Stack direction='row' spacing={2} padding={'10px'} position={'relative'} width={'100%'} sx={{ overflowX: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'red ' }}>
           {selectedItems?.map((icon, index) => (
             <Avatar
               key={index}
@@ -145,7 +144,6 @@ const Members = ({ SetMembers, SelectedRow }) => {
             </Avatar>
           ))}
         </Stack>
-      </div>
 
       <TextField
         placeholder='Search'

@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import { Avatar, Button, Chip, IconButton, Rating, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Box, Stack } from '@mui/system';
+import Link from 'next/link';
 
 
 const useRegistrationColumn = () => {
@@ -21,19 +22,15 @@ const useRegistrationColumn = () => {
       flex:2,
         renderCell: (params)=>{
       return (
+        <Link style={{ textDecoration:'none' }}  href={`/profile/${params?.row?.id}`}>
+
         <Stack spacing={1} direction={'row'}  alignItems={'center'} >
-          <Box>
-          <Avatar src={'sdsd'} alt='' />
-          </Box>
-          <Stack spacing={2} direction={'row'}>
+          <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
             <Typography>
-              {params.row.first_name}
+              {params.row.first_name} {params.row.last_name}
             </Typography>
-            <Typography>
-              {params.row.last_name}
-            </Typography>
-          </Stack>
         </Stack>
+        </Link>
       )
     }
   },

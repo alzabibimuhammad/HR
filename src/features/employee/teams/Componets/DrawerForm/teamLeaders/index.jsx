@@ -74,9 +74,9 @@ const Members = ({SetteamLeader}) => {
 
   const filteredData = useMemo(() => {
     if (!searchText || !UserData || !UserData.data || !UserData.data.data) {
-      return UserData?.data.data||[]; 
+      return UserData?.data.data||[];
     }
-  
+
     return UserData.data.data.filter((item) =>
       item.first_name.toLowerCase().includes(searchText.toLowerCase())
     );
@@ -117,7 +117,7 @@ const Members = ({SetteamLeader}) => {
                 mb: index !== data.length - 1 ? [6.25, 6.25, 5.5, 6.25] : undefined
               }}
             >
-              <Avatar variant='rounded' sx={{ mr: 4, width: 34, height: 34 }}>
+              <Avatar variant='rounded' src={process.env.NEXT_PUBLIC_IMAGES+'/'+item?.user_info?.image} sx={{ mr: 4, width: 34, height: 34 }}>
                 <Icon icon={item.first_name} />
               </Avatar>
               <Box

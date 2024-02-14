@@ -34,19 +34,27 @@ export default function Dashboard() {
   return (
     <Grid container spacing={5} sx={{ overflow: 'hidden' }}>
       <Grid item sm={8} xs={12}>
+
         <Box  sx={{ backgroundColor: '#fff' }}>
           <AppCalendar />
         </Box>
+        
       </Grid>
       <Grid item sm={4} xs={12}>
         <Attendance Data={percentageData} />
       </Grid>
-      <Grid item sm={8} xs={12}>
+
+
+        <Grid item sm={8} xs={12}>
         <Registration Data={registration} />
-      </Grid>
-      <Grid item sm={4} xs={12}>
+        </Grid>
+
+        <Grid item sm={4} xs={12} height={{sm:'634.5px',xs:'100%'}} >
         <Requests />
-      </Grid>
+
+
+        </Grid>
+
     </Grid>
   )
 }

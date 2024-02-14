@@ -41,7 +41,9 @@ const ReviewFeature = ({ Data }) => {
     // }
   }
   const handelDate = event=>{
-    setDate(event.target.value)
+    let value = event.target.value
+    if (value) setDate(value)
+    else setRows(ReviewData(data))
   }
 
   useEffect(()=>{

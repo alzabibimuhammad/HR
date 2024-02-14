@@ -50,9 +50,17 @@ const AppCalendar = () => {
   const dispatch = useDispatch()
   const store = useSelector(state => state.calendar)
   const { mutate: getEvent, isLoading, data: DataEventByDay } = useGetEventByDay()
-
+  const today = new Date()
+  const d = today.getDate()
+  const m =(Number(today.getMonth()+1) < 10 ? '0' : '') + Number(today.getMonth()+1)
+  const y = today.getFullYear()
+  const formattedDate = `${y}-${m}-${d}`
   // ** Vars
+  useEffect(()=>{
 
+    getEvent(formattedDate)
+
+  },[])
   const { skin, direction } = settings
   const mdAbove = useMediaQuery(theme => theme.breakpoints.up('md'))
   useEffect(() => {
@@ -60,7 +68,12 @@ const AppCalendar = () => {
   }, [dispatch, store?.selectedCalendars])
 
   const handleDateChange = date => {
-    const formattedDate = FormateDate(date)
+    console.log("🚀 ~ handleDateChange ~ date:", date)
+    let day = date.$D
+    let month = (Number(date.$M+1) < 10 ? '0' : '') + Number(date.$M+1)
+    let year = date.$y
+    const formattedDate = `${year}-${month}-${day}`
+
     getEvent(formattedDate)
   }
 
@@ -70,25 +83,27 @@ const AppCalendar = () => {
         <Typography variant='body1' color='initial'>
           {t('Calendar')}
         </Typography>
+
         <Stack
           direction={{ sm: 'row', xs: 'column' }}
-          alignContent={'center'}
-          alignItems={'center'}
           justifyContent={'space-around'}
+          m={0} p={0}
         >
-          <Box>
+          <Box display={'flex'} justifyContent={'start'} m={0} p={0} >
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateCalendar onChange={handleDateChange} />
             </LocalizationProvider>
           </Box>
 
-          <Box>
+          <Box mt={4.5}   >
             <Typography>{t('Event')}</Typography>
-            <Box width={'100%'} display={'flex'} justifyContent={'center'}>
+            <Box width={'100%'} display={'flex'} justifyContent={'center'} >
               <SidebarLeft DataEventByDay={DataEventByDay} />
             </Box>
           </Box>
+
         </Stack>
+
       </CardContent>
     </Card>
   )

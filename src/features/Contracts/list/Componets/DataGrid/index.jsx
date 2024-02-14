@@ -12,11 +12,13 @@ import { Box } from '@mui/system'
 
 const List = ({ rows }) => {
   const [data , setData] = useState(rows)
+
   const columns = useContractColumns()
   const { t } = useTranslation()
   const [role, setRole] = useState('')
   const [status, setStatus] = useState('')
-  const [searchText, setsearchText] = useState('')
+
+  const [searchText, setsearchText] = useState()
 
   const handleRoleChange = e => {
     setRole(e.target.value)
@@ -34,12 +36,13 @@ const List = ({ rows }) => {
   };
 
   useEffect(()=>{
-    const searchData = data?.data?.data?.data?.filter(val => {
+    const searchData = data?.data?.data?.filter(val => {
       return (
         val?.user?.first_name.toLowerCase().includes(searchText) ||
         val?.user?.last_name.toLowerCase().includes(searchText)
       );
     })
+    if (searchData?.length)
     setData({data:{data:searchData}})
 
 

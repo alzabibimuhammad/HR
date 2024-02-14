@@ -42,6 +42,7 @@ const TabsProfile = styled(Tabs)(({ theme }) => ({
 }));
 
 const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
+  console.log("🚀 ~ UserProfileHeader ~ userData:", userData)
   const {t} = useTranslation()
 
   const handleChange = (event, newValue) => {
@@ -56,7 +57,8 @@ const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
           <Box sx={{ marginTop:'3%',marginLeft:'3%',position:"relative" ,zIndex:"11",display:"flex",alignItems:"center",gap:"15px"}} >
             <Avatar
           sx={{ width: '130px', height: '130px', borderRadius: '5px',zIndex:"22222222",marginBottom:"26px" }}
-          src={ProfileData?.image || "/broken-image.jpg"}
+          src={process.env.NEXT_PUBLIC_IMAGES+'/'+userData?.user_info?.image|| "/broken-image.jpg"}
+
         />
 
             {/* <ProfilePicture src={ || "/broken-image.jpg"} alt='profile-picture' /> */}

@@ -342,7 +342,7 @@ const useInquiriesColumns = () => {
 )}
 
     </Box>
-
+<Menu>
                 <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleCloseAnchor}>
                   <Box style={{ textDecoration: 'none' }}>
                     <IconButton>
@@ -354,7 +354,6 @@ const useInquiriesColumns = () => {
                   </Box>
                 </MenuItem>
               </Menu>
-            </div>
             <Box sx={{ marginTop: '19px', display: 'flex', gap: '10px', justifyContent: 'center', marginRight: '2px' }}>
               {params.row.status === 'waiting' ? (
                 <>

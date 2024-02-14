@@ -122,7 +122,7 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
         {/* ********************** */}
 
         <Box sx={{ padding: '12px' }}>
-          <TeamLeaders SetteamLeader={SetteamLeader} />
+          <TeamLeaders SetteamLeader={SetteamLeader} Data={SelectedRow} />
         </Box>
 
         {/* ****************** */}

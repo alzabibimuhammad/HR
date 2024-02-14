@@ -13,8 +13,9 @@ export const useEditTeam = () => {
       queryClient.invalidateQueries("teams");
       showSuccesToast('',data?.data?.message)
     },
-    onError: (data) =>{
-      showErrorToast(data.message)
+    onError: (data) => {
+      showErrorToast(data.response.data.message,"please changed")
+
     }
   });
 

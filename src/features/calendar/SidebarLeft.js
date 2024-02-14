@@ -1,4 +1,3 @@
-// ** MUI Imports
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Drawer from '@mui/material/Drawer'
@@ -6,22 +5,16 @@ import Divider from '@mui/material/Divider'
 import Checkbox from '@mui/material/Checkbox'
 import Typography from '@mui/material/Typography'
 import FormControlLabel from '@mui/material/FormControlLabel'
-
-// ** Third Party Imports
 import DatePicker from 'react-datepicker'
-
-// ** Icons Imports
 import Icon from 'src/@core/components/icon'
-
-// ** Styled Component
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { RequestPage } from '@mui/icons-material'
 import { FormateDate } from 'src/utiltis/DateFormate'
 import { useGetEventByDay } from './hooks/useGetEventByDay'
-import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
-import { useState } from 'react'
-
+import Image from 'next/image'
+import { useTranslation } from 'react-i18next'
+import { useEffect, useState } from 'react'
+import { Stack, padding } from '@mui/system'
 
 const SidebarLeft = props => {
   const {
@@ -37,13 +30,23 @@ const SidebarLeft = props => {
     handleCalendarsUpdate,
     handleLeftSidebarToggle,
     handleAddEventSidebarToggle
-
   } = props
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const colorsArr = calendarsColor ? Object.entries(calendarsColor) : []
-const {mutate:getEvent,isLoading,data:DataEventByDay}=useGetEventByDay()
-const[selectedDate,SetSelectedDate]=useState()
+  const { mutate: getEvent, isLoading, data: DataEventByDay } = useGetEventByDay()
+  const today = new Date()
+  const d = today.getDate()
+  const m =(Number(today.getMonth()+1) < 10 ? '0' : '') + Number(today.getMonth()+1)
+  const y = today.getFullYear()
+  const formattedDate = `${y}-${m}-${d}`
+  // ** Vars
+  useEffect(()=>{
+
+    getEvent(formattedDate)
+
+  },[])
+  const [selectedDate, SetSelectedDate] = useState()
 
   const renderFilters = colorsArr.length
     ? colorsArr.map(([key, value]) => {
@@ -69,14 +72,20 @@ const[selectedDate,SetSelectedDate]=useState()
     dispatch(handleSelectEvent(null))
   }
 
-  const handleDateChoose = (date) => {
+  const handleDateChoose = date => {
+
     SetSelectedDate(date)
-    const formattedDate = FormateDate(date);
-    getEvent(formattedDate)
+    const formattedDate = FormateDate(date)
+    let formattedAfterformatted = new Date(formattedDate)
+    let d = formattedAfterformatted.getDate() + 1
+    let m =
+      (Number(formattedAfterformatted.getMonth() + 1) < 10 ? '0' : '') + Number(formattedAfterformatted.getMonth() + 1)
+    let y = formattedAfterformatted.getFullYear()
+    const FinalformattedDate = `${y}-${m}-${d}`
+    getEvent(FinalformattedDate)
     calendarApi.gotoDate(date)
 
-
-}
+  }
   if (renderFilters) {
     return (
       <Drawer
@@ -87,6 +96,7 @@ const[selectedDate,SetSelectedDate]=useState()
           disablePortal: true,
           disableAutoFocus: true,
           disableScrollLock: true,
+
           keepMounted: true // Better open performance on mobile.
         }}
         sx={{
@@ -109,12 +119,11 @@ const[selectedDate,SetSelectedDate]=useState()
           }
         }}
       >
-
         <Box sx={{ p: 6, width: '100%' }}>
-        <Typography sx={{color:"#8090A7",width:"93px",height:"24px",marginLeft:"10px"}} variant='h3'>{t('Calendar')}</Typography>
+          <Typography sx={{ color: '#8090A7', width: '93px', height: '24px', marginLeft: '10px' }} variant='h3'>
+            {t('Calendar')}
+          </Typography>
         </Box>
-
-        {/* calender show data <Divider sx={{ width: '100%', m: '0 !important' }} /> */}
 
         <DatePickerWrapper
           sx={{
@@ -126,6 +135,7 @@ const[selectedDate,SetSelectedDate]=useState()
         >
           <DatePicker selected={selectedDate} inline onChange={date => handleDateChoose(date)} />
         </DatePickerWrapper>
+
         <Box sx={{ p: 7, width: '100%' }}>
           <Button fullWidth variant='contained' sx={{ '& svg': { mr: 2 } }} onClick={handleSidebarToggleSidebar}>
             <Icon icon='tabler:plus' fontSize='1.125rem' />
@@ -133,35 +143,56 @@ const[selectedDate,SetSelectedDate]=useState()
           </Button>
         </Box>
         <Divider sx={{ width: '100%', m: '0 !important' }} />
-        <Box sx={{ p: 7, width: '100%' }}>
 
+        <Box sx={{ p: 4, width: '100%',overflow: 'auto' ,'&::-webkit-scrollbar': {width: '3px' } }} height={'350px'}  >
+          <Typography mb={2} sx={{ fontWeight: '600', fontSize: '20px', color: '#131627' }}>
+            {t('Today Event')}
+          </Typography>
+          {Array.isArray(DataEventByDay?.data?.data) && DataEventByDay.data.data.length > 0 ? (
+            <Stack sx={{ width: '100%' }} spacing={1}>
+              {DataEventByDay.data.data.map(event => (
+                <Stack
+                  direction={'row'}
+                  justifyContent={'start'}
+                  sx={{ padding: 0, margin: 0, width: '100%', height: '60px', overflow: 'hidden' }}
+                  className='parent'
+                  key={event.id}
+                >
+                  <Stack direction={'column'}>
+                    <span style={{ padding: 0, margin: 0 }} className='child'>
+                      {event.day}
+                    </span>
 
-        <Typography sx={{fontWeight:"600",fontSize:"20px",color:"#131627"}}>{t('Today Event')}</Typography>
-        <Box sx={{width:"100%"}}>
+                    <Typography width={'54px'} p={0} ml={0} variant='p' fontSize={10}>
+                      {event.start}
+                    </Typography>
+                  </Stack>
 
-        {Array.isArray(DataEventByDay?.data?.data) && DataEventByDay.data.data.length > 0 ? (
-      DataEventByDay.data.data.map(event => (
-        <div className="parent" key={event.id}>
-          <div>
-            <p><span className="child">{event.day}</span>{event.start}</p>
-            {/* <p>{event.time}</p> */}
-          </div>
-          <div>
-            <p className='description'>
-              {event.description}
-            </p>
-          </div>
-        </div>
-      ))
-    ) : (
-      <Image
-        width={250}
-        height={200}
-        src="/images/notRequest.svg"
-        alt="Alternate Text"
-      />
-    )}
-        </Box>
+                  <Box
+                    sx={{
+                      width: '130px',
+                      height: '100%',
+                      textAlign: 'start',
+                      overflowWrap: 'break-word',
+                      wordWrap: 'break-word',
+                      lineHeight: '15px',
+                      overflowY: 'auto',
+                      '&::-webkit-scrollbar': {
+                        width: '0px' /* This will hide the scrollbar on WebKit browsers (e.g., Chrome, Safari) */
+                      },
+                      scrollbarWidth: 'none' /* This will hide the scrollbar on Firefox */
+                    }}
+                  >
+                    <Typography variant='p' fontSize={12} color={'#000'} style={{ padding: 0, margin: 0 }}>
+                      {event.description}
+                    </Typography>
+                  </Box>
+                </Stack>
+              ))}
+            </Stack>
+          ) : (
+            <Image width={250} height={200} src='/images/notRequest.svg' alt='Alternate Text' />
+          )}
         </Box>
       </Drawer>
     )

@@ -77,6 +77,11 @@ const navigation = () => {
       ]
     },
     {
+      title: 'Complaints',
+      icon: 'tabler:alert-square',
+      path:"/complaints"
+    },
+    {
       title: 'Calendar',
       icon: 'tabler:calendar',
       path: '/calendar'

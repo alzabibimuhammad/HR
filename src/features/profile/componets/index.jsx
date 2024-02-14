@@ -64,7 +64,7 @@ const TabList = styled(MuiTabList)(({ theme }) => ({
   }
 }))
 
-const Profiles = ({ tab, data }) => {
+const Profiles = ({ data,tab }) => {
   // ** State
   const [activeTab, setActiveTab] = useState(tab)
   const [isLoading, setIsLoading] = useState(true)
@@ -73,6 +73,8 @@ const Profiles = ({ tab, data }) => {
   const [userData, setuserData] = useState()
 
   const userDataClean = userData?.data?.data[0]
+  
+  console.log("🚀 ~ Profiles ~ userDataClean:", userDataClean)
 
   const [value, setValues] = useState('1')
 

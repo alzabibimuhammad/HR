@@ -232,7 +232,7 @@ useEffect(()=>{
             </Stack>
                  </>
           ))}
-          <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClick}>
+          <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClick}>
           {t("Add Education")}
           </Typography>
 
@@ -273,7 +273,7 @@ useEffect(()=>{
               />
               </>
           ))}
-   <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickCertificate}>
+   <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClickCertificate}>
    {t("Add Certificate")}
           </Typography>
 
@@ -314,7 +314,7 @@ useEffect(()=>{
         </React.Fragment>
       ))}
 
-   <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickExperience}>
+   <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClickExperience}>
    {t("Add Experience")}
           </Typography>
 
@@ -322,8 +322,11 @@ useEffect(()=>{
                   {/* *********************************************************************************** */}
               <Typography>{t("Skills")}</Typography>
   {fieldsSkills.map((field, index) => (
-              <Stack direction={'row'} key={index}>
+
+              <Stack direction={'row'} key={index} alignItems={'end'} >
+                <Stack width={'100%'} direction={'column'} >
            {index === 1 && (
+
             <CloseIcon
               sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
               onClick={() => handleRemoveClickSkills(index)}
@@ -352,6 +355,7 @@ useEffect(()=>{
           />
         )}
       />
+      </Stack>
       <Box marginTop={'1%'}>
       <Rating
               name={`skills[${index}].rate`}
@@ -365,15 +369,14 @@ useEffect(()=>{
       </Box>
 </Stack>
   ))}
-
               <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickSkills}>
               {t("Add Skills")}
           </Typography>
 
-
               <Typography>{t("Languages")}</Typography>
               {fieldsLanguage.map((field, index) => (
-              <Stack direction={'row'} key={index}>
+              <Stack direction={'row'} key={index} alignItems={'end'}>
+                <Stack direction={'column'} width={'100%'} >
            {index === 1 && (
             <CloseIcon
               sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
@@ -405,6 +408,7 @@ useEffect(()=>{
           />
         )}
       />
+      </Stack>
       <Box marginTop={'1%'}>
       <Rating
               name={`languages[${index}].rate`}
@@ -416,7 +420,7 @@ useEffect(()=>{
             />      </Box>
 </Stack>
   ))}
-     <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickLanguage}>
+     <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClickLanguage}>
      {t("Add Language")}
           </Typography>
 

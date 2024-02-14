@@ -9,7 +9,7 @@ export default function RequestInquiries() {
 
   return <>
     {data ? <Inquiries  rows={data}  /> :
-    <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'50vh' }} ><CircularProgress /></Box>
+    <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'100%' }} ><CircularProgress /></Box>
   }
 
   </>

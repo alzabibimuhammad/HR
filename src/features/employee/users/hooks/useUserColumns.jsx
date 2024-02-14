@@ -5,11 +5,11 @@ import Box from '@mui/material/Box';
 import DrawerForm from '../Componets/DrawerForm/index';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { Avatar, IconButton, Typography } from '@mui/material';
+import { Avatar, IconButton,  Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useTranslation } from 'react-i18next';
-import Link from 'next/link';
 import AlertDialogDeleteUser from '../componets/dialog';
+import Link from 'next/link';
 
 const useUserColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false);
@@ -53,11 +53,11 @@ const useUserColumns = () => {
         flex:1,
         renderCell: (params) => {
               return (
-              <>
-              <Avatar alt=''  />
+              <Link href={`/profile/${params?.row?.id}`} style={{ display:'flex',textDecoration:'none',alignItems:'center' }} >
+              <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
               <Typography  style={{fontSize:'14px', marginLeft:'2px' }} >{params?.row?.first_name}</Typography>
               <Typography style={{ fontSize:'14px',marginLeft:'3px' }} >{params?.row?.last_name}</Typography>
-              </>
+              </Link>
             );
           },
       },

@@ -26,14 +26,17 @@ const useSalaryColumns = () => {
         field: '',
         headerName: t("Employee"),
         disableClickEventBubbling: true,
-        flex:1,
+        flex:1.7,
         renderCell: (params) => {
               return (
-              <>
-              <Avatar alt=''  />
-              <Typography  style={{fontSize:'14px', marginLeft:'2px' }} >{params?.row?.first_name}</Typography>
-              <Typography style={{ fontSize:'14px',marginLeft:'3px' }} >{params?.row?.last_name}</Typography>
-              </>
+                <Link style={{ textDecoration:'none' }}  href={`/profile/${params?.row?.id}`}>
+
+              <Stack direction={'row'} spacing={1} alignItems={'center'}>
+              <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
+              <Typography  >{params?.row?.first_name}</Typography>
+              <Typography  >{params?.row?.last_name}</Typography>
+              </Stack>
+              </Link>
 
             );
           },

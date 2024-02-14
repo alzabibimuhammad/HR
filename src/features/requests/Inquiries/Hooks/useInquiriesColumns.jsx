@@ -1,4 +1,3 @@
-// Import necessary components and libraries
 import React, { useEffect, useMemo, useState } from 'react'
 import Box from '@mui/material/Box'
 import { Avatar, Button, IconButton, Rating, Typography } from '@mui/material'
@@ -8,7 +7,6 @@ import MenuItem from '@mui/material/MenuItem'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useTranslation } from 'react-i18next'
-import Link from 'next/link'
 import PersonIcon from '@mui/icons-material/Person'
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material'
 import ListItem from '@mui/material/ListItem'
@@ -18,7 +16,7 @@ import { useDeleteRequest } from './useDeleteRequest'
 import { useAccepteRequest } from './useAccepteRequest' // Import the new hook
 import { useRejectRequest } from './useRejectRequest'
 import { Stack } from '@mui/system'
-
+import Link from 'next/link'
 const ITEM_HEIGHT = 162
 
 const useInquiriesColumns = () => {
@@ -78,13 +76,6 @@ const useInquiriesColumns = () => {
     handleCloseAnchor()
   }
 
-  //   const handleApproveClick = () => {
-  //     acceptRequestMutation.mutate(rowData?.id);
-
-  //     // handleCloseAnchor();
-
-  //     // handleDeleteClick()
-  //  }
 
   return useMemo(() => [
     {
@@ -92,17 +83,13 @@ const useInquiriesColumns = () => {
       headerName: t('Employee'),
       flex: 1,
       disableClickEventBubbling: true,
-      renderCell: params => {
-        return (
-          <Box>
-                    <Link style={{ textDecoration:'none' }}  href={`/profile/${params?.row?.user_id}`}>
-
+      renderCell: params => (
+        <Box>
+          <Link style={{ textDecoration: 'none' }} href={`/profile/${params?.row?.user_id}`}>
             <Typography sx={{ fontSize: '14px' }}>{params?.row?.employee}</Typography>
           </Link>
-          </Box>
-
-        )
-      }
+        </Box>
+      )
     },
     {
       field: 'Date',
@@ -178,70 +165,107 @@ const useInquiriesColumns = () => {
     {
       field: 'actions',
       headerName: t('Actions'),
-      headerAlign: 'center', // Align the header text to the center
-
+      headerAlign: 'center',
       flex: 1,
       renderCell: params => {
-        return (
-          <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-            <div style={{ marginLeft: '100px' }}>
-              <IconButton
-                aria-label='more'
-                id='long-button'
-                aria-controls={open ? 'long-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-haspopup='true'
-                onClick={event => handleClick(event, params.row)}
-              >
-                <MoreVertIcon />
-              </IconButton>
-              <Menu
-                params={params.row.id}
-                id='long-menu'
-                MenuListProps={{
-                  'aria-labelledby': 'long-button'
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleCloseAnchor}
-                PaperProps={{
-                  style: {
-                    maxHeight: ITEM_HEIGHT * 4.5,
-                    width: '208px',
-                    boxShadow: 'none'
-                  }
-                }}
-              >
-                <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleCloseAnchor}>
-                  <Link style={{ textDecoration: 'none' }} href={`/profile/${params.row.id}`}>
-                    <IconButton>
-                      <VisibilityIcon variant='contained' sx={{ color: '#3F4458' }} size='small'></VisibilityIcon>
-                    </IconButton>
-                    <span style={{ color: '#3F4458' }}>View Profile</span>
-                  </Link>
-                </MenuItem>
 
-                <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleOpenModal}>
-                  <Box style={{ textDecoration: 'none' }}>
-                    <IconButton>
-                      <PersonIcon variant='contained' sx={{ color: '#3F4458' }} size='small'></PersonIcon>
-                    </IconButton>
-                    <span style={{ color: '#3F4458' }}>View Request</span>
-                  </Box>
-                </MenuItem>
+        return <Stack direction={'row'} width={'100%'} justifyContent={'end'} alignItems={'center'} >
+          <Box >
+            {params.row.status === 'waiting' ? (
+              <Stack direction={'column'}  spacing={1}>
+                <Button
+                  sx={{
+                    width: '100%',
+                    color: '#91C483',
+                    fontWeight: '500',
+                    fontSize: '10px',
+                    backgroundColor: '#DDE6DA',
+                    borderRadius: '4px'
+                  }}
+                  onClick={() => handleApproveClick(params)}
+                >
+                  {t('Approve')}
+                </Button>
+                <Button
+                  sx={{
+                    width: '100%',
+                    color: '#DF2E38',
+                    fontWeight: '500',
+                    fontSize: '10px',
+                    backgroundColor: '#F9D5D7',
+                    borderRadius: '4px'
+                  }}
+                  onClick={() => handleRejectClick(params)}
+                >
+                  {t('Decline')}
+                </Button>
+              </Stack>
+            ) : params.row.status === 'rejected' ? (
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#DF2E38' }}>{t('Declined')}</Typography>
+              </Box>
+            ) : (
+              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#91C483' }}>{t('Approved')}</Typography>
+              </Box>
+            )}
+          </Box>
 
-    <MenuItem sx={{ padding: "0",color:"#3F4458" }} onClick={handleOpenModal}>
-        <Box style={{textDecoration:"none"}}>
-          <IconButton>
-            <PersonIcon variant="contained" sx={{ color: '#3F4458' }} size='small'></PersonIcon>
+          <Box>
+          <IconButton
+            aria-label='more'
+            id='long-button'
+            aria-controls={open ? 'long-menu' : undefined}
+            aria-expanded={open ? 'true' : undefined}
+            aria-haspopup='true'
+            onClick={event => handleClick(event, params.row)}
+          >
+            <MoreVertIcon />
           </IconButton>
-          <span style={{color:"#3F4458"}}>
-            View Request
-          </span>
-        </Box>
-      </MenuItem>
+          <Menu
+            id='long-menu'
+            MenuListProps={{
+              'aria-labelledby': 'long-button'
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleCloseAnchor}
+            PaperProps={{
+              style: {
+                maxHeight: ITEM_HEIGHT * 4.5,
+                width: '208px',
+                boxShadow: 'none'
+              }
+            }}
+          >
+            {/* <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleCloseAnchor}>
+              <Link href={`/profile/${params?.row?.user_id}`} style={{ textDecoration: 'none' }} >
+                <IconButton>
+                  <PersonIcon variant='contained' sx={{ color: '#3F4458' }} size='small' />
+                </IconButton>
+                <span style={{ color: '#3F4458' }}>View Profile</span>
+              </Link>
+            </MenuItem> */}
+            <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleOpenModal}>
+              <Box style={{ textDecoration: 'none' }}>
+                <IconButton>
+                  <PersonIcon variant='contained' sx={{ color: '#3F4458' }} size='small' />
+                </IconButton>
+                <span style={{ color: '#3F4458' }}>View Request</span>
+              </Box>
+            </MenuItem>
+            <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleDeleteClick}>
+              <Box style={{ textDecoration: 'none' }}>
+                <IconButton>
+                  <DeleteIcon variant='contained' sx={{ color: '#3F4458' }} size='small' />
+                </IconButton>
+                <span style={{ color: '#3F4458' }}>Delete</span>
+              </Box>
+            </MenuItem>
+          </Menu>
 
-      <Dialog open={openModal} onClose={handleCloseModal}>
+
+          <Dialog open={openModal} onClose={handleCloseModal}>
   <DialogTitle sx={{ fontSize: "20px", fontWeight: "600", color: "#3F4458", textAlign: "center" }}>Request</DialogTitle>
   <DialogContent sx={{ overflow: "hidden",width:"100vh",height:"100%" }}>
     <h3>Title Request</h3>
@@ -253,41 +277,9 @@ const useInquiriesColumns = () => {
     <h3>Description Request</h3>
     <p style={{ fontWeight: "400", fontSize: "14px", color: "#3e4458" }}>{rowData?.CONTENT}</p>
   </DialogContent>
-  <DialogActions>
-    <Box sx={{ marginTop: "19px", display: "flex", gap: "19px", marginRight:"20px" }}>
-      {params.row.status === "waiting"?(
-        <>
-<Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }} onClick={() => handleRejectClick(params)}>Decline</Button>
-<Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>Approve</Button>
-        </>
-      ):params.row.status==="rejected"? (
-        <>
-
-        <Button
-      sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}
-      onClick={() => handleRejectClick(params)}
-      disabled={true}
-    >
-      {t('Decline')}
-    </Button>
-      </>
 
 
-      ):(
-        <Button
-        sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }}
-        onClick={() => handleApproveClick(params)}
-        disabled={true}
 
-      >
-        {t('Approve')}
-      </Button>
-      )
-
-      }
-
-    </Box>
-  </DialogActions>
 </Dialog>
 
 
@@ -398,7 +390,7 @@ const useInquiriesColumns = () => {
         )
       }
     }
-  ])
-}
+  ]);
+};
 
-export default useInquiriesColumns
+export default useInquiriesColumns;

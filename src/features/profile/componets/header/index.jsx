@@ -42,7 +42,6 @@ const TabsProfile = styled(Tabs)(({ theme }) => ({
 }));
 
 const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
-  console.log("🚀 ~ UserProfileHeader ~ userData:", userData)
   const {t} = useTranslation()
 
   const handleChange = (event, newValue) => {

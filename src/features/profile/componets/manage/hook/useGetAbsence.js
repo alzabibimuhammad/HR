@@ -3,7 +3,7 @@ import GetAbsence from '../api/GetAbsence';
 
 const useGetAbsence = (id) => {
   const query = useQuery({
-    queryKey: ['Absence', id],
+    queryKey: ['absence', id],
     queryFn: () => GetAbsence(id),
   });
 

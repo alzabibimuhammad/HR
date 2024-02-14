@@ -155,6 +155,7 @@ export default function CollapsibleTable(Data, setEditData) {
             <Collapse in={open} timeout='auto' unmountOnExit>
               <Stack spacing={3} sx={{ margin: 1 }}>
                 {row?.user?.map(user => (
+
                   <Stack direction={'row'} justifyContent={'space-between'}>
                     <Link style={{ textDecoration: 'none' }} href={`/profile/${user.id}`}>
                       <Stack direction={'row'} alignItems={'center'} spacing={3}>
@@ -183,6 +184,7 @@ export default function CollapsibleTable(Data, setEditData) {
                       </Link>
                     </Stack>
                   </Stack>
+
                 ))}
               </Stack>
             </Collapse>

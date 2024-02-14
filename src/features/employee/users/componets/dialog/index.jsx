@@ -8,7 +8,6 @@ import Paper from '@mui/material/Paper';
 import useDeleteUser from "../../hooks/useDeleteUser";
 
 export default function AlertDialogDeleteUser({ id, open, handleClose }) {
-console.log("🚀 ~ AlertDialogDeleteUser ~ id:", id)
 
 
  const { mutate: DeleteUser, isLoading } = useDeleteUser();

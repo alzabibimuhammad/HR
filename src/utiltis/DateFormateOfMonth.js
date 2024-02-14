@@ -12,7 +12,7 @@ export function DateFormateOfMonth(date) {
   var year = originalDate.getUTCFullYear();
 
 
-  var formattedMonth =year + '-' + month + '-' ;
+  var formattedMonth =year + '-' + (month < 10 ? '0' : '') + month ;
 
 
   return formattedMonth;

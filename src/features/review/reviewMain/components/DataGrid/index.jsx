@@ -5,6 +5,7 @@ import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { Box, Stack } from '@mui/system'
 import useReviewColumn from '../../Hook/useReviewColumn'
 import { ReviewData } from '../../infrastructure'
+import Show10 from 'src/@core/components/show10'
 
 const ReviewFeature = ({ Data }) => {
   const columns = useReviewColumn()
@@ -13,6 +14,7 @@ const ReviewFeature = ({ Data }) => {
 
   const [rows, setRows] = useState(data)
   const [date, setDate] = useState()
+  const [show, setShow] = React.useState(10);
 
   useEffect(() => {
     setRows(ReviewData(data))
@@ -62,11 +64,14 @@ const ReviewFeature = ({ Data }) => {
         </Typography>
           <Stack direction={'column'} spacing={3} >
 
-              <Stack direction={{sm:'row',xs:'column'}} spacing={6} >
-
+          <Stack direction={'row'} width={{sm:'100%',xs:'100%'}} spacing={3} justifyContent={'space-between'} alignItems={'center'} >
+                <Stack width={'100%'} spacing={2} direction={'row'} alignItems={'center'}>
+                <Box mb={2}>
+                  <Show10 setShow={setShow}/>
+                </Box>
               <TextField
               placeholder={t('Search')}
-              fullWidth
+
               InputProps={{
                 startAdornment: (
                   <Box paddingRight={1}>
@@ -85,18 +90,19 @@ const ReviewFeature = ({ Data }) => {
                 )
               }}
               onChange={handelSearch}
-              sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+              sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none',width:'40%' }}
               size='small'
             />
+            </Stack>
                  <TextField
                   type='date'
-                  fullWidth
                   size='small'
+                  sx={{ width:'40%' }}
                   onChange={handelDate}
                   />
               </Stack>
 
-          <CustomDataGrid columns={columns} rows={rows || [] } />
+          <CustomDataGrid columns={columns} show={show}   rows={rows || [] } />
           </Stack>
 
 

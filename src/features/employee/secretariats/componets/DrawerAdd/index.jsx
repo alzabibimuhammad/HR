@@ -165,12 +165,13 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
                 <Controller
                   name='received_date'
                   control={control}
+
                   defaultValue=''
                   render={({ field }) => (
                     <TextField
                       {...field}
                       sx={{ marginTop:5 }}
-
+                      placeholder='2000-01-01'
                       fullWidth
                       label={t('Received Date')}
                       variant='outlined'

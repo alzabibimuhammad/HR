@@ -281,8 +281,113 @@ const useInquiriesColumns = () => {
 
 
 </Dialog>
-  </Box>
-        </Stack>
+
+
+    <MenuItem sx={{ padding: "0" ,color:"#3F4458" }} onClick={handleCloseAnchor}>
+      <Box style={{textDecoration:"none"}} >
+        <IconButton>
+          <DeleteIcon variant="contained" sx={{ color: '#3F4458' }} size='small'></DeleteIcon>
+        </IconButton>
+        <Button style={{color:"#3F4458"}} onClick={handleDeleteClick}>
+
+        Delete
+        </Button>
+      </Box>
+    </MenuItem>
+      </Menu>
+    </div>
+    <Box
+
+      sx={{marginTop:"19px",display:"flex",gap:"10px",justifyContent:'center',marginRight:'2px'}}
+    >
+
+      {params.row.status === 'waiting' ? (
+  <>
+    <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "14px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>{t('Approve')}
+ </Button>
+    <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "14px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}  onClick={() => handleRejectClick(params)} >{t('Decline')}
+ </Button>
+  </>
+) : params.row.status === 'rejected' ? (
+
+  <Box sx={{display:'flex', justifyContent:'center'}}>
+ <Typography
+      sx={{   fontWeight: "500", fontSize: "14px", color:'#DF2E38' }}
+    >
+      {t('Decline')}
+
+
+    </Typography>
+    </Box>
+
+) : (
+  <Box sx={{display:'flex', justifyContent:'center'}}>
+  <Typography
+       sx={{   fontWeight: "500", fontSize: "14px", color:'#91C483' }}
+     >
+       {t('Approve')}
+
+
+     </Typography>
+     </Box>
+
+)}
+
+    </Box>
+<Menu>
+                <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleCloseAnchor}>
+                  <Box style={{ textDecoration: 'none' }}>
+                    <IconButton>
+                      <DeleteIcon variant='contained' sx={{ color: '#3F4458' }} size='small'></DeleteIcon>
+                    </IconButton>
+                    <Button style={{ color: '#3F4458' }} onClick={handleDeleteClick}>
+                      Delete
+                    </Button>
+                  </Box>
+                </MenuItem>
+              </Menu>
+            <Box sx={{ marginTop: '19px', display: 'flex', gap: '10px', justifyContent: 'center', marginRight: '2px' }}>
+              {params.row.status === 'waiting' ? (
+                <>
+                  <Button
+                    sx={{
+                      width: '100%',
+                      color: '#91C483',
+                      fontWeight: '500',
+                      fontSize: '14px',
+                      backgroundColor: '#DDE6DA',
+                      borderRadius: '4px'
+                    }}
+                    onClick={() => handleApproveClick(params)}
+                  >
+                    {t('Approve')}
+                  </Button>
+                  <Button
+                    sx={{
+                      width: '100%',
+                      color: '#DF2E38',
+                      fontWeight: '500',
+                      fontSize: '14px',
+                      backgroundColor: '#F9D5D7',
+                      borderRadius: '4px'
+                    }}
+                    onClick={() => handleRejectClick(params)}
+                  >
+                    {t('Decline')}
+                  </Button>
+                </>
+              ) : params.row.status === 'rejected' ? (
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#DF2E38' }}>{t('Decline')}</Typography>
+                </Box>
+              ) : (
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                  <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#91C483' }}>{t('Approve')}</Typography>
+                </Box>
+              )}
+            </Box>
+          </Box>
+        )
       }
     }
   ]);

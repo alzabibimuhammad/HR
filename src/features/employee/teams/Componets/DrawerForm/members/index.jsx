@@ -72,6 +72,20 @@ const Members = ({SetMembers,SelectedRow}) => {
 
   const [selectedItems, setSelectedItems] = useState(SelectedRow||[]);
   console.log("🚀 ~ Members ~ selectedItems:", selectedItems)
+  
+  
+  useEffect(()=>{
+    if(SelectedRow){
+      console.log("🚀 ~ Members ~ SelectedRow:", SelectedRow)
+      const idsArray = selectedItems.map(item => item?.id);
+  setSelectedItems(idsArray)
+    }
+    
+    return () => {
+      setSelectedItems([]);
+    };
+  },[SelectedRow])
+  
   const [searchText, setSearchText] = useState('');
   const {data:UserData,isloading}=useGetEmployeeDropDown()
 
@@ -80,6 +94,7 @@ const Members = ({SetMembers,SelectedRow}) => {
   };
 
   const toggleSelect = (icon) => {
+   
     const isSelected = selectedItems.includes(icon);
     if (isSelected) {
       setSelectedItems(selectedItems.filter((item) => item !== icon));
@@ -172,7 +187,7 @@ value={searchText}
         </Box>
         <Box>
           <Checkbox
-            checked={selectedItems?.includes(item.id)}
+            checked={selectedItems.includes(item.id)}
             onChange={() => toggleSelect(item.id)}
           />
         </Box>

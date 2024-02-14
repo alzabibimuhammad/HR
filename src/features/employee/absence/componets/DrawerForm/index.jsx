@@ -18,6 +18,7 @@ import { Stack } from '@mui/system'
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import useViewGetAbsence from '../../hooks/useGetAbsenceById'
+import { useDeleteAbsence } from '../../hooks/useDeletedAbsence'
 
 const drawerWidth = 440
 
@@ -42,6 +43,9 @@ const { data, isLoading, isError } = useViewGetAbsence(id)
 const [selectedType, setSelectedType] = useState('');
 const [selectedDate, setSelectedDate] = useState('');
 const [fdata, setfdata] = useState('');
+const {mutate:deleteAbcence}=useDeleteAbsence()
+console.log("🚀 ~ DrawerForm ~ fdata:", fdata)
+const [fndata, setfndata] = useState('');
 
   const handleDrawerClose = () => {
     dispatch(getContractsData())
@@ -73,9 +77,9 @@ const [fdata, setfdata] = useState('');
 
     let searchData
     if (!date) {
-      setfndata(data?.data?.data?.justified)
+      setfndata(data?.data?.data?.unjustified)
     } else {
-      searchData = data?.data?.data?.justified?.filter(element => {
+      searchData = data?.data?.data?.unjustified?.filter(element => {
         return element?.startDate == date
       })
       setfndata(searchData)
@@ -83,9 +87,11 @@ const [fdata, setfdata] = useState('');
   }
 
   useEffect(() => {
+    setfndata(data?.data?.data?.unjustified)
+    setfdata(data?.data?.data?.justified)
     reset(defaultValues);
 
-  }, [Data]);
+  }, [data?.data?.data?.unjustified,data?.data?.data?.justified]);
 
   const {
     control,
@@ -123,7 +129,10 @@ const [fdata, setfdata] = useState('');
 
   }
 
-  const handleDeleteAbsence=user_id=>{
+  const handleDeleteAbsence=user_id => {
+    console.log("🚀 ~ handleDeleteAbsence ~ user_id:", user_id.id)
+    deleteAbcence(user_id.id)
+   
   }
 
 
@@ -131,7 +140,6 @@ const [fdata, setfdata] = useState('');
 
       <>
       <Drawer
-      onClose={handleDrawerClose}
 
       sx={{
         width: drawerWidth,
@@ -163,10 +171,22 @@ const [fdata, setfdata] = useState('');
             size='small' />
         </Box>
       </Stack>
+      <Stack direction={'column'} marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
 
+{fndata && fndata?.map((date, index) => (
+  <>
+ <Stack direction="row" spacing={70} alignItems="center">
+  <Typography>
+    {date?.startDate}
+  </Typography>
+  <CloseIcon sx={{ color: '#df2e38', cursor: 'pointer' }} onClick={() => handleDeleteAbsence(date)} />
+</Stack>
+</>
+  ))}
+</Stack>
 
     <Stack marginLeft={{ sm: '3%' }} marginTop={{ sm: '2%' }} direction={{ sm: 'column' }} spacing={3}>
-        <Typography>Justified</Typography>
+    <Typography>Justified</Typography>
         <Box width={{ sm: '94%' }}>
 
           <TextField
@@ -181,12 +201,13 @@ const [fdata, setfdata] = useState('');
 
         {fdata && fdata?.map((date, index) => (
           <>
-          <Typography>
-
-            {date?.startDate}
-          </Typography>
-          <CloseIcon sx={{ color: '#df2e38' }} onClick={() => handleDeleteAbsence(date)} />
-          </>
+     <Stack direction="row" spacing={70} alignItems="center">
+     <Typography>
+       {date?.startDate}
+     </Typography>
+     <CloseIcon sx={{ color: '#df2e38', cursor: 'pointer' }} onClick={() => handleDeleteAbsence(date.id)} />
+   </Stack>
+   </>
           ))}
       </Stack>
 

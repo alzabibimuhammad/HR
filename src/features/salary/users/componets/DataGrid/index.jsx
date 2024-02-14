@@ -21,12 +21,18 @@ const SalaryDataGrid = ({ rows }) => {
 
   const totalSalaries = SalaryData(rows)?.reduce((sum, value) => sum + value.total, 0);
 
+  let roleData = new Set([]) ;
+  rows?.data?.data?.forEach(element => {
+      roleData.add(element?.role)
+  });
+
   const columns = useSalaryColumns()
   const { t } = useTranslation()
 
   const { data: GetDataByMonth, mutate: getData } = useGetDataByMonth()
 
   const [fdata, setfdata] = useState(rows)
+  useEffect(()=>{setfdata(rows)},[rows])
 
   const [role, setRole] = useState('')
 
@@ -56,23 +62,16 @@ const SalaryDataGrid = ({ rows }) => {
 
   useEffect(() => {
     let filteredData
-    if (role && department) {
-      filteredData = rows?.data?.data?.filter(row => {
-        return row?.department?.name === department && row.role === role
-      })
-      setfdata({ data: { data: filteredData } })
-    } else if (role && department == '') {
+      if(role){
       filteredData = rows?.data?.data?.filter(row => {
         return row.role === role
       })
       setfdata({ data: { data: filteredData } })
-    } else if (department && role == '') {
-      filteredData = rows?.data?.data?.filter(row => {
-        return row?.department?.name === department
-      })
-      setfdata({ data: { data: filteredData } })
-    } else setfdata(rows)
-  }, [role, department])
+    }else
+      setfdata(rows)
+
+
+  }, [role])
 
   const handelSearch = event => {
     const searchText = event.target.value
@@ -195,27 +194,12 @@ const SalaryDataGrid = ({ rows }) => {
                 size='small'
               >
                 <MenuItem value=''>{`${t('Role')}`}</MenuItem>
-                <MenuItem value='admin'>{`${t('admin')}`}</MenuItem>
-                <MenuItem value='customer'>{`${t('customer')}`}</MenuItem>
-                <MenuItem value='employee'>{`${t('employee')}`}</MenuItem>
+                {Array.from(roleData).map(element => (
+                      <MenuItem key={element} value={element}>{element}</MenuItem>
+                    ))}
               </TextField>
 
-              <TextField
-                select
-                fullWidth
-                defaultValue='Team'
-                SelectProps={{
-                  // value: department,
-                  displayEmpty: true
 
-                  // onChange: handledepartmentChange,
-                }}
-                size='small'
-              >
-                <MenuItem value='Team'>{`${t('Team')}`}</MenuItem>
-                <MenuItem value='active'>{`${t('active')}`}</MenuItem>
-                <MenuItem value='not-active'>{`${t('not active')}`}</MenuItem>
-              </TextField>
 
               <Button sx={{ border: '1px solid' }} fullWidth onClick={handleOpen}>
                 {t('Select Date')}
@@ -233,7 +217,7 @@ const SalaryDataGrid = ({ rows }) => {
             </Stack>
 
             {rows ? (
-              <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={SalaryData(rows) || []} />
+              <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={SalaryData(fdata) || []} />
             ) : null}
           </Stack>
         </CardContent>

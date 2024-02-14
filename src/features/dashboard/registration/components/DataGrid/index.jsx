@@ -48,6 +48,10 @@ const Registration = Data => {
         else if( element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase()) ){
           return element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase());
         }
+        else if( element?.department?.name?.toLowerCase()?.includes(searchText.toLowerCase()) ){
+          return element?.department?.name?.toLowerCase()?.includes(searchText.toLowerCase());
+        }
+
         else if( element?.id == searchText ){
           return element?.id == searchText ;
         }

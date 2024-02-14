@@ -73,6 +73,9 @@ const Members = ({SetteamLeader,Data}) => {
     SetteamLeader(id)
   };
 
+
+
+
   const filteredData = useMemo(() => {
     if (!searchText || !UserData || !UserData.data || !UserData.data.data) {
       return UserData?.data.data||[];
@@ -91,6 +94,8 @@ const Members = ({SetteamLeader,Data}) => {
 
       <TextField
         placeholder='Search'
+        onChange={(e) => setSearchText(e.target.value)}
+
         InputProps={{
           startAdornment: (
             <Box paddingRight={1} >

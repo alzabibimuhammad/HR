@@ -1,6 +1,6 @@
   export const InquiriesData = elements => {
 
-    return elements?.data?.data?.data?.map(element => {
+    return elements?.data?.data?.map(element => {
       const dateOnly = element?.created_at ? element.created_at.split('T')[0] : null;
       const time = element?.created_at ? element.created_at.split('T')[1].slice(0, -8) : null;
 

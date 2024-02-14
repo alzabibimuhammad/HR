@@ -120,16 +120,24 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
         <Box sx={{ padding: '12px' }}>
           <Typography sx={{ fontFamily: 'Montserrat' }}>Name</Typography>
 
-          <TextField
-            fullWidth
-            style={{ height: '10px' }}
-            placeholder='Team Name'
-            size='small'
-            value={teamName}
-            onChange={handleTeamNameChange}
-          />
-        </Box>
-        {/* ********************** */}
+      <Drawer
+        backgroundColor='#fff'
+      onClose={handleDrawerClose}
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth
+          },
+          overflow:'visible',
+          borderRadius:'15px',
+        }}
+        anchor='right'
+        open={open}
+        variant='temporary'
+        ModalProps={{
+          keepMounted: true
+        }}
 
         <Box sx={{ padding: '12px' }}>
           <Members SetMembers={SetMembers} SelectedRow={SelectedRow.user} />

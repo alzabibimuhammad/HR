@@ -1,4 +1,5 @@
 export const AbsenceData = elements => {
+console.log("🚀 ~ AbsenceData ~ elements:", elements)
 
   return elements?.data?.data?.map(element => {
     return {

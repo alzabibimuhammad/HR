@@ -238,6 +238,19 @@ border-radius: 12px;
   r: 40;
 }
 
-.css-1ppzk2g-MuiBackdrop-root-MuiModal-backdrop{
+/* .css-1ppzk2g-MuiBackdrop-root-MuiModal-backdrop{
   position: relative !important;
+
+  opacity: 1  !important;
+} */
+
+.css-1bdczpd-MuiFormControl-root-MuiTextField-root{
+  padding-left: 0px !important;
+}
+
+
+
+.css-141nhls-MuiStack-root>:not(style)+:not(style) {
+    margin: 0;
+    margin-left: 3rem !important;
 }

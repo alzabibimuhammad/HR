@@ -130,6 +130,7 @@ const [selectedDate, setSelectedDate] = useState('');
   return (
 
       <Drawer
+      onClose={handleDrawerClose}
 
       sx={{
         width: drawerWidth,

@@ -163,7 +163,7 @@ const Profiles = ({ data,tab }) => {
               <NoteReport user_id={id} />
             </Stack>
 
-            <Stack width={{ sm: '60%', xs: '100%' }} spacing={6} direction={'column'}>
+            <Stack width={{ sm: '60%', xs: '100%' ,height:"5900vh" }} spacing={6} direction={'column'}>
               <Skills ProfileData={ProfileData} />
               <Employment ProfileData={ProfileData} />
             </Stack>

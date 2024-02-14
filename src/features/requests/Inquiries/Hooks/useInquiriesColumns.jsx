@@ -230,87 +230,118 @@ const useInquiriesColumns = () => {
                   </Box>
                 </MenuItem>
 
-                <Dialog open={openModal} onClose={handleCloseModal}>
-                  <DialogTitle sx={{ fontSize: '20px', fontWeight: '600', color: '#3F4458', textAlign: 'center' }}>
-                    Request
-                  </DialogTitle>
-                  <DialogContent sx={{ overflow: 'hidden', width: '100vh', height: '100%' }}>
-                    <h3>Title Request</h3>
-                    <p style={{ fontWeight: '400', fontSize: '14px', color: '#3e4458' }}>{rowData?.Title}</p>
-                    <Divider component='' />
-                    <h3>Date Request</h3>
-                    <p style={{ fontWeight: '400', fontSize: '14px', color: '#3e4458' }}>{rowData?.Date}</p>
-                    <Divider component='' />
-                    <h3>Description Request</h3>
-                    <p style={{ fontWeight: '400', fontSize: '14px', color: '#3e4458' }}>{rowData?.CONTENT}</p>
-                  </DialogContent>
-                  <DialogActions>
-                    <Box sx={{ marginTop: '19px', display: 'flex', gap: '19px' }}>
-                      {params.row.status === 'waiting' ? (
-                        <>
-                          <Button
-                            sx={{
-                              width: '100%',
-                              color: '#DF2E38',
-                              fontWeight: '500',
-                              fontSize: '12px',
-                              backgroundColor: '#F9D5D7',
-                              borderRadius: '4px'
-                            }}
-                            onClick={() => handleRejectClick(params)}
-                          >
-                            Decline
-                          </Button>
-                          <Button
-                            sx={{
-                              width: '100%',
-                              color: '#91C483',
-                              fontWeight: '500',
-                              fontSize: '12px',
-                              backgroundColor: '#DDE6DA',
-                              borderRadius: '4px'
-                            }}
-                            onClick={() => handleApproveClick(params)}
-                          >
-                            Approve
-                          </Button>
-                        </>
-                      ) : params.row.status === 'rejected' ? (
-                        <>
-                          <Button
-                            sx={{
-                              width: '100%',
-                              color: '#DF2E38',
-                              fontWeight: '500',
-                              fontSize: '12px',
-                              backgroundColor: '#F9D5D7',
-                              borderRadius: '4px'
-                            }}
-                            onClick={() => handleRejectClick(params)}
-                            disabled={true}
-                          >
-                            {t('Decline')}
-                          </Button>
-                        </>
-                      ) : (
-                        <Button
-                          sx={{
-                            width: '100%',
-                            color: '#91C483',
-                            fontWeight: '500',
-                            fontSize: '12px',
-                            backgroundColor: '#DDE6DA',
-                            borderRadius: '4px'
-                          }}
-                          onClick={() => handleApproveClick(params)}
-                          disabled={true}
-                        >
-                          {t('Approve')}
-                        </Button>
-                      )}
-                    </Box>
-                  </DialogActions>
-                </Dialog>
+    <MenuItem sx={{ padding: "0",color:"#3F4458" }} onClick={handleOpenModal}>
+        <Box style={{textDecoration:"none"}}>
+          <IconButton>
+            <PersonIcon variant="contained" sx={{ color: '#3F4458' }} size='small'></PersonIcon>
+          </IconButton>
+          <span style={{color:"#3F4458"}}>
+            View Request
+          </span>
+        </Box>
+      </MenuItem>
+
+      <Dialog open={openModal} onClose={handleCloseModal}>
+  <DialogTitle sx={{ fontSize: "20px", fontWeight: "600", color: "#3F4458", textAlign: "center" }}>Request</DialogTitle>
+  <DialogContent sx={{ overflow: "hidden",width:"100vh",height:"100%" }}>
+    <h3>Title Request</h3>
+    <p style={{ fontWeight: "400", fontSize: "14px", color: "#3e4458" }}>{rowData?.Title}</p>
+    <Divider component="" />
+    <h3>Date Request</h3>
+    <p style={{ fontWeight: "400", fontSize: "14px", color: "#3e4458" }}>{rowData?.Date}</p>
+    <Divider component="" />
+    <h3>Description Request</h3>
+    <p style={{ fontWeight: "400", fontSize: "14px", color: "#3e4458" }}>{rowData?.CONTENT}</p>
+  </DialogContent>
+  <DialogActions>
+    <Box sx={{ marginTop: "19px", display: "flex", gap: "19px", marginRight:"20px" }}>
+      {params.row.status === "waiting"?(
+        <>
+<Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }} onClick={() => handleRejectClick(params)}>Decline</Button>
+<Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>Approve</Button>
+        </>
+      ):params.row.status==="rejected"? (
+        <>
+
+        <Button
+      sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "12px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}
+      onClick={() => handleRejectClick(params)}
+      disabled={true}
+    >
+      {t('Decline')}
+    </Button>
+      </>
+
+
+      ):(
+        <Button
+        sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "12px", backgroundColor: "#DDE6DA", borderRadius: "4px" }}
+        onClick={() => handleApproveClick(params)}
+        disabled={true}
+
+      >
+        {t('Approve')}
+      </Button>
+      )
+
+      }
+
+    </Box>
+  </DialogActions>
+</Dialog>
+
+
+    <MenuItem sx={{ padding: "0" ,color:"#3F4458" }} onClick={handleCloseAnchor}>
+      <Box style={{textDecoration:"none"}} >
+        <IconButton>
+          <DeleteIcon variant="contained" sx={{ color: '#3F4458' }} size='small'></DeleteIcon>
+        </IconButton>
+        <Button style={{color:"#3F4458"}} onClick={handleDeleteClick}>
+
+        Delete
+        </Button>
+      </Box>
+    </MenuItem>
+      </Menu>
+    </div>
+    <Box
+
+      sx={{marginTop:"19px",display:"flex",gap:"10px",justifyContent:'center',marginRight:'2px'}}
+    >
+
+      {params.row.status === 'waiting' ? (
+  <>
+    <Button sx={{ width: "100%", color: "#91C483", fontWeight: "500", fontSize: "14px", backgroundColor: "#DDE6DA", borderRadius: "4px" }} onClick={() => handleApproveClick(params)}>{t('Approve')}
+ </Button>
+    <Button sx={{ width: "100%", color: "#DF2E38", fontWeight: "500", fontSize: "14px", backgroundColor: "#F9D5D7", borderRadius: "4px" }}  onClick={() => handleRejectClick(params)} >{t('Decline')}
+ </Button>
+  </>
+) : params.row.status === 'rejected' ? (
+
+  <Box sx={{display:'flex', justifyContent:'center'}}>
+ <Typography
+      sx={{   fontWeight: "500", fontSize: "14px", color:'#DF2E38' }}
+    >
+      {t('Decline')}
+
+
+    </Typography>
+    </Box>
+
+) : (
+  <Box sx={{display:'flex', justifyContent:'center'}}>
+  <Typography
+       sx={{   fontWeight: "500", fontSize: "14px", color:'#91C483' }}
+     >
+       {t('Approve')}
+
+
+     </Typography>
+     </Box>
+
+)}
+
+    </Box>
 
                 <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleCloseAnchor}>
                   <Box style={{ textDecoration: 'none' }}>

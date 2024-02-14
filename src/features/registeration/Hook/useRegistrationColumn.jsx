@@ -19,7 +19,7 @@ const useRegistrationColumn = () => {
     {
       field: 'first_name',
       headerName: t("Name"),
-      flex:2.5,
+      flex:2,
         renderCell: (params)=>{
       return (
         <Link style={{ textDecoration:'none' }}  href={`/profile/${params?.row?.id}`}>
@@ -37,12 +37,15 @@ const useRegistrationColumn = () => {
     {
       field: 'department',
       headerName: t('Department'),
-      flex: 2
+    
+      flex: 1.5
 
     },
     {
       field: 'status',
       headerName: t('Status'),
+      headerAlign: 'center',
+      align: 'center',
       flex: 1,
       renderCell: (params) => {
         return (
@@ -55,7 +58,8 @@ const useRegistrationColumn = () => {
                   color: 'var(--green, #91C483)',
                   fontSize:'13px',
                   width:'100%',
-                  height:'14px'
+                  height:'30px',
+                  padding:'5px'
                 }}
 
               />
@@ -68,8 +72,8 @@ const useRegistrationColumn = () => {
                   color: '#6AB2DF',
                   fontSize:'13px',
                   width:'100%',
-                  height:'14px'
-
+                  height:'30px',
+                 
                 }}
                 label={t(params?.row?.status)}
 
@@ -79,9 +83,10 @@ const useRegistrationColumn = () => {
                 sx={{
                   backgroundColor: 'rgba(106, 178, 223, 0.20)',
                   color: '#6AB2DF',
-                  height:'15px',
+                  height:'30px',
                   fontSize:'13px',
                   width:'100%',
+                  padding:'5px'
                 }}
                 label={t('out')}
               />
@@ -92,8 +97,9 @@ const useRegistrationColumn = () => {
                   backgroundColor: 'rgba(223, 46, 56, 0.20)',
                   color: '#DF2E38',
                   fontSize:'13px',
-                  height:'14px',
+                  height:'30px',
                   width:'100%',
+                  padding:'5px'
                 }}
                 label={t(params?.row?.status)}
 
@@ -105,8 +111,9 @@ const useRegistrationColumn = () => {
                     backgroundColor: 'rgba(223, 46, 56, 0.20)',
                     color: '#DF2E38',
                     fontSize:'13px',
-                    height:'14px',
+                    height:'30px',
                     width:'100%',
+                    padding:'5px'
                   }}
                   label={t(params?.row?.status)}
 
@@ -120,12 +127,16 @@ const useRegistrationColumn = () => {
     {
       field: 'checkIn',
       headerName: t('Check in'),
-      flex: 2
+      headerAlign: 'center',
+      align: 'center',
+      flex: 1
     },
     {
       field: 'checkOut',
       headerName: t('Check out'),
-      flex: 2
+      headerAlign: 'center',
+      align: 'center',
+      flex: 1
     }
   ])
 

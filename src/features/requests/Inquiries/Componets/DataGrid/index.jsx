@@ -128,7 +128,7 @@ const Inquiries = ({ rows }) => {
               <DataGrid
                 columns={columns}
                 rows={InquiriesData(rows) || []}
-                sx={gridStyles.root}
+                sx={gridStyles.root }
                 rowHeight={120}
               />
             </CardContent>

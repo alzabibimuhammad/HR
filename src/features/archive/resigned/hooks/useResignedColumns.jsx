@@ -69,7 +69,7 @@ const useResignedColumns = () => {
       renderCell: (params) => {
         return (
         <Typography sx={{ fontSize:'14px' }} >
-          {params?.row?.role}
+          {t(params?.row?.role)}
         </Typography>
       );
     },

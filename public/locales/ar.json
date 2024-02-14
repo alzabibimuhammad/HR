@@ -405,6 +405,12 @@
   "Received Date":"تاريخ الاستلام",
   "Date of registration is required":"تاريخ الاشتراك مطلوب",
   "Date format should be YYYY-MM-DD":"يجب ان يكون التاريخ سسسس-شش-يي",
-  "Description is required":"الوصف مطلوب"
+  "Description is required":"الوصف مطلوب",
+  "Show":"عرض",
+  "Resigned List":"المستقيلين",
+  "Archive":"الأرشيف",
+  "Resigned":"المستقيلين",
+  "Complaints":"شكاوي",
+  "Complaints List":"الشكاوي"
 
 }

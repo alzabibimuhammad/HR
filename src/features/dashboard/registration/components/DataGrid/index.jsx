@@ -11,6 +11,7 @@ import { Box, Stack } from '@mui/system'
 
 const Registration = Data => {
   const columns = useRegistrationColumn();
+  const [show, setShow] = React.useState(10);
 
   let {data} = Data?.Data
 
@@ -91,7 +92,7 @@ const Registration = Data => {
                   </Box>
 
                 </Stack>
-                <CustomDataGrid   columns={columns}   rows={RegistrationData(rows)||[]}/>
+                <CustomDataGrid   columns={columns} show={show}   rows={RegistrationData(rows)||[]}/>
               </CardContent>
             </Card>
           </Stack>

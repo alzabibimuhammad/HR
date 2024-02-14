@@ -7,7 +7,7 @@ import { showSuccesToast } from 'src/utiltis/toastSecces'
 import { showErrorToast } from 'src/utiltis/showErrorToast'
 
 export const getReportsData = createAsyncThunk('ReportStore/getReportsData', async () => {
-  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/api/Users/allUser', {
+  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/api/Users/allUser?branch_id=1', {
     headers: {
       Authorization: `Bearer ${localStorage.accessToken}`
     }

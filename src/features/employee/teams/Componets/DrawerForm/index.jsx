@@ -6,6 +6,8 @@ import { Button, TextField, Typography, Stack } from '@mui/material';
 import Members from './members';
 import TeamLeaders from './teamLeaders';
 import { useAddTeam } from '../../hooks/useAddTeam';
+import { LoadingButton } from '@mui/lab';
+import SaveIcon from '@mui/icons-material/Save';
 
 const drawerWidth = 440;
 
@@ -46,6 +48,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
 
   return (
     <Drawer
+    onClose={handleDrawerClose}
       backgroundColor='#fff'
       sx={{
         width: '440px',
@@ -58,6 +61,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
       }}
       anchor='right'
       open={open}
+  
       variant='temporary'
       ModalProps={{
         keepMounted: true,
@@ -108,18 +112,16 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
             >
               Cancel
             </Button>
-            <Button
-              onClick={handlerSendData}
-              sx={{
-                backgroundColor: '#6AB2DF',
-                color: '#fff',
-                borderRadius: '4px',
-                padding: '8px 24px',
-                '&:hover': { backgroundColor: '#6AB2DF' },
-              }}
-            >
-              Add
-            </Button>
+            <LoadingButton
+                 onClick={handlerSendData}
+  loading={isloading}
+  loadingPosition="start"
+  startIcon={<SaveIcon />}
+  variant="outlined"
+>
+  Save
+</LoadingButton>
+         
           </Stack>
         </Box>
       </Stack>

@@ -17,12 +17,15 @@ import DrawerForm from '../spinner/DrawerForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAttendancePercentage } from 'src/pages/dashboard/store';
 import useGetMvp from '../../hooks/useGetMvp';
+import Show10 from 'src/@core/components/show10';
 
 const Users = ({ rows }) => {
 
 
   const columns = useUserColumns();
   const [openParent, setOpenParent] = React.useState(false);
+  const [show, setShow] = React.useState(10);
+
   const { t } = useTranslation()
 
   let roleData = new Set([]) ;
@@ -215,11 +218,14 @@ const Users = ({ rows }) => {
         </Typography>
               <Stack
                 direction={{ xs: 'column', sm: 'column' }}
-                spacing={3}
+                spacing={2}
                 alignContent={'center'}
                 justifyContent={'center'}
               >
-
+              <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
+                <Box mb={2}>
+                  <Show10 setShow={setShow}/>
+                </Box>
             <TextField
               placeholder={t("Search")}
               fullWidth
@@ -241,6 +247,7 @@ const Users = ({ rows }) => {
 
 
             />
+            </Stack>
           <Stack
                 direction={{ xs: 'column', sm: 'row' }}
                 spacing={2}
@@ -290,7 +297,7 @@ const Users = ({ rows }) => {
 
                   </Stack>
 
-                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={UsersData(fdata)|| []}   />: null }
+                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} show={show} rows={UsersData(fdata)|| []}   />: null }
 
               </Stack>
               </CardContent>

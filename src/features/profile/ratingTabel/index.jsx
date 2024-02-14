@@ -22,20 +22,20 @@ import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { RatingData } from '../ratingTabel/infrastructure'
 import { Box } from '@mui/system'
 
-import useUserColumns from './hooks/useRatingUser'
-import { useGetRatingById } from './hooks/useGetRatingById'
-import { CustomDatePickerSalary } from 'src/@core/components/customPickerSalary'
-import { useGetDataByMonth } from 'src/features/salary/users/hooks/useGetDataByMonth'
-import { CustomDatePicker } from 'src/@core/components/customPickerDate'
-import { CustomDatePickerRating } from 'src/@core/components/customPickerRating'
-import useGetRattingtype from './hooks/useGetRatingType'
-import { useSelector } from 'react-redux'
-import useGetAllContracts from 'src/features/Contracts/list/Hooks/useGetAllContracts'
-import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
+import useUserColumns from './hooks/useRatingUser';
+import {useGetRatingById} from './hooks/useGetRatingById';
+import { CustomDatePickerSalary } from 'src/@core/components/customPickerSalary';
+import { useGetDataByMonth } from 'src/features/salary/users/hooks/useGetDataByMonth';
+import { CustomDatePicker } from 'src/@core/components/customPickerDate';
+import { CustomDatePickerRating } from 'src/@core/components/customPickerRating';
+import useGetRattingtype from './hooks/useGetRatingType';
+import { useSelector } from 'react-redux';
+import useGetAllContracts from 'src/features/Contracts/list/Hooks/useGetAllContracts';
+import useAbsenceColumns from './hooks/useRatingUser';
 
-const RatingTabel = ({ rows }) => {
-  const { data, isloading } = useGetRattingtype()
-  const columns = useUserColumns()
+const RatingTabel = ({rows}) => {
+  const{data,isloading}=useGetRattingtype()
+  const columns = useAbsenceColumns();
   const { t } = useTranslation()
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)

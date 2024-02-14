@@ -111,32 +111,17 @@ const handleTeamNameChange = (event) => {
       }}
     >
       <Stack spacing={3}>
-        <Box
-          sx={{
-            width: '100%',
-            backgroundColor: '#DCE1E6',
-            fontSize: '20px',
-            gap: '10px',
-            padding: '15px',
-            borderRadius: '10px',
-            fontFamily: 'Montserrat'
-          }}
-        >
-          Add team
-        </Box>
-        <Box sx={{ padding: '12px' }}>
+      <Box sx={{ padding: '12px' }}>
           <Typography sx={{ fontFamily: 'Montserrat' }}>Name</Typography>
-
           <TextField
             fullWidth
             style={{ height: '10px' }}
-            placeholder='Team Name'
+            placeholder="Team Name"
             size='small'
             value={teamName}
             onChange={handleTeamNameChange}
           />
         </Box>
-        {/* ********************** */}
 
         <Box sx={{ padding: '12px' }}>
           <Members SetMembers={SetMembers} SelectedRow={SelectedRow.user} />
@@ -178,6 +163,6 @@ const handleTeamNameChange = (event) => {
           </Stack>
         </Box>
       </Stack>
-    </Drawer>
+      </Drawer>
   )
 }

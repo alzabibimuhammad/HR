@@ -9,11 +9,13 @@ import { ComplaintsData, RegistrationData, RegistrationsData } from '../../infra
 import { Box, Stack } from '@mui/system'
 import useComplaintsColumn from '../../Hook/useComplaintsColumn'
 import { FormateDate } from 'src/utiltis/DateFormate'
+import Show10 from 'src/@core/components/show10'
 
 const ComplaintsTable = ({ Data }) => {
   const columns = useComplaintsColumn()
 
   const [rows, setRows] = useState()
+  const [show, setShow] = React.useState(10);
 
   useEffect(() => {
     setRows(ComplaintsData(Data))
@@ -44,7 +46,8 @@ const ComplaintsTable = ({ Data }) => {
     })
 
     if (searchData?.length) setRows(searchData)
-    else setRows([])
+    else if (searchText) setRows([])
+    else setRows(ComplaintsData(Data))
   }, [searchText])
 
   const [FilterDate, setFilterDate] = useState()
@@ -61,7 +64,10 @@ const ComplaintsTable = ({ Data }) => {
       return FilterDate == element?.date
     })
     if (date?.length) setRows(date)
-    else setRows([])
+    else {
+      if (FilterDate) setRows([])
+      else setRows(ComplaintsData(Data))
+    }
   }, [FilterDate])
 
   return (
@@ -71,7 +77,11 @@ const ComplaintsTable = ({ Data }) => {
           <Typography variant='h4' paddingBottom={'10px'}>
             {t('Complaints List')}
           </Typography>
-          <Stack direction={'column'} spacing={3}>
+          <Stack direction={'column'} spacing={2}>
+          <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
+                <Box mb={2}>
+                  <Show10 setShow={setShow}/>
+                </Box>
             <TextField
               placeholder={t('Search')}
               fullWidth
@@ -96,17 +106,18 @@ const ComplaintsTable = ({ Data }) => {
               sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
               size='small'
             />
+            </Stack>
             <Stack
-              alignItems={'center'}
+              alignItems={'start'}
               width={{ sm: '50%', xs: '100%' }}
-              direction={{ sm: 'row', xs: 'row' }}
-              spacing={6}
+              direction={{ sm: 'column', xs: 'column' }}
+              spacing={1}
             >
               <Typography>{t('Filter')}</Typography>
               <TextField type='date' fullWidth size='small' onChange={handelDate} />
             </Stack>
 
-            <CustomDataGrid columns={columns} rows={rows || []} />
+            <CustomDataGrid show={show}  columns={columns} rows={rows || []} />
           </Stack>
         </CardContent>
       </Card>

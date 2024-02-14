@@ -127,7 +127,7 @@ const Absence = ({ rows }) => {
               </Box>
             </Stack>
 
-            <CustomDataGrid columns={columns} sx={gridStyles.root} rows={AbsenceData(row) || []} />
+            <CustomDataGrid columns={columns} sx={gridStyles.root} rows={AbsenceData(row) } />
           </Stack>
         </CardContent>
       </Card>

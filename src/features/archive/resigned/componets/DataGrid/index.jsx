@@ -10,9 +10,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAttendancePercentage } from 'src/pages/dashboard/store';
 import useResignedColumns from '../../hooks/useResignedColumns';
 import { ResignedData } from '../../infrastructure';
+import Show10 from 'src/@core/components/show10';
 
 const ResignedTable = ({ rows }) => {
 
+  const [show, setShow] = React.useState(10);
 
   const columns = useResignedColumns();
   const [openParent, setOpenParent] = React.useState(false);
@@ -158,11 +160,13 @@ const ResignedTable = ({ rows }) => {
                 alignContent={'center'}
                 justifyContent={'center'}
               >
-
+       <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
+                <Box mb={2}>
+                  <Show10 setShow={setShow}/>
+                </Box>
             <TextField
               placeholder={t("Search")}
               fullWidth
-
               InputProps={{
                 startAdornment: (
                   <Box paddingRight={1} >
@@ -180,11 +184,14 @@ const ResignedTable = ({ rows }) => {
 
 
             />
+            </Stack>
           <Stack
-                direction={{ xs: 'column', sm: 'row' }}
+                direction={{ xs: 'column', sm: 'column' }}
                 spacing={2}
               >
+
               <Typography sx={{ fontSize:'16px',marginTop:'5px' }} >{t("Filters")}</Typography>
+              <Stack direction={{ sm:'row' , xs:'column' }} alignItems={'center'} spacing={2} >
                   <TextField
                     select
                     fullWidth
@@ -200,7 +207,7 @@ const ResignedTable = ({ rows }) => {
                     <MenuItem value=''>{`${t("Role")}`}</MenuItem>
 
                     {Array.from(roleData).map(element => (
-                      <MenuItem key={element} value={element}>{element}</MenuItem>
+                      <MenuItem key={element} value={element}>{t(element)}</MenuItem>
                     ))}
 
 
@@ -226,10 +233,10 @@ const ResignedTable = ({ rows }) => {
                       <MenuItem key={element} value={element}>{element}</MenuItem>
                     ))}
                   </TextField>
-
+                  </Stack>
                   </Stack>
 
-                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} rows={ResignedData(fdata)|| []}   />: null }
+                {rows ? <CustomDataGrid columns={columns} show={show}  sx={gridStyles.root} rows={ResignedData(fdata)|| []}   />: null }
 
               </Stack>
               </CardContent>

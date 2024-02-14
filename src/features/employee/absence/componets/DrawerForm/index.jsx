@@ -131,6 +131,7 @@ const [fdata, setfdata] = useState('');
 
       <>
       <Drawer
+      onClose={handleDrawerClose}
 
       sx={{
         width: drawerWidth,

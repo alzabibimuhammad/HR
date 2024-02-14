@@ -10,8 +10,10 @@ import useSecretariatsColumns from '../../hooks/useSecretariatsColumns'
 import { SecretariatsData } from '../../infrastructure'
 import AddIcon from '@mui/icons-material/Add'
 import DrawerFormAdd from '../DrawerAdd'
+import Show10 from 'src/@core/components/show10'
 const SecretariatsTable = ({ rows }) => {
   const columns = useSecretariatsColumns()
+  const [show, setShow] = React.useState(10);
 
   const [openAdd, setOpenAdd] = React.useState(false)
 
@@ -91,6 +93,10 @@ const SecretariatsTable = ({ rows }) => {
             justifyContent={'center'}
           >
             <Stack direction={{ sm: 'row', xs: 'row' }} justifyContent={'space-between'}>
+            <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
+                <Box mb={2}>
+                  <Show10 setShow={setShow}/>
+                </Box>
               <TextField
                 placeholder={t('Search')}
                 InputProps={{
@@ -114,6 +120,7 @@ const SecretariatsTable = ({ rows }) => {
                 sx={{ width: '50%', paddingLeft: '8px', backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
                 size='small'
               />
+              </Stack>
               <Button
                 sx={{
                   backgroundColor: '#6AB2DF',
@@ -145,7 +152,7 @@ const SecretariatsTable = ({ rows }) => {
             </Stack>
 
             {rows ? (
-              <CustomDataGrid columns={columns} sx={gridStyles.root} rows={SecretariatsData(fdata) || []} />
+              <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={SecretariatsData(fdata) || []} />
             ) : null}
           </Stack>
         </CardContent>

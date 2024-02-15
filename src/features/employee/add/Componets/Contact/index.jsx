@@ -8,6 +8,7 @@ import IconButton from 'src/@core/theme/overrides/icon-button'
 import email from 'src/store/apps/email'
 import { useTranslation } from 'react-i18next'
 import { ContactSchema } from 'src/pages/employees/add/validation'
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Contact({ onDataChange, Controller, control, defaultValues, errors }) {
   const handleFieldChange = (field, value) => {
@@ -153,14 +154,10 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                   >
                     {t('Add Email')}
                   </Button>
+                  {index!=0?
 
-                  <Button
-                    type='button'
-                    sx={{ fontSize: '12px', fontWeight: '400', color: '#6ab2df', padding: '0' }}
-                    onClick={() => EmailRemove(index)}
-                  >
-                    {t('delete Email')}
-                  </Button>
+                    <CloseIcon style={{ cursor:'pointer',color:'red' }} onClick={() => EmailRemove(index)}/>
+                  :null}
                 </Box>
               </Box>
             ))}

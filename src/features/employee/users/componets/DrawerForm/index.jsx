@@ -15,6 +15,7 @@ import { getContractsData,addContract, EditContract } from 'src/pages/contracts/
 import { useDispatch  } from 'react-redux'
 import { Schema } from '../../validation'
 import useEditEmployee from '../../hooks/useEditEmployee'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const drawerWidth = 440
 
@@ -31,11 +32,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 export default function DrawerForm({ open, setOpenParent,Data }) {
+
+
+
   const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('xl'));
   const {t} = useTranslation()
 const dispatch=useDispatch()
 const {mutate:EditEmployee,isloading}=useEditEmployee()
-  
+
 const handleDrawerClose = () => {
     dispatch(getContractsData())
     setOpenParent(false)
@@ -63,7 +68,7 @@ const handleDrawerClose = () => {
     formState: { errors ,isDirty },
     reset
   } = useForm({
-  
+
     defaultValues,
     mode: 'onBlur'
   })
@@ -91,12 +96,14 @@ const handleDrawerClose = () => {
     <Box sx={{ display: 'flex' }}>
 
       <Drawer
+      fullScreen={fullScreen}
+
         sx={{
           width: drawerWidth,
 
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth
+            width: drawerWidth,
           }
         }}
         anchor='right'
@@ -230,6 +237,7 @@ const handleDrawerClose = () => {
           </form>
         </List>
       </Drawer>
+
     </Box>
   )
 }

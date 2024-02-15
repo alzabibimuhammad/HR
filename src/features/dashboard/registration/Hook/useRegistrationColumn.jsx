@@ -12,7 +12,7 @@ const useRegistrationColumn = () => {
       field: 'id',
       headerName: t('ID'),
 
-      flex: 0
+      flex: 2
     },
 
     {
@@ -29,7 +29,7 @@ const useRegistrationColumn = () => {
     {
       field: 'department',
       headerName: t('Department'),
-      flex: 3
+      flex: 4
     },
     {
       field: 'status',

@@ -21,7 +21,6 @@ export default function Registeration() {
 
   let formattedDate = `${year}-${month}-${day}`;
 
-  console.log('data redff',store?.data);
 
   useEffect(()=>{
 
@@ -35,6 +34,8 @@ export default function Registeration() {
   },[dispatch,store?.data?.length,filterDate])
 
   return (
-    <Registration Data={data} setFilterDate={setFilterDate}/>
+    <>
+      {data ? <Registration Data={data} setFilterDate={setFilterDate}/> : null }
+      </>
   )
 }

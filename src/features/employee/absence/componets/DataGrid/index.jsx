@@ -18,12 +18,14 @@ import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import useAbsenceColumns from '../../hooks/useAbsenceColumns'
 import { AbsenceData } from '../../infrastructure'
 import { Box } from '@mui/system'
+import Show10 from 'src/@core/components/show10'
 
 const Absence = ({ rows }) => {
   const columns = useAbsenceColumns()
   const [openParent, setOpenParent] = React.useState(false)
   const { t } = useTranslation()
   const [row, setRow] = useState(rows)
+  const [show, setShow] = React.useState(10);
 
   const handleDrawerOpen = () => {
     setOpenParent(true)
@@ -99,7 +101,10 @@ const Absence = ({ rows }) => {
           >
             <Stack direction={{ xs: 'column', sm: 'column' }} spacing={2}>
 
-              <Box width={'100%'}>
+            <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
+                <Box mb={2}>
+                  <Show10 setShow={setShow}/>
+                </Box>
                 <TextField
                   placeholder={t('Search')}
                   fullWidth
@@ -124,10 +129,10 @@ const Absence = ({ rows }) => {
                   sx={{ paddingLeft: '8px', backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
                   size='small'
                 />
-              </Box>
+          </Stack>
             </Stack>
 
-            <CustomDataGrid columns={columns} sx={gridStyles.root} rows={AbsenceData(row) } />
+            <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={AbsenceData(row) } />
           </Stack>
         </CardContent>
       </Card>

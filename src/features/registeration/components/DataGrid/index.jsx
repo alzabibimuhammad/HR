@@ -8,9 +8,11 @@ import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import { RegistrationData, RegistrationsData } from '../../infrastructure'
 import { Box, Stack } from '@mui/system'
 import useRegistrationColumn from '../../Hook/useRegistrationColumn'
+import Show10 from 'src/@core/components/show10'
 
 const Registration = ({ Data, setFilterDate }) => {
   const columns = useRegistrationColumn()
+  const [show, setShow] = React.useState(10);
 
   let data  = Data?.data
   const [rows, setRows] = useState(data)
@@ -80,6 +82,10 @@ const Registration = ({ Data, setFilterDate }) => {
         {t("Registerations List")}
         </Typography>
           <Stack direction={'column'} spacing={3} >
+          <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
+                <Box mb={2}>
+                  <Show10 setShow={setShow}/>
+                </Box>
             <TextField
               placeholder={t('Search')}
               fullWidth
@@ -104,6 +110,7 @@ const Registration = ({ Data, setFilterDate }) => {
               sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
               size='small'
             />
+            </Stack>
               <Stack direction={{sm:'row',xs:'column'}} spacing={6} >
                   <TextField
                   type='date'
@@ -132,7 +139,7 @@ const Registration = ({ Data, setFilterDate }) => {
                 </TextField>
               </Stack>
 
-          <CustomDataGrid columns={columns} rows={rows || [] } />
+          <CustomDataGrid columns={columns} show={show} rows={rows || [] } />
           </Stack>
 
 

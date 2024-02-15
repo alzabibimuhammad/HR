@@ -36,7 +36,7 @@ const useRegistrationColumn = () => {
       headerName: t('Status'),
       headerAlign: 'center',
       align: 'center',
-      flex: 1,
+      flex: 3.5,
       renderCell: params => {
         return (
           <Chip

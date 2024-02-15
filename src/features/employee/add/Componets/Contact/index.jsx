@@ -74,8 +74,8 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
         <Typography>{t('Contact')}</Typography>
         <br />
 
-        <Stack sx={{ padding: '0' }} direction={'column'} spacing={2} width={'100%'}>
-          <Box>
+        <Stack sx={{ padding: '0' }}  direction={'column'} spacing={2} width={'100%'}>
+          <Box  >
             <Box sx={{ margin: '5px 0px' }}>
               <Controller
                 name={`address`}
@@ -94,7 +94,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
               />
             </Box>
             {phoneNumbersfields.map((phoneNumber, index) => (
-              <Box key={phoneNumber.id}>
+              <Box mt={5} key={phoneNumber.id}>
                 <Controller
                   name={`contacts.phonenumbers.${index}`}
                   control={control}

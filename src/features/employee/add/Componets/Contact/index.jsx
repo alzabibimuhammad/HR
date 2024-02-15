@@ -113,7 +113,9 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                     />
                   )}
                 />
+
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', my: '10px' }}>
+                  {index ==0?
                   <Button
                     type='button'
                     onClick={() => phoneNumbersappend({ phonenumber: '' })}
@@ -121,13 +123,16 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                   >
                     {t('Add phoneNumbers')}
                   </Button>
+                    :<CloseIcon style={{ cursor:'pointer',color:'red' }} onClick={() => phoneNumbersremove(index)}/>
+                  }
                 </Box>
+
               </Box>
             ))}
           </Box>
           <Box>
             {EmailFields.map((Email, index) => (
-              <Box key={Email.id}>
+              <Box key={Email.id} >
                 <Controller
                   name={`contacts.emails.${index}`}
                   control={control}
@@ -146,18 +151,19 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                     />
                   )}
                 />
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', my: '10px' }}>
-                  <Button
+                <Box sx={{ my: '10px' }}>
+
+                  {index==0?
+                    <Button
                     type='button'
                     onClick={() => EmailAppend({ email: '' })}
                     sx={{ fontSize: '12px', fontWeight: '400', color: '#6ab2df', padding: '0' }}
                   >
                     {t('Add Email')}
                   </Button>
-                  {index!=0?
-
-                    <CloseIcon style={{ cursor:'pointer',color:'red' }} onClick={() => EmailRemove(index)}/>
-                  :null}
+                  :
+                  <CloseIcon style={{ cursor:'pointer',color:'red' }} onClick={() => EmailRemove(index)}/>
+                  }
                 </Box>
               </Box>
             ))}

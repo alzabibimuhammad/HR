@@ -8,6 +8,7 @@ import IconButton from 'src/@core/theme/overrides/icon-button'
 import email from 'src/store/apps/email'
 import { useTranslation } from 'react-i18next'
 import { ContactSchema } from 'src/pages/employees/add/validation'
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Contact({ onDataChange, Controller, control, defaultValues, errors }) {
   const handleFieldChange = (field, value) => {
@@ -73,8 +74,8 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
         <Typography>{t('Contact')}</Typography>
         <br />
 
-        <Stack sx={{ padding: '0' }} direction={'column'} spacing={2} width={'100%'}>
-          <Box>
+        <Stack sx={{ padding: '0' }}  direction={'column'} spacing={2} width={'100%'}>
+          <Box  >
             <Box sx={{ margin: '5px 0px' }}>
               <Controller
                 name={`address`}
@@ -93,7 +94,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
               />
             </Box>
             {phoneNumbersfields.map((phoneNumber, index) => (
-              <Box key={phoneNumber.id}>
+              <Box mt={5} key={phoneNumber.id}>
                 <Controller
                   name={`contacts.phonenumbers.${index}`}
                   control={control}
@@ -112,7 +113,9 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                     />
                   )}
                 />
+
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', my: '10px' }}>
+                  {index ==0?
                   <Button
                     type='button'
                     onClick={() => phoneNumbersappend({ phonenumber: '' })}
@@ -120,17 +123,20 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                   >
                     {t('Add phoneNumbers')}
                   </Button>
+                    :<CloseIcon style={{ cursor:'pointer',color:'red' }} onClick={() => phoneNumbersremove(index)}/>
+                  }
                 </Box>
+
               </Box>
             ))}
           </Box>
           <Box>
             {EmailFields.map((Email, index) => (
-              <Box key={Email.id}>
+              <Box key={Email.id} >
                 <Controller
                   name={`contacts.emails.${index}`}
                   control={control}
-                  defaultValue={Email.id}
+                  defaultValue={"Email"}
                   render={({ field }) => (
                     <TextField
                       {...field}
@@ -145,22 +151,19 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                     />
                   )}
                 />
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', my: '10px' }}>
-                  <Button
+                <Box sx={{ my: '10px' }}>
+
+                  {index==0?
+                    <Button
                     type='button'
                     onClick={() => EmailAppend({ email: '' })}
                     sx={{ fontSize: '12px', fontWeight: '400', color: '#6ab2df', padding: '0' }}
                   >
                     {t('Add Email')}
                   </Button>
-
-                  <Button
-                    type='button'
-                    sx={{ fontSize: '12px', fontWeight: '400', color: '#6ab2df', padding: '0' }}
-                    onClick={() => EmailRemove(index)}
-                  >
-                    {t('delete Email')}
-                  </Button>
+                  :
+                  <CloseIcon style={{ cursor:'pointer',color:'red' }} onClick={() => EmailRemove(index)}/>
+                  }
                 </Box>
               </Box>
             ))}

@@ -1,5 +1,5 @@
 
-import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography } from '@mui/material'
+import { Button, Card, CardContent, InputAdornment, MenuItem, Rating, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import { useState } from 'react';
 import Avatar from 'src/@core/components/mui/avatar';
@@ -97,7 +97,13 @@ export default function Employment({onDataChange,Controller,control,errors}) {
                 fullWidth
                 error={Boolean(errors.salary)}
                 {...(errors.salary && { helperText: errors.salary.message })}
-
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      S.P
+                    </InputAdornment>
+                  ),
+                }}
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2}  >
@@ -107,9 +113,7 @@ export default function Employment({onDataChange,Controller,control,errors}) {
                       <Box>
                         {t('Salary')}
                     </Box>
-                    <Box width={'100%'} >
-                      <Typography sx={{ marginLeft:'410px' }} >s.p</Typography>
-                    </Box>
+
                   </Stack>
                 }
               />

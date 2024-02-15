@@ -117,7 +117,7 @@ console.log("🚀 ~ PersonalInfo ~ ProfileData:", ProfileData)
     </StackRow>
     <StackRow>
       <Typo>Phone number:</Typo>
-      <TypoVal>{val.contact}</TypoVal>
+      <TypoVal>{val.phone_num}</TypoVal>
     </StackRow>
     <StackRow>
       <Typo>Email:</Typo>

@@ -40,10 +40,10 @@ export default function Add() {
   const defaultValues = {
     // first_name: '',
 
-    // contact: {
-    //   phonenumbers: [],
-    //   emails: []
-    // },
+    contacts: {
+      phonenumbers: [{phone:''}],
+      emails: [{email:''}]
+    },
     // middle_name: '',
 
     // last_name: '',

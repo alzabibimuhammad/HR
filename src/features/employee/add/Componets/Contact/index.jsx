@@ -26,13 +26,15 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
     name: 'contacts.phonenumbers'
   })
 
+
   const {
     fields: EmailFields,
     append: EmailAppend,
     remove: EmailRemove
   } = useFieldArray({
     control,
-    name: 'contacts.emails'
+    name: 'contacts.emails',
+
   })
 
   const CustomTextField = styled(TextField)({
@@ -44,10 +46,8 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
     }
   })
 
-  React.useEffect(() => {
-    phoneNumbersappend()
-    EmailAppend()
-  }, [phoneNumbersappend, EmailAppend])
+
+
 
   const SvgMail = `
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -80,6 +80,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
               <Controller
                 name={`address`}
                 control={control}
+
                 render={({ field }) => (
                   <TextField
                     {...field}
@@ -98,7 +99,6 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                 <Controller
                   name={`contacts.phonenumbers.${index}`}
                   control={control}
-                  defaultValue={phoneNumber.number}
                   render={({ field }) => (
                     <TextField
                       {...field}
@@ -136,7 +136,6 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                 <Controller
                   name={`contacts.emails.${index}`}
                   control={control}
-                  defaultValue={"Email"}
                   render={({ field }) => (
                     <TextField
                       {...field}

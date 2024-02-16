@@ -8,12 +8,7 @@ const useRegistrationColumn = () => {
   const { t } = useTranslation()
 
   return useMemo(() => [
-    {
-      field: 'id',
-      headerName: t('ID'),
 
-      flex: 0
-    },
 
     {
       field: 'first_name',
@@ -36,7 +31,7 @@ const useRegistrationColumn = () => {
       headerName: t('Status'),
       headerAlign: 'center',
       align: 'center',
-      flex: 3.5,
+      flex: 6,
       renderCell: params => {
         return (
           <Chip
@@ -62,9 +57,9 @@ const useRegistrationColumn = () => {
                   : params?.row?.status === 'Absent'
                   ? '#DF2E38'
                   : '#DF2E38',
-              fontSize: '13px',
+              fontSize: '12px',
               height: '30px',
-              width: '100%',
+              width: 'auto',
               padding: '5px'
             }}
           />

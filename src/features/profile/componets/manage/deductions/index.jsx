@@ -47,7 +47,6 @@ export default function Deductions({id}) {
 
 
 
-   console.log("🚀 ~ Warnings ~ DataWarningsx:", DataWarnings)
 
 
 
@@ -56,8 +55,7 @@ export default function Deductions({id}) {
   const handleClose = () => setOpen(false);
 
   const handleDateChoose = (formattedDate) => {
-    console.log("🚀 ~ handleDateChoose ~ formattedDate:", formattedDate)
-    console.log('trueeeeeeeeeeeeeeeeeeeee')
+
     getDeductionsDate({idUser,formattedDate})
     setData({idUser,formattedDate})
 
@@ -241,7 +239,7 @@ export default function Deductions({id}) {
               aria-describedby='modal-modal-description'
             >
               <Box sx={style}>
-                <CustomPickerManage setstate={setstate} setStartDatee={setStartDate} state={state} startDate={startDate}  handleDateChoose={handleDateChoose}/>
+                <CustomPickerManage handleClose={handleClose} setstate={setstate} setStartDatee={setStartDate} state={state} startDate={startDate}  handleDateChoose={handleDateChoose}/>
               </Box>
             </Modal>
 
@@ -269,6 +267,8 @@ export default function Deductions({id}) {
       </DialogTitle>
       <DialogContent sx={{width:"100vh"}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
+        <Stack width={"89%"} spacing={4}>
+
         <Controller
                 name='dateTime'
                 control={control}
@@ -309,7 +309,7 @@ export default function Deductions({id}) {
                   />
                 )}
               />
-
+</Stack>
 
         </DialogContentText>
       </DialogContent>
@@ -322,7 +322,6 @@ export default function Deductions({id}) {
         </Button>
       </DialogActions>
     </Dialog>
-<Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>Select</Button>
      </Box>
 </StackRow>
 <>
@@ -355,7 +354,7 @@ export default function Deductions({id}) {
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {"Are you sure you want to delete team?"}
+        {"Are you sure you want to delete Deductions?"}
       </DialogTitle>
 
 
@@ -379,6 +378,8 @@ export default function Deductions({id}) {
                 </DialogTitle>
                 <DialogContent sx={{ width: '100vh' }}>
                   <DialogContentText sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <Stack width={"89%"} spacing={4}>
+
                   <Controller
                 name='dateTime'
                 control={control}
@@ -423,6 +424,7 @@ export default function Deductions({id}) {
                   />
                 )}
               />
+              </Stack>
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>

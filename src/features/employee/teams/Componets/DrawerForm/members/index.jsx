@@ -68,11 +68,9 @@ const data = [
 
 const Members = ({ SetMembers, SelectedRow }) => {
   const [selectedItems, setSelectedItems] = useState(SelectedRow || [])
-  console.log('🚀 ~ Members ~ selectedItems:', selectedItems)
 
   useEffect(() => {
     if (SelectedRow) {
-      console.log('🚀 ~ Members ~ SelectedRow:', SelectedRow)
       const idsArray = selectedItems.map(item => item?.id)
       setSelectedItems(idsArray)
     }

@@ -70,7 +70,6 @@ export default function Policies() {
      data.work_time.work_days=days
 
       AddPolicies(data)
-      console.log(data);
    } catch (error) {
 
    }
@@ -95,7 +94,6 @@ export default function Policies() {
       resolver: yupResolver(Schema),
   });
 
-  console.log(errors);
 
 
 

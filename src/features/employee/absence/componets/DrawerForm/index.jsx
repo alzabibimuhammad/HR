@@ -44,7 +44,6 @@ const [selectedType, setSelectedType] = useState('');
 const [selectedDate, setSelectedDate] = useState('');
 const [fdata, setfdata] = useState('');
 const {mutate:deleteAbcence}=useDeleteAbsence()
-console.log("🚀 ~ DrawerForm ~ fdata:", fdata)
 const [fndata, setfndata] = useState('');
 
   const handleDrawerClose = () => {
@@ -130,9 +129,8 @@ const [fndata, setfndata] = useState('');
   }
 
   const handleDeleteAbsence=user_id => {
-    console.log("🚀 ~ handleDeleteAbsence ~ user_id:", user_id.id)
     deleteAbcence(user_id.id)
-   
+
   }
 
 

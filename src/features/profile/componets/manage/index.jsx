@@ -33,115 +33,45 @@ export default function Mange({id}) {
     { ssr: false }
   )
 
-  const [startDate,setStartDate]=useState()
-
-  const theme = useTheme();
-
-
-
-
-
-  const Typo = styled(Typography)(() => ({
-    fontSize:'14px',
-    fontWeight:'500',
-    textTransform:'capitalize',
-    color:'#131627'
-
-  }))
-
-
-
-
-
-
-
-  const TypoVal = styled(Typography)(() => ({
-    fontSize:'14px',
-    marginLeft:'3px'
-
-  }))
-
-  const TypoHeader = styled(Typography)(() => ({
-    fontSize:'16px',
-    marginLeft:'5px',
-    fontWeight:'600',
-    textTransform:'capitalize',
-    color:'#131627'
-
-  }))
-
-  const StackRow = styled(Stack)(({ direction }) => ({
-    flexDirection: direction === 'column' ? 'column' : 'row',
-    justifyContent:"space-between",
-    width:"100% ",
-    alignItems:"center"
-  }));
-
-
-
-
-
-
-
 
   return (
+    <Grid container  spacing={2}>
+    <Grid item xs={12} md={6}>
+      {/* Warnings section */}
+      <Warnings id={id} />
+      {/* End Warnings section */}
 
-    <Grid  container spacing={2}>
-  <Grid   item xs={6}>
-  {/* section  Warnings*/}
+      {/* Alerts section */}
+      <Box sx={{ marginTop: '15px' }}>
+        <Alerts id={id} />
+      </Box>
+      {/* End Alerts section */}
 
+      {/* Penalties section */}
+      <Box sx={{ marginTop: '15px' }}>
+        <Penalties id={id} />
+      </Box>
+      {/* End Penalties section */}
+    </Grid>
 
+    <Grid item xs={12} md={6}>
+      {/* Deductions section */}
+      <Deductions id={id} />
+      {/* End Deductions section */}
 
+      {/* Absence section */}
+      <Box sx={{ marginTop: '15px' }}>
+        <Absence id={id} />
+      </Box>
+      {/* End Absence section */}
 
-<Warnings id={id} />
-
-   {/* End section Warnings */}
-
-   {/* ******************************* */}
-   {/* section  Alerts */}
-
-
-<Box sx={{marginTop:"15px"}}>
-
-   <Alerts  id={id}/>
-</Box>
-
-      {/* End section Alerts */}
-
-   {/* ******************************* */}
-
-
-   {/* section  Alerts */}
-   <Box sx={{marginTop:"15px"}}>
-
-    <Penalties id={id}/>
-
-   </Box>
-
-      {/* End section Alerts */}
-
-   {/* ******************************* */}
-
+      {/* Rewards section */}
+      <Box sx={{ marginTop: '15px' }}>
+        <Rewards id={id} />
+      </Box>
+      {/* End Rewards section */}
+    </Grid>
   </Grid>
-  <Grid item xs={6}>
-
- <Deductions  id={id}/>
-
-
- <Box sx={{marginTop:"15px"}}>
-
-
- <Absence  id={id} />
- </Box>
-
-<Box sx={{marginTop:"15px"}}>
-
-
- <Rewards  id={id} />
-</Box>
-
-  </Grid>
-</Grid>
 
   )
 }

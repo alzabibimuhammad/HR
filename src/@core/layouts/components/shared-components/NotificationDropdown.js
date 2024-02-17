@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, Fragment } from 'react'
+import { useState, Fragment, useEffect } from 'react'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -24,6 +24,7 @@ import CustomAvatar from 'src/@core/components/mui/avatar'
 
 // ** Util Import
 import { getInitials } from 'src/@core/utils/get-initials'
+import socket from './socket'
 
 // ** Styled Menu component
 const Menu = styled(MuiMenu)(({ theme }) => ({
@@ -98,8 +99,17 @@ const NotificationDropdown = props => {
   // ** Props
   const { settings, notifications } = props
 
+
+
+
   // ** States
   const [anchorEl, setAnchorEl] = useState(null)
+
+
+  const [realtimeData, setRealtimeData] = useState(null);
+
+
+
 
   // ** Hook
   const hidden = useMediaQuery(theme => theme.breakpoints.down('lg'))
@@ -115,8 +125,8 @@ const NotificationDropdown = props => {
     setAnchorEl(null)
   }
 
-  const RenderAvatar = ({ notification }) => {
-    const { avatarAlt, avatarImg, avatarIcon, avatarText, avatarColor } = notification
+  const RenderAvatar = ({ realtimeData }) => {
+    const { avatarAlt, avatarImg, avatarIcon, avatarText, avatarColor } = realtimeData
     if (avatarImg) {
       return <Avatar alt={avatarAlt} src={avatarImg} />
     } else if (avatarIcon) {
@@ -133,6 +143,19 @@ const NotificationDropdown = props => {
       )
     }
   }
+
+  useEffect(() => {
+    socket.on('notificationData', (data) => {
+      setRealtimeData(data);
+    });
+
+    return () => {
+      socket.off('notificationData');
+    };
+  }, []);
+
+
+
 
   return (
     <Fragment>
@@ -168,12 +191,28 @@ const NotificationDropdown = props => {
           </Box>
         </MenuItem>
         <ScrollWrapper hidden={hidden}>
-          {notifications.map((notification, index) => (
+          {/* {notifications.map((notification, index) => (
             <MenuItem key={index} disableRipple disableTouchRipple onClick={handleDropdownClose}>
               <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
                 <RenderAvatar notification={notification} />
                 <Box sx={{ mr: 4, ml: 2.5, flex: '1 1', display: 'flex', overflow: 'hidden', flexDirection: 'column' }}>
                   <MenuItemTitle>{notification.title}</MenuItemTitle>
+                  <MenuItemSubtitle variant='body2'>{notification.subtitle}</MenuItemSubtitle>
+                </Box>
+                <Typography variant='body2' sx={{ color: 'text.disabled' }}>
+                  {notification.meta}
+                </Typography>
+              </Box>
+            </MenuItem>
+          ))} */}
+
+
+{realtimeData && realtimeData.map((notification, index) => (
+            <MenuItem key={index} disableRipple disableTouchRipple onClick={handleDropdownClose}>
+              <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+              <RenderAvatar notification={notification} />
+                <Box sx={{ mr: 4, ml: 2.5, flex: '1 1', display: 'flex', overflow: 'hidden', flexDirection: 'column' }}>
+                  <MenuItemTitle variant='subtitle1'>{notification.title}</MenuItemTitle>
                   <MenuItemSubtitle variant='body2'>{notification.subtitle}</MenuItemSubtitle>
                 </Box>
                 <Typography variant='body2' sx={{ color: 'text.disabled' }}>

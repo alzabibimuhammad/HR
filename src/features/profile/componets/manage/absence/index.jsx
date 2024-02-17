@@ -21,35 +21,35 @@ import { styled } from '@mui/material/styles';
 import { CustomPickerManage } from 'src/@core/components/customPickerManage';
 import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
-import { useAddAbsence } from '../hook/useAddAbsence';
+import { useAddAbsence } from './hook/useAddAbsence';
 import useGetAbsence from './hook/useGetAbsence';
-import { useDeleteDecision } from '../hook/useDeleteDecision';
+import { useDeleteAbsence } from './hook/useDeleteAbsence';
+import { useEditAbsence } from './hook/useEditAbsence';
+import { MenuItem } from '@mui/material'
 
 
 
 export default function Absence({id}) {
   const idUser =id
 
-  const { mutate: DeleteDecision, isLoading } = useDeleteDecision();
-
-  const {mutate:AddDecision}=useAddDecision()
+  const { mutate: DeleteAbsence, isLoading } = useDeleteAbsence();
+  const { mutate:getAbsenceDate, data: DataWarnings } = useGetAbsence();
   const { mutate: AddAbsence} = useAddAbsence();
-  const {mutate : EditDecision} = useEditDecision()
+  const {mutate : EditAbsence} = useEditAbsence()
+
   const [openAdd, setOpenAdd] = React.useState(false);
   const [openEdit, setOpenEdit] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
   const [Edit , setEdit] = useState({})
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [open, setOpen] = React.useState(false);
   const [startDate,setStartDate]=useState(null)
   const [state, setstate] = useState(null);
   const [Data, setData] = useState(null);
-  const { mutate:getAbsenceDate, data: DataWarnings } = useGetAbsence();
 
 
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-   console.log("🚀 ~ Warnings ~ DataWarningsx:", DataWarnings)
 
 
 
@@ -58,8 +58,7 @@ export default function Absence({id}) {
   const handleClose = () => setOpen(false);
 
   const handleDateChoose = (formattedDate) => {
-    console.log("🚀 ~ handleDateChoose ~ formattedDate:", formattedDate)
-    console.log('trueeeeeeeeeeeeeeeeeeeee')
+
     getAbsenceDate({idUser,formattedDate})
     setData({idUser,formattedDate})
 
@@ -134,15 +133,16 @@ export default function Absence({id}) {
 
 
     const handleDeleteAPI = (id) => {
-      DeleteDecision(id)
+      DeleteAbsence(id)
       handleDeleteClose()
       getAbsenceDate(Data)
     };
 
+
   const defaultValues = {
     dateTime: Edit.dateTime,
+    type: Edit.type,
     user_id:idUser,
-
   };
 
 
@@ -150,8 +150,9 @@ export default function Absence({id}) {
    const onSubmit = async (data) => {
 
      const formData = new FormData();
-     formData.append('dateTime', data.dateTime);
-     formData.append('user_id', data.user_id);
+     formData.append('startDate', data.startDate);
+     formData.append('user_id', idUser);
+     formData.append('type', data.type);
 
      AddAbsence(formData)
      reset()
@@ -164,13 +165,11 @@ export default function Absence({id}) {
   const onSubmit2 = async (data) => {
 
       const formData = new FormData();
-      formData.append('dateTime', data.dateTime);
-      formData.append('content', data.content);
-      formData.append('user_id', data.user_id);
+      formData.append('startDate', data.startDate);
       formData.append('type', data.type);
-      formData.append('branch_id', 1);
 
-      EditDecision({id:Edit.id,formData:formData})
+
+      EditAbsence({id:Edit.id,formData:formData})
       getAbsenceDate(Data)
 
       reset()
@@ -197,8 +196,8 @@ export default function Absence({id}) {
 
 
   useEffect(() => {
-    setValue('dateTime', Edit?.dateTime || '');
-    setValue('content', Edit?.content || '');
+    setValue('startDate', Edit?.startDate || '');
+    setValue('type', Edit?.type || '');
   }, [Edit, setValue ]);
 
   useEffect(() => {
@@ -268,8 +267,10 @@ export default function Absence({id}) {
       </DialogTitle>
       <DialogContent sx={{width:"100vh"}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
+          <Stack width={"89%"} spacing={4}>
+
         <Controller
-                name='dateTime'
+                name='startDate'
                 control={control}
                 rules={{ required: true }}
                 render={({ field: { value, onChange, onBlur } }) => (
@@ -282,33 +283,30 @@ export default function Absence({id}) {
                     value={value}
                     onBlur={onBlur}
                     onChange={onChange}
-                  />
-                )}
-              />
+                    />
+                    )}
+                    />
         <Controller
-                name='content'
-                control={control}
-                rules={{ required: true,minLength: 8 }}
-                render={({ field: { value, onChange, onBlur } }) => (
-                  <CustomTextField
-                    fullWidth
-                    autoFocus
-                    variant='outlined'
-                    InputLabelProps={{ shrink: true }}
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    label="description"
-                    multiline
-                    rows={7}
-                    placeholder='Description ...'
-                    error={Boolean(errors?.content)}
-                    helperText={errors?.content?.message}
+              name={`type`}
+              control={control}
+              render={({ field }) => (
+                <CustomTextField
+                select
+                {...field}
+                defaultValue=''
+                variant='outlined'
+                fullWidth
+                size='small'
 
-                  />
-                )}
+                >
+                  <MenuItem value=''>Type</MenuItem>
+                  <MenuItem value='justified'>Justified</MenuItem>
+                  <MenuItem value='unjustified'>Unjustified</MenuItem>
+                </CustomTextField>
+              )}
               />
 
+              </Stack>
 
         </DialogContentText>
       </DialogContent>
@@ -374,14 +372,14 @@ export default function Absence({id}) {
               </Button>
               <Dialog fullScreen={fullScreen} open={openEdit} onClose={handleCloseEdit} aria-labelledby="responsive-dialog-title">
                 <DialogTitle sx={{ fontWeight: '600', fontSize: '20px', color: '#8090a7' }}>
-                  Edit Alerts
+                  Edit Absence
                 </DialogTitle>
                 <DialogContent sx={{ width: '100vh' }}>
                   <DialogContentText sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   <Controller
-                name='dateTime'
+                name='startDate'
                 control={control}
-                defaultValue={defaultValues.dateTime} // Provide your default date value here
+                defaultValue={defaultValues.startDate} // Provide your default date value here
 
                 rules={{ required: true }}
                 render={({ field: { value, onChange, onBlur } }) => (
@@ -397,31 +395,29 @@ export default function Absence({id}) {
                   />
                 )}
               />
-        <Controller
-                name='content'
-                control={control}
-                defaultValue={defaultValues.content } // Provide your default date value here
 
-                rules={{ required: true,minLength: 8 }}
-                render={({ field: { value, onChange, onBlur } }) => (
-                  <CustomTextField
-                    fullWidth
-                    autoFocus
-                    variant='outlined'
-                    InputLabelProps={{ shrink: true }}
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    label="description"
-                    multiline
-                    rows={7}
-                    placeholder='Description ...'
-                    error={Boolean(errors?.content)}
-                    helperText={errors?.content?.message}
+<Controller
+              name={`dateTime`}
+              defaultValue={defaultValues.dateTime} // Provide your default date value here
 
-                  />
-                )}
+              control={control}
+              render={({ field }) => (
+                <CustomTextField
+                select
+                {...field}
+                defaultValue=''
+                variant='outlined'
+                fullWidth
+                size='small'
+
+                >
+                  <MenuItem value=''>Type</MenuItem>
+                  <MenuItem value='justified'>Justified</MenuItem>
+                  <MenuItem value='unjustified'>Unjustified</MenuItem>
+                </CustomTextField>
+              )}
               />
+
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>

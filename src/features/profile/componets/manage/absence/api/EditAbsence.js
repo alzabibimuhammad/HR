@@ -1,14 +1,17 @@
 import { request } from "src/utiltis/AxiosUtilitis";
 
-const AddAbsence = (payload) => {
+const EditAbsence = (obj) => {
+
   return request({
-    url: `/api/Absence/AddAbsence`,
+    url: `/api/Absence/update?id=${obj.id}`,
     method: "post",
-    data: payload,
+    data: obj.formData,
     headers: {
       "Content-Type": "multipart/form-data",
     },
   });
 };
 
-export default AddAbsence;
+export default EditAbsence;
+
+

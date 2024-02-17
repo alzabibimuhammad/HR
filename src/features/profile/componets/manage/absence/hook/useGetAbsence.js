@@ -1,6 +1,6 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import GetAbsence from "../api/GetDeductions";
+import GetAbsence from "../api/GetAbsence";
 
 export const useGetAbsence = () => {
   const queryClient = useQueryClient();

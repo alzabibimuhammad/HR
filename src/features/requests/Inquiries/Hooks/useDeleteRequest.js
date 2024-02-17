@@ -14,7 +14,6 @@ export const useDeleteRequest = () => {
       showSuccesToast("","Deleted successfuly")
     },
     onError: (data) => {
-      console.log("🚀 ~ useDeleteRequest ~ data:", data)
       showErrorToast(data?.response?.data?.data,"")
     }
   });

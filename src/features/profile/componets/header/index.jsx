@@ -1,44 +1,21 @@
-// ** React Imports
-import { useState, useEffect } from 'react'
 
-// ** MUI Components
 import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import Button from '@mui/material/Button'
 import { styled } from '@mui/material/styles'
-import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-import axios from 'axios'
-import Icon from 'src/@core/components/icon'
 import { useTranslation } from 'react-i18next'
 import { Tab, Tabs } from '@mui/material'
-import { TabPanel } from '@mui/lab'
-import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
 import Avatar from '@mui/material/Avatar';
-
-const ProfilePicture = styled('img')(({ theme }) => ({
-  width: 108,
-  height: 108,
-  borderRadius: theme.shape.borderRadius,
-  border: `4px solid ${theme.palette.common.white}`,
-  position: 'relative',  // Fix here
-  zIndex: 1,
-  top: -40,
-  [theme.breakpoints.down('md')]: {
-    marginBottom: theme.spacing(4)
-  }
-}));
+import { Stack } from '@mui/material'
 
 const TabsProfile = styled(Tabs)(({ theme }) => ({
 
-  position: 'absolute',  // Change to 'absolute' to position relative to the parent
-  top: '25%',            // Center vertically
-  left: '35%',           // Center horizontally
-  zIndex: 1,
-  [theme.breakpoints.down('md')]: {
-    marginBottom: theme.spacing(4),
-  },
+  position: "relative",
+  left: "0px",
+  bottom: "45px",
+
+
+
 }));
 
 const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
@@ -53,30 +30,41 @@ const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
     < >
 
 
-          <Box sx={{ marginTop:'3%',marginLeft:'3%',position:"relative" ,zIndex:"11",display:"flex",alignItems:"center",gap:"15px"}} >
-            <Avatar
-          sx={{ width: '130px', height: '130px', borderRadius: '5px',zIndex:"22222222",marginBottom:"26px" }}
-          src={process.env.NEXT_PUBLIC_IMAGES+'/'+userData?.user_info?.image|| "/broken-image.jpg"}
+          <Stack direction={"row"} spacing={3} sx={{ marginTop:'3%',marginLeft:'3%',position:"relative" ,zIndex:"11",display:"flex",alignItems:"center"}} >
+          <Avatar
+  sx={{
+    width: { xs: '80px', sm: '100px', md: '130px' },
+    height: { xs: '100px', sm: '100px', md: '130px' },
+    borderRadius: '5px',
+    marginBottom: { xs: '16px', sm: '20px', md: '26px' },
+  }}
+  src={process.env.NEXT_PUBLIC_IMAGES + '/' + userData?.user_info?.image || "/broken-image.jpg"}
+/>
 
-        />
 
             {/* <ProfilePicture src={ || "/broken-image.jpg"} alt='profile-picture' /> */}
 
             <Box>
 <TabsProfile
-          sx={{zIndex:"2222222222222222222222",marginBottom:"40px"}}
-          value={value}
+        value={value}
           onChange={handleChange}
-          textColor="secondary"
-          indicatorColor="secondary"
-          aria-label="secondary tabs example"
+            sx={{
+              width: { xs: '100%', sm: '100%', md: '100%' },
+              marginTop: { xs: '-16px',sm:"0px"},
+    borderRadius: '5px',
+  }}
+
 >
   <Tab value="1" label="Reports" />
   <Tab value="2" label="Profile" />
   <Tab value="3" label="Manage" />
   <Tab value="4" label="Reviews" />
 </TabsProfile>
-        <Typography variant='h5' sx={{ mb: 2.5 }}>
+        <Typography variant='h5' sx={{ mb: 2.5,
+         marginTop: { xs: '-45px',sm:"0px"},
+
+
+        }}>
           {ProfileData?.first_name} {ProfileData?.last_name}
         </Typography>
         <Typography color={'#8090A7'} fontSize={'14px'} >
@@ -86,7 +74,7 @@ const UserProfileHeader = ({Data,setValues,value,ProfileData,userData}) => {
 
 
 
-          </Box>
+          </Stack>
 
 
 

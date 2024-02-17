@@ -65,7 +65,7 @@ const TabList = styled(MuiTabList)(({ theme }) => ({
 }))
 
 const Profiles = ({ data,tab }) => {
-  
+
   // ** State
   const [activeTab, setActiveTab] = useState(tab)
   const [isLoading, setIsLoading] = useState(true)
@@ -116,7 +116,7 @@ const Profiles = ({ data,tab }) => {
   return (
     <TabContext value={value}>
       <Stack direction={'column'} container spacing={15}>
-        <Box item xs={12} sx={{ height: '120px', zIndex: 999 }} marginTop={{ sm: '0', xs: '25px' }}>
+        <Box item xs={12} sx={{ height: '120px', zIndex: 999 }}  marginTop={{ sm: '0' }}>
           <UserProfileHeader
             userData={userDataClean}
             Data={data}
@@ -126,7 +126,7 @@ const Profiles = ({ data,tab }) => {
           />
         </Box>
 
-        <TabPanel value='1'>
+        <TabPanel  value='1'>
 
           <Stack direction={{ sm: 'row', xs: 'column' }}  width={'100%'} spacing={5}>
 

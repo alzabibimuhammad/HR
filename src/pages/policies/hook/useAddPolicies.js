@@ -14,7 +14,6 @@ export const useAddPolicies = () => {
 
     },
     onError:(data)=>{
-      console.log(data);
       showErrorToast("","Policies added Error , check input")
     }
   });

@@ -54,7 +54,6 @@ export default function CollapsibleTable(Data, setEditData) {
     const [DrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
 
     const handleEditClick = row => {
-      console.log('🚀 ~ handleEditClick ~ row:', row)
 
       setSelectedRow(row)
 

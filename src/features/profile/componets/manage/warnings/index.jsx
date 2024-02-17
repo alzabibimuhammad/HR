@@ -31,6 +31,7 @@ import TextField from '@mui/material/TextField'
 import { CustomPickerManage } from 'src/@core/components/customPickerManage';
 import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+import Checkbox from '@mui/material/Checkbox'
 
 
 
@@ -54,26 +55,14 @@ export default function Warnings({id}) {
   const { mutate:getWarningDate, data: DataWarnings } = useGetWarnings();
 
 
-
-   console.log("🚀 ~ Warnings ~ DataWarningsx:", DataWarnings)
-
-
-
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleDateChoose = (formattedDate) => {
-    console.log("🚀 ~ handleDateChoose ~ formattedDate:", formattedDate)
-    console.log('trueeeeeeeeeeeeeeeeeeeee')
     getWarningDate({idUser,formattedDate})
     setData({idUser,formattedDate})
 
   };
-
-
-
-
 
 
   const TypoHeader = styled(Typography)(() => ({
@@ -249,7 +238,7 @@ export default function Warnings({id}) {
               aria-describedby='modal-modal-description'
             >
               <Box sx={style}>
-                <CustomPickerManage setstate={setstate} setStartDatee={setStartDate} state={state} startDate={startDate}  handleDateChoose={handleDateChoose}/>
+                <CustomPickerManage  handleClose={handleClose} setstate={setstate} setStartDatee={setStartDate} state={state} startDate={startDate}  handleDateChoose={handleDateChoose}/>
               </Box>
             </Modal>
 
@@ -277,6 +266,8 @@ export default function Warnings({id}) {
       </DialogTitle>
       <DialogContent sx={{width:"100vh"}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
+        <Stack width={"89%"} spacing={4}>
+
         <Controller
                 name='dateTime'
                 control={control}
@@ -293,6 +284,7 @@ export default function Warnings({id}) {
                     onChange={onChange}
                   />
                 )}
+
               />
         <Controller
                 name='content'
@@ -318,7 +310,7 @@ export default function Warnings({id}) {
                 )}
               />
 
-
+</Stack>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -330,12 +322,11 @@ export default function Warnings({id}) {
         </Button>
       </DialogActions>
     </Dialog>
-<Button sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>Select</Button>
      </Box>
 </StackRow>
 <>
       {DataWarnings?.data?.data?.my_decisions?.map((val, index) => (
-        <StackRow key={index}>
+        <StackRow  key={index}>
           <Box>
             <Typography>{`${val.content} hours late`}</Typography>
           </Box>
@@ -363,7 +354,7 @@ export default function Warnings({id}) {
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {"Are you sure you want to delete team?"}
+        {"Are you sure you want to delete Warnings?"}
       </DialogTitle>
 
 
@@ -387,6 +378,8 @@ export default function Warnings({id}) {
                 </DialogTitle>
                 <DialogContent sx={{ width: '100vh' }}>
                   <DialogContentText sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <Stack width={"89%"} spacing={4}>
+
                   <Controller
                 name='dateTime'
                 control={control}
@@ -431,6 +424,7 @@ export default function Warnings({id}) {
                   />
                 )}
               />
+              </Stack>
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>

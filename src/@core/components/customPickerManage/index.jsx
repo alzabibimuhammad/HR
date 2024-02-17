@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
@@ -8,11 +8,19 @@ import useGetWarnings from 'src/features/profile/componets/manage/warnings/hook/
 import { FormateDate } from 'src/utiltis/DateFormate';
 import { DateFormateOfMonth } from 'src/utiltis/DateFormateOfMonth';
 import { DateFormateOfYear } from 'src/utiltis/DateFormateOfYear';
+import useOnClickOutside from './useOnClickOutside';
 
-export  const CustomPickerManage = ({  handleDateChoose }) => {
+export  const CustomPickerManage = ({  handleDateChoose ,handleClose}) => {
   const [view, setView] = useState('month');
   const [startDate, setStartDate] = useState(new Date());
   const [showMonthPicker, setShowMonthPicker] = useState('month');
+  const CloseRef = useRef(null);
+
+function Close() {
+  handleClose(true)
+}
+
+
 
 
   const toggleDatePickerMonth = () => {
@@ -45,22 +53,30 @@ export  const CustomPickerManage = ({  handleDateChoose }) => {
 
   };
 
-  const handleDateSendMonth = (date) => {
-    const formattedDate = DateFormateOfMonth(date);
-    setStartDate(date)
-    handleDateChoose(formattedDate)
+
+  const handleClickOutside = (event) => {
+
+    if (CloseRef.current && !CloseRef.current.contains(event.target)) {
+
+      handleClose(true);
+    }
   };
 
-  const datePickerStyle = {
-    width: '600px', // Set your desired width
-  };
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
 
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [CloseRef, handleClickOutside]);
 
 
   return (
     <Card sx={{ width: '426px',
-        height: '441px'}}>
-        <CardContent>
+        height: '441px'}}
+        ref={CloseRef}
+        >
+        <CardContent >
         <Typography sx={{ fontSize:'20px',fontWeight:'600',color:'#8090A7' }}>
         Filter
             </Typography>
@@ -75,7 +91,9 @@ Month      </Button>
         </Box>
         </CardContent>
 
+
           <DatePickerWrapper
+
           sx={{
             width: '100%',
 
@@ -102,7 +120,12 @@ Month      </Button>
 
           />
         </DatePickerWrapper>
+        <Box sx={{textAlign:"center"}}>
+        <Button variant='outlined'  onClick={Close}>
+        close
+      </Button>
 
+        </Box>
 
   </Card>
   );

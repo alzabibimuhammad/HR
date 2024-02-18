@@ -71,8 +71,12 @@ const navigation = () => {
       icon: 'tabler:alert-circle',
       children:[
         {
-          title:"Inquiries",
+          title:"Employees",
           path:"/requests/Inquiries"
+        },
+        {
+          title:"System",
+          path:"/requests/system"
         },
       ]
     },

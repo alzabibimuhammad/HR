@@ -12,43 +12,30 @@ import { Box } from '@mui/system'
 import Show10 from 'src/@core/components/show10'
 
 const List = ({ rows }) => {
-  const [data , setData] = useState(rows)
+  const [Fdata , setFData] = useState(rows)
   const [show, setShow] = React.useState(10);
 
   const columns = useContractColumns()
   const { t } = useTranslation()
-  const [role, setRole] = useState('')
-  const [status, setStatus] = useState('')
 
   const [searchText, setsearchText] = useState()
 
-  const handleRoleChange = e => {
-    setRole(e.target.value)
-  }
-
-  const handleStatusChange = e => {
-    setStatus(e.target.value)
-  }
 
   const handelSearch = event => {
     if(event.target.value)
-    setsearchText(event.target.value.trim().toLowerCase())
+      setsearchText(event.target.value)
     else
-      setData(rows)
+      setsearchText(null)
   };
 
   useEffect(()=>{
-    const searchData = data?.data?.data?.filter(val => {
-      return (
-        val?.user?.first_name.toLowerCase().includes(searchText) ||
-        val?.user?.last_name.toLowerCase().includes(searchText)
-      );
-    })
-    if (searchData?.length)
-    setData({data:{data:searchData}})
-
-
-  },[searchText])
+    let filterData = ContractsData(rows)
+    if(searchText)filterData=filterData?.filter((value,index)=>(
+      value?.employee?.toLowerCase()?.includes(searchText?.toLowerCase())||
+      value?.employeeLastName?.toLowerCase()?.includes(searchText?.toLowerCase())
+    ))
+    setFData(filterData)
+  },[rows,searchText])
 
 
 
@@ -110,7 +97,7 @@ const List = ({ rows }) => {
         </Stack>
         <Grid marginTop={'1%'} container spacing={2} alignItems={'center'} justifyContent={'space-around'}>
           <Grid item sm={12} xs={12}>
-            <CustomDataGrid columns={columns} show={show}  sx={gridStyles.root} rows={ContractsData(data) || []}/>
+            <CustomDataGrid columns={columns} show={show}  sx={gridStyles.root} rows={Fdata || []}/>
           </Grid>
         </Grid>
       </CardContent>

@@ -4,7 +4,7 @@ import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
-const CustomDataGrid = ({ rows, columns, show }) => {
+const CustomDataGrid = ({ rows, columns, show,rowHeight }) => {
 
   const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: show });
 
@@ -47,6 +47,7 @@ const CustomDataGrid = ({ rows, columns, show }) => {
           pageSizeOptions={[7, 10, 25, 50]}
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
+          rowHeight={rowHeight}
         />
       </Box>
     </>

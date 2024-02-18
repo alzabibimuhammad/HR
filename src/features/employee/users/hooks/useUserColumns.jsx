@@ -49,7 +49,7 @@ const useUserColumns = () => {
       {
         field: '',
         headerName: t('Employee'),
-        disableClickEventBubbling: true,
+         disableClickEventBubbling: true,
         flex: 2.5,
         renderCell: params => {
           return (
@@ -85,6 +85,18 @@ const useUserColumns = () => {
         renderCell: params => {
           return <Typography sx={{ fontSize: {xs:'8px',sm:"14px"} }}>{params?.row?.specialization}</Typography>
         }
+      },
+      {
+        field: 'Status',
+        headerName: t('Status'),
+        disableClickEventBubbling: true,
+        flex: 2.5,
+        headerAlign: 'center',
+        align: 'center',
+
+        // renderCell: params => {
+        // console.log("🚀 ~ useUserColumns ~ params:", params)
+        // }
       },
       {
         field: 'action',

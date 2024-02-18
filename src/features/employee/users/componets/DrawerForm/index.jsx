@@ -93,7 +93,7 @@ const handleDrawerClose = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', }}>
 
       <Drawer
       fullScreen={fullScreen}
@@ -103,8 +103,9 @@ const handleDrawerClose = () => {
 
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
-          }
+            width: {sm:drawerWidth,xl:"100%"},
+          },
+          width:{sm:"auto",xl:"100vh"}
         }}
         anchor='right'
         open={open}
@@ -112,6 +113,7 @@ const handleDrawerClose = () => {
         ModalProps={{
           keepMounted: true
         }}
+
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>

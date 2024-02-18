@@ -21,12 +21,12 @@ const useUserColumns = () => {
   const [EditData, setEditData] = useState(null)
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
+  console.log("🚀 ~ useUserColumns ~ deleteId:", deleteId)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { t } = useTranslation()
   const isMobile = useMediaQuery('(max-width:600px)');
 
   const handleClickOpenn = params => {
-    setDeleteId(params)
     setIsMenuOpen(!isMenuOpen)
   }
 
@@ -110,7 +110,7 @@ const useUserColumns = () => {
             <Stack direction={{ sm: 'row' }}>
               <Box >
                 {isMobile ? (
-                  <IconButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                  <IconButton onClick={() => handleClickOpenn(!isMenuOpen)}>
                     <MoreHorizIcon />
                   </IconButton>
                 ) : (

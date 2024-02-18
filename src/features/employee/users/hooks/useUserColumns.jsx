@@ -50,16 +50,16 @@ const useUserColumns = () => {
         field: '',
         headerName: t('Employee'),
         disableClickEventBubbling: true,
-        flex: 1,
+        flex: 2.5,
         renderCell: params => {
           return (
             <Link
               href={`/profile/${params?.row?.id}`}
               style={{ display: 'flex', textDecoration: 'none', alignItems: 'center' }}
             >
-              <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
-              <Typography style={{ fontSize: '14px', marginLeft: '2px' }}>{params?.row?.first_name}</Typography>
-              <Typography style={{ fontSize: '14px', marginLeft: '3px' }}>{params?.row?.last_name}</Typography>
+              <Avatar sx={{width:{sm:35,xs:20},height:{sm:35,xs:20}}} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
+              <Typography sx={{ fontSize: {xs:'8px',sm:"14px"}, marginLeft: '2px' }}>{params?.row?.first_name}</Typography>
+              <Typography sx={{ fontSize: {xs:'8px',sm:"14px"}, marginLeft: '3px' }}>{params?.row?.last_name}</Typography>
             </Link>
           )
         }
@@ -68,28 +68,28 @@ const useUserColumns = () => {
         field: 'role',
         headerName: t('Role'),
         disableClickEventBubbling: true,
-        flex: 1,
+        flex: 1.5,
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {
-          return <Typography sx={{ fontSize: '14px' }}>{params?.row?.role}</Typography>
+          return <Typography sx={{ fontSize: {xs:'8px',sm:"14px"} }}>{params?.row?.role}</Typography>
         }
       },
       {
         field: 'specialization',
         headerName: t('Specialization'),
         disableClickEventBubbling: true,
-        flex: 1,
+        flex: 2.5,
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {
-          return <Typography sx={{ fontSize: '14px' }}>{params?.row?.specialization}</Typography>
+          return <Typography sx={{ fontSize: {xs:'8px',sm:"14px"} }}>{params?.row?.specialization}</Typography>
         }
       },
       {
         field: 'action',
         headerName: t('Action'),
-        flex: 1,
+        flex: 2,
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {

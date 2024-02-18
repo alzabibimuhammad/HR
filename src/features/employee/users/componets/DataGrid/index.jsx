@@ -297,7 +297,7 @@ const Users = ({ rows }) => {
 
                   </Stack>
 
-                {rows ? <CustomDataGrid columns={columns}  sx={gridStyles.root} show={show} rows={UsersData(fdata)|| []}   />: null }
+                {rows ? <CustomDataGrid  columns={columns}  sx={gridStyles.root} show={show} rows={UsersData(fdata)|| []}   />: null }
 
               </Stack>
               </CardContent>

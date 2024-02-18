@@ -30,9 +30,11 @@ export default function AlertDialogDeleteUser({ id, open, handleClose }) {
   return (
     <Box >
     <Grid columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
     <Dialog
       onClose={handleClose}
       open={open}
+
       >
       <Grid item xs={12}>
         <Item>
@@ -52,7 +54,7 @@ export default function AlertDialogDeleteUser({ id, open, handleClose }) {
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
         <Button onClick={handleClose} style={{ color: '#B4B4B3' }}>Cancel</Button>
-        <Button  sx={{color:"#DF2E38"}}  onClick={()=>handleDeleteAPI()} autoFocus>
+        <Button  sx={{color:"#DF2E38"}}  onClick={handleDeleteAPI} autoFocus>
           Delete
         </Button>
       </DialogActions>

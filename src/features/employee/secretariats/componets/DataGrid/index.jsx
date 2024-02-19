@@ -86,9 +86,9 @@ const SecretariatsTable = ({ rows }) => {
             alignContent={'center'}
             justifyContent={'center'}
           >
-            <Stack direction={{ sm: 'row', xs: 'row' }} justifyContent={'space-between'} alignItems={'center'}>
-              <Stack direction={'row'} width={{ sm: '50%', xs: '100%' }} spacing={3} alignItems={'center'}>
-                <Box mb={2}>
+            <Stack direction={{ sm: 'row', xs: 'row' }} justifyContent={{sm:'space-between',xs:'start'}}  alignItems={{sm:'center'}}>
+              <Stack direction={{sm:'row',xs:'column'}} width={{ sm: '50%', xs: '100%' }} spacing={3} justifyContent={{ xs:'start' }} alignItems={{sm:'center'}}>
+                <Box mb={{sm:2}} display={'flex'} justifyContent={{ xs:'start' }}>
                   <Show10 setShow={setShow} />
                 </Box>
                 <TextField
@@ -112,7 +112,7 @@ const SecretariatsTable = ({ rows }) => {
                   }}
                   onChange={handelSearch}
                   sx={{
-                    width: '50%',
+                    width: {sm:'50%',xs:'100%'},
                     paddingLeft: '8px',
                     backgroundColor: '#F5F7FA',
                     border: 'none',
@@ -120,10 +120,13 @@ const SecretariatsTable = ({ rows }) => {
                   }}
                   size='small'
                 />
+
+
               </Stack>
               <Button
                 sx={{
                   backgroundColor: '#6AB2DF',
+                  mt:{xs:2},
                   height: '30%',
                   color: '#fff',
                   '&:hover': { backgroundColor: '#6ab2df', color: '#fff' }

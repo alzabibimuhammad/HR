@@ -39,7 +39,12 @@ const useRegistrationColumn = () => {
 
 
   return useMemo(() => [
+    {
+      field: 'id',
+      headerName: t("id"),
+      flex:2,
 
+    },
       {
         field: 'first_name',
         headerName: t("Name"),
@@ -68,7 +73,7 @@ const useRegistrationColumn = () => {
       renderCell: (params) => {
         return (
           <>
-          <Stack direction={{ sm:'row' }}  >
+          <Stack direction={{ sm:'row',xs:'row' }}  >
 
               <Link href={`/profile/${params.row.id}`} >
               <IconButton >

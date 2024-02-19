@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box } from '@mui/system';
+import { Box, fontSize } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
@@ -42,7 +42,7 @@ const CustomDataGrid = ({ rows, columns, show,rowHeight }) => {
       <Box sx={{ height: 500, width: '100%' }}>
         <DataGrid
           columns={columns}
-          classes={gridStyles}
+          classes={gridStyles.root}
           rows={rows || []}
           pageSizeOptions={[7, 10, 25, 50]}
           paginationModel={paginationModel}

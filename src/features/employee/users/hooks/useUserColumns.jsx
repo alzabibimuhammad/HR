@@ -21,7 +21,6 @@ const useUserColumns = () => {
   const [EditData, setEditData] = useState(null)
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
-  console.log("🚀 ~ useUserColumns ~ deleteId:", deleteId)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { t } = useTranslation()
   const isMobile = useMediaQuery('(max-width:600px)');
@@ -33,6 +32,7 @@ const useUserColumns = () => {
   const handleEditClick = row => {
     setEditData(row)
     setIsDrawerOpenEdit(true)
+    setIsMenuOpen(false)
   }
 
   const handleClickOpen = params => {

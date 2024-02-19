@@ -31,6 +31,27 @@ const ReportGrid = ({ rows }) => {
     setExpandedRow((prevRowId) => (prevRowId === rowId ? null : rowId));
   };
 
+  const gridStyles = {
+    root: {
+      '& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell': {
+        borderRight: '0px solid #000',
+      },
+      '& .MuiDataGrid-columnsContainer': {
+        backgroundColor: '#f0f0f0',
+      },
+      '& .MuiDataGrid-root': {
+        scrollbarWidth: 'thin',
+        scrollbarColor: '#000 #000',
+        '&::-webkit-scrollbar': {
+          width: '1px',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          backgroundColor: '#000',
+        },
+      },
+    },
+  };
+
   return (
     <>
       <Grid container spacing={4}>
@@ -43,6 +64,7 @@ const ReportGrid = ({ rows }) => {
               <CustomDataGrid
         columns={columns}
         rows={ReportData(rows)||[]}
+        sx={gridStyles.root }
 
       />
 

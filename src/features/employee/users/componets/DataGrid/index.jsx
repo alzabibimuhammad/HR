@@ -267,35 +267,5 @@ const Users = ({ rows }) => {
 
 
 
-                  </TextField>
-
-                  <TextField
-                    select
-                    fullWidth
-                    defaultValue='Specialization'
-                    SelectProps={{
-                      value: department,
-                      displayEmpty: true,
-                      onChange: handledepartmentChange,
-                    }}
-                    size='small'
-
-                  >
-                    <MenuItem value=''>{`${t("Specialization")}`}</MenuItem>
-                    {Array.from(specialization).map(element => (
-                      <MenuItem key={element} value={element}>{element}</MenuItem>
-                    ))}
-                  </TextField>
-
-                  </Stack>
-
-                {rows ? <CustomDataGrid  columns={columns}  sx={gridStyles.root} show={show} rows={UsersData(fdata)|| []}   />: null }
-
-              </Stack>
-              </CardContent>
-              </Card>
-          </>
-
-};
 
 export default Users;

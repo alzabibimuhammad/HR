@@ -89,14 +89,21 @@ const LoginPage = () => {
       <Grid container spacing={0}  sx={{backgroundColor:"#E9ECF3",}}>
         <Grid item   xs={0}   md={7} sm={7}>
 
-          <Stack   width={'100%'} sx={{ height: '100vh',backgroundColor:"#3f4458"}}>
-              <Box  width={'100%'} height={'100%'}>
+          <Stack className="log" position={"relative"}  width={'100%'} sx={{ height: '100vh',backgroundColor:"#3f4458"}}>
+             <Stack width={'100%'} height={'100%'}>
+             <Box className="photo" zIndex={"444444444"}  width={'100%'} height={'100%'} marginLeft={"50%"} >
                 <Box className='login-images'  sx={{  backgroundImage: `url('/images/loginRectangel.svg')`,backgroundRepeat:"no-repeat",width:"100%",height:"100%" }} ></Box>
               </Box>
 
-            <Box  display={'flex'} justifyContent={'start'} alignItems={'end'} width={'100%'} height={'100%'}>
+            <Box className="photo"  display={'flex'} marginTop={"50px"} justifyContent={'start'} alignItems={'end'} width={'100%'} height={'100%'}>
                 <Box   sx={{  backgroundImage: `url('/images/loginRectangleButtom.svg')`,backgroundRepeat:"no-repeat",width:"100%",height:"100%" }} ></Box>
             </Box>
+            <Box sx={{position:{sm:"absolute"},left:{sm:"40%"},top:{sm:"44%"}}}>
+            <div className="animate__animated animate__backInDown" >
+          <img width={200} height={200}  src='/images/policesIcon/pageLogo/logo.svg'/>
+
+              </div>            </Box>
+             </Stack>
 
           </Stack>
 
@@ -112,7 +119,7 @@ const LoginPage = () => {
                 Log in to get started
                  </Typography>
               </Box>
-                <Box sx={{ mt:5,mb: 4 }}>
+                <Box  sx={{ mt:5,mb: 4 }}>
                   <Controller
                     name='email'
                     control={control}
@@ -197,9 +204,9 @@ const LoginPage = () => {
                     Login
                   </Button>
                 </Box>
-                <Box sx={{ height:"300px" ,width:"300px",backgroundImage: `url('/images/image.svg')  `, backgroundPosition: 'no-repeat',backgroundSize: 'cover',}}>
+                <div className="animate__animated animate__backInDown" style={{ height:"300px" ,width:"300px",backgroundImage: `url('/images/image.svg')  `, backgroundPosition: 'no-repeat',backgroundSize: 'cover',}}>
 
-                </Box>
+                </div>
               </form>
         </Grid>
       </Grid>

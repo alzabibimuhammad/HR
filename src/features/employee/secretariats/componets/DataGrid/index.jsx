@@ -11,6 +11,7 @@ import { SecretariatsData } from '../../infrastructure'
 import AddIcon from '@mui/icons-material/Add'
 import DrawerFormAdd from '../DrawerAdd'
 import Show10 from 'src/@core/components/show10'
+
 const SecretariatsTable = ({ rows }) => {
   const columns = useSecretariatsColumns()
   const [show, setShow] = React.useState(10)
@@ -22,13 +23,16 @@ const SecretariatsTable = ({ rows }) => {
   const { t } = useTranslation()
 
   const [fdata, setfdata] = useState(rows)
+
   useEffect(() => {
+
     let filterData = SecretariatsData(rows)
     if(date)filterData=filterData?.filter((value,index)=>value?.date == date)
     if(search)filterData = filterData?.filter((value,index)=>(
       value?.first_name?.toLowerCase()?.includes(search?.toLowerCase())||
       value?.last_name?.toLowerCase()?.includes(search?.toLowerCase())
     ))
+
     setfdata(filterData)
   }, [rows,date,search])
 
@@ -40,6 +44,7 @@ const SecretariatsTable = ({ rows }) => {
     else
       setDate(null)
   }
+
   const handelSearch = event => {
     const searchText = event.target.value
     if(searchText)
@@ -68,6 +73,7 @@ const SecretariatsTable = ({ rows }) => {
       }
     }
   }
+
   const handleAdd = _ => {
     setOpenAdd(true)
   }
@@ -133,7 +139,7 @@ const SecretariatsTable = ({ rows }) => {
                 }}
                 onClick={handleAdd}
               >
-                <Stack direction={'row'}>
+                <Stack direction={'row'}  >
                   <AddIcon />
                   <Typography color={'#fff'}>{t('Add')}</Typography>
                 </Stack>

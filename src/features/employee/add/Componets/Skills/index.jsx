@@ -369,7 +369,7 @@ useEffect(()=>{
       </Box>
 </Stack>
   ))}
-              <Typography sx={{cursor:"pointer",width:"18%",}} color="primary" onClick={handleAddClickSkills}>
+              <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClickSkills}>
               {t("Add Skills")}
           </Typography>
 

@@ -76,7 +76,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
 
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth
+            width: {sm:drawerWidth}
           }
         }}
         anchor='right'

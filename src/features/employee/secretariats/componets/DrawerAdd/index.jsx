@@ -61,12 +61,14 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
 
     setSelectedUser(userId)
   }
+
   const onSubmit = data => {
     data.user_id = Number(selectedUser)
     AddSecretariats(data)
     handleDrawerClose()
 
   }
+
   const handelSearch = e => {
     const searchText = e.target.value
 
@@ -83,6 +85,7 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
     }
 
   }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -91,7 +94,7 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
 
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth
+            width: {sm:drawerWidth}
           }
         }}
         anchor='right'
@@ -201,7 +204,7 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
                     )}
                   />
 
-                  <Button type='submit' variant='contained' color='primary'>
+                  <Button type='submit' sx={{marginTop:"12px"}} variant='contained' color='primary'>
                     {`${t('Submit')}`}
                   </Button>
             </form>

@@ -9,12 +9,16 @@ import { Avatar, IconButton, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import AlertDialogDeleteSecretariats from '../componets/dialog'
 import Link from 'next/link'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import MenuItem from '@mui/material/MenuItem'
+import Menu from '@mui/material/Menu'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useSecretariatsColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
-
   const [EditData, setEditData] = useState(null)
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const isMobile = useMediaQuery('(max-width:600px)');
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
 
@@ -23,6 +27,12 @@ const useSecretariatsColumns = () => {
   const handleEditClick = row => {
     setEditData(row)
     setIsDrawerOpenEdit(true)
+    setIsMenuOpen(false)
+
+  }
+
+  const handleClickOpenn = params => {
+    setIsMenuOpen(!isMenuOpen)
   }
 
   const handleClickOpen = params => {
@@ -72,8 +82,17 @@ const useSecretariatsColumns = () => {
       renderCell: params => {
         return (
           <>
-            <Stack direction={{ sm: 'row' }}>
+            <Stack direction={{ sm: 'row' }}  >
               <Box>
+                {isMobile ? (
+     <IconButton onClick={() => handleClickOpenn(!isMenuOpen)}>
+     <MoreHorizIcon />
+   </IconButton>
+
+                ):(
+<>
+<Stack direction={"row"}>
+
                 <IconButton>
                   <BorderColorOutlinedIcon
                     style={{ color: '#8090A7' }}
@@ -85,7 +104,7 @@ const useSecretariatsColumns = () => {
                     Edit
                   </BorderColorOutlinedIcon>
                 </IconButton>
-              </Box>
+
               <Box>
                 <IconButton onClick={() => handleClickOpen(params?.row?.id)}>
                   <DeleteOutlinedIcon variant='contained' color='#8090A7' size='small'>
@@ -93,6 +112,41 @@ const useSecretariatsColumns = () => {
                     Delete{' '}
                   </DeleteOutlinedIcon>
                 </IconButton>
+              </Box>
+                    </Stack>
+</>
+
+                )}
+                {isMobile && (
+      <Menu
+      anchorEl={isMenuOpen ? document.body : null}
+      anchorOrigin={{
+        vertical: 'center',
+        horizontal: 'center',
+      }}
+      transformOrigin={{
+        vertical: 'center',
+        horizontal: 'center',
+      }}
+      open={isMenuOpen}
+      onClose={() => setIsMenuOpen(false)}
+    >
+         <Stack direction={"column"} spacing={3} justifyContent={"center"} alignItems={"start"} >
+
+<MenuItem  onClick={() => handleEditClick(params.row)}>
+  <BorderColorOutlinedIcon style={{ color: '#8090A7' }} size='small' />
+  Edit
+</MenuItem>
+<MenuItem onClick={() => handleClickOpen(params.row.id)}>
+  <DeleteOutlinedIcon style={{ color: '#8090A7' }} size='small' />
+  Delete
+</MenuItem>
+
+</Stack>
+
+</Menu>
+
+                )}
               </Box>
             </Stack>
             {isDeletePopupOpen && (

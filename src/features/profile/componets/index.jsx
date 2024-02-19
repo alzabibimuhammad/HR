@@ -77,6 +77,7 @@ const Profiles = ({ data,tab }) => {
 
 
   const [value, setValues] = useState('1')
+  console.log("🚀 ~ Profiles ~ value:", value)
 
   // ** Hooks
   const router = useRouter()
@@ -113,10 +114,14 @@ const Profiles = ({ data,tab }) => {
     }
   }, [tab])
 
+
   return (
-    <TabContext value={value}>
-      <Stack direction={'column'} container spacing={15}>
-        <Box item xs={12} sx={{ height: '120px', zIndex: 999 }}  marginTop={{ sm: '0' }}>
+    <>
+
+
+
+      <Stack  overflowX='hidden' direction={'column'} container spacing={15}>
+        <Box  overflowX='hidden'  item xs={12} sx={{ height: '120px', zIndex: 999 }}  marginTop={{ sm: '0' }}>
           <UserProfileHeader
             userData={userDataClean}
             Data={data}
@@ -126,8 +131,7 @@ const Profiles = ({ data,tab }) => {
           />
         </Box>
 
-        <TabPanel  value='1'>
-
+          {value == 1?
           <Stack direction={{ sm: 'row', xs: 'column' }}  width={'100%'} spacing={5}>
 
           <Stack direction={'column'}width={{ sm:'50%',xs:'100%' }} height="1000px" spacing={2} >
@@ -153,34 +157,32 @@ const Profiles = ({ data,tab }) => {
 
             </Stack>
           </Stack>
-
-        </TabPanel>
-
-        <TabPanel value='2'>
+        :null}
+        {value ==2?
           <Stack direction={{ sm: 'row', xs: 'column' }} spacing={6}>
-            <Stack sx={{height:"5900vh"}} spacing={6} width={{ sm: '40%', xs: '100%' }} direction={'column'}>
+            <Stack sx={{height:"100%"}} spacing={6} width={{ sm: '40%', xs: '100%' }} direction={'column'}>
               <PersonalInfo ProfileData={ProfileData} />
               <NoteReport user_id={id} />
             </Stack>
 
-            <Stack width={{ sm: '60%', xs: '100%' ,height:"5900vh" }} spacing={6} direction={'column'}>
+            <Stack width={{ sm: '60%', xs: '100%' ,height:"100%" }} spacing={6} direction={'column'}>
               <Skills ProfileData={ProfileData} />
               <Employment ProfileData={ProfileData} />
             </Stack>
           </Stack>
-        </TabPanel>
-
-        <TabPanel value='3'>
+        :null}
+          {value ==3?
+          <Box marginTop={{ sm:'12px' }}>
            <Mange id={id} DataDecision={DataDecision} />
-        </TabPanel>
+           </Box>
+         :null}
+          {value ==4?
 
-    <TabPanel value="4">
    <RatingTabel />
 
-      </TabPanel>
-
+:null}
 </Stack>
-</TabContext>
+</>
   )
 }
 

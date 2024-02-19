@@ -13,14 +13,24 @@ import Show10 from 'src/@core/components/show10'
 const Registration = ({ Data, setFilterDate }) => {
   const columns = useRegistrationColumn()
   const [show, setShow] = React.useState(10);
+  const [search,setSearch] = useState()
+  const [status, setStatus] = useState('');
 
   let data  = Data?.data
+
   const [rows, setRows] = useState(data)
 
   useEffect(() => {
-    setRows(RegistrationData(data))
+    let filterData = RegistrationData(data)
+    if(status)filterData = filterData?.filter((value,index)=> value?.status == status)
+    if(search)filterData = filterData?.filter((value,index)=>(
+        value?.first_name?.toLowerCase().includes(search.toLowerCase())||
+        value?.last_name?.toLowerCase().includes(search.toLowerCase())
+    ))
 
-  }, [Data])
+    setRows(filterData)
+  }, [Data,search,status])
+
   const { t } = useTranslation()
 
   const theme = useTheme()
@@ -32,47 +42,35 @@ const Registration = ({ Data, setFilterDate }) => {
   }))
 
   const handelSearch = event => {
-    let searchData
-
-    const searchText = event.target.value
-    if (!searchText) {
-      setRows(RegistrationData(data))
-    } else {
-      searchData = RegistrationData(data)?.filter(element => {
-        if (element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase())) {
-          return element?.first_name?.toLowerCase()?.includes(searchText.toLowerCase())
-        } else if (element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase())) {
-          return element?.last_name?.toLowerCase()?.includes(searchText.toLowerCase())
-        } else if (element?.id == searchText) {
-          return element?.id == searchText
-        }
-      })
-
-      setRows(searchData)
-    }
+    const searchData = event.target.value
+    if(searchData)
+      setSearch(searchData)
+    else
+      setSearch(null)
   }
   const handelDate = event=>{
     setFilterDate(event.target.value)
   }
-  const [status, setStatus] = useState('');
 
   const handleStatusChange = (e) => {
+    if(e.target.value)
     setStatus(e.target.value);
-    setRows(RegistrationData(data))
+    else
+      setStatus('')
   };
 
-  useEffect(()=>{
-    let filteredData;
-    if(status){
-      filteredData = rows?.filter((row) => {
-        return row?.status === status;
-      })
-      setRows(filteredData)
-    }else
-    setRows(RegistrationData(data))
+  // useEffect(()=>{
+  //   let filteredData;
+  //   if(status){
+  //     filteredData = rows?.filter((row) => {
+  //       return row?.status === status;
+  //     })
+  //     setRows(filteredData)
+  //   }else
+  //   setRows(RegistrationData(data))
 
 
-  },[status])
+  // },[status])
 
   return (
     <Stack height={'100%'}>
@@ -133,7 +131,7 @@ const Registration = ({ Data, setFilterDate }) => {
                     <MenuItem value=''>{`${t("Status")}`}</MenuItem>
                     <MenuItem value='Arrived'>{`${t("Arrived")}`}</MenuItem>
                     <MenuItem value='Late'>{`${t("Late")}`}</MenuItem>
-                    <MenuItem value='Absenced'>{`${t("Absenced")}`}</MenuItem>
+                    <MenuItem value='Absent'>{`${t("Absenced")}`}</MenuItem>
                     <MenuItem value='Checked Out'>{`${t("Checked out")}`}</MenuItem>
                     <MenuItem value='Wrong'>{`${t("Wrong")}`}</MenuItem>
                 </TextField>

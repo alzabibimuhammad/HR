@@ -131,16 +131,16 @@ const useInquiriesColumns = () => {
       renderCell: params => {
         const content = params.row.CONTENT
         const id = params.row.id
-        const shouldShowMore = content.length > 40
+        const shouldShowMore = content?.length > 40
 
         return (
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-              <Typography sx={{ fontSize: '14px' }}>{content.slice(0, 40) + '...'}</Typography>
+              <Typography sx={{ fontSize: '14px' }}>{content?.slice(0, 40) + '...'}</Typography>
             </div>
             {showMoreMap[id] && (
               <div>
-                <Typography sx={{ fontSize: '14px' }}>{content.slice(40)}</Typography>
+                <Typography sx={{ fontSize: '14px' }}>{content?.slice(40)}</Typography>
               </div>
             )}
 

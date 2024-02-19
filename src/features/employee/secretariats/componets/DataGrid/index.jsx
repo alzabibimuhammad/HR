@@ -16,42 +16,36 @@ const SecretariatsTable = ({ rows }) => {
   const [show, setShow] = React.useState(10)
 
   const [openAdd, setOpenAdd] = React.useState(false)
+  const [date, setDate] = React.useState()
+  const [search, setSearch] = React.useState()
 
   const { t } = useTranslation()
 
   const [fdata, setfdata] = useState(rows)
   useEffect(() => {
-    setfdata(rows)
-  }, [rows])
+    let filterData = SecretariatsData(rows)
+    if(date)filterData=filterData?.filter((value,index)=>value?.date == date)
+    if(search)filterData = filterData?.filter((value,index)=>(
+      value?.first_name?.toLowerCase()?.includes(search?.toLowerCase())||
+      value?.last_name?.toLowerCase()?.includes(search?.toLowerCase())
+    ))
+    setfdata(filterData)
+  }, [rows,date,search])
+
 
   const handleDate = e => {
     const date = e.target.value
-
-    let searchData
-    if (!date) {
-      setfdata(rows)
-    } else {
-      searchData = rows?.filter(element => {
-        return element?.received_date == date
-      })
-      setfdata(searchData)
-    }
+    if(date)
+      setDate(date)
+    else
+      setDate(null)
   }
-
   const handelSearch = event => {
     const searchText = event.target.value
-    let searchData
-    if (!searchText) {
-      setfdata(rows)
-    } else {
-      searchData = rows?.filter(element => {
-        return (
-          element?.user?.first_name?.toLowerCase()?.includes(searchText?.toLowerCase()) ||
-          element?.user?.last_name?.toLowerCase()?.includes(searchText?.toLowerCase())
-        )
-      })
-      setfdata(searchData)
-    }
+    if(searchText)
+      setSearch(searchText)
+    else
+      setSearch(null)
   }
 
   const gridStyles = {
@@ -158,7 +152,7 @@ const SecretariatsTable = ({ rows }) => {
             </Stack>
 
             {rows ? (
-              <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={SecretariatsData(fdata) || []} />
+              <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={fdata || []} />
             ) : null}
           </Stack>
         </CardContent>

@@ -87,18 +87,7 @@ const useUserColumns = () => {
           return <Typography sx={{ fontSize: {xs:'8px',sm:"14px"} }}>{params?.row?.specialization}</Typography>
         }
       },
-      {
-        field: 'Status',
-        headerName: t('Status'),
-        disableClickEventBubbling: true,
-        flex: 2.5,
-        headerAlign: 'center',
-        align: 'center',
 
-        // renderCell: params => {
-        // console.log("🚀 ~ useUserColumns ~ params:", params)
-        // }
-      },
       {
         field: 'action',
         headerName: t('Action'),

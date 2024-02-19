@@ -1,11 +1,10 @@
 export const ReviewData = elements => {
-
-  return elements?.[0]?.map(element => {
-    return {
-      id: element?.id,
-      first_name: element?.id,
-      date:element?.date,
-      employee:element?.evaluator_count
-    };
-  });
+  return elements?.map(element => (
+    element.map(ele => ({
+      id: ele?.id,
+      first_name: ele?.user_id,
+      date: ele?.date,
+      employee: ele?.evaluator_count
+    }))
+  ));
 };

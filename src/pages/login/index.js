@@ -92,7 +92,7 @@ const LoginPage = () => {
           <Stack className="log" position={"relative"}  width={'100%'} sx={{ height: '100vh',backgroundColor:"#3f4458"}}>
              <Stack width={'100%'} height={'100%'}>
              <Box className="photo" zIndex={"444444444"}  width={'100%'} height={'100%'} marginLeft={"50%"} >
-                <Box className='login-images'  sx={{  backgroundImage: `url('/images/loginRectangel.svg')`,backgroundRepeat:"no-repeat",width:"100%",height:"100%" }} ></Box>
+                <Box    sx={{  backgroundImage: `url('/images/loginRectangel.svg')`,backgroundRepeat:"no-repeat",width:"100%",height:"100%" }} ></Box>
               </Box>
 
             <Box className="photo"  display={'flex'} marginTop={"50px"} justifyContent={'start'} alignItems={'end'} width={'100%'} height={'100%'}>
@@ -112,7 +112,7 @@ const LoginPage = () => {
         <Grid item xs={12} width={{  xs:'50%' }}  sm={5} md={5} display={"flex"} justifyContent={'center'} alignItems={'center'} >
         <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
              <Box >
-                <Typography variant='h3' sx={{ color: '#000',fontSize:"24px",lineHeight: "130%" }}>
+                <Typography   variant='h3' sx={{ color: '#000',fontSize:"24px",lineHeight: "130%" }}>
                   {`Hello! 👋🏻`}
                 </Typography>
                 <Typography sx={{ color: '#000000' }}>

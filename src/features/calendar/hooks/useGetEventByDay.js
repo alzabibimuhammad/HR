@@ -10,7 +10,7 @@ export const useGetEventByDay = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries("event");
     },
-    onError(error){
+    onError(data){
       showErrorToast(data?.data?.message)
     }
   });

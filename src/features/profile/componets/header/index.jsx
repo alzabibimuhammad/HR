@@ -6,30 +6,40 @@ import { useTranslation } from 'react-i18next'
 import { Button, Tab, Tabs } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import { Stack } from '@mui/material'
+import { useState } from 'react'
 
-const TabsProfile = styled(Tabs)(({ theme }) => ({
-  position: 'relative',
-  left: '0px',
-  bottom: '45px'
-}))
+
+
 
 const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) => {
   const { t } = useTranslation()
+  const [activeButton, setActiveButton] = useState('reports');
+
   const handleOne = _ => {
+    setActiveButton('reports');
+
     setValues(1)
   }
+
   const handleTwo = _ => {
     setValues(2)
+    setActiveButton('profile');
+
   }
+
   const handleThree = _ => {
     setValues(3)
+    setActiveButton('manage');
+
   }
+
   const handleFoure = _ => {
     setValues(4)
+    setActiveButton('review');
+
   }
-  const handleChange = (event, newValue) => {
-    setValues(newValue)
-  }
+
+
 
   return Object.keys(Data).length > 0 ? (
     <>
@@ -39,16 +49,16 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
         spacing={{ sm:5,xs:1 }}
         sx={{
           position: { sm: 'relative', xs: 'relative' },
-          bottom: { sm: '-15px', xs: '14px' },
-          left: { sm: '170px', xs: '90px' },
-          overflow: 'hidden',
-          zIndex: 1000
+          bottom: { sm: '-20px', xs: '8px' },
+          left: { sm: '170px', xs: '99px' },
+          zIndex: 1000,
+          width:"30%"
         }}
       >
-        <Button sx={{ width:{xs:'10px',sm:'25px'},fontSize:{xs:'12px',sm:'16px'} }} onClick={handleOne}>Reports</Button>
-        <Button sx={{ width:{xs:'10px',sm:'25px'},fontSize:{xs:'12px',sm:'16px'} }} onClick={handleTwo}>Profile</Button>
-        <Button sx={{ width:{xs:'10px',sm:'25px'},fontSize:{xs:'12px',sm:'16px'} }} onClick={handleThree}>Manage</Button>
-        <Button sx={{ width:{xs:'10px',sm:'25px'},fontSize:{xs:'12px',sm:'16px'} }} onClick={handleFoure}>Review</Button>
+        <Button  className={`button-tap ${activeButton === 'reports' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleOne}> Reports  </Button>
+        <Button  className={`button-tap ${activeButton === 'profile' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleTwo}> Profile  </Button>
+        <Button  className={`button-tap ${activeButton === 'manage' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleThree}> Manage  </Button>
+        <Button  className={`button-tap ${activeButton === 'review' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleFoure}> Review  </Button>
       </Stack>
       <Stack
         direction={'row'}
@@ -67,8 +77,7 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
             height: { xs: '100px', sm: '100px', md: '130px' },
             borderRadius: '5px',
             marginLeft: { xs: '16px', sm: '20px', md: '26px' },
-            position: 'relative',
-            bottom: '20px'
+            marginBottom:{sm:"10px",xs:"15px"}
           }}
           src={process.env.NEXT_PUBLIC_IMAGES + '/' + userData?.user_info?.image || '/broken-image.jpg'}
         />

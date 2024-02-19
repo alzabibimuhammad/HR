@@ -80,7 +80,7 @@ const SidebarLeft = props => {
     let d = formattedAfterformatted.getDate() + 1
     let m =
       (Number(formattedAfterformatted.getMonth() + 1) < 10 ? '0' : '') + Number(formattedAfterformatted.getMonth() + 1)
-    let y = formattedAfterformatted.getFullYear()
+    let y = formattedAfterformatted.getFullYear()-1
     const FinalformattedDate = `${y}-${m}-${d}`
     getEvent(FinalformattedDate)
     calendarApi.gotoDate(date)
@@ -183,6 +183,10 @@ const SidebarLeft = props => {
                       scrollbarWidth: 'none' /* This will hide the scrollbar on Firefox */
                     }}
                   >
+                          <Typography variant='p' fontSize={12} color={'#000'} style={{ padding: 0, margin: 0 }}>
+                  {event.title}
+                </Typography>
+                <Divider/>
                     <Typography variant='p' fontSize={12} color={'#000'} style={{ padding: 0, margin: 0 }}>
                       {event.description}
                     </Typography>

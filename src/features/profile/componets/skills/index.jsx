@@ -4,9 +4,10 @@ import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import { Box, Stack } from '@mui/system';
 import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import { useTranslation } from 'react-i18next';
 
 export default function Skills({ ProfileData }) {
-
+    const {t} = useTranslation()
     const Typo = styled(Typography)(() => ({
         fontSize: '14px',
         fontWeight: '500',
@@ -37,11 +38,11 @@ export default function Skills({ ProfileData }) {
                 <Stack spacing={2} direction={'column'}>
                     <StackRow>
                         <img src='/images/pesonalProfile/skills/icon.svg' />
-                        <TypoHeader>Skills & Career:</TypoHeader>
+                        <TypoHeader>{t('Skills & Career')}:</TypoHeader>
                     </StackRow>
 
                     <Stack direction={'column'}>
-                        <Typo>Education:</Typo>
+                        <Typo>{t('Education')}:</Typo>
                         {ProfileData && ProfileData.study_situations && ProfileData.study_situations.map((val, index) => (
                             <>
                                 <ul style={{ padding: 0, margin: 0, marginLeft: '5%' }}>
@@ -57,7 +58,7 @@ export default function Skills({ ProfileData }) {
                     </Stack>
 
                     <Stack direction={'column'}>
-                        <Typo>Certifications:</Typo>
+                        <Typo>{t('Certifications')}:</Typo>
                         {ProfileData && ProfileData.certificates && ProfileData.certificates.map((val, index) => (
                             <>
                                 <ul style={{ padding: 0, margin: 0, marginLeft: '5%' }}>
@@ -70,7 +71,7 @@ export default function Skills({ ProfileData }) {
                     </Stack>
 
                     <Stack direction={'column'}>
-                        <Typo>Career:</Typo>
+                        <Typo>{t('Career')}:</Typo>
                         {ProfileData && ProfileData.careers && ProfileData.careers.map((val, index) => (
                             <>
                                 <ul style={{ padding: 0, margin: 0, marginLeft: '5%' }}>
@@ -83,7 +84,7 @@ export default function Skills({ ProfileData }) {
                     </Stack>
 
                     <Stack direction={'column'}>
-                        <Typo>Skills:</Typo>
+                        <Typo>{t('Skills')}:</Typo>
                         <ul style={{ padding: 0, margin: 0, marginLeft: '5%' }}>
                             {ProfileData && ProfileData.skills && ProfileData.skills.map((val, index) => (
                                 <li key={index}>
@@ -97,7 +98,7 @@ export default function Skills({ ProfileData }) {
                     </Stack>
 
                     <Stack direction={'column'}>
-                        <Typo>Languages:</Typo>
+                        <Typo>{t('Languages')}:</Typo>
                         <ul style={{ padding: 0, margin: 0, marginLeft: '5%' }}>
                             {ProfileData && ProfileData.languages && ProfileData.languages.map((val, index) => (
                                 <li key={index}>

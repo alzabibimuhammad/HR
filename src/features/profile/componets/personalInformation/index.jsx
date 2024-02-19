@@ -4,9 +4,10 @@ import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import { Box, Stack } from '@mui/system';
 import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import { useTranslation } from 'react-i18next';
 
 export default function PersonalInfo({ProfileData}) {
-
+  const {t} = useTranslation()
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -43,43 +44,43 @@ export default function PersonalInfo({ProfileData}) {
 
         <StackRow  >
           <img src='/images/pesonalProfile/personalInfo/icon.svg'/>
-          <TypoHeader  >Personal Information:</TypoHeader>
+          <TypoHeader  >{t('Personal Information')}:</TypoHeader>
         </StackRow>
 
         <StackRow>
-          <Typo>ID Number: </Typo>
+          <Typo>{t('ID Number')}: </Typo>
           {/* <TypoVal>{ProfileData.}</TypoVal> */}
         </StackRow>
 
         <StackRow>
-          <Typo>Birth Date: </Typo>
+          <Typo>{t('Birth Date')}: </Typo>
           <TypoVal>{ProfileData?.user_info?.birth_date}</TypoVal>
         </StackRow>
 
         <StackRow>
-          <Typo>Marital Status:</Typo>
+          <Typo>{t('Marital Status')}:</Typo>
           <TypoVal>{ProfileData?.user_info?.military_situation}</TypoVal>
         </StackRow>
 
         <StackRow>
-          <Typo>Social status:</Typo>
+          <Typo>{t('Social status')}:</Typo>
           <TypoVal>{ProfileData?.user_info?.social_situation}</TypoVal>
         </StackRow>
 
         <StackRow>
           <img src='/images/pesonalProfile/contact/icon.svg'/>
-          <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Contact Information:</TypoHeader>
+          <TypoHeader marginLeft={'5px'} fontSize={'16px'} >{t('Contact Information')}:</TypoHeader>
         </StackRow>
 
         <StackRow>
-          <Typo>Address:</Typo>
+          <Typo>{t('Address')}:</Typo>
           <TypoVal>{ProfileData?.address}</TypoVal>
         </StackRow>
         <Stack>
         {ProfileData?.my_contacts?.map((contact, index) => (
   contact.type === 'user_num' && (
     <StackRow sx={{padding:"3px"}}  key={index}>
-      <Typo>Phone Number{index -1}:</Typo>
+      <Typo>{t('Phone Number')} {index -1}:</Typo>
       <TypoVal>{contact.contact}</TypoVal>
     </StackRow>
   )
@@ -88,7 +89,7 @@ export default function PersonalInfo({ProfileData}) {
         </Stack>
         <StackRow >
 
-        <Typo>Email:</Typo>
+        <Typo>{t('Email')}:</Typo>
 
         <TypoVal>{ProfileData?.email}</TypoVal>
         </StackRow>
@@ -96,30 +97,30 @@ export default function PersonalInfo({ProfileData}) {
         {ProfileData?.my_contacts?.map((contact, index) => (
   contact.type === 'email' && (
     <StackRow key={index}>
-      <Typo>Email {index +1}:</Typo>
+      <Typo>{t('Email')}{index +1}:</Typo>
 
       <TypoVal>{contact.contact}</TypoVal>
     </StackRow>
   )
 ))}
 
-        <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Emergency:</TypoHeader>
+        <TypoHeader marginLeft={'5px'} fontSize={'16px'} >{t('Emergency')}:</TypoHeader>
         {ProfileData?.emergency?.map((val, index) => (
   <Box  key={val.id}>
     <StackRow>
-      <Typo>Name:</Typo>
+      <Typo>{t('Name')}:</Typo>
       <TypoVal>{val?.name}</TypoVal>
     </StackRow>
     <StackRow>
-      <Typo>Address:</Typo>
+      <Typo>{t('Address')}:</Typo>
       <TypoVal>{val?.address}</TypoVal>
     </StackRow>
     <StackRow>
-      <Typo>Phone number:</Typo>
+      <Typo>{t('Phone number')}:</Typo>
       <TypoVal>{val.phone_num}</TypoVal>
     </StackRow>
     <StackRow>
-      <Typo>Email:</Typo>
+      <Typo>{t('Email')}:</Typo>
       <TypoVal>{val?.email}</TypoVal>
     </StackRow>
   </Box>
@@ -130,19 +131,19 @@ export default function PersonalInfo({ProfileData}) {
 
         <StackRow>
           <img src='/images/pesonalProfile/professional/icon.svg'/>
-          <TypoHeader marginLeft={'5px'} fontSize={'16px'} >Professional:</TypoHeader>
+          <TypoHeader marginLeft={'5px'} fontSize={'16px'} >{t('Professional')}:</TypoHeader>
         </StackRow>
 
         <StackRow>
-          <Typo>Specialization:</Typo>
+          <Typo>{t('Specialization')}:</Typo>
           <TypoVal>{ProfileData?.specialization}</TypoVal>
         </StackRow>
         <StackRow>
-          <Typo>Role:</Typo>
+          <Typo>{t('Role')}:</Typo>
           <TypoVal>{ProfileData?.role}</TypoVal>
         </StackRow>
         <StackRow>
-          <Typo>team:</Typo>
+          <Typo>{t('Team')}:</Typo>
           <TypoVal>{ProfileData?.department?.name}</TypoVal>
 
         </StackRow>

@@ -47,7 +47,7 @@ export default function Mange({id}) {
       </Box>
       {/* End Alerts section */}
 
-      {/* Penalties section */}
+      {/* Penalties section and translate */}
       <Box sx={{ marginTop: '15px' }}>
         <Penalties id={id} />
       </Box>

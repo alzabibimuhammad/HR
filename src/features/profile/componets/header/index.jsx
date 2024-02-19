@@ -55,10 +55,10 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
           width:"30%"
         }}
       >
-        <Button  className={`button-tap ${activeButton === 'reports' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleOne}> Reports  </Button>
-        <Button  className={`button-tap ${activeButton === 'profile' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleTwo}> Profile  </Button>
-        <Button  className={`button-tap ${activeButton === 'manage' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleThree}> Manage  </Button>
-        <Button  className={`button-tap ${activeButton === 'review' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleFoure}> Review  </Button>
+        <Button  className={`button-tap ${activeButton === 'reports' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleOne}> {t('Reports')}  </Button>
+        <Button  className={`button-tap ${activeButton === 'profile' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleTwo}> {t('Profile')} </Button>
+        <Button  className={`button-tap ${activeButton === 'manage' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleThree}>{t('Manage')} </Button>
+        <Button  className={`button-tap ${activeButton === 'review' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleFoure}>{t('Review')} </Button>
       </Stack>
       <Stack
         direction={'row'}
@@ -82,7 +82,6 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
           src={process.env.NEXT_PUBLIC_IMAGES + '/' + userData?.user_info?.image || '/broken-image.jpg'}
         />
 
-        {/* <ProfilePicture src={ || "/broken-image.jpg"} alt='profile-picture' /> */}
 
         <Box>
           <Typography variant='h5' sx={{ mb: 2.5, marginTop: { xs: '-45px', sm: '0px' } }}>

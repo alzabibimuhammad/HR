@@ -1,13 +1,14 @@
 import { Button, Card, CardContent, CircularProgress } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import React, { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useReactToPrint } from 'react-to-print'
 import useViewContract from 'src/features/Contracts/list/Hooks/useViewContracts'
 
 export default function Download(userData) {
   const userId = userData?.user?.data?.data?.[0]?.id
   const componentRef = useRef()
-
+  const {t} = useTranslation()
   const { data } = useViewContract(userId)
 
 
@@ -30,8 +31,8 @@ export default function Download(userData) {
 
         <Stack spacing={2} >
 
-          <Button  onClick={handleDownloadClick} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} ><a target='_blank' >Print</a></Button>
-          <Button onClick={handleDownloadClick} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} >Download</Button>
+          <Button  onClick={handleDownloadClick} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} ><a target='_blank' >{t('Print')} </a></Button>
+          <Button onClick={handleDownloadClick} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} >{t('Download')} </Button>
 
         </Stack>
 

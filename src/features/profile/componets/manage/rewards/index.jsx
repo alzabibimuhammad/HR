@@ -23,12 +23,13 @@ import { CustomPickerManage } from 'src/@core/components/customPickerManage';
 import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import useGetRewards from './hook/useGetRewards';
+import { useTranslation } from 'react-i18next';
 
 
 
 export default function Rewards({id}) {
   const idUser =id
-
+  const {t} = useTranslation()
 
   const {mutate:AddDecision}=useAddDecision()
   const { mutate: DeleteDecision, isLoading } = useDeleteDecision();
@@ -225,7 +226,7 @@ export default function Rewards({id}) {
               <Stack direction={'row'} spacing={2} >
                 <InsertInvitationIcon/>
               <Typography color={'#fff'} >
-              Select Date
+              {t('Select Date')}
     </Typography>
               </Stack>
             </Button>

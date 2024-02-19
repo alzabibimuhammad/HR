@@ -171,7 +171,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <path d="M8.25478 12.7217H1.86115V13.3593H8.25478V12.7217Z" fill="black"/>
                 </svg>
                 <Header ariant='body2'  sx={{   textTransform: 'uppercase' }}>
-                  General
+                  {t('General')}
                 </Header>
                 <Divider sx={{ width:'85%' }} style={{ background: '#8090A7' }}/>
               </Box>
@@ -179,15 +179,15 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
 
                 <StackRow >
 
-                <Typo >Warnings:</Typo>
-                <Text style={{ color:'red' }} >late {userDataClean?.late} Houres</Text>
+                <Typo >{t('Warnings')} :</Typo>
+                <Text style={{ color:'red' }} >{t('late')}  {userDataClean?.late} {t('Houres')} </Text>
                 {/* for data see details arrow  */}
 
                 {!isWarDetails?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                 <Detail>
-                  See Details
+                  {t('See Details')}
                 </Detail>
                 <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleDetails}  fontSize='10px'/>
                 </Stack>
@@ -196,7 +196,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                   <Detail>
-                  Less Details
+                  {t('Less Details')}
                 </Detail>
                 <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleLessDetails} fontSize='10px'/>
                 </Stack>
@@ -208,28 +208,24 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <Stack direction={'column'} justifyContent={'start'}>
 
                 <Stack  marginLeft={6} direction={'row'} justifyContent={'space-between'}>
-                  <Typography>2 hour late</Typography>
+                  <Typography>2 {t('hour late')} </Typography>
                   <Typography>Febsb</Typography>
                 </Stack>
-                <Stack  marginLeft={6} direction={'row'} justifyContent={'space-between'}>
-                  <Typography>2 hour late</Typography>
-                  <Typography>july</Typography>
-                </Stack>
+
                 </Stack>
               :
               null
               }
 
               <StackRow>
-                  <Typo>Alerts:</Typo>
+                  <Typo>{t('Alerts')}:</Typo>
                   <Text >oooo</Text>
-                {/* for data see details arrow  */}
 
                 {!isAlertDetails?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                 <Detail>
-                  See Details
+                  {t('See Details')}
                 </Detail>
                 <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleAlertSee}  fontSize='10px'/>
                 </Stack>
@@ -238,7 +234,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                   <Detail>
-                  Less Details
+                  {t('Less Details')}
                 </Detail>
                 <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleAlertLess} fontSize='10px'/>
                 </Stack>
@@ -246,8 +242,8 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
               }
               </StackRow>
                 <StackRow>
-                  <Typo>Penalties:</Typo>
-                  <Text   >late {userDataClean?.deduction} hours</Text>
+                  <Typo>{t('Penalties')} :</Typo>
+                  <Text   >{t('late')}  {userDataClean?.deduction} {t('hours')} </Text>
 
                 </StackRow>
               </Stack>
@@ -269,25 +265,25 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.1331 9.05165C10.0297 9.01718 9.94353 8.98271 9.84013 8.93101C9.68503 8.86208 9.5127 8.79315 9.4093 8.65528C9.32313 8.55188 9.32313 8.37954 9.37483 8.25891C9.461 8.0521 9.70227 8.0004 9.90907 8.0004C10.2537 8.0004 10.5812 8.24167 10.6501 8.24167C10.788 8.24167 10.7707 7.8453 10.6501 7.77637C10.5467 7.6385 10.2537 7.56957 10.0814 7.55233V7.34553C10.0814 7.25936 10.0125 7.19043 9.9263 7.19043H9.70227C9.6161 7.19043 9.54716 7.25936 9.54716 7.34553V7.5868C9.2542 7.65573 8.99569 7.82807 8.87506 8.10381C8.78889 8.31061 8.77166 8.58634 8.87506 8.81038C9.01293 9.12058 9.28866 9.25845 9.58163 9.37908C9.68503 9.41355 9.7712 9.44802 9.85737 9.48249C10.0814 9.56865 10.3399 9.70652 10.3399 9.98226C10.3399 10.2408 10.202 10.3786 9.96077 10.4476C9.78843 10.4993 9.54717 10.482 9.3576 10.4303C9.23696 10.3959 8.84059 10.1891 8.80612 10.1891C8.66826 10.1891 8.68549 10.6027 8.78889 10.6888C8.94399 10.8267 9.34036 10.9129 9.52993 10.9301V11.1369C9.52993 11.2231 9.59886 11.292 9.68503 11.292H9.90907C9.99524 11.292 10.0642 11.2231 10.0642 11.1369V10.8956C10.5467 10.7922 10.8914 10.4648 10.8914 9.94779C10.9086 9.43079 10.5639 9.22398 10.1331 9.05165Z" fill="black"/>
               </svg>
                 <Header ariant='body2'  sx={{   textTransform: 'uppercase' }}>
-                  Financial
+                {t('Financial')}
                 </Header>
                 <Divider sx={{ width:'80%' }} style={{ background: '#8090A7' }}/>
               </Box>
               <Stack direction={'column'}  >
                 <StackRow   >
-                <Typo  >Salary:</Typo>
-                <Text>{userDataClean?.BaseSalary} L.S</Text>
+                <Typo  >{t('Salary')} :</Typo>
+                <Text>{userDataClean?.BaseSalary} {t('L.S')} </Text>
                 </StackRow>
                 <StackRow>
-                  <Typo>Overtime:</Typo>
-                  <Text >{userDataClean?.overtime} hours</Text>
+                  <Typo>{t('Overtime')} :</Typo>
+                  <Text >{userDataClean?.overtime} {t('hours')} </Text>
                 {/* for data see details arrow  */}
 
                 {!isoverDetails?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                 <Detail>
-                  See Details
+                  {t('See Details')}
                 </Detail>
                 <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleOverSee}  fontSize='10px'/>
                 </Stack>
@@ -296,7 +292,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                   <Detail>
-                  Less Details
+                  {t('Less Details')}
                 </Detail>
                 <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleOverLess} fontSize='10px'/>
                 </Stack>
@@ -304,15 +300,15 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
               }
                 </StackRow>
                 <StackRow>
-                  <Typo>Rewards:</Typo>
-                  <Text   >{userDataClean?.reward} L.S</Text>
+                  <Typo>{t('Rewards')} :</Typo>
+                  <Text   >{userDataClean?.reward} {t('L.S')} </Text>
               {/* for data see details arrow  */}
 
               {!isRewardDetails?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                 <Detail>
-                  See Details
+                  {t('See Details')}
                 </Detail>
                 <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleRewardSee}  fontSize='10px'/>
                 </Stack>
@@ -321,7 +317,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                   <Detail>
-                  Less Details
+                  {t('Less Details')}
                 </Detail>
                 <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleRewardLess} fontSize='10px'/>
                 </Stack>
@@ -330,14 +326,14 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 </StackRow>
 
                 <StackRow>
-                  <Typo>Advances:</Typo>
-                  <Text   >{userDataClean?.advance} L.S</Text>
+                  <Typo>{t('Advances')} :</Typo>
+                  <Text   >{userDataClean?.advance} {t('L.S')}</Text>
 
                 {!isAdvanceDetails?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                 <Detail>
-                  See Details
+                  {t('See Details')}
                 </Detail>
                 <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleAdvancesSee}  fontSize='10px'/>
                 </Stack>
@@ -346,7 +342,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                   <Detail>
-                  Less Details
+                  {t('Less Details')}
                 </Detail>
                 <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleAdvancesLess} fontSize='10px'/>
                 </Stack>
@@ -355,13 +351,13 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 </StackRow>
 
                 <StackRow>
-                  <Typo>Deduction:</Typo>
-                  <Text   >{userDataClean?.deduction} L.S</Text>
+                  <Typo>{t('Deduction')} :</Typo>
+                  <Text   >{userDataClean?.deduction} {t('L.S')}</Text>
                 {!isDeductionDetails?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                 <Detail>
-                  See Details
+                  {t('See Details')}
                 </Detail>
                 <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleDeductionSee}  fontSize='10px'/>
                 </Stack>
@@ -370,7 +366,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                   <Detail>
-                  Less Details
+                  {t('Less Details')}
                 </Detail>
                 <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleDeductionLess} fontSize='10px'/>
                 </Stack>
@@ -378,8 +374,8 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
               }
                 </StackRow>
                 <StackRow>
-                  <Typo>Total Salary:</Typo>
-                  <Text   >{userDataClean?.BaseSalary} L.S</Text>
+                  <Typo>{t('Total Salary')} :</Typo>
+                  <Text   >{userDataClean?.BaseSalary} {t('L.S')}</Text>
                 </StackRow>
               </Stack>
             </Box>
@@ -393,19 +389,19 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
               </svg>
 
                 <Header ariant='body2'  sx={{   textTransform: 'uppercase' }}>
-                WorkTime
+                {t('WorkTime')}
                 </Header>
                 <Divider sx={{ width:'80%' }} style={{ background: '#8090A7' }}/>
               </Box>
               <Stack direction={'column'}  >
                 <StackRow   >
-                <Typo  >Check-in:</Typo>
-                <Text >{userDataClean?.CheckInPercentage}% on time</Text>
+                <Typo  >{t('Check-in')} :</Typo>
+                <Text >{userDataClean?.CheckInPercentage}% {t('on time')}</Text>
                 {!isCheckin?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                 <Detail>
-                  See Details
+                  {t('See Details')}
                 </Detail>
                 <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleCheckinSee}  fontSize='10px'/>
                 </Stack>
@@ -414,7 +410,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                   <Detail>
-                  Less Details
+                  {t('Less Details')}
                 </Detail>
                 <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleCheckinLess} fontSize='10px'/>
                 </Stack>
@@ -422,13 +418,13 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
               }
                 </StackRow>
                 <StackRow>
-                  <Typo>Check-out:</Typo>
-                  <Text >{userDataClean?.CheckOutPercentage}% on time</Text>
+                  <Typo>{t('Check-out')} :</Typo>
+                  <Text >{userDataClean?.CheckOutPercentage}% {t('on time')} </Text>
                   {!isCheckout?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                 <Detail>
-                  See Details
+                  {t('See Details')}
                 </Detail>
                 <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleCheckoutSee}  fontSize='10px'/>
                 </Stack>
@@ -437,7 +433,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                   <Detail>
-                  Less Details
+                  {t('Less Details')}
                 </Detail>
                 <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleCheckoutLess} fontSize='10px'/>
                 </Stack>
@@ -445,13 +441,13 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
               }
                 </StackRow>
                 <StackRow>
-                  <Typo>Absences:</Typo>
-                  <Text   >{userDataClean?.absence} days</Text>
+                  <Typo>{t('Absences')} :</Typo>
+                  <Text   >{userDataClean?.absence} {t('days')} </Text>
                   {!isAbsences?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                 <Detail>
-                  See Details
+                  {t('See Details')}
                 </Detail>
                 <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={handleAbsencesSee}  fontSize='10px'/>
                 </Stack>
@@ -460,7 +456,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
                   <Detail>
-                  Less Details
+                  {t('Less Details')}
                 </Detail>
                 <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={handleAbsencesLess} fontSize='10px'/>
                 </Stack>
@@ -478,7 +474,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
               </svg>
 
                 <Header ariant='body2'  sx={{   textTransform: 'uppercase' }}>
-                Secretariats
+                {t('Secretariats')}
                 </Header>
                 <Divider sx={{ width:'74%' }} style={{ background: '#8090A7' }}/>
               </Box>

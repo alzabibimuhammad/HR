@@ -29,6 +29,7 @@ const useUserColumns = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
+
   const handleEditClick = row => {
     setEditData(row)
     setIsDrawerOpenEdit(true)

@@ -143,7 +143,8 @@ const [fndata, setfndata] = useState('');
         width: drawerWidth,
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: drawerWidth
+          width: {sm:drawerWidth,xl:"100%"},
+          overflowX:"hidden"
         },
         overflow: 'visible',
         borderRadius: '15px',
@@ -265,13 +266,13 @@ const [fndata, setfndata] = useState('');
 
         ))}
           </Box>
-        <Stack marginLeft={{ sm:'3%'  }} sx={{marginTop:"15px"}}>
+        <Stack marginLeft={{ sm:'3%',xl:"0px"  }} sx={{marginTop:"15px"}}>
           <Box  onClick={() => append({ type: '', date: '' })}sx={{ color: '#6AB2DF' ,cursor:"pointer"}} display={'flex'}> <AddIcon sx={{ color:'#6AB2DF' }} />  <Typography sx={{ color:'#6AB2DF' }}>Add Absence</Typography> </Box>
         </Stack>
 
 
       <Box sx={{ display:'flex', width:'100%',padding:'10px'}} >
-          <Stack sx={{ marginLeft:'50%' }} direction={'row'} spacing={2} >
+          <Stack sx={{ marginLeft:{sm:'50%'} }} direction={'row'} spacing={2} >
 
             <Button onClick={handleDrawerClose} sx={{ backgroundColor:'#DCE1E6',color:'#8090A7',borderRadius:'4px', padding: '8px 24px' }}>Cancle</Button>
 

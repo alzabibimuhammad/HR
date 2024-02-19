@@ -102,7 +102,7 @@ export default function Add() {
                   label='User Name :'
                   sx={{ mb: 5 }}
                   id='invoice-country'
-                  
+
                   SelectProps={{
                     value: value,
                     onChange: e => onChange(e)
@@ -125,7 +125,7 @@ export default function Add() {
                 <CustomTextField
                   fullWidth
                   label='Start Date :'
-                  
+
                   autoFocus
                   variant='outlined'
                   InputLabelProps={{ shrink: true }}
@@ -164,8 +164,8 @@ export default function Add() {
             {t('Contract File')} :
           </Typography>
 
-          <Box sx={{ display: 'flex', justifyContent: 'center' }} marginTop={'25px'}>
-            <Box sx={{ width: '754px', height: '380px', borderRadius: '26px', border: '7px dashed #8090A7' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems:"center" }}  marginTop={'25px'}>
+            <Box sx={{ width: {sm:'754px'}, height: '380px', borderRadius: '26px', border: {sm:'7px dashed #8090A7'} }} >
               <Box {...getRootProps({ className: 'dropzone' })} sx={files.length ? { height: 450 } : {}}>
                 <input {...getInputProps()} />
                 {files.length ? (
@@ -183,7 +183,7 @@ export default function Add() {
                     <CloudDoneOutlinedIcon sx={{ width: '56px', height: '56px' }} />
                     <Typography
                       variant='h4'
-                      sx={{ width: '421px', height: '77px', fontSize: '24px', fontWeight: '500', my: '10px' }}
+                      sx={{ width: {sm:'421px'}, height: {sm:'77px'}, fontSize: {sm:'24px'}, fontWeight: '500', my: '10px' }}
                     >
                       {t('Choose a file or drag & drop it here PDF, up to 50MB')}
                     </Typography>
@@ -198,10 +198,11 @@ export default function Add() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         backgroundColor: theme => `rgba(${theme.palette.customColors.main}, 0.08)`,
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+
                       }}
                     >
-                      <Typography>{t('Browse File')}</Typography>
+                      <Typography >{t('Browse File')}</Typography>
                     </Box>
                   </Box>
                 )}
@@ -209,7 +210,7 @@ export default function Add() {
             </Box>
           </Box>
 
-          <Box sx={{ width: '100%', mt: '24px' }} textAlign={'end'}>
+          <Box sx={{ width: '100%', marginTop: {sm:'24px'} }} textAlign={'end'}>
             <Button sx={{ padding: '16px 33px 16px 33px' }} type='submit' variant='contained'>
               {t('Add Contract')}
             </Button>

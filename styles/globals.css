@@ -259,5 +259,38 @@ border-radius: 12px;
 position: relative !important;
 }
 
+.button-tap {
+  color: #8090A7 !important;
+  background-color: transparent !important;
+  position: relative !important;
+}
+
+.button-tap:hover{
+  color: #6AB2DF !important;
+}
+
+.button-tap::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #6AB2DF;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s ease-out;
+}
+
+.button-tap:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom bottom;
+}
 
 
+
+.button-tap.active {
+  color: #6AB2DF !important;
+  font-weight: 900;
+
+}

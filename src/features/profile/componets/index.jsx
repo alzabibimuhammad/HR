@@ -77,7 +77,6 @@ const Profiles = ({ data,tab }) => {
 
 
   const [value, setValues] = useState('1')
-  console.log("🚀 ~ Profiles ~ value:", value)
 
   // ** Hooks
   const router = useRouter()
@@ -97,10 +96,7 @@ const Profiles = ({ data,tab }) => {
   const ProfileData = DataEmployee?.data?.data[0]
   const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
-  const handleDateChoose = date => {
-    const formattedDate = FormateDate(date)
-    SetSelectedDate(date)
-  }
+
 
   useEffect(() => {
     if (data) {
@@ -116,74 +112,76 @@ const Profiles = ({ data,tab }) => {
 
 
   return (
-    <>
 
 
 
-      <Stack  overflowX='hidden' direction={'column'} container spacing={15}>
-        <Box  overflowX='hidden'  item xs={12} sx={{ height: '120px', zIndex: 999 }}  marginTop={{ sm: '0' }}>
-          <UserProfileHeader
-            userData={userDataClean}
-            Data={data}
-            ProfileData={ProfileData}
-            setValues={setValues}
-            values={value}
-          />
-        </Box>
 
-          {value == 1?
-          <Stack direction={{ sm: 'row', xs: 'column' }}  width={'100%'} spacing={5}>
+    <Stack  overflowX='hidden' direction={'column'} container spacing={{sm:15,xs:6}}>
+      <Box  overflowX='hidden'  item xs={12} sx={{ height: '120px', zIndex: 999 }}  marginTop={{ sm: '0' }}>
+        <UserProfileHeader
+          userData={userDataClean}
+          Data={data}
+          ProfileData={ProfileData}
+          setValues={setValues}
+          values={value}
+        />
+      </Box>
 
-          <Stack direction={'column'}width={{ sm:'50%',xs:'100%' }} height="1000px" spacing={2} >
-            <Box  >
-              <AboutOverivew userDataClean={userDataClean} Data={data} />
+        {value == 1?
+        <Stack direction={{ sm: 'row', xs: 'column' }}  width={'100%'} spacing={{sm:5,xs:1}}>
+
+        <Stack direction={'column'} width={{ sm:'50%',xs:'100%' }} height={{sm:"100%"}} spacing={{sm:2,xs:1}} >
+          <Box  >
+            <AboutOverivew userDataClean={userDataClean} Data={data} />
+          </Box>
+          <Box>
+          <ReviewsReport/>
+          </Box>
+          </Stack>
+          <Stack width={{ sm:'50%',xs:'100%' }} spacing={{sm:2,xs:1}} direction={'column'}>
+
+            <Box width={'100%'} >
+              <CustomDatePicker setUserData={setuserData} selectedDate={SelecetedDate} />
             </Box>
             <Box>
-            <ReviewsReport/>
+              <Download user={userData} />
             </Box>
-            </Stack>
-            <Stack width={{ sm:'50%',xs:'100%' }} spacing={2} direction={'column'}>
 
-              <Box width={'100%'} >
-                <CustomDatePicker setUserData={setuserData} selectedDate={SelecetedDate} />
-              </Box>
-              <Box>
-                <Download user={userData} />
-              </Box>
-
-              <Box width={'100%'} height={'20% !important '}>
-                <NoteReport user_id={id} />
-              </Box>
-
-            </Stack>
-          </Stack>
-        :null}
-        {value ==2?
-          <Stack direction={{ sm: 'row', xs: 'column' }} spacing={6}>
-            <Stack sx={{height:"100%"}} spacing={6} width={{ sm: '40%', xs: '100%' }} direction={'column'}>
-              <PersonalInfo ProfileData={ProfileData} />
+            <Box width={'100%'} height={'20% !important '}>
               <NoteReport user_id={id} />
-            </Stack>
+            </Box>
 
-            <Stack width={{ sm: '60%', xs: '100%' ,height:"100%" }} spacing={6} direction={'column'}>
-              <Skills ProfileData={ProfileData} />
-              <Employment ProfileData={ProfileData} />
-            </Stack>
           </Stack>
-        :null}
-          {value ==3?
-          <Box marginTop={{ sm:'12px' }}>
-           <Mange id={id} DataDecision={DataDecision} />
-           </Box>
-         :null}
-          {value ==4?
+        </Stack>
+      :null}
+      {value ==2?
+        <Stack direction={{ sm: 'row', xs: 'column' }}spacing={{sm:5,xs:1}}>
+          <Stack sx={{height:"100%"}} spacing={{sm:5,xs:1}} width={{ sm: '40%', xs: '100%' }} direction={'column'}>
+            <PersonalInfo ProfileData={ProfileData} />
+            <NoteReport user_id={id} />
+          </Stack>
 
-   <RatingTabel />
+          <Stack width={{ sm: '60%', xs: '100%' ,height:"100%" }} spacing={{sm:5,xs:1}} direction={'column'}>
+            <Skills ProfileData={ProfileData} />
+            <Employment ProfileData={ProfileData} />
+          </Stack>
+        </Stack>
+      :null}
+        {value ==3?
+        <Box marginTop={{ sm:'12px' }}>
+         <Mange id={id} DataDecision={DataDecision} />
+         </Box>
+       :null}
+        {value ==4?
+          <Stack>
 
-:null}
+        <RatingTabel />
+          </Stack>
+
+
+      :null}
 </Stack>
-</>
-  )
+)
 }
 
 export default Profiles

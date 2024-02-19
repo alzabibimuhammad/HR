@@ -56,10 +56,12 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
     onClose={handleDrawerClose}
       backgroundColor='#fff'
       sx={{
-        width: '440px',
+        width: {sm:'440px',xl:"100%"},
         flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: '440px',
+          width: {sm:'440px',xl:"100%"},
+          overflowY:"auto",
+          overflowX:"hidden"
         },
         overflow: 'visible',
         borderRadius: '15px',
@@ -104,7 +106,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
           <TeamLeaders SetteamLeader={SetteamLeader} />
         </Box>
         <Box sx={{ display: 'flex', width: '100%', padding: '10px' }}>
-          <Stack sx={{ marginLeft: '50%' }} direction={'row'} spacing={2}>
+          <Stack sx={{ marginLeft: {sm:'50%'} }} direction={'row'} spacing={2}>
             <Button
               onClick={handleDrawerClose}
               sx={{

@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -12,13 +12,36 @@ import { setRatingUser } from 'src/store/apps/user';
 
 import { FormateDate } from 'src/utiltis/DateFormate';
 
-export  const CustomDatePickerRating = ({ }) => {
+export  const CustomDatePickerRating = ({handleClose }) => {
   const [view, setView] = useState('month');
   const [startDate, setStartDate] = useState(new Date());
   const [showMonthPicker, setShowMonthPicker] = useState('day');
   const {mutate:getData ,data:rateData, isloading}= useGetRatingById()
   const store = useSelector(state => state.user)
- 
+  const CloseRef = useRef(null);
+  const [open, setOpen] = React.useState(false);
+
+
+
+  function Close() {
+    handleClose(true)
+  }
+
+  const handleClickOutside = (event) => {
+
+    if (CloseRef.current && !CloseRef.current.contains(event.target)) {
+
+      handleClose(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [CloseRef, handleClickOutside]);
 
   const toggleDatePickerMonth = () => {
     setStartDate(new Date());
@@ -36,8 +59,8 @@ export  const CustomDatePickerRating = ({ }) => {
 
 
     getData({user_id:store.userId,date:formattedDate})
-  
-  
+
+
 
   };
 
@@ -59,7 +82,9 @@ export  const CustomDatePickerRating = ({ }) => {
 
 
   return (
-    <Card sx={{ width: '426px',
+    <Card
+    ref={CloseRef}
+    sx={{ width: '426px',
         height: '441px'}}>
         <CardContent>
         <Typography sx={{ fontSize:'20px',fontWeight:'600',color:'#8090A7' }}>

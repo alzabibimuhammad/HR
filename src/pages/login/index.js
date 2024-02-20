@@ -109,7 +109,7 @@ const LoginPage = () => {
 
         </Grid>
 
-        <Grid item xs={12} width={{  xs:'50%' }}  sm={5} md={5} display={"flex"} justifyContent={'center'} alignItems={'center'} >
+        <Grid sx={{position:"relative",zIndex:"2222222222222222"}} item xs={12} width={{  xs:'50%' }}  sm={5} md={5} display={"flex"} justifyContent={'center'} alignItems={'center'} >
         <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
              <Box >
                 <Typography   variant='h3' sx={{ color: '#000',fontSize:"24px",lineHeight: "130%" }}>
@@ -204,7 +204,7 @@ const LoginPage = () => {
                     Login
                   </Button>
                 </Box>
-                <div className="animate__animated animate__backInDown" style={{ height:"300px" ,width:"300px",backgroundImage: `url('/images/image.svg')  `, backgroundPosition: 'no-repeat',backgroundSize: 'cover',}}>
+                <div  style={{ height:"300px" ,width:"300px",backgroundImage: `url('/images/image.svg')  `, backgroundPosition: 'no-repeat',backgroundSize: 'cover',}}>
 
                 </div>
               </form>

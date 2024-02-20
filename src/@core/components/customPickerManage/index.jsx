@@ -11,7 +11,6 @@ import { DateFormateOfYear } from 'src/utiltis/DateFormateOfYear';
 import useOnClickOutside from './useOnClickOutside';
 
 export  const CustomPickerManage = ({  handleDateChoose ,handleClose}) => {
-  const [view, setView] = useState('month');
   const [startDate, setStartDate] = useState(new Date());
   const [showMonthPicker, setShowMonthPicker] = useState('month');
   const CloseRef = useRef(null);

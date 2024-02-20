@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next'
 import { Button, Tab, Tabs } from '@mui/material'
 import Avatar from '@mui/material/Avatar'
 import { Stack } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setProfileTap } from '../../../../store/apps/user'
+import { useRouter } from 'next/router'
 
 
 
@@ -14,27 +17,43 @@ import { useState } from 'react'
 const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) => {
   const { t } = useTranslation()
   const [activeButton, setActiveButton] = useState('reports');
+  const dispatch = useDispatch()
+
+  const router = useRouter();
+  let { type } = router.query;
+  useEffect(()=>{
+    if(type)
+      setActiveButton(type)
+  },[type])
+
+  console.log("🚀 ~ UserProfileHeader:", type)
 
   const handleOne = _ => {
-    setActiveButton('reports');
+    type = null
+    setActiveButton("reports");
 
-    setValues(1)
+    dispatch(setProfileTap(1))
+
   }
 
   const handleTwo = _ => {
-    setValues(2)
+    dispatch(setProfileTap(2))
+    type = null
+
     setActiveButton('profile');
 
   }
 
   const handleThree = _ => {
-    setValues(3)
+    dispatch(setProfileTap(3))
     setActiveButton('manage');
 
+    type = null
   }
 
   const handleFoure = _ => {
-    setValues(4)
+    dispatch(setProfileTap(4))
+    type = null
     setActiveButton('review');
 
   }

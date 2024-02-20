@@ -1,6 +1,5 @@
 //Collapsible table
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import Box from '@mui/material/Box'
 import Collapse from '@mui/material/Collapse'
 import IconButton from '@mui/material/IconButton'
@@ -14,28 +13,17 @@ import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import { Avatar, Button, Card, CardContent, MenuItem, TextField } from '@mui/material'
-import DrawerForm from '../DrawerForm'
+import { Avatar, Card, CardContent, MenuItem, TextField } from '@mui/material'
 import { Stack } from '@mui/system'
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline'
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
 import Link from 'next/link'
-import AlertDialog from '../dialog'
 import { useState } from 'react'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { setProfileTap } from 'src/store/apps/user'
 
-function createData(id, employee, role, spcialization, team, user) {
-  return {
-    employee,
-    role,
-    spcialization,
-    team,
-    id,
-    user
-  }
-}
 
 export default function CollapsibleTable({ Data }) {
   const { t } = useTranslation()
@@ -45,7 +33,7 @@ export default function CollapsibleTable({ Data }) {
   const [search , setSearch] = useState(null)
   const [department,setDepartment] = useState('')
   const [role, setRole] = useState('')
-
+  const dispatch = useDispatch()
   useEffect(() => {
      let filterData =  Data
       if(role)filterData = filterData?.filter((value,index)=>value?.role == role)
@@ -71,7 +59,9 @@ export default function CollapsibleTable({ Data }) {
       setOpen(!open)
     }
 
-
+    const handleViewProfileTap=_=>{
+      dispatch(setProfileTap(1))
+    }
 
 
 
@@ -125,20 +115,15 @@ export default function CollapsibleTable({ Data }) {
           </TableCell>
           <TableCell>
             <Box>
-              <Link href={`/profile/${row.id}`}>
-                <IconButton>
+              <Link href={`/profile/${row.id}?type=reports`}>
+                <IconButton onClick={handleViewProfileTap}>
                   <VisibilityIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
                     Details
                   </VisibilityIcon>
                 </IconButton>
               </Link>
-              <IconButton onClick={() => handleClickOpen(row.id)}>
-                <DeleteOutlinedIcon style={{ color: '#8090A7' }} variant='error' size='small'>
-                  Delete
-                </DeleteOutlinedIcon>
-              </IconButton>
+
             </Box>
-            {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
           </TableCell>
         </TableRow>
         <TableRow>
@@ -264,7 +249,7 @@ export default function CollapsibleTable({ Data }) {
                   <TableCell sx={{ width: '10%' }}>{t('Role')}</TableCell>
                   <TableCell sx={{ left: 0, width: '10%' }}>{t('Specialization')}</TableCell>
                   <TableCell sx={{ left: 0, width: '10%' }}>{t('Team')}</TableCell>
-                  <TableCell sx={{ left: 0, width: '10%' }}>{t('Action')}</TableCell>
+                  <TableCell  sx={{ left: 0, width: '10%' }}>{t('Action')}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

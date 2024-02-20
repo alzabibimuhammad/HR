@@ -10,6 +10,8 @@ import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import AlertDialogDeleteUser from '../componets/dialog';
 import DrawerForm from '../componets/DrawerForm';
+import { useDispatch } from 'react-redux';
+import { setProfileTap } from 'src/store/apps/user';
 
 const useResignedColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false);
@@ -18,7 +20,7 @@ const useResignedColumns = () => {
 
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
-
+  const dispatch = useDispatch()
   const { t } = useTranslation();
 
 
@@ -42,7 +44,9 @@ const useResignedColumns = () => {
     setIsDeletePopupOpen(false)
   };
 
-
+  const handleProfileTap=_=>{
+    dispatch(setProfileTap(2))
+  }
 
   return useMemo(() => [
 
@@ -101,19 +105,19 @@ const useResignedColumns = () => {
           <>
           <Stack direction={{ sm:'row' }}  >
 
-              <Link href={`/profile/${params.row.id}`} >
-              <IconButton >
-              <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'>Details</VisibilityIcon>
+              <Link href={`/profile/${params.row.id}?type=profile`} >
+              <IconButton onClick={handleProfileTap} >
+              <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'/>
               </IconButton>
               </Link>
               <Box >
                 <IconButton>
-                <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={()=>handleEditClick(params.row)} >Edit</BorderColorOutlinedIcon>
+                <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={()=>handleEditClick(params.row)} />
                 </IconButton>
               </Box>
               <Box>
                 <IconButton onClick={() => handleClickOpen(params?.row?.id)}>
-                <DeleteOutlinedIcon  variant="contained" color="#8090A7" size='small'>  Delete   </DeleteOutlinedIcon>
+                <DeleteOutlinedIcon  variant="contained" color="#8090A7" size='small'/>
                 </IconButton>
               </Box>
 

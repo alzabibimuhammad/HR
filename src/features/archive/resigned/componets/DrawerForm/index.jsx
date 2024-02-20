@@ -124,7 +124,7 @@ const handleDrawerClose = () => {
                       {...field}
                       fullWidth
                        autoFocus
-                      label={`${t("First NAME")}`}
+                      label={`${t("First Name")}`}
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}
@@ -142,7 +142,7 @@ const handleDrawerClose = () => {
                       {...field}
                       fullWidth
                        autoFocus
-                      label={`${t("middle_name")}`}
+                      label={`${t("Midle Name")}`}
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}
@@ -159,7 +159,7 @@ const handleDrawerClose = () => {
                     <TextField
                       {...field}
                       fullWidth
-                      label='Last Name'
+                      label={t('Last Name')}
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}
@@ -178,7 +178,7 @@ const handleDrawerClose = () => {
                     <TextField
                       {...field}
                       fullWidth
-                      label='Team'
+                      label={t('Team')}
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}
@@ -195,7 +195,7 @@ const handleDrawerClose = () => {
                     <TextField
                       {...field}
                       fullWidth
-                      label='specialization'
+                      label={t('Specialization')}
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}
@@ -212,7 +212,7 @@ const handleDrawerClose = () => {
                     <TextField
                       {...field}
                       fullWidth
-                      label='E-Mail'
+                      label={t('Email')}
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}

@@ -37,10 +37,12 @@ export default function Download(userData) {
         </Stack>
 
         :
-          <Box display={'flex'} justifyContent={'center'} >
-            <Typography  color={'#FF5858'}>There is no contract!</Typography>
-          </Box>
-         }
+          <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} spacing={2} >
+              <Typography variant='h5'>{t('Loading contract...')}</Typography>
+              <CircularProgress/>
+          </Stack>
+
+}
 
         </CardContent></Card>
     )

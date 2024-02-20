@@ -18,6 +18,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import Icon from 'src/@core/components/icon'
 import useGetEmployeeDropDown from 'src/features/Contracts/list/Hooks/useEmployee'
 import { useEditTeam } from '../../hooks/useEditTeam'
+import { useTranslation } from 'react-i18next'
 
 const drawerWidth = 440
 
@@ -30,23 +31,18 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start'
 }))
 
-
-
-export default function EditeForm({ open, setOpenParent,SelectedRow }) {
-  const {data:UserData,isloading}=useGetEmployeeDropDown()
+export default function EditeForm({ open, setOpenParent, SelectedRow }) {
+  const { data: UserData, isloading } = useGetEmployeeDropDown()
   const theme = useTheme()
-  const{mutate:EditTeam}=useEditTeam()
-const[members,SetMembers]=useState([])
-const[teamLeader,SetteamLeader]=useState()
-const [teamName, setTeamName] = useState(SelectedRow.name);
+  const { mutate: EditTeam } = useEditTeam()
+  const [members, SetMembers] = useState([])
+  const [teamLeader, SetteamLeader] = useState()
+  const [teamName, setTeamName] = useState(SelectedRow.name)
+  const { t } = useTranslation()
 
-
-
-const handleTeamNameChange = (event) => {
-  setTeamName(event.target.value);
-};
-
-
+  const handleTeamNameChange = event => {
+    setTeamName(event.target.value)
+  }
 
   const handleDrawerClose = () => {
     setOpenParent(false)
@@ -111,12 +107,12 @@ const handleTeamNameChange = (event) => {
       }}
     >
       <Stack spacing={3}>
-      <Box sx={{ padding: '12px' }}>
-          <Typography sx={{ fontFamily: 'Montserrat' }}>Name</Typography>
+        <Box sx={{ padding: '12px' }}>
+          <Typography sx={{ fontFamily: 'Montserrat' }}>{t('Name')}</Typography>
           <TextField
             fullWidth
             style={{ height: '10px' }}
-            placeholder="Team Name"
+            placeholder='Team Name'
             size='small'
             value={teamName}
             onChange={handleTeamNameChange}
@@ -146,7 +142,7 @@ const handleTeamNameChange = (event) => {
                 '&:hover': { backgroundColor: '#DCE1E6' }
               }}
             >
-              Cancle
+              {t('Cancle')}
             </Button>
             <Button
               onClick={handlerSendData}
@@ -158,11 +154,11 @@ const handleTeamNameChange = (event) => {
                 '&:hover': { backgroundColor: '#6AB2DF' }
               }}
             >
-              Edit
+              {t('Edit')}
             </Button>
           </Stack>
         </Box>
       </Stack>
-      </Drawer>
+    </Drawer>
   )
 }

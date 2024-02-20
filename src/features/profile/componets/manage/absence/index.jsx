@@ -26,12 +26,13 @@ import useGetAbsence from './hook/useGetAbsence';
 import { useDeleteAbsence } from './hook/useDeleteAbsence';
 import { useEditAbsence } from './hook/useEditAbsence';
 import { MenuItem } from '@mui/material'
+import { useTranslation } from 'react-i18next';
 
 
 
 export default function Absence({id}) {
   const idUser =id
-
+  const {t} = useTranslation()
   const { mutate: DeleteAbsence, isLoading } = useDeleteAbsence();
   const { mutate:getAbsenceDate, data: DataWarnings } = useGetAbsence();
   const { mutate: AddAbsence} = useAddAbsence();
@@ -211,7 +212,7 @@ export default function Absence({id}) {
 
 <StackRow >
   <Box>
- <TypoHeader sx={{color:"#131627",fontWeight:"500"}}>Absence</TypoHeader>
+ <TypoHeader sx={{color:"#131627",fontWeight:"500"}}>{t('Absence')} </TypoHeader>
   </Box>
   <Box>
 
@@ -221,7 +222,7 @@ export default function Absence({id}) {
               <Stack direction={'row'} spacing={2} >
                 <InsertInvitationIcon/>
               <Typography color={'#fff'} >
-              Select Date
+              {t('Select Date')}
     </Typography>
               </Stack>
             </Button>
@@ -246,11 +247,11 @@ export default function Absence({id}) {
 <StackRow >
   <Box>
 
- <TypoHeader>Total {DataWarnings?.data?.data?.absences?.length} Absence</TypoHeader>
+ <TypoHeader>{t('Total')} {DataWarnings?.data?.data?.absences?.length} {t('Absence')}</TypoHeader>
   </Box>
   <Box sx={{display:"flex",gap:"10px"}}>
 
-<Button onClick={handleClickOpenAdd} sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>+ Add</Button>
+<Button onClick={handleClickOpenAdd} sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>+ {t('Add')} </Button>
 
     <Dialog
       fullScreen={fullScreen}
@@ -259,7 +260,7 @@ export default function Absence({id}) {
       aria-labelledby="responsive-dialog-title"
     >
       <DialogTitle sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
-      Add Absence
+      {t('Add Absence')}
       </DialogTitle>
       <DialogContent sx={{width:"100vh"}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
@@ -295,9 +296,9 @@ export default function Absence({id}) {
                 size='small'
 
                 >
-                  <MenuItem value=''>Type</MenuItem>
-                  <MenuItem value='justified'>Justified</MenuItem>
-                  <MenuItem value='unjustified'>Unjustified</MenuItem>
+                  <MenuItem value=''>{t('Type')} </MenuItem>
+                  <MenuItem value='justified'>{t('Justified')} </MenuItem>
+                  <MenuItem value='unjustified'>{t('Unjustified')} </MenuItem>
                 </CustomTextField>
               )}
               />
@@ -308,10 +309,10 @@ export default function Absence({id}) {
       </DialogContent>
       <DialogActions sx={{marginRight:{sm:"58px"}}}>
         <Button sx={{padding:"8px 24px 8px 24px",borderRadius:"4px",backgroundColor:"#dce1e6",color:"#8090a7",fontSize:"14px",fontWeight:"500","&:hover": {backgroundColor: "#dce1e6"}}} autoFocus onClick={handleCloseAdd}>
-        Cancel
+        {t('Cancel')}
         </Button>
         <Button sx={{backgroundColor:"#6ab2df",padding:"8px 34px 8px 34px",borderRadius:"4px",fontWeight:"500",color:"#fff",fontSize:"14px","&:hover": {backgroundColor: "#6ab2df"}}} onClick={handleSubmit(onSubmit)} autoFocus>
-        Add
+        {t('Add')}
         </Button>
       </DialogActions>
     </Dialog>
@@ -343,18 +344,18 @@ export default function Absence({id}) {
 
         </DialogContentText>
       </DialogContent>
-      <Typography  sx={{fontWeight:"600",fontSize:"16px",color:"#131627"}}>Delete</Typography>
+      <Typography  sx={{fontWeight:"600",fontSize:"16px",color:"#131627"}}>{t('Delete')} </Typography>
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {"Are you sure you want to delete Absence?"}
+        {t("Are you sure you want to delete")+t("Absence")+"?"}
       </DialogTitle>
 
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
-        <Button onClick={handleDeleteClose} style={{ color: '#B4B4B3' }}>Cancel</Button>
+        <Button onClick={handleDeleteClose} style={{ color: '#B4B4B3' }}>{t('Cancel')} </Button>
         <Button  sx={{color:"#DF2E38"}}  onClick={()=>handleDeleteAPI(val.id)} autoFocus>
-          Delete
+        {t('Delete')}
         </Button>
       </DialogActions>
       </Item>
@@ -367,7 +368,7 @@ export default function Absence({id}) {
               </Button>
               <Dialog fullScreen={fullScreen} open={openEdit} onClose={handleCloseEdit} aria-labelledby="responsive-dialog-title">
                 <DialogTitle sx={{ fontWeight: '600', fontSize: '20px', color: '#8090a7' }}>
-                  Edit Absence
+                {t('Edit Absence')}
                 </DialogTitle>
                 <DialogContent sx={{ width: '100vh' }}>
                   <DialogContentText sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -408,9 +409,9 @@ export default function Absence({id}) {
                 size='small'
 
                 >
-                  <MenuItem value=''>Type</MenuItem>
-                  <MenuItem value='justified'>Justified</MenuItem>
-                  <MenuItem value='unjustified'>Unjustified</MenuItem>
+                  <MenuItem value=''>{t('Type')} </MenuItem>
+                  <MenuItem value='justified'>{t('Justified')} </MenuItem>
+                  <MenuItem value='unjustified'>{t('Unjustified')} </MenuItem>
                 </CustomTextField>
               )}
               />
@@ -419,10 +420,10 @@ export default function Absence({id}) {
                 </DialogContent>
                 <DialogActions sx={{marginRight:{sm:"58px"}}}>
                   <Button sx={{ padding: '8px 24px 8px 24px', borderRadius: '4px', backgroundColor: '#dce1e6', color: '#8090a7', fontSize: '14px', fontWeight: '500', '&:hover': { backgroundColor: '#dce1e6' } }} autoFocus onClick={handleCloseEdit}>
-                    Cancel
+                  {t('Cancel')}
                   </Button>
                   <Button type="submit" sx={{ backgroundColor: '#6ab2df', padding: '8px 34px 8px 34px', borderRadius: '4px', fontWeight: '500', color: '#fff', fontSize: '14px', '&:hover': { backgroundColor: '#6ab2df' } }} autoFocus onClick={handleSubmit(onSubmit2)}>
-                    Edit
+                  {t('Edit')}
                   </Button>
                 </DialogActions>
               </Dialog>

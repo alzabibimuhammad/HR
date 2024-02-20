@@ -124,7 +124,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
                     <TextField
                       {...field}
                       fullWidth
-                      label='Received Date'
+                      label={t('Received Date')}
                       variant='outlined'
                       error={!!errors.received_date}
                       helperText={errors.received_date ? errors.received_date.message : ''}

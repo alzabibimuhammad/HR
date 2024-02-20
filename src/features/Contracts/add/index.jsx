@@ -99,7 +99,7 @@ export default function Add() {
                 <CustomTextField
                   select
                   fullWidth
-                  label='User Name :'
+                  label={t('User Name')}
                   sx={{ mb: 5 }}
                   id='invoice-country'
 
@@ -124,7 +124,7 @@ export default function Add() {
               render={({ field: { value, onChange, onBlur } }) => (
                 <CustomTextField
                   fullWidth
-                  label='Start Date :'
+                  label={t('Start Date')}
 
                   autoFocus
                   variant='outlined'
@@ -146,7 +146,7 @@ export default function Add() {
                 <CustomTextField
                   fullWidth
                   autoFocus
-                  label='End Date :'
+                  label={t('End Date')}
                   variant='outlined'
                   InputLabelProps={{ shrink: true }}
                   type='date'

@@ -241,20 +241,13 @@ const useInquiriesColumns = () => {
                   }
                 }}
               >
-                {/* <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleCloseAnchor}>
-  <Link href={`/profile/${params?.row?.user_id}`} style={{ textDecoration: 'none' }} >
-    <IconButton>
-      <PersonIcon variant='contained' sx={{ color: '#3F4458' }} size='small' />
-    </IconButton>
-    <span style={{ color: '#3F4458' }}>View Profile</span>
-  </Link>
-</MenuItem> */}
+
                 <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleOpenModal}>
                   <Box style={{ textDecoration: 'none' }}>
                     <IconButton>
                       <PersonIcon variant='contained' sx={{ color: '#3F4458' }} size='small' />
                     </IconButton>
-                    <span style={{ color: '#3F4458' }}>View Request</span>
+                    <span style={{ color: '#3F4458' }}>{t('View Request')}</span>
                   </Box>
                 </MenuItem>
                 <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleDeleteClick}>
@@ -262,24 +255,28 @@ const useInquiriesColumns = () => {
                     <IconButton>
                       <DeleteIcon variant='contained' sx={{ color: '#3F4458' }} size='small' />
                     </IconButton>
-                    <span style={{ color: '#3F4458' }}>Delete</span>
+                    <span style={{ color: '#3F4458' }}>{t('Delete')}</span>
                   </Box>
                 </MenuItem>
               </Menu>
 
-              <Dialog open={openModal} onClose={handleCloseModal}>
+              <Dialog open={openModal} sx={{ overflowX:'hidden' }}  onClose={handleCloseModal}>
                 <DialogTitle sx={{ fontSize: '20px', fontWeight: '600', color: '#3F4458', textAlign: 'center' }}>
-                  Request
+                {t('Request')}
                 </DialogTitle>
-                <DialogContent sx={{ overflow: 'hidden', width: '100vh', height: '100%' }}>
-                  <h3>Title Request</h3>
+                <DialogContent sx={{ overflowX: 'hidden', width: '100vh', height: '100%' }}>
+                  <h3>{t('Title Request')}</h3>
                   <p style={{ fontWeight: '400', fontSize: '14px', color: '#3e4458' }}>{rowData?.Title}</p>
-                  <Divider component='' />
-                  <h3>Date Request</h3>
+                  <Divider component='' sx={{ width:'80%' }} />
+                  <h3>{t('Date Request')}</h3>
                   <p style={{ fontWeight: '400', fontSize: '14px', color: '#3e4458' }}>{rowData?.Date}</p>
-                  <Divider component='' />
-                  <h3>Description Request</h3>
-                  <p style={{ fontWeight: '400', fontSize: '14px', color: '#3e4458' }}>{rowData?.CONTENT}</p>
+                  <Divider component='' sx={{ width:'80%' }} />
+                  <h3>{t('Description Request')}</h3>
+                  <p style={{ fontWeight: '400',
+                   fontSize: '14px',
+                    color: '#3e4458',
+                    width:'80%'
+                }}>{rowData?.CONTENT}</p>
                 </DialogContent>
               </Dialog>
             </Box>

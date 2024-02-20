@@ -34,7 +34,7 @@ const FooterContent = () => {
           ❤️
         </Box>
         <Typography sx={{ ml: 1 }} href='/' component={StyledCompanyName}>
-        {`${t("Rahmoon")}`}
+        {`${t("Code Shild")}`}
         </Typography>
       </Typography>
 

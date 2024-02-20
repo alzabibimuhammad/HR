@@ -132,7 +132,7 @@ const RatingTabel = ({rows}) => {
               <Stack direction={'row'} spacing={2} >
 
               <Typography color={'#fff'} >
-              Select Date
+              {t('Select Date')}
     </Typography>
               </Stack>
             </Button>

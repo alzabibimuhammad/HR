@@ -21,6 +21,7 @@ import Icon from 'src/@core/components/icon'
 import { useAuth } from 'src/hooks/useAuth'
 import { useTranslation } from 'react-i18next'
 import useShowAllBranches from 'src/features/settings/hooks/useShowAllBranches'
+import { Button } from '@mui/material'
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -157,10 +158,9 @@ const UserDropdown = props => {
           ))}
         <Divider sx={{ my: theme => `${theme.spacing(2)} !important` }} />
         <MenuItemStyled sx={{ p: 0 }} onClick={handleLogout}>
-          <Box sx={styles}>
-            <Icon icon='tabler:logout' />
-            {`${t('Sign Out')}`}
-          </Box>
+          <Button sx={{ backgroundColor:'#DF2E38',color:'#fff',':hover':{backgroundColor:'#DF2E38',color:'#fff'} ,width:'100%' }}>
+            {`${t('Log Out')}`}
+          </Button>
         </MenuItemStyled>
       </Menu>
     </Fragment>

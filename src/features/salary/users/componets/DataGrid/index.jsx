@@ -117,7 +117,6 @@ const SalaryDataGrid = ({ rows }) => {
   }
 
 
-
   return (
     <>
       <Box sx={{ margin: 0, padding: 0 }}></Box>

@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, CircularProgress } from '@mui/material'
+import { Button, Card, CardContent, CircularProgress, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -37,10 +37,12 @@ export default function Download(userData) {
         </Stack>
 
         :
-          <Box display={'flex'} justifyContent={'center'} >
-            <CircularProgress/>
-          </Box>
-         }
+          <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} spacing={2} >
+              <Typography variant='h5'>{t('Loading contract...')}</Typography>
+              <CircularProgress/>
+          </Stack>
+
+}
 
         </CardContent></Card>
     )

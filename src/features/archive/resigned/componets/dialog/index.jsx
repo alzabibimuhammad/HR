@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import useDeleteResigned from "../../hooks/useDeleteResigned";
+import { t } from "i18next";
 
 export default function AlertDialogDeleteUser({ id, open, handleClose }) {
 
@@ -42,18 +43,18 @@ export default function AlertDialogDeleteUser({ id, open, handleClose }) {
 
         </DialogContentText>
       </DialogContent>
-      <Typography  sx={{fontWeight:"600",fontSize:"16px",color:"#131627"}}>Delete</Typography>
+      <Typography  sx={{fontWeight:"600",fontSize:"16px",color:"#131627"}}>{t('Delete')} </Typography>
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {"Are you sure you want to delete user?"}
+        {t("Are you sure you want to delete ")+" "+t("user")+"?"}
       </DialogTitle>
 
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
-        <Button onClick={handleClose} style={{ color: '#B4B4B3' }}>Cancel</Button>
+        <Button onClick={handleClose} style={{ color: '#B4B4B3' }}>{t('Cancel')} </Button>
         <Button  sx={{color:"#DF2E38"}}  onClick={()=>handleDeleteAPI()} autoFocus>
-          Delete
+        {t('Delete')}
         </Button>
       </DialogActions>
       </Item>

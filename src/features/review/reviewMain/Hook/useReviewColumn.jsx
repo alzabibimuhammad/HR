@@ -77,17 +77,17 @@ const useRegistrationColumn = () => {
 
               <Link href={`/profile/${params.row.id}`} >
               <IconButton >
-              <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'>Details</VisibilityIcon>
+              <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'/>
               </IconButton>
               </Link>
               <Box>
                 <IconButton onClick={() => handleClickOpen(params?.row?.id)}>
-                <DeleteOutlinedIcon  variant="contained" color="#8090A7" size='small'>Delete</DeleteOutlinedIcon>
+                <DeleteOutlinedIcon  variant="contained" color="#8090A7" size='small'/>
                 </IconButton>
               </Box>
 
           </Stack>
-            {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
+            {/* {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />} */}
 
             <Box>
               <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />

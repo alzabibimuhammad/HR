@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
@@ -8,10 +8,11 @@ import { FormateDate } from 'src/utiltis/DateFormate';
 import { DateFormateOfMonth } from 'src/utiltis/DateFormateOfMonth';
 import { DateFormateOfYear } from 'src/utiltis/DateFormateOfYear';
 
-export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
+export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose ,handleClose }) => {
   const [view, setView] = useState('month');
   const [startDate, setStartDate] = useState(new Date());
   const [showMonthPicker, setShowMonthPicker] = useState('month');
+  const CloseRef = useRef(null);
 
   const toggleDatePickerMonth = () => {
     setStartDate(new Date());
@@ -19,6 +20,25 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
 
   };
 
+  function Close() {
+    handleClose(true)
+  }
+
+  const handleClickOutside = (event) => {
+
+    if (CloseRef.current && !CloseRef.current.contains(event.target)) {
+
+      handleClose(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [CloseRef, handleClickOutside]);
 
 
   const toggleDatePickerYear = () => {
@@ -56,7 +76,10 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
 
   return (
     <Card sx={{ width: '426px',
-        height: '441px'}}>
+        height: '441px'}}
+        ref={CloseRef}
+
+        >
         <CardContent>
         <Typography sx={{ fontSize:'20px',fontWeight:'600',color:'#8090A7' }}>
         Filter

@@ -91,7 +91,7 @@ const VerticalNavHeader = props => {
 <img width="30px" height="30px"  src='/images/policesIcon/pageLogo/logo.svg'/>
 
             <Typography sx={{fontWeight:"700",color:"#8090a7",fontSize:"16px"}}>
-             {t("Company Name")}
+             {t("Code Shild")}
 
             </Typography>
 

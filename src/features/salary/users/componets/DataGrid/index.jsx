@@ -118,18 +118,6 @@ const SalaryDataGrid = ({ rows }) => {
     }
   }
 
-//  { // const [percentageData, setpercentageData] = useState([])
-
-//   // const dispatch = useDispatch()
-//   // const store = useSelector(state => state.Dashboard)
-
-//   // useEffect(() => {
-//   //   dispatch(getAttendancePercentage())
-//   //   setpercentageData(store?.AttendancePercentage)
-//   // }, [dispatch, store?.AttendancePercentage?.length])
-
-//   // const handleClick = () => {}
-//  }
 
   return (
     <>

@@ -118,7 +118,7 @@ export default function CollapsibleTable({ Data }) {
               <Link href={`/profile/${row.id}?type=reports`}>
                 <IconButton onClick={handleViewProfileTap}>
                   <VisibilityIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
-                    Details
+                  {t('Details')}
                   </VisibilityIcon>
                 </IconButton>
               </Link>
@@ -209,16 +209,16 @@ export default function CollapsibleTable({ Data }) {
                 select
                 fullWidth
                 value={role}
-                label='Role'
+                label={t('Role')}
                 defaultValue={role}
                 onChange={handleRoleChange}
                 size='small'
               >
-                <MenuItem value=''>{`${t('Role')}`}</MenuItem>
+                <MenuItem value=''>{t('Role')}</MenuItem>
 
                 {Array.from(roleData).map(element => (
                   <MenuItem key={element} value={element}>
-                    {element}
+                    {t(element)}
                   </MenuItem>
                 ))}
               </TextField>
@@ -227,7 +227,7 @@ export default function CollapsibleTable({ Data }) {
                 fullWidth
                 defaultValue={department}
                 value={department}
-                label='Specialization'
+                label={t('Specialization')}
                 onChange={handledepartmentChange}
                 size='small'
               >

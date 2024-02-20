@@ -159,9 +159,9 @@ const [fndata, setfndata] = useState('');
     >
 
 
-      <Box sx={{ width: '100%', backgroundColor: '#DCE1E6', fontSize: '20px', gap: '10px', padding: '15px', borderRadius: '10px', fontFamily: 'Montserrat' }}>Edit Absence</Box>
+      <Box sx={{ width: '100%', backgroundColor: '#DCE1E6', fontSize: '20px', gap: '10px', padding: '15px', borderRadius: '10px', fontFamily: 'Montserrat' }}>{t('Edit Absence')}</Box>
       <Stack marginLeft={{ sm: '3%' }} marginTop={{ sm: '2%' }} direction={{ sm: 'column' }} spacing={3}>
-        <Typography>UnJustified</Typography>
+        <Typography>{t('Edit Absence')}</Typography>
         <Box width={{ sm: '94%' }}>
           <TextField
             onChange={handleDateN}
@@ -185,7 +185,7 @@ const [fndata, setfndata] = useState('');
 </Stack>
 
     <Stack marginLeft={{ sm: '3%' }} marginTop={{ sm: '2%' }} direction={{ sm: 'column' }} spacing={3}>
-    <Typography>Justified</Typography>
+    <Typography>{t('Justified')}</Typography>
         <Box width={{ sm: '94%' }}>
 
           <TextField
@@ -236,9 +236,9 @@ const [fndata, setfndata] = useState('');
                     setSelectedType(e.target.value);
                   }}
                   >
-                  <MenuItem value=''>Type</MenuItem>
-                  <MenuItem value='justified'>Justified</MenuItem>
-                  <MenuItem value='unjustified'>Unjustified</MenuItem>
+                  <MenuItem value=''>{t('Type')}</MenuItem>
+                  <MenuItem value='justified'>{t('Justified')}</MenuItem>
+                  <MenuItem value='unjustified'>{t('Unjustified')}</MenuItem>
                 </TextField>
               )}
               />
@@ -267,17 +267,17 @@ const [fndata, setfndata] = useState('');
         ))}
           </Box>
         <Stack marginLeft={{ sm:'3%',xl:"0px"  }} sx={{marginTop:"15px"}}>
-          <Box  onClick={() => append({ type: '', date: '' })}sx={{ color: '#6AB2DF' ,cursor:"pointer"}} display={'flex'}> <AddIcon sx={{ color:'#6AB2DF' }} />  <Typography sx={{ color:'#6AB2DF' }}>Add Absence</Typography> </Box>
+          <Box  onClick={() => append({ type: '', date: '' })}sx={{ color: '#6AB2DF' ,cursor:"pointer"}} display={'flex'}> <AddIcon sx={{ color:'#6AB2DF' }} />  <Typography sx={{ color:'#6AB2DF' }}>{t('Add Absence')}</Typography> </Box>
         </Stack>
 
 
       <Box sx={{ display:'flex', width:'100%',padding:'10px'}} >
           <Stack sx={{ marginLeft:{sm:'50%'} }} direction={'row'} spacing={2} >
 
-            <Button onClick={handleDrawerClose} sx={{ backgroundColor:'#DCE1E6',color:'#8090A7',borderRadius:'4px', padding: '8px 24px' }}>Cancle</Button>
+            <Button onClick={handleDrawerClose} sx={{ backgroundColor:'#DCE1E6',color:'#8090A7',borderRadius:'4px', padding: '8px 24px' }}>{t('Cancle')}</Button>
 
             <Button /*onClick={handlerSendData}*/ sx={{ backgroundColor:'#6AB2DF',color:'#fff' ,borderRadius:'4px', padding: '8px 24px' ,   '&:hover': {
-              backgroundColor: '#3F4458', },}} >Edit</Button>
+              backgroundColor: '#3F4458', },}} >{t('Edit')}</Button>
           </Stack>
 
       </Box>

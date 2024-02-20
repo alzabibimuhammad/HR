@@ -9,12 +9,13 @@ import { FormateDate } from 'src/utiltis/DateFormate';
 import { DateFormateOfMonth } from 'src/utiltis/DateFormateOfMonth';
 import { DateFormateOfYear } from 'src/utiltis/DateFormateOfYear';
 import useOnClickOutside from './useOnClickOutside';
+import { useTranslation } from 'react-i18next';
 
 export  const CustomPickerManage = ({  handleDateChoose ,handleClose}) => {
   const [startDate, setStartDate] = useState(new Date());
   const [showMonthPicker, setShowMonthPicker] = useState('month');
   const CloseRef = useRef(null);
-
+  const {t} = useTranslation()
 function Close() {
   handleClose(true)
 }
@@ -77,14 +78,14 @@ function Close() {
         >
         <CardContent >
         <Typography sx={{ fontSize:'20px',fontWeight:'600',color:'#8090A7' }}>
-        Filter
+        {t('Filter')}
             </Typography>
             <Box sx={{display:'flex', justifyContent:'center' }}>
 
       <Button variant='contained' color='secondary' onClick={toggleDatePickerMonth}  sx={{mr:2, backgroundColor: showMonthPicker === 'month' ? '#6AB2DF' : 'secondary'}}>
-Month      </Button>
+      {t('Month')}       </Button>
       <Button variant='contained' color='secondary'  onClick={toggleDatePickerYear} sx={{mr:2,backgroundColor: showMonthPicker === 'year' ? '#6AB2DF' : 'secondary'}}>
-        Year
+      {t('Year')}
       </Button>
 
         </Box>
@@ -121,7 +122,7 @@ Month      </Button>
         </DatePickerWrapper>
         <Box sx={{textAlign:"center"}}>
         <Button variant='outlined'  onClick={Close}>
-        close
+        {t('close')}
       </Button>
 
         </Box>

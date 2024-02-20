@@ -15,6 +15,8 @@ import DrawerForm from '../Componets/DrawerForm/index'
 import { useTranslation } from 'react-i18next'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useDispatch } from 'react-redux'
+import { setProfileTap } from 'src/store/apps/user'
 
 const useUserColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
@@ -24,6 +26,8 @@ const useUserColumns = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { t } = useTranslation()
   const isMobile = useMediaQuery('(max-width:600px)');
+
+  const dispatch = useDispatch()
 
   const handleClickOpenn = params => {
     setIsMenuOpen(!isMenuOpen)
@@ -45,6 +49,10 @@ const useUserColumns = () => {
     setIsDeletePopupOpen(false)
   }
 
+
+const handleViewProfileTap=_=>{
+  dispatch(setProfileTap(2))
+}
   return useMemo(
     () => [
       {
@@ -105,8 +113,8 @@ const useUserColumns = () => {
                   </IconButton>
                 ) : (
                   <>
-                    <Link href={`/profile/${params.row.id}`}>
-                      <IconButton>
+                    <Link href={`/profile/${params.row.id}?type=profile`}>
+                      <IconButton onClick={handleViewProfileTap}>
                         <VisibilityIcon variant="contained" sx={{ color: '#8090A7' }} size='small'>Details</VisibilityIcon>
                       </IconButton>
                     </Link>

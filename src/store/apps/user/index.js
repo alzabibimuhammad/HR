@@ -40,7 +40,8 @@ export const appUsersSlice = createSlice({
     params: {},
     allData: [],
     userId: null,
-    RatingUser:null
+    RatingUser:null,
+    profileTab:1
   },
   reducers: {
     setUserId: (state, action) => {
@@ -48,6 +49,9 @@ export const appUsersSlice = createSlice({
     },
     setRatingUser: (state, action) => {
       state.RatingUser = action.payload;
+    },
+    setProfileTap: (state, action) => {
+      state.profileTab = action.payload;
     },
   },
   extraReducers: builder => {
@@ -60,7 +64,7 @@ export const appUsersSlice = createSlice({
   }
 })
 
-export const { setUserId,setRatingUser } = appUsersSlice.actions;
+export const { setUserId,setRatingUser,setProfileTap } = appUsersSlice.actions;
 
 
 

@@ -2,12 +2,14 @@ import { Button, ButtonGroup, Card, CardContent, CardHeader, Typography } from '
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
+import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
 import { FormateDate } from 'src/utiltis/DateFormate'
 
 export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }) => {
+  const {t} = useTranslation()
   const [view, setView] = useState('month')
   const [startDate, setStartDate] = useState(new Date())
 
@@ -71,7 +73,7 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
   return (
     <Card>
       <CardContent>
-        <Typography sx={{ fontSize: '20px', fontWeight: '600', color: '#8090A7' }}>Filter</Typography>
+        <Typography sx={{ fontSize: '20px', fontWeight: '600', color: '#8090A7' }}>{t('Filter')} </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'end' }}>
           <Button
             variant='contained'
@@ -79,7 +81,7 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
             sx={{ mr: 2, backgroundColor: showMonthPicker === 'day' ? '#6AB2DF' : 'secondary' }}
             onClick={toggleDatePickerDay}
           >
-            Day
+            {t('Day')}
           </Button>
           <Button
             variant='contained'
@@ -87,7 +89,7 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
             onClick={toggleDatePickerMonth}
             sx={{ mr: 2, backgroundColor: showMonthPicker === 'month' ? '#6AB2DF' : 'secondary' }}
           >
-            Month{' '}
+            {t('Month')} {' '}
           </Button>
           <Button
             variant='contained'
@@ -95,7 +97,7 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
             onClick={toggleDatePickerYear}
             sx={{ mr: 2, backgroundColor: showMonthPicker === 'year' ? '#6AB2DF' : 'secondary' }}
           >
-            Year
+            {t('Year')}
           </Button>
         </Box>
       </CardContent>

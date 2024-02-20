@@ -88,16 +88,16 @@ export  const CustomDatePickerRating = ({handleClose }) => {
         height: '441px'}}>
         <CardContent>
         <Typography sx={{ fontSize:'20px',fontWeight:'600',color:'#8090A7' }}>
-        Filter
+        {t('Filter')}
             </Typography>
             <Box sx={{display:'flex', justifyContent:'end' }}>
             <Button variant='contained' color='secondary'  sx={{mr:2 ,backgroundColor: showMonthPicker === 'day' ? '#6AB2DF' : 'secondary'}} onClick={toggleDatePickerDay}>
-        Day
+            {t('Day')}
       </Button>
       <Button variant='contained' color='secondary' onClick={toggleDatePickerMonth}  sx={{mr:2, backgroundColor: showMonthPicker === 'month' ? '#6AB2DF' : 'secondary'}}>
-Month      </Button>
+      {t('Month')}       </Button>
       <Button variant='contained' color='secondary'  onClick={toggleDatePickerYear} sx={{mr:2,backgroundColor: showMonthPicker === 'year' ? '#6AB2DF' : 'secondary'}}>
-        Year
+      {t('Year')}
       </Button>
 
         </Box>

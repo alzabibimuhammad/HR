@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { getReportsData } from './store'
 import { useEffect, useState } from 'react'
-import ReportGrid from 'src/features/Report/componets/DataGrid'
 import { Box } from '@mui/system'
 import { CircularProgress } from '@mui/material'
 import CollapsibleTable from 'src/features/Report/componets/table'

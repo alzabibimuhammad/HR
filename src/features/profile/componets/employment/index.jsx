@@ -5,9 +5,10 @@ import { Box, Stack } from '@mui/system';
 import styled from 'styled-components';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 export default function Employment({ProfileData}) {
-
+  const {t} = useTranslation()
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -45,40 +46,40 @@ export default function Employment({ProfileData}) {
 
             <StackRow  >
               <img src='/images/pesonalProfile/employment/icon.svg'/>
-              <TypoHeader >Employment:</TypoHeader>
+              <TypoHeader >{t('Employment')}:</TypoHeader>
             </StackRow>
 
               {ProfileData?.deposits?.map((deposit, index) => (
                   <Box sx={{}} key={index}>
                     <StackRow>
-                      <Typo>Start Date:</Typo>
+                      <Typo>{t('Start Date')}:</Typo>
                       <TypoVal>{deposit.received_date}</TypoVal>
                     </StackRow>
                     <Stack direction={"row"}>
-                      <Typo>Secretariats</Typo>
+                      <Typo>{t('Secretariats')}</Typo>
                       <TypoVal>{deposit.description}</TypoVal>
                     </Stack>
                   </Box>
 ))}
             <StackRow>
 
-              <Typo>Tenure:</Typo>
-              <TypoVal>12 months</TypoVal>
+              <Typo>{t('Tenure')}:</Typo>
+              <TypoVal>12{t('months')} </TypoVal>
             </StackRow>
 
             <StackRow>
-              <Typo>Contract:</Typo>
+              <Typo>{t('Contract')}:</Typo>
 
                   <Link href={`/contracts/view/${5}`} style={{ textDecoration:'none' }} >
                     <StackRow>
                       <img src='/images/pesonalProfile/showContract/icon.svg'/>
-                      <Typo>Show Contract</Typo>
+                      <Typo>{t('Show Contract')} </Typo>
                     </StackRow>
                     </Link>
             </StackRow>{/* link to Contract */}
 
             <StackRow>
-              <Typo>Salary</Typo>
+              <Typo>{t('Salary')}: </Typo>
               <TypoVal> {ProfileData?.user_info?.salary}</TypoVal>
             </StackRow>
 

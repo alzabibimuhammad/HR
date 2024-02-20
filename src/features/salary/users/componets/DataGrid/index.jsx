@@ -52,13 +52,11 @@ const SalaryDataGrid = ({ rows }) => {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+
   const handleRoleChange = e => {
     setRole(e.target.value)
   }
 
-  const handledepartmentChange = e => {
-    setDepartment(e.target.value)
-  }
 
   useEffect(() => {
     let filteredData
@@ -199,7 +197,7 @@ const SalaryDataGrid = ({ rows }) => {
                 aria-describedby='modal-modal-description'
               >
                 <Box sx={style}>
-                  <CustomDatePickerSalary selectedDate={1} handleDateChoose={getData} />
+                  <CustomDatePickerSalary handleClose={handleClose} selectedDate={1} handleDateChoose={getData} />
                 </Box>
               </Modal>
             </Stack>

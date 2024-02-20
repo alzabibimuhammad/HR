@@ -9,15 +9,37 @@ import { FormateDate } from 'src/utiltis/DateFormate'
 import { DateFormateOfMonth } from 'src/utiltis/DateFormateOfMonth'
 import { DateFormateOfYear } from 'src/utiltis/DateFormateOfYear'
 
-export const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
-  const [view, setView] = useState('month')
-  const [startDate, setStartDate] = useState(new Date())
-  const [showMonthPicker, setShowMonthPicker] = useState('month')
+export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose ,handleClose }) => {
+  const [view, setView] = useState('month');
+  const [startDate, setStartDate] = useState(new Date());
+  const [showMonthPicker, setShowMonthPicker] = useState('month');
+  const CloseRef = useRef(null);
 
   const toggleDatePickerMonth = () => {
-    setStartDate(new Date())
-    setShowMonthPicker('month')
+    setStartDate(new Date());
+    setShowMonthPicker('month');
+
+  };
+
+  function Close() {
+    handleClose(true)
   }
+
+  const handleClickOutside = (event) => {
+
+    if (CloseRef.current && !CloseRef.current.contains(event.target)) {
+
+      handleClose(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [CloseRef, handleClickOutside]);
 
   const { t } = useTranslation()
 
@@ -50,26 +72,23 @@ export const CustomDatePickerSalary = ({ selectedDate, handleDateChoose }) => {
   }
 
   return (
-    <Card sx={{ width: '426px', height: '441px' }}>
-      <CardContent>
-        <Typography sx={{ fontSize: '20px', fontWeight: '600', color: '#8090A7' }}>{t('Filter')}</Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Button
-            variant='contained'
-            color='secondary'
-            onClick={toggleDatePickerMonth}
-            sx={{ mr: 2, backgroundColor: showMonthPicker === 'month' ? '#6AB2DF' : 'secondary' }}
-          >
-            {t('Month')}{' '}
-          </Button>
-          <Button
-            variant='contained'
-            color='secondary'
-            onClick={toggleDatePickerYear}
-            sx={{ mr: 2, backgroundColor: showMonthPicker === 'year' ? '#6AB2DF' : 'secondary' }}
-          >
-            {t('Year')}
-          </Button>
+    <Card sx={{ width: '426px',
+        height: '441px'}}
+        ref={CloseRef}
+
+        >
+        <CardContent>
+        <Typography sx={{ fontSize:'20px',fontWeight:'600',color:'#8090A7' }}>
+        Filter
+            </Typography>
+            <Box sx={{display:'flex', justifyContent:'center' }}>
+
+      <Button variant='contained' color='secondary' onClick={toggleDatePickerMonth}  sx={{mr:2, backgroundColor: showMonthPicker === 'month' ? '#6AB2DF' : 'secondary'}}>
+Month      </Button>
+      <Button variant='contained' color='secondary'  onClick={toggleDatePickerYear} sx={{mr:2,backgroundColor: showMonthPicker === 'year' ? '#6AB2DF' : 'secondary'}}>
+        Year
+      </Button>
+
         </Box>
       </CardContent>
 

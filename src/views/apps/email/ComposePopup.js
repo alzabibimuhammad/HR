@@ -22,7 +22,7 @@ import CustomAutocomplete from 'src/@core/components/mui/autocomplete'
 import Icon from 'src/@core/components/icon'
 
 // ** Third Party Components
-import { EditorState } from 'draft-js'
+import { EditorState, convertToRaw } from 'draft-js'
 
 // ** Custom Components Imports
 import OptionsMenu from 'src/@core/components/option-menu'
@@ -38,6 +38,8 @@ import { getInitials } from 'src/@core/utils/get-initials'
 // ** Styles
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { AddEmail } from 'src/store/apps/email'
 
 const menuItemsArr = [
   {
@@ -83,11 +85,16 @@ const ComposePopup = props => {
   const [subjectValue, setSubjectValue] = useState('')
   const [bccValue, setbccValue] = useState([])
   const [messageValue, setMessageValue] = useState(EditorState.createEmpty())
-
+  const dispatch =useDispatch()
   const [visibility, setVisibility] = useState({
     cc: false,
     bcc: false
   })
+  const getRawContentState = () => {
+    const contentState = messageValue.getCurrentContent();
+    return JSON.stringify(convertToRaw(contentState));
+  };
+
   const toggleVisibility = value => setVisibility({ ...visibility, [value]: !visibility[value] })
 
   const handleMailDelete = (value, state, setState) => {
@@ -108,6 +115,28 @@ const ComposePopup = props => {
       cc: false,
       bcc: false
     })
+  }
+  const handleEmailSend = () => {
+    const rawContentState = getRawContentState();
+    const contentState = JSON.parse(rawContentState);
+    const text = contentState.blocks[0].text;
+    setEmailTo(emailTo)
+    setccValue(ccValue)
+    setbccValue(bccValue)
+    setVisibility(visibility)
+    setMessageValue(messageValue)
+    setSubjectValue(subjectValue)
+    const EmailData={
+      subject:subjectValue,
+      recieverEmail:emailTo,
+      content:text,
+      attachment:messageValue
+
+    }
+   
+
+    dispatch(AddEmail(EmailData));
+    handlePopupClose()
   }
 
   const handleMinimize = () => {
@@ -380,7 +409,7 @@ const ComposePopup = props => {
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Button variant='contained' onClick={handlePopupClose} sx={{ '& svg': { mr: 2 } }}>
+          <Button variant='contained' onClick={handleEmailSend} sx={{ '& svg': { mr: 2 } }}>
             <Icon icon='tabler:send' fontSize='1.125rem' />
             {t("Send")}
           </Button>

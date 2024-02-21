@@ -24,7 +24,7 @@ import CustomAvatar from 'src/@core/components/mui/avatar'
 
 // ** Util Import
 import { getInitials } from 'src/@core/utils/get-initials'
-import socket from './socket'
+// import socket from './socket'
 
 // ** Styled Menu component
 const Menu = styled(MuiMenu)(({ theme }) => ({
@@ -144,15 +144,15 @@ const NotificationDropdown = props => {
     }
   }
 
-  useEffect(() => {
-    socket.on('notificationData', (data) => {
-      setRealtimeData(data);
-    });
+  // useEffect(() => {
+  //   socket.on('notificationData', (data) => {
+  //     setRealtimeData(data);
+  //   });
 
-    return () => {
-      socket.off('notificationData');
-    };
-  }, []);
+  //   return () => {
+  //     socket.off('notificationData');
+  //   };
+  // }, []);
 
 
 

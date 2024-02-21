@@ -37,6 +37,7 @@ const labelColors = {
 }
 
 const EmailAppLayout = ({ folder, label }) => {
+  console.log("🚀 ~ EmailAppLayout ~ folder:", folder)
   // ** States
   const [query, setQuery] = useState('')
   const [composeOpen, setComposeOpen] = useState(false)
@@ -52,6 +53,7 @@ const EmailAppLayout = ({ folder, label }) => {
   const smAbove = useMediaQuery(theme.breakpoints.up('sm'))
   const hidden = useMediaQuery(theme.breakpoints.down('lg'))
   const store = useSelector(state => state.email)
+  console.log("🚀 ~ EmailAppLayout ~ store:", store)
 
   // ** Vars
   const leftSidebarWidth = 260
@@ -60,11 +62,11 @@ const EmailAppLayout = ({ folder, label }) => {
 
   const routeParams = {
     label: label || '',
-    folder: folder || 'inbox'
+    folder: folder || 'sent'
   }
   useEffect(() => {
     // @ts-ignore
-    dispatch(fetchMails({ q: query || '', folder: routeParams.folder, label: routeParams.label }))
+    dispatch(fetchMails({ folder: routeParams.folder}))
   }, [dispatch, query, routeParams.folder, routeParams.label])
   const toggleComposeOpen = () => setComposeOpen(!composeOpen)
   const handleLeftSidebarToggle = () => setLeftSidebarOpen(!leftSidebarOpen)

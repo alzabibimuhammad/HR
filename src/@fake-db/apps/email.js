@@ -39,7 +39,7 @@ const data = {
       labels: ['private'],
       time: 'Mon Dec 10 2018 07:46:00 GMT+0000 (GMT)',
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -72,7 +72,7 @@ const data = {
       labels: ['company', 'private'],
       time: 'Mon Dec 10 2018 07:55:00 GMT+0000 (GMT)',
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -131,7 +131,7 @@ const data = {
       labels: ['important'],
       time: 'Mon Dec 11 2018 09:04:10 GMT+0000 (GMT)',
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -235,7 +235,7 @@ const data = {
       labels: ['private'],
       time: 'Tue Dec 15 2018 11:02:28 GMT+0000 (GMT)',
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: false
     },
     {
@@ -398,7 +398,7 @@ const data = {
       labels: ['company'],
       time: 'Tue Jan 06 2018 23:12:13 GMT+0000 (GMT)',
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -424,7 +424,7 @@ const data = {
       labels: ['company'],
       time: 'Tue Jan 07 2018 12:25:03 GMT+0000 (GMT)',
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: false
     },
     {
@@ -584,7 +584,7 @@ const data = {
           labels: [],
           time: 'Mon Dec 15 2018 10:56:00 GMT+0000 (GMT)',
           replies: [],
-          folder: 'inbox',
+          folder: 'INBOX',
           isRead: false
         },
         {
@@ -610,7 +610,7 @@ const data = {
           labels: [],
           time: 'Mon Dec 16 2018 11:25:00 GMT+0000 (GMT)',
           replies: [],
-          folder: 'inbox',
+          folder: 'INBOX',
           isRead: false
         }
       ],
@@ -640,7 +640,7 @@ const data = {
       labels: ['company'],
       time: new Date(new Date().getTime() - 7 * 60 * 60 * 1000),
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: false
     },
     {
@@ -748,7 +748,7 @@ const data = {
           labels: [],
           time: 'Mon Dec 10 2018 10:56:00 GMT+0000 (GMT)',
           replies: [],
-          folder: 'inbox',
+          folder: 'INBOX',
           isRead: false
         },
         {
@@ -774,11 +774,11 @@ const data = {
           labels: [],
           time: 'Mon Dec 10 2018 11:25:00 GMT+0000 (GMT)',
           replies: [],
-          folder: 'inbox',
+          folder: 'INBOX',
           isRead: false
         }
       ],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -804,7 +804,7 @@ const data = {
       labels: ['private'],
       time: new Date(new Date().getTime() - 1 * 30 * 60 * 1000),
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -853,7 +853,7 @@ const data = {
           labels: [],
           time: 'Mon Dec 15 2018 10:56:00 GMT+0000 (GMT)',
           replies: [],
-          folder: 'inbox',
+          folder: 'INBOX',
           isRead: false
         },
         {
@@ -879,11 +879,11 @@ const data = {
           labels: [],
           time: 'Mon Dec 16 2018 11:25:00 GMT+0000 (GMT)',
           replies: [],
-          folder: 'inbox',
+          folder: 'INBOX',
           isRead: false
         }
       ],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -909,7 +909,7 @@ const data = {
       labels: ['personal'],
       time: new Date(new Date().getTime() - 1 * 30 * 60 * 1000),
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -935,7 +935,7 @@ const data = {
       labels: ['company'],
       time: new Date(new Date().getTime() - 1 * 30 * 60 * 1000),
       replies: [],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -984,7 +984,7 @@ const data = {
           labels: [],
           time: 'Mon Jan 5 2019 10:56:00 GMT+0000 (GMT)',
           replies: [],
-          folder: 'inbox',
+          folder: 'INBOX',
           isRead: false
         },
         {
@@ -1010,11 +1010,11 @@ const data = {
           labels: [],
           time: 'Mon Jan 8 2019 11:25:00 GMT+0000 (GMT)',
           replies: [],
-          folder: 'inbox',
+          folder: 'INBOX',
           isRead: false
         }
       ],
-      folder: 'inbox',
+      folder: 'INBOX',
       isRead: true
     },
     {
@@ -1056,7 +1056,7 @@ mock.onGet('/apps/email/allEmails').reply(() => {
 // ------------------------------------------------
 // GET: Return Emails
 mock.onGet('/apps/email/emails').reply(config => {
-  const { q = '', folder = 'inbox', label } = config.params
+  const { q = '', folder = 'INBOX', label } = config.params
   const queryLowered = q.toLowerCase()
   function isInFolder(email) {
     if (folder === 'trash') return email.folder === 'trash'
@@ -1079,7 +1079,7 @@ mock.onGet('/apps/email/emails').reply(config => {
   // Email Meta
   // ------------------------------------------------
   const emailsMeta = {
-    inbox: data.emails.filter(email => !email.isRead && email.folder === 'inbox').length,
+    INBOX: data.emails.filter(email => !email.isRead && email.folder === 'INBOX').length,
     draft: data.emails.filter(email => email.folder === 'draft').length,
     spam: data.emails.filter(email => !email.isRead && email.folder === 'spam').length
   }

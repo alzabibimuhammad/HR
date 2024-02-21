@@ -21,7 +21,7 @@ const ListDense = () => {
             <ListItemIcon>
               <Icon icon='tabler:mail' fontSize='1.125rem' />
             </ListItemIcon>
-            <ListItemText primary='Inbox' />
+            <ListItemText primary='INBOX' />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>

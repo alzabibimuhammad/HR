@@ -29,7 +29,7 @@ const ListNested = () => {
             <ListItemIcon>
               <Icon icon='tabler:mail' fontSize={20} />
             </ListItemIcon>
-            <ListItemText primary='Inbox' />
+            <ListItemText primary='INBOX' />
             <Icon icon={open ? 'tabler:chevron-up' : 'tabler:chevron-down'} />
           </ListItemButton>
         </ListItem>

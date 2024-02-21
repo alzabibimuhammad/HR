@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Grid,
   Card,
@@ -25,26 +25,25 @@ const Absence = ({ rows }) => {
   const [openParent, setOpenParent] = React.useState(false)
   const { t } = useTranslation()
   const [row, setRow] = useState(rows)
+  const [search, setSearch] = useState()
   const [show, setShow] = React.useState(10);
 
   const handleDrawerOpen = () => {
     setOpenParent(true)
   }
 
+  useEffect(()=>{
+      let filterData = AbsenceData(rows)
+      if(search)filterData = filterData?.filter((value,index)=>(value?.name?.toLowerCase()?.includes(search?.toLowerCase())))
+      setRow(filterData)
+  },[rows,search])
+
   const handelSearch = event => {
     const searchText = event.target.value
-    let searchData
-    if (!searchText) {
-      setRow(rows)
-    } else {
-      searchData = rows?.data?.data?.filter(element => {
-        if (element?.username?.toLowerCase()?.includes(searchText?.toLowerCase())) {
-          return element?.username?.toLowerCase()?.includes(searchText?.toLowerCase())
-        }
-      })
-
-      setRow({ data: { data: searchData } })
-    }
+    if(searchText)
+      setSearch(searchText)
+    else
+      setSearch(null)
   }
 
   const gridStyles = {
@@ -68,24 +67,6 @@ const Absence = ({ rows }) => {
     }
   }
 
-  const Data = {
-    success: true,
-    message: 'success',
-    data: {
-      total: 10,
-      active: 3
-    }
-  }
-  const columnStyles = {
-    header: {
-      backgroundColor: 'red',
-      color: 'white'
-    },
-    cell: {
-      backgroundColor: 'yellow',
-      marginLeft: '95%'
-    }
-  }
   return (
     <>
       <Card>
@@ -132,7 +113,7 @@ const Absence = ({ rows }) => {
           </Stack>
             </Stack>
 
-            <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={AbsenceData(row) } />
+            <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={row } />
           </Stack>
         </CardContent>
       </Card>

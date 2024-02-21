@@ -1,37 +1,16 @@
+import { CircularProgress } from '@mui/material'
+import { Box } from '@mui/system'
 import Absence from 'src/features/employee/absence/componets/DataGrid'
 import useGetAllAbsence from 'src/features/employee/absence/hooks/useGetAllabsence'
 
 export default function Employees() {
 
-  // const {data , loading } = useGetAllUsers()
-  // const  data = {
-
-  //   "success": true,
-  //   "message": "success",
-  //   "data":
-  //       [
-  //       {
-  //         'id':1,
-  //         'first_name':'muhammad',
-  //         'last_name':'alzabibi',
-  //         'justified':5,
-  //         'unjustified':6,
-  //         'total':11,
-  //       },
-  //       {
-  //         'id':2,
-  //         'first_name':'abood',
-  //         'last_name':'aaa',
-  //         'justified':2,
-  //         'unjustified':15,
-  //         'total':17,
-  //       },
-  //     ]
-  //   }
   const {data} = useGetAllAbsence()
   return (
     <>
-    {data ? <Absence rows = {data}/>:null}
+    {data ? <Absence rows = {data}/>:<Box height={'100%'} display={'center'} justifyContent={'center'}  alignItems={'center'} >
+      <CircularProgress/>
+    </Box>}
     </>
   )
 

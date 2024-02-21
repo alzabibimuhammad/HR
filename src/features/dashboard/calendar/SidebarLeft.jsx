@@ -69,7 +69,8 @@ export default function SidebarLeft({ DataEventByDay }) {
                   {event.day}
                 </span>
 
-                <Typography width={'54px'} p={0} ml={0} variant='p' fontSize={10}>
+
+                <Typography className='childp'  width={'54px'} p={0} ml={0} variant='p' fontSize={10}>
                   {event.start}
                 </Typography>
               </Stack>
@@ -93,7 +94,7 @@ export default function SidebarLeft({ DataEventByDay }) {
                 <Typography variant='p' fontSize={12} color={'#000'} style={{ padding: 0, margin: 0 }}>
                   {event.title}
                 </Typography>
-                <Divider/>
+                <Divider sx={{padding:"0",margin:"0"}}/>
                 <Typography variant='p' fontSize={12} color={'#000'} style={{ padding: 0, margin: 0 }}>
                   {event.description}
                 </Typography>

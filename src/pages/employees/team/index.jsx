@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, Grid, List, Menu, MenuItem } from '@mui/
 import React from 'react'
 import CollapsibleTable from 'src/features/employee/teams/Componets/table'
 import useGetAllTeams from 'src/features/employee/teams/hooks/useGetAllTeams'
+import { CircularProgress } from '@mui/material'
+import { Box } from '@mui/system'
 
 export default function Employees() {
 
@@ -13,7 +15,12 @@ export default function Employees() {
       <Card>
         <CardContent >
 
-          <CollapsibleTable Data = {data}/>
+          {data?
+          <CollapsibleTable Data = {data}/> :    <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height:"70vh"}}>
+
+          <CircularProgress className='loading-rtl'/>
+          </Box>}
+
 
         </CardContent>
         </Card>

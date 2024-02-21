@@ -23,7 +23,10 @@ export default function Employees() {
     <>
     {GetDataByMonth ? <SalaryDataGrid rows = {GetDataByMonth}/>:
     <Box height={'100%'} display={'center'} justifyContent={'center'}  alignItems={'center'} >
-      <CircularProgress/>
+         <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height:"70vh"}}>
+
+<CircularProgress className='loading-rtl'/>
+</Box>
     </Box>}
     </>
   )

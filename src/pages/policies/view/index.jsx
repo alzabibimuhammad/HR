@@ -9,7 +9,7 @@ import Reviews from 'src/features/policies/view/componets/reviews';
 import Deductions from 'src/features/policies/view/componets/deductions';
 import WorkTimes from 'src/features/policies/view/componets/workTime';
 import useShowPolicies from 'src/features/policies/hook/useShowPolicies';
-
+import { CircularProgress } from '@mui/material'
 
 export default function View() {
 
@@ -19,6 +19,9 @@ export default function View() {
   return (<>
 
     <Logo/>
+
+{data ?
+
     <Stack marginTop={'24px'} direction={{sm:'row',xs:'column'}} spacing={6} >
 
       <Stack width={{ sm:'50%',xs:'100%' }} direction={'column'}>
@@ -32,6 +35,14 @@ export default function View() {
         <Deductions data={data?.data}/>
       </Stack>
     </Stack>
+:
+
+<Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height:"70vh"}}>
+
+<CircularProgress className='loading-rtl'/>
+</Box>
+}
+
 
   </>
   )

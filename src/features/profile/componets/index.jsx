@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 // ** Next Import
 import { useRouter } from 'next/router'
@@ -25,8 +25,9 @@ import PersonalInfo from './personalInformation'
 import Skills from './skills'
 import Employment from './employment'
 import { useGetEmployeeById } from 'src/features/employee/hooks/useGetEmployeeById'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setUserId } from '../../../store/apps/user'
+import { setProfileTap } from '../../../store/apps/user'
 import RatingTabel from '../ratingTabel'
 import Mange from './manage'
 import useGetRatingById from '../ratingTabel/hooks/useGetRatingById'
@@ -64,83 +65,74 @@ const TabList = styled(MuiTabList)(({ theme }) => ({
   }
 }))
 
-const Profiles = ({ data,tab }) => {
-
+const Profiles = ({ data, tab }) => {
   // ** State
-  const [activeTab, setActiveTab] = useState(tab)
   const [isLoading, setIsLoading] = useState(true)
   const [SelecetedDate, SetSelectedDate] = useState()
 
   const [userData, setuserData] = useState()
 
   const userDataClean = userData?.data?.data[0]
+  const store = useSelector(state => state.user)
 
-
-  const [value, setValues] = useState('1')
-
+  const value = useMemo(() => store?.profileTab, [store?.profileTab]);
   // ** Hooks
   const router = useRouter()
- const id =router.query.id
- const dispatch = useDispatch();
- dispatch(setUserId(id));
-  const {mutate:getEmployee,data:DataEmployee}=useGetEmployeeById()
+  const id = router.query.id
 
+  console.log("🚀 ~ Profiles ~ profileTab:", store.profileTab)
 
-  const {data:DataDecision}=useGetDecision(id);
+  const dispatch = useDispatch()
+  // dispatch(setUserId(id))
 
+  useEffect(()=>{
 
+  dispatch(setUserId(id))
 
+  },[dispatch])
 
+  const { mutate: getEmployee, data: DataEmployee } = useGetEmployeeById()
 
+  const { data: DataDecision } = useGetDecision(()=>store.user_id)
 
   const ProfileData = DataEmployee?.data?.data[0]
-  const hideText = useMediaQuery(theme => theme.breakpoints.down('sm'))
-
-
 
   useEffect(() => {
     if (data) {
       setIsLoading(false)
     }
-    getEmployee(id)
+      getEmployee(id)
   }, [data])
-  useEffect(() => {
-    if (tab && tab !== activeTab) {
-      setActiveTab(tab)
-    }
-  }, [tab])
 
 
   return (
-
-
-
-
-    <Stack  overflowX='hidden' direction={'column'} container spacing={{sm:15,xs:6}}>
-      <Box  overflowX='hidden'  item xs={12} sx={{ height: '120px', zIndex: 999 }}  marginTop={{ sm: '0' }}>
+    <Stack overflowX='hidden' direction={'column'} container spacing={{ sm: 15, xs: 6 }}>
+      <Box overflowX='hidden' item xs={12} sx={{ height: '120px', zIndex: 999 }} marginTop={{ sm: '0' }}>
         <UserProfileHeader
           userData={userDataClean}
           Data={data}
           ProfileData={ProfileData}
-          setValues={setValues}
           values={value}
         />
       </Box>
 
-        {value == 1?
-        <Stack direction={{ sm: 'row', xs: 'column' }}  width={'100%'} spacing={{sm:5,xs:1}}>
-
-        <Stack direction={'column'} width={{ sm:'50%',xs:'100%' }} height={{sm:"100%"}} spacing={{sm:2,xs:1}} >
-          <Box  >
-            <AboutOverivew userDataClean={userDataClean} Data={data} />
-          </Box>
-          <Box>
-          <ReviewsReport/>
-          </Box>
+      {value == 1 ? (
+        <Stack direction={{ sm: 'row', xs: 'column' }} width={'100%'} spacing={{ sm: 5, xs: 1 }}>
+          <Stack
+            direction={'column'}
+            width={{ sm: '50%', xs: '100%' }}
+            height={{ sm: '100%' }}
+            spacing={{ sm: 2, xs: 1 }}
+          >
+            <Box>
+              <AboutOverivew userDataClean={userDataClean} Data={data} />
+            </Box>
+            <Box>
+              <ReviewsReport />
+            </Box>
           </Stack>
-          <Stack width={{ sm:'50%',xs:'100%' }} spacing={{sm:2,xs:1}} direction={'column'}>
-
-            <Box width={'100%'} >
+          <Stack width={{ sm: '50%', xs: '100%' }} spacing={{ sm: 2, xs: 1 }} direction={'column'}>
+            <Box width={'100%'}>
               <CustomDatePicker setUserData={setuserData} selectedDate={SelecetedDate} />
             </Box>
             <Box>
@@ -150,38 +142,39 @@ const Profiles = ({ data,tab }) => {
             <Box width={'100%'} height={'20% !important '}>
               <NoteReport user_id={id} />
             </Box>
-
           </Stack>
         </Stack>
-      :null}
-      {value ==2?
-        <Stack direction={{ sm: 'row', xs: 'column' }}spacing={{sm:5,xs:1}}>
-          <Stack sx={{height:"100%"}} spacing={{sm:5,xs:1}} width={{ sm: '40%', xs: '100%' }} direction={'column'}>
+      ) : null}
+      {value == 2 ? (
+        <Stack direction={{ sm: 'row', xs: 'column' }} spacing={{ sm: 5, xs: 1 }}>
+          <Stack
+            sx={{ height: '100%' }}
+            spacing={{ sm: 5, xs: 1 }}
+            width={{ sm: '40%', xs: '100%' }}
+            direction={'column'}
+          >
             <PersonalInfo ProfileData={ProfileData} />
             <NoteReport user_id={id} />
           </Stack>
 
-          <Stack width={{ sm: '60%', xs: '100%' ,height:"100%" }} spacing={{sm:5,xs:1}} direction={'column'}>
+          <Stack width={{ sm: '60%', xs: '100%', height: '100%' }} spacing={{ sm: 5, xs: 1 }} direction={'column'}>
             <Skills ProfileData={ProfileData} />
             <Employment ProfileData={ProfileData} />
           </Stack>
         </Stack>
-      :null}
-        {value ==3?
-        <Box marginTop={{ sm:'12px' }}>
-         <Mange id={id} DataDecision={DataDecision} />
-         </Box>
-       :null}
-        {value ==4?
-          <Stack>
-
-        <RatingTabel />
-          </Stack>
-
-
-      :null}
-</Stack>
-)
+      ) : null}
+      {value == 3 ? (
+        <Box marginTop={{ sm: '12px' }}>
+          <Mange id={id} DataDecision={DataDecision} />
+        </Box>
+      ) : null}
+      {value == 4 ? (
+        <Stack>
+          <RatingTabel />
+        </Stack>
+      ) : null}
+    </Stack>
+  )
 }
 
 export default Profiles

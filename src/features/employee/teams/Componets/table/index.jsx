@@ -27,6 +27,8 @@ import AlertDialogMember from '../dialogTeamUser'
 import EditeForm from '../EditeForm'
 import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import VisibilityIcon from '@mui/icons-material/Visibility'
+import { useDispatch } from 'react-redux'
+import { setProfileTap } from 'src/store/apps/user'
 
 function createData(id, name, user) {
   return {
@@ -52,7 +54,7 @@ export default function CollapsibleTable(Data, setEditData) {
     const [memberdeleteId, setMemberDeleteId] = useState(null)
 
     const [DrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
-
+    const dispatch = useDispatch()
     const handleEditClick = row => {
 
       setSelectedRow(row)
@@ -73,12 +75,15 @@ export default function CollapsibleTable(Data, setEditData) {
       setMemberDeleteId(params)
       setIsMemberPopupOpen(true)
 
-      // setDeleteId(params);
-      // setIsDeletePopupOpen(true);
+
     }
 
     const handleMemberClose = () => {
       setIsMemberPopupOpen(false)
+    }
+
+    const handleProfileTap=_=>{
+      dispatch(setProfileTap(2))
     }
 
     return (
@@ -140,13 +145,12 @@ export default function CollapsibleTable(Data, setEditData) {
               )}
 
               <IconButton onClick={() => handleClickOpen(row.id)}>
-                <DeleteOutlinedIcon style={{ color: '#8090A7' }} variant color='error' size='small'>
-                  Delete
-                </DeleteOutlinedIcon>
+                <DeleteOutlinedIcon style={{ color: '#8090A7' }} variant color='error' size='small'/>
               </IconButton>
             </Box>
 
             {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
+            {isMemberPopupOpen && <AlertDialogMember id={memberdeleteId} open={isMemberPopupOpen} handleClose={handleMemberClose} />}
           </TableCell>
         </TableRow>
         <TableRow>
@@ -173,11 +177,11 @@ export default function CollapsibleTable(Data, setEditData) {
                       </Stack>
                     </Link>
                     <Stack direction={'row'} spacing={2} alignItems={'center'}>
-                      <IconButton onClick={() => handleMemberOpen(user.id)}>
-                        <HighlightOffIcon style={{ color: '#8090A7' }} variant color='error' size='small' />
+                      <IconButton  onClick={() => handleMemberOpen(user.id)}>
+                        <HighlightOffIcon  style={{ color: '#8090A7' }} variant color='error' size='small' />
                       </IconButton>
-                      <Link href={`/profile/${user.id}`}>
-                        <IconButton>
+                      <Link href={`/profile/${user.id}?type=profile`}>
+                        <IconButton onClick={handleProfileTap}>
                           <VisibilityIcon variant='contained' size='small' />
                         </IconButton>
                       </Link>

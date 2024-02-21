@@ -23,13 +23,14 @@ import { CustomPickerManage } from 'src/@core/components/customPickerManage';
 import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import useGetPenalties from './hook/useGetPenalties';
+import { useTranslation } from 'react-i18next';
 
 
 
 export default function Penalties({id}) {
   const idUser =id
 
-
+  const {t} = useTranslation()
   const {mutate:AddDecision}=useAddDecision()
   const { mutate: DeleteDecision, isLoading } = useDeleteDecision();
   const {mutate : EditDecision} = useEditDecision()
@@ -215,7 +216,7 @@ export default function Penalties({id}) {
 
 <StackRow >
   <Box>
- <TypoHeader sx={{color:"#131627",fontWeight:"500"}}>Penalties</TypoHeader>
+ <TypoHeader sx={{color:"#131627",fontWeight:"500"}}>{t('Penalties')} </TypoHeader>
   </Box>
   <Box>
 
@@ -225,7 +226,7 @@ export default function Penalties({id}) {
               <Stack direction={'row'} spacing={2} >
                 <InsertInvitationIcon/>
               <Typography color={'#fff'} >
-              Select Date
+              {t('Select Date')}
     </Typography>
               </Stack>
             </Button>
@@ -250,11 +251,11 @@ export default function Penalties({id}) {
 <StackRow >
   <Box>
 
- <TypoHeader>Total {DataWarnings?.data?.data?.my_decisions?.length} Penalties</TypoHeader>
+ <TypoHeader>{t('Total')} {DataWarnings?.data?.data?.my_decisions?.length} {t('Penalties')} </TypoHeader>
   </Box>
   <Box sx={{display:"flex",gap:"10px"}}>
 
-<Button onClick={handleClickOpenAdd} sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>+ Add</Button>
+<Button onClick={handleClickOpenAdd} sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>+ {t('Add')} </Button>
 
     <Dialog
       fullScreen={fullScreen}
@@ -263,7 +264,7 @@ export default function Penalties({id}) {
       aria-labelledby="responsive-dialog-title"
     >
       <DialogTitle sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
-      Add Penalties
+      {t('Add Penalties')}
       </DialogTitle>
       <DialogContent sx={{width:"100vh"}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
@@ -299,10 +300,11 @@ export default function Penalties({id}) {
                     value={value}
                     onBlur={onBlur}
                     onChange={onChange}
-                    label="description"
+                    label={t("Description")}
+
                     multiline
                     rows={7}
-                    placeholder='Description ...'
+                    placeholder={t('Description')+'...'}
                     error={Boolean(errors?.content)}
                     helperText={errors?.content?.message}
 
@@ -313,12 +315,12 @@ export default function Penalties({id}) {
 
         </DialogContentText>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{marginRight:{sm:"58px"}}}>
         <Button sx={{padding:"8px 24px 8px 24px",borderRadius:"4px",backgroundColor:"#dce1e6",color:"#8090a7",fontSize:"14px",fontWeight:"500","&:hover": {backgroundColor: "#dce1e6"}}} autoFocus onClick={handleCloseAdd}>
-        Cancel
+        {t('Cancel')}
         </Button>
         <Button sx={{backgroundColor:"#6ab2df",padding:"8px 34px 8px 34px",borderRadius:"4px",fontWeight:"500",color:"#fff",fontSize:"14px","&:hover": {backgroundColor: "#6ab2df"}}} onClick={handleSubmit(onSubmit)} autoFocus>
-        Add
+        {t('Add')}
         </Button>
       </DialogActions>
     </Dialog>
@@ -350,7 +352,7 @@ export default function Penalties({id}) {
 
         </DialogContentText>
       </DialogContent>
-      <Typography  sx={{fontWeight:"600",fontSize:"16px",color:"#131627"}}>Delete</Typography>
+      <Typography  sx={{fontWeight:"600",fontSize:"16px",color:"#131627"}}>{t('Delete')} </Typography>
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
@@ -359,9 +361,9 @@ export default function Penalties({id}) {
 
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
-        <Button onClick={handleDeleteClose} style={{ color: '#B4B4B3' }}>Cancel</Button>
+        <Button onClick={handleDeleteClose} style={{ color: '#B4B4B3' }}>{t('Cancel')} </Button>
         <Button  sx={{color:"#DF2E38"}}  onClick={()=>handleDeleteAPI(val.id)} autoFocus>
-          Delete
+        {t('Reports')}
         </Button>
       </DialogActions>
       </Item>
@@ -374,7 +376,7 @@ export default function Penalties({id}) {
               </Button>
               <Dialog fullScreen={fullScreen} open={openEdit} onClose={handleCloseEdit} aria-labelledby="responsive-dialog-title">
                 <DialogTitle sx={{ fontWeight: '600', fontSize: '20px', color: '#8090a7' }}>
-                  Edit Alerts
+                {t('Edit Alerts')}
                 </DialogTitle>
                 <DialogContent sx={{ width: '100vh' }}>
                   <DialogContentText sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -414,10 +416,10 @@ export default function Penalties({id}) {
                     value={value}
                     onBlur={onBlur}
                     onChange={onChange}
-                    label="description"
+                    label={t("Description")}
                     multiline
                     rows={7}
-                    placeholder='Description ...'
+                    placeholder={t('Description')+'...'}
                     error={Boolean(errors?.content)}
                     helperText={errors?.content?.message}
 
@@ -427,12 +429,12 @@ export default function Penalties({id}) {
 </Stack>
                   </DialogContentText>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions sx={{marginRight:{sm:"58px"}}}>
                   <Button sx={{ padding: '8px 24px 8px 24px', borderRadius: '4px', backgroundColor: '#dce1e6', color: '#8090a7', fontSize: '14px', fontWeight: '500', '&:hover': { backgroundColor: '#dce1e6' } }} autoFocus onClick={handleCloseEdit}>
-                    Cancel
+                  {t('Cancel')}
                   </Button>
                   <Button type="submit" sx={{ backgroundColor: '#6ab2df', padding: '8px 34px 8px 34px', borderRadius: '4px', fontWeight: '500', color: '#fff', fontSize: '14px', '&:hover': { backgroundColor: '#6ab2df' } }} autoFocus onClick={handleSubmit(onSubmit2)}>
-                    Edit
+                  {t('Edit')}
                   </Button>
                 </DialogActions>
               </Dialog>

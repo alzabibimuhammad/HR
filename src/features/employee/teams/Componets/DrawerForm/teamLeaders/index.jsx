@@ -15,6 +15,7 @@ import OptionsMenu from 'src/@core/components/option-menu'
 import { Checkbox, Input, TextField } from '@mui/material'
 import useGetEmployeeDropDown from 'src/features/Contracts/list/Hooks/useEmployee'
 import { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const data = [
   {
@@ -66,7 +67,7 @@ const Members = ({SetteamLeader,Data}) => {
   const {data:UserData,isloading}=useGetEmployeeDropDown()
   const [selectedTeamLeader,SetTeamLeader]=useState()
   const [searchText, setSearchText] = useState('');
-
+  const {t} = useTranslation()
   const handleCheckboxChange = (id) => {
     SetTeamLeader(id);
     SetteamLeader(id)
@@ -88,11 +89,11 @@ const Members = ({SetteamLeader,Data}) => {
   return (
     <>
       <Typography>
-        TeamLeader
+      {t('Team Leader')}
       </Typography>
 
       <TextField
-        placeholder='Search'
+        placeholder={t('Search')}
         onChange={(e) => setSearchText(e.target.value)}
 
         InputProps={{
@@ -139,7 +140,7 @@ const Members = ({SetteamLeader,Data}) => {
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                   <Typography variant='h6'>{item.first_name + '\u00A0\u00A0' + item.last_name}</Typography>
                   <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-                    {item.role}
+                    {t(item.role)}
                   </Typography>
                 </Box>
                 <Box>

@@ -314,7 +314,7 @@ export default function Alerts({id}) {
 </Stack>
         </DialogContentText>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{marginRight:{sm:"58px"}}}>
         <Button sx={{padding:"8px 24px 8px 24px",borderRadius:"4px",backgroundColor:"#dce1e6",color:"#8090a7",fontSize:"14px",fontWeight:"500","&:hover": {backgroundColor: "#dce1e6"}}} autoFocus onClick={handleCloseAdd}>
         {t('Cancel')}
         </Button>
@@ -428,7 +428,7 @@ export default function Alerts({id}) {
               </Stack>
                   </DialogContentText>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions sx={{marginRight:{sm:"58px"}}}>
                   <Button sx={{ padding: '8px 24px 8px 24px', borderRadius: '4px', backgroundColor: '#dce1e6', color: '#8090a7', fontSize: '14px', fontWeight: '500', '&:hover': { backgroundColor: '#dce1e6' } }} autoFocus onClick={handleCloseEdit}>
                   {t('Cancel')}
                   </Button>

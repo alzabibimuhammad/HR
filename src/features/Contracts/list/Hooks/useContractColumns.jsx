@@ -42,7 +42,7 @@ const useContractColumns = () => {
   return useMemo(() => [
     {
       field: 'id',
-      headerName: 'ID',
+      headerName: t('ID'),
       flex: 0.5,
       disableClickEventBubbling: true,
       renderCell: params => {

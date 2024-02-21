@@ -4,9 +4,10 @@ import { Card, CardContent, Divider, Typography } from '@mui/material'
 import { Stack } from '@mui/system';
 
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 export default function WorkTimes({data}) {
-
+  const {t} = useTranslation()
 
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
@@ -48,7 +49,7 @@ export default function WorkTimes({data}) {
   <StackRow  >
 
     <img src='/images/policesIcon/worktimes/worktimes.svg'/>
-    <TypoHeader>Work time</TypoHeader>
+    <TypoHeader>{t('Work Time')}</TypoHeader>
     <Divider  sx={{ marginLeft:'1%',width:'78%',height:'1px' }} color='black' />
 
   </StackRow>
@@ -62,34 +63,36 @@ export default function WorkTimes({data}) {
     <div >
 
           <StackRow marginTop={'2%'}>
-            <Typo>Work days:</Typo>
+            <Typo>{t('Work days')}:</Typo>
             <TypoVal>{data?.data?.policy.work_time?.work_days.map((day)=>( day+" "))}</TypoVal>
           </StackRow>
 
           <StackRow sx={{ padding: "5px 0px" }}>
-            <Typo>Start Date:</Typo>
+            <Typo>{t('Start Date')}:</Typo>
              <TypoVal>{data?.data?.policy.work_time?.start_time}</TypoVal>
           </StackRow>
 
           <StackRow>
-            <Typo>End Date:</Typo>
+            <Typo>{t('End Date')}:</Typo>
             <TypoVal>{data?.data?.policy.work_time?.end_time}</TypoVal>
           </StackRow>
         </div>
 
 
         <Typography component={'li'} sx={{margin:"5px"}}>
-          Notes
+        {t('Notes')}
         </Typography>
 
-        <Typo marginLeft={'25px'} >Note 1:</Typo>
         <TypoVal style={{ maxWidth:'319px', marginLeft:'21px',color:"red" }}>
   {data?.data?.policy.work_time?.notes?.length > 0 ?
     data?.data?.policy.work_time?.notes.map((note, index) => (
-      <span key={index}>{note}</span>
-    )) :
-    "not notes"
-  }
+      <Stack direction={'column'}>
+        <Typo marginLeft={'25px'} >{t('Note')} {index+1}:</Typo>
+        <Typo marginLeft={'40px'}  key={index}>{note}</Typo>
+      </Stack>
+      )) :
+      <Typography>{t("There is no notes")}</Typography>
+    }
 </TypoVal>
 
 </CardContent>
@@ -103,40 +106,42 @@ export default function WorkTimes({data}) {
   <StackRow  >
 
     <img src='/images/policesIcon/absence/absence.svg'/>
-    <TypoHeader>Absence</TypoHeader>
+    <TypoHeader>{t('Absence')}</TypoHeader>
     <Divider  sx={{ marginLeft:'1%',width:'82%',height:'1px' }} color='black' />
 
   </StackRow>
 
   <StackRow  marginTop={'2%'}>
-    <Typo>Paid Absences Days:</Typo>
+    <Typo>{t('Paid Absences Days')}:</Typo>
      <TypoVal>{data?.data?.policy?.absence_management?.paid_absence_days?.count}</TypoVal>
   </StackRow>
 
   <StackRow sx={{padding:"5px 0px"}}>
-    <Typo>Unpaid Absences Days:</Typo>
+    <Typo>{t('Unpaid Absences Days')}:</Typo>
     <TypoVal>{data?.data?.policy?.absence_management?.unpaid_absence_days?.count}</TypoVal>
   </StackRow>
 
   <StackRow>
-    <Typo>Sick Absences Days:</Typo>
+    <Typo>{t('Sick Absences Days')}:</Typo>
     <TypoVal>{data?.data?.policy?.absence_management?.sick_absence_days?.count}</TypoVal>
   </StackRow>
 
 
     <Typography component={'li'} sx={{margin:"5px"}}>
-      Notes
+    {t('Notes')}
     </Typography>
 
-    <Typo marginLeft={'25px'} >Note 1:</Typo>
     <TypoVal style={{ maxWidth:'319px', marginLeft:'21px',color:"red" }}>
   {data?.data?.policy?.absence_management?.notes?.length > 0 ?
     data?.data?.policy?.absence_management?.notes.map((note, index) => (
-      <div key={index}>
-        {note}
-      </div>
+      <Stack direction={'column'} key={index}>
+        <Typo marginLeft={'25px'} >{t('Note')} {index+1}:</Typo>
+        <Typo marginLeft={'40px'} >{note}</Typo>
+
+
+      </Stack>
     )) :
-    "not notes"
+    <Typography>{t("There is no notes")}</Typography>
   }
 </TypoVal></CardContent>
 
@@ -145,31 +150,31 @@ export default function WorkTimes({data}) {
   <StackRow  >
 
     <img src='/images/policesIcon/annual/annual.svg'/>
-    <Typography sx={{width:"30% !important",marginLeft:'5px',color:"#131627",fontSize:'14px !important',fontWeight:'500 !important'}}>Annual Salary Increase </Typography>
+    <Typography sx={{width:"30% !important",marginLeft:'5px',color:"#131627",fontSize:'14px !important',fontWeight:'500 !important'}}>{t('Annual Salary Increase')} </Typography>
     <Divider  sx={{ width:'66.5%',height:'1px' }} color='black' />
 
   </StackRow>
 
   <StackRow  marginTop={'2%'}>
-    <Typo>Annual percentage increase:</Typo>
+    <Typo>{t('Annual percentage increase')}:</Typo>
      <TypoVal>{data?.data?.policy?.annual_salary_increase?.annual_salary_percentage} %</TypoVal>
   </StackRow>
 
 
     <Typography component={'li'} sx={{margin:"5px"}}>
 
-      Notes
+    {t('Notes')}
     </Typography>
 
-    <Typo marginLeft={'25px'} >Note 1:</Typo>
     <TypoVal style={{ maxWidth:'319px', marginLeft:'21px',color:"red" }}>
   {data?.data?.policy?.annual_salary_increase?.notes?.length > 0 ?
     data?.data?.policy?.annual_salary_increase?.notes.map((note, index) => (
-      <div key={index}>
-        {note}
-      </div>
+      <Stack direction={'column'} key={index}>
+      <Typo marginLeft={'25px'} >{t('Note')} {index+1}:</Typo>
+      <Typo marginLeft={'40px'} >{note}</Typo>
+    </Stack>
     )) :
-    "not notes"
+    <Typography>{t("There is no notes")}</Typography>
   }
 </TypoVal></CardContent>
 

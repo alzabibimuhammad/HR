@@ -20,7 +20,7 @@ const useUserColumns = () => {
       return [
         {
           field: 'FirstName',
-          headerName: 'Employee Name',
+          headerName: t('Employee Name'),
           disableClickEventBubbling: true,
           flex: 1,
         },
@@ -35,13 +35,13 @@ const useUserColumns = () => {
     return [
       {
         field: 'FirstName',
-        headerName: 'Employee Name',
+        headerName: t('Employee Name'),
         disableClickEventBubbling: true,
         flex: 1,
       },
       ...data.data.data.map((item, index) => ({
         field: `rate${index + 1}`,
-        headerName: item.rate_type,
+        headerName: t(item.rate_type),
         disableClickEventBubbling: true,
         flex: 1,
       })),

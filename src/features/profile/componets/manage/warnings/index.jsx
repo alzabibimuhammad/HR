@@ -265,9 +265,10 @@ export default function Warnings({id}) {
       <DialogTitle sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
       {t('Add Warning')}
       </DialogTitle>
-      <DialogContent sx={{width:"100vh"}}>
+      <DialogContent sx={{width:{sm:"100vh",xs:"100%"},height:{sm:"auto",xs:"100%"}}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
-        <Stack width={"89%"} spacing={4}>
+        <Stack width={{sm:"89%",xr:"10%"}} overflow={"hidden"} spacing={4}>
+    <Box>
 
         <Controller
                 name='dateTime'
@@ -287,6 +288,9 @@ export default function Warnings({id}) {
                 )}
 
               />
+    </Box>
+    <Box>
+
         <Controller
                 name='content'
                 control={control}
@@ -310,11 +314,12 @@ export default function Warnings({id}) {
                   />
                 )}
               />
+    </Box>
 
 </Stack>
         </DialogContentText>
       </DialogContent>
-      <DialogActions>
+      <DialogActions sx={{marginRight:{sm:"58px"}}}>
         <Button sx={{padding:"8px 24px 8px 24px",borderRadius:"4px",backgroundColor:"#dce1e6",color:"#8090a7",fontSize:"14px",fontWeight:"500","&:hover": {backgroundColor: "#dce1e6"}}} autoFocus onClick={handleCloseAdd}>
         {t('Cancel')}
         </Button>
@@ -428,7 +433,7 @@ export default function Warnings({id}) {
               </Stack>
                   </DialogContentText>
                 </DialogContent>
-                <DialogActions>
+                <DialogActions sx={{marginRight:{sm:"58px"}}}>
                   <Button sx={{ padding: '8px 24px 8px 24px', borderRadius: '4px', backgroundColor: '#dce1e6', color: '#8090a7', fontSize: '14px', fontWeight: '500', '&:hover': { backgroundColor: '#dce1e6' } }} autoFocus onClick={handleCloseEdit}>
                   {t('Cancel')}
                   </Button>

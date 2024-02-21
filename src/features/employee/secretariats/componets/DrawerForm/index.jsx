@@ -72,7 +72,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
     <Box sx={{ display: 'flex' }}>
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: { xl:drawerWidth,md:drawerWidth , sm:drawerWidth, xs: '90%' },
 
           flexShrink: 0,
           '& .MuiDrawer-paper': {
@@ -124,7 +124,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
                     <TextField
                       {...field}
                       fullWidth
-                      label='Received Date'
+                      label={t('Received Date')}
                       variant='outlined'
                       error={!!errors.received_date}
                       helperText={errors.received_date ? errors.received_date.message : ''}

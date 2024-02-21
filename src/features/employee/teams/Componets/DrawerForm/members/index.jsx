@@ -19,6 +19,7 @@ import { useEffect, useMemo, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import { IconButton } from '@mui/material'
 import useGetEmployeeDropDown from 'src/features/Contracts/list/Hooks/useEmployee'
+import { useTranslation } from 'react-i18next'
 
 const data = [
   {
@@ -67,6 +68,7 @@ const data = [
 ]
 
 const Members = ({ SetMembers, SelectedRow }) => {
+  const {t} = useTranslation()
   const [selectedItems, setSelectedItems] = useState(SelectedRow || [])
 
   useEffect(() => {
@@ -108,7 +110,7 @@ const Members = ({ SetMembers, SelectedRow }) => {
 
   return (
     <Box sx={{ overflowX: 'hidden' }}>
-      <Typography sx={{ fontFamily: 'Montserrat' }}>Members</Typography>
+      <Typography sx={{ fontFamily: 'Montserrat' }}>{t('Members')}</Typography>
 
         <Stack direction='row' spacing={2} padding={'10px'} position={'relative'} width={'100%'} sx={{ overflowX: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'red ' }}>
           {selectedItems?.map((icon, index) => (
@@ -144,7 +146,7 @@ const Members = ({ SetMembers, SelectedRow }) => {
         </Stack>
 
       <TextField
-        placeholder='Search'
+        placeholder={t('Search')}
         value={searchText}
         onChange={e => setSearchText(e.target.value)}
         InputProps={{
@@ -199,7 +201,7 @@ const Members = ({ SetMembers, SelectedRow }) => {
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <Typography variant='h6'>{item.first_name + '\u00A0\u00A0' + item.last_name}</Typography>
               <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-                {item.role}
+                {t(item.role)}
               </Typography>
             </Box>
             <Box>

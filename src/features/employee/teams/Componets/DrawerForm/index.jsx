@@ -56,10 +56,9 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
     onClose={handleDrawerClose}
       backgroundColor='#fff'
       sx={{
-        width: {sm:'440px',xl:"100%"},
-        flexShrink: 0,
+          flexShrink: 0,
         '& .MuiDrawer-paper': {
-          width: {sm:'440px',xl:"100%"},
+        width: { xl:drawerWidth,md:drawerWidth , sm:drawerWidth, xs: '90%' },
           overflowY:"auto",
           overflowX:"hidden"
         },

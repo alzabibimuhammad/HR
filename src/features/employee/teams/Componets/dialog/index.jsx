@@ -6,10 +6,11 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { useDeleteTeam } from "../../hooks/useDeleteTeam";
+import { useTranslation } from "react-i18next";
 
 export default function AlertDialog({ id, open, handleClose }) {
  const { mutate: DeleteTeam, isLoading } = useDeleteTeam();
-
+  const {t} = useTranslation()
   const handleDeleteAPI = () => {
     DeleteTeam(id)
     handleClose()
@@ -40,18 +41,18 @@ export default function AlertDialog({ id, open, handleClose }) {
 
         </DialogContentText>
       </DialogContent>
-      <Typography  sx={{fontWeight:"600",fontSize:"16px",color:"#131627"}}>Delete</Typography>
+      <Typography  sx={{fontWeight:"600",fontSize:"16px",color:"#131627"}}>{t('Delete')}</Typography>
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {"Are you sure you want to delete team?"}
+        {t("Are you sure you want to delete ")+" "+t("team")+"?"}
       </DialogTitle>
 
 
         <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
-        <Button onClick={handleClose} style={{ color: '#B4B4B3' }}>Cancel</Button>
+        <Button onClick={handleClose} style={{ color: '#B4B4B3' }}>{t('Cancel')}</Button>
         <Button  sx={{color:"#DF2E38"}}  onClick={()=>handleDeleteAPI()} autoFocus>
-          Delete
+        {t('Delete')}
         </Button>
       </DialogActions>
       </Item>

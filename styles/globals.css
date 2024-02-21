@@ -347,4 +347,6 @@ margin-right: 36px;
 
 
 
-
+.loading-rtl{
+  text-align: center !important;
+}

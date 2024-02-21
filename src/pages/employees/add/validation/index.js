@@ -21,7 +21,7 @@ export const Schema = yup.object().shape({
 
 
    birth_date: yup.string().matches(/^\d{4}-\d{2}-\d{2}$/,'Date of registration is required exampe:2020-02-06'),
-   nationalID: yup.number().integer().positive().min(10000000000).max(99999999999).required(),
+  //  nationalID: yup.number().max(99999999999).required(),
    military_situation: yup.string().required(),
    social_situation: yup.string().required(),
    address: yup.string().required(),

@@ -40,7 +40,6 @@ const SidebarLeft = props => {
   const m =(Number(today.getMonth()+1) < 10 ? '0' : '') + Number(today.getMonth()+1)
   const y = today.getFullYear()
   const formattedDate = `${y}-${m}-${d}`
-  // ** Vars
   useEffect(()=>{
 
     getEvent(formattedDate)
@@ -77,7 +76,9 @@ const SidebarLeft = props => {
     SetSelectedDate(date)
     const formattedDate = FormateDate(date)
     let formattedAfterformatted = new Date(formattedDate)
+
     let d = formattedAfterformatted.getDate() + 1
+
     let m =
       (Number(formattedAfterformatted.getMonth() + 1) < 10 ? '0' : '') + Number(formattedAfterformatted.getMonth() + 1)
     let y = formattedAfterformatted.getFullYear()-1
@@ -88,6 +89,7 @@ const SidebarLeft = props => {
   }
   if (renderFilters) {
     return (
+
       <Drawer
         open={leftSidebarOpen}
         onClose={handleLeftSidebarToggle}
@@ -159,7 +161,7 @@ const SidebarLeft = props => {
                   key={event.id}
                 >
                   <Stack direction={'column'}>
-                    <span style={{ padding: 0, margin: 0 }} className='child'>
+                    <span style={{ padding: 0, margin: 0 }} className='child-cal'>
                       {event.day}
                     </span>
 
@@ -186,7 +188,7 @@ const SidebarLeft = props => {
                           <Typography variant='p' fontSize={12} color={'#000'} style={{ padding: 0, margin: 0 }}>
                   {event.title}
                 </Typography>
-                <Divider/>
+                <Divider sx={{padding:"0",margin:"0"}}/>
                     <Typography variant='p' fontSize={12} color={'#000'} style={{ padding: 0, margin: 0 }}>
                       {event.description}
                     </Typography>

@@ -8,7 +8,6 @@ import { ReviewData } from '../../infrastructure'
 import Show10 from 'src/@core/components/show10'
 
 const ReviewFeature = ({ Data }) => {
-  console.log("🚀 ~ ReviewFeature ~ Data:", Data)
   const columns = useReviewColumn()
 
   let data  = Data?.data?.data

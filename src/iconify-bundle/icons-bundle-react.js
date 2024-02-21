@@ -5368,10 +5368,10 @@ addCollection({
     'id-off': {
       body: '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M8 4h10a3 3 0 0 1 3 3v10m-1.437 2.561c-.455.279-.99.439-1.563.439H6a3 3 0 0 1-3-3V7c0-1.083.573-2.031 1.433-2.559"/><path d="M8.175 8.178a2 2 0 1 0 2.646 2.65M15 8h2m-1 4h1M7 16h9M3 3l18 18"/></g>'
     },
-    inbox: {
+    INBOX: {
       body: '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><rect width="16" height="16" x="4" y="4" rx="2"/><path d="M4 13h3l3 3h4l3-3h3"/></g>'
     },
-    'inbox-off': {
+    'INBOX-off': {
       body: '<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M8 4h10a2 2 0 0 1 2 2v10m-.593 3.422A1.994 1.994 0 0 1 18 20H6a2 2 0 0 1-2-2V6c0-.554.225-1.056.59-1.418"/><path d="M4 13h3l3 3h4l.987-.987M17 13h3M3 3l18 18"/></g>'
     },
     'indent-decrease': {

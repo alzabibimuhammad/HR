@@ -37,7 +37,7 @@ const MailItem = styled(ListItem)(({ theme }) => ({
   paddingBottom: theme.spacing(2.25),
   justifyContent: 'space-between',
   transition: 'border 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out',
-  '&:not(:first-child)': {
+  '&:not(:first-of-type)': {
     borderTop: `1px solid ${theme.palette.divider}`
   },
   '&:hover': {
@@ -90,6 +90,7 @@ const MailLog = props => {
     handleSelectAllMail,
     handleLeftSidebarToggle
   } = props
+    console.log("🚀 ~ MailLog ~ store:", store)
 
   // ** State
   const [refresh, setRefresh] = useState(false)
@@ -330,7 +331,7 @@ const MailLog = props => {
         <Box sx={{ py: 2, px: { xs: 2.5, sm: 5 } }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              {store && store.mails && store.selectedMails ? (
+              {store && store.mails  ? (
                 <Checkbox
                   onChange={e => dispatch(handleSelectAllMail(e.target.checked))}
                   checked={(store.mails.length && store.mails.length === store.selectedMails.length) || false}
@@ -410,8 +411,8 @@ const MailLog = props => {
                           <Icon icon={mail.is ? 'tabler:star-filled' : 'tabler:star'} />
                         </IconButton>
                         <Avatar
-                          alt={mail.from.name}
-                          src={mail.from.avatar}
+                          alt={mail.sender}
+                          src={mail.senderImage}
                           sx={{ mr: 3, width: '2rem', height: '2rem' }}
                         />
                         <Box
@@ -433,7 +434,7 @@ const MailLog = props => {
                               textOverflow: ['ellipsis', 'unset']
                             }}
                           >
-                            {mail.from.name}
+                            {mail.sender}
                           </Typography>
                           <Typography noWrap sx={{ width: '100%', color: 'text.secondary' }}>
                             {mail.subject}
@@ -482,12 +483,12 @@ const MailLog = props => {
                         className='mail-info-right'
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
                       >
-                        <Box sx={{ display: { xs: 'none', sm: 'flex' } }}>{renderMailLabels(mail.labels)}</Box>
+                        
                         <Typography
                           variant='body2'
                           sx={{ minWidth: '50px', textAlign: 'right', whiteSpace: 'nowrap', color: 'text.disabled' }}
                         >
-                          {new Date(mail.time).toLocaleTimeString('en-US', {
+                          {new Date(mail.date).toLocaleTimeString('en-US', {
                             hour: '2-digit',
                             minute: '2-digit',
                             hour12: true

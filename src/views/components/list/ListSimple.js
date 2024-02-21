@@ -21,7 +21,7 @@ const ListSimple = () => {
             <ListItemIcon>
               <Icon icon='tabler:mail' fontSize={20} />
             </ListItemIcon>
-            <ListItemText primary='Inbox' />
+            <ListItemText primary='INBOX' />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>

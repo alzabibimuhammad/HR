@@ -1,3 +1,4 @@
+
 // ** Redux Imports
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
@@ -6,22 +7,81 @@ import axios from 'axios'
 
 // ** Fetch Mails
 export const fetchMails = createAsyncThunk('appEmail/fetchMails', async params => {
-  const response = await axios.get('/apps/email/emails', {
-    params
-  })
-
-  return { ...response.data, filter: params }
+  const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+'/api/Gmail/google/mailbox', {
+    boxType: `${params.folder}`,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  }
+  
+  )
+  console.log("🚀 ~ fetchMails ~ response:", response.data.data)
+  
+  return  [...response.data.data] 
 })
+
 
 // ** Get Current Mail
 export const getCurrentMail = createAsyncThunk('appEmail/selectMail', async id => {
-  const response = await axios.get('/apps/email/get-email', {
-    params: {
-      id
+  const response = await axios.post(
+    process.env.NEXT_PUBLIC_BASE_URL+ `/api/Gmail/google/getMessageById/`,
+    {
+      messageId: id,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
     }
-  })
+  );
+
+  return response.data.emails[0]
+})
+export const DeleteMail = createAsyncThunk('appEmail/deletemail', async id => {
+  const response = await axios.post(
+    process.env.NEXT_PUBLIC_BASE_URL+ `api/Gmail/google/deleteMessages`,
+    {
+      messageIds: id,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      },
+    }
+  );
 
   return response.data
+})
+export const AddEmail = createAsyncThunk('appEmail/addEmail', async data => {
+  try{
+    const formData = new FormData();
+
+    // Append your form data to the FormData object
+    formData.append('subject', data.subject);
+    formData.append('recieverEmail', data.recieverEmail[0].name)
+    formData.append('content',data.content)
+
+    const response = await axios.post(
+      process.env.NEXT_PUBLIC_BASE_URL+`/api/Gmail/google/sendEmail`,
+      
+        formData
+      
+      ,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+  
+    return response.data
+  }
+  catch(error){
+    alert('404')
+  }
+  
 })
 
 // ** Update Mail
@@ -65,7 +125,7 @@ export const appEmailSlice = createSlice({
     filter: {
       q: '',
       label: '',
-      folder: 'inbox'
+      folder: 'INBOX'
     },
     currentMail: null,
     selectedMails: []
@@ -95,7 +155,8 @@ export const appEmailSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(fetchMails.fulfilled, (state, action) => {
-      state.mails = action.payload.emails
+      console.log("🚀 ~ builder.addCase ~ action:", action)
+      state.mails = action.payload
       state.filter = action.payload.filter
       state.mailMeta = action.payload.emailsMeta
     })

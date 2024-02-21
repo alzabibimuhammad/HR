@@ -87,9 +87,9 @@ const MenuCustomized = () => {
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <Icon icon='tabler:inbox' fontSize={20} />
+            <Icon icon='tabler:INBOX' fontSize={20} />
           </ListItemIcon>
-          <ListItemText primary='Inbox' />
+          <ListItemText primary='INBOX' />
         </MenuItem>
       </Menu>
     </div>

@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 // ** MUI Imports
 import List from '@mui/material/List'
@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import ListItemIcon from '@mui/material/ListItemIcon'
-
+import {Base64} from 'js-base64'
 // ** Icon Imports
 import Icon from 'src/@core/components/icon'
 
@@ -80,9 +80,21 @@ const MailDetails = props => {
 
   // ** State
   const [showReplies, setShowReplies] = useState(false)
+  const[messages,setmessage]=useState(null)
 
   // ** Hook
   const { settings } = useSettings()
+
+  useEffect(()=>{
+    if (mail && mail.message && mail.message['text/html']) {
+    const message = Base64.decode(mail.message['text/html']);
+    setmessage(message)
+    // Rest of your code
+} else {
+    console.error('Mail or its properties are null or undefined.');
+}
+
+},[mail])
 
   const handleMoveToTrash = () => {
     dispatch(updateMail({ emailIds: [mail.id], dataToUpdate: { folder: 'trash' } }))
@@ -147,7 +159,7 @@ const MailDetails = props => {
         })
       })
     } else {
-      foldersObj['inbox'].map(folder => {
+      foldersObj['INBOX']?.map(folder => {
         array.length = 0
         array.push({
           icon: folder.icon,
@@ -160,6 +172,7 @@ const MailDetails = props => {
           }
         })
       })
+      console.log("🚀 ~ handleFoldersMenu ~ foldersObj:", foldersObj)
     }
 
     return array
@@ -308,7 +321,7 @@ const MailDetails = props => {
                 >
                   <Icon icon={mail.isStarred ? 'tabler:star-filled' : 'tabler:star'} />
                 </IconButton>
-                {mail.replies.length ? (
+                {mail?.replies?.length ? (
                   <IconButton size='small' onClick={() => (showReplies ? setShowReplies(false) : setShowReplies(true))}>
                     {showReplies ? <Icon icon='tabler:fold' /> : <Icon icon='tabler:arrows-vertical' />}
                   </IconButton>
@@ -331,7 +344,7 @@ const MailDetails = props => {
                   justifyContent: 'center'
                 }}
               >
-                {mail.replies.length && !showReplies ? (
+                {mail?.replies?.length && !showReplies ? (
                   <Typography
                     onClick={() => setShowReplies(true)}
                     sx={{ mb: 5, cursor: 'pointer', color: 'primary.main' }}
@@ -439,7 +452,7 @@ const MailDetails = props => {
                     })
                   : null}
 
-                {mail.replies.length && !showReplies ? (
+                {mail?.replies?.length && !showReplies ? (
                   <Fragment>
                     <HiddenReplyBack sx={{ cursor: 'pointer' }} onClick={() => setShowReplies(true)} />
                     <HiddenReplyFront sx={{ cursor: 'pointer' }} onClick={() => setShowReplies(true)} />
@@ -467,7 +480,7 @@ const MailDetails = props => {
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                           <Typography variant='h6'>{mail.from.name}</Typography>
                           <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-                            {mail.from.email}
+                            {mail.subject}
                           </Typography>
                         </Box>
                       </Box>
@@ -480,7 +493,7 @@ const MailDetails = props => {
                             hour12: true
                           })}
                         </Typography>
-                        {mail.attachments.length ? (
+                        {mail?.attachments?.length ? (
                           <IconButton size='small'>
                             <Icon icon='tabler:paperclip' fontSize='1.25rem' />
                           </IconButton>
@@ -506,9 +519,9 @@ const MailDetails = props => {
                   </Box>
                   <Divider sx={{ m: '0 !important' }} />
                   <Box sx={{ px: 6 }}>
-                    <Box sx={{ color: 'text.secondary' }} dangerouslySetInnerHTML={{ __html: mail.message }} />
+                    <Box sx={{ color: 'text.secondary' }} dangerouslySetInnerHTML={{ __html: messages  }} />
                   </Box>
-                  {mail.attachments.length ? (
+                  {mail?.attachments?.length ? (
                     <>
                       <Divider sx={{ mx: 5, my: '0 !important' }} />
                       <Box sx={{ px: 6, pt: 3 }}>

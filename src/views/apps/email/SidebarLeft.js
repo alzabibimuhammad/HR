@@ -21,6 +21,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 // ** Custom Components Imports
 import CustomBadge from 'src/@core/components/mui/badge'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { fetchMails } from 'src/store/apps/email'
 
 // ** Styled Components
 const ListItemStyled = styled(ListItem)(({ theme }) => ({
@@ -65,12 +67,13 @@ const SidebarLeft = props => {
     }
   }
 
-  const handleActiveItem = (type, value) => {
-    if (store && store.filter[type] !== value) {
-      return false
-    } else {
-      return true
-    }
+
+  const handleActiveItem = (type) => {
+  console.log("🚀 ~ handleActiveItem ~ type:", type)
+  dispatch(fetchMails({ folder: type}))
+
+   
+    console.log('handleActivetItem')
   }
 
   const handleListItemClick = () => {
@@ -123,9 +126,8 @@ const SidebarLeft = props => {
         <Box sx={{ pt: 0, overflowY: 'hidden' }}>
           <List component='div' sx={{ '& .MuiListItemIcon-root': { mr: 2 } }}>
             <ListItemStyled
-              component={Link}
-              href='/apps/email/inbox'
-              onClick={handleListItemClick}
+              component={Button}
+              onClick={() => handleActiveItem('INBOX')}
               sx={{ py: 1.5, borderLeftColor: activeInboxCondition ? 'primary.main' : 'transparent' }}
             >
               <ListItemIcon sx={{ color: activeInboxCondition ? 'primary.main' : 'text.secondary' }}>
@@ -141,9 +143,8 @@ const SidebarLeft = props => {
               {RenderBadge('inbox', 'primary')}
             </ListItemStyled>
             <ListItemStyled
-              component={Link}
-              href='/apps/email/sent'
-              onClick={handleListItemClick}
+            component={Button}
+            onClick={() => handleActiveItem('SENT')}
               sx={{
                 py: 1.5,
                 borderLeftColor: handleActiveItem('folder', 'sent') ? 'primary.main' : 'transparent'
@@ -165,9 +166,8 @@ const SidebarLeft = props => {
               />
             </ListItemStyled>
             <ListItemStyled
-              component={Link}
-              href='/apps/email/draft'
-              onClick={handleListItemClick}
+           component={Button}
+           onClick={() => handleActiveItem('DRAFT')}
               sx={{
                 py: 1.5,
                 borderLeftColor: handleActiveItem('folder', 'draft') ? 'primary.main' : 'transparent'
@@ -190,9 +190,8 @@ const SidebarLeft = props => {
               {RenderBadge('draft', 'warning')}
             </ListItemStyled>
             <ListItemStyled
-              component={Link}
-              href='/apps/email/starred'
-              onClick={handleListItemClick}
+          component={Button}
+          onClick={() => handleActiveItem('STARRED')}
               sx={{
                 py: 1.5,
                 borderLeftColor: handleActiveItem('folder', 'starred') ? 'primary.main' : 'transparent'
@@ -214,9 +213,8 @@ const SidebarLeft = props => {
               />
             </ListItemStyled>
             <ListItemStyled
-              component={Link}
-              href='/apps/email/spam'
-              onClick={handleListItemClick}
+          component={Button}
+          onClick={() => handleActiveItem('SPAM')}
               sx={{
                 py: 1.5,
                 borderLeftColor: handleActiveItem('folder', 'spam') ? 'primary.main' : 'transparent'
@@ -239,9 +237,8 @@ const SidebarLeft = props => {
               {RenderBadge('spam', 'error')}
             </ListItemStyled>
             <ListItemStyled
-              component={Link}
-              href='/apps/email/trash'
-              onClick={handleListItemClick}
+           component={Button}
+           onClick={() => handleActiveItem('TRASH')}
               sx={{
                 py: 1.5,
                 borderLeftColor: handleActiveItem('folder', 'trash') ? 'primary.main' : 'transparent'

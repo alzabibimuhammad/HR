@@ -101,7 +101,7 @@ const ListNested = () => {
             <ListItemIcon>
               <Icon icon='tabler:mail' fontSize={20} />
             </ListItemIcon>
-            <ListItemText primary='Inbox' />
+            <ListItemText primary='INBOX' />
             <Icon icon={open ? 'tabler:chevron-up' : 'tabler:chevron-down'} />
           </ListItemButton>
         </ListItem>
@@ -307,7 +307,7 @@ const ListDense = () => {
             <ListItemIcon>
               <Icon icon='tabler:mail' fontSize='1.125rem' />
             </ListItemIcon>
-            <ListItemText primary='Inbox' />
+            <ListItemText primary='INBOX' />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -368,7 +368,7 @@ const ListSimple = () => {
             <ListItemIcon>
               <Icon icon='tabler:mail' fontSize={20} />
             </ListItemIcon>
-            <ListItemText primary='Inbox' />
+            <ListItemText primary='INBOX' />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>

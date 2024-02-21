@@ -72,7 +72,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
     <Box sx={{ display: 'flex' }}>
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: { xl:drawerWidth,md:drawerWidth , sm:drawerWidth, xs: '90%' },
 
           flexShrink: 0,
           '& .MuiDrawer-paper': {

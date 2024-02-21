@@ -91,7 +91,7 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
     <Drawer
       backgroundColor='#fff'
       sx={{
-        width: drawerWidth,
+        width: { xl:drawerWidth,md:drawerWidth , sm:drawerWidth, xs: '90%' },
         flexShrink: 0,
         '& .MuiDrawer-paper': {
           width: drawerWidth

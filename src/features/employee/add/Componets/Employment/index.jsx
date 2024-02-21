@@ -100,16 +100,14 @@ export default function Employment({onDataChange,Controller,control,errors}) {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
-                      S.P
+                      {t('L.S')}
                     </InputAdornment>
                   ),
                 }}
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2}  >
-                    <Box>
-                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgSalary)}`}/>
-                      </Box>
+
                       <Box>
                         {t('Salary')}
                     </Box>

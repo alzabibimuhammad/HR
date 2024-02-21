@@ -92,11 +92,9 @@ const handleDrawerClose = () => {
 
       <Drawer
         sx={{
-          width: drawerWidth,
-
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth
+            width: { xl:drawerWidth,md:drawerWidth , sm:drawerWidth, xs: '90%' },
           }
         }}
         anchor='right'

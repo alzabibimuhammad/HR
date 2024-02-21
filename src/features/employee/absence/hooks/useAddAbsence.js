@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import DeletedAbsenceById from "../api/DeleteAbsenceById";
+import AddAbsence from "../api/AddAbsence";
 
-export const useDeleteAbsence = () => {
+export const useAddAbsence = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn:DeletedAbsenceById,
+    mutationFn:AddAbsence,
     onSuccess: () => {
       queryClient.invalidateQueries("Absence");
     },

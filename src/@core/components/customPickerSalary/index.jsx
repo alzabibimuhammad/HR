@@ -1,6 +1,7 @@
 import { Button, ButtonGroup, Card, CardContent, CardHeader, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useTransition } from 'react'
 import DatePicker from 'react-datepicker'
 import { useTranslation } from 'react-i18next'
 
@@ -79,14 +80,14 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose ,handle
         >
         <CardContent>
         <Typography sx={{ fontSize:'20px',fontWeight:'600',color:'#8090A7' }}>
-        Filter
+        {t('Filter')}
             </Typography>
             <Box sx={{display:'flex', justifyContent:'center' }}>
 
       <Button variant='contained' color='secondary' onClick={toggleDatePickerMonth}  sx={{mr:2, backgroundColor: showMonthPicker === 'month' ? '#6AB2DF' : 'secondary'}}>
-Month      </Button>
+      {t('Month')}      </Button>
       <Button variant='contained' color='secondary'  onClick={toggleDatePickerYear} sx={{mr:2,backgroundColor: showMonthPicker === 'year' ? '#6AB2DF' : 'secondary'}}>
-        Year
+      {t('Year')}
       </Button>
 
         </Box>

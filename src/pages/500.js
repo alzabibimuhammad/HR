@@ -12,6 +12,7 @@ import BlankLayout from 'src/@core/layouts/BlankLayout'
 
 // ** Demo Imports
 import FooterIllustrations from 'src/views/pages/misc/FooterIllustrations'
+import { useTranslation } from 'react-i18next'
 
 // ** Styled Components
 const BoxWrapper = styled(Box)(({ theme }) => ({
@@ -34,18 +35,19 @@ const Img = styled('img')(({ theme }) => ({
 }))
 
 const Error500 = () => {
+  const {t} = useTranslation()
   return (
     <Box className='content-center'>
       <Box sx={{ p: 5, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
         <BoxWrapper>
           <Typography variant='h2' sx={{ mb: 1.5 }}>
-            Oops, something went wrong!
+          {t('Oops, something went wrong!')}
           </Typography>
           <Typography sx={{ mb: 6, color: 'text.secondary' }}>
-            There was an error with the internal server. Please contact your site administrator.
+          {t('There was an error with the internal server. Please contact your site administrator.')}
           </Typography>
           <Button href='/' component={Link} variant='contained'>
-            Back to Home
+          {t('Back to Home')}
           </Button>
         </BoxWrapper>
         <Img height='500' alt='error-illustration' src='/images/pages/404.png' />

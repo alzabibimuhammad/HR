@@ -533,7 +533,15 @@
   "There is no notes":"لا توجد ملاحظات",
   "Annual percentage increase":"نسبة الزيادة السنوية",
   "Loading contract...":"جاري تحميل العقد...",
-  "Add absence":"اضافة غياب"
+  "Add absence":"اضافة غياب",
+  "Please contact your site administrator.":"من فضلك تواصل مع مدير الصفحة",
+  "Back to Login":"العودة لتسجيل الدخول",
+  "You are not authorized!":"أنت غير موثوق",
+  "You do not have permission to view this page using the credentials that you have provided while login.":"ليس لديك إذن لعرض هذه الصفحة باستخدام بيانات الاعتماد التي قدمتها أثناء تسجيل الدخول.",
+  "Oops! 😖 The requested URL was not found on this server.":"أُووبس! 😖 لم يتم العثور على عنوان URL المطلوب على هذا الخادم.",
+  "Back to Home":"العودة للصفحة الرئيسية",
+  "Page Not Found :(":"الصفحة غير موجودة :(",
+  "There was an error with the internal server. Please contact your site administrator.":"حدث خطأ في الخادم الداخلي. يرجى الاتصال بمسؤول الموقع."
 
 
 }

@@ -2,9 +2,9 @@ import { request } from "../../../utiltis/AxiosUtilitis";
 
 const ReportByDay = (payload) => {
   return request({
-    url: `/api/Report/reportByDay`,
+    url: `/api/Report/reportByDay?date=${payload.date}`,
     method: "post",
-    data: payload,
+    data:payload.data,
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -12,3 +12,4 @@ const ReportByDay = (payload) => {
 };
 
 export default ReportByDay;
+

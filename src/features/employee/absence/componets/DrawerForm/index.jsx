@@ -294,7 +294,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
                   >
                     <MenuItem value=''>{t('Type')}</MenuItem>
                     <MenuItem value='justified'>{t('Justified')}</MenuItem>
-                    <MenuItem value='unjustified'>{t('Unjustified')}</MenuItem>
+                    <MenuItem value='Unjustified'>{t('Unjustified')}</MenuItem>
                   </TextField>
                 )}
               />

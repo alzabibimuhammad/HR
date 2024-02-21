@@ -311,3 +311,40 @@ position: relative !important;
   }
 
 }
+
+[dir="rtl"] .parent {
+overflow: hidden !important;
+position: relative;
+height: 50px !important;
+width: 96%;
+border-right-style: solid;
+border-right-width: 5px;
+border-left-style: none;
+}
+
+
+[dir="rtl"] .child {
+position: absolute;
+bottom: 20%;
+right: 1%;
+}
+
+[dir="rtl"] .childp {
+margin-right: 36px;
+}
+ [dir="ltr"] .child-cal {
+  position: absolute;
+  left: 0px;
+  bottom: 10px;
+  font-size: 30px;
+  color: #3F4458;
+}
+/* [dir="ltr"] .child-cal {
+  display: flex !important;
+}  */
+
+/* ************************************************************* */
+
+
+
+

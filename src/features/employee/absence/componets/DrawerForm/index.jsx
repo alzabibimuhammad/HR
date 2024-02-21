@@ -179,7 +179,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
         {fndata &&
           fndata?.map((date, index) => (
             <>
-              <Stack direction='row' spacing={70} alignItems='center'>
+              <Stack direction='row' justifyContent={'space-between'} alignItems='center'>
                 <Typography>{date?.startDate}</Typography>
                 <CloseIcon
                   sx={{ color: '#df2e38', cursor: 'pointer' }}
@@ -227,11 +227,11 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
         </Box>
       </Stack>
 
-      <Stack direction={'column'} marginTop={'2%'} style={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
+      <Stack direction={'column'} marginTop={'2%'} sx={{ overflowY: 'scroll', maxHeight: '300px', padding: '15px' }}>
         {fdata &&
           fdata?.map((date, index) => (
             <>
-              <Stack direction='row' spacing={70} alignItems='center'>
+              <Stack direction='row' justifyContent={'space-between'} alignItems='center'>
                 <Typography>{date?.startDate}</Typography>
                 <CloseIcon
                   sx={{ color: '#df2e38', cursor: 'pointer' }}

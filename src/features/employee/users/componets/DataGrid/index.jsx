@@ -123,6 +123,7 @@ const Users = ({ rows }) => {
   }, [dispatch, store?.AttendancePercentage?.length])
 
   const { data, loading } = useGetMvp()
+  console.log("🚀 ~ Users ~ data:", data)
 
   return (
     <>
@@ -164,7 +165,7 @@ const Users = ({ rows }) => {
               </IconButton>
             </Stack>
             <Stack direction={'row'} justifyContent={'start'} alignItems={'center'} spacing={2}>
-              <Avatar />
+              <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + data?.data?.data?.user?.user_info?.image}  />
 
               <Typography>{data?.data?.data?.user?.first_name}</Typography>
               <Typography>{data?.data?.data?.user?.last_name}</Typography>

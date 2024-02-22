@@ -150,7 +150,7 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
               {users?.map(user => (
                 <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
                   <Stack direction={'row'} alignItems={'center'} spacing={1}>
-                  <Avatar src={user?.user_info?.image} />
+                  <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + user?.user_info?.image}  />
                 <Typography>{user.first_name} {user.last_name}</Typography>
                 </Stack>
                   <FormControlLabel

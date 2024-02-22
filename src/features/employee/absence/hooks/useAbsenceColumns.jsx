@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { Avatar,IconButton } from '@mui/material';
+import { Avatar,IconButton, Typography } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
 import DrawerForm from '../componets/DrawerForm';
@@ -56,10 +56,10 @@ const useAbsenceColumns = () => {
       flex: 3,
       renderCell: (params) => {
         return (
-          <>
+          <Stack direction={'row'} alignItems={'center'} spacing={1}>
             <Avatar alt='' />
-            <p style={{ marginLeft: '2px' }}>{params?.row?.name}</p>
-          </>
+            <Typography>{params?.row?.name}</Typography>
+          </Stack>
         );
       },
     },

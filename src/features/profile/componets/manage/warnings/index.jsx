@@ -262,12 +262,13 @@ export default function Warnings({id}) {
       onClose={handleCloseAdd}
       aria-labelledby="responsive-dialog-title"
     >
-      <DialogTitle sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
+      <DialogTitle   sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
       {t('Add Warning')}
       </DialogTitle>
-      <DialogContent sx={{width:{sm:"100vh",xs:"100%"},height:{sm:"auto",xs:"100%"}}}>
+      <DialogContent  sx={{width:{sm:"100vh",xs:"100%"},height:{sm:"auto",xs:"100%"}}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
-        <Stack width={{sm:"89%",xr:"10%"}} overflow={"hidden"} spacing={4}>
+        <Stack width={{sm:"89%",xr:"10%"}}  overflow={"hidden"} spacing={4}>
+
     <Box>
 
         <Controller

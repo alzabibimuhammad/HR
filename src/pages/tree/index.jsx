@@ -17,12 +17,12 @@ export default function Tree() {
 
 
   return (
-      <Stack spacing={3}>
-      <Box size={'small'} >
+      <Stack >
+      <Box  >
         <Logo />
       </Box>
 
-      <Stack height={'100%'} >
+      <Stack  direction={"row"} justifyContent={"center"}>
         <TreeComponent/>
       </Stack>
       </Stack>

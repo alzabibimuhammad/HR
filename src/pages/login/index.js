@@ -114,10 +114,10 @@ const LoginPage = () => {
         <form noValidate autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
              <Box >
                 <Typography   variant='h3' sx={{ color: '#000',fontSize:"24px",lineHeight: "130%" }}>
-                  {`${t('Hello')}! 👋🏻`}
+                  Hello👋🏻
                 </Typography>
                 <Typography sx={{ color: '#000000' }}>
-                {t('Log in to get started')}
+                Log in to get started
                  </Typography>
               </Box>
                 <Box  sx={{ mt:5,mb: 4 }}>
@@ -130,7 +130,7 @@ const LoginPage = () => {
                         fullWidth
                         sx={{ color:'#8090A7' }}
                         autoFocus
-                        label={t('Email')}
+                        label='Email'
                         value={value}
                         onBlur={onBlur}
                         onChange={onChange}
@@ -151,7 +151,7 @@ const LoginPage = () => {
                         fullWidth
                         value={value}
                         onBlur={onBlur}
-                        label={t('Password')}
+                        label='Password'
                         onChange={onChange}
                         id='auth-login-v2-password'
                         error={Boolean(errors.password)}
@@ -184,7 +184,7 @@ const LoginPage = () => {
 
 
                   <Typography component={LinkStyled} href='/forgot-password' sx={{ color: '#3F4458',fontSize:"14px",fontWeight: "400",lineHeight: "130%" }}>
-                  {t('Forgot Password?')}
+                  Forgot Password?
                   </Typography>
                 </Box>
                 <Box >
@@ -202,7 +202,7 @@ const LoginPage = () => {
 
                    }}
                    >
-                    {t('Login')}
+                    Login
                   </Button>
                 </Box>
                 <div  style={{ height:"300px" ,width:"300px",backgroundImage: `url('/images/image.svg')  `, backgroundPosition: 'no-repeat',backgroundSize: 'cover',}}>

@@ -96,7 +96,7 @@ const LoginPage = () => {
                 <Box    sx={{  backgroundImage: `url('/images/loginRectangel.svg')`,backgroundRepeat:"no-repeat",width:"100%",height:"100%" }} ></Box>
               </Box>
 
-            <Box className="photo"  display={'flex'} marginTop={"50px"} justifyContent={'start'} alignItems={'end'} width={'100%'} height={'100%'}>
+            <Box id='photo2' className="photo"  display={'flex'} marginTop={"50px"} justifyContent={'start'} alignItems={'end'} width={'100%'} height={'100%'}>
                 <Box   sx={{  backgroundImage: `url('/images/loginRectangleButtom.svg')`,backgroundRepeat:"no-repeat",width:"100%",height:"100%" }} ></Box>
             </Box>
             <Box sx={{position:{sm:"absolute"},left:{sm:"40%"},top:{sm:"44%"}}}>

@@ -156,16 +156,16 @@ const SidebarLeft = props => {
                 <Stack
                   direction={'row'}
                   justifyContent={'start'}
-                  sx={{ padding: 0, margin: 0, width: '100%', height: '60px', overflow: 'hidden' }}
+                  sx={{ padding: 0, margin: 0, width: '100%', height: 'auto', overflow: 'hidden' }}
                   className='parent'
                   key={event.id}
                 >
-                  <Stack direction={'column'}>
+                  <Stack className='content-cal' direction={'column'}>
                     <span style={{ padding: 0, margin: 0 }} className='child-cal'>
                       {event.day}
                     </span>
 
-                    <Typography width={'54px'} p={0} ml={0} variant='p' fontSize={10}>
+                    <Typography className='start'  p={0} ml={0} variant='p' fontSize={10}>
                       {event.start}
                     </Typography>
                   </Stack>
@@ -173,7 +173,7 @@ const SidebarLeft = props => {
                   <Box
                     sx={{
                       width: '130px',
-                      height: '100%',
+                      height: '70%',
                       textAlign: 'start',
                       overflowWrap: 'break-word',
                       wordWrap: 'break-word',

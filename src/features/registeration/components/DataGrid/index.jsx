@@ -59,18 +59,6 @@ const Registration = ({ Data, setFilterDate }) => {
       setStatus('')
   };
 
-  // useEffect(()=>{
-  //   let filteredData;
-  //   if(status){
-  //     filteredData = rows?.filter((row) => {
-  //       return row?.status === status;
-  //     })
-  //     setRows(filteredData)
-  //   }else
-  //   setRows(RegistrationData(data))
-
-
-  // },[status])
 
   return (
     <Stack height={'100%'}>
@@ -133,7 +121,6 @@ const Registration = ({ Data, setFilterDate }) => {
                     <MenuItem value='Late'>{`${t("Late")}`}</MenuItem>
                     <MenuItem value='Absent'>{`${t("Absenced")}`}</MenuItem>
                     <MenuItem value='Checked Out'>{`${t("Checked out")}`}</MenuItem>
-                    <MenuItem value='Wrong'>{`${t("Wrong")}`}</MenuItem>
                 </TextField>
               </Stack>
 

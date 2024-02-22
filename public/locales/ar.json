@@ -17,7 +17,7 @@
   "Add": "اضافة",
   "Select Status":"تحديد حالة",
   "User": "المستعمل",
-  "View": "رأي",
+  "View": "عرض",
   "Security": "حماية",
   "Billing & Plans": "الفواتير والخطط",
   "Notifications": "إشعارات",
@@ -237,6 +237,7 @@
   "Customer":"الزبون",
   "Approve":"موافقة",
   "Decline":"رفض",
+
   "Total Employees":"كل الموظفين",
   "Active Employees":"الموظفين النشطين",
   "Registration":"الاشتراكات",
@@ -345,6 +346,7 @@
   "Employees":"الموظفين",
   "Note":"ملاحظة",
   "By choosing this option, the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.":"من خلال تحديد هذا الخيار، سيقوم النظام بإنشاء طلب خصم لحالات محددة. ويلزم الحصول على موافقة المشرف قبل تطبيق الخصم. مثالي للحالات التي قد تتطلب مراجعة أو استثناءات.",
+
   "notes":"ملاحظات",
   "add":"اضافة",
   "Overall":"إجمالي",
@@ -533,7 +535,29 @@
   "There is no notes":"لا توجد ملاحظات",
   "Annual percentage increase":"نسبة الزيادة السنوية",
   "Loading contract...":"جاري تحميل العقد...",
-  "Add absence":"اضافة غياب"
+  "Add absence":"اضافة غياب",
+  "Please contact your site administrator.":"من فضلك تواصل مع مدير الصفحة",
+  "Back to Login":"العودة لتسجيل الدخول",
+  "You are not authorized!":"أنت غير موثوق",
+  "You do not have permission to view this page using the credentials that you have provided while login.":"ليس لديك إذن لعرض هذه الصفحة باستخدام بيانات الاعتماد التي قدمتها أثناء تسجيل الدخول.",
+  "Oops! 😖 The requested URL was not found on this server.":"أُووبس! 😖 لم يتم العثور على عنوان URL المطلوب على هذا الخادم.",
+  "Back to Home":"العودة للصفحة الرئيسية",
+  "Page Not Found :(":"الصفحة غير موجودة :(",
+  "There was an error with the internal server. Please contact your site administrator.":"حدث خطأ في الخادم الداخلي. يرجى الاتصال بمسؤول الموقع.",
+  "Branch Name":"اسم الفرع",
+  "Please, Enter the new name of the branch.":"من فضلك ادخل اسم الفرع الجديد .",
+  "This action is irreversible and will permanently remove all associated data and configurations for this branch.":"لا يمكن التراجع عن هذا الإجراء وسيؤدي إلى إزالة جميع البيانات والتكوينات المرتبطة بهذا الفرع نهائيًا.",
+  "Please, Enter your password to confirm the deletion.":"من فضلك، أدخل كلمة المرور الخاصة بك لتأكيد الحذف.",
+  "Are you sure you want to delete":"هل انت متأكد من حذف",
+  "Please, Enter the new branch name.":"من فصلك أدخل اسم الفرع الجديد",
+  "the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.":" سيقوم النظام بإنشاء طلب خصم لحالات محددة. ويلزم الحصول على موافقة المشرف قبل تطبيق الخصم. مثالي للحالات التي قد تتطلب مراجعة أو استثناءات",
+  "Event":"حدث",
 
+  "Select the new employee of the month":"حدد الموظف الجديد لهذا الشهر",
+  "Done":"تم",
+  "Employee of the month":"موظف الشهر",
+  "Reports":"تقارير",
+  "Inquiries List":"قائمة الطلبات",
+  "Waiting":"منتظر"
 
 }

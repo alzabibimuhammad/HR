@@ -7,19 +7,23 @@ import { useSelector } from 'react-redux'
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
 import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
 import { FormateDate } from 'src/utiltis/DateFormate'
+import { DateFormateOfMonth } from 'src/utiltis/DateFormateOfMonth'
+import { DateFormateOfYear } from 'src/utiltis/DateFormateOfYear'
+import { ProfilteDate } from 'src/utiltis/profileDatePicker'
 
 export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }) => {
   const {t} = useTranslation()
   const [view, setView] = useState('month')
   const [startDate, setStartDate] = useState(new Date())
+  const store = useSelector(state => state.user)
 
   const [showMonthPicker, setShowMonthPicker] = useState('day')
+  const [id, setUserId] = useState(store?.id)
 
   const { mutate: ReportDay, data, isloading } = useReportByDay()
 
   const DayDate = new Date()
   const FormateDayDate = FormateDate(DayDate)
-  const store = useSelector(state => state.user)
 
   useEffect(() => {
     const formData = new FormData()
@@ -28,9 +32,12 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
 
     formData.append('date', FormateDayDate)
 
-    ReportDay(formData)
 
-  }, [store?.userId])
+    setUserId(store?.user_id)
+
+    ReportDay({data:formData,date:FormateDayDate})
+
+  }, [store])
 
   useEffect(() => {
     setUserData(data)
@@ -43,7 +50,20 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
   }
 
   const handelSendReport = date => {
-    const formattedDate = FormateDate(date)
+    let formattedDate
+    if(showMonthPicker=='day')
+    {
+      formattedDate=ProfilteDate(date)
+    }
+    if(showMonthPicker=='month')
+    {
+      formattedDate=DateFormateOfMonth(date)
+    }
+    if(showMonthPicker=='year')
+    {
+      formattedDate=DateFormateOfYear(date)
+    }
+
 
     setStartDate(date)
 
@@ -53,7 +73,8 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
 
     formData.append('date', formattedDate)
 
-    ReportDay(formData)
+    ReportDay({data:formData,date:formattedDate})
+
   }
 
   const toggleDatePickerDay = () => {

@@ -6,11 +6,14 @@ import useGetAllAbsence from 'src/features/employee/absence/hooks/useGetAllabsen
 export default function Employees() {
 
   const {data} = useGetAllAbsence()
+
   return (
     <>
     {data ? <Absence rows = {data}/>:<Box height={'100%'} display={'center'} justifyContent={'center'}  alignItems={'center'} >
-      <CircularProgress/>
-    </Box>}
+   <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height:"70vh"}}>
+
+<CircularProgress className='loading-rtl'/>
+</Box>    </Box>}
     </>
   )
 

@@ -60,7 +60,6 @@ export default function Annual({Controller,control,errors}) {
             {...field}
             error={Boolean(errors?.annual_salary_increase?.annual_salary_percentage)}
             helperText={errors?.annual_salary_increase?.annual_salary_percentage?.message}
-          defaultValue={0}
           size='small'
           InputProps={{
             endAdornment: (

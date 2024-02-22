@@ -11,9 +11,12 @@ import { useDeleteContract } from '../list/Hooks/useDeleteContract'
 import { useReactToPrint } from 'react-to-print'
 import Logo from './logo'
 import Profile from 'src/pages/profile/[id]'
+import { useTranslation } from 'react-i18next'
 
 export default function View({ id }) {
   const componentRef = useRef()
+
+  const {t} = useTranslation()
 
   const router = useRouter()
 
@@ -76,18 +79,18 @@ export default function View({ id }) {
                 }}
               >
                 <Typography sx={{ marginTop: '4px', fontWeight: '600', fontSize: '16px', color: '#3F4458' }}>
-                  Contract #{ele.id}
+                {t('Contract')} #{ele.id}
                 </Typography>
 
                 <Typography sx={{ marginTop: '4px', fontWeight: '600', fontSize: '14px', color: '#8090A7' }}>
-                  Name : {ele.user.first_name} {ele.user.last_name}
+                {t('Name')} : {ele.user.first_name} {ele.user.last_name}
                 </Typography>
                 <Typography sx={{ marginTop: '4px', fontWeight: '600', fontSize: '14px', color: '#8090A7' }}>
-                  Start Date : {ele.startTime}
+                {t('Start Date')} : {ele.startTime}
                 </Typography>
 
                 <Typography sx={{ marginTop: '4px', fontWeight: '600', fontSize: '14px', color: '#8090A7' }}>
-                  End Date : {ele.endTime}
+                {t('End Date')} : {ele.endTime}
                 </Typography>
               </Box>
 
@@ -104,12 +107,10 @@ export default function View({ id }) {
                 }}
               >
                 <Button sx={{ width: '100%' }} size='large' variant='contained' onClick={handlePrint}>
-                  {' '}
-                  Print
+                  {t('Print')}
                 </Button>
                 <Button sx={{ width: '100%' }} size='large' variant='contained' onClick={handleDownloadClick}>
-                  {' '}
-                  Download
+                {t('Download')}
                 </Button>
                 <Button
                   sx={{ width: '100%', backgroundColor: '#DF2E38' }}
@@ -117,8 +118,7 @@ export default function View({ id }) {
                   variant='contained'
                   onClick={() => deleteContractt(id)}
                 >
-                  {' '}
-                  Delete
+                  {t('Delete')}
                 </Button>
               </Box>
             </Box>

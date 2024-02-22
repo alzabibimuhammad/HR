@@ -22,6 +22,7 @@ import { useAuth } from 'src/hooks/useAuth'
 import { useTranslation } from 'react-i18next'
 import useShowAllBranches from 'src/features/settings/hooks/useShowAllBranches'
 import { Button } from '@mui/material'
+import Link from 'next/link'
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -94,8 +95,8 @@ const UserDropdown = props => {
   }
   const userData = JSON.parse(localStorage.getItem('userData'))
 
-  // Check if userData exists and has the 'image' property with at least one element
-  const imageSrc = userData && userData.image && userData.image[0] && userData.image[0].image
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+
 
   return (
     <Fragment>
@@ -110,8 +111,8 @@ const UserDropdown = props => {
         }}
       >
         <Avatar
-          alt='John Doe'
-          src={process.env.NEXT_PUBLIC_IMAGES + '/' + imageSrc}
+          alt=''
+          src={process.env.NEXT_PUBLIC_IMAGES + '/'+userInfo?.image }
           onClick={handleDropdownOpen}
           sx={{ width: 38, height: 38 }}
         />
@@ -135,14 +136,21 @@ const UserDropdown = props => {
               }}
             >
               <Avatar
-                alt='John Doe'
-                src={process.env.NEXT_PUBLIC_IMAGES + '/' + imageSrc}
+                alt=''
+                src={process.env.NEXT_PUBLIC_IMAGES + '/'+userInfo?.image }
                 sx={{ width: '2.5rem', height: '2.5rem' }}
               />
             </Badge>
+            <Box display={'flex'} justifyContent={'space-between'} width={'100%'} alignItems={'center'}>
             <Box sx={{ display: 'flex', ml: 2.5, alignItems: 'flex-start', flexDirection: 'column' }}>
-              <Typography sx={{ fontWeight: 500 }}>{JSON.parse(localStorage.getItem('userData')).name}</Typography>
-              <Typography variant='body2'>{`${t('Admin')}`}</Typography>
+              <Typography sx={{ fontWeight: 500 }}>{userData?.first_name} {userData?.last_name}</Typography>
+              <Typography variant='body2'>{`${t(userData?.role)}`}</Typography>
+            </Box>
+              <Link href={'/Settings'} >
+              <Box>
+              <img src='/images/setting.svg' />
+              </Box>
+              </Link>
             </Box>
           </Box>
         </Box>

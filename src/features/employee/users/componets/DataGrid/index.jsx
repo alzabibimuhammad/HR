@@ -150,7 +150,7 @@ const Users = ({ rows }) => {
 
           <AccordionDetails>
             <Stack direction={'row'} justifyContent={'start'} alignItems={'center'}>
-              <Typography>Employee of the month</Typography>
+              <Typography>{t('Employee of the month')}</Typography>
               <IconButton
                 aria-label='more'
                 id='long-button'

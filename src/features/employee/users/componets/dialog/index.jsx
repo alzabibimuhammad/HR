@@ -35,7 +35,7 @@ export default function AlertDialogDeleteUser({ id, open, handleClose }) {
     <Dialog
       onClose={handleClose}
       open={open}
-
+      className="dialog-arabic"
       >
       <Grid item xs={12}>
         <Item>

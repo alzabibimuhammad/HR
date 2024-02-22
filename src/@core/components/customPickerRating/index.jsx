@@ -2,6 +2,7 @@ import { Button, ButtonGroup, Card, CardContent, CardHeader, Typography } from '
 import { Box } from '@mui/system';
 import React, { useEffect, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker';
@@ -21,7 +22,7 @@ export  const CustomDatePickerRating = ({handleClose }) => {
   const CloseRef = useRef(null);
   const [open, setOpen] = React.useState(false);
 
-
+  const {t} = useTranslation()
 
   function Close() {
     handleClose(true)
@@ -60,6 +61,7 @@ export  const CustomDatePickerRating = ({handleClose }) => {
 
     getData({user_id:store.userId,date:formattedDate})
 
+    handleClose(true);
 
 
   };

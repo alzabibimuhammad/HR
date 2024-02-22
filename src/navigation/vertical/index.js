@@ -52,7 +52,7 @@ const navigation = () => {
       ]
     },
     {
-      title: 'Report',
+      title: 'Reports',
       icon: 'tabler:file-report',
       path: '/report'
     },
@@ -127,11 +127,7 @@ const navigation = () => {
       ]
     },
 
-    {
-      title: 'Settings',
-      icon: 'tabler:settings',
-      path: '/Settings'
-    },
+
   ];
 };
 

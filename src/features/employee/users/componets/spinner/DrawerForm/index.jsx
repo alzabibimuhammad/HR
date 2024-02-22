@@ -37,6 +37,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function DrawerForm({ open, setOpenParent }) {
   const {data} = useGetAllUsers()
+  console.log("🚀 ~ DrawerForm ~ data:", data)
 
   const [selectedId, setSelectedId] = useState(null);
 
@@ -91,7 +92,7 @@ export default function DrawerForm({ open, setOpenParent }) {
                         control={<Radio />}
                         label={
                             <Stack direction={'row'} spacing={2} alignItems={'center'}>
-                                <Avatar />
+                                <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + element?.user_info?.image}  />
                                 <Typography>
                                     {element.first_name}
                                 </Typography>

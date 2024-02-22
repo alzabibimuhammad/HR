@@ -644,6 +644,15 @@
   "Select the new employee of the month": "Select the new employee of the month",
   "Done": "Done",
   "Employee of the month": "Employee of the month",
-  "Reports":"Reports"
+  "Reports":"Reports",
+  "Inquiries List": "Inquiries List",
+  "Waiting": "Waiting",
+  "Absenced": "Absenced",
+  "Checked out": "Checked out",
+  "Action": "Action",
+  "Actions": "Actions",
+  "Save": "Save",
+  "Inbox": "Inbox"
+
 
  }

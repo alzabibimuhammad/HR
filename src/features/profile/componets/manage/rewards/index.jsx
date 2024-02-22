@@ -347,7 +347,7 @@ export default function Rewards({id}) {
         <Item>
         <DialogContent sx={{height:"99px",width:"100%",borderRadius:"10px",position:"relative",overflow:"visible"}}>
         <DialogContentText sx={{}}>
-          <CancelRoundedIcon  style={{ backgroundColor:"#FFFFFF",color: '#A20D29' ,fontSize: 160,position:"absolute",top: "50%", left: "50%", transform: "translate(-50%, -90%)",borderRadius:"50%" }} />
+          <CancelRoundedIcon  style={{ backgroundColor:"#FFFFFF",color: '#A20D29' ,fontSize: 160,position:"fixed",top: "50%", left: "50%", transform: "translate(-50%, -90%)",borderRadius:"50%" }} />
 
         </DialogContentText>
       </DialogContent>

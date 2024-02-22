@@ -62,11 +62,11 @@ const EmailAppLayout = ({ folder, label }) => {
 
   const routeParams = {
     label: label || '',
-    folder: folder || 'sent'
+    folder: folder || 'INBOX'
   }
   useEffect(() => {
     // @ts-ignore
-    dispatch(fetchMails({ folder: routeParams.folder}))
+    dispatch(fetchMails({ folder:'INBOX'}))
   }, [dispatch, query, routeParams.folder, routeParams.label])
   const toggleComposeOpen = () => setComposeOpen(!composeOpen)
   const handleLeftSidebarToggle = () => setLeftSidebarOpen(!leftSidebarOpen)

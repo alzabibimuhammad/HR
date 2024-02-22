@@ -13,8 +13,8 @@ export const useAddPolicies = () => {
       showSuccesToast("",'Policies added successfully')
 
     },
-    onError:(data)=>{
-      showErrorToast("","Policies added Error , check input")
+    onError:(error)=>{
+      error.response.data.errors && error.response.data.errors.map((error)=>showErrorToast("There is an error in the input",error))
     }
   });
 };

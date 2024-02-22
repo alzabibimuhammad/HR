@@ -62,20 +62,20 @@ export default function WorkTimes({data}) {
 
     <div >
 
-          <StackRow marginTop={'2%'}>
+          <Stack direction={'row'} marginTop={'2%'} spacing={1}>
             <Typo>{t('Work days')}:</Typo>
             <TypoVal>{data?.data?.policy.work_time?.work_days.map((day)=>( day+" "))}</TypoVal>
-          </StackRow>
+          </Stack>
 
-          <StackRow sx={{ padding: "5px 0px" }}>
+          <Stack direction={'row'}  spacing={1} sx={{ padding: "5px 0px" }}>
             <Typo>{t('Start Date')}:</Typo>
              <TypoVal>{data?.data?.policy.work_time?.start_time}</TypoVal>
-          </StackRow>
+          </Stack>
 
-          <StackRow>
+          <Stack direction={'row'}  spacing={1}>
             <Typo>{t('End Date')}:</Typo>
             <TypoVal>{data?.data?.policy.work_time?.end_time}</TypoVal>
-          </StackRow>
+          </Stack>
         </div>
 
 
@@ -111,20 +111,20 @@ export default function WorkTimes({data}) {
 
   </StackRow>
 
-  <StackRow  marginTop={'2%'}>
+  <StackRow direction={'row'}  spacing={1}  marginTop={'2%'}>
     <Typo>{t('Paid Absences Days')}:</Typo>
      <TypoVal>{data?.data?.policy?.absence_management?.paid_absence_days?.count}</TypoVal>
   </StackRow>
 
-  <StackRow sx={{padding:"5px 0px"}}>
+  <Stack direction={'row'}  spacing={1} sx={{padding:"5px 0px"}}>
     <Typo>{t('Unpaid Absences Days')}:</Typo>
     <TypoVal>{data?.data?.policy?.absence_management?.unpaid_absence_days?.count}</TypoVal>
-  </StackRow>
+  </Stack>
 
-  <StackRow>
+  <Stack direction={'row'}  spacing={1}>
     <Typo>{t('Sick Absences Days')}:</Typo>
     <TypoVal>{data?.data?.policy?.absence_management?.sick_absence_days?.count}</TypoVal>
-  </StackRow>
+  </Stack>
 
 
     <Typography component={'li'} sx={{margin:"5px"}}>
@@ -155,10 +155,10 @@ export default function WorkTimes({data}) {
 
   </StackRow>
 
-  <StackRow  marginTop={'2%'}>
+  <Stack direction={'row'}  spacing={1}  marginTop={'2%'}>
     <Typo>{t('Annual percentage increase')}:</Typo>
-     <TypoVal>{data?.data?.policy?.annual_salary_increase?.annual_salary_percentage} %</TypoVal>
-  </StackRow>
+     <TypoVal>{data?.data?.policy?.annual_salary_increase?.annual_salary_percentage}%</TypoVal>
+  </Stack>
 
 
     <Typography component={'li'} sx={{margin:"5px"}}>

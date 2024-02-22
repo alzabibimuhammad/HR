@@ -6,13 +6,13 @@ import Grid from '@mui/material/Grid'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import useDeleteBranch from '../../hooks/useDelete'
+import { useTranslation } from 'react-i18next'
 
 export default function AlertDialog({ Branch, open, handleClose }) {
 
   const { mutate: deleteBranch, isLoading } = useDeleteBranch();
   const [confirm , setConfirm] = useState(false);
-
-
+  const {t} = useTranslation()
   const handleDelete = () => {
 
     setConfirm(true)
@@ -42,16 +42,15 @@ export default function AlertDialog({ Branch, open, handleClose }) {
           <Grid item xs={12}>
             <form onSubmit={handleSubmit} >
             <Item>
-              {!confirm?<Typography sx={{ fontWeight: '600', fontSize: '20px', color: '#131627' }}>Delete</Typography>:null}
+              {!confirm?<Typography sx={{ fontWeight: '600', fontSize: '20px', color: '#131627' }}>{t('Delete')}</Typography>:null}
               {!confirm ?
               <DialogTitle style={{ fontSize: '14px', color: '#3F4458' }}>
-                Are you sure you want to delete [{Branch && Branch && Branch.name}] ? This action is irreversible and
-                will permanently remove all associated data and configurations for this branch.
+                {t('Are you sure you want to delete')} [{Branch && Branch && Branch.name}] ? {t('This action is irreversible and will permanently remove all associated data and configurations for this branch.')}
               </DialogTitle>
               :
               <DialogTitle style={{ fontSize: '14px', color: '#3F4458' }}>
 
-              Please, Enter your password to confirm the deletion.
+{t('Please, Enter your password to confirm the deletion.')}
 
               <TextField
                 sx={{ marginTop:'3%' }}
@@ -65,7 +64,7 @@ export default function AlertDialog({ Branch, open, handleClose }) {
               }
               <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
                 <Button onClick={handleClose} sx={{ backgroundColor: 'rgba(128, 144, 167,0.2)', color: '#8090A7' }}>
-                  Cancel
+                {t('Cancel')}
                 </Button>
 
                 {!confirm?
@@ -79,7 +78,7 @@ export default function AlertDialog({ Branch, open, handleClose }) {
                   }}
                   onClick={handleDelete}
                 >
-                  Delete
+                  {t('Delete')}
                 </Button>
                 :
                 <Button

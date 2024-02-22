@@ -90,11 +90,11 @@ const navigation = () => {
       icon: 'tabler:calendar',
       path: '/calendar'
     },
-    {
-      title: 'Hierarchy',
-      icon: 'tabler:tree',
-      path: '/tree'
-    },
+    // {
+    //   title: 'Hierarchy',
+    //   icon: 'tabler:tree',
+    //   path: '/tree'
+    // },
     {
       title: 'Emails',
       icon: 'tabler:mail',

@@ -58,46 +58,6 @@ export const RegistrationData = elements => {
       else statusX="Late";
     }
 
-    // if (checkinDate) {
-    //   const checkinTime = new Date(checkinDate);
-    //   const hours = checkinTime?.getHours()?.toString()?.padStart(2, '0');
-    //   const minutes = checkinTime?.getMinutes()?.toString()?.padStart(2, '0');
-    //   const formattedTime = `${hours}:${minutes}`;
-
-    //   checkinDate = formattedTime
-
-    //   if (formattedTime < targetTime) {
-    //     statusX = "Arrived";
-    //   }
-    //   else {
-    //     statusX = "Late";
-    //   }
-    // }
-    // else if(!checkinDate && !checkoutDate)
-    //   if(CurrentFormattedTime>endTime) {
-    //     statusX="Absent";
-    //   }
-    //   else
-    //     statusX="Late";
-
-    // else if(!checkinDate && checkoutDate)
-    //   statusX = "Wrong"
-
-    // if(checkinDate&&checkoutDate) {
-    //   statusX = "Checked Out";
-    // }
-
-    // const checkoutTime = new Date(checkoutDate);
-    // const hours = checkoutTime?.getHours()?.toString()?.padStart(2, '0');
-    // const minutes = checkoutTime?.getMinutes()?.toString()?.padStart(2, '0');
-    // const outformattedTime = `${hours}:${minutes}`;
-
-    // if(outformattedTime!='NaN:NaN')
-    //   checkoutDate = outformattedTime
-    // else
-    //   checkoutDate = '---'
-    // if(!checkinDate)
-    //   checkinDate='---'
 
 
     return {
@@ -107,7 +67,8 @@ export const RegistrationData = elements => {
       department: element?.department?.name,
       status: statusX,
       checkIn: checkinDate,
-      checkOut: checkoutDate
+      checkOut: checkoutDate,
+      user_info:element?.user_info?.image
     };
   });
 };

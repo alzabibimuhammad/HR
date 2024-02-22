@@ -224,8 +224,8 @@
   "Absence":"الغيابات",
   "Search":"بحث",
   "Inquiries":"استفسارات",
-  "ADD TEAM":"اضافة فريق",
-  "Team Name":"اسم الفريق",
+  "ADD TEAM":"اضافة قسم",
+  "Team Name":"اسم القسم",
   "Team ID":"رقم الفريق",
   "Members":"الاعضاء",
   "ID":"الرقم",
@@ -558,6 +558,12 @@
   "Employee of the month":"موظف الشهر",
   "Reports":"تقارير",
   "Inquiries List":"قائمة الطلبات",
-  "Waiting":"منتظر"
+  "Waiting":"منتظر",
+  "Absenced":"غائب",
+  "Checked out":"خارج",
+  "Action": "اجراءات",
+  "Actions": "اجراءات",
+  "Save":"حفظ"
+
 
 }

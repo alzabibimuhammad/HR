@@ -27,7 +27,10 @@
           <Stack spacing={1} direction={'row'}  alignItems={'center'} >
             <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
               <Typography>
-                {params.row.first_name} {params.row.last_name}
+                {params.row.first_name}
+              </Typography>
+              <Typography>
+                {params.row.first_name}
               </Typography>
           </Stack>
           </Link>

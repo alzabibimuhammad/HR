@@ -94,6 +94,8 @@ const UserDropdown = props => {
   }
   const userData = JSON.parse(localStorage.getItem('userData'))
 
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+
 
   return (
     <Fragment>
@@ -109,7 +111,7 @@ const UserDropdown = props => {
       >
         <Avatar
           alt=''
-          src={process.env.NEXT_PUBLIC_IMAGES + '/' }
+          src={process.env.NEXT_PUBLIC_IMAGES + '/'+userInfo?.image }
           onClick={handleDropdownOpen}
           sx={{ width: 38, height: 38 }}
         />
@@ -134,7 +136,7 @@ const UserDropdown = props => {
             >
               <Avatar
                 alt=''
-                src={process.env.NEXT_PUBLIC_IMAGES }
+                src={process.env.NEXT_PUBLIC_IMAGES + '/'+userInfo?.image }
                 sx={{ width: '2.5rem', height: '2.5rem' }}
               />
             </Badge>

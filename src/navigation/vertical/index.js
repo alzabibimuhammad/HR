@@ -52,7 +52,7 @@ const navigation = () => {
       ]
     },
     {
-      title: 'Report',
+      title: 'Reports',
       icon: 'tabler:file-report',
       path: '/report'
     },

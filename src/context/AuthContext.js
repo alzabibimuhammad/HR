@@ -32,13 +32,13 @@ const AuthProvider = ({ children }) => {
   const router = useRouter()
   useEffect(() => {
     const initAuth = async () => {
-      const storedToken = localStorage.getItem('accessToken')
-      setUser(JSON.parse(localStorage.getItem('userData')))
+      const storedToken = localStorage?.getItem('accessToken')
+      setUser(JSON.parse(localStorage?.getItem('userData')))
 
       setLoading(false)
     }
     initAuth()
- 
+
   }, [])
 
 
@@ -48,6 +48,7 @@ const AuthProvider = ({ children }) => {
       .then(async response => {
         localStorage.setItem('accessToken', response.data?.data?.authorization.token);
         localStorage.setItem('userData', JSON.stringify(response.data?.data?.user));
+        localStorage.setItem('userInfo', JSON.stringify(response.data?.data?.user_info));
          const returnUrl = router.query.returnUrl
          setUser(response.data.data?.user)
          const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'

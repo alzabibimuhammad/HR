@@ -19,7 +19,8 @@ const ReviewFeature = ({ Data }) => {
   const [show, setShow] = React.useState(10);
 
   useEffect(() => {
-    let filterData = ReviewData(data)
+    
+    let filterData = ReviewData(Data?.data.data)
     if(date)filterData = filterData?.filter((value,index)=>value?.date==date)
     setRows(filterData)
   }, [Data,date])

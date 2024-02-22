@@ -82,6 +82,7 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
         <Typo>{t("Paid absence days")}</Typo>
 
         <Controller
+        defaultValue=''
         name={`absence_management.paid_absence_days[count]`}
         control={control}
         render={({ field }) => (

@@ -39,7 +39,7 @@ export default function AlertDialogDelete({ id, open, handleClose }) {
                       backgroundColor: '#FFFFFF',
                       color: '#A20D29',
                       fontSize: 160,
-                      position: 'absolute',
+                      position: 'fixed',
                       top: '50%',
                       left: '50%',
                       transform: 'translate(-50%, -90%)',

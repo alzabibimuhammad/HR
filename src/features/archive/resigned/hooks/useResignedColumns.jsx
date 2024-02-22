@@ -96,41 +96,41 @@ const useResignedColumns = () => {
 
 
 
-    {
-      field: 'action',
-      headerName: t("Action"),
-      flex:1,
-      renderCell: (params) => {
-        return (
-          <>
-          <Stack direction={{ sm:'row' }}  >
+    // {
+    //   field: 'action',
+    //   headerName: t("Action"),
+    //   flex:1,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //       <Stack direction={{ sm:'row' }}  >
 
-              <Link href={`/profile/${params.row.id}?type=profile`} >
-              <IconButton onClick={handleProfileTap} >
-              <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'/>
-              </IconButton>
-              </Link>
-              <Box >
-                <IconButton>
-                <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={()=>handleEditClick(params.row)} />
-                </IconButton>
-              </Box>
-              <Box>
-                <IconButton onClick={() => handleClickOpen(params?.row?.id)}>
-                <DeleteOutlinedIcon  variant="contained" color="#8090A7" size='small'/>
-                </IconButton>
-              </Box>
+    //           <Link href={`/profile/${params.row.id}?type=profile`} >
+    //           <IconButton onClick={handleProfileTap} >
+    //           <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'/>
+    //           </IconButton>
+    //           </Link>
+    //           <Box >
+    //             <IconButton>
+    //             <BorderColorOutlinedIcon style={{ color:'#8090A7' }} variant="contained" color="primary" size='small' onClick={()=>handleEditClick(params.row)} />
+    //             </IconButton>
+    //           </Box>
+    //           <Box>
+    //             <IconButton onClick={() => handleClickOpen(params?.row?.id)}>
+    //             <DeleteOutlinedIcon  variant="contained" color="#8090A7" size='small'/>
+    //             </IconButton>
+    //           </Box>
 
-          </Stack>
-            {isDeletePopupOpen && <AlertDialogDeleteUser id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
+    //       </Stack>
+    //         {isDeletePopupOpen && <AlertDialogDeleteUser id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
 
-            <Box>
-              <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
-            </Box>
-          </>
-        );
-      },
-    },
+    //         <Box>
+    //           <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
+    //         </Box>
+    //       </>
+    //     );
+    //   },
+    // },
   ]);
 };
 

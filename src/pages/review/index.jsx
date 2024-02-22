@@ -10,9 +10,12 @@ export default function Review() {
   return (
     <>
     {data?<ReviewFeature Data={data}/>:<Box height={'100%'} display={'center'} justifyContent={'center'}  alignItems={'center'} >
+    <Box sx={{display: 'flex',justifyContent:"center",alignItems:"center",height:'70vh' }} >
     <CircularProgress/>
+    </Box>
   </Box>}
   </>
   )
 }
+
 

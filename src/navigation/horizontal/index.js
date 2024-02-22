@@ -17,7 +17,11 @@ const navigation = () => {
         path:'/profile/[id]'
       },
 
-
+      {
+        title: 'Settings',
+        icon: 'tabler:settings',
+        path: '/Settings'
+      },
   ]
 }
 

@@ -264,7 +264,7 @@ const useInquiriesColumns = () => {
                 <DialogTitle sx={{ fontSize: '20px', fontWeight: '600', color: '#3F4458', textAlign: 'center' }}>
                 {t('Request')}
                 </DialogTitle>
-                <DialogContent sx={{ overflowX: 'hidden', width: '100vh', height: '100%' }}>
+                <DialogContent sx={{ overflowX: 'hidden', width: '100%', height: '100%' }}>
                   <h3>{t('Title Request')}</h3>
                   <p style={{ fontWeight: '400', fontSize: '14px', color: '#3e4458' }}>{rowData?.Title}</p>
                   <Divider component='' sx={{ width:'80%' }} />

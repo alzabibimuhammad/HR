@@ -127,11 +127,7 @@ const navigation = () => {
       ]
     },
 
-    {
-      title: 'Settings',
-      icon: 'tabler:settings',
-      path: '/Settings'
-    },
+
   ];
 };
 

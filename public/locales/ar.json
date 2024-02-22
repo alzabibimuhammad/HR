@@ -17,7 +17,7 @@
   "Add": "اضافة",
   "Select Status":"تحديد حالة",
   "User": "المستعمل",
-  "View": "رأي",
+  "View": "عرض",
   "Security": "حماية",
   "Billing & Plans": "الفواتير والخطط",
   "Notifications": "إشعارات",
@@ -541,7 +541,13 @@
   "Oops! 😖 The requested URL was not found on this server.":"أُووبس! 😖 لم يتم العثور على عنوان URL المطلوب على هذا الخادم.",
   "Back to Home":"العودة للصفحة الرئيسية",
   "Page Not Found :(":"الصفحة غير موجودة :(",
-  "There was an error with the internal server. Please contact your site administrator.":"حدث خطأ في الخادم الداخلي. يرجى الاتصال بمسؤول الموقع."
-
+  "There was an error with the internal server. Please contact your site administrator.":"حدث خطأ في الخادم الداخلي. يرجى الاتصال بمسؤول الموقع.",
+  "Branch Name":"اسم الفرع",
+  "Please, Enter the new name of the branch.":"من فضلك ادخل اسم الفرع الجديد .",
+  "This action is irreversible and will permanently remove all associated data and configurations for this branch.":"لا يمكن التراجع عن هذا الإجراء وسيؤدي إلى إزالة جميع البيانات والتكوينات المرتبطة بهذا الفرع نهائيًا.",
+  "Please, Enter your password to confirm the deletion.":"من فضلك، أدخل كلمة المرور الخاصة بك لتأكيد الحذف.",
+  "Are you sure you want to delete":"هل انت متأكد من حذف",
+  "Please, Enter the new branch name.":"من فصلك أدخل اسم الفرع الجديد",
+  "the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.":" سيقوم النظام بإنشاء طلب خصم لحالات محددة. ويلزم الحصول على موافقة المشرف قبل تطبيق الخصم. مثالي للحالات التي قد تتطلب مراجعة أو استثناءات"
 
 }

@@ -15,10 +15,13 @@ import Grid from '@mui/material/Grid'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import useAddBranch from '../../hooks/useAdd'
+import { useTranslation } from 'react-i18next'
 
 export default function AlertDialogAdd({  open, handleClose }) {
 
   const { mutate: AddBranch, isLoading } = useAddBranch();
+
+  const {t} = useTranslation()
 
   const handleSubmit = event =>{
 
@@ -42,21 +45,21 @@ export default function AlertDialogAdd({  open, handleClose }) {
           <Dialog onClose={handleClose} open={open}>
             <Grid item xs={12}>
               <Item>
-                <Typography sx={{ fontWeight: '600', fontSize: '20px', color: '#131627' }}>Add</Typography>
+                <Typography sx={{ fontWeight: '600', fontSize: '20px', color: '#131627' }}>{t('Add')}</Typography>
                 <form onSubmit={handleSubmit}>
 
                   <Stack direction={'column'}>
                     <DialogTitle style={{ fontSize: '14px', color: '#3F4458' }}>
-                      Please, Enter the new branch name.
+                    {t('Please, Enter the new branch name.')}
                     </DialogTitle>
 
                     <DialogTitle style={{ fontSize: '14px', color: '#3F4458' }}>
-                      <TextField  label='Branch Name' fullWidth size='small' />
+                      <TextField  label={t('Branch Name')} fullWidth size='small' />
                     </DialogTitle>
                   </Stack>
                   <DialogActions style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
                     <Button onClick={handleClose} sx={{ backgroundColor: 'rgba(128, 144, 167,0.2)', color: '#8090A7' }}>
-                      Cancel
+                      {t('Cancel')}
                     </Button>
 
                     <Button
@@ -68,7 +71,7 @@ export default function AlertDialogAdd({  open, handleClose }) {
                         '&:hover': { color: '#fff', background: '#6AB2DF' }
                       }}
                     >
-                      Add
+                      {t('Add')}
                     </Button>
                   </DialogActions>
                 </form>

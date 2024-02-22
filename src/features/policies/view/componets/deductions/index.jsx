@@ -54,7 +54,7 @@ export default function Deductions({data}) {
         <Typo marginTop={'2%'}>{data?.data?.policy?.deduction_status === 1 ?t("Request for Approval"):t("Automatic Deduction")}</Typo>
 
 
-        <TypoVal sx={{marginTop:"5px"}}>{data?.data?.policy?.deduction_status === 1 ? t("By choosing this option, the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions."): t("Automatic DeductionSelecting this option will enable automatic deduction of salary for specified cases, such as late arrivals. The system will apply deductions without requiring manual approval.")  }
+        <TypoVal sx={{marginTop:"5px"}}>{data?.data?.policy?.deduction_status === 1 ? t("the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions."): t("Automatic DeductionSelecting this option will enable automatic deduction of salary for specified cases, such as late arrivals. The system will apply deductions without requiring manual approval.")  }
         </TypoVal>
 
 

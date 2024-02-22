@@ -22,6 +22,7 @@ import { useAuth } from 'src/hooks/useAuth'
 import { useTranslation } from 'react-i18next'
 import useShowAllBranches from 'src/features/settings/hooks/useShowAllBranches'
 import { Button } from '@mui/material'
+import Link from 'next/link'
 
 // ** Styled Components
 const BadgeContentSpan = styled('span')(({ theme }) => ({
@@ -140,9 +141,16 @@ const UserDropdown = props => {
                 sx={{ width: '2.5rem', height: '2.5rem' }}
               />
             </Badge>
+            <Box display={'flex'} justifyContent={'space-between'} width={'100%'} alignItems={'center'}>
             <Box sx={{ display: 'flex', ml: 2.5, alignItems: 'flex-start', flexDirection: 'column' }}>
               <Typography sx={{ fontWeight: 500 }}>{userData?.first_name} {userData?.last_name}</Typography>
               <Typography variant='body2'>{`${t(userData?.role)}`}</Typography>
+            </Box>
+              <Link href={'/Settings'} >
+              <Box>
+              <img src='/images/setting.svg' />
+              </Box>
+              </Link>
             </Box>
           </Box>
         </Box>

@@ -57,8 +57,9 @@ const useAbsenceColumns = () => {
       renderCell: (params) => {
         return (
           <Stack direction={'row'} alignItems={'center'} spacing={1}>
-            <Avatar alt='' />
+            <Avatar alt='' src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} />
             <Typography>{params?.row?.name}</Typography>
+            <Typography>{params?.row?.last_name}</Typography>
           </Stack>
         );
       },

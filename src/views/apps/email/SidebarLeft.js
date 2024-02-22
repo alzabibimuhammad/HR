@@ -72,18 +72,18 @@ const SidebarLeft = props => {
 
 
 
-   
+
 
   }
 
   const handleActiveMailItem = (type) => {
     console.log("🚀 ~ handleActiveItem ~ type:", type)
      dispatch(fetchMails({ folder: type}))
-  
-     
+
+
       console.log('handleActivetItem')
     }
-  
+
   const handleListItemClick = () => {
     setMailDetailsOpen(false)
     setTimeout(() => dispatch(handleSelectAllMail(false)), 50)
@@ -268,18 +268,7 @@ const SidebarLeft = props => {
               />
             </ListItemStyled>
           </List>
-          <Typography
-            variant='body2'
-            sx={{ mx: 6, mt: 5.5, mb: 1.5, color: 'text.disabled', textTransform: 'uppercase' }}
-          >
-            Labels
-          </Typography>
-          <List component='div'>
-       
-   
 
-          
-          </List>
         </Box>
       </ScrollWrapper>
     </Drawer>

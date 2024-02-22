@@ -53,6 +53,7 @@ export default function SidebarLeft({ DataEventByDay }) {
       sx={{ '&::-webkit-scrollbar': { width: '3px' } }}
       spacing={1}
       direction={'column'}
+      alignItems={"center"}
     >
       {Array.isArray(DataEventByDay?.data?.data) && DataEventByDay.data.data.length > 0 ? (
         DataEventByDay.data.data.map(event => (
@@ -60,9 +61,10 @@ export default function SidebarLeft({ DataEventByDay }) {
             <Stack
               direction={'row'}
               justifyContent={'start'}
-              sx={{ padding: 0, margin: 0, width: '100%', height: '70px' }}
+              sx={{ padding: 0, margin: 0,   }}
               className='parent'
               key={event.id}
+              height={"70px !important"}
             >
               <Stack alignItems={'center'} direction={'column'}>
                 <span style={{ padding: 0, margin: 0 }} className='child'>

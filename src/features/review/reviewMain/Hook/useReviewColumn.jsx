@@ -39,12 +39,7 @@ const useRegistrationColumn = () => {
 
 
   return useMemo(() => [
-    {
-      field: 'id',
-      headerName: t("id"),
-      flex:2,
 
-    },
       {
         field: 'first_name',
         headerName: t("Name"),

@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import useGetAllUsers from '../../../hooks/useGetAllUsers';
 import useUpdateMvp from '../../../hooks/useUpdateMvp';
+import { useTranslation } from 'react-i18next';
 
 const drawerWidth = 440;
 
@@ -38,6 +39,8 @@ export default function DrawerForm({ open, setOpenParent }) {
   const {data} = useGetAllUsers()
 
   const [selectedId, setSelectedId] = useState(null);
+
+  const {t} = useTranslation()
 
   const { mutate: UpdateMvp, isLoading } = useUpdateMvp();
 
@@ -69,7 +72,7 @@ export default function DrawerForm({ open, setOpenParent }) {
         onEscapeKeyDown={handleDrawerClose}
 
       >
-      <DrawerHeader sx={{color:'#8090A7',padding:'0px 0px 0px 10px' }} >Select the new employee of the month</DrawerHeader>
+      <DrawerHeader sx={{color:'#8090A7',padding:'0px 0px 0px 10px' }} >{t('Select the new employee of the month')}</DrawerHeader>
 
     <Stack  height={ '270px' }   direction={'column'} padding={'2px 0px 0px 10px'}>
         <FormControl>
@@ -109,8 +112,8 @@ export default function DrawerForm({ open, setOpenParent }) {
 
 
     <Box sx={{ display:"flex",justifyContent:"flex-end",padding:"7px",gap:"4px",marginTop:"8px" }}>
-    <Button  onClick={handleDrawerClose} >Cancel</Button>
-        <Button sx={{backgroundColor: '#6AB2DF',color: '#fff',':hover': { color: '#fff', backgroundColor: '#2A4759' }, }} onClick={handleDrawerDone}>Done</Button>
+    <Button  onClick={handleDrawerClose} >{t('Cancel')}</Button>
+        <Button sx={{backgroundColor: '#6AB2DF',color: '#fff',':hover': { color: '#fff', backgroundColor: '#2A4759' }, }} onClick={handleDrawerDone}>{t('Done')}</Button>
     </Box>
     </Stack>
 

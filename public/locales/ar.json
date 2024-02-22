@@ -237,6 +237,7 @@
   "Customer":"الزبون",
   "Approve":"موافقة",
   "Decline":"رفض",
+
   "Total Employees":"كل الموظفين",
   "Active Employees":"الموظفين النشطين",
   "Registration":"الاشتراكات",
@@ -345,6 +346,7 @@
   "Employees":"الموظفين",
   "Note":"ملاحظة",
   "By choosing this option, the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.":"من خلال تحديد هذا الخيار، سيقوم النظام بإنشاء طلب خصم لحالات محددة. ويلزم الحصول على موافقة المشرف قبل تطبيق الخصم. مثالي للحالات التي قد تتطلب مراجعة أو استثناءات.",
+
   "notes":"ملاحظات",
   "add":"اضافة",
   "Overall":"إجمالي",
@@ -548,6 +550,12 @@
   "Please, Enter your password to confirm the deletion.":"من فضلك، أدخل كلمة المرور الخاصة بك لتأكيد الحذف.",
   "Are you sure you want to delete":"هل انت متأكد من حذف",
   "Please, Enter the new branch name.":"من فصلك أدخل اسم الفرع الجديد",
-  "the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.":" سيقوم النظام بإنشاء طلب خصم لحالات محددة. ويلزم الحصول على موافقة المشرف قبل تطبيق الخصم. مثالي للحالات التي قد تتطلب مراجعة أو استثناءات"
+  "the system will generate a deduction request for specific cases.Admin approval is required before the deduction is applied.Ideal for situations that may require review or exceptions.":" سيقوم النظام بإنشاء طلب خصم لحالات محددة. ويلزم الحصول على موافقة المشرف قبل تطبيق الخصم. مثالي للحالات التي قد تتطلب مراجعة أو استثناءات",
+  "Event":"حدث",
+
+  "Select the new employee of the month":"حدد الموظف الجديد لهذا الشهر",
+  "Done":"تم",
+  "Employee of the month":"موظف الشهر",
+  "Reports":"تقارير"
 
 }

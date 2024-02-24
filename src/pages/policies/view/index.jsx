@@ -11,6 +11,9 @@ import WorkTimes from 'src/features/policies/view/componets/workTime';
 import useShowPolicies from 'src/features/policies/hook/useShowPolicies';
 import { CircularProgress } from '@mui/material'
 
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import Link from 'next/link';
+
 export default function View() {
 
   const {data}=useShowPolicies()
@@ -18,8 +21,16 @@ export default function View() {
 
   return (<>
 
-    <Logo/>
+    <Box sx={{ position:'relative' }} >
+      <Link href={'/policies/edit'}>
+      <Box sx={{ position:'absolute' , right:'10px',top:'10px' }} >
 
+        <EditNoteIcon/>
+
+      </Box>
+      </Link>
+      <Logo/>
+    </Box>
 {data ?
 
     <Stack marginTop={'24px'} direction={{sm:'row',xs:'column'}} spacing={6} >

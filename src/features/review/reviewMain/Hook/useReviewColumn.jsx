@@ -8,6 +8,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
 import DrawerForm from '../components/DrawerForm';
+import AlertDialogDeleteRieview from '../components/DeleteDialog';
 
 const useRegistrationColumn = () => {
 
@@ -26,8 +27,7 @@ const useRegistrationColumn = () => {
     setIsDrawerOpenEdit(true);
   };
 
-  const handleClickOpen = (params) => {
-    const { id } = params;
+  const handleClickOpen = (id) => {
     setDeleteId(id);
     setIsDeletePopupOpen(true);
   };
@@ -82,7 +82,7 @@ const useRegistrationColumn = () => {
               </Box>
 
           </Stack>
-            {/* {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />} */}
+            {isDeletePopupOpen && <AlertDialogDeleteRieview id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
 
             <Box>
               <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />

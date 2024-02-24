@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { showErrorToast } from './showErrorToast'
 
-const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_BASE_URL });
+const client = axios.create({ baseURL: "http:///91.144.20.117:6001" });
 
 export const request = async ({ url, params = {}, ...rest }) => {
   // Add the branch_id query parameter to the params object

@@ -30,10 +30,16 @@ export const Schema = yup.object().shape({
 
 
    contacts: yup.object().shape({
-    // ... (your existing contact schema)
+
     phonenumbers: yup.array().of(
-      yup.string().matches(/^09\d{8}$/, 'Invalid Syrian phone number').required('Phone number is required')
-    ),
+      yup.object().shape({
+      phone:yup.string().matches(/^09\d{8}$/, 'Invalid Syrian phone number').required('Phone number is required')
+    })),
+
+    emails:yup.array().of(
+      yup.object().shape({
+        email:yup.string().email('Invalid email address').required('Email is required')
+      }))
 
   }),
 

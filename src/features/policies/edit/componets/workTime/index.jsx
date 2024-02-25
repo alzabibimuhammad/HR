@@ -110,7 +110,7 @@ export default function WorkTime({ EditData, Controller, control, days, setDays,
               <TextField
                 {...field}
                 type='time'
-                defaultValue={EditData?.policy?.work_time?.start_time} // Set initial value here
+                defaultValue={EditData?.policy?.work_time?.start_time}
 
                 placeholder='Start time'
             fullWidth

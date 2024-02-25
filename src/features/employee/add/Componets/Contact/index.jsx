@@ -97,7 +97,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
             {phoneNumbersfields.map((phoneNumber, index) => (
               <Box mt={5} key={phoneNumber.id}>
                 <Controller
-                  name={`contacts.phonenumbers.${index}`}
+                  name={`contacts.phonenumbers.${index}.phone`}
                   control={control}
                   render={({ field }) => (
                     <TextField
@@ -106,9 +106,9 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                       variant='outlined'
                       fullWidth
                       size='small'
-                      error={Boolean(errors?.contacts?.phonenumbers?.[index])}
-                      {...(errors?.contacts?.phonenumbers?.[index] && {
-                        helperText: errors?.contacts?.phonenumbers?.[index].message
+                      error={Boolean(errors?.contacts?.phonenumbers?.[index].phone)}
+                      {...(errors?.contacts?.phonenumbers?.[index].phone && {
+                        helperText: errors?.contacts?.phonenumbers?.[index].phone.message
                       })}
                     />
                   )}
@@ -134,7 +134,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
             {EmailFields.map((Email, index) => (
               <Box key={Email.id} >
                 <Controller
-                  name={`contacts.emails.${index}`}
+                  name={`contacts.emails.${index}.email`}
                   control={control}
                   render={({ field }) => (
                     <TextField
@@ -143,9 +143,9 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                       variant='outlined'
                       fullWidth
                       size='small'
-                      error={Boolean(errors?.contacts?.emails?.[index])}
-                      {...(errors?.contacts?.emails?.[index] && {
-                        helperText: errors?.contacts?.emails?.[index].message
+                      error={Boolean(errors?.contacts?.emails?.[index].email)}
+                      {...(errors?.contacts?.emails?.[index].email && {
+                        helperText: errors?.contacts?.emails?.[index].email.message
                       })}
                     />
                   )}

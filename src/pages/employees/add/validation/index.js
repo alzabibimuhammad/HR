@@ -21,9 +21,9 @@ export const Schema = yup.object().shape({
 
 
    birth_date: yup.string().matches(/^\d{4}-\d{2}-\d{2}$/,'Date of registration is required exampe:2020-02-06'),
-   nationalID: yup.string()
-   .matches(/^\d{11}$/, 'ID Number must be exactly 11 digits')
-   .required('ID Number is required'),   military_situation: yup.string().required(),
+   nationalID: yup.string().matches(/^\d{11}$/, 'ID Number must be exactly 11 digits').required('ID Number is required'),
+   military_situation: yup.string().required(),
+   gender: yup.string().required(),
    social_situation: yup.string().required(),
    address: yup.string().required(),
 
@@ -38,7 +38,7 @@ export const Schema = yup.object().shape({
 
     emails:yup.array().of(
       yup.object().shape({
-        email:yup.string().email('Invalid email address').required('Email is required')
+        email:yup.string().email('Invalid email address')
       }))
 
   }),

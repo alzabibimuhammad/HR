@@ -17,7 +17,7 @@ export const RegistrationData = elements => {
     element?.attendance?.forEach(element => {
       if(element?.status==0)
         checkinDate = element?.datetime
-      else if(element?.status ==0)
+      else if(element?.status ==1)
         checkoutDate = element?.datetime
 
     });

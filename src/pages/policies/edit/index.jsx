@@ -23,7 +23,6 @@ import useShowPolicies from 'src/features/policies/hook/useShowPolicies';
 export default function EditPolicies() {
   const {data}=useShowPolicies()
   const Data = data?.data?.data
-  console.log("🚀 ~ EditPolicies ~ Data:", Data?.policy?.annual_salary_increase)
 
 
   const [days, setDays] = React.useState([]);
@@ -33,6 +32,9 @@ export default function EditPolicies() {
   const [Paid  , setPaid ] = useState();
   const [Unpaid  , setUnpaid ] = useState(0);
   const [Sick , setSick] = useState(0);
+  const [annualSalarypercentage,setAnnualSalarypercentage] = useState()
+
+
   const {t} = useTranslation()
 
   useEffect(()=>{
@@ -42,39 +44,28 @@ export default function EditPolicies() {
     setAlert(Data?.policy?.warnings?.alerts_to_warnings)
     setWarningsto(Data?.policy?.warnings?.warnings_to_dismissal)
     setDays([Data?.policy?.work_time?.work_days])
+    setAnnualSalarypercentage(Data?.policy.annual_salary_increase?.annual_salary_percentage)
 
   },[data])
 
 
-  const defaultValues = {
-
-    warnings:{
-      alerts_to_warnings:0,
-      warningsto_dismissal:0,
-      notes:[]
-    },
-    annual_salary_increase:{
-      annual_salary_percentage:Data?.policy.annual_salary_increase?.annual_salary_percentage,
-      allow_advance_request:Data?.policy.annual_salary_increase?.allow_advance_request
-    }
 
 
- };
 
  const handleDataSubmit =  (data) => {
-   try {
+  //  try {
 
-     data.warnings.alerts_to_warnings=alert
-     data.warnings.warningsto_dismissal=warningsto
-     data.absence_management.paid_absence_days.count=Paid
-     data.absence_management.unpaid_absence_days.count=Unpaid
-     data.absence_management.sick_absence_days.count=Sick
-     data.work_time.work_days=days
+  //    data.warnings.alerts_to_warnings=alert
+  //    data.warnings.warningsto_dismissal=warningsto
+  //    data.absence_management.paid_absence_days.count=Paid
+  //    data.absence_management.unpaid_absence_days.count=Unpaid
+  //    data.absence_management.sick_absence_days.count=Sick
+  //    data.work_time.work_days=days
 
-      AddPolicies(data)
-   } catch (error) {
+  //     AddPolicies(data)
+  //  } catch (error) {
 
-   }
+  //  }
 
 
 };
@@ -90,7 +81,6 @@ export default function EditPolicies() {
     reset,
     formState: { errors, },
   } = useForm({
-    defaultValues,
     mode: 'onBlur',
 
       resolver: yupResolver(Schema),
@@ -128,15 +118,15 @@ export default function EditPolicies() {
         <Stack  spacing={6} direction={'column'}>
           <Box  >
 
-            <WorkTime EditData={Data} errors={errors} defaultValues={defaultValues} control={control} Controller={Controller} setDays={setDays} days={days}/>
+            <WorkTime EditData={Data} errors={errors} control={control} Controller={Controller} setDays={setDays} days={days}/>
 
           </Box>
 
           <Box >
-            <Annual EditData={Data} errors={errors}  defaultValues={defaultValues} control={control} Controller={Controller}/>
+            <Annual EditData={Data} errors={errors}  control={control} annualSalarypercentage={annualSalarypercentage} setAnnualSalarypercentage={setAnnualSalarypercentage} Controller={Controller}/>
           </Box>
           <Box >
-            <Reviews EditData={Data}  errors={errors}  defaultValues={defaultValues} control={control} Controller={Controller}/>
+            <Reviews EditData={Data}  errors={errors}   control={control} Controller={Controller}/>
           </Box>
         </Stack>
     </Grid>
@@ -144,7 +134,7 @@ export default function EditPolicies() {
     <Grid item sm={6}  xs={12} marginTop={'24px'}>
 
       <Stack spacing={6} direction={'column'}>
-        <Warnings EditData={Data} errors={errors} defaultValues={defaultValues} control={control} Controller={Controller} setAlert={setAlert} alert={alert} setWarningsto={setWarningsto} warningsto={warningsto}/>
+        <Warnings EditData={Data} errors={errors}  control={control} Controller={Controller} setAlert={setAlert} alert={alert} setWarningsto={setWarningsto} warningsto={warningsto}/>
         <AbsencesManagement EditData={Data} control={control} Controller={Controller} setPaid={setPaid} Paid={Paid} Unpaid={Unpaid} setUnpaid={setUnpaid} setSick={setSick} Sick={Sick}/>
         <Deductions  EditData={Data} control={control} Controller={Controller} />
       </Stack>

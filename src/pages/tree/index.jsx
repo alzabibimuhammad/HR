@@ -2,7 +2,6 @@ import { Box, Stack } from '@mui/system'
 import dynamic from 'next/dynamic';
 import React from 'react'
 import Logo from 'src/features/Contracts/view/logo';
-import useGetMembersHierarchy from 'src/features/tree/hooks/useGetMembersHierarchy';
 
 
 const TreeComponent = dynamic(

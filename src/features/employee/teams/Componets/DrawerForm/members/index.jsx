@@ -20,6 +20,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import { IconButton } from '@mui/material'
 import useGetEmployeeDropDown from 'src/features/Contracts/list/Hooks/useEmployee'
 import { useTranslation } from 'react-i18next'
+import useGetAllUsers from '../../../hooks/useGetAllEmployee'
 
 const data = [
   {
@@ -83,7 +84,7 @@ const Members = ({ SetMembers, SelectedRow }) => {
   }, [SelectedRow])
 
   const [searchText, setSearchText] = useState('')
-  const { data: UserData, isloading } = useGetEmployeeDropDown()
+  const { data: UserData, isloading } = useGetAllUsers()
 
   const deletee = index => {
     setSelectedItems(prevItems => prevItems.filter((_, i) => i !== index))

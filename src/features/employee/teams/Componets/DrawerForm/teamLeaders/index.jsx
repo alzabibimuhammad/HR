@@ -16,6 +16,7 @@ import { Checkbox, Input, TextField } from '@mui/material'
 import useGetEmployeeDropDown from 'src/features/Contracts/list/Hooks/useEmployee'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import useGetAllUsers from '../../../hooks/useGetAllEmployee'
 
 const data = [
   {
@@ -64,7 +65,7 @@ const data = [
 ]
 
 const Members = ({SetteamLeader,Data}) => {
-  const {data:UserData,isloading}=useGetEmployeeDropDown()
+  const {data:UserData,isloading}=useGetAllUsers()
   const [selectedTeamLeader,SetTeamLeader]=useState()
   const [searchText, setSearchText] = useState('');
   const {t} = useTranslation()

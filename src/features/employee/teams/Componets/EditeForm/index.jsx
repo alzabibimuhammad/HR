@@ -19,6 +19,7 @@ import Icon from 'src/@core/components/icon'
 import useGetEmployeeDropDown from 'src/features/Contracts/list/Hooks/useEmployee'
 import { useEditTeam } from '../../hooks/useEditTeam'
 import { useTranslation } from 'react-i18next'
+import useGetAllUsers from '../../hooks/useGetAllEmployee'
 
 const drawerWidth = 440
 
@@ -32,7 +33,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }))
 
 export default function EditeForm({ open, setOpenParent, SelectedRow }) {
-  const { data: UserData, isloading } = useGetEmployeeDropDown()
+  const { data: UserData, isloading } = useGetAllUsers()
   const theme = useTheme()
   const { mutate: EditTeam } = useEditTeam()
   const [members, SetMembers] = useState([])

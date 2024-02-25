@@ -22,6 +22,10 @@ const navigation = () => {
         icon: 'tabler:settings',
         path: '/Settings'
       },
+      {
+        title:"Edit",
+        path:"/policies/edit"
+      },
   ]
 }
 

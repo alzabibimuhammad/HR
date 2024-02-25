@@ -12,7 +12,7 @@ export default function Logo() {
       <Box  display={'flex'} alignItems={'center'} sx={{width:"246px"}}>
 
       <Box sx={{ width:'64px',height:'65px' }}>
-        <img style={{ width:'100%',height:'100%' }} src='/images/axis.png' />
+        <img style={{ width:'100%',height:'100%' }} src='/images/policesIcon/pageLogo/logo.svg' />
       </Box>
 
       <Typography color={'#8090A7'} variant='h2'>

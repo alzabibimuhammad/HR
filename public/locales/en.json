@@ -652,7 +652,9 @@
   "Action": "Action",
   "Actions": "Actions",
   "Save": "Save",
-  "Inbox": "Inbox"
+  "Inbox": "Inbox",
+  "review":"review"
+
 
 
  }

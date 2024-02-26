@@ -18,6 +18,8 @@ import { useAddUsers } from './hook/useAddUsers'
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next'
 import { showErrorToast } from 'src/utiltis/showErrorToast'
+import { useRouter } from 'next/router'
+import useGetUser from './hook/useGetUser'
 
 export default function Add() {
   const [snapshotData, setSnapshotData] = useState({})
@@ -31,11 +33,21 @@ export default function Add() {
   const [EmergencyContactData, setEmergencyContacttData] = useState({})
   const [ProfileImage, setProfileImage] = useState()
   const {t} = useTranslation()
+
   const { mutate: addUsers, isLoading } = useAddUsers()
+
+  const router = useRouter();
+  let { user_id } = router.query;
+
+  const { data:ShowUser } = useGetUser(user_id)
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
   }
+
+
+  // if(user_id)
+  //   GetUser(user_id)
 
   const defaultValues = {
     // first_name: '',

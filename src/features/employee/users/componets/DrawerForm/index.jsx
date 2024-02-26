@@ -36,7 +36,6 @@ export default function DrawerForm({ open, setOpenParent,Data }) {
 
 
   const theme = useTheme()
-  const fullScreen = useMediaQuery(theme.breakpoints.down('xl'));
   const {t} = useTranslation()
 const dispatch=useDispatch()
 const {mutate:EditEmployee,isloading}=useEditEmployee()
@@ -96,16 +95,14 @@ const handleDrawerClose = () => {
     <Box sx={{ display: 'flex', }}>
 
       <Drawer
-      fullScreen={fullScreen}
 
         sx={{
-          width: drawerWidth,
 
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: {sm:drawerWidth,xl:"100%"},
+            width: { xl: drawerWidth, md: drawerWidth, sm: drawerWidth, xs: '90%' },
+            overflowX: 'hidden'
           },
-          width:{sm:"auto",xl:"100vh"}
         }}
         anchor='right'
         open={open}
@@ -204,7 +201,7 @@ const handleDrawerClose = () => {
                     <TextField
                       {...field}
                       fullWidth
-                      label={t('Specialization')}
+                      label={t('Role')}
                       variant='outlined'
                       error={!!errors.name}
                       helperText={errors.name ? errors.name.message : ''}

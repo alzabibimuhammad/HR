@@ -83,7 +83,7 @@ export default function Add() {
 
 
   const handleDataSubmit = data => {
-    console.log("🚀 ~ handleDataSubmit ~ data:", data)
+  
     try {
       const formData = new FormData()
       formData.append('image', ProfileImage)

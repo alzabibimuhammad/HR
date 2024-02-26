@@ -18,6 +18,7 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
 
   const [noteAdded, setNoteAdded] = useState(false);
   const {t} = useTranslation()
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'absence_management.notes',

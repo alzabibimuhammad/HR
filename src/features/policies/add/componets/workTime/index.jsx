@@ -44,10 +44,7 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
 
     };
 
-    // const handleSelectBranchChange = e => {
-    //   setSpecialization(e.target.value)
-    //   handleFieldChange('SelectBranch', e.target.value)
-    // }
+
 
   return (
     <Card >
@@ -181,7 +178,6 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
                   displayEmpty: true,
                   onChange: e => {
                     field.onChange(e)
-                    handleSelectBranchChange(e)
                   }
                 }}
                 size='small'

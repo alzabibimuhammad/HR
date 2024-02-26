@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import useGetMembersHierarchy from '../../hooks/useGetMembersHierarchy';
 
 const renderChildren = (children, level) => {
-  console.log("🚀 ~ renderChildren ~ children:", children)
+
   if (!children || children.length === 0) return null;
 
   return (
@@ -29,7 +29,7 @@ const renderChildren = (children, level) => {
 };
 
 const renderChildrenTeamLeader = (children, level) => {
-  console.log("🚀 ~ renderChildrenTeamleader ~ children:", children)
+
   if (!children || children.length === 0) return null;
 
   return (
@@ -50,7 +50,7 @@ const renderChildrenTeamLeader = (children, level) => {
   );
 };
 const renderChildrenMembers = (children, level) => {
-  console.log("🚀 ~ renderChildrenTeamleader ~ children:", children)
+
   if (!children || children.length === 0) return null;
 
   return (
@@ -108,7 +108,7 @@ const TreeNode = ({ employee, level }) => {
   );
 };
 const TreeNodeTeamLeader = ({ employee, level }) => {
-  console.log("🚀 ~ TreeNodeteamleader ~ employee:", employee)
+
 
 
   return (
@@ -149,7 +149,7 @@ const TreeNodeTeamLeader = ({ employee, level }) => {
   );
 };
 const TreeNodeTeamMemmbers = ({ employee, level }) => {
-  console.log("🚀 ~ TreeNodeMembers ~ employee:", employee)
+
 
 
   return (
@@ -192,7 +192,7 @@ const TreeNodeTeamMemmbers = ({ employee, level }) => {
 
 const CompanyTree = () => {
   const { data } = useGetMembersHierarchy();
-  console.log("🚀 ~ CompanyTree ~ data:", data)
+
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -209,7 +209,7 @@ const CompanyTree = () => {
         ))}
       </div>
 
-    
+
     </div>
   );
 };

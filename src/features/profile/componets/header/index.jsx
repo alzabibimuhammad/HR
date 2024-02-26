@@ -10,21 +10,24 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProfileTap } from '../../../../store/apps/user'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
 
 
 
 const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) => {
+  console.log("🚀 ~ UserProfileHeader ~ ProfileData:", ProfileData)
   const { t } = useTranslation()
   const [activeButton, setActiveButton] = useState('reports');
   const dispatch = useDispatch()
 
   const router = useRouter();
   let { type } = router.query;
-  useEffect(()=>{
-    if(type)
+  useEffect(() => {
+    if (type)
       setActiveButton(type)
-  },[type])
+  }, [type])
 
   console.log("🚀 ~ UserProfileHeader:", type)
 
@@ -65,19 +68,19 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
       <Stack
         direction={'row'}
         overflowX='hidden'
-        spacing={{ sm:5,xs:1 }}
+        spacing={{ sm: 5, xs: 1 }}
         sx={{
           position: { sm: 'relative', xs: 'relative' },
           bottom: { sm: '-20px', xs: '8px' },
           left: { sm: '170px', xs: '99px' },
           zIndex: 1000,
-          width:"30%"
+          width: "30%"
         }}
       >
-        <Button  className={`button-tap ${activeButton === 'reports' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleOne}> {t('Reports')}  </Button>
-        <Button  className={`button-tap ${activeButton === 'profile' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleTwo}> {t('Profile')} </Button>
-        <Button  className={`button-tap ${activeButton === 'manage' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleThree}>{t('Manage')} </Button>
-        <Button  className={`button-tap ${activeButton === 'review' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleFoure}>{t('Review')} </Button>
+        <Button className={`button-tap ${activeButton === 'reports' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleOne}> {t('Reports')}  </Button>
+        <Button className={`button-tap ${activeButton === 'profile' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleTwo}> {t('Profile')} </Button>
+        <Button className={`button-tap ${activeButton === 'manage' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleThree}>{t('Manage')} </Button>
+        <Button className={`button-tap ${activeButton === 'review' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleFoure}>{t('Review')} </Button>
       </Stack>
       <Stack
         direction={'row'}
@@ -96,7 +99,7 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
             height: { xs: '100px', sm: '100px', md: '130px' },
             borderRadius: '5px',
             marginLeft: { xs: '16px', sm: '20px', md: '26px' },
-            marginBottom:{sm:"10px",xs:"15px"}
+            marginBottom: { sm: "10px", xs: "15px" }
           }}
           src={process.env.NEXT_PUBLIC_IMAGES + '/' + userData?.user_info?.image || '/broken-image.jpg'}
         />
@@ -109,6 +112,17 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
           <Typography color={'#8090A7'} fontSize={'14px'}>
             {userData?.specialization}
           </Typography>
+          {
+
+            ProfileData?.id &&
+          <Link style={{ textDecoration:'none' }} href={`/employees/add?user_id=${ProfileData?.id}`}>
+            <Box sx={{ position: 'absolute', right: '10px', top: '25px' }} >
+
+              <EditNoteIcon />
+
+            </Box>
+          </Link>
+        }
         </Box>
       </Stack>
 

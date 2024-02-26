@@ -12,7 +12,7 @@ export default function AlertDialogDeleteSystem({ id, open, handleClose }) {
  const { mutate: RejectSystem, isLoading } = useRejectSystem();
   const {t} = useTranslation()
   const handleDeleteAPI = () => {
-    console.log("🚀 ~ AlertDialog ~ id:", id)
+   
     RejectSystem(id)
       handleClose()
   };

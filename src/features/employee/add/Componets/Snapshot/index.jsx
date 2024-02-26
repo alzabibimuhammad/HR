@@ -1,10 +1,11 @@
 import { Button, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import { useTranslation } from 'react-i18next';
 
 export default function Snapshot({onDataChange,Controller,control,defaultValues,errors,setProfileImage}) {
+console.log("🚀 ~ Snapshot ~ defaultValues:", defaultValues)
 
   const [image, setImage] = useState(null);
 const[fileName,setFileName]=useState(null)
@@ -13,6 +14,7 @@ const {t} = useTranslation()
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
 
+ 
 
 
   const handleImageChange = (event) => {
@@ -75,6 +77,7 @@ const {t} = useTranslation()
           <Stack direction={'column'} spacing={3} width={'100%'} >
           <Controller
         name={`first_name`}
+        defaultValue=''
         control={control}
         render={({ field }) => (
             <TextField
@@ -101,6 +104,7 @@ const {t} = useTranslation()
         <Controller
         name={`middle_name`}
         control={control}
+        defaultValue=''
         render={({ field }) => (
             <TextField
             {...field}
@@ -130,6 +134,7 @@ const {t} = useTranslation()
              <Controller
              name={`last_name`}
              control={control}
+             defaultValue=''
              render={({ field }) => (
             <TextField
             {...field}

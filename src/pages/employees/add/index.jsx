@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import Account from 'src/features/employee/add/Componets/Account'
@@ -40,29 +40,53 @@ export default function Add() {
   let { user_id } = router.query;
 
   const { data:ShowUser } = useGetUser(user_id)
+  console.log("🚀 ~ Add ~ ShowUser:", ShowUser?.data?.data[0])
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
   }
 
+ 
 
   // if(user_id)
   //   GetUser(user_id)
 
   const defaultValues = {
-    // first_name: '',
+    first_name: ShowUser?.data?.data[0]?.first_name,
 
     contacts: {
       phonenumbers: [{phone:''}],
       emails: [{email:''}]
     },
-    // middle_name: '',
+     middle_name: ShowUser?.data?.data[0]?.middle_name,
 
-    // last_name: '',
+     last_name: ShowUser?.data?.data[0]?.last_name,
+     email: ShowUser?.data?.data[0]?.email,
+     birth_date:ShowUser?.data?.data[0]?.user_info?.birth_date  ,
+     nationalID:ShowUser?.data?.data[0]?.user_info?.nationalID,
+     health_status:ShowUser?.data?.data[0]?.user_info?.health_status,
+     gender:ShowUser?.data?.data[0]?.user_info?.gender,
+     military_situation:ShowUser?.data?.data[0]?.user_info?.military_situation,
+     level:ShowUser?.data?.data[0]?.user_info?.level,
+     social_situation:ShowUser?.data?.data[0]?.user_info?.social_situation ,
+     health_status:ShowUser?.data?.data[0]?.user_info?.health_status ,
+     salary:ShowUser?.data?.data[0]?.user_info?.salary ,
+address:ShowUser?.data?.data[0]?.address,
+specialization:ShowUser?.data?.data[0]?.specialization,
 
-    // email: '',
-    role: 'admin'
+     branch_id:ShowUser?.data?.data[0]?.branch_id ,
+     contacts: {
+      emails:ShowUser?.data?.data[0]?.my_contacts,
+      phonenumbers: ShowUser?.data?.data[0]?.my_contacts,
+    
+    },
+    skills:ShowUser?.data?.data[0]?.skills,
+    educations: ShowUser?.data?.data[0]?.study_situations,
+    certificates:ShowUser?.data?.data[0]?.certificates.map((val)=>val.content),
+    languages:ShowUser?.data?.data[0]?.languages
+  
   }
+
 
   const {
     control,
@@ -83,6 +107,8 @@ export default function Add() {
 
 
   const handleDataSubmit = data => {
+  
+    try {
       const formData = new FormData()
       formData.append('image', ProfileImage)
 
@@ -161,6 +187,7 @@ export default function Add() {
               errors={errors}
               onDataChange={setAccountData}
               setError={setError}
+              defaultValues={defaultValues}
               control={control}
               Controller={Controller}
               watch={watch}
@@ -171,6 +198,7 @@ export default function Add() {
             <Info
               errors={errors}
               onDataChange={setInfoData}
+              defaultValues={defaultValues}
               setError={setError}
               control={control}
               Controller={Controller}

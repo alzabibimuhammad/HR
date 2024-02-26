@@ -24,7 +24,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = ({ params }) => {
-  console.log("🚀 ~ getStaticProps ~ params:", params)
+
   return {
     props: {
       folder: params?.folder

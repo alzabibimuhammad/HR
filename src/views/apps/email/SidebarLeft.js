@@ -77,11 +77,11 @@ const SidebarLeft = props => {
   }
 
   const handleActiveMailItem = (type) => {
-    console.log("🚀 ~ handleActiveItem ~ type:", type)
+
      dispatch(fetchMails({ folder: type}))
 
 
-      console.log('handleActivetItem')
+
     }
 
   const handleListItemClick = () => {

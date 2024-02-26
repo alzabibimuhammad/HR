@@ -124,7 +124,7 @@ const Users = ({ rows }) => {
   }, [dispatch, store?.AttendancePercentage?.length])
 
   const { data, loading } = useGetMvp()
-  console.log("🚀 ~ Users ~ data:", data)
+
 
   return (
     <>

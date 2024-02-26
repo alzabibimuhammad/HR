@@ -90,7 +90,7 @@ const MailLog = props => {
     handleSelectAllMail,
     handleLeftSidebarToggle
   } = props
-    console.log("🚀 ~ MailLog ~ store:", store)
+  
 
   // ** State
   const [refresh, setRefresh] = useState(false)
@@ -483,7 +483,7 @@ const MailLog = props => {
                         className='mail-info-right'
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}
                       >
-                        
+
                         <Typography
                           variant='body2'
                           sx={{ minWidth: '50px', textAlign: 'right', whiteSpace: 'nowrap', color: 'text.disabled' }}

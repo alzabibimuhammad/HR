@@ -37,7 +37,7 @@ const labelColors = {
 }
 
 const EmailAppLayout = ({ folder, label }) => {
-  console.log("🚀 ~ EmailAppLayout ~ folder:", folder)
+
   // ** States
   const [query, setQuery] = useState('')
   const [composeOpen, setComposeOpen] = useState(false)
@@ -53,7 +53,7 @@ const EmailAppLayout = ({ folder, label }) => {
   const smAbove = useMediaQuery(theme.breakpoints.up('sm'))
   const hidden = useMediaQuery(theme.breakpoints.down('lg'))
   const store = useSelector(state => state.email)
-  console.log("🚀 ~ EmailAppLayout ~ store:", store)
+
 
   // ** Vars
   const leftSidebarWidth = 260

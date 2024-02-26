@@ -6,14 +6,17 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useTranslation } from 'react-i18next';
 
-export default function Deductions({EditData,Controller,control}) {
-  const [selectedOption, setSelectedOption] = useState(''); // State to keep track of the selected option
+export default function Deductions({deductions,seDeductions,EditData,Controller,control}) {
   const {t} = useTranslation()
 
+  const [selectedOption, setSelectedOption] = useState(() => {
+    if (EditData?.policy?.deduction_status === 1) {
+      return 'true';
+    } else {
+      return 'false';
+    }
+  });
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
 
 
 
@@ -27,11 +30,11 @@ export default function Deductions({EditData,Controller,control}) {
         <Controller
   name="deduction_status"
   control={control}
-  render={({ field }) => (
+  render={({ ...field }) => (
     <RadioGroup
       name="deduction_status"
-      value={field.value ? true : false}
-      onChange={(e) => field.onChange(e.target.value === 'true')}
+      value={deductions}
+      onChange={(e) => seDeductions(e.target.value)}
     >
       <FormControlLabel
         control={<Radio />}

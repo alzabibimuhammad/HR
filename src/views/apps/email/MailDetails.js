@@ -172,7 +172,7 @@ const MailDetails = props => {
           }
         })
       })
-      console.log("🚀 ~ handleFoldersMenu ~ foldersObj:", foldersObj)
+
     }
 
     return array

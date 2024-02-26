@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Schema } from '../validation';
 import useShowPolicies from 'src/features/policies/hook/useShowPolicies';
+import { useEditPolicies } from '../hook/useEditPolicies';
 
 
 
@@ -24,14 +25,31 @@ export default function EditPolicies() {
   const {data}=useShowPolicies()
   const Data = data?.data?.data
 
+  const {mutate: EditPolicie}=useEditPolicies()
+
+  const defaultValues = {
+    work_time:{
+      start_time:Data?.policy?.work_time?.start_time?.slice(0,5),
+      cut_off_time:Data?.policy?.work_time?.cut_off_time?.slice(0,5),
+      end_time:Data?.policy?.work_time?.end_time?.slice(0,5)
+    },
+      rate_type:Data?.rateTypes?.map((val)=>(val.rate_type)),
+
+
+      deduction_status:Data?.policy?.deduction_status
+
+  }
+
 
   const [days, setDays] = React.useState([]);
 
   const [alert , setAlert] = useState(0);
   const [warningsto , setWarningsto] = useState(0);
   const [Paid  , setPaid ] = useState();
+
   const [Unpaid  , setUnpaid ] = useState(0);
   const [Sick , setSick] = useState(0);
+  const [deductions , seDeductions] = useState(0);
   const [annualSalarypercentage,setAnnualSalarypercentage] = useState()
 
 
@@ -42,7 +60,8 @@ export default function EditPolicies() {
     setUnpaid(Data?.policy?.absence_management?.unpaid_absence_days?.count)
     setSick(Data?.policy?.absence_management?.sick_absence_days?.count)
     setAlert(Data?.policy?.warnings?.alerts_to_warnings)
-    setWarningsto(Data?.policy?.warnings?.warnings_to_dismissal)
+    setWarningsto(Data?.policy?.warnings?.warnings_to_dismissal || Data?.policy?.warnings?.warningsto_dismissal )
+
     setDays([Data?.policy?.work_time?.work_days])
     setAnnualSalarypercentage(Data?.policy.annual_salary_increase?.annual_salary_percentage)
 
@@ -52,23 +71,7 @@ export default function EditPolicies() {
 
 
 
- const handleDataSubmit =  (data) => {
-  //  try {
 
-  //    data.warnings.alerts_to_warnings=alert
-  //    data.warnings.warningsto_dismissal=warningsto
-  //    data.absence_management.paid_absence_days.count=Paid
-  //    data.absence_management.unpaid_absence_days.count=Unpaid
-  //    data.absence_management.sick_absence_days.count=Sick
-  //    data.work_time.work_days=days
-
-  //     AddPolicies(data)
-  //  } catch (error) {
-
-  //  }
-
-
-};
 
 
   const {
@@ -82,12 +85,23 @@ export default function EditPolicies() {
     formState: { errors, },
   } = useForm({
     mode: 'onBlur',
-
-      resolver: yupResolver(Schema),
+    defaultValues,
+    resolver: yupResolver(Schema),
   });
 
 
+  const handleDataSubmit2 =  (data) => {
+  data.warnings.alerts_to_warnings=alert
+  data.warnings.warningsto_dismissal=warningsto
+  data.absence_management.paid_absence_days.count=Paid
+  data.absence_management.unpaid_absence_days.count=Unpaid
+  data.absence_management.sick_absence_days.count=Sick
+  data.work_time.work_days=days
+  data.deduction_status=deductions
 
+
+    EditPolicie(data)
+  };
 
 
   return (
@@ -104,7 +118,7 @@ export default function EditPolicies() {
       </Box>
       <Box >
         <Button
-         onClick={handleSubmit(handleDataSubmit)}
+         onClick={handleSubmit(handleDataSubmit2)}
         sx={{color:"#fff",borderRadius:"8px",padding:"10px",backgroundColor:"#6ab2df",fontWeight:"600" ,':hover': { color: 'inhert', backgroundColor: '#2A4759' }      }}>
         {t("Save changes")}
         </Button>
@@ -118,7 +132,7 @@ export default function EditPolicies() {
         <Stack  spacing={6} direction={'column'}>
           <Box  >
 
-            <WorkTime EditData={Data} errors={errors} control={control} Controller={Controller} setDays={setDays} days={days}/>
+            <WorkTime getValues={getValues} defaultValues={defaultValues} reset={reset} setValue={setValue} EditData={Data} errors={errors} control={control} Controller={Controller} setDays={setDays} days={[days]}/>
 
           </Box>
 
@@ -126,7 +140,7 @@ export default function EditPolicies() {
             <Annual EditData={Data} errors={errors}  control={control} annualSalarypercentage={annualSalarypercentage} setAnnualSalarypercentage={setAnnualSalarypercentage} Controller={Controller}/>
           </Box>
           <Box >
-            <Reviews EditData={Data}  errors={errors}   control={control} Controller={Controller}/>
+            <Reviews  reset={reset} EditData={Data}  errors={errors}   control={control} Controller={Controller}/>
           </Box>
         </Stack>
     </Grid>
@@ -136,7 +150,7 @@ export default function EditPolicies() {
       <Stack spacing={6} direction={'column'}>
         <Warnings EditData={Data} errors={errors}  control={control} Controller={Controller} setAlert={setAlert} alert={alert} setWarningsto={setWarningsto} warningsto={warningsto}/>
         <AbsencesManagement EditData={Data} control={control} Controller={Controller} setPaid={setPaid} Paid={Paid} Unpaid={Unpaid} setUnpaid={setUnpaid} setSick={setSick} Sick={Sick}/>
-        <Deductions  EditData={Data} control={control} Controller={Controller} />
+        <Deductions deductions={deductions} seDeductions={seDeductions}  EditData={Data} control={control} Controller={Controller} />
       </Stack>
 
     </Grid>

@@ -64,7 +64,7 @@ export default function WorkTimes({data}) {
 
           <Stack direction={'row'} marginTop={'2%'} spacing={1}>
             <Typo>{t('Work days')}:</Typo>
-            <TypoVal>{data?.data?.policy.work_time?.work_days.map((day)=>( day+" "))}</TypoVal>
+            <TypoVal>{data?.data?.policy.work_time?.work_days?.map((day)=>( day+" "))}</TypoVal>
           </Stack>
 
           <Stack direction={'row'}  spacing={1} sx={{ padding: "5px 0px" }}>

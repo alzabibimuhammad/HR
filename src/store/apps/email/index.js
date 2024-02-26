@@ -15,11 +15,11 @@ export const fetchMails = createAsyncThunk('appEmail/fetchMails', async params =
       Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
     },
   }
-  
+
   )
-  console.log("🚀 ~ fetchMails ~ response:", response.data.data)
-  
-  return  [...response.data.data] 
+
+
+  return  [...response.data.data]
 })
 
 
@@ -65,9 +65,9 @@ export const AddEmail = createAsyncThunk('appEmail/addEmail', async data => {
 
     const response = await axios.post(
       process.env.NEXT_PUBLIC_BASE_URL+`/api/Gmail/google/sendEmail`,
-      
+
         formData
-      
+
       ,{
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
@@ -75,13 +75,13 @@ export const AddEmail = createAsyncThunk('appEmail/addEmail', async data => {
         },
       }
     );
-  
+
     return response.data
   }
   catch(error){
     alert('404')
   }
-  
+
 })
 
 // ** Update Mail
@@ -155,7 +155,7 @@ export const appEmailSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(fetchMails.fulfilled, (state, action) => {
-      console.log("🚀 ~ builder.addCase ~ action:", action)
+     
       state.mails = action.payload
       state.filter = action.payload.filter
       state.mailMeta = action.payload.emailsMeta

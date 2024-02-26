@@ -40,21 +40,21 @@ export default function Warnings({EditData,Controller,control,defaultValues,setA
     }))
 
     const handleUpAlert = _=>{
-      setAlert(alert+1)
+      setAlert(Number(alert)+1)
     }
 
     const handleDownAlert = _=>{
       if(alert != 0)
-        setAlert(alert-1)
+        setAlert(Number(alert)-1)
     }
 
     const handleUpWaring = _=>{
-      setWarningsto(warningsto+1)
+      setWarningsto(Number(warningsto)+1)
     }
 
     const handleDownWarning = _=>{
       if(warningsto != 0)
-      setWarningsto(warningsto-1)
+      setWarningsto(Number(warningsto)-1)
     }
 
   return (

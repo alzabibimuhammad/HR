@@ -80,7 +80,6 @@ const Profiles = ({ data, tab }) => {
   const router = useRouter()
   const id = router.query.id
 
-  console.log("🚀 ~ Profiles ~ profileTab:", store.profileTab)
 
   const dispatch = useDispatch()
   // dispatch(setUserId(id))

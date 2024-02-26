@@ -113,7 +113,7 @@ const RatingTabel = ({rows}) => {
     })
   }
 
-  console.log(output);
+
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { Card, CardContent, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useFieldArray } from 'react-hook-form'
 import { Button } from '@mui/material'
@@ -8,53 +8,55 @@ import Box from '@mui/material/Box'
 import CloseIcon from '@mui/icons-material/Close'
 
 export default function Reviews({ EditData, Controller, defaultValues, control, errors }) {
-  console.log('🚀 ~ Reviews ~ defaultValues:', defaultValues?.rate)
   const { t } = useTranslation()
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'rate_type' // Name of the array field
+    name: 'rate_type'
   })
 
-  function appendInput() {
-    append()
-  }
 
-  useEffect(() => {
-    appendInput()
-  }, [])
+
+
+
+
+
 
   return (
     <Card>
       <CardContent>
         <Typography fontSize={'20px'}>{t('Reviews')}</Typography>
         <Stack spacing={2}>
-          {defaultValues?.rate?.map((field, index) => (
+          {fields?.map((field, index) => (
+
             <React.Fragment key={field.id}>
-              {index === 0 ? (
+              {index === -1 ? (
                 ''
               ) : (
-                <Typography sx={{ textAlign: 'start', cursor: 'pointer' }}>
-                  <CloseIcon sx={{ color: '#8090A7', '&:hover': { color: 'red' } }} onClick={() => remove(defaultValues?.rate[index])} />
+                <Typography sx={{ textAlign: 'start', cursor: 'pointer',padding:"0",margin:"0",marginTop:"14px" }}>
+                  <CloseIcon sx={{ color: '#8090A7', '&:hover': { color: 'red' } }} onClick={() => remove(index)} />
                 </Typography>
               )}
-              <Typography style={{ marginTop: '24px' }} fontSize={'14px'}>
+              <Typography style={{ marginTop: '4px' }} fontSize={'14px'}>
                 {t('Review criteria')}
               </Typography>
-              <Controller
-                name={`rate.rate_type[${index}]`}
 
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                value={field.rate_type}
-                  {...field}
-                  fullWidth size='small'
-                   placeholder={t('Overall')}
-                   />
-                )}
-              />
+                  <Controller
+                    name={`rate_type[${index }]`}
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                      {...field}
+                      fullWidth size='small'
+                       placeholder={t('Overall')}
+                       />
+                    )}
+                  />
+
             </React.Fragment>
+
+
+
           ))}
 
           <Button

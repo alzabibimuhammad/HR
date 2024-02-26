@@ -56,6 +56,7 @@ export default function Policies() {
  };
 
  const handleDataSubmit =  (data) => {
+  
    try {
      // const formData = new FormData();
      // formData.append('image',ProfileImage)

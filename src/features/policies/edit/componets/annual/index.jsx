@@ -13,6 +13,8 @@ import { useTranslation } from 'react-i18next'
 export default function Annual({ EditData, Controller, control, annualSalarypercentage, setAnnualSalarypercentage, defaultValues, errors }) {
   const [noteAdded, setNoteAdded] = useState(false);
 
+
+
   const { t } = useTranslation()
 
   const Typo = styled(Typography)(({ theme }) => ({
@@ -58,9 +60,9 @@ export default function Annual({ EditData, Controller, control, annualSalaryperc
               render={({ field }) => (
                 <TextField
                   {...field}
-                  error={Boolean(errors?.annual_salary_increase?.annual_salary_percentage)}
-                  helperText={errors?.annual_salary_increase?.annual_salary_percentage?.message}
-                  defaultValue={annualSalarypercentage}
+
+
+                  defaultValue={EditData?.policy?.annual_salary_increase?.annual_salary_percentage}
 
                   size='small'
                   InputProps={{

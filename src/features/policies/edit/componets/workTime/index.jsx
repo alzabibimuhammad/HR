@@ -11,11 +11,14 @@ import { useTranslation } from 'react-i18next'
 import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch'
 import { MenuItem } from '@mui/material'
 
-export default function WorkTime({ EditData, Controller, control, days, setDays, errors }) {
+export default function WorkTime({ EditData, Controller, control,defaultValues, days, setDays, errors,setValue,reset }) {
   const [openParent, setOpenParent] = React.useState(false)
   const [noteAdded, setNoteAdded] = useState(false)
   const { t } = useTranslation()
   const { data } = useSelectBranch()
+
+
+
 
   const handleDayPicker = date => {
     setOpenParent(true)
@@ -40,6 +43,8 @@ export default function WorkTime({ EditData, Controller, control, days, setDays,
     setNoteAdded(false)
   }
 
+
+
   return (
     <Card>
       <CardContent>
@@ -47,10 +52,10 @@ export default function WorkTime({ EditData, Controller, control, days, setDays,
           <Typography fontSize={'20px'}>{t('Work Time')}</Typography>
           <Typo style={{ marginTop: '24px' }}>{t('Work days')}</Typo>
           <Controller
-  name={`work_time.work_days`}
-  control={control}
-  render={({ field }) => (
-    <>
+           name={`work_time.work_days`}
+           control={control}
+           render={({ field }) => (
+           <>
       <Button
         onClick={() => {
           handleDayPicker();
@@ -106,17 +111,16 @@ export default function WorkTime({ EditData, Controller, control, days, setDays,
           <Controller
             name={`work_time.start_time`}
             control={control}
+            defaultValue={defaultValues.work_time?.start_time}
             render={({ field }) => (
               <TextField
                 {...field}
+                defaultValue={defaultValues.work_time?.start_time?.slice(0,5)}
                 type='time'
-                defaultValue={EditData?.policy?.work_time?.start_time}
-
                 placeholder='Start time'
-            fullWidth
+                fullWidth
                 size='small'
-                error={Boolean(errors.work_time?.start_time)}
-                helperText={errors.work_time?.start_time?.message}
+
               />
             )}
           />

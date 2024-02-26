@@ -7,7 +7,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { useTranslation } from 'react-i18next';
 
 export default function Deductions({Controller,control}) {
-  const [selectedOption, setSelectedOption] = useState(''); // State to keep track of the selected option
+  const [selectedOption, setSelectedOption] = useState('');
+
   const {t} = useTranslation()
 
 
@@ -30,8 +31,12 @@ export default function Deductions({Controller,control}) {
   render={({ field }) => (
     <RadioGroup
       name="deduction_status"
-      value={field.value ? true : false}
-      onChange={(e) => field.onChange(e.target.value === 'true')}
+      value={selectedOption}
+      onChange={(e) => {
+        field.onChange(e.target.value === 'true');
+        setSelectedOption(e.target.value);
+      }}
+
     >
       <FormControlLabel
         control={<Radio />}

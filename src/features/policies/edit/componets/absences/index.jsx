@@ -16,8 +16,10 @@ import { useTranslation } from 'react-i18next'
 
 export default function AbsencesManagement({EditData,Controller,control,Paid,setPaid,Unpaid,setUnpaid,setSick,Sick}) {
 
+
   const [noteAdded, setNoteAdded] = useState(false);
   const {t} = useTranslation()
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'absence_management.notes',
@@ -43,32 +45,32 @@ export default function AbsencesManagement({EditData,Controller,control,Paid,set
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
     const handleUpPaid = () => {
-      setPaid(Paid + 1);
+      setPaid(Number(Paid) + 1);
     }
 
     const handleDownPaid = () => {
       if (Paid > 0) {
-        setPaid(Paid - 1);
+        setPaid(Number(Paid) - 1);
       }
     }
 
     const handleUpUnpaid = () => {
-      setUnpaid(Unpaid + 1);
+      setUnpaid(Number(Unpaid) + 1);
     }
 
     const handleDownUnpaid = () => {
       if (Unpaid > 0) {
-        setUnpaid(Unpaid - 1);
+        setUnpaid(Number(Unpaid) - 1);
       }
     }
 
     const handleUpSick = () => {
-      setSick(Sick + 1);
+      setSick(Number(Sick) + 1);
     }
 
     const handleDownSick = () => {
       if (Sick > 0) {
-        setSick(Sick - 1);
+        setSick(Number(Sick) - 1);
       }
     }
 
@@ -82,13 +84,11 @@ export default function AbsencesManagement({EditData,Controller,control,Paid,set
         <Typo>{t("Paid absence days")}</Typo>
 
         <Controller
-        defaultValue=''
         name={`absence_management.paid_absence_days[count]`}
         control={control}
         render={({ field }) => (
             <TextField
             {...field}
-
               value={Paid !== 0 ? Paid : t('none')}
               disabled
         fullWidth

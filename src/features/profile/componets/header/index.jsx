@@ -26,7 +26,7 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
       setActiveButton(type)
   },[type])
 
-  console.log("🚀 ~ UserProfileHeader:", type)
+
 
   const handleOne = _ => {
     type = null

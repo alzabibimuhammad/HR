@@ -80,10 +80,8 @@ const Profiles = ({ data, tab }) => {
   const router = useRouter()
   const id = router.query.id
 
-  console.log("🚀 ~ Profiles ~ profileTab:", store.profileTab)
 
   const dispatch = useDispatch()
-  // dispatch(setUserId(id))
 
   useEffect(()=>{
 
@@ -93,7 +91,6 @@ const Profiles = ({ data, tab }) => {
 
   const { mutate: getEmployee, data: DataEmployee } = useGetEmployeeById()
 
-  const { data: DataDecision } = useGetDecision(()=>store.user_id)
 
   const ProfileData = DataEmployee?.data?.data[0]
 
@@ -165,7 +162,7 @@ const Profiles = ({ data, tab }) => {
       ) : null}
       {value == 3 ? (
         <Box marginTop={{ sm: '12px' }}>
-          <Mange id={id} DataDecision={DataDecision} />
+          <Mange id={id}  />
         </Box>
       ) : null}
       {value == 4 ? (

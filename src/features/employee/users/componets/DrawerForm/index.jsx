@@ -11,11 +11,8 @@ import Grid from '@mui/material/Grid'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
-import { getContractsData,addContract, EditContract } from 'src/pages/contracts/store'
 import { useDispatch  } from 'react-redux'
-import { Schema } from '../../validation'
 import useEditEmployee from '../../hooks/useEditEmployee'
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 const drawerWidth = 440
 
@@ -41,7 +38,6 @@ const dispatch=useDispatch()
 const {mutate:EditEmployee,isloading}=useEditEmployee()
 
 const handleDrawerClose = () => {
-    dispatch(getContractsData())
     setOpenParent(false)
     open = false
     reset();

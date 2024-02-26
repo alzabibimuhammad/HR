@@ -83,18 +83,14 @@ export default function Add() {
 
 
   const handleDataSubmit = data => {
-    console.log("🚀 ~ handleDataSubmit ~ data:", data)
-    try {
       const formData = new FormData()
       formData.append('image', ProfileImage)
 
       data.image = ProfileImage
 
       addUsers(data)
-    } catch (error) {
-      showErrorToast(error.message)
 
-    }
+
   }
 
   //  const handleDataSubmit = async (data) => {

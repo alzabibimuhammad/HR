@@ -5,7 +5,7 @@ import AppCalendar from 'src/features/dashboard/calendar'
 import Registration from 'src/features/dashboard/registration/components/DataGrid'
 import Requests from 'src/features/dashboard/requests'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAttendancePercentage, getRegisteration } from './store'
+import { getAttendancePercentage, getRegisteration, storeAttendanceLogs } from './store'
 import { Grid } from '@mui/material'
 
 export default function Dashboard() {
@@ -29,6 +29,9 @@ export default function Dashboard() {
 
     dispatch(getRegisteration(formattedDate))
     setRegistration(store?.Registertion)
+
+    dispatch(storeAttendanceLogs())
+
   }, [dispatch, store?.AttendancePercentage?.length, store?.Registertion?.length])
 
   return (
@@ -38,7 +41,7 @@ export default function Dashboard() {
         <Box  sx={{ backgroundColor: '#fff' }}>
           <AppCalendar />
         </Box>
-        
+
       </Grid>
       <Grid item sm={4} xs={12}>
         <Attendance Data={percentageData} />

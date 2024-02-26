@@ -10,5 +10,8 @@ export const showErrorToast = (message,ErrorMessageApi) => {
       fontWeight:"600",
       fontSize:"16px"
     },
-  });
+   duration: 3000,
+  },
+
+  );
 };

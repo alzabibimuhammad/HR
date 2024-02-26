@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import AddUsers from "../api/AddUsers";
 import { showSuccesToast } from "src/utiltis/toastSecces";
 import { showErrorToast } from "src/utiltis/showErrorToast";
@@ -14,9 +13,9 @@ export const useAddUsers = () => {
       showSuccesToast("Add Employee ",data?.data?.success)
     },
     onError: (error) => {
-      
+
       error.response.data.errors && error.response.data.errors.map((error)=>showErrorToast("There is an error in the input",error))
-      
+
 
     }
   });

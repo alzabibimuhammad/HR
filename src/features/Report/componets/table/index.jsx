@@ -25,7 +25,7 @@ import { useDispatch } from 'react-redux'
 import { setProfileTap } from 'src/store/apps/user'
 
 
-export default function CollapsibleTable({ Data }) {
+export default function CollapsibleTable(Data ) {
   const { t } = useTranslation()
   const [users, setUsers] = useState({ rows: [] })
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false) // Add this line
@@ -34,8 +34,9 @@ export default function CollapsibleTable({ Data }) {
   const [department,setDepartment] = useState('')
   const [role, setRole] = useState('')
   const dispatch = useDispatch()
+
   useEffect(() => {
-     let filterData =  Data
+     let filterData =  Data?.Data
       if(role)filterData = filterData?.filter((value,index)=>value?.role == role)
       if(department)filterData = filterData?.filter((value,index)=>value?.specialization == department)
       if(search)filterData = filterData?.filter((value,index)=>(
@@ -105,13 +106,13 @@ export default function CollapsibleTable({ Data }) {
             </Stack>
           </TableCell>
           <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{t(row.role)}</Typography>
+            <Typography sx={{ fontSize: '14px' }}>{t(row?.role)}</Typography>
           </TableCell>
           <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{row.specialization}</Typography>
+            <Typography sx={{ fontSize: '14px' }}>{row?.specialization}</Typography>
           </TableCell>
           <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{row.department.name}</Typography>
+            <Typography sx={{ fontSize: '14px' }}>{row?.department?.name}</Typography>
           </TableCell>
           <TableCell>
             <Box>
@@ -163,12 +164,12 @@ export default function CollapsibleTable({ Data }) {
   }
 
   let specialization = new Set([])
-  Data?.forEach(element => {
+  Data.Data?.forEach(element => {
     specialization.add(element?.specialization)
   })
 
   let roleData = new Set([])
-  Data?.forEach(element => {
+  Data.Data?.forEach(element => {
     roleData.add(element?.role)
   })
 

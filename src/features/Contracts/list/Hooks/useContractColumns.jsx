@@ -1,39 +1,21 @@
 // Import necessary components and libraries
-import React, { useEffect, useMemo, useState } from 'react'
+import React, {  useMemo, useState } from 'react'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
-import DrawerForm from '../Componets/DrawerForm/index'
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline'
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
-import { Avatar, Button, Chip, IconButton, Rating, Typography } from '@mui/material'
+import { Avatar,  Chip, IconButton, Typography } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility'
-
 import { useTranslation } from 'react-i18next'
 import AlertDialog from '../Componets/dialog'
-import { useDispatch, useSelector } from 'react-redux'
-import { RemoveContracts } from 'src/pages/contracts/store'
 import Link from 'next/link'
 
 const useContractColumns = () => {
-  const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
 
-  const [EditData, setEditData] = useState(null)
 
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
 
   const { t } = useTranslation()
 
-  const handleEditClick = row => {
-    setEditData(row)
-    setIsDrawerOpenEdit(true)
-  }
-
-  const handleClickOpen = params => {
-    const { id } = params.row
-    setDeleteId(id)
-    setIsDeletePopupOpen(true)
-  }
 
   const handleClose = () => {
     setIsDeletePopupOpen(false)

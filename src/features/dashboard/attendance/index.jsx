@@ -3,20 +3,21 @@ import * as agCharts from 'ag-charts-community';
 import { useTranslation } from 'react-i18next';
 
 function Attendance(Data) {
+  console.log("🚀 ~ Attendance ~ Data:", Data)
   const {t} = useTranslation()
 
   useEffect(() => {
 
     function getData() {
       return [
-        { type: t('Total Employees'), count: Data?.Data?.data?.total_employees },
-        { type: t('Active'), count: Data?.Data?.data?.present_employees  },
+        { type: t('Total Employees'), count: Data?.Data?.total_employees },
+        { type: t('Active'), count: Data?.Data?.present_employees  },
       ];
     }
 
     const data = getData();
     const numFormatter = new Intl.NumberFormat('en-US');
-    let total = ((Data?.Data?.data?.present_employees/Data?.Data?.data?.total_employees)*100).toFixed(1);
+    let total = ((Data?.Data?.present_employees/Data?.Data?.total_employees)*100).toFixed(1);
 
     if(isNaN(total))
       total = 0

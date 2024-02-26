@@ -58,22 +58,26 @@
                 backgroundColor:
                   params?.row?.status === 'Arrived'
                     ? 'rgba(145, 196, 131, 0.20)'
-                    : params?.row?.status.includes('Late')
+                    :  Boolean(params?.row?.status.includes('Late'))
                     ? 'rgba(106, 178, 223, 0.20)'
                     : params?.row?.status==='Out'
                     ? 'rgba(106, 178, 223, 0.20)'
                     : params?.row?.status === 'Absent'
                     ? 'rgba(223, 46, 56, 0.20)'
+                    :  Boolean(params?.row?.status.includes('Early'))
+                    ? 'rgba(106, 178, 223, 0.20)'
                     : 'rgba(223, 46, 56, 0.20)',
                 color:
                   params?.row?.status === 'Arrived'
                     ? '#91C483'
-                    : params?.row?.status.includes('Late')
+                    : Boolean(params?.row?.status.includes('Late'))
                     ? '#6AB2DF'
                     : params?.row?.status==='Out'
                     ? '#6AB2DF'
                     : params?.row?.status === 'Absent'
                     ? '#DF2E38'
+                    : Boolean(params?.row?.status.includes('Early'))
+                    ? '#6AB2DF'
                     : '#DF2E38',
                 fontSize: '13px',
                 height: '30px',

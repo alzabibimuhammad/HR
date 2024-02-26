@@ -40,7 +40,7 @@ export const RegistrationData = elements => {
           const outTime = `${hours}:${minutes}`;
           if(formattedTime < targetTime && outTime >= endTime) statusX="Out"
           else if(formattedTime > targetTime && outTime >= endTime) statusX="Out & Arrived Late"
-          else if(formattedTime < targetTime && outTime < endTime) statusX="Out & Late"
+          else if(formattedTime < targetTime && outTime < endTime) statusX="Early Out"
           else statusX = "Out Late&Arraived Late"
           checkoutDate = outTime
         }

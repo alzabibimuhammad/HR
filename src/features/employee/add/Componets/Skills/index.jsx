@@ -221,7 +221,7 @@ useEffect(()=>{
                   error={Boolean(errors?.educations?.[index]?.degree)}
                   {...(errors?.educations?.[index]?.degree && { helperText: errors?.educations?.[index]?.degree.message })}
                   >
-                <MenuItem value="Degree">{t("Degree")}</MenuItem>
+                <MenuItem value="">{t("Degree")}</MenuItem>
                 <MenuItem value="bachelor">{t("Bachelor")}</MenuItem>
                 <MenuItem value="master">{t("Master")}</MenuItem>
                 <MenuItem value="phd">{t("PhD")}</MenuItem>
@@ -385,8 +385,7 @@ useEffect(()=>{
           )}
       <Controller
         name={`languages[${index}].languages`}
-        control={control}
-        defaultValue={field.languages}
+          control={control}
         render={({ field }) => (
           <TextField
             {...field}

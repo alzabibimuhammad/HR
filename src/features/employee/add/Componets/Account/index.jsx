@@ -73,6 +73,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
           <Controller
             name={`email`}
             control={control}
+            defaultValues=''
             render={({ field }) => (
               <TextField
                 {...field}
@@ -101,6 +102,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
 
 <Controller
   name={`password`}
+  defaultValues=''
   control={control}
   render={({ field }) => (
     <TextField

@@ -4,7 +4,7 @@ import { t } from 'i18next';
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 
-export default function Info({onDataChange,Controller,control,errors}) {
+export default function Info({onDataChange,Controller,control,errors, defaultValues}) {
     const {t} = useTranslation()
 
   const handleFieldChange = (field, value) => {
@@ -154,8 +154,9 @@ export default function Info({onDataChange,Controller,control,errors}) {
               <TextField
               {...field}
               select
+
               fullWidth
-              defaultValue="gender"
+             
               SelectProps={{
                 value: field.value,
                 displayEmpty: true,
@@ -166,8 +167,8 @@ export default function Info({onDataChange,Controller,control,errors}) {
               }}
               size='small'
                   >
-                    <MenuItem value='gender'>{`${t("Gender")}`}</MenuItem>
-                    <MenuItem value='male'>{`${t("Male")}`}</MenuItem>
+                    <MenuItem value=''>{`${t("Gender")}`}</MenuItem>
+                    <MenuItem value='Male'>{`${t("Male")}`}</MenuItem>
                     <MenuItem value='female'>{`${t("Female")}`}</MenuItem>
                 </TextField>
   )}
@@ -193,7 +194,7 @@ export default function Info({onDataChange,Controller,control,errors}) {
               }}
               size='small'
                   >
-                    <MenuItem value='Military Status'>{`${t("Military Status")}`}</MenuItem>
+                    <MenuItem value=''>{`${t("Military Status")}`}</MenuItem>
                     <MenuItem value='Finished'>{`${t("Finished")}`}</MenuItem>
                     <MenuItem value='Postponed'>{`${t("Postponed")}`}</MenuItem>
                     <MenuItem value='Exempt'>{`${t("Exempt")}`}</MenuItem>

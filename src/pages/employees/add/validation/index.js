@@ -51,7 +51,7 @@ export const Schema = yup.object().shape({
     yup.object().shape({
       name: yup.string().required('Name is required'),
       phonenumber: yup.string().matches(/^09\d{8}$/, 'Invalid Syrian phone number').required('Phone Number is required'),
-      email: yup.string().email('Invalid email address').required('Email is required'),
+      email: yup.string().email('Invalid email address')
     })
   ),
 
@@ -66,7 +66,6 @@ export const Schema = yup.object().shape({
 
   specialization: yup.string().required('Specialization is required'),
   level: yup.string().required('Level is required'),
-  department_id: yup.string().required('Department is required'),
   branch_id: yup.string().required('Branch is required'),
 
 
@@ -88,36 +87,11 @@ export const Schema = yup.object().shape({
   ),
 
 
-
-  //  experience: yup.array().of(yup.string().required('Experience is a required field')),
-
-
-//   skills: yup.array().of(
-//     yup.object().shape({
-//         skills: yup.string().required('Skills is required'),
-//         rating: yup
-//             .number()
-//             .required('Rating is required')
-//             .integer('Rating must be an integer')
-//             .min(1, 'Rating must be at least 1')
-//             .max(5, 'Rating must be at most 5'),
-//     })
-// ).required('Skills are required'),
-
-
-
-
-// languages: yup.array().of(
-//   yup.object().shape({
-//       languages: yup.string().required('Language is required'),
-//       rating: yup.number().required('Rating is required').min(1, 'Rating must be at least 1').max(5, 'Rating must be at most 5'),
-//   })
-// ),
   salary: yup.number().required('Salary is required'),
 
   secretariats: yup.array().of(
     yup.object().shape({
-      object: yup.string().required('Object is required'),
+      object: yup.string(),
       delivery_date: yup.string().matches(/^\d{4}-\d{2}-\d{2}$/, 'Valid date format required Examp : 2020-12-12'),
 
     })

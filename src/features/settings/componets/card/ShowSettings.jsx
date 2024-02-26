@@ -85,6 +85,16 @@ export default function ShowSetting() {
     </Stack>
       </Stack>
 
+      {isDeletePopupOpen && (
+                  <AlertDialog Branch={branchRow} open={isDeletePopupOpen} handleClose={handleClose} />
+                )}
+
+                {isEditPopupOpen && (
+                  <AlertDialogEdit Branch={branchRow} open={isEditPopupOpen} handleClose={handleCloseEdit} />
+                )}
+                {isAdd ?
+                  <AlertDialogAdd open={isAdd} handleClose={handleCloseAdd} />:null
+                }
       <Grid marginTop={'0%'} container spacing={2}>
         {data?.data?.data?.map((branch, index) => (
           <Grid item sm={6} xs={12} key={index}>
@@ -125,16 +135,6 @@ export default function ShowSetting() {
                   </Button>
                 </Stack>
 
-                {isDeletePopupOpen && (
-                  <AlertDialog Branch={branchRow} open={isDeletePopupOpen} handleClose={handleClose} />
-                )}
-
-                {isEditPopupOpen && (
-                  <AlertDialogEdit Branch={branchRow} open={isEditPopupOpen} handleClose={handleCloseEdit} />
-                )}
-                {isAdd && (
-                  <AlertDialogAdd open={isAdd} handleClose={handleCloseAdd} />
-                )}
 
               </CardContent>
             </Card>

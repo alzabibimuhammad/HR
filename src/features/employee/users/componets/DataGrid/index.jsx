@@ -120,6 +120,7 @@ const Users = ({ rows }) => {
   useEffect(() => {
     dispatch(getAttendancePercentage())
     setpercentageData(store?.AttendancePercentage)
+
   }, [dispatch, store?.AttendancePercentage?.length])
 
   const { data, loading } = useGetMvp()
@@ -144,7 +145,7 @@ const Users = ({ rows }) => {
               </Box>
 
               <Typography marginLeft={'5px'}>
-                {(percentageData?.data?.present_employees / percentageData?.data?.total_employees) * 100}%
+                {isNaN(((percentageData?.data?.present_employees / percentageData?.data?.total_employees) * 100).toFixed(2)) ? 0 : ((percentageData?.data?.present_employees / percentageData?.data?.total_employees) * 100).toFixed(2) }%
               </Typography>
             </Stack>
           </AccordionSummary>

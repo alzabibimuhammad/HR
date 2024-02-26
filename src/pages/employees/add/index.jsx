@@ -115,10 +115,8 @@ specialization:ShowUser?.data?.data[0]?.specialization,
       data.image = ProfileImage
 
       addUsers(data)
-    } catch (error) {
-      showErrorToast(error.message)
 
-    }
+
   }
 
   //  const handleDataSubmit = async (data) => {

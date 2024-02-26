@@ -1,15 +1,7 @@
 // Import necessary components and libraries
 import React, { useMemo, useState } from 'react';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { Avatar, IconButton, Typography } from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Avatar, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import Link from 'next/link';
-import AlertDialogDeleteUser from '../componets/dialog';
-import DrawerForm from '../componets/DrawerForm';
 import { useDispatch } from 'react-redux';
 import { setProfileTap } from 'src/store/apps/user';
 

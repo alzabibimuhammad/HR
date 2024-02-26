@@ -1,29 +1,42 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { request } from 'src/utiltis/AxiosUtilitis'
+import { showErrorToast } from 'src/utiltis/showErrorToast';
 
-import axios from 'axios'
 
 
+export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendancePercentage', async _ => {
+  try {
+    const response = await request({ url: '/api/showPercent' });
+    return response.data;
 
-export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendancePercentage', async () => {
-  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + '/api/showPercent', {
-    headers: {
-      Authorization: `Bearer ${localStorage.accessToken}`
+  } catch (error) {
+    throw error;
     }
-  })
-  return {
-    data: response.data
-  }
 })
 
 export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async date => {
-  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + `/api/DayAttendance/${date}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.accessToken}`
+  try {
+    const response = await request({ url: `/api/DayAttendance/${date}`});
+    return response.data;
+
+  } catch (error) {
+
+    showErrorToast(error?.response?.status,"Registeration Not Found")
     }
-  })
+
+})
+
+export const storeAttendanceLogs = createAsyncThunk('Dashboard/storeAttendanceLogs', async () => {
+  try{
+  const response = request({ url: '/api/storeAttendanceLogs' })
+
   return {
-    data: response.data
+   data: response.data
+  }
+}
+  catch (error){
+    showErrorToast(error,"")
   }
 })
 
@@ -40,11 +53,11 @@ const DashboardSlice = createSlice({
 
     .addCase(getAttendancePercentage.fulfilled,(state,action)=>{
       state.loading = false
-      state.AttendancePercentage = action.payload.data
+      state.AttendancePercentage = action?.payload?.data
     })
     .addCase(getRegisteration.fulfilled,(state,action)=>{
       state.loading = false
-      state.Registertion = action.payload.data
+      state.Registertion = action?.payload?.data
     })
 
 

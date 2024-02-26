@@ -1,15 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 import axios from 'axios'
+import { showErrorToast } from 'src/utiltis/showErrorToast'
 
-export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async date => {
-  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + `/api/DayAttendance/${date}`, {
+export const getRegisteration = createAsyncThunk('RegisterStore/getRegisteration', async date => {
+  try{
+  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + `/api/DayAttendance/${date}?branch_id=${localStorage.branch}`, {
     headers: {
       Authorization: `Bearer ${localStorage.accessToken}`
     }
   })
   return {
     data: response.data
+  }
+  }
+  catch (error) {
+     showErrorToast(error,"")
   }
 })
 
@@ -29,7 +35,7 @@ const appRegiterSlice = createSlice({
       })
       .addCase(getRegisteration.fulfilled, (state, action) => {
         state.loading = false
-        state.data = action.payload.data
+        state.data = action?.payload?.data
       })
 
 

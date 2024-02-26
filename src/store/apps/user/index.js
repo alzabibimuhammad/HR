@@ -5,7 +5,7 @@ import axios from 'axios'
 
 // ** Fetch Users
 export const fetchData = createAsyncThunk('appUsers/fetchData', async params => {
-  const response = await axios.get('/apps/users/list', {
+  const response = await axios.get(`/apps/users/list?branch_id=${localStorage?.branch}`, {
     params
   })
 
@@ -14,7 +14,7 @@ export const fetchData = createAsyncThunk('appUsers/fetchData', async params => 
 
 // ** Add User
 export const addUser = createAsyncThunk('appUsers/addUser', async (data, { getState, dispatch }) => {
-  const response = await axios.post('/apps/users/add-user', {
+  const response = await axios.post(`/apps/users/add-user?branch_id=${localStorage?.branch}`, {
     data
   })
   dispatch(fetchData(getState().user.params))
@@ -24,7 +24,7 @@ export const addUser = createAsyncThunk('appUsers/addUser', async (data, { getSt
 
 // ** Delete User
 export const deleteUser = createAsyncThunk('appUsers/deleteUser', async (id, { getState, dispatch }) => {
-  const response = await axios.delete('/apps/users/delete', {
+  const response = await axios.delete(`/apps/users/delete?branch_id=${localStorage?.branch}`, {
     data: id
   })
   dispatch(fetchData(getState().user.params))

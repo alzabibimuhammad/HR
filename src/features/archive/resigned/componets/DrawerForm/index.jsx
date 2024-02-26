@@ -11,7 +11,6 @@ import Grid from '@mui/material/Grid'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useTranslation } from 'react-i18next'
-import { getContractsData,addContract, EditContract } from 'src/pages/contracts/store'
 import { useDispatch  } from 'react-redux'
 import { Schema } from '../../validation'
 import useEditResigned from '../../hooks/useEditResigned'
@@ -37,7 +36,7 @@ const dispatch=useDispatch()
 const {mutate:EditResigned,isloading}=useEditResigned()
 
 const handleDrawerClose = () => {
-    dispatch(getContractsData())
+    // dispatch(getContractsData())
     setOpenParent(false)
     open = false
     reset();
@@ -69,19 +68,16 @@ const handleDrawerClose = () => {
   })
 
   const onSubmit =   data => {
-      if(!Data)
+      if(Data)
       {
-        dispatch(addContract(data));
 
-               }
-      else
-      {
         const EditData = {
           data,
           Data
         };
         EditResigned(EditData)
-      }
+               }
+
       handleDrawerClose()
       reset();
 

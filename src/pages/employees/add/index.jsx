@@ -46,7 +46,7 @@ export default function Add() {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
   }
 
- 
+
 
   // if(user_id)
   //   GetUser(user_id)
@@ -78,13 +78,13 @@ specialization:ShowUser?.data?.data[0]?.specialization,
      contacts: {
       emails:ShowUser?.data?.data[0]?.my_contacts,
       phonenumbers: ShowUser?.data?.data[0]?.my_contacts,
-    
+
     },
     skills:ShowUser?.data?.data[0]?.skills,
     educations: ShowUser?.data?.data[0]?.study_situations,
     certificates:ShowUser?.data?.data[0]?.certificates.map((val)=>val.content),
     languages:ShowUser?.data?.data[0]?.languages
-  
+
   }
 
 
@@ -107,7 +107,7 @@ specialization:ShowUser?.data?.data[0]?.specialization,
 
 
   const handleDataSubmit = data => {
-  
+
     try {
       const formData = new FormData()
       formData.append('image', ProfileImage)
@@ -117,24 +117,11 @@ specialization:ShowUser?.data?.data[0]?.specialization,
       addUsers(data)
 
 
+  }catch (error) {
+
   }
+}
 
-  //  const handleDataSubmit = async (data) => {
-  //      try {
-  //      const formData = new FormData();
-
-  //  formData.append('path', files[0]);
-  // formData.append('startTime', data.startTime);
-  //  formData.append('endTime', data.endTime);
-  //  formData.append('user_id', data.user_id);
-  //  formData.append('first_name', data.first_name);
-  //  formData.append('first_name', data.middle_name);
-
-  // addUsers(formData)
-  //  }
-  //   catch (error) {
-  //    }
-  // }
 
   const handleRatingChange = (index, newValue) => {
     const updatedSkills = [...getValues('skills')]

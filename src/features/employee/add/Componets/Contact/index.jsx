@@ -135,7 +135,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
               <Box key={Email.id} >
                 <Controller
                   name={`contacts.emails.${index}.email`}
-      
+
                   control={control}
                   render={({ field }) => (
                     <TextField

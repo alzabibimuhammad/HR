@@ -51,9 +51,9 @@ export default function View({ id }) {
     <>
       <Logo />
 
-      <Stack marginTop={'20px'} direction={'row'} justifyContent={'space-between'} spacing={12}>
+      <Stack marginTop={'20px'} direction={'column'} justifyContent={'space-between'} spacing={12}>
         {data?.data?.data.map(ele => (
-          <>
+          <Stack direction={'row'} spacing={12}>
             <Box
               ref={componentRef}
               sx={{ width: '100%', borderRadius: '12px', backgroundColor: '#FFFFFF', textAlign: 'center' }}
@@ -122,7 +122,7 @@ export default function View({ id }) {
                 </Button>
               </Box>
             </Box>
-          </>
+          </Stack>
         ))}
           
       </Stack>

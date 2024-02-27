@@ -21,24 +21,33 @@ export default function View({ id }) {
   const router = useRouter()
 
   const { data, isLoading, isError } = useViewContract(id)
+  console.log("🚀 ~ View ~ data:", data)
 
   const { mutate: deleteContract } = useDeleteContract()
 
   const deleteContractt = async id => {
     try {
       await deleteContract(id)
-      router.push('/contracts/list')
+      // router.push('/contracts/list')
     } catch (error) {}
   }
 
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current
-  })
-
-  const handleDownloadClick = () => {
+  const handlePrint = (path) => {
     const downloadLink = document.createElement('a')
 
-    downloadLink.href = `${process.env.NEXT_PUBLIC_BASE_URL}/${data?.data?.data?.[0].path}`
+    downloadLink.href = `${process.env.NEXT_PUBLIC_BASE_URL}/${path}`
+    downloadLink.download = 'your_pdf_filename.pdf'
+
+    downloadLink.style.display = 'none'
+    document.body.appendChild(downloadLink)
+    downloadLink.click()
+    document.body.removeChild(downloadLink)
+  }
+
+  const handleDownloadClick = (path) => {
+    const downloadLink = document.createElement('a')
+
+    downloadLink.href = `${process.env.NEXT_PUBLIC_BASE_URL}/${path}`
     downloadLink.download = 'your_pdf_filename.pdf'
 
     downloadLink.style.display = 'none'
@@ -106,17 +115,17 @@ export default function View({ id }) {
                   padding: '0 15px'
                 }}
               >
-                <Button sx={{ width: '100%' }} size='large' variant='contained' onClick={handlePrint}>
+                <Button sx={{ width: '100%' }} size='large' variant='contained' onClick={()=>handlePrint(ele?.path)}>
                   {t('Print')}
                 </Button>
-                <Button sx={{ width: '100%' }} size='large' variant='contained' onClick={handleDownloadClick}>
+                <Button sx={{ width: '100%' }} size='large' variant='contained' onClick={()=>handleDownloadClick(ele?.path)}>
                 {t('Download')}
                 </Button>
                 <Button
                   sx={{ width: '100%', backgroundColor: '#DF2E38' }}
                   size='large'
                   variant='contained'
-                  onClick={() => deleteContractt(id)}
+                  onClick={() => deleteContractt(ele?.id)}
                 >
                   {t('Delete')}
                 </Button>

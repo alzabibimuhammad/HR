@@ -5,16 +5,18 @@ import Avatar from '@mui/material/Avatar';
 import { useTranslation } from 'react-i18next';
 
 export default function Snapshot({onDataChange,Controller,control,defaultValues,errors,setProfileImage}) {
-console.log("🚀 ~ Snapshot ~ defaultValues:", defaultValues)
 
   const [image, setImage] = useState(null);
 const[fileName,setFileName]=useState(null)
 const {t} = useTranslation()
+
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
 
- 
+
+
+
 
 
   const handleImageChange = (event) => {
@@ -59,7 +61,7 @@ const {t} = useTranslation()
       <Controller
         name={`image`}
         control={control}
-        defaultValues={defaultValues.image}
+        defaultValues={defaultValues?.image}
         render={({ field }) => (
             <TextField
             {...field}

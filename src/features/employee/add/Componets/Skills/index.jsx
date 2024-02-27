@@ -206,6 +206,7 @@ useEffect(()=>{
                   <TextField
                   {...field}
                   select
+                  defaultValue={"Degree"}
                   label={t("Degree")}
                   SelectProps={{
                     value: field.value,  // Use field.value here
@@ -220,7 +221,7 @@ useEffect(()=>{
                   error={Boolean(errors?.educations?.[index]?.degree)}
                   {...(errors?.educations?.[index]?.degree && { helperText: errors?.educations?.[index]?.degree.message })}
                   >
-                <MenuItem value="">{t("Degree")}</MenuItem>
+                <MenuItem value="Degree">{t("Degree")}</MenuItem>
                 <MenuItem value="bachelor">{t("Bachelor")}</MenuItem>
                 <MenuItem value="master">{t("Master")}</MenuItem>
                 <MenuItem value="phd">{t("PhD")}</MenuItem>

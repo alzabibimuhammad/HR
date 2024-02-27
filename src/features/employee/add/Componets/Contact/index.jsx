@@ -46,10 +46,6 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
     }
   })
 
-  useEffect(()=>{
-    phoneNumbersappend({ phonenumber: '' })
-  },[])
-
 
 
 
@@ -148,9 +144,9 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                       variant='outlined'
                       fullWidth
                       size='small'
-                      error={Boolean(errors?.contacts?.emails?.[index].email)}
-                      {...(errors?.contacts?.emails?.[index].email && {
-                        helperText: errors?.contacts?.emails?.[index].email.message
+                      error={Boolean(errors?.contacts?.emails?.[index]?.email)}
+                      {...(errors?.contacts?.emails?.[index]?.email && {
+                        helperText: errors?.contacts?.emails?.[index]?.email?.message
                       })}
                     />
                   )}

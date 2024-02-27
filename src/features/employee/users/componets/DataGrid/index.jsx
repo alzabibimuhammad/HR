@@ -113,6 +113,7 @@ const Users = ({ rows }) => {
   }
 
   const [percentageData, setpercentageData] = useState([])
+  console.log("🚀 ~ Users ~ percentageData:", percentageData)
 
   const dispatch = useDispatch()
   const store = useSelector(state => state.Dashboard)
@@ -133,19 +134,19 @@ const Users = ({ rows }) => {
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel2-content' id='panel2-header'>
             <Stack width={'50%'} direction={'row'}>
               <Stack direction={'row'}>
-                <Typography>{percentageData?.data?.present_employees}</Typography>/
-                <Typography>{percentageData?.data?.total_employees}</Typography>
+                <Typography>{percentageData?.present_employees}</Typography>/
+                <Typography>{percentageData?.total_employees}</Typography>
               </Stack>
 
               <Box marginTop={'5px'} marginLeft={'5px'} width={'50%'}>
                 <FallbackSpinner
-                  total={percentageData?.data?.total_employees}
-                  active={percentageData?.data?.present_employees}
+                  total={percentageData?.total_employees}
+                  active={percentageData?.present_employees}
                 />
               </Box>
 
               <Typography marginLeft={'5px'}>
-                {isNaN(((percentageData?.data?.present_employees / percentageData?.data?.total_employees) * 100).toFixed(2)) ? 0 : ((percentageData?.data?.present_employees / percentageData?.data?.total_employees) * 100).toFixed(2) }%
+                {isNaN(((percentageData?.present_employees / percentageData?.total_employees) * 100).toFixed(2)) ? 0 : ((percentageData?.present_employees / percentageData?.total_employees) * 100).toFixed(2) }%
               </Typography>
             </Stack>
           </AccordionSummary>

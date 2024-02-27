@@ -40,7 +40,6 @@ export default function Add() {
   let { user_id } = router.query;
 
   const { data:ShowUser,isLoading, } = useGetUser(user_id)
-  console.log("🚀 ~ Add ~ ShowUser:", ShowUser)
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
@@ -50,7 +49,12 @@ export default function Add() {
 
 
 
- let  defaultValues = {}
+ let   defaultValues={
+  contacts: {
+    emails:[{ email: '' }],
+    phonenumbers: [{ phone: '' }],
+  },
+}
 
 
 
@@ -68,6 +72,7 @@ export default function Add() {
     setValue,
     register,
     watch,
+    reset,
     formState: { errors }
   } = useForm({
     defaultValues,
@@ -108,9 +113,8 @@ export default function Add() {
 
 
   useEffect(() => {
-    // Update default values when data is successfully fetched
     if (ShowUser?.data?.data[0]) {
-      const defaultValues = {
+      defaultValues = {
         first_name: ShowUser?.data?.data[0]?.first_name,
         middle_name: ShowUser?.data?.data[0]?.middle_name,
         last_name: ShowUser?.data?.data[0]?.last_name,
@@ -144,6 +148,8 @@ export default function Add() {
         setValue(field, value);
       });
     }
+    if(!user_id) return ()=>reset()
+
   }, [ShowUser, setValue]);
 
 

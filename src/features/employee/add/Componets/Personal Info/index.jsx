@@ -150,13 +150,16 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
             <Controller
             name={`gender`}
             control={control}
+
             render={({ field }) => (
               <TextField
+
               {...field}
               select
-
               fullWidth
-             
+              defaultValue=""
+              error={Boolean(errors.gender)}
+              {...(errors.gender && { helperText: errors.gender.message })}
               SelectProps={{
                 value: field.value,
                 displayEmpty: true,
@@ -183,7 +186,7 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               fullWidth
               error={Boolean(errors.military_situation)}
               {...(errors.military_situation && { helperText: errors.military_situation.message })}
-              defaultValue="Military Status"
+              defaultValue=""
               SelectProps={{
                 value: field.value,  // Use field.value here
                 displayEmpty: true,
@@ -215,7 +218,7 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               {...(errors.social_situation && { helperText: errors.social_situation.message })}
                     select
                     fullWidth
-                    defaultValue="social_situation"
+                    defaultValue=""
                     SelectProps={{
                       value: field.value,
                       displayEmpty: true,
@@ -226,7 +229,7 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
                     }}
                     size='small'
                   >
-                    <MenuItem value='social_situation'>{`${t("social_situation")}`}</MenuItem>
+                    <MenuItem value=''>{`${t("social_situation")}`}</MenuItem>
                     <MenuItem value='Single'>{`${t("Single")}`}</MenuItem>
                     <MenuItem value='Married'>{`${t("Married")}`}</MenuItem>
                 </TextField>

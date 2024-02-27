@@ -2,7 +2,7 @@ import { Button, Card, CardContent, List, ListItem, TextField, Typography } from
 import { Box, Stack } from '@mui/system'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { styled, useTheme } from '@mui/material/styles'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ListItemSelected from 'src/views/components/list/ListItemSelected'
 import IconButton from 'src/@core/theme/overrides/icon-button'
 import email from 'src/store/apps/email'
@@ -45,6 +45,10 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
       color: '#8090A7s'
     }
   })
+
+  useEffect(()=>{
+    phoneNumbersappend({ phonenumber: '' })
+  },[])
 
 
 
@@ -106,9 +110,9 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                       variant='outlined'
                       fullWidth
                       size='small'
-                      error={Boolean(errors?.contacts?.phonenumbers?.[index].phone)}
-                      {...(errors?.contacts?.phonenumbers?.[index].phone && {
-                        helperText: errors?.contacts?.phonenumbers?.[index].phone.message
+                      error={Boolean(errors?.contacts?.phonenumbers?.[index]?.phone)}
+                      {...(errors?.contacts?.phonenumbers?.[index]?.phone && {
+                        helperText: errors?.contacts?.phonenumbers?.[index]?.phone?.message
                       })}
                     />
                   )}
@@ -135,7 +139,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
               <Box key={Email.id} >
                 <Controller
                   name={`contacts.emails.${index}.email`}
-      
+
                   control={control}
                   render={({ field }) => (
                     <TextField

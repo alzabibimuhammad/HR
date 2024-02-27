@@ -9,7 +9,11 @@ import { FormateDateTime } from 'src/utiltis/DateTimeFormat'
 
 // ** Fetch Events
 export const fetchEvents = createAsyncThunk('appCalendar/fetchEvents', async calendars => {
-  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL+`/api/Calendar/All`)
+  const response = await axios.get(process.env.NEXT_PUBLIC_BASE_URL+`/api/Calendar/All`,  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  })
 
   return response.data
 })
@@ -56,7 +60,11 @@ export const updateEvent = createAsyncThunk('appCalendar/updateEvent', async (ev
   formData.append('end',end_date)
   formData.append('start',start_date)
 
-  const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/Calendar/Edit/${ event.id }`,formData )
+  const response = await axios.post(process.env.NEXT_PUBLIC_BASE_URL+`/api/Calendar/Edit/${ event.id }`,formData,  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  } )
   await dispatch(fetchEvents())
 
   return response.data.event
@@ -65,7 +73,11 @@ export const updateEvent = createAsyncThunk('appCalendar/updateEvent', async (ev
 // ** Delete Event
 export const deleteEvent = createAsyncThunk('appCalendar/deleteEvent', async (id, { dispatch }) => {
 
-  const response = await axios.delete(process.env.NEXT_PUBLIC_BASE_URL+`/api/Calendar/Remove/${ id }`)
+  const response = await axios.delete(process.env.NEXT_PUBLIC_BASE_URL+`/api/Calendar/Remove/${ id }`,  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+    },
+  })
   await dispatch(fetchEvents())
 
   return response.data

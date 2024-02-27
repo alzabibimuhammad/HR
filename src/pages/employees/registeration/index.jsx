@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Registration from 'src/features/registeration/components/DataGrid'
-import { getRegisteration } from './store'
+// import { getRegisteration } from './store'
 import { CircularProgress } from '@mui/material'
 import { Box } from '@mui/system'
-
+import getRegisteration from './api'
+import { request } from 'src/utiltis/AxiosUtilitis'
 export default function Registeration() {
   const dispatch = useDispatch()
 
   const store = useSelector(state => state.RegisterStore)
 
-  const [data , setData] = useState([])
+  // const [data , setData] = useState([])
 
   const [filterDate,setFilterDate] = useState({})
 
@@ -23,17 +24,32 @@ export default function Registeration() {
 
   let formattedDate = `${year}-${month}-${day}`;
 
+  const [data , setData] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    if(Object?.keys(filterDate).length != 0)
-      dispatch(getRegisteration(filterDate))
-    else
-      dispatch(getRegisteration(formattedDate))
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/DayAttendance/${Object.keys(filterDate).length?filterDate:formattedDate}?branch_id=${localStorage.branch}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.accessToken}`
+      }
+    })
 
-    setData(store?.data)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(jsonData => {
+        setData(jsonData);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
 
-  },[dispatch,store?.data?.length,filterDate])
+      });
+
+  }, [,filterDate]);
+
 
   return (
     <>

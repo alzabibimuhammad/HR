@@ -2,7 +2,7 @@
 import toast from 'react-hot-toast';
 
 export const showSuccesToast = (message,SuccessMessageApi) => {
-    toast.success(`${message}    ${SuccessMessageApi} `, {
+    toast.success(`${message}    ${SuccessMessageApi?SuccessMessageApi:""} `, {
         position: "top-left",
         style: {
           backgroundColor: "#91C483",

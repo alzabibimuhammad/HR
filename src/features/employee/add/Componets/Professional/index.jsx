@@ -60,7 +60,7 @@ export default function Professional({ onDataChange, Controller, control,errors 
                 fullWidth
                 error={Boolean(errors?.branch_id)}
                 helperText={errors?.branch_id?.message}
-                defaultValue={'Branch'}
+                defaultValue=''
                 SelectProps={{
                   value: field.value,
                   displayEmpty: true,
@@ -71,7 +71,7 @@ export default function Professional({ onDataChange, Controller, control,errors 
                 }}
                 size='small'
               >
-                <MenuItem disabled={true} value='Branch' >{`${t('Branch')}`}</MenuItem>
+                <MenuItem value='' >{`${t('Branch')}`}</MenuItem>
 
                 {SelectBranch?.data?.data?.map((val, index) => (
                   <MenuItem key={val.id} value={val.id}>
@@ -93,8 +93,10 @@ export default function Professional({ onDataChange, Controller, control,errors 
                 select
                 fullWidth
                 error={Boolean(errors?.specialization)}
-      helperText={errors?.specialization?.message}
-                defaultValue='work specialization'
+                {...(errors?.specialization && {
+                  helperText: errors?.specialization?.message
+                })}
+                defaultValue=''
                 SelectProps={{
                   value: field.value,
                   displayEmpty: true,
@@ -105,10 +107,9 @@ export default function Professional({ onDataChange, Controller, control,errors 
                 }}
                 size='small'
               >
-                <MenuItem value='' disabled>
+                <MenuItem value='' >
                 {t("work specialization")}
                 </MenuItem>
-                <MenuItem value='work specialization'>{`${t('work specialization')}`}</MenuItem>
 
                 {data?.data?.data?.specialisation?.map((val, index) => (
                   <MenuItem key={index} value={val}>

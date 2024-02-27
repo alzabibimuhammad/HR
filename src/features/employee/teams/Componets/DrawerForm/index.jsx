@@ -42,7 +42,8 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
   const handlerSendData = () => {
     const formData = new FormData()
     formData.append('name', teamName)
-    formData.append('team_leader', teamLeader)
+    if(teamLeader)
+      formData.append('team_leader', teamLeader)
     members.forEach((user, index) => {
       formData.append(`users_array[${index}]`, user)
     })

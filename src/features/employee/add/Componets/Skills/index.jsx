@@ -209,7 +209,6 @@ useEffect(()=>{
                   label={t("Degree")}
                   SelectProps={{
                     value: field.value,  // Use field.value here
-                    displayEmpty: true,
                     onChange: (e) => {
                       field.onChange(e);  // Ensure field.onChange is called
                       handleDegreeChange(e);

@@ -131,7 +131,8 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               <TextField
                 {...field}
                 fullWidth
-
+                error={Boolean(errors.health_status)}
+                {...(errors?.health_status && { helperText: errors?.health_status?.message })}
                 size='small'
                 label={
                   <Stack direction={'row'} spacing={2} >
@@ -171,7 +172,7 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               size='small'
                   >
                     <MenuItem value=''>{`${t("Gender")}`}</MenuItem>
-                    <MenuItem value='Male'>{`${t("Male")}`}</MenuItem>
+                    <MenuItem value='male'>{`${t("Male")}`}</MenuItem>
                     <MenuItem value='female'>{`${t("Female")}`}</MenuItem>
                 </TextField>
   )}

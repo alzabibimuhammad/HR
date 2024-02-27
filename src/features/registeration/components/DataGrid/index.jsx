@@ -18,7 +18,7 @@ const Registration = ({ Data, setFilterDate }) => {
 
   let data  = Data?.data
 
-  const [rows, setRows] = useState(data)
+  const [rows, setRows] = useState()
 
   useEffect(() => {
     let filterData = RegistrationData(data)

@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from '@mui/material'
+import { Card, CardContent, CircularProgress, Typography } from '@mui/material'
 import React from 'react'
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import { Box, Stack } from '@mui/system';
@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 export default function Employment({ProfileData}) {
+  console.log("🚀 ~ Employment ~ ProfileData:", ProfileData?.contract[0].id)
   const {t} = useTranslation()
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
@@ -67,15 +68,16 @@ export default function Employment({ProfileData}) {
               <TypoVal>12{t('months')} </TypoVal>
             </StackRow>
 
-            <StackRow>
+            <StackRow alignItems={'center'}>
               <Typo>{t('Contract')}:</Typo>
-
-                  <Link href={`/contracts/view/${5}`} style={{ textDecoration:'none' }} >
+                  {ProfileData?.id?
+                  <Link href={`/contracts/view/${ProfileData?.id}`} style={{ textDecoration:'none' }} >
                     <StackRow>
                       <img src='/images/pesonalProfile/showContract/icon.svg'/>
                       <Typo>{t('Show Contract')} </Typo>
                     </StackRow>
                     </Link>
+                  :<CircularProgress style={{ marginLeft:'10px',width:'20px',height:'20px' }} />}
             </StackRow>{/* link to Contract */}
 
             <StackRow>

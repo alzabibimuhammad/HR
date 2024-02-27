@@ -111,7 +111,7 @@ const useContractColumns = () => {
         return (
           <>
             <Stack>
-              <Link href={`/contracts/view/${params.row.id}`}>
+              <Link href={`/contracts/view/${params?.row?.user_id}`}>
                 <IconButton>
                   <VisibilityIcon variant='contained' sx={{ color: '#FF9F43' }} size='small'>
                     Details

@@ -93,11 +93,11 @@ export default function Skills({ ProfileData }) {
             <Typo>{t('Skills')}:</Typo>
             <ul style={{ padding: 0, margin: 0, marginLeft: '5%' }}>
               {ProfileData &&
-                ProfileData.skills &&
-                ProfileData.skills.map((val, index) => (
+                ProfileData?.skills &&
+                ProfileData?.skills?.map((val, index) => (
                   <li key={index}>
                     <StackRow>
-                      <TypoVal>{val.name}</TypoVal>
+                      <TypoVal>{val.skills}</TypoVal>
                       <Rating name='size-medium' readOnly defaultValue={val.rate} />
                     </StackRow>
                   </li>
@@ -109,11 +109,11 @@ export default function Skills({ ProfileData }) {
             <Typo>{t('Languages')}:</Typo>
             <ul style={{ padding: 0, margin: 0, marginLeft: '5%' }}>
               {ProfileData &&
-                ProfileData.languages &&
-                ProfileData.languages.map((val, index) => (
+                ProfileData?.languages &&
+                ProfileData?.languages?.map((val, index) => (
                   <li key={index}>
                     <StackRow>
-                      <TypoVal>{val.name}</TypoVal>
+                      <TypoVal>{val?.languages}</TypoVal>
                       <Rating name='size-medium' readOnly defaultValue={val.rate} />
                     </StackRow>
                   </li>

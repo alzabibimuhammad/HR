@@ -98,7 +98,7 @@ export default function Skills({ ProfileData }) {
                   <li key={index}>
                     <StackRow>
                       <TypoVal>{val.name}</TypoVal>
-                      <Rating name='size-medium' defaultValue={val.rate} />
+                      <Rating name='size-medium' readOnly defaultValue={val.rate} />
                     </StackRow>
                   </li>
                 ))}
@@ -114,7 +114,7 @@ export default function Skills({ ProfileData }) {
                   <li key={index}>
                     <StackRow>
                       <TypoVal>{val.name}</TypoVal>
-                      <Rating name='size-medium' defaultValue={val.rate} />
+                      <Rating name='size-medium' readOnly defaultValue={val.rate} />
                     </StackRow>
                   </li>
                 ))}

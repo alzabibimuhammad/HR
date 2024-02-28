@@ -1,23 +1,23 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { request } from 'src/utiltis/AxiosUtilitis'
+import { requestDashboard } from 'src/utiltis/AxiosDashboard';
 import { showErrorToast } from 'src/utiltis/showErrorToast';
 
 
 
 export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendancePercentage', async _ => {
   try {
-    const response = await request({ url: '/api/showPercent' });
+    const response = await requestDashboard({ url: '/api/showPercent' });
     return response.data;
 
   } catch (error) {
-    throw error;
+    showErrorToast("Network Error")
     }
 })
 
 export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async date => {
   try {
-    const response = await request({ url: `/api/DayAttendance/${date}`});
+    const response = await requestDashboard({ url: `/api/DayAttendance/${date}`});
     return response.data;
 
   } catch (error) {
@@ -29,7 +29,7 @@ export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', a
 
 export const storeAttendanceLogs = createAsyncThunk('Dashboard/storeAttendanceLogs', async () => {
   try{
-  const response = request({ url: '/api/storeAttendanceLogs' })
+  const response = requestDashboard({ url: '/api/storeAttendanceLogs' })
 
   return {
    data: response.data

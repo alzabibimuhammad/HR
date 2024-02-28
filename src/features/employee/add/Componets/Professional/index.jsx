@@ -7,7 +7,6 @@ import useSelectInput from 'src/pages/employees/add/hook/useSelectInput'
 import useSelectLevel from 'src/pages/employees/add/hook/useSelectLevel'
 
 export default function Professional({ onDataChange, Controller, control,errors, ShowUser }) {
-  console.log("🚀 ~ Professional ~ ShowUser:", ShowUser?.data?.data?.[0]?.department?.id)
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
   }

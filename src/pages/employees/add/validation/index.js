@@ -28,13 +28,7 @@ confirm_password: yup
   social_situation: yup.string().required("socialsituation is required"),
   specialization: yup.string().required('Specialization is required'),
 
-  experiences: yup.array().of(
-    yup.string()
-  ),
-
-  certificates: yup.array().of(
-    yup.string()
-  ),
+  
 
 
   level: yup.string().required('Level is required'),

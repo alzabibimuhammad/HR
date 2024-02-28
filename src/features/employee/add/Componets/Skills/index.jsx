@@ -249,7 +249,7 @@ useEffect(()=>{
                   <CloseIcon sx={{cursor:"pointer",'&:hover': { color: 'red' }}} onClick={() => handleRemoveClickcertificate(index)} />
                  )}
               <Controller
-                name={`certificates[${index}]`}
+                name={`certificates[${index}].content`}
                 control={control}
                 render={({ field }) => (
               <TextField
@@ -290,7 +290,7 @@ useEffect(()=>{
             />
           )}
           <Controller
-            name={`experiences[${index}]`}
+            name={`experiences[${index}].content`}
             control={control}
             render={({ field }) => (
               <TextField

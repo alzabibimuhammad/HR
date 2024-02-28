@@ -112,45 +112,45 @@ export default function Add() {
   }
 
 
-  useEffect(() => {
-    if (ShowUser?.data?.data[0]) {
-      defaultValues = {
-        first_name: ShowUser?.data?.data[0]?.first_name,
-        middle_name: ShowUser?.data?.data[0]?.middle_name,
-        last_name: ShowUser?.data?.data[0]?.last_name,
-        email: ShowUser?.data?.data[0]?.email,
-        birth_date: ShowUser?.data?.data[0]?.user_info?.birth_date,
-        nationalID: ShowUser?.data?.data[0]?.user_info?.nationalID,
-        health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
-        gender: ShowUser?.data?.data[0]?.user_info?.gender,
-        military_situation: ShowUser?.data?.data[0]?.user_info?.military_situation,
-        level: ShowUser?.data?.data[0]?.user_info?.level,
-        social_situation: ShowUser?.data?.data[0]?.user_info?.social_situation,
-        health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
-        salary: ShowUser?.data?.data[0]?.user_info?.salary,
-        address: ShowUser?.data?.data[0]?.address,
-        specialization: ShowUser?.data?.data[0]?.specialization,
-        branch_id: ShowUser?.data?.data[0]?.branch_id,
-        contacts: {
-          emails: ShowUser?.data?.data[0]?.my_contacts || [{ email: '' }],
-          phonenumbers: ShowUser?.data?.data[0]?.my_contacts || [{ phone: '' }],
-        },
-        skills: ShowUser?.data?.data[0]?.skills,
-        educations: ShowUser?.data?.data[0]?.study_situations?.study,
-        degree: ShowUser?.data?.data[0]?.study_situations?.degree,
-        certificates: ShowUser?.data?.data[0]?.certificates.map((val) => val.content),
-        languages: ShowUser?.data?.data[0]?.languages,
-        educations: {
-          study: ShowUser?.data?.data[0]?.study_situations,
-        },
-      };
-      Object.entries(defaultValues).forEach(([field, value]) => {
-        setValue(field, value);
-      });
-    }
-    if(!user_id) return ()=>reset()
+  // useEffect(() => {
+  //   if (ShowUser?.data?.data[0]) {
+  //     defaultValues = {
+  //       first_name: ShowUser?.data?.data[0]?.first_name,
+  //       middle_name: ShowUser?.data?.data[0]?.middle_name,
+  //       last_name: ShowUser?.data?.data[0]?.last_name,
+  //       email: ShowUser?.data?.data[0]?.email,
+  //       birth_date: ShowUser?.data?.data[0]?.user_info?.birth_date,
+  //       nationalID: ShowUser?.data?.data[0]?.user_info?.nationalID,
+  //       health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
+  //       gender: ShowUser?.data?.data[0]?.user_info?.gender,
+  //       military_situation: ShowUser?.data?.data[0]?.user_info?.military_situation,
+  //       level: ShowUser?.data?.data[0]?.user_info?.level,
+  //       social_situation: ShowUser?.data?.data[0]?.user_info?.social_situation,
+  //       health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
+  //       salary: ShowUser?.data?.data[0]?.user_info?.salary,
+  //       address: ShowUser?.data?.data[0]?.address,
+  //       specialization: ShowUser?.data?.data[0]?.specialization,
+  //       branch_id: ShowUser?.data?.data[0]?.branch_id,
+  //       contacts: {
+  //         emails: ShowUser?.data?.data[0]?.my_contacts || [{ email: '' }],
+  //         phonenumbers: ShowUser?.data?.data[0]?.my_contacts || [{ phone: '' }],
+  //       },
+  //       skills: ShowUser?.data?.data[0]?.skills,
+  //       educations: ShowUser?.data?.data[0]?.study_situations?.study,
+  //       degree: ShowUser?.data?.data[0]?.study_situations?.degree,
+  //       certificates: ShowUser?.data?.data[0]?.certificates.map((val) => val.content),
+  //       languages: ShowUser?.data?.data[0]?.languages,
+  //       educations: {
+  //         study: ShowUser?.data?.data[0]?.study_situations,
+  //       },
+  //     };
+  //     Object.entries(defaultValues).forEach(([field, value]) => {
+  //       setValue(field, value);
+  //     });
+  //   }
+  //   if(!user_id) return ()=>reset()
 
-  }, [ShowUser, setValue]);
+  // }, [ShowUser, setValue]);
 
 
 

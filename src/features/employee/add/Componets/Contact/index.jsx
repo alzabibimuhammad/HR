@@ -97,7 +97,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
             {phoneNumbersfields.map((phoneNumber, index) => (
               <Box mt={5} key={phoneNumber.id}>
                 <Controller
-                  name={`contacts.phonenumbers.${index}.phone`}
+                  name={`contacts.phonenumbers.${index}.phone_num`}
                   control={control}
                   render={({ field }) => (
                     <TextField
@@ -106,9 +106,9 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                       variant='outlined'
                       fullWidth
                       size='small'
-                      error={Boolean(errors?.contacts?.phonenumbers?.[index]?.phone)}
-                      {...(errors?.contacts?.phonenumbers?.[index]?.phone && {
-                        helperText: errors?.contacts?.phonenumbers?.[index]?.phone?.message
+                      error={Boolean(errors?.contacts?.phonenumbers?.[index]?.phone_num)}
+                      {...(errors?.contacts?.phonenumbers?.[index]?.phone_num && {
+                        helperText: errors?.contacts?.phonenumbers?.[index]?.phone_num?.message
                       })}
                     />
                   )}

@@ -43,7 +43,7 @@ confirm_password: yup
 
     phonenumbers: yup.array().of(
       yup.object().shape({
-      phone:yup.string().matches(/^09\d{8}$/, 'Invalid Syrian phone number').required("phone is required")
+        phone_num:yup.string().matches(/^09\d{8}$/, 'Invalid Syrian phone number').required("phone is required")
     })),
 
     emails:yup.array().of(

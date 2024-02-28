@@ -38,59 +38,60 @@ export default function Add() {
   const { mutate: addUsers, } = useAddUsers()
 
   const { mutate: EditUsers, } = useEditUsers()
-  
+
   const router = useRouter();
   let { user_id } = router.query;
-  
+
 
   const { data: ShowUser, isLoading, } = useGetUser(user_id)
- 
-  console.log("🚀 ~ Add ~ ShowUser:", ShowUser)
+
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
   }
 
+  ShowUser?.data?.data?.[0]?.deposits?.forEach((element,key) => {
+    element.object = element?.description
+    element.delivery_date = element?.received_date
+  });
+
+  console.log("🚀 ~ ShowUser?.data?.data?.[0]?.deposits?.forEach ~ ShowUser:", ShowUser)
 
 
- 
-  
   const phonenumbers=  ShowUser?.data?.data?.[0]?.my_contacts.map(contact => ({ phone: contact.phone_num }))
-  console.log("🚀 ~ Add ~ phonenumbers:", phonenumbers)
 
  const defaultValues = {
-          first_name: ShowUser?.data?.data[0]?.first_name,
-          middle_name: ShowUser?.data?.data[0]?.middle_name,
-          last_name: ShowUser?.data?.data[0]?.last_name,
-          email: ShowUser?.data?.data[0]?.email,
-          birth_date: ShowUser?.data?.data[0]?.user_info?.birth_date,
-          nationalID: ShowUser?.data?.data[0]?.user_info?.nationalID,
-          health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
-          gender: ShowUser?.data?.data[0]?.user_info?.gender.toLowerCase(),
-          military_situation: ShowUser?.data?.data[0]?.user_info?.military_situation,
-          level: ShowUser?.data?.data[0]?.user_info?.level,
-          social_situation: ShowUser?.data?.data[0]?.user_info?.social_situation,
-          health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
-          salary: ShowUser?.data?.data[0]?.user_info?.salary,
-          address: ShowUser?.data?.data[0]?.address,
-          specialization: ShowUser?.data?.data[0]?.specialization,
-          branch_id: ShowUser?.data?.data[0]?.branch_id,
+          first_name: ShowUser?.data?.data[0]?.first_name||"",
+          middle_name: ShowUser?.data?.data[0]?.middle_name||"",
+          last_name: ShowUser?.data?.data[0]?.last_name||"",
+          email: ShowUser?.data?.data[0]?.email||"",
+          birth_date: ShowUser?.data?.data[0]?.user_info?.birth_date||"",
+          nationalID: ShowUser?.data?.data[0]?.user_info?.nationalID||"",
+          health_status: ShowUser?.data?.data[0]?.user_info?.health_status||"",
+          gender: ShowUser?.data?.data[0]?.user_info?.gender||"",
+          military_situation: ShowUser?.data?.data[0]?.user_info?.military_situation||"Exempt",
+          level: ShowUser?.data?.data[0]?.user_info?.level||"",
+          social_situation: ShowUser?.data?.data[0]?.user_info?.social_situation||"",
+          health_status: ShowUser?.data?.data[0]?.user_info?.health_status||"",
+          salary: ShowUser?.data?.data[0]?.user_info?.salary||"",
+          address: ShowUser?.data?.data[0]?.address||"",
+          specialization: ShowUser?.data?.data[0]?.specialization||"",
+          branch_id: ShowUser?.data?.data[0]?.branch_id||"",
           contacts: {
-            emails: ShowUser?.data?.data[0]?.my_contacts || [{ email: '' }],
-            phonenumbers: phonenumbers || [{ phone: '' }],
+            emails: ShowUser?.data?.data[0]?.emails || [{ email: '' }],
+            phonenumbers: ShowUser?.data?.data[0]?.phone_number || [{ phone: '' }],
           },
           skills: ShowUser?.data?.data[0]?.skills||[
             { skills: '', rate:''  }
           ],
           educations: ShowUser?.data?.data[0]?.study_situations||[{ study: '', degree: '' }],
-          degree: ShowUser?.data?.data[0]?.study_situations?.degree,
-          certificates: ShowUser?.data?.data[0]?.certificates.map((val) => val.content),
-          languages: ShowUser?.data?.data[0]?.languages||[
-            { languages: '',rate:"" }
-          ],
+          degree: ShowUser?.data?.data[0]?.study_situations?.degree||"",
+          certificates: ShowUser?.data?.data[0]?.certificates.map((val) => val.content)||"",
+          languages: ShowUser?.data?.data[0]?.languages||[{ languages: '',rate:"" }],
 
           experiences:ShowUser?.data?.data[0]?.careers||[{ experience: '' }],
           certificates:ShowUser?.data?.data[0]?.certificates||[{content:''}],
+          secretaraits:ShowUser?.data?.data[0]?.deposits||[{object:"",delivery_date:""}]
 
         }
 
@@ -120,7 +121,7 @@ export default function Add() {
           mode: 'onBlur',
           resolver: Boolean(ShowUser?.data?.data?.length) ? undefined :yupResolver(Schema) ,
         });
-        
+
 
   const handleDataSubmit = data => {
 
@@ -137,16 +138,16 @@ export default function Add() {
 
 }
 const handleDataEditSubmit = data => {
-  
-  
+
+
 
   const formData = new FormData()
   formData.append('image', ProfileImage)
 
   data.image = ProfileImage
-  
+
   EditUsers({id:user_id,data:data})
-  
+
 
 
 }
@@ -180,7 +181,6 @@ const handleDataEditSubmit = data => {
 
 
   if (isLoading) {
-    // Render loading state or placeholder while fetching data
     return <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'100%'}}><CircularProgress/></div>;
 }
 
@@ -315,6 +315,7 @@ return (
                   setError={setError}
                   control={control}
                   Controller={Controller}
+                  ShowUser={ShowUser}
                 />
               </Box>
             </Stack>

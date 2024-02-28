@@ -10,7 +10,6 @@ export default function Download(userData) {
   const componentRef = useRef()
   const {t} = useTranslation()
   const { data } = useViewContract(userId)
-  console.log("🚀 ~ Download ~ data:", data)
 
 
   const handleDownloadClick = () => {

@@ -3,7 +3,6 @@ import * as agCharts from 'ag-charts-community';
 import { useTranslation } from 'react-i18next';
 
 function Attendance(Data) {
-  console.log("🚀 ~ Attendance ~ Data:", Data)
   const {t} = useTranslation()
 
   useEffect(() => {

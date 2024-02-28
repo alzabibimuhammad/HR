@@ -21,7 +21,6 @@ export default function View({ id }) {
   const router = useRouter()
 
   const { data, isLoading, isError } = useViewContract(id)
-  console.log("🚀 ~ View ~ data:", data)
 
   const { mutate: deleteContract } = useDeleteContract()
 
@@ -133,7 +132,7 @@ export default function View({ id }) {
             </Box>
           </Stack>
         ))}
-          
+
       </Stack>
     </>
   )

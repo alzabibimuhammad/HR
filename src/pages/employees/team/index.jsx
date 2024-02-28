@@ -8,7 +8,6 @@ import { Box } from '@mui/system'
 export default function Employees() {
 
   const {data , loading } = useGetAllTeams()
-  console.log("🚀 ~ Employees ~ data:", data)
 
   return (
     <Grid container spacing={4}>

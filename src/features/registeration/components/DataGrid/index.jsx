@@ -11,7 +11,6 @@ import useRegistrationColumn from '../../Hook/useRegistrationColumn'
 import Show10 from 'src/@core/components/show10'
 
 const Registration = ({ Data, setFilterDate,filterDate }) => {
-  console.log("🚀 ~ Registration ~ Data:", Data)
   const columns = useRegistrationColumn()
   const [show, setShow] = React.useState(10);
   const [search,setSearch] = useState()

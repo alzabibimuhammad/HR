@@ -5,7 +5,6 @@ import Avatar from '@mui/material/Avatar';
 import { useTranslation } from 'react-i18next';
 
 export default function Snapshot({ onDataChange, Controller, control, defaultValues, errors, setProfileImage, ShowUser }) {
-  console.log("🚀 ~ Snapshot ~ defaultValues:", defaultValues)
 
 
   const [image, setImage] = useState(null);

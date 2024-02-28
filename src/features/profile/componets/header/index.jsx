@@ -17,7 +17,6 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 
 
 const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) => {
-  console.log("🚀 ~ UserProfileHeader ~ ProfileData:", ProfileData)
   const { t } = useTranslation()
   const [activeButton, setActiveButton] = useState('reports');
   const dispatch = useDispatch()

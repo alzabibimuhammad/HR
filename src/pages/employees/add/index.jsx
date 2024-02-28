@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Typography } from '@mui/material'
+import { Button, CircularProgress, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import Account from 'src/features/employee/add/Componets/Account'
 import Contact from 'src/features/employee/add/Componets/Contact'
@@ -40,6 +40,7 @@ export default function Add() {
   let { user_id } = router.query;
 
   const { data:ShowUser,isLoading, } = useGetUser(user_id)
+  console.log("🚀 ~ Add ~ ShowUser:", ShowUser)
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
@@ -49,17 +50,50 @@ export default function Add() {
 
 
 
- let   defaultValues={
-  contacts: {
-    emails:[{ email: '' }],
-    phonenumbers: [{ phone: '' }],
-  },
-}
+
+ const defaultValues = {
+          first_name: ShowUser?.data?.data[0]?.first_name,
+          middle_name: ShowUser?.data?.data[0]?.middle_name,
+          last_name: ShowUser?.data?.data[0]?.last_name,
+          email: ShowUser?.data?.data[0]?.email,
+          birth_date: ShowUser?.data?.data[0]?.user_info?.birth_date,
+          nationalID: ShowUser?.data?.data[0]?.user_info?.nationalID,
+          health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
+          gender: ShowUser?.data?.data[0]?.user_info?.gender.toLowerCase(),
+          military_situation: ShowUser?.data?.data[0]?.user_info?.military_situation,
+          level: ShowUser?.data?.data[0]?.user_info?.level,
+          social_situation: ShowUser?.data?.data[0]?.user_info?.social_situation,
+          health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
+          salary: ShowUser?.data?.data[0]?.user_info?.salary,
+          address: ShowUser?.data?.data[0]?.address,
+          specialization: ShowUser?.data?.data[0]?.specialization,
+          branch_id: ShowUser?.data?.data[0]?.branch_id,
+          contacts: {
+            emails: ShowUser?.data?.data[0]?.my_contacts || [{ email: '' }],
+            phonenumbers: ShowUser?.data?.data[0]?.my_contacts || [{ phone: '' }],
+          },
+          skills: ShowUser?.data?.data[0]?.skills||[
+            { skills: '', rate:''  }
+          ],
+          educations: ShowUser?.data?.data[0]?.study_situations||[{ study: '', degree: '' }],
+          degree: ShowUser?.data?.data[0]?.study_situations?.degree,
+          certificates: ShowUser?.data?.data[0]?.certificates.map((val) => val.content),
+          languages: ShowUser?.data?.data[0]?.languages||[
+            { languages: '',rate:"" }
+          ],
+        
+          experiences:ShowUser?.data?.data[0]?.careers||[{ experience: '' }],
+          certificates:ShowUser?.data?.data[0]?.certificates||[{content:''}],
+          
+        }
+ console.log("🚀 ~ Add ~ defaultValues:", defaultValues)
 
 
 
 
 
+          
+        
 
 
 
@@ -84,7 +118,7 @@ export default function Add() {
 
   const handleDataSubmit = data => {
 
-    try {
+ 
       const formData = new FormData()
       formData.append('image', ProfileImage)
 
@@ -93,9 +127,7 @@ export default function Add() {
       addUsers(data)
 
 
-  }catch (error) {
-
-  }
+ 
 }
 
 
@@ -112,51 +144,24 @@ export default function Add() {
   }
 
 
-  // useEffect(() => {
-  //   if (ShowUser?.data?.data[0]) {
-  //     defaultValues = {
-  //       first_name: ShowUser?.data?.data[0]?.first_name,
-  //       middle_name: ShowUser?.data?.data[0]?.middle_name,
-  //       last_name: ShowUser?.data?.data[0]?.last_name,
-  //       email: ShowUser?.data?.data[0]?.email,
-  //       birth_date: ShowUser?.data?.data[0]?.user_info?.birth_date,
-  //       nationalID: ShowUser?.data?.data[0]?.user_info?.nationalID,
-  //       health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
-  //       gender: ShowUser?.data?.data[0]?.user_info?.gender,
-  //       military_situation: ShowUser?.data?.data[0]?.user_info?.military_situation,
-  //       level: ShowUser?.data?.data[0]?.user_info?.level,
-  //       social_situation: ShowUser?.data?.data[0]?.user_info?.social_situation,
-  //       health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
-  //       salary: ShowUser?.data?.data[0]?.user_info?.salary,
-  //       address: ShowUser?.data?.data[0]?.address,
-  //       specialization: ShowUser?.data?.data[0]?.specialization,
-  //       branch_id: ShowUser?.data?.data[0]?.branch_id,
-  //       contacts: {
-  //         emails: ShowUser?.data?.data[0]?.my_contacts || [{ email: '' }],
-  //         phonenumbers: ShowUser?.data?.data[0]?.my_contacts || [{ phone: '' }],
-  //       },
-  //       skills: ShowUser?.data?.data[0]?.skills,
-  //       educations: ShowUser?.data?.data[0]?.study_situations?.study,
-  //       degree: ShowUser?.data?.data[0]?.study_situations?.degree,
-  //       certificates: ShowUser?.data?.data[0]?.certificates.map((val) => val.content),
-  //       languages: ShowUser?.data?.data[0]?.languages,
-  //       educations: {
-  //         study: ShowUser?.data?.data[0]?.study_situations,
-  //       },
-  //     };
-  //     Object.entries(defaultValues).forEach(([field, value]) => {
-  //       setValue(field, value);
-  //     });
-  //   }
-  //   if(!user_id) return ()=>reset()
-
-  // }, [ShowUser, setValue]);
+  useEffect(() => {
+    
+    
+      Object.entries(defaultValues).forEach(([field, value]) => {
+        setValue(field, value);
+      });
+   
+    
+  }, [ShowUser]);
 
 
 
 
 
-
+  if (isLoading) {
+    // Render loading state or placeholder while fetching data
+    return <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'100%'}}><CircularProgress/></div>;
+}
 
 
   return (
@@ -193,6 +198,7 @@ export default function Add() {
              control={control}
              Controller={Controller}
              setProfileImage={setProfileImage}
+             ShowUser={ShowUser}
            />
          </Box>
          <Box>
@@ -216,7 +222,7 @@ export default function Add() {
              control={control}
              Controller={Controller}
              passwordValue={getValues('password')} // Pass the password value
-
+             ShowUser={ShowUser}
            />
          </Box>
          <Box>
@@ -259,6 +265,8 @@ export default function Add() {
              setError={setError}
              control={control}
              Controller={Controller}
+             errors={errors}
+             ShowUser={ShowUser}
            />
          </Box>
          <Box>

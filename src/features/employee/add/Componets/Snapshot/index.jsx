@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import { useTranslation } from 'react-i18next';
 
-export default function Snapshot({onDataChange,Controller,control,defaultValues,errors,setProfileImage}) {
+export default function Snapshot({onDataChange,Controller,control,defaultValues,errors,setProfileImage,ShowUser}) {
 
   const [image, setImage] = useState(null);
 const[fileName,setFileName]=useState(null)
@@ -54,7 +54,7 @@ const {t} = useTranslation()
       <label htmlFor="imageInput">
         <Avatar
           sx={{ width: '120px', height: '120px', borderRadius: '5px' }}
-          src={image || "/broken-image.jpg"}
+          src={image ||process.env.NEXT_PUBLIC_IMAGES +'/'+ShowUser?.data?.data[0]?.user_info?.image ||"/broken-image.jpg"}
         />
       </label>
 

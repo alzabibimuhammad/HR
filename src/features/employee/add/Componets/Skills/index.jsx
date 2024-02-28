@@ -112,14 +112,14 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
 
 
 
-useEffect(()=>{
-  append('educations', { study: '', degree: '' });
-  certificateAppend('certificates', {  });
-  experienceAppend('experiences', { experience: '' });
-  skillsAppend('skills', { skills: '', rate: "" });
-  LanguageAppend('languages', { languages: '',rate:"" });
+// useEffect(()=>{
+//   append('educations', { study: '', degree: '' });
+//   certificateAppend('certificates', {  });
+//   experienceAppend('experiences', { experience: '' });
+//   skillsAppend('skills', { skills: '', rate: "" });
+//   LanguageAppend('languages', { languages: '',rate:"" });
 
-},[append,certificateAppend,experienceAppend,skillsAppend,LanguageAppend])
+// },[append,certificateAppend,experienceAppend,skillsAppend,LanguageAppend])
 
 
   const SvgStudy = `

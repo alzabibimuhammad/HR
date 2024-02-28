@@ -32,14 +32,14 @@ export default function Add() {
   const [AdditionalFilesData, setAdditionalFilesData] = useState({})
   const [EmergencyContactData, setEmergencyContacttData] = useState({})
   const [ProfileImage, setProfileImage] = useState()
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
-  const { mutate: addUsers,  } = useAddUsers()
+  const { mutate: addUsers, } = useAddUsers()
 
   const router = useRouter();
   let { user_id } = router.query;
 
-  const { data:ShowUser,isLoading, } = useGetUser(user_id)
+  const { data: ShowUser, isLoading, } = useGetUser(user_id)
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
@@ -49,17 +49,37 @@ export default function Add() {
 
 
 
- let   defaultValues={
-  contacts: {
-    emails:[{ email: '' }],
-    phonenumbers: [{ phone: '' }],
-  },
-}
-
-
-
-
-
+  let defaultValues = {
+    first_name: ShowUser?.data?.data[0]?.first_name,
+    middle_name: ShowUser?.data?.data[0]?.middle_name,
+    last_name: ShowUser?.data?.data[0]?.last_name,
+    email: ShowUser?.data?.data[0]?.email,
+    birth_date: ShowUser?.data?.data[0]?.user_info?.birth_date,
+    nationalID: ShowUser?.data?.data[0]?.user_info?.nationalID,
+    health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
+    gender: 'Male',
+    military_situation: ShowUser?.data?.data[0]?.user_info?.military_situation,
+    level: ShowUser?.data?.data[0]?.user_info?.level,
+    social_situation: ShowUser?.data?.data[0]?.user_info?.social_situation,
+    health_status: ShowUser?.data?.data[0]?.user_info?.health_status,
+    salary: ShowUser?.data?.data[0]?.user_info?.salary,
+    address: ShowUser?.data?.data[0]?.address,
+    specialization: ShowUser?.data?.data[0]?.specialization,
+    branch_id: ShowUser?.data?.data[0]?.branch_id,
+    contacts: {
+      emails: ShowUser?.data?.data[0]?.my_contacts[{ email: '' }],
+      phonenumbers: ShowUser?.data?.data[0]?.my_contacts[{ phone: '' }],
+    },
+    skills: ShowUser?.data?.data[0]?.skills,
+    educations: ShowUser?.data?.data[0]?.study_situations?.study,
+    degree: ShowUser?.data?.data[0]?.study_situations?.degree,
+    certificates: ShowUser?.data?.data[0]?.certificates.map((val) => val.content),
+    languages: ShowUser?.data?.data[0]?.languages,
+    emergency: ShowUser?.data?.data[0]?.emergency,
+    educations: {
+      study: ShowUser?.data?.data[0]?.study_situations,
+    },
+  };
 
 
 
@@ -79,11 +99,11 @@ export default function Add() {
     mode: 'onBlur',
 
     resolver: yupResolver(Schema),
-      })
+  })
 
 
   const handleDataSubmit = data => {
-
+    console.log("🚀 ~ handleDataSubmit ~ data:", data)
     try {
       const formData = new FormData()
       formData.append('image', ProfileImage)
@@ -93,10 +113,10 @@ export default function Add() {
       addUsers(data)
 
 
-  }catch (error) {
+    } catch (error) {
 
+    }
   }
-}
 
 
   const handleRatingChange = (index, newValue) => {
@@ -161,132 +181,133 @@ export default function Add() {
 
   return (
     <>
-    {ShowUser?
-   <>
-   <Box width={'100%'} display={'flex'} justifyContent={'end'}>
-     <Button
-       type='submit'
-       sx={{
-         backgroundColor: '#6AB2DF',
-         color: '#fff',
-         ':hover': { color: '#fff', backgroundColor: '#2A4759' }
-       }}
-       onClick={handleSubmit(handleDataSubmit)}
-     >
-       <Stack direction={'row'}>
-         <AddIcon/>
-         <Typography color={'inherit'} >
-         {t("Add Employee")}
-         </Typography>
-       </Stack>
-     </Button>
-     </Box>
+      {ShowUser ?
+        <>
+          <Box width={'100%'} display={'flex'} justifyContent={'end'}>
+            <Button
+              type='submit'
+              sx={{
+                backgroundColor: '#6AB2DF',
+                color: '#fff',
+                ':hover': { color: '#fff', backgroundColor: '#2A4759' }
+              }}
+              onClick={handleSubmit(ShowUser.data.data.length === 0 ? handleDataSubmit : handleDataSubmit)}
+            >
+              <Stack direction={'row'}>
+                <AddIcon />
+                <Typography color={'inherit'}>
+                  {ShowUser.data.data.length === 0 ? t("Add Employee") : t("Edit Employee")}
+                </Typography>
+              </Stack>
+            </Button>
+          </Box>
+          <Stack marginTop={'1%'} direction={{ sm: 'row', xs: 'column' }} spacing={2}>
+            <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
+              <Box>
+                <Snapshot
+                  onDataChange={setSnapshotData}
+                  errors={errors}
+                  defaultValues={defaultValues}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                  setProfileImage={setProfileImage}
+                  ShowUser={ShowUser}
+                />
+              </Box>
+              <Box>
+                <Account
+                  errors={errors}
+                  onDataChange={setAccountData}
+                  setError={setError}
+                  defaultValues={defaultValues}
+                  control={control}
+                  Controller={Controller}
+                  watch={watch}
+                  register={register}
+                  ShowUser={ShowUser}
+                />
+              </Box>
+              <Box>
+                <Info
+                  errors={errors}
+                  onDataChange={setInfoData}
+                  defaultValues={defaultValues}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                  passwordValue={getValues('password')} // Pass the password value
 
-     <Stack marginTop={'1%'} direction={{ sm: 'row', xs: 'column' }} spacing={2}>
-       <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
-         <Box>
-           <Snapshot
-             onDataChange={setSnapshotData}
-             errors={errors}
-             defaultValues={defaultValues}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             setProfileImage={setProfileImage}
-           />
-         </Box>
-         <Box>
-           <Account
-             errors={errors}
-             onDataChange={setAccountData}
-             setError={setError}
-             defaultValues={defaultValues}
-             control={control}
-             Controller={Controller}
-             watch={watch}
-             register={register}
-           />
-         </Box>
-         <Box>
-           <Info
-             errors={errors}
-             onDataChange={setInfoData}
-             defaultValues={defaultValues}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             passwordValue={getValues('password')} // Pass the password value
+                />
+              </Box>
+              <Box>
+                <Contact
+                  errors={errors}
+                  defaultValues={defaultValues}
+                  handleFieldChange={handleFieldChange}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                  onDataChange={setContactData}
+                />
+              </Box>
+              <Box>
+                <EmergencyContact
+                  errors={errors}
+                  handleFieldChange={handleFieldChange}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                  onDataChange={setEmergencyContacttData}
+                />
+              </Box>
+              <Box>
+                <AdditionalFiles
+                  errors={errors}
+                  handleFieldChange={handleFieldChange}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                  onDataChange={setAdditionalFilesData}
+                />
+              </Box>
+            </Stack>
 
-           />
-         </Box>
-         <Box>
-           <Contact
-             errors={errors}
-             defaultValues={defaultValues}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             onDataChange={setContactData}
-           />
-         </Box>
-         <Box>
-           <EmergencyContact
-             errors={errors}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             onDataChange={setEmergencyContacttData}
-           />
-         </Box>
-         <Box>
-           <AdditionalFiles
-             errors={errors}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             onDataChange={setAdditionalFilesData}
-           />
-         </Box>
-       </Stack>
-
-       <Stack flex={1} direction={'column'} spacing={2}>
-         <Box>
-           <Professional
-             onDataChange={setProfessionalData}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-           />
-         </Box>
-         <Box>
-           <Skills
-             errors={errors}
-             handleLanguageChange={handleLanguageChange}
-             handleRatingChange={handleRatingChange}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             onDataChange={setSkillsData}
-           />
-         </Box>
-         <Box>
-           <Employment
-             errors={errors}
-             onDataChange={setEmploymentData}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-           />
-         </Box>
-       </Stack>
-     </Stack>
-     </>
-     :null}
+            <Stack flex={1} direction={'column'} spacing={2}>
+              <Box>
+                <Professional
+                  onDataChange={setProfessionalData}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                />
+              </Box>
+              <Box>
+                <Skills
+                  errors={errors}
+                  handleLanguageChange={handleLanguageChange}
+                  handleRatingChange={handleRatingChange}
+                  handleFieldChange={handleFieldChange}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                  onDataChange={setSkillsData}
+                />
+              </Box>
+              <Box>
+                <Employment
+                  errors={errors}
+                  onDataChange={setEmploymentData}
+                  handleFieldChange={handleFieldChange}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                />
+              </Box>
+            </Stack>
+          </Stack>
+        </>
+        : null}
 
 
     </>

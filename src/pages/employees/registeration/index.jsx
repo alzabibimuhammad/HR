@@ -1,16 +1,12 @@
 import React, { use, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import Registration from 'src/features/registeration/components/DataGrid'
-// import { getRegisteration } from './store'
 import { CircularProgress } from '@mui/material'
 import { Box } from '@mui/system'
-import getRegisteration from './api'
-import { request } from 'src/utiltis/AxiosUtilitis'
-export default function Registeration() {
-  const dispatch = useDispatch()
+import getAttendance from './api'
 
-  const store = useSelector(state => state.RegisterStore)
+export default function Registeration() {
+
 
   // const [data , setData] = useState([])
 
@@ -22,38 +18,25 @@ export default function Registeration() {
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
 
-  let formattedDate = `${year}-${month}-${day}`;
+  const formattedDate = `${year}-${month}-${day}`;
 
   const [data , setData] = useState(null);
 
   useEffect(() => {
+    const fetchData =  async (date) => {
+      const jsonData =  await getAttendance(date);
+      setData(jsonData);
+    }
 
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/DayAttendance/${Object.keys(filterDate).length?filterDate:formattedDate}?branch_id=${localStorage.branch}`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.accessToken}`
-      }
-    })
+      fetchData(filterDate?filterDate:formattedDate);
 
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(jsonData => {
-        setData(jsonData);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+  }, [formattedDate,filterDate]);
 
-      });
-
-  }, [,filterDate]);
 
 
   return (
     <>
-      {data ? <Registration Data={data} setFilterDate={setFilterDate}/> :    <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height:"70vh"}}>
+      {data ? <Registration Data={data} filterDate={filterDate} setFilterDate={setFilterDate}/> :    <Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height:"70vh"}}>
 
 <CircularProgress className='loading-rtl'/>
 </Box> }

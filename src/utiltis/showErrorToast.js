@@ -2,8 +2,7 @@
 import toast from 'react-hot-toast';
 
 export const showErrorToast = (message,ErrorMessageApi) => {
-  if(ErrorMessageApi)
-  toast.error(`${message}    ${ErrorMessageApi?ErrorMessageApi:""}  `, {
+  toast.error(`${message?message:""}    ${ErrorMessageApi?ErrorMessageApi:""}  `, {
     position: "top-left",
     style: {
       backgroundColor: "#DF2E38",

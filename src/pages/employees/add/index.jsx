@@ -163,173 +163,138 @@ export default function Add() {
 }
 
 
-  return (
-    <>
-      {ShowUser ?
-        <>
-          <Box width={'100%'} display={'flex'} justifyContent={'end'}>
-            <Button
-              type='submit'
-              sx={{
-                backgroundColor: '#6AB2DF',
-                color: '#fff',
-                ':hover': { color: '#fff', backgroundColor: '#2A4759' }
-              }}
-              onClick={handleSubmit(ShowUser.data.data.length === 0 ? handleDataSubmit : handleDataSubmit)}
-            >
-              <Stack direction={'row'}>
-                <AddIcon />
-                <Typography color={'inherit'}>
-                  {ShowUser.data.data.length === 0 ? t("Add Employee") : t("Edit Employee")}
-                </Typography>
-              </Stack>
-            </Button>
-          </Box>
-          <Stack marginTop={'1%'} direction={{ sm: 'row', xs: 'column' }} spacing={2}>
-            <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
+
+return (
+  <>
+    {ShowUser ?
+      <>
+        <Box width={'100%'} display={'flex'} justifyContent={'end'}>
+          <Button
+            type='submit'
+            sx={{
+              backgroundColor: '#6AB2DF',
+              color: '#fff',
+              ':hover': { color: '#fff', backgroundColor: '#2A4759' }
+            }}
+            onClick={handleSubmit(ShowUser.data.data.length === 0 ? handleDataSubmit : handleDataSubmit)}
+          >
+            <Stack direction={'row'}>
+              <AddIcon />
+              <Typography color={'inherit'}>
+                {ShowUser.data.data.length === 0 ? t("Add Employee") : t("Edit Employee")}
+              </Typography>
+            </Stack>
+          </Button>
+        </Box>
+        <Stack marginTop={'1%'} direction={{ sm: 'row', xs: 'column' }} spacing={2}>
+          <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
+            <Box>
+              <Snapshot
+                onDataChange={setSnapshotData}
+                errors={errors}
+                defaultValues={defaultValues}
+                setError={setError}
+                control={control}
+                Controller={Controller}
+                setProfileImage={setProfileImage}
+                ShowUser={ShowUser}
+              />
+            </Box>
+            <Box>
+              <Account
+                errors={errors}
+                onDataChange={setAccountData}
+                setError={setError}
+                defaultValues={defaultValues}
+                control={control}
+                Controller={Controller}
+                watch={watch}
+                register={register}
+                ShowUser={ShowUser}
+              />
+            </Box>
+            <Box>
+              <Info
+                errors={errors}
+                onDataChange={setInfoData}
+                defaultValues={defaultValues}
+                setError={setError}
+                control={control}
+                Controller={Controller}
+                passwordValue={getValues('password')} // Pass the password value
+
+              />
+            </Box>
+            <Box>
+              <Contact
+                errors={errors}
+                defaultValues={defaultValues}
+                handleFieldChange={handleFieldChange}
+                setError={setError}
+                control={control}
+                Controller={Controller}
+                onDataChange={setContactData}
+              />
+            </Box>
+            <Box>
+              <EmergencyContact
+                errors={errors}
+                handleFieldChange={handleFieldChange}
+                setError={setError}
+                control={control}
+                Controller={Controller}
+                onDataChange={setEmergencyContacttData}
+              />
+            </Box>
+            <Box>
+              <AdditionalFiles
+                errors={errors}
+                handleFieldChange={handleFieldChange}
+                setError={setError}
+                control={control}
+                Controller={Controller}
+                onDataChange={setAdditionalFilesData}
+              />
+            </Box>
+          </Stack>
+
+
+          <Stack flex={1} direction={'column'} spacing={2}>
               <Box>
-                <Snapshot
-                  onDataChange={setSnapshotData}
-                  errors={errors}
-                  defaultValues={defaultValues}
+                <Professional
+                  onDataChange={setProfessionalData}
                   setError={setError}
                   control={control}
                   Controller={Controller}
-                  setProfileImage={setProfileImage}
-                  ShowUser={ShowUser}
+                  errors={errors}
                 />
               </Box>
               <Box>
-                <Account
+                <Skills
                   errors={errors}
-                  onDataChange={setAccountData}
+                  handleLanguageChange={handleLanguageChange}
+                  handleRatingChange={handleRatingChange}
+                  handleFieldChange={handleFieldChange}
                   setError={setError}
-                  defaultValues={defaultValues}
                   control={control}
                   Controller={Controller}
-                  watch={watch}
-                  register={register}
-                  ShowUser={ShowUser}
+                  onDataChange={setSkillsData}
                 />
               </Box>
               <Box>
-                <Info
+                <Employment
                   errors={errors}
-                  onDataChange={setInfoData}
-                  defaultValues={defaultValues}
+                  onDataChange={setEmploymentData}
+                  handleFieldChange={handleFieldChange}
                   setError={setError}
                   control={control}
                   Controller={Controller}
-                  passwordValue={getValues('password')} // Pass the password value
-
-     <Stack marginTop={'1%'} direction={{ sm: 'row', xs: 'column' }} spacing={2}>
-       <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
-         <Box>
-           <Snapshot
-             onDataChange={setSnapshotData}
-             errors={errors}
-             defaultValues={defaultValues}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             setProfileImage={setProfileImage}
-             ShowUser={ShowUser}
-           />
-         </Box>
-         <Box>
-           <Account
-             errors={errors}
-             onDataChange={setAccountData}
-             setError={setError}
-             defaultValues={defaultValues}
-             control={control}
-             Controller={Controller}
-             watch={watch}
-             register={register}
-           />
-         </Box>
-         <Box>
-           <Info
-             errors={errors}
-             onDataChange={setInfoData}
-             defaultValues={defaultValues}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             passwordValue={getValues('password')} // Pass the password value
-             ShowUser={ShowUser}
-           />
-         </Box>
-         <Box>
-           <Contact
-             errors={errors}
-             defaultValues={defaultValues}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             onDataChange={setContactData}
-           />
-         </Box>
-         <Box>
-           <EmergencyContact
-             errors={errors}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             onDataChange={setEmergencyContacttData}
-           />
-         </Box>
-         <Box>
-           <AdditionalFiles
-             errors={errors}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             onDataChange={setAdditionalFilesData}
-           />
-         </Box>
-       </Stack>
-
-       <Stack flex={1} direction={'column'} spacing={2}>
-         <Box>
-           <Professional
-             onDataChange={setProfessionalData}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             errors={errors}
-             ShowUser={ShowUser}
-           />
-         </Box>
-         <Box>
-           <Skills
-             errors={errors}
-             handleLanguageChange={handleLanguageChange}
-             handleRatingChange={handleRatingChange}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-             onDataChange={setSkillsData}
-           />
-         </Box>
-         <Box>
-           <Employment
-             errors={errors}
-             onDataChange={setEmploymentData}
-             handleFieldChange={handleFieldChange}
-             setError={setError}
-             control={control}
-             Controller={Controller}
-           />
-         </Box>
-       </Stack>
-     </Stack>
-     </>
-     :null}
+                />
+              </Box>
+            </Stack>
+          </Stack>
+        </>
+        : null}
 
 
     </>

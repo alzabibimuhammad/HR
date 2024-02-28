@@ -20,6 +20,7 @@ import { useTranslation } from 'react-i18next'
 import { showErrorToast } from 'src/utiltis/showErrorToast'
 import { useRouter } from 'next/router'
 import useGetUser from './hook/useGetUser'
+import { useEditUsers } from './hook/useEditUserTotal'
 
 export default function Add() {
   const [snapshotData, setSnapshotData] = useState({})
@@ -36,10 +37,15 @@ export default function Add() {
 
   const { mutate: addUsers, } = useAddUsers()
 
+  const { mutate: EditUsers, } = useEditUsers()
+  
   const router = useRouter();
   let { user_id } = router.query;
+  
 
   const { data: ShowUser, isLoading, } = useGetUser(user_id)
+ 
+  console.log("🚀 ~ Add ~ ShowUser:", ShowUser)
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
@@ -47,8 +53,10 @@ export default function Add() {
 
 
 
-
-
+ 
+  
+  const phonenumbers=  ShowUser?.data?.data?.[0]?.my_contacts.map(contact => ({ phone: contact.phone_num }))
+  console.log("🚀 ~ Add ~ phonenumbers:", phonenumbers)
 
  const defaultValues = {
           first_name: ShowUser?.data?.data[0]?.first_name,
@@ -69,7 +77,7 @@ export default function Add() {
           branch_id: ShowUser?.data?.data[0]?.branch_id,
           contacts: {
             emails: ShowUser?.data?.data[0]?.my_contacts || [{ email: '' }],
-            phonenumbers: ShowUser?.data?.data[0]?.my_contacts || [{ phone: '' }],
+            phonenumbers: phonenumbers || [{ phone: '' }],
           },
           skills: ShowUser?.data?.data[0]?.skills||[
             { skills: '', rate:''  }
@@ -85,7 +93,6 @@ export default function Add() {
           certificates:ShowUser?.data?.data[0]?.certificates||[{content:''}],
 
         }
- console.log("🚀 ~ Add ~ defaultValues:", defaultValues)
 
 
 
@@ -97,25 +104,26 @@ export default function Add() {
 
 
 
-  const {
-    control,
-    setError,
-    handleSubmit,
-    getValues,
-    setValue,
-    register,
-    watch,
-    reset,
-    formState: { errors }
-  } = useForm({
-    defaultValues,
-    mode: 'onBlur',
 
-    resolver: yupResolver(Schema),
-  })
-
+        const {
+          control,
+          setError,
+          handleSubmit,
+          getValues,
+          setValue,
+          register,
+          watch,
+          reset,
+          formState: { errors }
+        } = useForm({
+          defaultValues,
+          mode: 'onBlur',
+          resolver: Boolean(ShowUser?.data?.data?.length) ? undefined :yupResolver(Schema) ,
+        });
+        
 
   const handleDataSubmit = data => {
+
 
 
       const formData = new FormData()
@@ -125,6 +133,20 @@ export default function Add() {
 
       addUsers(data)
 
+
+
+}
+const handleDataEditSubmit = data => {
+  
+  
+
+  const formData = new FormData()
+  formData.append('image', ProfileImage)
+
+  data.image = ProfileImage
+  
+  EditUsers({id:user_id,data:data})
+  
 
 
 }
@@ -176,7 +198,7 @@ return (
               color: '#fff',
               ':hover': { color: '#fff', backgroundColor: '#2A4759' }
             }}
-            onClick={handleSubmit(ShowUser.data.data.length === 0 ? handleDataSubmit : handleDataSubmit)}
+            onClick={handleSubmit(ShowUser.data.data.length === 0 ? handleDataSubmit : handleDataEditSubmit)}
           >
             <Stack direction={'row'}>
               <AddIcon />

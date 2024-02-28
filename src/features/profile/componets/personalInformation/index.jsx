@@ -7,6 +7,7 @@ import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import { useTranslation } from 'react-i18next';
 
 export default function PersonalInfo({ProfileData}) {
+  
   const {t} = useTranslation()
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
@@ -49,7 +50,7 @@ export default function PersonalInfo({ProfileData}) {
 
         <StackRow>
           <Typo>{t('ID Number')}: </Typo>
-          {/* <TypoVal>{ProfileData.}</TypoVal> */}
+          <TypoVal>{ProfileData?.user_info?.nationalID}</TypoVal>
         </StackRow>
 
         <StackRow>

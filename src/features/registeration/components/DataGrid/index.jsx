@@ -10,7 +10,7 @@ import { Box, Stack } from '@mui/system'
 import useRegistrationColumn from '../../Hook/useRegistrationColumn'
 import Show10 from 'src/@core/components/show10'
 
-const Registration = ({ Data, setFilterDate }) => {
+const Registration = ({ Data, setFilterDate,filterDate }) => {
   const columns = useRegistrationColumn()
   const [show, setShow] = React.useState(10);
   const [search,setSearch] = useState()
@@ -21,7 +21,7 @@ const Registration = ({ Data, setFilterDate }) => {
   const [rows, setRows] = useState()
 
   useEffect(() => {
-    let filterData = RegistrationData(data)
+    let filterData = RegistrationData(data,filterDate)
     if(status)filterData = filterData?.filter((value,index)=> value?.status == status)
     if(search)filterData = filterData?.filter((value,index)=>(
         value?.first_name?.toLowerCase().includes(search.toLowerCase())||

@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 export default function Employment({ProfileData}) {
-
   const {t} = useTranslation()
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',

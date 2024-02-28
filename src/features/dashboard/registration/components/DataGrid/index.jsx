@@ -10,7 +10,6 @@ import useRegistrationColumn from '../../Hook/useRegistrationColumn';
 import { Box, Stack } from '@mui/system'
 
 const Registration = Data => {
-  console.log("🚀 ~ Registration ~ Data:", Data)
   const columns = useRegistrationColumn();
   const [show, setShow] = React.useState(10);
 

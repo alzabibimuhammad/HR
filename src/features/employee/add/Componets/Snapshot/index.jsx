@@ -4,11 +4,12 @@ import React, { useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import { useTranslation } from 'react-i18next';
 
-export default function Snapshot({onDataChange,Controller,control,defaultValues,errors,setProfileImage,ShowUser}) {
+export default function Snapshot({ onDataChange, Controller, control, defaultValues, errors, setProfileImage, ShowUser }) {
+
 
   const [image, setImage] = useState(null);
-const[fileName,setFileName]=useState(null)
-const {t} = useTranslation()
+  const [fileName, setFileName] = useState(null)
+  const { t } = useTranslation()
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
@@ -45,122 +46,123 @@ const {t} = useTranslation()
 
   return (
     <Card>
-        <CardContent>
+      <CardContent>
 
-          <Typography >{t("Snapshot")}</Typography>
-          <br/>
-          <Stack direction={'row'} alignItems={"center"} spacing={3} >
+        <Typography >{t("Snapshot")}</Typography>
+        <br />
+        <Stack direction={'row'} alignItems={"center"} spacing={3} >
           <Box>
-      <label htmlFor="imageInput">
-        <Avatar
-          sx={{ width: '120px', height: '120px', borderRadius: '5px' }}
-          src={image ||process.env.NEXT_PUBLIC_IMAGES +'/'+ShowUser?.data?.data[0]?.user_info?.image ||"/broken-image.jpg"}
-        />
-      </label>
+            <label htmlFor="imageInput">
+              <Avatar
+                sx={{ width: '120px', height: '120px', borderRadius: '5px' }}
+                src={image || process.env.NEXT_PUBLIC_IMAGES + '/' + ShowUser?.data?.data[0]?.user_info?.image || "/broken-image.jpg"}
+              />
+            </label>
 
-      <Controller
-        name={`image`}
-        control={control}
-        defaultValues={defaultValues?.image}
-        render={({ field }) => (
-            <TextField
-            {...field}
-        id="imageInput"
-        type="file"
-        accept="image/*"
-        style={{ display: 'none' }}
-        onChange={handleImageChange}
+            <Controller
+              name={`image`}
+              control={control}
+              defaultValues={defaultValues?.image}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  id="imageInput"
+                  type="file"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={handleImageChange}
 
-      />
-        )}
-        />
-    </Box>
+                />
+              )}
+            />
+          </Box>
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
-          <Controller
-        name={`first_name`}
-        defaultValue=''
-        control={control}
-        render={({ field }) => (
-            <TextField
-            {...field}
-              fullWidth
-              error={Boolean(errors.first_name)}
-                        {...(errors.first_name && { helperText: errors.first_name.message })}
-              size='small'
-              label={
-                <Stack direction={'row'} spacing={2} >
-                  <Box>
-                  <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`}/>
-                    </Box>
-                    <Box>
-                      {t('First Name')}
-                  </Box>
-                </Stack>
-              }
+            <Controller
+              name={`first_name`}
+              defaultValue=''
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  error={Boolean(errors.first_name)}
+                  {...(errors.first_name && { helperText: errors.first_name.message })}
+                  size='small'
+                  label={
+                    <Stack direction={'row'} spacing={2} >
+                      <Box>
+                        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`} />
+                      </Box>
+                      <Box>
+                        {t('First Name')}
+                      </Box>
+                    </Stack>
+                  }
+                />
+              )}
             />
-        )}
-/>
 
 
-        <Controller
-        name={`middle_name`}
-        control={control}
-        defaultValue=''
-        render={({ field }) => (
-            <TextField
-            {...field}
-                fullWidth
-                error={Boolean(errors.middle_name)}
-                {...(errors.middle_name && { helperText: errors.middle_name?.message })}
-                size='small'
+            <Controller
+              name={`middle_name`}
+              control={control}
+              defaultValue=''
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  error={Boolean(errors.middle_name)}
+                  {...(errors.middle_name && { helperText: errors.middle_name?.message })}
+                  size='small'
 
-                label={
-                  <Stack direction={'row'} spacing={2} >
-                    <Box>
-                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`}/>
+
+                  label={
+                    <Stack direction={'row'} spacing={2} >
+                      <Box>
+                        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`} />
                       </Box>
                       <Box>
                         {t('Midle Name')}
-                    </Box>
-                  </Stack>
-                }
-              />
-  )}
-  />
+                      </Box>
+                    </Stack>
+                  }
+                />
+              )}
+            />
 
 
 
 
 
-             <Controller
-             name={`last_name`}
-             control={control}
-             defaultValue=''
-             render={({ field }) => (
-            <TextField
-            {...field}
-            size='small'
-            fullWidth
-            error={Boolean(errors.last_name)}
-            {...(errors.last_name && { helperText: errors.last_name?.message })}
-            label={
-                  <Stack direction={'row'} spacing={2} >
-                    <Box>
-                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`}/>
+            <Controller
+              name={`last_name`}
+              control={control}
+              defaultValue=''
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  size='small'
+                  fullWidth
+                  error={Boolean(errors.last_name)}
+                  {...(errors.last_name && { helperText: errors.last_name?.message })}
+                  label={
+                    <Stack direction={'row'} spacing={2} >
+                      <Box>
+                        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(svgContent)}`} />
                       </Box>
                       <Box>
                         {t('Last Name')}
-                    </Box>
-                  </Stack>
-                }
+                      </Box>
+                    </Stack>
+                  }
                 />
-             ) }
-              />
+              )}
+            />
 
           </Stack>
-          </Stack>
-        </CardContent>
+        </Stack>
+      </CardContent>
     </Card>
 
   )

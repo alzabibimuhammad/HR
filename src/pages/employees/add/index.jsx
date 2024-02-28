@@ -32,15 +32,14 @@ export default function Add() {
   const [AdditionalFilesData, setAdditionalFilesData] = useState({})
   const [EmergencyContactData, setEmergencyContacttData] = useState({})
   const [ProfileImage, setProfileImage] = useState()
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
-  const { mutate: addUsers,  } = useAddUsers()
+  const { mutate: addUsers, } = useAddUsers()
 
   const router = useRouter();
   let { user_id } = router.query;
 
-  const { data:ShowUser,isLoading, } = useGetUser(user_id)
-  console.log("🚀 ~ Add ~ ShowUser:", ShowUser)
+  const { data: ShowUser, isLoading, } = useGetUser(user_id)
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
@@ -113,7 +112,7 @@ export default function Add() {
     mode: 'onBlur',
 
     resolver: yupResolver(Schema),
-      })
+  })
 
 
   const handleDataSubmit = data => {
@@ -166,26 +165,62 @@ export default function Add() {
 
   return (
     <>
-    {ShowUser?
-   <>
-   <Box width={'100%'} display={'flex'} justifyContent={'end'}>
-     <Button
-       type='submit'
-       sx={{
-         backgroundColor: '#6AB2DF',
-         color: '#fff',
-         ':hover': { color: '#fff', backgroundColor: '#2A4759' }
-       }}
-       onClick={handleSubmit(handleDataSubmit)}
-     >
-       <Stack direction={'row'}>
-         <AddIcon/>
-         <Typography color={'inherit'} >
-         {t("Add Employee")}
-         </Typography>
-       </Stack>
-     </Button>
-     </Box>
+      {ShowUser ?
+        <>
+          <Box width={'100%'} display={'flex'} justifyContent={'end'}>
+            <Button
+              type='submit'
+              sx={{
+                backgroundColor: '#6AB2DF',
+                color: '#fff',
+                ':hover': { color: '#fff', backgroundColor: '#2A4759' }
+              }}
+              onClick={handleSubmit(ShowUser.data.data.length === 0 ? handleDataSubmit : handleDataSubmit)}
+            >
+              <Stack direction={'row'}>
+                <AddIcon />
+                <Typography color={'inherit'}>
+                  {ShowUser.data.data.length === 0 ? t("Add Employee") : t("Edit Employee")}
+                </Typography>
+              </Stack>
+            </Button>
+          </Box>
+          <Stack marginTop={'1%'} direction={{ sm: 'row', xs: 'column' }} spacing={2}>
+            <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
+              <Box>
+                <Snapshot
+                  onDataChange={setSnapshotData}
+                  errors={errors}
+                  defaultValues={defaultValues}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                  setProfileImage={setProfileImage}
+                  ShowUser={ShowUser}
+                />
+              </Box>
+              <Box>
+                <Account
+                  errors={errors}
+                  onDataChange={setAccountData}
+                  setError={setError}
+                  defaultValues={defaultValues}
+                  control={control}
+                  Controller={Controller}
+                  watch={watch}
+                  register={register}
+                  ShowUser={ShowUser}
+                />
+              </Box>
+              <Box>
+                <Info
+                  errors={errors}
+                  onDataChange={setInfoData}
+                  defaultValues={defaultValues}
+                  setError={setError}
+                  control={control}
+                  Controller={Controller}
+                  passwordValue={getValues('password')} // Pass the password value
 
      <Stack marginTop={'1%'} direction={{ sm: 'row', xs: 'column' }} spacing={2}>
        <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>

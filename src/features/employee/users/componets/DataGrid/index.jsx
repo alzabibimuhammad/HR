@@ -113,7 +113,6 @@ const Users = ({ rows }) => {
   }
 
   const [percentageData, setpercentageData] = useState([])
-  console.log("🚀 ~ Users ~ percentageData:", percentageData)
 
   const dispatch = useDispatch()
   const store = useSelector(state => state.Dashboard)

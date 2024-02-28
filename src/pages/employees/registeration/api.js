@@ -1,21 +1,35 @@
-import axios from "axios"
-import { showErrorToast } from "src/utiltis/showErrorToast"
+import { showErrorToast } from "src/utiltis/showErrorToast";
 
-const getRegisteration =(date)=> {
+const getAttendance = async (date) => {
+  const datee = new Date();
 
-  try{
-  const response = axios.get(process.env.NEXT_PUBLIC_BASE_URL + `/api/DayAttendance/${date}?branch_id=${localStorage.branch}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.accessToken}`
+  const year = datee.getFullYear();
+  const month = String(datee.getMonth() + 1).padStart(2, '0');
+  const day = String(datee.getDate()).padStart(2, '0');
+
+  const formattedDate = `${year}-${month}-${day}`;
+
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/DayAttendance/${Object.keys(date).length?date:formattedDate}?branch_id=${localStorage.branch}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.accessToken}`
+      }
+    });
+
+    if (!response.ok) {
+      showErrorToast("","Network response was not ok")
     }
-  })
-  return {
-    data: response.data
-  }
-  }
-  catch (error) {
-     showErrorToast(error,"")
-  }
-}
 
-export default getRegisteration
+    const jsonData = await response.json();
+    return jsonData;
+
+  } catch (error) {
+    showErrorToast("",)
+    console.error('Error fetching data:', error);
+
+    return null;
+  }
+};
+
+export default getAttendance;
+

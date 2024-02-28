@@ -10,7 +10,7 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
-  const [Status, setStatus] = useState(ShowUser?.data?.data[0]?.user_info?.military_situation||"");
+  const [Status, setStatus] = useState(ShowUser?.data?.data[0]?.user_info?.military_situation||"Exempt");
   const [Marital, setMarital] = useState(ShowUser?.data?.data[0]?.user_info?.social_situation||"");
   const [Gender, setGender] = useState(ShowUser?.data?.data[0]?.user_info?.gender||"");
 

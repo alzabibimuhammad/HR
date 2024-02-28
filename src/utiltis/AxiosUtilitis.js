@@ -23,7 +23,7 @@ export const request = async ({ url, params = {}, ...rest }) => {
     //       : error.response.data.message;
     //   store.dispatch(actions.logError(errorMessage));
     //   return Promise.reject(error);
-    // return Promise.reject(error);
+    return Promise.reject(error);
   };
 
   return client({ url, params, ...rest }).then(onSuccess).catch(onError);

@@ -13,7 +13,7 @@ export const useAddUsers = () => {
       showSuccesToast("Add Employee ",data?.data?.success)
     },
     onError: (error) => {
-
+      
       error.response.data.errors && error.response.data.errors.map((error)=>showErrorToast("There is an error in the input",error))
 
 

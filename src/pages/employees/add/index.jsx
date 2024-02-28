@@ -67,8 +67,8 @@ export default function Add() {
     specialization: ShowUser?.data?.data[0]?.specialization,
     branch_id: ShowUser?.data?.data[0]?.branch_id,
     contacts: {
-      emails: ShowUser?.data?.data[0]?.my_contacts[{ email: '' }],
-      phonenumbers: ShowUser?.data?.data[0]?.my_contacts[{ phone: '' }],
+      emails: ShowUser?.data?.data[0]?.my_contacts||[{ email: '' }],
+      phonenumbers: ShowUser?.data?.data[0]?.my_contacts||[{ phone: '' }],
     },
     skills: ShowUser?.data?.data[0]?.skills,
     educations: ShowUser?.data?.data[0]?.study_situations?.study,

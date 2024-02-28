@@ -80,10 +80,10 @@ export default function Add() {
           languages: ShowUser?.data?.data[0]?.languages||[
             { languages: '',rate:"" }
           ],
-        
+
           experiences:ShowUser?.data?.data[0]?.careers||[{ experience: '' }],
           certificates:ShowUser?.data?.data[0]?.certificates||[{content:''}],
-          
+
         }
  console.log("🚀 ~ Add ~ defaultValues:", defaultValues)
 
@@ -91,8 +91,8 @@ export default function Add() {
 
 
 
-          
-        
+
+
 
 
 
@@ -117,7 +117,7 @@ export default function Add() {
 
   const handleDataSubmit = data => {
 
- 
+
       const formData = new FormData()
       formData.append('image', ProfileImage)
 
@@ -126,7 +126,7 @@ export default function Add() {
       addUsers(data)
 
 
- 
+
 }
 
 
@@ -144,13 +144,13 @@ export default function Add() {
 
 
   useEffect(() => {
-    
-    
+
+
       Object.entries(defaultValues).forEach(([field, value]) => {
         setValue(field, value);
       });
-   
-    
+
+
   }, [ShowUser]);
 
 
@@ -221,7 +221,9 @@ return (
                 setError={setError}
                 control={control}
                 Controller={Controller}
-                passwordValue={getValues('password')} // Pass the password value
+                passwordValue={getValues('password')}
+                ShowUser={ShowUser}
+                // Pass the password value
 
               />
             </Box>
@@ -267,6 +269,8 @@ return (
                   control={control}
                   Controller={Controller}
                   errors={errors}
+                  ShowUser={ShowUser}
+
                 />
               </Box>
               <Box>

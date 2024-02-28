@@ -5,7 +5,6 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 
 export default function Info({onDataChange,Controller,control,errors, defaultValues,ShowUser}) {
-    console.log("🚀 ~ Info ~ ShowUser:", ShowUser)
     const {t} = useTranslation()
 
   const handleFieldChange = (field, value) => {
@@ -159,8 +158,8 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               {...field}
               select
               fullWidth
-             
-              value={Gender} 
+
+              value={Gender}
               error={Boolean(errors.gender)}
               {...(errors.gender && { helperText: errors.gender.message })}
               SelectProps={{
@@ -188,7 +187,7 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               select
               fullWidth
               value={Status}
-              
+
               error={Boolean(errors.military_situation)}
               {...(errors.military_situation && { helperText: errors.military_situation.message })}
               SelectProps={{

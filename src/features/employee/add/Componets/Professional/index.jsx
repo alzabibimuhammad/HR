@@ -1,6 +1,5 @@
 import { Card, CardContent, MenuItem, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
-import { t } from 'i18next'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch'
@@ -8,13 +7,18 @@ import useSelectInput from 'src/pages/employees/add/hook/useSelectInput'
 import useSelectLevel from 'src/pages/employees/add/hook/useSelectLevel'
 
 export default function Professional({ onDataChange, Controller, control,errors, ShowUser }) {
-  console.log("🚀 ~ Professional ~ ShowUser:", ShowUser?.data?.data[0]?.branch_id)
+  console.log("🚀 ~ Professional ~ ShowUser:", ShowUser?.data?.data?.[0]?.department?.id)
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
   }
-  const [role, setRole] = useState(ShowUser?.data?.data?.[0]?.level)
-  const [specialization, setSpecialization] = useState('')
-  const [team, setTeam] = useState('')
+
+  const [level, setLevel] = useState(ShowUser?.data?.data?.[0]?.user_info?.level||"")
+
+  const [specialization, setSpecialization] = useState(ShowUser?.data?.data?.[0]?.specialization||"")
+  const [team, setTeam] = useState(ShowUser?.data?.data?.[0]?.department?.id||"")
+
+  const [branch , setBranch] = useState(ShowUser?.data?.data[0]?.branch_id||"")
+
   const { t } = useTranslation()
   const { data } = useSelectInput()
 
@@ -22,18 +26,18 @@ export default function Professional({ onDataChange, Controller, control,errors,
 
   const { data: SelectBranch } = useSelectBranch()
 
-  const handleRoleChange = e => {
-    setRole(e.target.value)
-    handleFieldChange('role', e.target.value)
+  const handleLevelChange = e => {
+    setLevel(e.target.value)
+    handleFieldChange('level', e.target.value)
   }
 
   const handleSpecializationChange = e => {
     setSpecialization(e.target.value)
-    handleFieldChange('specialization', e.target.value)
+    handleFieldChange('branch_id', e.target.value)
   }
 
   const handleSelectBranchChange = e => {
-    setSpecialization(e.target.value)
+    setBranch(e.target.value)
     handleFieldChange('SelectBranch', e.target.value)
   }
 
@@ -61,10 +65,9 @@ export default function Professional({ onDataChange, Controller, control,errors,
                 fullWidth
                 error={Boolean(errors?.branch_id)}
                 helperText={errors?.branch_id?.message}
-                defaultValue=''
-                value={ShowUser?.data?.data[0]?.branch_id?ShowUser?.data?.data[0]?.branch_id:field.value} 
+                value={branch}
                 SelectProps={{
-                
+
                   displayEmpty: true,
                   onChange: e => {
                     field.onChange(e)
@@ -98,9 +101,8 @@ export default function Professional({ onDataChange, Controller, control,errors,
                 {...(errors?.specialization && {
                   helperText: errors?.specialization?.message
                 })}
-                defaultValue=''
+                value={specialization}
                 SelectProps={{
-                  value: field.value,
                   displayEmpty: true,
                   onChange: e => {
                     field.onChange(e)
@@ -125,27 +127,26 @@ export default function Professional({ onDataChange, Controller, control,errors,
           <Typography>{t("Level")}</Typography>
 
           <Controller
-            name={`level`}
+            name="level"
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
                 select
                 fullWidth
-                value={role}
+                value={level}
                 error={Boolean(errors?.level)}
                 helperText={errors?.level?.message}
-                defaultValue='Level'
                 SelectProps={{
                   displayEmpty: true,
                   onChange: e => {
                     field.onChange(e)
-                    handleRoleChange(e)
+                    handleLevelChange(e)
                   }
                 }}
                 size='small'
               >
-                <MenuItem value='Level'>{`${t('Level')}`}</MenuItem>
+                <MenuItem value=''>{`${t('Level')}`}</MenuItem>
                 {LevelData?.data?.data?.levels?.map((val, index) => (
                   <MenuItem key={index} value={val}>
                     {val}
@@ -167,9 +168,9 @@ export default function Professional({ onDataChange, Controller, control,errors,
                 fullWidth
                 error={Boolean(errors?.department_id)}
                 helperText={errors?.department_id?.message}
-                defaultValue='Team'
+                value={team}
                 SelectProps={{
-                  value: field.value,
+
                   displayEmpty: true,
                   onChange: e => {
                     field.onChange(e)
@@ -178,7 +179,7 @@ export default function Professional({ onDataChange, Controller, control,errors,
                 }}
                 size='small'
               >
-                <MenuItem value='Team'>{`${t('Team')}`}</MenuItem>
+                <MenuItem value=''>{`${t('Team')}`}</MenuItem>
                 {data?.data?.data?.departments?.map((val, index) => (
                   <MenuItem key={index} value={val.id}>
                     {val.name}

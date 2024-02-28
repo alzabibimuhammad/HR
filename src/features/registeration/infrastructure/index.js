@@ -1,5 +1,4 @@
 export const RegistrationData = (elements,filterDate) => {
-console.log("🚀 ~ RegistrationData ~ filterDate:", filterDate)
 
 
   const targetTime = "09:15"

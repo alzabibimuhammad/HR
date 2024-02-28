@@ -7,11 +7,12 @@ import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch'
 import useSelectInput from 'src/pages/employees/add/hook/useSelectInput'
 import useSelectLevel from 'src/pages/employees/add/hook/useSelectLevel'
 
-export default function Professional({ onDataChange, Controller, control,errors }) {
+export default function Professional({ onDataChange, Controller, control,errors, ShowUser }) {
+  console.log("🚀 ~ Professional ~ ShowUser:", ShowUser?.data?.data[0]?.branch_id)
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }))
   }
-  const [role, setRole] = useState('')
+  const [role, setRole] = useState(ShowUser?.data?.data?.[0]?.level)
   const [specialization, setSpecialization] = useState('')
   const [team, setTeam] = useState('')
   const { t } = useTranslation()
@@ -61,8 +62,9 @@ export default function Professional({ onDataChange, Controller, control,errors 
                 error={Boolean(errors?.branch_id)}
                 helperText={errors?.branch_id?.message}
                 defaultValue=''
+                value={ShowUser?.data?.data[0]?.branch_id?ShowUser?.data?.data[0]?.branch_id:field.value} 
                 SelectProps={{
-                  value: field.value,
+                
                   displayEmpty: true,
                   onChange: e => {
                     field.onChange(e)
@@ -130,11 +132,11 @@ export default function Professional({ onDataChange, Controller, control,errors 
                 {...field}
                 select
                 fullWidth
+                value={role}
                 error={Boolean(errors?.level)}
                 helperText={errors?.level?.message}
                 defaultValue='Level'
                 SelectProps={{
-                  value: field.value,
                   displayEmpty: true,
                   onChange: e => {
                     field.onChange(e)

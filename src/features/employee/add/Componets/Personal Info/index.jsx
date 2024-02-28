@@ -4,15 +4,16 @@ import { t } from 'i18next';
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 
-export default function Info({onDataChange,Controller,control,errors, defaultValues}) {
+export default function Info({onDataChange,Controller,control,errors, defaultValues,ShowUser}) {
+    console.log("🚀 ~ Info ~ ShowUser:", ShowUser)
     const {t} = useTranslation()
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
   };
-  const [Status, setStatus] = useState('');
-  const [Marital, setMarital] = useState('');
-  const [Gender, setGender] = useState('');
+  const [Status, setStatus] = useState(ShowUser?.data?.data[0]?.user_info?.military_situation||"");
+  const [Marital, setMarital] = useState(ShowUser?.data?.data[0]?.user_info?.social_situation||"");
+  const [Gender, setGender] = useState(ShowUser?.data?.data[0]?.user_info?.gender||"");
 
   const date = new Date();
 
@@ -158,11 +159,12 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               {...field}
               select
               fullWidth
-              defaultValue=""
+             
+              value={Gender} 
               error={Boolean(errors.gender)}
               {...(errors.gender && { helperText: errors.gender.message })}
               SelectProps={{
-                value: field.value,
+
                 displayEmpty: true,
                 onChange: (e) => {
                   field.onChange(e);
@@ -172,8 +174,8 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               size='small'
                   >
                     <MenuItem value=''>{`${t("Gender")}`}</MenuItem>
-                    <MenuItem value='male'>{`${t("Male")}`}</MenuItem>
-                    <MenuItem value='female'>{`${t("Female")}`}</MenuItem>
+                    <MenuItem value='Male'>{`${t("Male")}`}</MenuItem>
+                    <MenuItem value='Female'>{`${t("Female")}`}</MenuItem>
                 </TextField>
   )}
 />
@@ -185,11 +187,11 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               {...field}
               select
               fullWidth
+              value={Status}
+              
               error={Boolean(errors.military_situation)}
               {...(errors.military_situation && { helperText: errors.military_situation.message })}
-              defaultValue=""
               SelectProps={{
-                value: field.value,  // Use field.value here
                 displayEmpty: true,
                 onChange: (e) => {
                   field.onChange(e);  // Ensure field.onChange is called
@@ -219,9 +221,8 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               {...(errors.social_situation && { helperText: errors.social_situation.message })}
                     select
                     fullWidth
-                    defaultValue=""
+                    value={Marital}
                     SelectProps={{
-                      value: field.value,
                       displayEmpty: true,
                       onChange: (e) => {
                         field.onChange(e);

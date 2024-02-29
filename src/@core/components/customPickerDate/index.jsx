@@ -21,7 +21,6 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
   const [id, setUserId] = useState(store?.id)
 
   const { mutate: ReportDay, data, isloading } = useReportByDay()
-  console.log("🚀 ~ CustomDatePicker ~ data:", data)
 
   const DayDate = new Date()
   const Currentday = DayDate.getDate()

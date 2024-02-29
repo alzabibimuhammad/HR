@@ -147,7 +147,6 @@ export default function Rewards({id}) {
 
 
    const onSubmit = async (data) => {
-   console.log("🚀 ~ onSubmit ~ data:", data)
 
      const formData = new FormData();
      formData.append('dateTime', data.dateTime);

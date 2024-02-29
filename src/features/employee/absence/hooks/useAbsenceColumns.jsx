@@ -7,6 +7,7 @@ import { Avatar,IconButton, Typography } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
 import DrawerForm from '../componets/DrawerForm';
+import Link from 'next/link';
 
 const useAbsenceColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false);
@@ -56,11 +57,13 @@ const useAbsenceColumns = () => {
       flex: 3,
       renderCell: (params) => {
         return (
+          <Link style={{ textDecoration:'none' }} href={`/profile/${params?.row?.user_info?.user_id}`}>
           <Stack direction={'row'} alignItems={'center'} spacing={1}>
-            <Avatar alt='' src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} />
+            <Avatar alt='' src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info?.image} />
             <Typography>{params?.row?.name}</Typography>
             <Typography>{params?.row?.last_name}</Typography>
           </Stack>
+          </Link>
         );
       },
     },

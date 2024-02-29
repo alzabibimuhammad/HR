@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
+import { Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material'
 import {     Modal } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import  { useState } from 'react'
@@ -139,6 +139,7 @@ export default function Deductions({id}) {
   const defaultValues = {
     dateTime: Edit.dateTime,
     content: Edit.content,
+    amount:Edit?.amount,
     user_id:idUser,
     type:"deduction"
 
@@ -152,7 +153,9 @@ export default function Deductions({id}) {
      formData.append('dateTime', data.dateTime);
      formData.append('content', data.content);
      formData.append('user_id', data.user_id);
+     formData.append('amount', data.amount);
      formData.append('type', data.type);
+     formData.append('branch_id', localStorage.branch);
      AddDecision(formData)
      reset()
      handleCloseAdd()
@@ -168,7 +171,10 @@ export default function Deductions({id}) {
       formData.append('content', data.content);
       formData.append('user_id', data.user_id);
       formData.append('type', data.type);
-      formData.append('branch_id', 1);
+      formData.append('amount', data.amount);
+
+      formData.append('branch_id', localStorage.branch);
+
 
       EditDecision({id:Edit.id,formData:formData})
       getDeductionsDate(Data)
@@ -199,6 +205,8 @@ export default function Deductions({id}) {
   useEffect(() => {
     setValue('dateTime', Edit?.dateTime || '');
     setValue('content', Edit?.content || '');
+    setValue('amount', Edit?.amount || '');
+
   }, [Edit, setValue ]);
 
   useEffect(() => {
@@ -284,6 +292,29 @@ export default function Deductions({id}) {
                     value={value}
                     onBlur={onBlur}
                     onChange={onChange}
+                  />
+                )}
+              />
+                <Controller
+                name='amount'
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <TextField
+                    fullWidth
+                    type='number'
+                    autoFocus
+                    variant='outlined'
+                    InputLabelProps={{ shrink: true }}
+                    value={value}
+                    size='small'
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    label={t("Amount")}
+                    placeholder={t("Amount")+'...'}
+                    error={Boolean(errors?.content)}
+                    helperText={errors?.content?.message}
+
                   />
                 )}
               />
@@ -375,7 +406,7 @@ export default function Deductions({id}) {
               </Button>
               <Dialog fullScreen={fullScreen} open={openEdit} onClose={handleCloseEdit} aria-labelledby="responsive-dialog-title">
                 <DialogTitle sx={{ fontWeight: '600', fontSize: '20px', color: '#8090a7' }}>
-                {t('Edit Alerts')}
+                {t('Edit Deductions')}
                 </DialogTitle>
                 <DialogContent sx={{ width: '100vh' }}>
                   <DialogContentText sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -397,6 +428,29 @@ export default function Deductions({id}) {
                     value={value}
                     onBlur={onBlur}
                     onChange={onChange}
+                  />
+                )}
+              />
+                     <Controller
+                name='amount'
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <TextField
+                    fullWidth
+                    type='number'
+                    autoFocus
+                    variant='outlined'
+                    InputLabelProps={{ shrink: true }}
+                    value={value}
+                    size='small'
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    label={t("Amount")}
+                    placeholder={t("Amount")+'...'}
+                    error={Boolean(errors?.content)}
+                    helperText={errors?.content?.message}
+
                   />
                 )}
               />

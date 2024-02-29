@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Card, CardContent, Grid, Typography } from '@mui/material'
+import { Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material'
 import {     Modal } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import  { useState } from 'react'
@@ -39,7 +39,6 @@ export default function Rewards({id}) {
   const [openDelete, setOpenDelete] = React.useState(false);
   const [Edit , setEdit] = useState({})
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [open, setOpen] = React.useState(false);
   const [startDate,setStartDate]=useState(null)
   const [state, setstate] = useState(null);
@@ -139,6 +138,7 @@ export default function Rewards({id}) {
   const defaultValues = {
     dateTime: Edit.dateTime,
     content: Edit.content,
+    content: Edit.amount,
     user_id:idUser,
     type:"reward"
 
@@ -147,16 +147,19 @@ export default function Rewards({id}) {
 
 
    const onSubmit = async (data) => {
+   console.log("🚀 ~ onSubmit ~ data:", data)
 
      const formData = new FormData();
      formData.append('dateTime', data.dateTime);
      formData.append('content', data.content);
      formData.append('user_id', data.user_id);
+     formData.append('amount', data.amount);
      formData.append('type', data.type);
+     formData.append('branch_id', localStorage.branch);
+
      AddDecision(formData)
      reset()
      handleCloseAdd()
-     getRewardsDate(Data)
 
 
   };
@@ -168,7 +171,8 @@ export default function Rewards({id}) {
       formData.append('content', data.content);
       formData.append('user_id', data.user_id);
       formData.append('type', data.type);
-      formData.append('branch_id', 1);
+     formData.append('amount', data.amount);
+     formData.append('branch_id', localStorage.branch);
 
       EditDecision({id:Edit.id,formData:formData})
       getRewardsDate(Data)
@@ -199,6 +203,7 @@ export default function Rewards({id}) {
   useEffect(() => {
     setValue('dateTime', Edit?.dateTime || '');
     setValue('content', Edit?.content || '');
+    setValue('amount', Edit?.amount || '');
   }, [Edit, setValue ]);
 
   useEffect(() => {
@@ -258,7 +263,6 @@ export default function Rewards({id}) {
 <Button onClick={handleClickOpenAdd} sx={{borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",color:"#fff","&:hover": {backgroundColor: "#6ab2df"}}}>+ {t('Add')} </Button>
 
     <Dialog
-      fullScreen={fullScreen}
       open={openAdd}
       onClose={handleCloseAdd}
       aria-labelledby="responsive-dialog-title"
@@ -287,10 +291,33 @@ export default function Rewards({id}) {
                   />
                 )}
               />
+              <Controller
+                name='amount'
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <TextField
+                    fullWidth
+                    type='number'
+                    autoFocus
+                    variant='outlined'
+                    InputLabelProps={{ shrink: true }}
+                    value={value}
+                    size='small'
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    label={t("Amount")}
+                    placeholder={t("Amount")+'...'}
+                    error={Boolean(errors?.content)}
+                    helperText={errors?.content?.message}
+
+                  />
+                )}
+              />
         <Controller
                 name='content'
                 control={control}
-                rules={{ required: true,minLength: 8 }}
+                rules={{ required: true }}
                 render={({ field: { value, onChange, onBlur } }) => (
                   <CustomTextField
                     fullWidth
@@ -373,9 +400,9 @@ export default function Rewards({id}) {
                   <CreateOutlinedIcon />
                 </Typography>
               </Button>
-              <Dialog fullScreen={fullScreen} open={openEdit} onClose={handleCloseEdit} aria-labelledby="responsive-dialog-title">
+              <Dialog  open={openEdit} onClose={handleCloseEdit} aria-labelledby="responsive-dialog-title">
                 <DialogTitle sx={{ fontWeight: '600', fontSize: '20px', color: '#8090a7' }}>
-                {t('Edit Alerts')}
+                {t('Edit Rewards')}
                 </DialogTitle>
                 <DialogContent sx={{ width: '100vh' }}>
                   <DialogContentText sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -397,6 +424,29 @@ export default function Rewards({id}) {
                     value={value}
                     onBlur={onBlur}
                     onChange={onChange}
+                  />
+                )}
+              />
+                     <Controller
+                name='amount'
+                control={control}
+                rules={{ required: true }}
+                render={({ field: { value, onChange, onBlur } }) => (
+                  <TextField
+                    fullWidth
+                    type='number'
+                    autoFocus
+                    variant='outlined'
+                    InputLabelProps={{ shrink: true }}
+                    value={value}
+                    size='small'
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    label={t("Amount")}
+                    placeholder={t("Amount")+'...'}
+                    error={Boolean(errors?.content)}
+                    helperText={errors?.content?.message}
+
                   />
                 )}
               />

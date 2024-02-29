@@ -12,6 +12,7 @@ import { useReactToPrint } from 'react-to-print'
 import Logo from './logo'
 import Profile from 'src/pages/profile/[id]'
 import { useTranslation } from 'react-i18next'
+import { CircularProgress } from '@mui/material'
 
 export default function View({ id }) {
   const componentRef = useRef()
@@ -60,6 +61,8 @@ export default function View({ id }) {
       <Logo />
 
       <Stack marginTop={'20px'} direction={'column'} justifyContent={'space-between'} spacing={12}>
+        {data?.data?.data?.length?
+        <>
         {data?.data?.data.map(ele => (
           <Stack direction={'row'} spacing={12}>
             <Box
@@ -132,6 +135,8 @@ export default function View({ id }) {
             </Box>
           </Stack>
         ))}
+        </>
+              :<Box height={'50vh'} display={'flex'} justifyContent={'center'} alignItems={'center'} ><CircularProgress/></Box>}
 
       </Stack>
     </>

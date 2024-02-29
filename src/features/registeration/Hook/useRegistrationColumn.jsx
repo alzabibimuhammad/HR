@@ -30,7 +30,7 @@
                 {params.row.first_name}
               </Typography>
               <Typography>
-                {params.row.first_name}
+                {params.row.last_name}
               </Typography>
           </Stack>
           </Link>

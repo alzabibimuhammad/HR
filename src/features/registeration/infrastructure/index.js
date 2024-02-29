@@ -19,13 +19,20 @@ export const RegistrationData = (elements,filterDate) => {
   return elements?.[0]?.map(element => {
     let checkinDate=null,checkoutDate=null;
 
+    outerLoop:
     element?.attendance?.forEach(element => {
-      if(element?.status==0)
-        checkinDate = element?.datetime
-      else if(element?.status ==1)
+      if (element?.status == 0) {
+        checkinDate = element?.datetime;
+        return;
+      }
+    });
+    element?.attendance?.forEach(element => {
+
+      if(element?.status ==1)
         checkoutDate = element?.datetime
 
-    });
+    })
+
 
     let statusX;
     if(checkinDate){

@@ -55,9 +55,7 @@ export default function Add() {
     element.delivery_date = element?.received_date
   });
 
-  console.log("🚀 ~ ShowUser?.data?.data?.[0]?.deposits?.forEach ~ ShowUser:", ShowUser)
 
-  console.log(ShowUser?.data?.data[0]?.languages);
 
   const phonenumbers=  ShowUser?.data?.data?.[0]?.my_contacts.map(contact => ({ phone: contact.phone_num }))
 

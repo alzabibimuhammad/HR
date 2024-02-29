@@ -19,20 +19,13 @@ export const RegistrationData = (elements,filterDate) => {
   return elements?.[0]?.map(element => {
     let checkinDate=null,checkoutDate=null;
 
-    outerLoop:
     element?.attendance?.forEach(element => {
-      if (element?.status == 0) {
-        checkinDate = element?.datetime;
-        return;
-      }
-    });
-    element?.attendance?.forEach(element => {
-
-      if(element?.status ==1)
+      if(element?.status==0)
+        checkinDate = element?.datetime
+      else if(element?.status ==1)
         checkoutDate = element?.datetime
 
-    })
-
+    });
 
     let statusX;
     if(checkinDate){
@@ -50,7 +43,7 @@ export const RegistrationData = (elements,filterDate) => {
           const hours = checkoutTime?.getHours()?.toString()?.padStart(2, '0');
           const minutes = checkoutTime?.getMinutes()?.toString()?.padStart(2, '0');
           const outTime = `${hours}:${minutes}`;
-          if(formattedTime < targetTime && outTime >= endTime) statusX="out"
+          if(formattedTime < targetTime && outTime >= endTime) statusX="Out"
           else if(formattedTime > targetTime && outTime >= endTime) statusX="Out & Arrived Late"
           else if(formattedTime < targetTime && outTime < endTime) statusX="Early Out"
           else statusX = "Out Eatly&Arraived Late"

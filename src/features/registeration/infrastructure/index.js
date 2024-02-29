@@ -1,7 +1,7 @@
 export const RegistrationData = (elements,filterDate) => {
 
 
-  const targetTime = "09:15"
+  const targetTime = "09:30"
   const currentDate = new Date();
   const endTime = "16:45"
 

@@ -291,6 +291,10 @@ export default function Absence({id}) {
                 select
                 {...field}
                 defaultValue=''
+                SelectProps={{
+                  displayEmpty: true,
+
+                }}
                 variant='outlined'
                 fullWidth
                 size='small'

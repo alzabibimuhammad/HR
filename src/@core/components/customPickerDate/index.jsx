@@ -21,9 +21,14 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
   const [id, setUserId] = useState(store?.id)
 
   const { mutate: ReportDay, data, isloading } = useReportByDay()
+  console.log("🚀 ~ CustomDatePicker ~ data:", data)
 
   const DayDate = new Date()
-  const FormateDayDate = FormateDate(DayDate)
+  const Currentday = DayDate.getDate()
+  const CurrentMonth = DayDate.getMonth()
+  const CurrentYear = DayDate.getFullYear()
+
+  const FormateDayDate = CurrentYear + '-' + ( Number(CurrentMonth+1) < 10 ? '0' : '') + Number(CurrentMonth+1) + '-' + Currentday +'';
 
   useEffect(() => {
     const formData = new FormData()

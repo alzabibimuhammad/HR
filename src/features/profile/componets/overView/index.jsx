@@ -34,6 +34,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
   const [isCheckin,setisCheckin] = useState(false)
   const [isCheckout,setisCheckout] = useState(false)
   const [isAbsences,setisAbsences] = useState(false)
+  const [isPenalty,setisPenalty] = useState(false)
 
   const {data,isloading}=useReportByDay()
 
@@ -240,14 +241,55 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 </Stack>
                 </>
               }
+
               </StackRow>
-                <StackRow>
+                <StackRow alignItems={'center'} >
                   <Typo>{t('Penalties')} :</Typo>
-                  <Text   >{t('late')}  {userDataClean?.deduction} {t('hours')} </Text>
+                  <Text   >{userDataClean?.penalties?.length ?userDataClean?.penalties?.length:0 } </Text>
+                  {!isPenalty?
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                <Detail>
+                  {t('See Details')}
+                </Detail>
+                <KeyboardArrowDownIcon style={{ cursor:'pointer' }} onClick={()=>{setisPenalty(true)}}  fontSize='10px'/>
+                </Stack>
+                </>
+                :
+                <>
+                <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
+                  <Detail>
+                  {t('Less Details')}
+                </Detail>
+                <KeyboardArrowUpIcon style={{ cursor:'pointer' }} onClick={()=>{setisPenalty(false)}} fontSize='10px'/>
+                </Stack>
+                  </>
+              }
 
                 </StackRow>
+
               </Stack>
+
+              {/* for data inside warning  */}
+              {isPenalty ?
+
+                <Stack marginLeft={6} direction={'column'} justifyContent={'space-between'}>
+                  {userDataClean?.penalties?.map((ele,index)=>(
+                      <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
+                      <Typography>{ele.content}</Typography>
+                      <Typography>{ele.dateTime}</Typography>
+                    </Stack>
+
+                  ))
+                  }
+
+                </Stack>
+              :
+              null
+              }
             </Box>
+
+
             {/* second section */ }
 
             <Box sx={{ mb: 6 }}>
@@ -272,11 +314,11 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
               <Stack direction={'column'}  >
                 <StackRow   >
                 <Typo  >{t('Salary')} :</Typo>
-                <Text>{userDataClean?.BaseSalary} {t('L.S')} </Text>
+                <Text>{userDataClean?.BaseSalary?userDataClean?.BaseSalary:0} {t('L.S')} </Text>
                 </StackRow>
                 <StackRow>
                   <Typo>{t('Overtime')} :</Typo>
-                  <Text >{userDataClean?.overtime} {t('hours')} </Text>
+                  <Text >{userDataClean?.overtime?userDataClean?.overtime:0} {t('hours')} </Text>
                 {/* for data see details arrow  */}
 
                 {!isoverDetails?
@@ -301,7 +343,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 </StackRow>
                 <StackRow>
                   <Typo>{t('Rewards')} :</Typo>
-                  <Text   >{userDataClean?.reward} {t('L.S')} </Text>
+                  <Text   >{userDataClean?.reward?userDataClean?.reward:0} {t('L.S')} </Text>
               {/* for data see details arrow  */}
 
               {!isRewardDetails?
@@ -327,7 +369,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
 
                 <StackRow>
                   <Typo>{t('Advances')} :</Typo>
-                  <Text   >{userDataClean?.advance} {t('L.S')}</Text>
+                  <Text   >{userDataClean?.advance?userDataClean?.advance:0} {t('L.S')}</Text>
 
                 {!isAdvanceDetails?
                 <>
@@ -352,7 +394,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
 
                 <StackRow>
                   <Typo>{t('Deduction')} :</Typo>
-                  <Text   >{userDataClean?.deduction} {t('L.S')}</Text>
+                  <Text   >{userDataClean?.deduction?userDataClean?.deduction:0} {t('L.S')}</Text>
                 {!isDeductionDetails?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
@@ -375,7 +417,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 </StackRow>
                 <StackRow>
                   <Typo>{t('Total Salary')} :</Typo>
-                  <Text   >{userDataClean?.BaseSalary} {t('L.S')}</Text>
+                  <Text   >{isNaN(userDataClean?.BaseSalary+userDataClean?.reward+userDataClean?.advance-userDataClean?.deduction)?0:userDataClean?.BaseSalary+userDataClean?.reward+userDataClean?.advance-userDataClean?.deduction} {t('L.S')}</Text>
                 </StackRow>
               </Stack>
             </Box>
@@ -396,7 +438,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
               <Stack direction={'column'}  >
                 <StackRow   >
                 <Typo  >{t('Check-in')} :</Typo>
-                <Text >{userDataClean?.CheckInPercentage}% {t('on time')}</Text>
+                <Text >{userDataClean?.CheckInPercentage?(userDataClean?.CheckInPercentage)?.toFixed(1):0}% {t('on time')}</Text>
                 {!isCheckin?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
@@ -419,7 +461,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 </StackRow>
                 <StackRow>
                   <Typo>{t('Check-out')} :</Typo>
-                  <Text >{userDataClean?.CheckOutPercentage}% {t('on time')} </Text>
+                  <Text >{userDataClean?.CheckOutPercentage?userDataClean?.CheckOutPercentage?.toFixed(1):0}% {t('on time')} </Text>
                   {!isCheckout?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >
@@ -442,7 +484,7 @@ const AboutOverivew = ({userDataClean,Data,ProfileData}) => {
                 </StackRow>
                 <StackRow>
                   <Typo>{t('Absences')} :</Typo>
-                  <Text   >{userDataClean?.absence} {t('days')} </Text>
+                  <Text   >{userDataClean?.absence?userDataClean?.absence:0} {t('days')} </Text>
                   {!isAbsences?
                 <>
                 <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} >

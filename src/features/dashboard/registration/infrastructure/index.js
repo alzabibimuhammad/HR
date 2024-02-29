@@ -1,4 +1,4 @@
-export const RegistrationData = elements => {
+export const RegistrationData = (elements,filterDate) => {
 
 
   const targetTime = "09:15"
@@ -9,6 +9,11 @@ export const RegistrationData = elements => {
   const CurrentMinutes = currentDate?.getMinutes()?.toString()?.padStart(2, '0');
   const CurrentFormattedTime = `${CurrentHours}:${CurrentMinutes}`;
 
+  const Currentyear = currentDate.getFullYear();
+  const Currentmonth = String(currentDate.getMonth() + 1).padStart(2, '0');
+  const Currentday = String(currentDate.getDate()).padStart(2, '0');
+
+  const CurrentformattedDate = `${Currentyear}-${Currentmonth}-${Currentday}`;
 
 
   return elements?.[0]?.map(element => {
@@ -40,8 +45,8 @@ export const RegistrationData = elements => {
           const outTime = `${hours}:${minutes}`;
           if(formattedTime < targetTime && outTime >= endTime) statusX="Out"
           else if(formattedTime > targetTime && outTime >= endTime) statusX="Out & Arrived Late"
-          else if(formattedTime < targetTime && outTime < endTime) statusX="Out & Late"
-          else statusX = "Out Late&Arraived Late"
+          else if(formattedTime < targetTime && outTime < endTime) statusX="Early Out"
+          else statusX = "Out Eatly&Arraived Late"
           checkoutDate = outTime
         }
     }
@@ -54,8 +59,11 @@ export const RegistrationData = elements => {
       checkoutDate = outTime
       statusX='Wrong'}
     else{
-      if(CurrentFormattedTime>endTime) statusX="Absent";
-      else statusX="Late";
+      if(filterDate)
+        if( CurrentformattedDate > filterDate ) statusX="Absent";
+        else statusX="Late";
+      else
+        statusX="Late";
     }
 
 
@@ -67,7 +75,8 @@ export const RegistrationData = elements => {
       department: element?.department?.name,
       status: statusX,
       checkIn: checkinDate,
-      checkOut: checkoutDate
+      checkOut: checkoutDate,
+      user_info:element?.user_info?.image
     };
   });
 };

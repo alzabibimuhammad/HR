@@ -1,4 +1,5 @@
 export const AbsenceData = elements => {
+console.log("🚀 ~ AbsenceData ~ elements:", elements)
 
   return elements?.data?.data?.map(element => {
     return {
@@ -8,7 +9,7 @@ export const AbsenceData = elements => {
       justified: element?.userjustified,
       unjustified:element?.userUnjustified,
       total:element?.all,
-      user_info:element?.userinfo?.image
+      user_info:element?.userinfo
     }
   })
 }

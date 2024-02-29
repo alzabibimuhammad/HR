@@ -57,6 +57,7 @@ export default function Add() {
 
   console.log("🚀 ~ ShowUser?.data?.data?.[0]?.deposits?.forEach ~ ShowUser:", ShowUser)
 
+  console.log(ShowUser?.data?.data[0]?.languages);
 
   const phonenumbers=  ShowUser?.data?.data?.[0]?.my_contacts.map(contact => ({ phone: contact.phone_num }))
 
@@ -86,13 +87,13 @@ export default function Add() {
           ],
           educations: ShowUser?.data?.data[0]?.study_situations||[{ study: '', degree: '' }],
           degree: ShowUser?.data?.data[0]?.study_situations?.degree||"",
-          certificates: ShowUser?.data?.data[0]?.certificates.map((val) => val.content)||"",
+
           languages: ShowUser?.data?.data[0]?.languages||[{ languages: '',rate:"" }],
 
           experiences:ShowUser?.data?.data[0]?.careers||[{ experience: '' }],
           certificates:ShowUser?.data?.data[0]?.certificates||[{content:''}],
-          secretaraits:ShowUser?.data?.data[0]?.deposits||[{object:"",delivery_date:""}]
-
+          secretaraits:ShowUser?.data?.data[0]?.deposits||[{object:"",delivery_date:""}],
+          emergency_contact:ShowUser?.data?.data[0]?.emergency
         }
 
 
@@ -170,8 +171,11 @@ const handleDataEditSubmit = data => {
 
 
       Object.entries(defaultValues).forEach(([field, value]) => {
-        setValue(field, value);
+      setValue(field, value);
+
       });
+
+
 
 
   }, [ShowUser]);

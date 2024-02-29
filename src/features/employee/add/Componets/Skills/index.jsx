@@ -2,17 +2,17 @@ import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography } fr
 import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
-import {    List, ListItem, } from '@mui/material';
-import { useFieldArray ,setValue, useFormContext } from 'react-hook-form';
+import { List, ListItem, } from '@mui/material';
+import { useFieldArray, setValue, useFormContext } from 'react-hook-form';
 import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { color } from '@mui/system';
 import { useTranslation } from 'react-i18next';
 
-export default function Skills({onDataChange,Controller,control,handleRatingChange,handleLanguageChange,errors}) {
+export default function Skills({ onDataChange, Controller, control, handleRatingChange, handleLanguageChange, errors }) {
 
   const [degree, setDegree] = useState('');
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
@@ -20,7 +20,7 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
 
   const handleDegreeChange = (e) => {
     setDegree(e.target.value);
-    handleFieldChange('degree',degree)
+    handleFieldChange('degree', degree)
   };
 
   const { fields, append, remove } = useFieldArray({
@@ -29,22 +29,22 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
   });
 
   const handleAddClick = () => {
-   append('educations', { study: '', degree: '' });
-   };
+    append('educations', { study: '', degree: '' });
+  };
 
-   const handleRemoveClick = (index) => {
-     remove(index);
-   };
+  const handleRemoveClick = (index) => {
+    remove(index);
+  };
 
-    // ******************************************************************************************************************************
+  // ******************************************************************************************************************************
 
-  const { fields:fieldsCertificate, append:certificateAppend, remove:certificateRemove } = useFieldArray({
+  const { fields: fieldsCertificate, append: certificateAppend, remove: certificateRemove } = useFieldArray({
     control,
     name: "certificates"
   });
 
- const handleAddClickCertificate = () => {
-  certificateAppend('certificates', { });
+  const handleAddClickCertificate = () => {
+    certificateAppend('certificates', { content: '' });
   };
 
 
@@ -55,31 +55,31 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
   // *********************************************************************************************************************************
 
 
-  const { fields:fieldsExperience, append:experienceAppend, remove:ExperienceRemove } = useFieldArray({
+  const { fields: fieldsExperience, append: experienceAppend, remove: ExperienceRemove } = useFieldArray({
     control,
     name: "experiences"
   });
 
- const handleAddClickExperience = () => {
-  experienceAppend('experiences', {  });
+  const handleAddClickExperience = () => {
+    experienceAppend('experiences', { content: ''});
   };
 
 
   const handleRemoveClickExperience = (index) => {
     ExperienceRemove(index);
 
- }
+  }
 
   // *********************************************************************************************************************************
 
 
-  const { fields:fieldsSkills, append:skillsAppend, remove:skillsRemove } = useFieldArray({
+  const { fields: fieldsSkills, append: skillsAppend, remove: skillsRemove } = useFieldArray({
     control,
     name: "skills"
   });
 
- const handleAddClickSkills = () => {
-  skillsAppend('skills', { skills: '', rate: 0 });
+  const handleAddClickSkills = () => {
+    skillsAppend('skills', { skills: '', rate: 0 });
   };
 
 
@@ -92,13 +92,13 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
   // *********************************************************************************************************************************
 
 
-  const { fields:fieldsLanguage, append:LanguageAppend, remove:LanguageRemove } = useFieldArray({
+  const { fields: fieldsLanguage, append: LanguageAppend, remove: LanguageRemove } = useFieldArray({
     control,
     name: "languages"
   });
 
- const handleAddClickLanguage = () => {
-  LanguageAppend('languages', { language: '',rate:0 });
+  const handleAddClickLanguage = () => {
+    LanguageAppend('languages', { languages: '', rate: 0 });
   };
 
 
@@ -112,14 +112,14 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
 
 
 
-// useEffect(()=>{
-//   append('educations', { study: '', degree: '' });
-//   certificateAppend('certificates', {  });
-//   experienceAppend('experiences', { experience: '' });
-//   skillsAppend('skills', { skills: '', rate: "" });
-//   LanguageAppend('languages', { languages: '',rate:"" });
+  // useEffect(()=>{
+  //   append('educations', { study: '', degree: '' });
+  //   certificateAppend('certificates', {  });
+  //   experienceAppend('experiences', { experience: '' });
+  //   skillsAppend('skills', { skills: '', rate: "" });
+  //   LanguageAppend('languages', { languages: '',rate:"" });
 
-// },[append,certificateAppend,experienceAppend,skillsAppend,LanguageAppend])
+  // },[append,certificateAppend,experienceAppend,skillsAppend,LanguageAppend])
 
 
   const SvgStudy = `
@@ -162,272 +162,272 @@ export default function Skills({onDataChange,Controller,control,handleRatingChan
 
 
 
-  return  <>
+  return <>
     <Card>
-        <CardContent>
+      <CardContent>
 
-          <Typography >{t("Skills & Career")}</Typography>
-          <br/>
+        <Typography >{t("Skills & Career")}</Typography>
+        <br />
 
-          <Stack direction={'column'} spacing={3} width={'100%'} >
-              <Typography>{t("Education")}</Typography>
-
-
+        <Stack direction={'column'} spacing={3} width={'100%'} >
+          <Typography>{t("Education")}</Typography>
 
 
 
 
-              {fields.map((field, index) => ( <>
-            <Stack spacing={4}  key={field.id}>
-{index === 1 && (
-  <CloseIcon sx={{cursor:"pointer",'&:hover': { color: 'red' }}} onClick={() => handleRemoveClick(index)} />
+
+
+          {fields.map((field, index) => (<>
+            <Stack spacing={4} key={field.id}>
+              {index === 1 && (
+                <CloseIcon sx={{ cursor: "pointer", '&:hover': { color: 'red' } }} onClick={() => handleRemoveClick(index)} />
               )}
-             <Controller
+              <Controller
                 name={`educations[${index}].study`}
                 control={control}
-                defaultValue={field.study}
                 render={({ field }) => (
                   <TextField
-                  {...field}
+                    {...field}
                     label={t("study")}
                     variant="outlined"
                     fullWidth
                     size="small"
                     error={Boolean(errors?.educations?.[index]?.study)}
                     {...(errors?.educations?.[index]?.study && { helperText: errors?.educations?.[index]?.study.message })}
-                    />
-                    )}
-                    />
-                <Controller
+                  />
+                )}
+              />
+              <Controller
                 name={`educations[${index}].degree`}
                 control={control}
                 defaultValue={field.degree}
                 render={({ field }) => (
                   <TextField
-                  {...field}
-                  select
-                  defaultValue={"Degree"}
-                  label={t("Degree")}
-                  SelectProps={{
-                    value: field.value,  // Use field.value here
-                    onChange: (e) => {
-                      field.onChange(e);  // Ensure field.onChange is called
-                      handleDegreeChange(e);
-                    },
-                  }}
-                  variant="outlined"
-                  fullWidth
-                  size="small"
-                  error={Boolean(errors?.educations?.[index]?.degree)}
-                  {...(errors?.educations?.[index]?.degree && { helperText: errors?.educations?.[index]?.degree.message })}
+                    {...field}
+                    select
+                    defaultValue={"Degree"}
+                    label={t("Degree")}
+                    SelectProps={{
+                      value: field.value,  // Use field.value here
+                      onChange: (e) => {
+                        field.onChange(e);  // Ensure field.onChange is called
+                        handleDegreeChange(e);
+                      },
+                    }}
+                    variant="outlined"
+                    fullWidth
+                    size="small"
+                    error={Boolean(errors?.educations?.[index]?.degree)}
+                    {...(errors?.educations?.[index]?.degree && { helperText: errors?.educations?.[index]?.degree.message })}
                   >
-                <MenuItem value="Degree">{t("Degree")}</MenuItem>
-                <MenuItem value="bachelor">{t("Bachelor")}</MenuItem>
-                <MenuItem value="master">{t("Master")}</MenuItem>
-                <MenuItem value="phd">{t("PhD")}</MenuItem>
-              </TextField>
-                 )}
-                 />
+                    <MenuItem value="Degree">{t("Degree")}</MenuItem>
+                    <MenuItem value="bachelor">{t("Bachelor")}</MenuItem>
+                    <MenuItem value="master">{t("Master")}</MenuItem>
+                    <MenuItem value="phd">{t("PhD")}</MenuItem>
+                  </TextField>
+                )}
+              />
 
             </Stack>
-                 </>
+          </>
           ))}
-          <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClick}>
-          {t("Add Education")}
+          <Typography sx={{ cursor: "pointer" }} color="primary" onClick={handleAddClick}>
+            {t("Add Education")}
           </Typography>
 
 
 
 
 
-{/*  *********************************************************************                                          */}
+          {/*  *********************************************************************                                          */}
 
-              <Typography>{t("Certificates")}</Typography>
+          <Typography>{t("Certificates")}</Typography>
 
-              {fieldsCertificate.map((field, index) => ( <>
-                {index === 1 && (
-                  <CloseIcon sx={{cursor:"pointer",'&:hover': { color: 'red' }}} onClick={() => handleRemoveClickcertificate(index)} />
-                 )}
-              <Controller
-                name={`certificates[${index}].content`}
-                control={control}
-                render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                error={Boolean(errors.certificates && errors.certificates[index])}
-                helperText={errors.certificates && errors.certificates[index]?.message}
-                size='small'
-                label={
-                  <Stack direction={'row'} spacing={2} >
-                    <Box>
-                    <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgCertificate)}`}/>
+          {fieldsCertificate.map((field, index) => (
+          <Stack Stack spacing={4} key={field.id}>
+            {index === 1 && (
+              <CloseIcon sx={{ cursor: "pointer", '&:hover': { color: 'red' } }} onClick={() => handleRemoveClickcertificate(index)} />
+            )}
+            <Controller
+              name={`certificates[${index}].content`}
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  error={Boolean(errors.certificates && errors.certificates[index])}
+                  helperText={errors.certificates && errors.certificates[index]?.message}
+                  size='small'
+                  label={
+                    <Stack direction={'row'} spacing={2} >
+                      <Box>
+                        <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgCertificate)}`} />
                       </Box>
                       <Box>
                         {t('Certificates')}
-                    </Box>
-                  </Stack>
-                }
-              />
+                      </Box>
+                    </Stack>
+                  }
+                />
               )}
-              />
-              </>
-          ))}
-   <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClickCertificate}>
-   {t("Add Certificate")}
-          </Typography>
-
-
-              {/* *********************************************************************                                          */}
-
-              <Typography>{t("Experience")}</Typography>
-      {fieldsExperience.map((field, index) => (
-        <React.Fragment key={index}>
-          {index === 1 && (
-            <CloseIcon
-              sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
-              onClick={() => handleRemoveClickExperience(index)}
             />
-          )}
-          <Controller
-            name={`experiences[${index}].content`}
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                fullWidth
-                error={Boolean(errors.experiences && errors.experiences[index])}
-                helperText={errors.experiences && errors.experiences[index]?.message}
-
-                size="small"
-                label={
-                  <Stack direction={'row'} spacing={2}>
-                    <Box>
-                      <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgExperience)}`} />
-                    </Box>
-                    <Box>{t('Experience')}</Box>
-                  </Stack>
-                }
-              />
-            )}
-          />
-        </React.Fragment>
-      ))}
-
-   <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClickExperience}>
-   {t("Add Experience")}
-          </Typography>
-
-
-                  {/* *********************************************************************************** */}
-              <Typography>{t("Skills")}</Typography>
-  {fieldsSkills.map((field, index) => (
-
-              <Stack direction={'row'} key={index} alignItems={'end'} >
-                <Stack width={'100%'} direction={'column'} >
-           {index === 1 && (
-
-            <CloseIcon
-              sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
-              onClick={() => handleRemoveClickSkills(index)}
-            />
-          )}
-      <Controller
-        name={`skills[${index}].skills`}
-        control={control}
-        defaultValue={field.skills}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            fullWidth
-
-            size='small'
-            label={
-              <Stack direction={'row'} spacing={2}>
-                <Box>
-                  <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgSkills)}`} alt="Skills Icon" />
-                </Box>
-                <Box>
-                  {t('Skills')}
-                </Box>
-              </Stack>
-            }
-          />
-        )}
-      />
-      </Stack>
-      <Box marginTop={'1%'}>
-      <Rating
-              name={`skills[${index}].rate`}
-              value={field.rate}
-              onChange={(event, newValue) => {
-                handleRatingChange(index, newValue);
-
-              }}
-            />
-
-      </Box>
-</Stack>
-  ))}
-              <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClickSkills}>
-              {t("Add Skills")}
-          </Typography>
-
-              <Typography>{t("Languages")}</Typography>
-              {fieldsLanguage.map((field, index) => (
-              <Stack direction={'row'} key={index} alignItems={'end'}>
-                <Stack direction={'column'} width={'100%'} >
-           {index === 1 && (
-            <CloseIcon
-              sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
-              onClick={() => handleRemoveClickLanguage(index)}
-            />
-          )}
-      <Controller
-        name={`languages[${index}].languages`}
-          control={control}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            fullWidth
-
-            size='small'
-            label={
-              <Stack direction={'row'} spacing={2}>
-                <Box>
-                  <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgLanguage)}`} alt="Language Icon" />
-                </Box>
-                <Box>
-                  {t('Language')}
-                </Box>
-              </Stack>
-
-            }
-
-          />
-        )}
-      />
-      </Stack>
-      <Box marginTop={'1%'}>
-      <Rating
-              name={`languages[${index}].rate`}
-              value={field.rate}
-
-              onChange={(event, newValue) => {
-                handleLanguageChange(index, newValue);
-              }}
-            />      </Box>
-</Stack>
-  ))}
-     <Typography sx={{cursor:"pointer"}} color="primary" onClick={handleAddClickLanguage}>
-     {t("Add Language")}
-          </Typography>
-
           </Stack>
-        </CardContent>
-    </Card>
-    </>
+          ))}
+          <Typography sx={{ cursor: "pointer" }} color="primary" onClick={handleAddClickCertificate}>
+            {t("Add Certificate")}
+          </Typography>
 
-  }
+
+          {/* *********************************************************************                                          */}
+
+          <Typography>{t("Experience")}</Typography>
+          {fieldsExperience.map((field, index) => (
+            <Stack Stack spacing={4} key={field.id}>
+              {index === 1 && (
+                <CloseIcon
+                  sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
+                  onClick={() => handleRemoveClickExperience(index)}
+                />
+              )}
+              <Controller
+                name={`experiences[${index}].content`}
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    fullWidth
+                    error={Boolean(errors.experiences && errors.experiences[index])}
+                    helperText={errors.experiences && errors.experiences[index]?.message}
+
+                    size="small"
+                    label={
+                      <Stack direction={'row'} spacing={2}>
+                        <Box>
+                          <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgExperience)}`} />
+                        </Box>
+                        <Box>{t('Experience')}</Box>
+                      </Stack>
+                    }
+                  />
+                )}
+              />
+            </Stack>
+          ))}
+
+          <Typography sx={{ cursor: "pointer" }} color="primary" onClick={handleAddClickExperience}>
+            {t("Add Experience")}
+          </Typography>
+
+
+          {/* *********************************************************************************** */}
+          <Typography>{t("Skills")}</Typography>
+          {fieldsSkills.map((field, index) => (
+
+            <Stack direction={'row'} key={field.id} alignItems={'end'} >
+              <Stack width={'100%'} direction={'column'} >
+                {index === 1 && (
+
+                  <CloseIcon
+                    sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
+                    onClick={() => handleRemoveClickSkills(index)}
+                  />
+                )}
+                <Controller
+                  name={`skills[${index}].skills`}
+                  control={control}
+                  defaultValue={field.skills}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      fullWidth
+
+                      size='small'
+                      label={
+                        <Stack direction={'row'} spacing={2}>
+                          <Box>
+                            <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgSkills)}`} alt="Skills Icon" />
+                          </Box>
+                          <Box>
+                            {t('Skills')}
+                          </Box>
+                        </Stack>
+                      }
+                    />
+                  )}
+                />
+              </Stack>
+              <Box marginTop={'1%'}>
+                <Rating
+                  name={`skills[${index}].rate`}
+                  value={field.rate}
+                  onChange={(event, newValue) => {
+                    handleRatingChange(index, newValue);
+
+                  }}
+                />
+
+              </Box>
+            </Stack>
+          ))}
+          <Typography sx={{ cursor: "pointer" }} color="primary" onClick={handleAddClickSkills}>
+            {t("Add Skills")}
+          </Typography>
+
+          <Typography>{t("Languages")}</Typography>
+          {fieldsLanguage.map((field, index) => (
+            <Stack direction={'row'} key={field.id} alignItems={'end'}>
+              <Stack direction={'column'} width={'100%'} >
+                {index === 1 && (
+                  <CloseIcon
+                    sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
+                    onClick={() => handleRemoveClickLanguage(index)}
+                  />
+                )}
+                <Controller
+                  name={`languages[${index}].languages`}
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      fullWidth
+
+                      size='small'
+                      label={
+                        <Stack direction={'row'} spacing={2}>
+                          <Box>
+                            <img src={`data:image/svg+xml;utf8,${encodeURIComponent(SvgLanguage)}`} alt="Language Icon" />
+                          </Box>
+                          <Box>
+                            {t('Language')}
+                          </Box>
+                        </Stack>
+
+                      }
+
+                    />
+                  )}
+                />
+              </Stack>
+              <Box marginTop={'1%'}>
+                <Rating
+                  name={`languages[${index}].rate`}
+                  value={field.rate}
+
+                  onChange={(event, newValue) => {
+                    handleLanguageChange(index, newValue);
+                  }}
+                />      </Box>
+            </Stack>
+          ))}
+          <Typography sx={{ cursor: "pointer" }} color="primary" onClick={handleAddClickLanguage}>
+            {t("Add Language")}
+          </Typography>
+
+        </Stack>
+      </CardContent>
+    </Card>
+  </>
+
+}
 
 ;

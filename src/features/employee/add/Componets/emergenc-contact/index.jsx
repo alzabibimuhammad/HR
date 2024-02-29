@@ -77,7 +77,7 @@ export default function EmergencyContact({ onDataChange, control, errors }) {
               </Box>
               <Box sx={{ width: "100%" }}>
                 <Controller
-                  name={`emergency_contact[${index}].phonenumber`}
+                  name={`emergency_contact[${index}].phone_num`}
                   control={control}
                   defaultValue={field.phonenumber}
                   render={({ field }) => (
@@ -87,8 +87,8 @@ export default function EmergencyContact({ onDataChange, control, errors }) {
                       variant="outlined"
                       fullWidth
                       size="small"
-                      error={Boolean(errors?.emergency_contact?.[index]?.phonenumber)}
-                      {...(errors?.emergency_contact?.[index]?.phonenumber && { helperText: errors?.emergency_contact?.[index]?.phonenumber.message })}
+                      error={Boolean(errors?.emergency_contact?.[index]?.phone_num)}
+                      {...(errors?.emergency_contact?.[index]?.phone_num && { helperText: errors?.emergency_contact?.[index]?.phone_num.message })}
                     />
                   )}
                 />

@@ -4,7 +4,6 @@ import { Box, Stack } from '@mui/system'
 import { useState } from 'react';
 import Avatar from 'src/@core/components/mui/avatar';
 import { useFieldArray, useForm, Controller } from 'react-hook-form';
-import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
 import AttachmentIcon from '@mui/icons-material/Attachment';
@@ -158,7 +157,7 @@ export default function Employment({ onDataChange, Controller, control, errors,S
 
           <Typography>{t("Secretariats")}</Typography>
           {fields.map((field, index) => (
-            <Stack direction={"column"} spacing={4} key={index}>
+            <Stack direction={"column"} spacing={4} key={field.id}>
               {index === 1 && (
                 <CloseIcon
                   sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}

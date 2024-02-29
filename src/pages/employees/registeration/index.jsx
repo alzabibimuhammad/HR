@@ -7,19 +7,7 @@ import getAttendance from './api'
 
 export default function Registeration() {
 
-
-  // const [data , setData] = useState([])
-
   const [filterDate,setFilterDate] = useState({})
-
-
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-
-  const formattedDate = `${year}-${month}-${day}`;
-
   const [data , setData] = useState(null);
 
   useEffect(() => {
@@ -28,9 +16,9 @@ export default function Registeration() {
       setData(jsonData);
     }
 
-      fetchData(filterDate?filterDate:formattedDate);
+      fetchData(filterDate);
 
-  }, [formattedDate,filterDate]);
+  }, [filterDate]);
 
 
 

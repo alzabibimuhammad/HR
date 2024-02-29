@@ -168,7 +168,7 @@ export default function Penalties({id}) {
       formData.append('content', data.content);
       formData.append('user_id', data.user_id);
       formData.append('type', data.type);
-      formData.append('branch_id', 1);
+      formData.append('branch_id', localStorage.branch);
 
       EditDecision({id:Edit.id,formData:formData})
       getPenaltiesDate(Data)

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box, fontSize } from '@mui/system';
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { Box } from '@mui/system';
 
 const CustomDataGrid = ({ rows, columns, show,rowHeight }) => {
 
@@ -14,12 +12,6 @@ const CustomDataGrid = ({ rows, columns, show,rowHeight }) => {
       pageSize: show
     }));
   }, [show]);
-
-  const Item = styled(Paper)(({ theme }) => ({
-    textAlign: 'center',
-    width: "30%",
-    color: theme.palette.text.secondary,
-  }));
 
   const gridStyles = {
     root: {

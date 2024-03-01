@@ -404,7 +404,7 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
                       </>
                     }
                   </StackRow>
-                  {isRewardDetails ?
+                  {isRewardDetails && userDataClean?.rewards?.length ?
                     <Stack marginLeft={6} direction={'column'} >
                       {userDataClean?.rewards?.map((ele, index) => (
                         <Stack key={index} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
@@ -439,7 +439,7 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
                       </>
                     }
                   </StackRow>
-                  {isAdvanceDetails ?
+                  {isAdvanceDetails &&userDataClean?.advances?.length ?
                     <Stack marginLeft={6} direction={'column'} >
                       {userDataClean?.advances?.map((ele, index) => (
                         <Stack key={index} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
@@ -473,7 +473,7 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
                       </>
                     }
                   </StackRow>
-                  {isDeductionDetails ?
+                  {isDeductionDetails &&userDataClean?.deductions?.length   ?
                     <Stack marginLeft={6} direction={'column'} >
                       {userDataClean?.deductions?.map((ele, index) => (
                         <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>

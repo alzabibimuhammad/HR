@@ -7,7 +7,7 @@ import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import { useTranslation } from 'react-i18next';
 
 export default function PersonalInfo({ProfileData}) {
-  
+
   const {t} = useTranslation()
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
@@ -59,13 +59,13 @@ export default function PersonalInfo({ProfileData}) {
         </StackRow>
 
         <StackRow>
-          <Typo>{t('Marital Status')}:</Typo>
-          <TypoVal>{ProfileData?.user_info?.military_situation}</TypoVal>
+          <Typo>{t('Military Status')}:</Typo>
+          <TypoVal>{t(ProfileData?.user_info?.military_situation)}</TypoVal>
         </StackRow>
 
         <StackRow>
           <Typo>{t('Social status')}:</Typo>
-          <TypoVal>{ProfileData?.user_info?.social_situation}</TypoVal>
+          <TypoVal>{t(ProfileData?.user_info?.social_situation)}</TypoVal>
         </StackRow>
 
         <StackRow>
@@ -141,7 +141,7 @@ export default function PersonalInfo({ProfileData}) {
         </StackRow>
         <StackRow>
           <Typo>{t('Role')}:</Typo>
-          <TypoVal>{ProfileData?.role}</TypoVal>
+          <TypoVal>{t(ProfileData?.role)}</TypoVal>
         </StackRow>
         <StackRow>
           <Typo>{t('Team')}:</Typo>

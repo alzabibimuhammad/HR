@@ -59,6 +59,11 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
       setStatus('')
   };
 
+  let StatusData = new Set([])
+  RegistrationData(data,filterDate)?.forEach(element => {
+    StatusData.add(element?.status)
+  })
+
 
   return (
     <Stack height={'100%'}>
@@ -117,10 +122,11 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
                     size='small'
                   >
                     <MenuItem value=''>{`${t("Status")}`}</MenuItem>
-                    <MenuItem value='Arrived'>{`${t("Arrived")}`}</MenuItem>
-                    <MenuItem value='Late'>{`${t("Late")}`}</MenuItem>
-                    <MenuItem value='Absent'>{`${t("Absenced")}`}</MenuItem>
-                    <MenuItem value='Checked Out'>{`${t("Checked out")}`}</MenuItem>
+                    {Array.from(StatusData).map(element => (
+                  <MenuItem key={element} value={element}>
+                    {t(element)}
+                  </MenuItem>
+                ))}
                 </TextField>
               </Stack>
 

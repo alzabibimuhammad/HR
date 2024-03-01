@@ -1,7 +1,9 @@
 export const RegistrationData = (elements,filterDate) => {
 
 
-  const targetTime = "09:15"
+
+
+  const targetTime = "09:30"
   const currentDate = new Date();
   const endTime = "16:45"
 
@@ -34,16 +36,22 @@ export const RegistrationData = (elements,filterDate) => {
         const minutes = checkinTime?.getMinutes()?.toString()?.padStart(2, '0');
         const formattedTime = `${hours}:${minutes}`;
         checkinDate = formattedTime
+
         if(!checkoutDate){
-          if(formattedTime < targetTime)statusX="Arrived"
-          else statusX="Arrived & Late"
+          if(CurrentFormattedTime > endTime)
+            if(formattedTime < targetTime)statusX="Arrived & forgot to checkout"
+            else statusX="Arrived late & forgot to checkout"
+          else
+            if(formattedTime < targetTime)statusX="Arrived"
+            else statusX="Arrived & late"
+
         }
         if(checkoutDate){
           const checkoutTime = new Date(checkoutDate);
           const hours = checkoutTime?.getHours()?.toString()?.padStart(2, '0');
           const minutes = checkoutTime?.getMinutes()?.toString()?.padStart(2, '0');
           const outTime = `${hours}:${minutes}`;
-          if(formattedTime < targetTime && outTime >= endTime) statusX="Out"
+          if(formattedTime < targetTime && outTime >= endTime) statusX="out"
           else if(formattedTime > targetTime && outTime >= endTime) statusX="Out & Arrived Late"
           else if(formattedTime < targetTime && outTime < endTime) statusX="Early Out"
           else statusX = "Out Eatly&Arraived Late"
@@ -57,16 +65,16 @@ export const RegistrationData = (elements,filterDate) => {
       const minutes = checkoutTime?.getMinutes()?.toString()?.padStart(2, '0');
       const outTime = `${hours}:${minutes}`;
       checkoutDate = outTime
-      statusX='Wrong'}
+      statusX='Wrong'
+    }
     else{
-      if(filterDate)
-        if( CurrentformattedDate > filterDate ) statusX="Absent";
+      if(Object?.keys(filterDate)?.length)
+        if( CurrentformattedDate > filterDate || (CurrentformattedDate == filterDate && CurrentFormattedTime > endTime) ) statusX="Absent";
         else statusX="Late";
       else
-        statusX="Late";
-    }
-
-
+        if(CurrentFormattedTime > endTime)statusX = "Absent"
+        else statusX="Late";
+  }
 
     return {
       id: element?.id,
@@ -80,3 +88,5 @@ export const RegistrationData = (elements,filterDate) => {
     };
   });
 };
+
+

@@ -96,7 +96,7 @@ const Registration = Data => {
                   </Box>
 
                 </Stack>
-                <CustomDataGrid   columns={columns} show={show}   rows={RegistrationData(rows)||[]}/>
+                <CustomDataGrid   columns={columns} show={show}   rows={RegistrationData(rows,{})||[]}/>
               </CardContent>
             </Card>
           </Stack>

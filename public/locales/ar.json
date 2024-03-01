@@ -255,6 +255,8 @@
   "Out & Arrived Late":"خارج ووصل متأخرا",
   "Early Out":"خرج مبكرا",
   "Out Eatly&Arraived Late":"خرج مبكرا وجاء متأخرا",
+  "Arrived but forgot to checkout":"وصل ولكن نسى تسجيل الخروج",
+  "Arrived late & forgot to checkout":"وصل متأخرا و نسى تسجيل الخروج",
   "Next":"التالي",
   "Back":"السابق",
   "Events":"الأحداث",

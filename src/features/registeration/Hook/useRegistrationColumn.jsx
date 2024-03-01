@@ -60,8 +60,8 @@
                     ? 'rgba(145, 196, 131, 0.20)'
                     :  Boolean(params?.row?.status.includes('Late'))
                     ? 'rgba(106, 178, 223, 0.20)'
-                    : params?.row?.status==='Out'
-                    ? 'rgba(106, 178, 223, 0.20)'
+                    : params?.row?.status==='out'
+                    ? 'rgba(145, 196, 131, 0.20)'
                     : params?.row?.status === 'Absent'
                     ? 'rgba(223, 46, 56, 0.20)'
                     :  Boolean(params?.row?.status.includes('Early'))
@@ -72,8 +72,8 @@
                     ? '#91C483'
                     : Boolean(params?.row?.status.includes('Late'))
                     ? '#6AB2DF'
-                    : params?.row?.status==='Out'
-                    ? '#6AB2DF'
+                    : params?.row?.status==='out'
+                    ? '#91C483'
                     : params?.row?.status === 'Absent'
                     ? '#DF2E38'
                     : Boolean(params?.row?.status.includes('Early'))

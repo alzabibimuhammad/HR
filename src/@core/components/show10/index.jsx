@@ -28,12 +28,12 @@ export default function Show10({setShow}) {
           id="demo-simple-select"
           onChange={handleChange}
         >
-          <MenuItem value={1}>1</MenuItem>
           <MenuItem value={10}>10</MenuItem>
           <MenuItem value={20}>20</MenuItem>
           <MenuItem value={30}>30</MenuItem>
           <MenuItem value={40}>40</MenuItem>
           <MenuItem value={50}>50</MenuItem>
+          <MenuItem value={100}>100</MenuItem>
 
         </Select>
       </FormControl>

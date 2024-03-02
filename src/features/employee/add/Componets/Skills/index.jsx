@@ -245,7 +245,7 @@ export default function Skills({ onDataChange, Controller, control, handleRating
 
           {fieldsCertificate.map((field, index) => (
           <Stack Stack spacing={4} key={field.id}>
-            {index === 1 && (
+            {index != 0 && (
               <CloseIcon sx={{ cursor: "pointer", '&:hover': { color: 'red' } }} onClick={() => handleRemoveClickcertificate(index)} />
             )}
             <Controller
@@ -283,7 +283,7 @@ export default function Skills({ onDataChange, Controller, control, handleRating
           <Typography>{t("Experience")}</Typography>
           {fieldsExperience.map((field, index) => (
             <Stack Stack spacing={4} key={field.id}>
-              {index === 1 && (
+              {index !=0 && (
                 <CloseIcon
                   sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
                   onClick={() => handleRemoveClickExperience(index)}
@@ -325,7 +325,7 @@ export default function Skills({ onDataChange, Controller, control, handleRating
 
             <Stack direction={'row'} key={field.id} alignItems={'end'} >
               <Stack width={'100%'} direction={'column'} >
-                {index === 1 && (
+                {index !=0 && (
 
                   <CloseIcon
                     sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
@@ -377,7 +377,7 @@ export default function Skills({ onDataChange, Controller, control, handleRating
           {fieldsLanguage.map((field, index) => (
             <Stack direction={'row'} key={field.id} alignItems={'end'}>
               <Stack direction={'column'} width={'100%'} >
-                {index === 1 && (
+                {index !=0 && (
                   <CloseIcon
                     sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
                     onClick={() => handleRemoveClickLanguage(index)}

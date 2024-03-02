@@ -158,7 +158,7 @@ export default function Employment({ onDataChange, Controller, control, errors,S
           <Typography>{t("Secretariats")}</Typography>
           {fields.map((field, index) => (
             <Stack direction={"column"} spacing={4} key={field.id}>
-              {index === 1 && (
+              {index != 0  && (
                 <CloseIcon
                   sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
                   onClick={() => handleRemoveClick(index)}

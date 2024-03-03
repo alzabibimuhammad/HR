@@ -415,3 +415,17 @@ margin-right: 40px;
   overflow-y: visible;
   width: 83vh;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px;
+}
+th, td {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 18px;
+}
+th {
+  background-color: #f2f2f2;
+}

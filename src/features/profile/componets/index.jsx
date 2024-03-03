@@ -133,7 +133,7 @@ const Profiles = ({ data, tab }) => {
               <CustomDatePicker setUserData={setuserData} selectedDate={SelecetedDate} />
             </Box>
             <Box>
-              <Download user={userData} />
+              <Download ProfileData={ProfileData} user={userData} />
             </Box>
 
             <Box width={'100%'} height={'20% !important '}>

@@ -1,67 +1,39 @@
-import { Button, Card, CardContent, CircularProgress, Typography } from '@mui/material'
-import { Box, Stack } from '@mui/system'
-import React, { useEffect, useRef } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useReactToPrint } from 'react-to-print'
-import useViewContract from 'src/features/Contracts/list/Hooks/useViewContracts'
-import PDFGenerator from '../pdf'
-import { t } from 'i18next'
+import React, { useRef, useEffect } from 'react';
 
-
-
-//
-      {/* {data?.data?.data.length ? */}
-
-      //           <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} spacing={2} >
-      //               <Typography variant='h5'>{t('Loading contract...')}</Typography>
-      //               <CircularProgress/>
-      //           </Stack>
-
-      // }
-
-
-
-
-const Download = ({user,ProfileData}) => {
-
+const PDFGenerator = ({user,ProfileData,contentRef}) => {
   const  data = user?.data?.data?.[0]
 
-  console.log("🚀 ~ Download ~ ProfileData:", user?.data?.data?.length)
+  // useEffect(() => {
+  //   // This useEffect will only run on the client side after the initial render
+  //   // Code that uses window
+  //   if (typeof window !== 'undefined') {
+  //     import('html2pdf.js').then(html2pdfModule => {
+  //       window.html2pdf = html2pdfModule.default || html2pdfModule;
+  //     });
+  //   }
+  // }, []);
 
-  const contentRef = useRef(null);
+  // const generatePDF = async () => {
+  //   const content = contentRef.current;
 
-  useEffect(() => {
-    // This useEffect will only run on the client side after the initial render
-    // Code that uses window
-    if (typeof window !== 'undefined') {
-      import('html2pdf.js').then(html2pdfModule => {
-        window.html2pdf = html2pdfModule.default || html2pdfModule;
-      });
-    }
-  }, []);
+  //   if (typeof window !== 'undefined' && window.html2pdf) {
+  //     const html2pdf = window.html2pdf;
 
-  const generatePDF = async () => {
-    const content = contentRef.current;
-
-    if (typeof window !== 'undefined' && window.html2pdf) {
-      const html2pdf = window.html2pdf;
-
-      html2pdf(content).outputPdf().then(pdf => {
-        const blob = new Blob([pdf], { type: 'application/pdf' });
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = 'generated.pdf';
-        link.click();
-      });
-    } else {
-      console.error('abooooooooood');
-    }
-  };
+  //     html2pdf(content).outputPdf().then(pdf => {
+  //       const blob = new Blob([pdf], { type: 'application/pdf' });
+  //       const link = document.createElement('a');
+  //       link.href = window.URL.createObjectURL(blob);
+  //       link.download = 'generated.pdf';
+  //       link.click();
+  //     });
+  //   } else {
+  //     console.error('abooooooooood');
+  //   }
+  // };
 
   return (
-    <>
-    <div style={{display:"flex",flexDirection:"column",display:"none"}}>
-      {/* <div style={{ color: 'red',overflow:"hidden" }} ref={contentRef}>
+    <div style={{display:"flex",flexDirection:"column"}}>
+      <div style={{ color: 'red',overflow:"hidden" }} ref={contentRef}>
       <table >
         <thead>
             <tr>
@@ -152,33 +124,11 @@ const Download = ({user,ProfileData}) => {
             </tr>
         </tbody>
     </table>
-      </div> */}
-<PDFGenerator contentRef={contentRef} ProfileData={ProfileData} user={user}/>
+      </div>
+
+
     </div>
-
-
-      <Card>
-      <CardContent>
-      {user?.data?.data?.length ?
-
-        <Stack spacing={2} >
-
-          <Button onClick={generatePDF} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} >{t('Download')} </Button>
-
-        </Stack>
-
-:
-<Stack direction={'row'} justifyContent={'center'} alignItems={'center'} spacing={2} >
-                     <Typography variant='h5'>{t('Loading contract...')}</Typography>
-                  <CircularProgress/>
-                 </Stack>
-
-      }
-        </CardContent>
-        </Card>
-    </>
-
   );
 };
 
-export default Download;
+export default PDFGenerator;

@@ -67,8 +67,8 @@ const handleViewProfileTap=_=>{
               style={{ display: 'flex', textDecoration: 'none', alignItems: 'center' }}
             >
               <Avatar sx={{width:{sm:35,xs:20},height:{sm:35,xs:20}}} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
-              <Typography sx={{ fontSize: {xs:'8px',sm:"14px"}, marginLeft: '2px' }}>{params?.row?.first_name}</Typography>
-              <Typography sx={{ fontSize: {xs:'8px',sm:"14px"}, marginLeft: '3px' }}>{params?.row?.last_name}</Typography>
+              <Typography sx={{ fontSize: {sm:"14px"}, marginLeft: '2px' }}>{params?.row?.first_name}</Typography>
+              <Typography sx={{ fontSize: {sm:"14px"}, marginLeft: '3px' }}>{params?.row?.last_name}</Typography>
             </Link>
           )
         }
@@ -81,7 +81,7 @@ const handleViewProfileTap=_=>{
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {
-          return <Typography sx={{ fontSize: {xs:'8px',sm:"14px"} }}>{params?.row?.role}</Typography>
+          return <Typography sx={{ fontSize: {sm:"14px"} }}>{params?.row?.role}</Typography>
         }
       },
       {
@@ -92,7 +92,7 @@ const handleViewProfileTap=_=>{
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {
-          return <Typography sx={{ fontSize: {xs:'8px',sm:"14px"} }}>{params?.row?.specialization}</Typography>
+          return <Typography sx={{ fontSize: {sm:"14px"} }}>{params?.row?.specialization}</Typography>
         }
       },
 

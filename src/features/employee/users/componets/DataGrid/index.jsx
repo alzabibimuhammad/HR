@@ -145,7 +145,7 @@ const Users = ({ rows }) => {
               </Box>
 
               <Typography marginLeft={'5px'}>
-                {isNaN(((percentageData?.present_employees / percentageData?.total_employees) * 100).toFixed(2)) ? 0 : ((percentageData?.present_employees / percentageData?.total_employees) * 100).toFixed(2) }%
+                {isNaN(((percentageData?.present_employees / percentageData?.total_employees) * 100)) ? 0 : ((percentageData?.present_employees / percentageData?.total_employees) * 100).toFixed(1) }%
               </Typography>
             </Stack>
           </AccordionSummary>

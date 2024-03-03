@@ -20,18 +20,21 @@ console.log("🚀 ~ RegistrationData ~ filterDate:", filterDate)
 
   return elements?.[0]?.map(element => {
     let checkinDate=null,checkoutDate=null;
+    const checkArray = [];
 
     element?.attendance?.forEach(element => {
-      if(element?.status==0)
+      if(element?.status==0){
         checkinDate = element?.datetime
+        checkArray.push(checkinDate)
+      }
       else if(element?.status ==1)
         checkoutDate = element?.datetime
 
     });
 
     let statusX;
-    if(checkinDate){
-        const checkinTime = new Date(checkinDate);
+    if(checkArray?.length){
+        const checkinTime = new Date(checkArray[0]);
         const hours = checkinTime?.getHours()?.toString()?.padStart(2, '0');
         const minutes = checkinTime?.getMinutes()?.toString()?.padStart(2, '0');
         const formattedTime = `${hours}:${minutes}`;

@@ -26,7 +26,6 @@ export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendance
   } catch (error) {
     showErrorToast("Network Error")
     }
-  await dispatch(storeAttendanceLogs())
 
 })
 
@@ -39,7 +38,6 @@ export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', a
 
     showErrorToast(error?.response?.status,"Registeration Not Found")
     }
-    await dispatch(storeAttendanceLogs())
 
 })
 

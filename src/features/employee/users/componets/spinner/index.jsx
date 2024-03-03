@@ -1,4 +1,3 @@
-
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -10,26 +9,14 @@ const FallbackSpinner = ({ total, active }) => {
   const [progress, setProgress] = React.useState(0);
 
   React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 0;
-        }
-        const diff = (active / total) * 100;
-        return diff;
-      });
-    }, 800);
+    const diff = (active / total) * 100;
+    setProgress(diff);
 
-    return () => {
-      clearInterval(timer);
-    };
   }, [total, active]);
 
   return (
-    <Stack >
-
+    <Stack>
       <LinearProgress variant="determinate" value={progress} />
-
     </Stack>
   );
 }

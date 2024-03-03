@@ -43,7 +43,7 @@ export const RegistrationData = (elements,filterDate) => {
             else statusX="Arrived late & forgot to checkout"
           else
             if(formattedTime < targetTime)statusX="Arrived"
-            else statusX="Arrived & late"
+            else statusX="Arrived & Late"
 
         }
         if(checkoutDate){

@@ -1,9 +1,37 @@
 
-export const RegistrationData = (elements,filterDate) => {
+export const RegistrationData = (elements,filterDate,policyTime) => {
+let [startHour, startMinuts] = String(policyTime?.start)?.split(':');
+let [endHour, endMinuts] = String(policyTime?.end)?.split(':');
+/* start time form policy */
+startHour = parseInt(startHour);
+startMinuts = parseInt(startMinuts);
+startMinuts += 30;
 
-  const targetTime = "09:30"
+if (startMinuts >= 60) {
+    startHour += 1;
+    startMinuts -= 60;
+}
+startHour = startHour.toString().padStart(2, '0');
+startMinuts = startMinuts.toString().padStart(2, '0');
+/*end time from policy */
+endHour = parseInt(endHour);
+endMinuts = parseInt(endMinuts);
+endMinuts -= 15;
+
+if (endMinuts < 0) {
+    endHour -= 1;
+    endMinuts += 60;
+}
+endHour = endHour.toString().padStart(2, '0');
+endMinuts = endMinuts.toString().padStart(2, '0');
+
+
+  const newStartTime = `${startHour}:${startMinuts}`;
+  const newEndTime = `${endHour}:${endMinuts}`;
+
+  const targetTime = newStartTime
+  const endTime = newEndTime
   const currentDate = new Date();
-  const endTime = "16:45"
 
   const CurrentHours = currentDate?.getHours()?.toString()?.padStart(2, '0');
   const CurrentMinutes = currentDate?.getMinutes()?.toString()?.padStart(2, '0');

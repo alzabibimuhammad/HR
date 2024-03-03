@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, TextField } from '@mui/material'
+import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, TextField, CircularProgress } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import PageHeader from 'src/@core/components/page-header'
@@ -9,6 +9,7 @@ import { RegistrationData, RegistrationsData } from '../../infrastructure'
 import { Box, Stack } from '@mui/system'
 import useRegistrationColumn from '../../Hook/useRegistrationColumn'
 import Show10 from 'src/@core/components/show10'
+import useShowPolicies from 'src/features/policies/hook/useShowPolicies'
 
 const Registration = ({ Data, setFilterDate,filterDate }) => {
   const columns = useRegistrationColumn()
@@ -17,19 +18,24 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
   const [status, setStatus] = useState('');
 
   let data  = Data?.data
+  const {data:policy,isLoading}=useShowPolicies()
+  const distructPolicy = policy?.data?.data?.policy?.work_time
+
+  const [state , setState] = useState(false)
 
   const [rows, setRows] = useState()
-
+  let StatusData = new Set([])
   useEffect(() => {
-    let filterData = RegistrationData(data,filterDate)
+  let filterData  = RegistrationData(data,filterDate,{start:distructPolicy?.start_time,end:distructPolicy?.end_time})
     if(status)filterData = filterData?.filter((value,index)=> value?.status == status)
     if(search)filterData = filterData?.filter((value,index)=>(
         value?.first_name?.toLowerCase().includes(search.toLowerCase())||
         value?.last_name?.toLowerCase().includes(search.toLowerCase())
     ))
-
     setRows(filterData)
-  }, [Data,search,status])
+    setState(true)
+
+  }, [Data,search,status,policy])
 
   const { t } = useTranslation()
 
@@ -50,6 +56,7 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
   }
   const handelDate = event=>{
     setFilterDate(event.target.value)
+    setState(false)
   }
 
   const handleStatusChange = (e) => {
@@ -59,11 +66,10 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
       setStatus('')
   };
 
-  let StatusData = new Set([])
-  RegistrationData(data,filterDate)?.forEach(element => {
+
+  rows?.forEach(element => {
     StatusData.add(element?.status)
   })
-
 
   return (
     <Stack height={'100%'}>
@@ -122,15 +128,19 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
                     size='small'
                   >
                     <MenuItem value=''>{`${t("Status")}`}</MenuItem>
-                    {Array.from(StatusData).map(element => (
+                    {rows?.length&&
+                    Array.from(StatusData).map(element => (
                   <MenuItem key={element} value={element}>
                     {t(element)}
                   </MenuItem>
-                ))}
+                ))
+                }
                 </TextField>
               </Stack>
 
+            {policy &&state ?
           <CustomDataGrid columns={columns} show={show} rows={rows || [] } />
+            :<Box sx={{ height:'50vh',display:'flex',justifyContent:'center',alignItems:'center' }} ><CircularProgress/></Box>}
           </Stack>
 
 

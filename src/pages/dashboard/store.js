@@ -5,28 +5,6 @@ import { showErrorToast } from 'src/utiltis/showErrorToast';
 
 
 
-export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendancePercentage', async _ => {
-  try {
-    const response = await requestDashboard({ url: '/api/showPercent' });
-    return response.data;
-
-  } catch (error) {
-    showErrorToast("Network Error")
-    }
-})
-
-export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async date => {
-  try {
-    const response = await requestDashboard({ url: `/api/DayAttendance/${date}`});
-    return response.data;
-
-  } catch (error) {
-
-    showErrorToast(error?.response?.status,"Registeration Not Found")
-    }
-
-})
-
 export const storeAttendanceLogs = createAsyncThunk('Dashboard/storeAttendanceLogs', async () => {
   try{
   const response = requestDashboard({ url: '/api/storeAttendanceLogs' })
@@ -39,6 +17,32 @@ export const storeAttendanceLogs = createAsyncThunk('Dashboard/storeAttendanceLo
     showErrorToast(error,"")
   }
 })
+
+export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendancePercentage', async _ => {
+  try {
+    const response = await requestDashboard({ url: '/api/showPercent' });
+    return response.data;
+
+  } catch (error) {
+    showErrorToast("Network Error")
+    }
+  await dispatch(storeAttendanceLogs())
+
+})
+
+export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async date => {
+  try {
+    const response = await requestDashboard({ url: `/api/DayAttendance/${date}`});
+    return response.data;
+
+  } catch (error) {
+
+    showErrorToast(error?.response?.status,"Registeration Not Found")
+    }
+    await dispatch(storeAttendanceLogs())
+
+})
+
 
 const DashboardSlice = createSlice({
   name: 'Dashboard',

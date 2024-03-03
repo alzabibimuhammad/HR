@@ -36,20 +36,28 @@ console.log("🚀 ~ RegistrationData ~ filterDate:", filterDate)
         const minutes = checkinTime?.getMinutes()?.toString()?.padStart(2, '0');
         const formattedTime = `${hours}:${minutes}`;
         checkinDate = formattedTime
+
         if(!checkoutDate){
 
           if(formattedTime < targetTime){
+            if(Object?.keys(filterDate)?.length)
               if(CurrentformattedDate > filterDate)
                 statusX = "Arrived but forgot to checkout"
               else
                 statusX="Arrived"
+            else{
+              statusX="Arrived"
+            }
+
           }
 
           else{
-            if(CurrentformattedDate > filterDate)
-            statusX = "Arrived late & forgot to checkout"
-          else
-            statusX="Arrived & Late"
+            if(Object?.keys(filterDate)?.length)
+              if(CurrentformattedDate > filterDate)
+                statusX = "Arrived late & forgot to checkout"
+              else
+                statusX="Arrived & Late"
+            else statusX="Arrived & Late"
           }
         }
         if(checkoutDate){

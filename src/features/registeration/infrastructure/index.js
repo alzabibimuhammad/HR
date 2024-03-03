@@ -1,6 +1,5 @@
-export const RegistrationData = (elements,filterDate) => {
-console.log("🚀 ~ RegistrationData ~ filterDate:", filterDate)
 
+export const RegistrationData = (elements,filterDate) => {
 
   const targetTime = "09:30"
   const currentDate = new Date();
@@ -10,12 +9,12 @@ console.log("🚀 ~ RegistrationData ~ filterDate:", filterDate)
   const CurrentMinutes = currentDate?.getMinutes()?.toString()?.padStart(2, '0');
   const CurrentFormattedTime = `${CurrentHours}:${CurrentMinutes}`;
 
-  console.log("🚀 ~ RegistrationData ~ CurrentFormattedTime:", CurrentFormattedTime)
   const Currentyear = currentDate.getFullYear();
   const Currentmonth = String(currentDate.getMonth() + 1).padStart(2, '0');
   const Currentday = String(currentDate.getDate()).padStart(2, '0');
 
   const CurrentformattedDate = `${Currentyear}-${Currentmonth}-${Currentday}`;
+
 
 
   return elements?.[0]?.map(element => {
@@ -76,7 +75,7 @@ console.log("🚀 ~ RegistrationData ~ filterDate:", filterDate)
         }
     }
 
-    else if(!checkinDate && checkoutDate){
+    else if(!checkArray?.length && checkoutDate){
       const checkoutTime = new Date(checkoutDate);
       const hours = checkoutTime?.getHours()?.toString()?.padStart(2, '0');
       const minutes = checkoutTime?.getMinutes()?.toString()?.padStart(2, '0');

@@ -31,8 +31,9 @@ const CustomDataGrid = ({ rows, columns, show,rowHeight }) => {
 
   return (
     <>
-      <Box sx={{ height: 500, width: '100%' }}>
+      <Box sx={{ height: 500, width: '100%',overflow:'auto' }}>
         <DataGrid
+        sx={{ minWidth: 800  }}
           columns={columns}
           classes={gridStyles.root}
           rows={rows || []}

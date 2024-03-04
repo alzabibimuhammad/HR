@@ -125,12 +125,12 @@ const Profiles = ({ data, tab }) => {
               <AboutOverivew userDataClean={userDataClean} Data={data} />
             </Box>
             <Box>
-              <ReviewsReport />
+              <ReviewsReport SelecetedDate={SelecetedDate}  />
             </Box>
           </Stack>
           <Stack width={{ sm: '50%', xs: '100%' }} spacing={{ sm: 2, xs: 1 }} direction={'column'}>
             <Box width={'100%'}>
-              <CustomDatePicker setUserData={setuserData} selectedDate={SelecetedDate} />
+              <CustomDatePicker setUserData={setuserData} SetSelectedDate={SetSelectedDate} />
             </Box>
             <Box>
               <Download ProfileData={ProfileData} user={userData} />

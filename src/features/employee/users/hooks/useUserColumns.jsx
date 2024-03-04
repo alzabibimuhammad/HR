@@ -67,8 +67,8 @@ const handleViewProfileTap=_=>{
               style={{ display: 'flex', textDecoration: 'none', alignItems: 'center' }}
             >
               <Avatar sx={{width:{sm:35,xs:20},height:{sm:35,xs:20}}} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
-              <Typography sx={{ fontSize: {xs:'8px',sm:"14px"}, marginLeft: '2px' }}>{params?.row?.first_name}</Typography>
-              <Typography sx={{ fontSize: {xs:'8px',sm:"14px"}, marginLeft: '3px' }}>{params?.row?.last_name}</Typography>
+              <Typography sx={{ fontSize: {sm:"14px"}, marginLeft: '2px' }}>{params?.row?.first_name}</Typography>
+              <Typography sx={{ fontSize: {sm:"14px"}, marginLeft: '3px' }}>{params?.row?.last_name}</Typography>
             </Link>
           )
         }
@@ -81,7 +81,7 @@ const handleViewProfileTap=_=>{
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {
-          return <Typography sx={{ fontSize: {xs:'8px',sm:"14px"} }}>{params?.row?.role}</Typography>
+          return <Typography sx={{ fontSize: {sm:"14px"} }}>{params?.row?.role}</Typography>
         }
       },
       {
@@ -92,7 +92,7 @@ const handleViewProfileTap=_=>{
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {
-          return <Typography sx={{ fontSize: {xs:'8px',sm:"14px"} }}>{params?.row?.specialization}</Typography>
+          return <Typography sx={{ fontSize: {sm:"14px"} }}>{params?.row?.specialization}</Typography>
         }
       },
 
@@ -107,12 +107,6 @@ const handleViewProfileTap=_=>{
             <>
             <Stack direction={{ sm: 'row' }}>
               <Box >
-                {isMobile ? (
-                  <IconButton onClick={() => handleClickOpenn(!isMenuOpen)}>
-                    <MoreHorizIcon />
-                  </IconButton>
-                ) : (
-                  <>
                     <Link href={`/profile/${params.row.id}?type=profile`}>
                       <IconButton onClick={handleViewProfileTap}>
                         <VisibilityIcon variant="contained" sx={{ color: '#8090A7' }} size='small'>Details</VisibilityIcon>
@@ -124,41 +118,8 @@ const handleViewProfileTap=_=>{
                     <IconButton>
                       <DeleteOutlinedIcon onClick={() => handleClickOpen(params.row.id)} variant="contained" color="#8090A7" size='small'>  Delete   </DeleteOutlinedIcon>
                     </IconButton>
-                  </>
-                )}
-                {isMobile && (
-                  <Menu
-                    anchorEl={isMenuOpen ? document.body : null}
-                    anchorOrigin={{
-                      vertical: 'center',
-                      horizontal: 'center',
-                    }}
-                    transformOrigin={{
-                      vertical: 'center',
-                      horizontal: 'center',
-                    }}
-                    open={isMenuOpen}
-                    onClose={() => setIsMenuOpen(false)}
-                  >
-                    <Stack direction={"column"} spacing={3} justifyContent={"center"} alignItems={"start"} >
 
-                    <MenuItem  onClick={() => handleEditClick(params.row)}>
-                      <BorderColorOutlinedIcon style={{ color: '#8090A7' }} size='small' />
-                      Edit
-                    </MenuItem>
-                    <MenuItem onClick={() => handleClickOpen(params.row.id)}>
-                      <DeleteOutlinedIcon style={{ color: '#8090A7' }} size='small' />
-                      Delete
-                    </MenuItem>
-                      <MenuItem >
-                    <Link style={{display:"flex",textDecoration:"none",color: '#8090A7'}} href={`/profile/${params.row.id}`}>
-                        <VisibilityIcon variant="contained" sx={{ color: '#8090A7' }} size='small'></VisibilityIcon>
-                        <Typography >Details</Typography>
-                    </Link>
-                      </MenuItem>
-                    </Stack>
-                  </Menu>
-                )}
+
               </Box>
             </Stack>
             {isDeletePopupOpen && <AlertDialogDeleteUser id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
@@ -170,7 +131,7 @@ const handleViewProfileTap=_=>{
         }
       }
     ],
-    [t, isDrawerOpenEdit, EditData, isDeletePopupOpen, deleteId, isMenuOpen]
+    []
   )
 }
 

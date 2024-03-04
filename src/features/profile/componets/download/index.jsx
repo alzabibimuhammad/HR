@@ -56,22 +56,19 @@ const Download = ({user,ProfileData}) => {
 
         <Stack spacing={2} >
 
-          <Button onClick={generatePDF} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} >{t('Download')} </Button>
+          <Button  onClick={handleDownloadClick} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} ><a target='_blank' >{t('Print')} </a></Button>
+          <Button onClick={handleDownloadClick} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} >{t('Download')} </Button>
 
         </Stack>
 
-:
-<Stack direction={'row'} justifyContent={'center'} alignItems={'center'} spacing={2} >
-                     <Typography variant='h5'>{t('Loading contract...')}</Typography>
-                  <CircularProgress/>
-                 </Stack>
+        :
+          <Stack direction={'row'} justifyContent={'center'} alignItems={'center'} spacing={2} >
+              <Typography variant='h5'>{t('Loading contract...')}</Typography>
+              <CircularProgress/>
+          </Stack>
 
-      }
-        </CardContent>
-        </Card>
-    </>
+}
 
-  );
-};
-
-export default Download;
+        </CardContent></Card>
+    )
+}

@@ -11,7 +11,7 @@ import { DateFormateOfMonth } from 'src/utiltis/DateFormateOfMonth'
 import { DateFormateOfYear } from 'src/utiltis/DateFormateOfYear'
 import { ProfilteDate } from 'src/utiltis/profileDatePicker'
 
-export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }) => {
+export const CustomDatePicker = ({ setUserData, SetSelectedDate, handleDateChoose }) => {
   const {t} = useTranslation()
   const [view, setView] = useState('month')
   const [startDate, setStartDate] = useState(new Date())
@@ -36,7 +36,7 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
 
     formData.append('date', FormateDayDate)
 
-
+    SetSelectedDate(FormateDayDate)
     setUserId(store?.user_id)
 
     ReportDay({data:formData,date:FormateDayDate})
@@ -76,6 +76,7 @@ export const CustomDatePicker = ({ setUserData, selectedDate, handleDateChoose }
     formData.append('user_id', store.userId)
 
     formData.append('date', formattedDate)
+    SetSelectedDate(formattedDate)
 
     ReportDay({data:formData,date:formattedDate})
 

@@ -1,33 +1,58 @@
 import { Button, Card, CardContent, CircularProgress, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
-import React, { useRef } from 'react'
-import { useTranslation } from 'react-i18next'
-import { useReactToPrint } from 'react-to-print'
-import useViewContract from 'src/features/Contracts/list/Hooks/useViewContracts'
+import React, { useEffect, useRef } from 'react'
+import PDFGenerator from '../pdf'
+import { t } from 'i18next'
 
-export default function Download(userData) {
-  const userId = userData?.user?.data?.data?.[0]?.id
-  const componentRef = useRef()
-  const {t} = useTranslation()
-  const { data } = useViewContract(userId)
+const Download = ({user,ProfileData}) => {
 
 
-  const handleDownloadClick = () => {
-    const downloadLink = document.createElement('a')
 
-    downloadLink.href = `${process.env.NEXT_PUBLIC_BASE_URL}/${data?.data?.data?.[0].path}`
-    downloadLink.download = 'your_pdf_filename.pdf'
+  const  data = user?.data?.data?.[0]
 
-    downloadLink.style.display = 'none'
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
-  }
+
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+
+    if (typeof window !== 'undefined') {
+      import('html2pdf.js').then(html2pdfModule => {
+        window.html2pdf = html2pdfModule.default || html2pdfModule;
+      });
+    }
+  }, []);
+
+  const generatePDF = async () => {
+    const content = contentRef.current;
+
+    if (typeof window !== 'undefined' && window.html2pdf) {
+      const html2pdf = window.html2pdf;
+
+      html2pdf(content).outputPdf().then(pdf => {
+        const blob = new Blob([pdf], { type: 'application/pdf' });
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'generated.pdf';
+        link.click();
+
+
+
+      });
+    } else {
+    }
+  };
 
   return (
-    <Card>
+    <>
+    <div style={{display:"none"}}>
+
+<PDFGenerator contentRef={contentRef} ProfileData={ProfileData} user={user}/>
+    </div>
+
+
+      <Card>
       <CardContent>
-      {data?.data?.data.length ?
+      {user?.data?.data?.length && ProfileData ?
 
         <Stack spacing={2} >
 

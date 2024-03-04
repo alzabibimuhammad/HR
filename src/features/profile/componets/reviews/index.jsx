@@ -29,7 +29,7 @@ export default function ReviewsReport(SelecetedDate) {
           <Typography fontSize={'14px'} color='#3F4458'>
           {t('Total')} ({isNaN(total/data?.data?.data?.length)?0:total/data?.data?.data?.length})
           </Typography>
-          {data?.data?.data.map((ele,index)=>(
+          {data?.data?.data?.map((ele,index)=>(
           <Box key={index}>
 
           <Stack spacing={1} direction={'row'} alignItems={'center'}>

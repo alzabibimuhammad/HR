@@ -56,8 +56,8 @@ const Download = ({user,ProfileData}) => {
 
         <Stack spacing={2} >
 
-          <Button  onClick={handleDownloadClick} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} ><a target='_blank' >{t('Print')} </a></Button>
-          <Button onClick={handleDownloadClick} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} >{t('Download')} </Button>
+          {/* <Button  onClick={handleDownloadClick} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} ><a target='_blank' >{t('Print')} </a></Button> */}
+          <Button onClick={generatePDF} sx={{ height:'56px',width:'100%',color:'#8090A7',backgroundColor:'#DCE1E6','&:hover': {backgroundColor: '#DCE1E6' }}} >{t('Download')} </Button>
 
         </Stack>
 
@@ -69,6 +69,10 @@ const Download = ({user,ProfileData}) => {
 
 }
 
-        </CardContent></Card>
+        </CardContent>
+        </Card>
+        </>
     )
 }
+
+export default Download

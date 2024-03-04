@@ -1,6 +1,8 @@
+import React from 'react'
+
 import { Button, Card, CardContent, CircularProgress, Divider, Typography } from '@mui/material'
 import { Box, Stack } from '@mui/system'
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import EditIcon from '@mui/icons-material/Edit'
 import useGetNotes from './hooks/useGetUserNotes'
@@ -9,7 +11,8 @@ import AddIcon from '@mui/icons-material/Add';
 import AddNote from './componets/add'
 import AlertDialogDeleteNote from './componets/delete'
 import { useTranslation } from 'react-i18next'
-export default function NoteReport(user_id) {
+
+const NoteReport = (user_id) => {
   const [open, setOpen] = useState(false)
   const [editData, setEditData] = useState()
 
@@ -40,6 +43,7 @@ export default function NoteReport(user_id) {
     setOpen(true)
     setEditData(note)
   }
+
   const handleAdd =_=>{
     setOpenAdd(true)
   }
@@ -64,7 +68,8 @@ export default function NoteReport(user_id) {
           </Stack>
 
           {notes?.map((element, index) => (
-            <Stack>
+
+            <Stack key={index}>
               <Typography color={'#3F4458'} fontSize={'14px'}>
               {t('Note')}  {index + 1}:
               </Typography>
@@ -100,3 +105,6 @@ export default function NoteReport(user_id) {
     </Box>
   )
 }
+
+
+export default NoteReport;

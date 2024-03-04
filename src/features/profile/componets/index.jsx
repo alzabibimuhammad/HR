@@ -1,5 +1,6 @@
 // ** React Imports
 import { useState, useEffect, useMemo } from 'react'
+import React from 'react'
 
 // ** Next Import
 import { useRouter } from 'next/router'
@@ -36,34 +37,7 @@ import ReviewsReport from './reviews'
 import Download from './download'
 import NoteReport from './notesReport'
 
-const TabList = styled(MuiTabList)(({ theme }) => ({
-  borderBottom: '0 !important',
-  '&, & .MuiTabs-scroller': {
-    boxSizing: 'content-box',
-    padding: theme.spacing(1.25, 1.25, 2),
-    margin: `${theme.spacing(-1.25, -1.25, -2)} !important`
-  },
-  '& .MuiTabs-indicator': {
-    display: 'none'
-  },
-  '& .Mui-selected': {
-    boxShadow: theme.shadows[2],
-    backgroundColor: theme.palette.primary.main,
-    color: `${theme.palette.common.white} !important`
-  },
-  '& .MuiTab-root': {
-    minWidth: 65,
-    minHeight: 38,
-    lineHeight: 1,
-    borderRadius: theme.shape.borderRadius,
-    '&:hover': {
-      color: theme.palette.primary.main
-    },
-    [theme.breakpoints.up('sm')]: {
-      minWidth: 130
-    }
-  }
-}))
+
 
 const Profiles = ({ data, tab }) => {
   // ** State
@@ -76,7 +50,7 @@ const Profiles = ({ data, tab }) => {
   const store = useSelector(state => state.user)
 
   const value = useMemo(() => store?.profileTab, [store?.profileTab]);
-  // ** Hooks
+
   const router = useRouter()
   const id = router.query.id
 

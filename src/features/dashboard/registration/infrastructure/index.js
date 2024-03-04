@@ -1,6 +1,4 @@
 export const RegistrationData = (elements,filterDate) => {
-  console.log("🚀 ~ RegistrationData ~ filterDate:", filterDate)
-
 
     const targetTime = "09:30"
     const currentDate = new Date();
@@ -10,7 +8,6 @@ export const RegistrationData = (elements,filterDate) => {
     const CurrentMinutes = currentDate?.getMinutes()?.toString()?.padStart(2, '0');
     const CurrentFormattedTime = `${CurrentHours}:${CurrentMinutes}`;
 
-    console.log("🚀 ~ RegistrationData ~ CurrentFormattedTime:", CurrentFormattedTime)
     const Currentyear = currentDate.getFullYear();
     const Currentmonth = String(currentDate.getMonth() + 1).padStart(2, '0');
     const Currentday = String(currentDate.getDate()).padStart(2, '0');

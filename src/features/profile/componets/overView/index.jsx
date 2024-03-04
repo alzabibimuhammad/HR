@@ -21,7 +21,6 @@ import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
 
 
 const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
-  console.log("🚀 ~ AboutOverivew ~ userDataClean:", userDataClean)
 
 
 

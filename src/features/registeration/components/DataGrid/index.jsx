@@ -19,7 +19,6 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
 
   let data  = Data?.data
   const {data:policy,isLoading}=useShowPolicies()
-  console.log("🚀 ~ Registration ~ policy222:", policy)
   const distructPolicy = policy?.data?.data?.policy?.work_time
 
   const [state , setState] = useState(false)

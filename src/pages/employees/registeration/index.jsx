@@ -13,9 +13,9 @@ export default function Registeration() {
   const [data , setData] = useState(null);
   const dispatch = useDispatch()
 
-  // useEffect(()=>{
-  //   dispatch(storeAttendanceLogs())
-  // },[])
+  useEffect(()=>{
+    dispatch(storeAttendanceLogs())
+  },[])
 
   useEffect(() => {
     const fetchData =  async (date) => {

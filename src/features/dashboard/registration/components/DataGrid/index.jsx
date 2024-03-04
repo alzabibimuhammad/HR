@@ -8,10 +8,15 @@ import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import {  RegistrationData, RegistrationsData } from '../../infrastructure'
 import useRegistrationColumn from '../../Hook/useRegistrationColumn';
 import { Box, Stack } from '@mui/system'
+import useShowPolicies from 'src/features/policies/hook/useShowPolicies';
 
 const Registration = Data => {
   const columns = useRegistrationColumn();
   const [show, setShow] = React.useState(10);
+
+  const {data:policy,isLoading}=useShowPolicies()
+  const distructPolicy = policy?.data?.data?.policy?.work_time
+
 
   let data = Data?.Data
 
@@ -96,7 +101,7 @@ const Registration = Data => {
                   </Box>
 
                 </Stack>
-                <CustomDataGrid   columns={columns} show={show}   rows={RegistrationData(rows,{})||[]}/>
+                <CustomDataGrid   columns={columns} show={show}   rows={policy && RegistrationData(rows,{},{start:distructPolicy?.start_time,end:distructPolicy?.end_time})||[]}/>
               </CardContent>
             </Card>
           </Stack>

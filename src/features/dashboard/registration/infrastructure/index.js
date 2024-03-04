@@ -1,5 +1,5 @@
-export const RegistrationData = (elements,filterDate,policyTime) => {
 
+export const RegistrationData = (elements,filterDate,policyTime) => {
   let [startHour, startMinuts] = String(policyTime?.start)?.split(':');
   let [endHour, endMinuts] = String(policyTime?.end)?.split(':');
   /* start time form policy */
@@ -31,8 +31,8 @@ export const RegistrationData = (elements,filterDate,policyTime) => {
 
     const targetTime = newStartTime
     const endTime = newEndTime
-
     const currentDate = new Date();
+
     const CurrentHours = currentDate?.getHours()?.toString()?.padStart(2, '0');
     const CurrentMinutes = currentDate?.getMinutes()?.toString()?.padStart(2, '0');
     const CurrentFormattedTime = `${CurrentHours}:${CurrentMinutes}`;
@@ -44,20 +44,24 @@ export const RegistrationData = (elements,filterDate,policyTime) => {
     const CurrentformattedDate = `${Currentyear}-${Currentmonth}-${Currentday}`;
 
 
+
     return elements?.[0]?.map(element => {
       let checkinDate=null,checkoutDate=null;
+      const checkArray = [];
 
       element?.attendance?.forEach(element => {
-        if(element?.status==0)
+        if(element?.status==0){
           checkinDate = element?.datetime
+          checkArray.push(checkinDate)
+        }
         else if(element?.status ==1)
           checkoutDate = element?.datetime
 
       });
 
       let statusX;
-      if(checkinDate){
-          const checkinTime = new Date(checkinDate);
+      if(checkArray?.length){
+          const checkinTime = new Date(checkArray[0]);
           const hours = checkinTime?.getHours()?.toString()?.padStart(2, '0');
           const minutes = checkinTime?.getMinutes()?.toString()?.padStart(2, '0');
           const formattedTime = `${hours}:${minutes}`;
@@ -91,15 +95,16 @@ export const RegistrationData = (elements,filterDate,policyTime) => {
             const hours = checkoutTime?.getHours()?.toString()?.padStart(2, '0');
             const minutes = checkoutTime?.getMinutes()?.toString()?.padStart(2, '0');
             const outTime = `${hours}:${minutes}`;
-            if(formattedTime < targetTime && outTime >= endTime) statusX="out"
-            else if(formattedTime > targetTime && outTime >= endTime) statusX="Out & Arrived Late"
-            else if(formattedTime < targetTime && outTime < endTime) statusX="Early Out"
-            else statusX = "Out Eatly&Arraived Late"
+
+            if(formattedTime < targetTime && outTime >= endTime) statusX="out";
+            else if(formattedTime >= targetTime && outTime >= endTime) statusX="Out & Arrived Late";
+            else if(formattedTime < targetTime && outTime < endTime) statusX="Early Out";
+            else if(formattedTime >= targetTime && outTime < endTime)  statusX = "Out early & Arraived Late";
             checkoutDate = outTime
           }
       }
 
-      else if(!checkinDate && checkoutDate){
+      else if(!checkArray?.length && checkoutDate){
         const checkoutTime = new Date(checkoutDate);
         const hours = checkoutTime?.getHours()?.toString()?.padStart(2, '0');
         const minutes = checkoutTime?.getMinutes()?.toString()?.padStart(2, '0');

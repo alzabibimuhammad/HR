@@ -55,6 +55,7 @@ const handleViewProfileTap=_=>{
 }
   return useMemo(
     () => [
+
       {
         field: '',
         headerName: t('Employee'),
@@ -62,13 +63,12 @@ const handleViewProfileTap=_=>{
         flex: 2.5,
         renderCell: params => {
           return (
-            <Link
-              href={`/profile/${params?.row?.id}`}
-              style={{ display: 'flex', textDecoration: 'none', alignItems: 'center' }}
-            >
-              <Avatar sx={{width:{sm:35,xs:20},height:{sm:35,xs:20}}} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
-              <Typography sx={{ fontSize: {sm:"14px"}, marginLeft: '2px' }}>{params?.row?.first_name}</Typography>
-              <Typography sx={{ fontSize: {sm:"14px"}, marginLeft: '3px' }}>{params?.row?.last_name}</Typography>
+            <Link href={`/profile/${params?.row?.id}`} style={{ display: 'flex', textDecoration: 'none', alignItems: 'center' }}>
+              <Avatar sx={{width:'36px',height:'36px'}} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
+              <Stack marginLeft={'12px'} direction={'column'}>
+                <Typography className='custome-data-grid-font' >{params?.row?.first_name} {params?.row?.last_name}</Typography>
+                <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
+              </Stack>
             </Link>
           )
         }
@@ -81,7 +81,7 @@ const handleViewProfileTap=_=>{
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {
-          return <Typography sx={{ fontSize: {sm:"14px"} }}>{params?.row?.role}</Typography>
+          return <Typography  className='custome-data-grid-font' >{params?.row?.role}</Typography>
         }
       },
       {
@@ -92,10 +92,17 @@ const handleViewProfileTap=_=>{
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {
-          return <Typography sx={{ fontSize: {sm:"14px"} }}>{params?.row?.specialization}</Typography>
+          return <Typography  className='custome-data-grid-font' >{params?.row?.specialization}</Typography>
         }
       },
-
+      {
+        field: 'department',
+        headerName: t('department'),
+        flex: 2.5,
+        renderCell: params => {
+          return <Typography  className='custome-data-grid-font'>{params?.row?.department}</Typography>
+        }
+      },
       {
         field: 'action',
         headerName: t('Action'),

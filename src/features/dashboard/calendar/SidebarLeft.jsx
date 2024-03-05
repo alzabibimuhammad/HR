@@ -61,24 +61,27 @@ export default function SidebarLeft({ DataEventByDay }) {
             <Stack
               direction={'row'}
               justifyContent={'start'}
-              sx={{ padding: 0, margin: 0,   }}
+              sx={{ padding: 0, margin: 0   }}
               className='parent'
               key={event.id}
               height={"70px !important"}
             >
-              <Stack alignItems={'center'} direction={'column'}>
-                <span style={{ padding: 0, margin: 0 }} className='child'>
+              <Stack sx={{fontWeight:"600",fontSize:"8px",color:"#3f4458"}} alignItems={'center'} direction={'column'}>
+                <span style={{ padding: 0, marginRight: "5px" }} className='child'>
                   {event.day}
                 </span>
 
 
-                <Typography className='childp'  width={'54px'} p={0} ml={0} variant='p' fontSize={10}>
+                <Typography className='childp'  width={'59px'} p={0} ml={0} variant='p' fontSize={10}>
                   {event.start}
                 </Typography>
               </Stack>
 
               <Box
                 sx={{
+                  fontWeight:"500",
+                  fontSize:"8px",
+                  color:"#3f4458",
                   width: '160px',
                   height: '65px',
                   textAlign: 'start',
@@ -105,8 +108,11 @@ export default function SidebarLeft({ DataEventByDay }) {
           </>
         ))
       ) : (
-        <Box width={'100%'}>
-          <img style={{ width: '100%', height: '100%' }} src='/images/notRequest.svg' alt='Alternate Text' />
+        <Box  sx={{display:"flex",justifyContent:"center",alignItems:"center",height:"100%"}}>
+          <Typography sx={{fontWeight:"500",fontSize:"16px",color:"#8090a7"}}>
+          No events to show
+          </Typography>
+
         </Box>
       )}
     </Stack>

@@ -5,18 +5,6 @@ import { showErrorToast } from 'src/utiltis/showErrorToast';
 
 
 
-export const storeAttendanceLogs = createAsyncThunk('Dashboard/storeAttendanceLogs', async () => {
-  try{
-  const response = requestDashboard({ url: '/api/storeAttendanceLogs' })
-
-  return {
-   data: response.data
-  }
-}
-  catch (error){
-    showErrorToast(error,"")
-  }
-})
 
 export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendancePercentage', async _ => {
   try {
@@ -67,26 +55,26 @@ const DashboardSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(storeAttendanceLogs.pending, (state) => {
-       
+
         state.loading = 'pending';
       })
       .addCase(storeAttendanceLogs.fulfilled, (state, action) => {
-       
-        
+
+
         state.AttendancePercentage = action.payload.data;
         state.loading = 'succeeded';
       })
       .addCase(storeAttendanceLogs.rejected, (state, action) => {
         state.loading = 'failed';
-        
+
         showErrorToast(action.payload, "");
       })
       .addCase(getAttendancePercentage.fulfilled, (state, action) => {
-        
+
         state.AttendancePercentage = action.payload?.data;
       })
       .addCase(getRegisteration.fulfilled, (state, action) => {
-      
+
         state.Registertion = action.payload?.data;
       });
   },

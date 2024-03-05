@@ -10,7 +10,7 @@ const getAttendance = async (date) => {
   const formattedDate = `${year}-${month}-${day}`;
 
   try {
-    const response = await fetch(`${'http://192.168.2.138:800'}/api/DayAttendance/${Object.keys(date).length?date:formattedDate}?branch_id=${localStorage.branch}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/DayAttendance/${Object.keys(date).length?date:formattedDate}?branch_id=${localStorage.branch}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.accessToken}`
       }

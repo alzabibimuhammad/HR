@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { showErrorToast } from './showErrorToast'
 
-const client = axios.create({ baseURL: "http://192.168.2.138:800" });
+const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_BASE_URL });
 
 export const requestDashboard = async ({ url, params = {}, ...rest }) => {
   params = { ...params, branch_id: localStorage.getItem('branch')||1};

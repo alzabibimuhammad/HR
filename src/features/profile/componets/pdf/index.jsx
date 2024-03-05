@@ -1,133 +1,172 @@
 import React, { useRef, useEffect } from 'react';
+import { Button, Card, CardContent, CircularProgress, Typography } from '@mui/material'
+import { Box, Stack, styled } from '@mui/system'
+import Divider from '@mui/material/Divider'
 
 const PDFGenerator = ({user,ProfileData,contentRef}) => {
+  console.log("🚀 ~ PDFGenerator ~ user:", user)
+  console.log("🚀 ~ PDFGenerator ~ ProfileData:", ProfileData)
   const  data = user?.data?.data?.[0]
 
-  // useEffect(() => {
-  //   // This useEffect will only run on the client side after the initial render
-  //   // Code that uses window
-  //   if (typeof window !== 'undefined') {
-  //     import('html2pdf.js').then(html2pdfModule => {
-  //       window.html2pdf = html2pdfModule.default || html2pdfModule;
-  //     });
-  //   }
-  // }, []);
 
-  // const generatePDF = async () => {
-  //   const content = contentRef.current;
-
-  //   if (typeof window !== 'undefined' && window.html2pdf) {
-  //     const html2pdf = window.html2pdf;
-
-  //     html2pdf(content).outputPdf().then(pdf => {
-  //       const blob = new Blob([pdf], { type: 'application/pdf' });
-  //       const link = document.createElement('a');
-  //       link.href = window.URL.createObjectURL(blob);
-  //       link.download = 'generated.pdf';
-  //       link.click();
-  //     });
-  //   } else {
-  //     console.error('abooooooooood');
-  //   }
-  // };
 
   return (
-    <div style={{display:"flex",flexDirection:"column"}}>
-      <div style={{ color: 'red',overflow:"hidden" }} ref={contentRef}>
-      <table >
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Address</th>
-                <th>Specialization</th>
-                <th>Branch ID</th>
+      <div style={{marginTop:"22px" }} ref={contentRef}>
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{data?.id}</td>
-                <td>{data?.first_name}</td>
-                <td>{data?.middle_name}</td>
-                <td>{data?.last_name}</td>
-                <td>{data?.email}</td>
-                <td>{data?.role}</td>
-                <td>{data?.address}</td>
-                <td>{data?.specialization}</td>
-                <td>{data?.branch_id}</td>
+        <Stack  direction={"row"} justifyContent={"space-around"} sx={{width:"100%"}}>
+          <Stack  sx={{width:"100%"}} direction={"row"} justifyContent={"space-around"} >
+          <table>
 
-            </tr>
-        </tbody>
-    </table>
-      <table >
-        <thead>
-            <tr>
-                <th>deposits</th>
-                <th>received_date</th>
-                <th>birth_date</th>
-                <th>gender</th>
-                <th>level</th>
-                <th>military_situation</th>
-                <th>nationalID</th>
-                <th>salary</th>
-                <th>social_situation</th>
+<tbody style={{color:'#3F4458',fontSize:'14px',display:"flex",flexDirection:"column",gap:"8px"}}>
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{data?.deposits?.map((val)=>(val.description))}</td>
-                <td>{data?.deposits?.map((val)=>(val.received_date))}</td>
-                <td>{data?.user_info?.birth_date}</td>
-                <td>{data?.user_info?.gender}</td>
-                <td>{data?.user_info?.level}</td>
-                <td>{data?.user_info?.military_situation}</td>
-                <td>{data?.user_info?.nationalID}</td>
-                <td>{data?.user_info?.salary}</td>
-                <td>{data?.user_info?.social_situation}</td>
+  <tr>
+    <td>ID :</td>
+    <td>{data?.id}</td>
+    <Divider   sx={{backgroundColor:"#3F4458"}}/>
+  </tr>
+  <tr>
+    <td>{ProfileData?.first_name}</td>
+  </tr>
+  <tr>
+    <td>First Name : </td>
+    <td>{ProfileData?.first_name}</td>
+  </tr>
+  <tr>
+    <td>Middle Name : </td>
+    <td>{ProfileData?.middle_name}</td>
+  </tr>
+  <tr>
+    <td>Last Name : </td>
+    <td>{ProfileData?.last_name}</td>
+  </tr>
+  <tr>
+    <td>Middle Name : </td>
+    <td>{ProfileData?.middle_name}</td>
+  </tr>
+  <tr>
+    <td>Email : </td>
+    <td>{ProfileData?.email}</td>
+  </tr>
+  <tr>
+    <td>Role : </td>
+    <td>{ProfileData?.role}</td>
+  </tr>
+  <tr>
+    <td>Address : </td>
+    <td>{ProfileData?.address}</td>
+  </tr>
+  <tr>
+    <td>Specialization : </td>
+    <td>{ProfileData?.specialization}</td>
+  </tr>
 
-            </tr>
-        </tbody>
-    </table>
-      <table >
-        <thead>
-            <tr>
-                <th>careers</th>
-                <th>certificates</th>
-                <th>emergency</th>
-                <th>languages</th>
-                <th>PhoneNumber</th>
-                <th>military_situation</th>
-                <th>nationalID</th>
-                <th>salary</th>
-                <th>social_situation</th>
+  <tr>
+    <td>birth_date : </td>
+    <td>{ProfileData?.user_info?.birth_date}</td>
+  </tr>
+  <tr>
+    <td>gender : </td>
+    <td>{ProfileData?.user_info?.gender}</td>
+  </tr>
+  <tr>
+    <td>level : </td>
+    <td>{ProfileData?.user_info?.level}</td>
+  </tr>
+  <tr>
+    <td>military_situation :</td>
+    <td>{ProfileData?.user_info?.military_situation}</td>
+  </tr>
+  <tr>
+    <td>nationalID : </td>
+    <td>{ProfileData?.user_info?.nationalID}</td>
+  </tr>
+  <tr>
+    <td>salary : </td>
+    <td>{ProfileData?.user_info?.salary}</td>
+  </tr>
+  <tr>
+    <td>social_situation : </td>
+    <td>{ProfileData?.user_info?.social_situation}</td>
+  </tr>
+  <tr>
+    <td>Branch ID : </td>
+    <td>{ProfileData?.branch_id}</td>
+  </tr>
+  <tr>
+    <td>deposits : </td>
+    <td>{ProfileData?.deposits?.map((val)=>(val.description)).join("  -  ")}</td>
+  </tr>
+  <tr>
+    <td>received_date : </td>
+    <td>{ProfileData?.deposits?.map((val)=>(val.received_date)).join("  -  ")}</td>
+  </tr>
+</tbody>
+</table>
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{ProfileData?.careers?.map((val)=>(val.content))}</td>
-                <td>{ProfileData?.certificates?.map((val)=>(val.content))}</td>
-                <td>{ProfileData?.emergency?.map((val)=>(val.email))}  || {ProfileData?.emergency?.map((val)=>(val.phone_num))}     </td>
-                <td> {ProfileData?.languages?.map((val,i)=>(  <p  key={i}>{val.languages}</p>  ))}</td>
-                <td>{ ProfileData?.phone_number?.map((val,i)=>( val.type="normal" ? <p key={i}> {val?.phone_num}</p> :null ))}   </td>
-                <td>{data?.user_info?.military_situation}</td>
-                <td>{data?.user_info?.nationalID}</td>
-                <td>{data?.user_info?.salary}</td>
-                <td>{data?.user_info?.social_situation}</td>
+<Divider orientation="vertical"  sx={{backgroundColor:"#3F4458"}}/>
 
-            </tr>
-        </tbody>
-    </table>
-      </div>
+          <table>
+
+<tbody style={{color:'#3F4458',fontSize:'14px',display:"flex",flexDirection:"column",gap:"8px"}}>
 
 
-    </div>
+
+  <tr>
+    <td>careers : </td>
+    <td>{ProfileData?.careers?.map((val)=>(val.content)).join(" - ")}</td>
+  </tr>
+  <tr>
+    <td>certificates : </td>
+    <td>{ProfileData?.certificates?.map((val)=>(val.content)).join(" - ")}</td>
+  </tr>
+  <tr>
+    <td>PhoneNumber : </td>
+    <td>{ProfileData?.phone_number?.map((val) => (val?.phone_num)).join(" - ")}</td>
+  </tr>
+  <tr>
+    <td>emergency : </td>
+    <td>{ProfileData?.emergency?.map((val)=>(val.email)).join(" - ")}  || {ProfileData?.emergency?.map((val)=>(val.phone_num)).join(" - ")}</td>
+  </tr>
+  <tr>
+    <td>languages : </td>
+    <td>{ProfileData?.languages?.map((val)=>(val.languages)).join(" / ")}</td>
+  </tr>
+
+  <tr>
+    <td>military_situation : </td>
+    <td>{ProfileData?.user_info?.military_situation}</td>
+  </tr>
+  <tr>
+    <td>nationalID : </td>
+    <td>{ProfileData?.user_info?.nationalID}</td>
+  </tr>
+  <tr>
+    <td>salary : </td>
+    <td>{ProfileData?.user_info?.salary}</td>
+  </tr>
+  <tr>
+    <td>study_situations : </td>
+    <td>{ProfileData?.study_situations?.map((val)=>(val.study ,"||",val.degree ) ).join(" - ")}</td>
+  </tr>
+  <tr>
+    <td>Skills  : </td>
+    <td>{ProfileData?.skills?.map((val)=>(val.skills)).join(" - ")}</td>
+  </tr>
+  <tr>
+    <td>absence  : </td>
+    <td>{ProfileData?.absence}</td>
+  </tr>
+  <tr>
+    <td>health_status  : </td>
+    <td>{ProfileData?.user_info.health_status}</td>
+  </tr>
+
+
+</tbody>
+</table>
+          </Stack>
+        </Stack>
+   </div>
   );
 };
 

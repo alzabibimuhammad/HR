@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography } from '@mui/material'
+import { Button, Card, CardContent, MenuItem, Rating, TextField, Typography , InputAdornment} from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import { t } from 'i18next';
 import React, { useState } from 'react'
@@ -194,6 +194,7 @@ export default function Skills({ onDataChange, Controller, control, handleRating
                     size="small"
                     error={Boolean(errors?.educations?.[index]?.study)}
                     {...(errors?.educations?.[index]?.study && { helperText: errors?.educations?.[index]?.study.message })}
+
                   />
                 )}
               />
@@ -244,10 +245,8 @@ export default function Skills({ onDataChange, Controller, control, handleRating
           <Typography>{t("Certificates")}</Typography>
 
           {fieldsCertificate.map((field, index) => (
-          <Stack Stack spacing={4} key={field.id}>
-            {index != 0 && (
-              <CloseIcon sx={{ cursor: "pointer", '&:hover': { color: 'red' } }} onClick={() => handleRemoveClickcertificate(index)} />
-            )}
+          <Stack direction={"column"} spacing={4} key={field.id}>
+
             <Controller
               name={`certificates[${index}].content`}
               control={control}
@@ -258,6 +257,13 @@ export default function Skills({ onDataChange, Controller, control, handleRating
                   error={Boolean(errors.certificates && errors.certificates[index])}
                   helperText={errors.certificates && errors.certificates[index]?.message}
                   size='small'
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        {index!=0&&<CloseIcon style={{ cursor:'pointer',color:'red' , padding: '1',margin: '0px 0px'}} onClick={() => handleRemoveClickcertificate(index)}/>}
+                      </InputAdornment>
+                    ),
+                  }}
                   label={
                     <Stack direction={'row'} spacing={2} >
                       <Box>
@@ -266,6 +272,7 @@ export default function Skills({ onDataChange, Controller, control, handleRating
                       <Box>
                         {t('Certificates')}
                       </Box>
+
                     </Stack>
                   }
                 />
@@ -283,12 +290,7 @@ export default function Skills({ onDataChange, Controller, control, handleRating
           <Typography>{t("Experience")}</Typography>
           {fieldsExperience.map((field, index) => (
             <Stack Stack spacing={4} key={field.id}>
-              {index !=0 && (
-                <CloseIcon
-                  sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
-                  onClick={() => handleRemoveClickExperience(index)}
-                />
-              )}
+
               <Controller
                 name={`experiences[${index}].content`}
                 control={control}
@@ -298,7 +300,13 @@ export default function Skills({ onDataChange, Controller, control, handleRating
                     fullWidth
                     error={Boolean(errors.experiences && errors.experiences[index])}
                     helperText={errors.experiences && errors.experiences[index]?.message}
-
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          {index!=0&&<CloseIcon style={{ cursor:'pointer',color:'red' , padding: '1',margin: '0px 0px'}} onClick={() => handleRemoveClickExperience(index)}/>}
+                        </InputAdornment>
+                      ),
+                    }}
                     size="small"
                     label={
                       <Stack direction={'row'} spacing={2}>
@@ -325,13 +333,7 @@ export default function Skills({ onDataChange, Controller, control, handleRating
 
             <Stack direction={'row'} key={field.id} alignItems={'end'} >
               <Stack width={'100%'} direction={'column'} >
-                {index !=0 && (
 
-                  <CloseIcon
-                    sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
-                    onClick={() => handleRemoveClickSkills(index)}
-                  />
-                )}
                 <Controller
                   name={`skills[${index}].skills`}
                   control={control}
@@ -340,7 +342,13 @@ export default function Skills({ onDataChange, Controller, control, handleRating
                     <TextField
                       {...field}
                       fullWidth
-
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            {index!=0&&<CloseIcon style={{ cursor:'pointer',color:'red' , padding: '1',margin: '0px 0px'}} onClick={() => handleRemoveClickSkills(index)}/>}
+                          </InputAdornment>
+                        ),
+                      }}
                       size='small'
                       label={
                         <Stack direction={'row'} spacing={2}>
@@ -377,12 +385,7 @@ export default function Skills({ onDataChange, Controller, control, handleRating
           {fieldsLanguage.map((field, index) => (
             <Stack direction={'row'} key={field.id} alignItems={'end'}>
               <Stack direction={'column'} width={'100%'} >
-                {index !=0 && (
-                  <CloseIcon
-                    sx={{ cursor: 'pointer', '&:hover': { color: 'red' } }}
-                    onClick={() => handleRemoveClickLanguage(index)}
-                  />
-                )}
+
                 <Controller
                   name={`languages[${index}].languages`}
                   control={control}
@@ -390,7 +393,13 @@ export default function Skills({ onDataChange, Controller, control, handleRating
                     <TextField
                       {...field}
                       fullWidth
-
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            {index!=0&&<CloseIcon style={{ cursor:'pointer',color:'red' , padding: '1',margin: '0px 0px'}} onClick={() => handleRemoveClickLanguage(index)}/>}
+                          </InputAdornment>
+                        ),
+                      }}
                       size='small'
                       label={
                         <Stack direction={'row'} spacing={2}>

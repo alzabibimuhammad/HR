@@ -79,7 +79,7 @@ const AppCalendar = () => {
   return (
     <Card>
       <CardContent>
-        <Typography variant='body1' color='initial'>
+        <Typography sx={{fontSize:"20px",fontWeight:"600",color:"#8090a7",position:"relative",bottom:"11px"}} >
           {t('Calendar')}
         </Typography>
 
@@ -88,14 +88,14 @@ const AppCalendar = () => {
           justifyContent={'space-around'}
           m={0} p={0}
         >
-          <Box display={'flex'} justifyContent={'start'} m={0} p={0} >
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <Box display={'flex'}  justifyContent={'start'} m={0} p={0} >
+            <LocalizationProvider  dateAdapter={AdapterDayjs}>
               <DateCalendar onChange={handleDateChange} />
             </LocalizationProvider>
           </Box>
 
-          <Box mt={4.5}   >
-            <Typography>{t('Event')}</Typography>
+          <Box   >
+            <Typography sx={{position:"relative",bottom:"38px",fontWeight:"600",fontSize:"20px",color:"#8090a7"}}>{t('Events')}</Typography>
             <Box width={'100%'} display={'flex'} justifyContent={'center'} >
               <SidebarLeft DataEventByDay={DataEventByDay} />
             </Box>

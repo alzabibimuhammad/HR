@@ -5,6 +5,19 @@ import { showErrorToast } from 'src/utiltis/showErrorToast';
 
 
 
+export const storeAttendanceLogs = createAsyncThunk('Dashboard/storeAttendanceLogs', async () => {
+  try{
+  const response = requestDashboard({ url: '/api/storeAttendanceLogs' })
+
+  return {
+   data: response.data
+  }
+}
+  catch (error){
+    showErrorToast(error,"")
+  }
+})
+
 export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendancePercentage', async _ => {
   try {
     const response = await requestDashboard({ url: '/api/showPercent' });
@@ -13,6 +26,7 @@ export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendance
   } catch (error) {
     showErrorToast("Network Error")
     }
+
 })
 
 export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async date => {

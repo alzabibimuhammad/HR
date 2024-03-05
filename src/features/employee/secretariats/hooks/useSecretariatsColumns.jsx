@@ -83,71 +83,28 @@ const useSecretariatsColumns = () => {
         return (
           <>
             <Stack direction={{ sm: 'row' }}  >
-              <Box>
-                {isMobile ? (
-     <IconButton onClick={() => handleClickOpenn(!isMenuOpen)}>
-     <MoreHorizIcon />
-   </IconButton>
+                    <Stack direction={"row"}>
+                      <IconButton>
+                        <BorderColorOutlinedIcon
+                          style={{ color: '#8090A7' }}
+                          variant='contained'
+                          color='primary'
+                          size='small'
+                          onClick={() => handleEditClick(params.row)}
+                        >
+                          Edit
+                        </BorderColorOutlinedIcon>
+                      </IconButton>
 
-                ):(
-<>
-<Stack direction={"row"}>
-
-                <IconButton>
-                  <BorderColorOutlinedIcon
-                    style={{ color: '#8090A7' }}
-                    variant='contained'
-                    color='primary'
-                    size='small'
-                    onClick={() => handleEditClick(params.row)}
-                  >
-                    Edit
-                  </BorderColorOutlinedIcon>
-                </IconButton>
-
-              <Box>
-                <IconButton onClick={() => handleClickOpen(params?.row?.id)}>
-                  <DeleteOutlinedIcon variant='contained' color='#8090A7' size='small'>
-                    {' '}
-                    Delete{' '}
-                  </DeleteOutlinedIcon>
-                </IconButton>
-              </Box>
+                      <Box>
+                        <IconButton onClick={() => handleClickOpen(params?.row?.id)}>
+                          <DeleteOutlinedIcon variant='contained' color='#8090A7' size='small'>
+                            {' '}
+                            Delete{' '}
+                          </DeleteOutlinedIcon>
+                        </IconButton>
+                      </Box>
                     </Stack>
-</>
-
-                )}
-                {isMobile && (
-      <Menu
-      anchorEl={isMenuOpen ? document.body : null}
-      anchorOrigin={{
-        vertical: 'center',
-        horizontal: 'center',
-      }}
-      transformOrigin={{
-        vertical: 'center',
-        horizontal: 'center',
-      }}
-      open={isMenuOpen}
-      onClose={() => setIsMenuOpen(false)}
-    >
-         <Stack direction={"column"} spacing={3} justifyContent={"center"} alignItems={"start"} >
-
-<MenuItem  onClick={() => handleEditClick(params.row)}>
-  <BorderColorOutlinedIcon style={{ color: '#8090A7' }} size='small' />
-  Edit
-</MenuItem>
-<MenuItem onClick={() => handleClickOpen(params.row.id)}>
-  <DeleteOutlinedIcon style={{ color: '#8090A7' }} size='small' />
-  Delete
-</MenuItem>
-
-</Stack>
-
-</Menu>
-
-                )}
-              </Box>
             </Stack>
             {isDeletePopupOpen && (
               <AlertDialogDeleteSecretariats id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />

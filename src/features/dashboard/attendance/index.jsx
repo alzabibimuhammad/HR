@@ -25,8 +25,9 @@ function Attendance(Data) {
       container: document.getElementById('myChart'),
 
       data,
+
       title: {
-        text: t('Employees'),
+        text: t(''),
       },
 
       series: [
@@ -84,8 +85,12 @@ function Attendance(Data) {
   }, [Data]);
 
   return (
-    <div id="myChart" style={{ height: '100%' }}>
+
+
+
+    <div id="myChart" style={{ height: '100%',borderRadius:"12px" }}>
     </div>
+
     )
 }
 

@@ -30,6 +30,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useDispatch } from 'react-redux'
 import { setProfileTap } from 'src/store/apps/user'
 
+import AddIcon from '@mui/icons-material/Add';
+
 function createData(id, name, user) {
   return {
     id,
@@ -157,22 +159,39 @@ export default function CollapsibleTable(Data, setEditData) {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout='auto' unmountOnExit>
               <Stack spacing={3} sx={{ margin: 1 }}>
-                {row?.user?.map(user => (
+                {row?.user?.map((user,index) => (
 
                   <Stack direction={'row'} justifyContent={'space-between'}>
                     <Link style={{ textDecoration: 'none' }} href={`/profile/${user.id}`}>
-                      <Stack direction={'row'} alignItems={'center'} spacing={3}>
+                      <Stack direction={'row'} alignItems={'center'} >
                         <Avatar
                           src={process.env.NEXT_PUBLIC_IMAGES + '/' + user?.user_info?.image}
                           sx={{ width: 46, height: 46 }}
                         />
-                        <Stack direction={'column'}>
-                          <Typography>
+                        <Stack marginLeft={'8px'} direction={'column'}>
+                          <>
+                        {index == 0 && user?.role == 'team_leader'?
+
+                        <>
+                          <Typography className='custome-data-grid-font'>
                             {user.first_name} {user.last_name}
                           </Typography>
-                          <Typography fontSize={'13px'} color={'#8090A7'}>
-                            {user.specialization}
+                          <Typography className='custome-data-grid-font2'>
+                            {user.role}
                           </Typography>
+                          </>
+                          :
+                          <>
+                          <Typography className='custome-data-grid-font'>
+                            {user.first_name} {user.last_name}
+                          </Typography>
+                          <Typography className='custome-data-grid-font2'>
+                            {user.role}
+                          </Typography>
+                          </>
+                          }
+
+                          </>
                         </Stack>
                       </Stack>
                     </Link>
@@ -224,14 +243,14 @@ export default function CollapsibleTable(Data, setEditData) {
 
   return (
     <>
-      <Typography variant='h4' paddingBottom={'10px'}>
-        {t('Teams')}
-      </Typography>
+
+
       <Stack
         spacing={{ xs: 2 }}
         direction={{ sm: 'row', xs: 'column' }}
         width={'100%'}
         justifyContent={'space-between'}
+
       >
         <Box width={{ sm: '50%', xs: '100%' }}>
           <TextField
@@ -264,26 +283,28 @@ export default function CollapsibleTable(Data, setEditData) {
           sx={{
             fontSize: '13px',
             color: 'white',
+            borderRadius:'8px',
             backgroundColor: '#6AB2DF',
             ':hover': { color: '#6D6B77' }
           }}
           onClick={handleDrawerOpen}
         >
-          + {t('ADD TEAM')}
+          <AddIcon/>
+          {t('ADD TEAM')}
         </Button>
       </Stack>
 
-      <Box sx={{ borderRadius: '15px' }}>
+      <Box >
         <DrawerForm open={openParent} setOpenParent={setOpenParent} />
       </Box>
 
-      <TableContainer component={Paper}>
+      <TableContainer   component={Paper}>
         <Table aria-label='collapsible table'>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ width: '20%', marginLeft: '10%' }}>{t('Team Name')}</TableCell>
-              <TableCell sx={{ width: '10%' }}>{t('Team ID')}</TableCell>
-              <TableCell sx={{ left: 0, width: '70%', textAlign: 'right' }}>{t('Action')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' >{t('Team Name')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ width: '10%' }}>{t('Team ID')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ left: 0, width: '70%', textAlign: 'right' }}>{t('Action')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

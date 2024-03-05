@@ -12,7 +12,7 @@ export default function Employees() {
   return (
     <Grid container spacing={4}>
     <Grid item xs={12}>
-      <Card>
+      <Card sx={{ borderRadius:'12px' }} >
         <CardContent >
 
           {data?

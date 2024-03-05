@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Profiles from 'src/features/profile/componets';
 import { setUserId } from 'src/store/apps/user';
 
-export default function Profile() {
+const  Profile = () => {
   const router = useRouter();
   const { id } = router.query;
   const dispatch=useDispatch()
@@ -24,6 +24,7 @@ export default function Profile() {
 
 
   }
+
   return (
 
     <div>
@@ -38,3 +39,5 @@ export default function Profile() {
 
   );
 }
+
+export default Profile

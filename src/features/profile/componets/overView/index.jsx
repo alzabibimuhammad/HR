@@ -1,11 +1,9 @@
-// ** MUI Components
+import React from 'react'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
-
-// ** Icon Imports
 import Icon from 'src/@core/components/icon'
 import { Divider, Rating } from '@mui/material'
 import { Stack } from '@mui/system'
@@ -21,7 +19,6 @@ import { useReportByDay } from 'src/features/Report/hooks/useReportByDay'
 
 
 const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
-  console.log("🚀 ~ AboutOverivew ~ userDataClean:", userDataClean)
 
 
 

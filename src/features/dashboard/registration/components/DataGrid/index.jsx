@@ -8,10 +8,15 @@ import CustomDataGrid from 'src/@core/components/custom-datagrid'
 import {  RegistrationData, RegistrationsData } from '../../infrastructure'
 import useRegistrationColumn from '../../Hook/useRegistrationColumn';
 import { Box, Stack } from '@mui/system'
+import useShowPolicies from 'src/features/policies/hook/useShowPolicies';
 
 const Registration = Data => {
   const columns = useRegistrationColumn();
   const [show, setShow] = React.useState(10);
+
+  const {data:policy,isLoading}=useShowPolicies()
+  const distructPolicy = policy?.data?.data?.policy?.work_time
+
 
   let data = Data?.Data
 
@@ -23,14 +28,6 @@ const Registration = Data => {
   const { t } = useTranslation()
 
 
-
-  const theme = useTheme();
-
-  const Item = styled(Paper)(({ theme }) => ({
-    textAlign: 'center',
-    width: '30%',
-    color: theme.palette.text.secondary,
-  }));
 
   const handelSearch=event=>{
 
@@ -65,13 +62,13 @@ const Registration = Data => {
   }
 
   return (
-          <Stack height={'100%'} >
-            <Card>
+          <Stack height={'100%'}  >
+            <Card sx={{ borderRadius:'12px'  }} >
               <CardContent>
 
-                <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"} m={"14px 0"}>
+                <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"} m={"10px 0"}>
                   <Box>
-                    <Typography sx={{color:"#8090A7"}} variant="h3" color="initial">{t('Registration')}</Typography>
+                    <Typography sx={{ color: 'var(--blue-gray, #8090A7)',fontSize:'20px',fontWeight:'600',lineHeight: 'normal',fontStyle:'normal' }}>{t('Registration')}</Typography>
                   </Box>
 
                   <Box>
@@ -96,7 +93,7 @@ const Registration = Data => {
                   </Box>
 
                 </Stack>
-                <CustomDataGrid   columns={columns} show={show}   rows={RegistrationData(rows,{})||[]}/>
+                <CustomDataGrid   columns={columns} show={show}  rows={policy && RegistrationData(rows,{},{start:distructPolicy?.start_time,end:distructPolicy?.end_time})||[]}/>
               </CardContent>
             </Card>
           </Stack>

@@ -16,6 +16,7 @@ export default function Dashboard() {
   const [registration, setRegistration] = useState([])
   const [percentageData, setpercentageData] = useState([])
 
+  const {t} = useTranslation()
   const dispatch = useDispatch()
   const date = new Date()
 
@@ -40,17 +41,21 @@ export default function Dashboard() {
     <Grid container spacing={6} sx={{ overflow: 'hidden' }}>
       <Grid item sm={8} xs={12}>
 
-        <Box  sx={{ backgroundColor: '#fff' }}>
+        <Box  sx={{ backgroundColor: '#fff',borderRadius:"12px" }}>
           <AppCalendar />
         </Box>
 
       </Grid>
-      <Grid item sm={4} xs={12}>
+      <Grid item sm={4} xs={12} >
         <Attendance Data={percentageData} />
       </Grid>
 
+      <Grid sx={{position:"relative",borderRadius:"12px"}} item sm={4} xs={12}>
+        <Attendance  Data={percentageData} />
+      </Grid>
+<p className='Attendance' style={{position:"absolute",right:"18%",marginTop:"37px",fontSize:"20px",fontWeight:"600",color:"#8090a7"}}>{t('Attendance')}</p>
 
-        <Grid item sm={8} xs={12}>
+        <Grid item sm={8} xs={12} >
         <Registration Data={registration} />
         </Grid>
 

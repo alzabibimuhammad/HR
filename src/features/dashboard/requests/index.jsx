@@ -31,7 +31,7 @@ export default function Requests() {
 
   return (
     <>
-      <Stack sx={{ width: '100%',borderRadius:'6px',height:'100%' ,backgroundColor: "#fff", p: "15px" ,overflowY: 'auto' }} spacing={2}>
+      <Stack sx={{ width: '100%',borderRadius:'6px',height:'100%' ,backgroundColor: "#fff", p: "15px" ,overflowY: 'auto',borderRadius:'12px' }} spacing={2}>
 
         <Typography variant="h3" marginTop={"25px"} marginLeft={"10px"} color="#8090A7">{t('Requests')}</Typography>
 

@@ -41,13 +41,23 @@ const Users = ({ rows }) => {
 
   let roleData = new Set([])
   rows?.data?.data?.forEach(element => {
+    if(element?.role)
     roleData.add(element?.role)
   })
 
-  let specialization = new Set([])
+  let specializationFilter = new Set([])
   rows?.data?.data?.forEach(element => {
-    specialization.add(element?.specialization)
+    if(element?.specialization)
+    specializationFilter.add(element?.specialization)
   })
+
+  let departmentFilter = new Set([])
+  rows?.data?.data?.forEach(element => {
+    if(element?.department?.name)
+    departmentFilter.add(element?.department?.name)
+
+  })
+
 
   const handleDrawerOpen = () => {
     setOpenParent(true)
@@ -57,6 +67,7 @@ const Users = ({ rows }) => {
 
   const [role, setRole] = useState('')
 
+  const [specialization, setSpecialization] = useState('')
   const [department, setDepartment] = useState('')
   const [search, setSearch] = useState('')
 
@@ -65,14 +76,15 @@ const Users = ({ rows }) => {
     else setRole(null)
   }
 
-  const handledepartmentChange = e => {
-    setDepartment(e.target.value)
+  const handleSpecializationChange = e => {
+    setSpecialization(e.target.value)
   }
 
   useEffect(() => {
     let filterData = UsersData(rows)
     if (role) filterData = filterData?.filter((value, index) => value?.role == role)
-    if (department) filterData = filterData?.filter((value, index) => value?.specialization == department)
+    if (specialization) filterData = filterData?.filter((value, index) => value?.specialization == specialization)
+    if(department) filterData = filterData?.filter((value, index) => value?.department == department)
     if (search)
       filterData = filterData?.filter((value, index) => {
         return (
@@ -81,7 +93,7 @@ const Users = ({ rows }) => {
         )
       })
     setfdata(filterData)
-  }, [rows, role, department, search])
+  }, [rows, role, specialization, search,department])
 
   const handelSearch = event => {
     const searchText = event.target.value
@@ -128,10 +140,13 @@ const Users = ({ rows }) => {
 
   return (
     <>
-      <Box sx={{ margin: 0, padding: 0 }}>
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='panel2-content' id='panel2-header'>
-            <Stack width={'50%'} direction={'row'}>
+         <Typography variant='h4' className='Pagetitle' paddingBottom={'10px'}>
+            {t('Employees')}
+          </Typography>
+      <Box sx={{ marginTop:'24px',margin: 0, padding: 0  }}>
+        <Accordion  >
+          <AccordionSummary  expandIcon={<ExpandMoreIcon />} aria-controls='panel2-content' id='panel2-header'>
+            <Stack  width={'50%'} direction={'row'}>
               <Stack direction={'row'}>
                 <Typography>{percentageData?.present_employees}</Typography>/
                 <Typography>{percentageData?.total_employees}</Typography>
@@ -145,7 +160,7 @@ const Users = ({ rows }) => {
               </Box>
 
               <Typography marginLeft={'5px'}>
-                {isNaN(((percentageData?.present_employees / percentageData?.total_employees) * 100).toFixed(2)) ? 0 : ((percentageData?.present_employees / percentageData?.total_employees) * 100).toFixed(2) }%
+                {isNaN(((percentageData?.present_employees / percentageData?.total_employees) * 100)) ? 0 : ((percentageData?.present_employees / percentageData?.total_employees) * 100).toFixed(1) }%
               </Typography>
             </Stack>
           </AccordionSummary>
@@ -176,11 +191,9 @@ const Users = ({ rows }) => {
         <DrawerForm open={openParent} setOpenParent={setOpenParent} />
       </Box>
 
-      <Card>
+      <Card sx={{borderRadius:'12px', marginTop:'24px' }}>
         <CardContent>
-          <Typography variant='h4' paddingBottom={'10px'}>
-            {t('Employees List')}
-          </Typography>
+
           <Stack
             direction={{ xs: 'column', sm: 'column' }}
             spacing={2}
@@ -243,14 +256,33 @@ const Users = ({ rows }) => {
                 fullWidth
                 defaultValue=''
                 SelectProps={{
-                  value: department,
+                  value: specialization,
                   displayEmpty: true,
-                  onChange: handledepartmentChange
+                  onChange: handleSpecializationChange
                 }}
                 size='small'
               >
                 <MenuItem value=''>{`${t('Specialization')}`}</MenuItem>
-                {Array.from(specialization).map(element => (
+                {Array.from(specializationFilter).map(element => (
+                  <MenuItem key={element} value={element}>
+                    {element}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+              <TextField
+                select
+                fullWidth
+                defaultValue=''
+                SelectProps={{
+                  value: department,
+                  displayEmpty: true,
+                  onChange: (e)=>setDepartment(e.target.value)
+                }}
+                size='small'
+              >
+                <MenuItem value=''>{`${t('Department')}`}</MenuItem>
+                {Array.from(departmentFilter).map(element => (
                   <MenuItem key={element} value={element}>
                     {element}
                   </MenuItem>

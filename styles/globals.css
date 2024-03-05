@@ -429,3 +429,137 @@ th, td {
 th {
   background-color: #f2f2f2;
 } */
+
+.css-2v4r7n-MuiButtonBase-root-MuiPickersDay-root {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #131627 !important;
+  padding: 18px !important;
+}
+
+.css-2v4r7n-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: #6AB2DF !important;
+  color: #fff !important;
+}
+
+.css-2v4r7n-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
+  background-color: #6AB2DF !important;
+  color: #fff !important;
+}
+
+
+.css-145rq02-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #3f4458 !important;
+}
+
+.css-1sdzv1m-MuiPickersCalendarHeader-labelContainer ,.rtl-1sdzv1m-MuiPickersCalendarHeader-labelContainer {
+  font-weight: 700 !important;
+  font-size: 27px !important;
+  color: #3f4458 !important;
+width: 100% !important;
+}
+
+.css-11iq8zx-MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon {
+  width: 24.85px !important;
+  height: 32px !important;
+  color: #3f4458 !important;
+  position: relative;
+  right: 13px;
+  top: 12px;
+  transform: rotate(315deg) !important;
+}
+
+.rtl-11iq8zx-MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon{
+  width: 24.85px !important;
+  height: 32px !important;
+  color: #3f4458 !important;
+  position: relative;
+  left: 18px;
+  top: 12px;
+  transform: rotate(-310deg) !important;
+}
+
+.rtl-9khrwr-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton:hover{
+  background-color: transparent !important;
+
+}
+
+.css-9khrwr-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton:hover {
+  background-color: transparent !important;
+}
+
+.css-5pixi0-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 16px !important;
+  color: #6AB2DF !important;
+  margin-left: 3px !important;
+  background-color: #bebebe40 !important  ;
+}
+
+.rtl-1vooibu-MuiSvgIcon-root{
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 16px !important;
+  color: #6AB2DF !important;
+  background-color: #bebebe40 !important  ;
+  margin-left: -2px;
+
+}
+
+.rtl-1vooibu-MuiSvgIcon-root:hover{
+  background-color: transparent !important;
+}
+
+.rtl-bgd4cd-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button,.rtl-5pixi0-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button:hover{
+  background-color: transparent !important  ;
+}
+
+
+
+.css-bgd4cd-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 16px !important;
+  color: #6AB2DF !important;
+  background-color: #bebebe40 !important  ;
+}
+
+[dir="rtl"] .Attendance{
+  position: absolute !important;
+  right: 74% !important;
+  margin-top: 35px !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: rgb(128, 144, 167) !important;
+}
+
+.rtl-145rq02-MuiTypography-root-MuiDayCalendar-weekDayLabel{
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #3f4458 !important;
+}
+
+
+.rtl-2v4r7n-MuiButtonBase-root-MuiPickersDay-root{
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #131627 !important;
+  padding: 18px !important;
+}
+
+
+.rtl-2v4r7n-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: #6AB2DF !important;
+  color: #fff !important;
+}
+
+.rtl-1llv0fg-MuiButtonBase-root-MuiIconButton-root-MuiPickersCalendarHeader-switchViewButton{
+  background-color: transparent !important;
+}
+
+
+/* .rtl-1sdzv1m-MuiPickersCalendarHeader-labelContainer */
+

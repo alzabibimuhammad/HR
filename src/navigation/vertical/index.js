@@ -2,7 +2,7 @@ const navigation = () => {
   return [
     {
       title: 'Home',
-      icon: 'tabler:home',
+      icon: 'lets-icons:order-light',
       path: '/dashboard'
     },
     {
@@ -18,7 +18,7 @@ const navigation = () => {
           path:"/employees/team"
         },
         {
-          title: 'Registration',
+          title: 'Registeration',
           path: '/employees/registeration'
         },
         {

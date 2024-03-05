@@ -37,10 +37,22 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
 
 
 
-
   const Typo = styled(Typography)(({ theme }) => ({
-    fontSize:'14px'
-    }))
+  
+    fontFamily: "Montserrat",
+    fontSize: "14px",
+    fontWeight: 500,
+    letterSpacing: 0.7,
+    color:'#8090A7'
+        }))
+        const TittleSection = styled(Typography)(({ theme }) => ({
+      
+          fontFamily: "Montserrat",
+          fontSize: "20px",
+          fontWeight: 600,
+         
+          color:'#8090A7'
+              }))
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
     const handleUpPaid = () => {
@@ -74,10 +86,10 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
     }
 
   return (
-    <Card>
+    <Card sx={{borderRadius: "12px"}}>
       <CardContent>
         <Stack direction={'column'} spacing={2}>
-        <Typography fontSize={'20px'}>{t("Absences Management")}</Typography>
+        <TittleSection fontSize={'20px'}>{t("Absences Management")}</TittleSection>
 
         <Box sx={{width:"100%"}}>
         <Typo>{t("Paid absence days")}</Typo>
@@ -110,7 +122,7 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
         )}
         />
 
-    <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"7px"}>
+    <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"12px"}>
     <Controller
       name={`absence_management.paid_absence_days[compensatory_time]`}
       control={control}
@@ -158,7 +170,7 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
         )}
         />
 
-       <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"7px"}>
+       <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"12px"}>
     <Controller
       name={`absence_management.unpaid_absence_days[compensatory_time]`}
       control={control}
@@ -203,7 +215,7 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
     />
         )}
         />
-       <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"7px"}>
+       <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"12px"}>
        <Controller
       name={`absence_management.sick_absence_days[compensatory_time]`}
       control={control}

@@ -367,7 +367,28 @@ margin-right: 40px;
 }
 
 
-
+.css-1pholb1-MuiInputBase-root-MuiOutlinedInput-root {
+  line-height: 1.4375em;
+  font-size: 0.9375rem;
+  font-family: Montserrat;
+  font-weight: 400;
+  color: rgba(47, 43, 61, 0.78);
+  box-sizing: border-box;
+  position: relative;
+  cursor: text;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  height: 44px !important;
+  border-radius: 6px;
+}
 
 /* ************************************************************* */
 
@@ -377,7 +398,42 @@ margin-right: 40px;
   text-align: center !important;
 }
 
+.input-icon{
+  position: relative;
+  cursor: pointer !important;
+}
 
+input[type="time"]::-webkit-calendar-picker-indicator {
+  /* background: none; */
+  overflow: hidden;
+  position: absolute;
+  left: 93%;
+  z-index: 99999999999999999999;
+  width: 100vh !important;
+  height: 100vh !important;
+  cursor: pointer !important;
+}
+
+[dir="rtl"] .input-icon {
+  /* background: none; */
+  /* overflow: hidden;
+  position: absolute;
+  right: 8px;
+  z-index: 99999999999999999999;
+  width: 25px !important;
+  height: 25px !important;
+  cursor: pointer !important; */
+  position: relative;
+  left: 500px;
+  width: 25px !important;
+  height: 25px !important;
+
+  cursor: pointer !important;
+}
+
+[dir="rtl"]  input[type="time"]::-webkit-calendar-picker-indicator {
+
+}
 
 
 
@@ -463,9 +519,7 @@ line-height: normal !important;
   line-height: normal !important;
   letter-spacing: 1.2px !important;
 }
-th {
-  background-color: #f2f2f2;
-} */
+
 
 .css-2v4r7n-MuiButtonBase-root-MuiPickersDay-root {
   font-size: 14px !important;
@@ -605,11 +659,17 @@ width: 100% !important;
   border-radius: 12px !important;
 }
 
-/* .rtl-1sdzv1m-MuiPickersCalendarHeader-labelContainer */
+.filterTitle{
+  color: var(--blue-gray, #8090A7)!important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: normal !important;
+}
 
 
-
-
-
-
-
+/* .css-1rt6uap-MuiDataGrid-root .MuiDataGrid-columnHeader:last-of-type {
+  background-color: #DCE1E6;
+    border-radius:10px;
+}
+ */

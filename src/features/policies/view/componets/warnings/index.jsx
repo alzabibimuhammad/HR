@@ -9,7 +9,6 @@ export default function Warning({data}) {
   const {t} = useTranslation()
 
   const Typo = styled(Typography)(() => ({
-
     fontSize:'14px',
     fontWeight:'500',
     textTransform:'capitalize',
@@ -19,13 +18,16 @@ export default function Warning({data}) {
 
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
-    marginLeft:'3px'
+    marginLeft:'8px',
+    marginRight:'8px'
+
 
   }))
 
   const TypoHeader = styled(Typography)(() => ({
     fontSize:'16px',
-    marginLeft:'5px',
+    marginLeft:'8px',
+    marginRight:'8px',
     fontWeight:'500',
     textTransform:'capitalize',
     color:'#131627'
@@ -41,15 +43,15 @@ export default function Warning({data}) {
 
 
 
-    <Card>
+    <Card sx={{borderRadius:" 12px"}}>
 
-      <CardContent>
+      <CardContent sx={{PaddingX:'100px',paddingY:'16px'}}>
 
         <StackRow  >
 
           <img src='/images/policesIcon/warning/icon.svg'/>
-          <TypoHeader sx={{width:"680px"}}>{t("Warnings To Alert")}:</TypoHeader>
-          <Divider  sx={{ marginLeft:'1%',width:'68%',height:'1px' }} color='black' />
+          <TypoHeader >{t("Warnings To Alert")}</TypoHeader>
+          <Divider  sx={{ width:'60%',height:'0px' ,backgroundColor:'#8090A7'}} />
 
         </StackRow>
 
@@ -68,7 +70,7 @@ export default function Warning({data}) {
           {t("Notes")}
           </Typography>
 
-          <Typo marginLeft={'21px'} >{t("Note")} 1:</Typo>
+          
           <TypoVal style={{ maxWidth:'319px', marginLeft:'21px',color:"red" }}>
   {data?.data?.policy?.warnings?.notes?.length > 0 ?
     data?.data?.policy?.warnings?.notes.map((note, index) => (
@@ -76,7 +78,7 @@ export default function Warning({data}) {
         {note}
       </div>
     )) :
-    "not notes"
+    <Typography>{t("There is no notes")}</Typography>
   }
 </TypoVal>      </CardContent>
     </Card>

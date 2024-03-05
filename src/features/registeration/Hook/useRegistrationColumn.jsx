@@ -26,12 +26,15 @@
 
           <Stack spacing={1} direction={'row'}  alignItems={'center'} >
             <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
-              <Typography>
-                {params.row.first_name}
+              <Stack direction={'column'}>
+              <Typography className='custome-data-grid-font'>
+                {params?.row?.first_name} {params?.row?.last_name}
               </Typography>
-              <Typography>
-                {params.row.last_name}
-              </Typography>
+              <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
+
+              </Stack>
+
+
           </Stack>
           </Link>
         )
@@ -41,7 +44,11 @@
         field: 'department',
         headerName: t('Department'),
 
-        flex: 1.5
+        flex: 1.5,
+        renderCell: params => (
+          <Typography className='custome-data-grid-font' >{params?.row?.department}</Typography>
+
+        )
 
       },
       {
@@ -93,14 +100,22 @@
         headerName: t('Check in'),
         headerAlign: 'center',
         align: 'center',
-        flex: 1
+        flex: 1,
+        renderCell: params => (
+          <Typography className='custome-data-grid-font' >{params?.row?.checkIn}</Typography>
+
+        )
       },
       {
         field: 'checkOut',
         headerName: t('Check out'),
         headerAlign: 'center',
         align: 'center',
-        flex: 1
+        flex: 1,
+        renderCell: params => (
+          <Typography className='custome-data-grid-font' >{params?.row?.checkOut}</Typography>
+
+        )
       }
     ])
 

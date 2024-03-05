@@ -54,6 +54,7 @@ export default function CollapsibleTable(Data ) {
     setIsDeletePopupOpen(false)
   }
   function Row({ row }) {
+    console.log("🚀 ~ Row ~ row:", row)
     const [open, setOpen] = useState(false)
 
     const handleToggle = () => {
@@ -79,12 +80,14 @@ export default function CollapsibleTable(Data ) {
                   src={process.env.NEXT_PUBLIC_IMAGES + '/' + row?.user_info?.image}
                   alt=''
                 />
-                <Typography sx={{ marginLeft: '2px', fontSize: '14px' }}>
-                  {row?.first_name} {row?.last_name}
-                </Typography>
-
+                <Stack marginLeft={'6px'}>
+                    <Typography  className='custome-data-grid-font'>
+                      {row?.first_name} {row?.last_name}
+                    </Typography>
+                    <Typography  className='custome-data-grid-font2' >{row?.specialization}</Typography>
+                </Stack>
               </Box>
-              <Box>
+              <Box >
                 <IconButton
                   size='small'
                   onClick={() => setOpen(!open)}
@@ -98,7 +101,7 @@ export default function CollapsibleTable(Data ) {
                   disableRipple
                 >
                   <Stack direction={'row'}>
-                    <Typography sx={{ fontSize: '14px' }}>{t('Daily Report')}</Typography>
+                    <Typography sx={{ fontSize: '14px',color:'#8090A7',fontWeight:500 }}>{t('Daily Report')}</Typography>
                   </Stack>
                   {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                 </IconButton>
@@ -106,16 +109,14 @@ export default function CollapsibleTable(Data ) {
             </Stack>
           </TableCell>
           <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{t(row?.role)}</Typography>
+            <Typography className='custome-data-grid-font' >{t(row?.role)}</Typography>
+          </TableCell>
+
+          <TableCell>
+            <Typography sx={{ fontSize: '14px' }}>{row?.department?.name?row?.department?.name:'---'}</Typography>
           </TableCell>
           <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{row?.specialization}</Typography>
-          </TableCell>
-          <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{row?.department?.name}</Typography>
-          </TableCell>
-          <TableCell>
-            <Box>
+            <Box style={{ display:'flex', justifyContent:'end' }} >
               <Link href={`/profile/${row.id}?type=reports`}>
                 <IconButton onClick={handleViewProfileTap}>
                   <VisibilityIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
@@ -134,8 +135,8 @@ export default function CollapsibleTable(Data ) {
                   <Stack direction={'column'}>
                     {row?.late !=0?
                     <>
-                    <Typography>{t('Late')} {row?.late} {t('Hours')}</Typography>
-                    <Typography sx={{ fontSize:'14px',color:'#DF2E38' }}>{t('Warning because of delay')}</Typography>
+                    <Typography sx={{ fontSize:'14px',color:'#3F4458',fontWeight:400 }} >{t('Late')} {row?.late} {t('Hours')}</Typography>
+                    <Typography sx={{ fontSize:'14px',color:'#DF2E38',fontWeight:400 }}>{t('Warning because of delay')}</Typography>
                     </>
                     :
                     <Typography>{t('No Updates')}</Typography>
@@ -174,12 +175,14 @@ export default function CollapsibleTable(Data ) {
   })
 
   return (
-    <Card>
-      <CardContent>
-        <Stack direction={'column'} spacing={2} >
-          <Typography variant='h4' paddingBottom={'10px'}>
+    <>
+         <Typography className='Pagetitle'>
             {t('Reports List')}
           </Typography>
+    <Card sx={{ marginTop:'24px' }} >
+      <CardContent>
+        <Stack direction={'column'} spacing={2} >
+
           <TextField
                 placeholder={t('Search')}
                 fullWidth
@@ -201,14 +204,14 @@ export default function CollapsibleTable(Data ) {
                   )
                 }}
                 onChange={handelSearch}
-                sx={{ paddingLeft: '8px', backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+                sx={{ backgroundColor: '#F5F7FA',border:'none', boxShadow: 'none',width:{sm:'320px',xs:'100%'} }}
                 size='small'
               />
-              <Stack direction={'row'} alignItems={'center'} spacing={2}>
-                <Typography variant='h5' >{t('Filter')}</Typography>
+              <Stack direction={{sm:'row',md:'row',xs:'column'}} alignItems={'center'} spacing={2}>
+                <Typography className='filterTitle' >{t('Filter')}</Typography>
               <TextField
                 select
-                fullWidth
+                sx={{ width:{sm:'320px',md:'320px',xs:'100%'} }}
                 value={role}
                 label={t('Role')}
                 defaultValue={role}
@@ -225,7 +228,8 @@ export default function CollapsibleTable(Data ) {
               </TextField>
               <TextField
                 select
-                fullWidth
+                sx={{ width:{sm:'320px',md:'320px',xs:'100%'} }}
+
                 defaultValue={department}
                 value={department}
                 label={t('Specialization')}
@@ -246,11 +250,10 @@ export default function CollapsibleTable(Data ) {
             <Table aria-label='collapsible table'>
               <TableHead>
                 <TableRow>
-                  <TableCell sx={{ width: '20%', marginLeft: '10%' }}>{t('Employee')}</TableCell>
-                  <TableCell sx={{ width: '10%' }}>{t('Role')}</TableCell>
-                  <TableCell sx={{ left: 0, width: '10%' }}>{t('Specialization')}</TableCell>
-                  <TableCell sx={{ left: 0, width: '10%' }}>{t('Team')}</TableCell>
-                  <TableCell  sx={{ left: 0, width: '10%' }}>{t('Action')}</TableCell>
+                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Employee')}</TableCell>
+                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Role')}</TableCell>
+                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Team')}</TableCell>
+                  <TableCell  className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' style={{ display:'flex', justifyContent:'end' }} >{t('Action')}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -265,5 +268,6 @@ export default function CollapsibleTable(Data ) {
         </Stack>
       </CardContent>
     </Card>
+    </>
   )
 }

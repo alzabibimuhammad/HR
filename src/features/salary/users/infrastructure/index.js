@@ -11,8 +11,8 @@ export const SalaryData = elements => {
       deducations:element?.deduction,
       advances:element?.advance,
       total:total,
-      user_info:element?.user_info?.image
-
+      user_info:element?.user_info?.image,
+      specialization:element?.specialization
     }
   })
 }

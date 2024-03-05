@@ -84,7 +84,7 @@ function Attendance(Data) {
   }, [Data]);
 
   return (
-    <div id="myChart" style={{ height: '100%' }}>
+    <div  id="myChart" style={{ height: '100%' }}>
     </div>
     )
 }

@@ -1,3 +1,5 @@
+
+
 const navigation = () => {
   return [
     {
@@ -6,7 +8,7 @@ const navigation = () => {
       children: [
         {
           title: 'Email',
-          icon: 'tabler:mail',
+          icon: '/image/image.svg',
           path: '/apps/email'
         },
       ]

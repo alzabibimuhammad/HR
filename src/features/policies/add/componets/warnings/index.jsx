@@ -34,10 +34,23 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
 
   };
 
-
   const Typo = styled(Typography)(({ theme }) => ({
-    fontSize:'14px'
-    }))
+  
+    fontFamily: "Montserrat",
+    fontSize: "14px",
+    fontWeight: 500,
+    letterSpacing: 0.7,
+    color:'#8090A7'
+        }))
+        const TittleSection = styled(Typography)(({ theme }) => ({
+      
+          fontFamily: "Montserrat",
+          fontSize: "20px",
+          fontWeight: 600,
+         
+          color:'#8090A7'
+              }))
+    
 
     const handleUpAlert = _=>{
       setAlert(alert+1)
@@ -61,9 +74,9 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
     <Card>
       <CardContent>
         <Stack direction={'column'} spacing={2}>
-        <Typography fontSize={'20px'}>{t("Warnings Management")}</Typography>
+        <TittleSection fontSize={'20px'}>{t("Warnings Management")}</TittleSection>
 
-        <Typo>{t("Alerts to warning")}</Typo>
+        <Typo style={{ marginTop:'24px' }}>{t("Alerts to warning")}</Typo>
 
         <Controller
         name={`warnings.alerts_to_warnings`}

@@ -17,13 +17,16 @@ export default function Reviews({data}) {
 
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
-    marginLeft:'3px'
+    marginLeft:'8px',
+    marginRight:'8px'
+
 
   }))
 
   const TypoHeader = styled(Typography)(() => ({
     fontSize:'16px',
-    marginLeft:'5px',
+    marginLeft:'8px',
+    marginRight:'8px',
     fontWeight:'500',
     textTransform:'capitalize',
     color:'#131627'
@@ -36,14 +39,14 @@ export default function Reviews({data}) {
   }));
 
   return (
-    <Card>
+    <Card sx={{borderRadius:" 12px"}}>
 
       <CardContent>
 
         <StackRow>
           <img src='/images/policesIcon/review/icon.svg'/>
           <TypoHeader>{t("Reviews")}</TypoHeader>
-          <Divider  sx={{ marginLeft:'1%',width:'87%',height:'1px' }} color='black' />
+          <Divider  sx={{ width:'70%',height:'0px' ,backgroundColor:'#8090A7'}} />
 
         </StackRow>
 

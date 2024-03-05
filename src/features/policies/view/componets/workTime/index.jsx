@@ -19,13 +19,15 @@ export default function WorkTimes({data}) {
 
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
-    marginLeft:'3px'
+    marginLeft:'8px',
+    marginRight:'8px'
 
   }))
 
   const TypoHeader = styled(Typography)(() => ({
     fontSize:'16px',
-    marginLeft:'5px',
+    marginLeft:'8px',
+    marginRight:'8px',
     fontWeight:'500',
     textTransform:'capitalize',
     color:'#131627'
@@ -42,23 +44,20 @@ export default function WorkTimes({data}) {
 
   return (<>
 
-<Card>
+<Card sx={{borderRadius:" 12px"}}>
 
-<CardContent>
+<CardContent  >
 
   <StackRow  >
 
     <img src='/images/policesIcon/worktimes/worktimes.svg'/>
     <TypoHeader>{t('Work Time')}</TypoHeader>
-    <Divider  sx={{ marginLeft:'1%',width:'78%',height:'1px' }} color='black' />
+    <Divider  sx={{ width:'78%',height:'0px' ,backgroundColor:'#8090A7'}} />
 
   </StackRow>
 
 
-  {/* {Array.isArray(data?.data) &&
-  data?.data?.map((item, index) => (
 
-    ))} */}
 
     <div >
 
@@ -101,13 +100,13 @@ export default function WorkTimes({data}) {
 
 
 
-<CardContent>
+<CardContent sx={{PaddingX:'24px',paddingY:'16px'}}>
 
   <StackRow  >
 
     <img src='/images/policesIcon/absence/absence.svg'/>
     <TypoHeader>{t('Absence')}</TypoHeader>
-    <Divider  sx={{ marginLeft:'1%',width:'82%',height:'1px' }} color='black' />
+    <Divider  sx={{ width:'80%',height:'0px' ,backgroundColor:'#8090A7' }}  />
 
   </StackRow>
 
@@ -145,13 +144,13 @@ export default function WorkTimes({data}) {
   }
 </TypoVal></CardContent>
 
-<CardContent>
+<CardContent sx={{PaddingX:'24px',paddingY:'16px'}}>
 
   <StackRow  >
 
     <img src='/images/policesIcon/annual/annual.svg'/>
-    <Typography sx={{width:"30% !important",marginLeft:'5px',color:"#131627",fontSize:'14px !important',fontWeight:'500 !important'}}>{t('Annual Salary Increase')} </Typography>
-    <Divider  sx={{ width:'66.5%',height:'1px' }} color='black' />
+    <TypoHeader >{t('Annual Salary Increase')} </TypoHeader>
+    <Divider  sx={{ width:'60%',height:'0px' ,backgroundColor:'#8090A7' }} />
 
   </StackRow>
 

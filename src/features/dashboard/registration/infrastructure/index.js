@@ -1,5 +1,6 @@
 
 export const RegistrationData = (elements,filterDate,policyTime) => {
+  console.log("🚀 ~ RegistrationData ~ elements:", elements)
   let [startHour, startMinuts] = String(policyTime?.start)?.split(':');
   let [endHour, endMinuts] = String(policyTime?.end)?.split(':');
   /* start time form policy */
@@ -130,7 +131,8 @@ export const RegistrationData = (elements,filterDate,policyTime) => {
         status: statusX,
         checkIn: checkinDate,
         checkOut: checkoutDate,
-        user_info:element?.user_info?.image
+        user_info:element?.user_info?.image,
+        specialization:element?.specialization
       };
     });
   };

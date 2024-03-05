@@ -1,30 +1,48 @@
 import { useMemo, useState } from 'react'
 
-import { Avatar, Button, Chip, IconButton, Rating } from '@mui/material'
+import { Avatar, Button, Chip, IconButton, Rating, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { Box } from '@mui/system'
+import { Box, Stack } from '@mui/system'
+import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
+import { setProfileTap } from 'src/store/apps/user'
 
 const useRegistrationColumn = () => {
   const { t } = useTranslation()
 
-  return useMemo(() => [
+  const router = useRouter()
 
+  const dispatch = useDispatch()
+
+  const handleViewProfileTap=id=>{
+    dispatch(setProfileTap(1))
+    router.push(`/profile/${id}?type=profile`)
+  }
+
+  return useMemo(() => [
 
     {
       field: 'first_name',
-      headerName: t('first Name'),
-      flex: 3
-    },
+      headerName: t('First Name'),
+      flex: 7,
+      renderCell: params =>(
 
-    {
-      field: 'last_name',
-      headerName: t('Last name'),
-      flex: 3
+        <Stack onClick={()=>handleViewProfileTap(params?.row?.id)} direction={'row'} sx={{ cursor:'pointer' }} spacing={1}>
+          <Avatar sx={{ width:'36px',height:'36px' }} src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} />
+          <Stack direction={'column'}>
+            <Typography className='custome-data-grid-font' >{params?.row?.first_name} {params?.row?.last_name}</Typography>
+            <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
+          </Stack>
+        </Stack>
+      )
     },
     {
       field: 'department',
       headerName: t('Department'),
-      flex: 3
+      flex: 4,
+      renderCell: params =>(
+        <Typography className='custome-data-grid-font' >{params?.row?.department}</Typography>
+      )
     },
     {
       field: 'status',
@@ -70,12 +88,18 @@ const useRegistrationColumn = () => {
     {
       field: 'checkIn',
       headerName: t('Check in'),
-      flex: 3
+      flex: 3,
+      renderCell: params =>(
+        <Typography className='custome-data-grid-font' sx={{ lineHeight:'25px',letterSpacing:'0.07px' }} >{params?.row?.checkIn}</Typography>
+      )
     },
     {
       field: 'checkOut',
       headerName: t('Check out'),
-      flex: 3
+      flex: 3,
+      renderCell: params =>(
+        <Typography className='custome-data-grid-font' sx={{ lineHeight:'25px',letterSpacing:'0.07px' }} >{params?.row?.checkOut}</Typography>
+      )
     }
   ])
 }

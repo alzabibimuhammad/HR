@@ -45,13 +45,16 @@ export default function Dashboard() {
         </Box>
 
       </Grid>
+      <Grid item sm={4} xs={12} >
+        <Attendance Data={percentageData} />
+      </Grid>
 
       <Grid sx={{position:"relative",borderRadius:"12px"}} item sm={4} xs={12}>
         <Attendance  Data={percentageData} />
       </Grid>
 <p className='Attendance' style={{position:"absolute",right:"18%",marginTop:"37px",fontSize:"20px",fontWeight:"600",color:"#8090a7"}}>{t('Attendance')}</p>
 
-        <Grid item sm={8} xs={12}>
+        <Grid item sm={8} xs={12} >
         <Registration Data={registration} />
         </Grid>
 

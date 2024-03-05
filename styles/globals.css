@@ -416,15 +416,52 @@ margin-right: 40px;
   width: 83vh;
 }
 
-/* table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 8px;
+
+.css-1rt6uap-MuiDataGrid-root .MuiDataGrid-columnHeader:not(.MuiDataGrid-columnHeaderCheckbox):first-of-type ,.css-q360zr-MuiDataGrid-columnHeaders,.rtl-oc5vc5-MuiDataGrid-columnHeadersInner,.rtl-1rt6uap-MuiDataGrid-root .MuiDataGrid-columnHeader:not(.MuiDataGrid-columnHeaderCheckbox):first-of-type {
+  background-color: #fff !important;
+
 }
-th, td {
-  border: 1px solid #dddddd;
-  text-align: center;
-  padding: 18px;
+
+.css-sbn3f9-MuiDataGrid-columnHeaderTitle {
+  color: var(--text-Primarycolor, #3F4458) !important;
+font-size: 14px !important;
+font-style: normal !important;
+font-weight: 600 !important;
+line-height: normal !important;
+}
+
+
+.custome-data-grid-font{
+color: var(--text-Primarycolor, #3F4458) !important;
+font-size: 14px !important;
+font-style: normal !important;
+font-weight: 500 !important;
+line-height: normal !important;
+}
+.custome-data-grid-font2{
+  color: #7B8794 !important;
+  font-size: 12px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: normal !important;
+}
+
+.rtl-sbn3f9-MuiDataGrid-columnHeaderTitle {
+  color: var(--text-Primarycolor, #3F4458);
+  font-family: Montserrat;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.Pagetitle{
+  color: var(--blue-gray, #8090A7) !important;
+  font-size: 24px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: normal !important;
+  letter-spacing: 1.2px !important;
 }
 th {
   background-color: #f2f2f2;

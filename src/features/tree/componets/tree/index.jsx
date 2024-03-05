@@ -49,6 +49,7 @@ const renderChildrenTeamLeader = (children, level) => {
     </div>
   );
 };
+
 const renderChildrenMembers = (children, level) => {
 
   if (!children || children.length === 0) return null;
@@ -96,7 +97,7 @@ const TreeNode = ({ employee, level }) => {
               />
             </Box>
             <Box sx={{ lineHeight: '25px', padding: '5px' }}>
-              <Typography sx={{ color: '#3f4458', fontWeight: '500', fontSize: '13px' }}>{employee?.first_name}   {employee?.middle_name}  </Typography>
+              <Typography sx={{ color: '#3f4458', fontWeight: '500', fontSize: '13px' }}>{employee?.first_name}  {employee?.middle_name} {employee?.last_name}  </Typography>
               <Typography sx={{ fontSize: '10px', fontWeight: '400', color: '7b8794' }}>{employee?.role}</Typography>
               <Typography sx={{ fontSize: '10px', fontWeight: '400', color: '7b8794' }}>{employee?.leader?.specialization || employee?.leader?.member?.specialization}</Typography>
             </Box>
@@ -107,11 +108,13 @@ const TreeNode = ({ employee, level }) => {
     </>
   );
 };
+
 const TreeNodeTeamLeader = ({ employee, level }) => {
 
 
 
   return (
+
     <>
       <div
         style={{
@@ -137,7 +140,7 @@ const TreeNodeTeamLeader = ({ employee, level }) => {
               />
             </Box>
             <Box sx={{ lineHeight: '25px', padding: '5px' }}>
-              <Typography sx={{ color: '#3f4458', fontWeight: '500', fontSize: '13px' }}>{employee?.leader?.first_name}   {employee?.middle_name}  </Typography>
+              <Typography sx={{ color: '#3f4458', fontWeight: '500', fontSize: '13px' }}>{employee?.leader?.first_name} {employee?.leader?.middle_name}   {employee?.leader?.last_name}  </Typography>
               <Typography sx={{ fontSize: '10px', fontWeight: '400', color: '7b8794' }}>{employee?.leader?.role}</Typography>
               <Typography sx={{ fontSize: '10px', fontWeight: '400', color: '7b8794' }}>{employee?.leader?.specialization }</Typography>
             </Box>
@@ -148,11 +151,14 @@ const TreeNodeTeamLeader = ({ employee, level }) => {
     </>
   );
 };
+
 const TreeNodeTeamMemmbers = ({ employee, level }) => {
+console.log("🚀 ~ TreeNodeTeamMemmbers ~ employee:", employee)
 
 
 
   return (
+
     <>
       <div
         style={{
@@ -178,7 +184,7 @@ const TreeNodeTeamMemmbers = ({ employee, level }) => {
               />
             </Box>
             <Box sx={{ lineHeight: '25px', padding: '5px' }}>
-              <Typography sx={{ color: '#3f4458', fontWeight: '500', fontSize: '13px' }}>{employee?.member?.first_name}   {employee?.middle_name}  </Typography>
+              <Typography sx={{ color: '#3f4458', fontWeight: '500', fontSize: '13px' }}>{employee?.member?.first_name}  {employee?.member?.middle_name}  {employee?.member?.last_name}  </Typography>
               <Typography sx={{ fontSize: '10px', fontWeight: '400', color: '7b8794' }}>{employee?.member?.role}</Typography>
               <Typography sx={{ fontSize: '10px', fontWeight: '400', color: '7b8794' }}>{employee?.member?.specialization }</Typography>
             </Box>

@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, List, ListItem, TextField, Typography } from '@mui/material'
+import { Button, Card, CardContent, List, ListItem, TextField, Typography,InputAdornment } from '@mui/material'
 import { Box, Stack } from '@mui/system'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { styled, useTheme } from '@mui/material/styles'
@@ -96,21 +96,33 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
             </Box>
             {phoneNumbersfields.map((phoneNumber, index) => (
               <Box mt={5} key={phoneNumber.id}>
+
                 <Controller
+
                   name={`contacts.phonenumbers.${index}.phone_num`}
                   control={control}
                   render={({ field }) => (
                     <TextField
+
                       {...field}
                       label={`${t('Phone Number')} ${index + 1}`}
                       variant='outlined'
                       fullWidth
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            {index!=0&&<CloseIcon style={{ cursor:'pointer',color:'red' , padding: '1',margin: '0px 500px'}} onClick={() => phoneNumbersremove(index)}/>}
+                          </InputAdornment>
+                        ),
+                      }}
+
                       size='small'
                       error={Boolean(errors?.contacts?.phonenumbers?.[index]?.phone_num)}
                       {...(errors?.contacts?.phonenumbers?.[index]?.phone_num && {
                         helperText: errors?.contacts?.phonenumbers?.[index]?.phone_num?.message
                       })}
-                    />
+
+                      />
                   )}
                 />
 
@@ -123,7 +135,8 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                   >
                     {t('Add phoneNumbers')}
                   </Button>
-                    :<CloseIcon style={{ cursor:'pointer',color:'red' }} onClick={() => phoneNumbersremove(index)}/>
+                    :
+                    null
                   }
                 </Box>
 
@@ -148,6 +161,13 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                       {...(errors?.contacts?.emails?.[index]?.email && {
                         helperText: errors?.contacts?.emails?.[index]?.email?.message
                       })}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            {index!=0&&<CloseIcon style={{ cursor:'pointer',color:'red' , padding: '1',margin: '0px 500px'}} onClick={() => EmailRemove(index)}/>}
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   )}
                 />
@@ -162,7 +182,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
                     {t('Add Email')}
                   </Button>
                   :
-                  <CloseIcon style={{ cursor:'pointer',color:'red' }} onClick={() => EmailRemove(index)}/>
+                  null
                   }
                 </Box>
               </Box>

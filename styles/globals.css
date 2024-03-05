@@ -365,7 +365,28 @@ margin-right: 40px;
 }
 
 
-
+.css-1pholb1-MuiInputBase-root-MuiOutlinedInput-root {
+  line-height: 1.4375em;
+  font-size: 0.9375rem;
+  font-family: Montserrat;
+  font-weight: 400;
+  color: rgba(47, 43, 61, 0.78);
+  box-sizing: border-box;
+  position: relative;
+  cursor: text;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  height: 44px !important;
+  border-radius: 6px;
+}
 
 /* ************************************************************* */
 
@@ -375,7 +396,42 @@ margin-right: 40px;
   text-align: center !important;
 }
 
+.input-icon{
+  position: relative;
+  cursor: pointer !important;
+}
 
+input[type="time"]::-webkit-calendar-picker-indicator {
+  /* background: none; */
+  overflow: hidden;
+  position: absolute;
+  left: 93%;
+  z-index: 99999999999999999999;
+  width: 100vh !important;
+  height: 100vh !important;
+  cursor: pointer !important;
+}
+
+[dir="rtl"] .input-icon {
+  /* background: none; */
+  /* overflow: hidden;
+  position: absolute;
+  right: 8px;
+  z-index: 99999999999999999999;
+  width: 25px !important;
+  height: 25px !important;
+  cursor: pointer !important; */
+  position: relative;
+  left: 500px;
+  width: 25px !important;
+  height: 25px !important;
+
+  cursor: pointer !important;
+}
+
+[dir="rtl"]  input[type="time"]::-webkit-calendar-picker-indicator {
+
+}
 
 
 
@@ -412,4 +468,11 @@ margin-right: 40px;
 .rtl-1x2dz75-MuiPaper-root-MuiDialog-paper{
   overflow-y: visible;
   width: 83vh;
+}
+
+.MuiOutlinedInput-notchedOutline, .rtl-1d3z3hw-MuiOutlinedInput-notchedOutline{
+  border-radius: 8px !important;
+
+  border: 1px solid #8090A7 !important;
+
 }

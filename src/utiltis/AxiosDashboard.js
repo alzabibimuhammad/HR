@@ -3,7 +3,7 @@ import { showErrorToast } from './showErrorToast'
 
 const client = axios.create({ baseURL: process.env.NEXT_PUBLIC_BASE_URL });
 
-export const requestDashboard = async ({ url, params = {}, ...rest }) => {
+export const requestDashboard =  ({ url, params = {}, ...rest }) => {
   params = { ...params, branch_id: localStorage.getItem('branch')||1};
 
   client.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;

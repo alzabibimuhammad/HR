@@ -27,40 +27,54 @@ export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', a
 
 })
 
-export const storeAttendanceLogs = createAsyncThunk('Dashboard/storeAttendanceLogs', async () => {
-  try{
-  const response = requestDashboard({ url: '/api/storeAttendanceLogs' })
-
-  return {
-   data: response.data
+export const storeAttendanceLogs = createAsyncThunk(
+  'Dashboard/storeAttendanceLogs',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await requestDashboard({ url: '/api/storeAttendanceLogs' });
+      return response.data; // Return data directly
+    } catch (error) {
+      // Dispatching an error action using rejectWithValue
+      return rejectWithValue(error);
+    }
   }
-}
-  catch (error){
-    showErrorToast(error,"")
-  }
-})
+);
 
 const DashboardSlice = createSlice({
   name: 'Dashboard',
   initialState: {
+    loading: 'idle',
     AttendancePercentage: [],
     Registertion: [],
-    loading: false
+    attendanceLogs: null, // Initialize with null
+    error: null,
   },
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-
-    .addCase(getAttendancePercentage.fulfilled,(state,action)=>{
-      state.loading = false
-      state.AttendancePercentage = action?.payload?.data
-    })
-    .addCase(getRegisteration.fulfilled,(state,action)=>{
-      state.loading = false
-      state.Registertion = action?.payload?.data
-    })
-
-
+      .addCase(storeAttendanceLogs.pending, (state) => {
+       
+        state.loading = 'pending';
+      })
+      .addCase(storeAttendanceLogs.fulfilled, (state, action) => {
+       
+        
+        state.AttendancePercentage = action.payload.data;
+        state.loading = 'succeeded';
+      })
+      .addCase(storeAttendanceLogs.rejected, (state, action) => {
+        state.loading = 'failed';
+        
+        showErrorToast(action.payload, "");
+      })
+      .addCase(getAttendancePercentage.fulfilled, (state, action) => {
+        
+        state.AttendancePercentage = action.payload?.data;
+      })
+      .addCase(getRegisteration.fulfilled, (state, action) => {
+      
+        state.Registertion = action.payload?.data;
+      });
   },
 })
 

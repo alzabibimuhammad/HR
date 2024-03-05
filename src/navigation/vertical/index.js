@@ -2,7 +2,7 @@ const navigation = () => {
   return [
     {
       title: 'Home',
-      icon: 'tabler:home',
+      icon: 'lets-icons:order-light',
       path: '/dashboard'
     },
     {

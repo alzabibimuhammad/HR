@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
 
   const handleLogin = (params, errorCallback) => {
     axios
-      .post(process.env.NEXT_PUBLIC_BASE_URL+'/api/login', params)
+      .post("http://192.168.2.138:800"+'/api/login', params)
       .then(async response => {
         localStorage.setItem('accessToken', response.data?.data?.authorization.token);
         localStorage.setItem('userData', JSON.stringify(response.data?.data?.user));

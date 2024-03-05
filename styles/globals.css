@@ -463,3 +463,17 @@ line-height: normal !important;
   line-height: normal !important;
   letter-spacing: 1.2px !important;
 }
+
+.filterTitle{
+  color: var(--blue-gray, #8090A7)!important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: normal !important;
+}
+
+
+.css-1rt6uap-MuiDataGrid-root .MuiDataGrid-columnHeader:last-of-type {
+  background-color: #DCE1E6;
+    border-radius:10px;
+}

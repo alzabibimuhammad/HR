@@ -18,7 +18,7 @@ const navigation = () => {
           path:"/employees/team"
         },
         {
-          title: 'Registration',
+          title: 'Registeration',
           path: '/employees/registeration'
         },
         {

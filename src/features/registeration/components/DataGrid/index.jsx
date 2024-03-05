@@ -39,13 +39,7 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
 
   const { t } = useTranslation()
 
-  const theme = useTheme()
 
-  const Item = styled(Paper)(({ theme }) => ({
-    textAlign: 'center',
-    width: '30%',
-    color: theme.palette.text.secondary
-  }))
 
   const handelSearch = event => {
     const searchData = event.target.value
@@ -68,24 +62,23 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
 
 
   rows?.forEach(element => {
-    StatusData.add(element?.status)
+    StatusData?.add(element?.status)
   })
 
   return (
     <Stack height={'100%'}>
-      <Card>
+      <Typography className='Pagetitle' >{t('Registeration')}</Typography>
+      <Card sx={{ marginTop:'24px' }} >
         <CardContent>
-        <Typography variant='h4' paddingBottom={'10px'}>
-        {t("Registerations List")}
-        </Typography>
-          <Stack direction={'column'} spacing={3} >
-          <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
-                <Box mb={2}>
+
+          <Stack direction={'column'} >
+          <Stack direction={'row'} width={{sm:'100%',xs:'100%'}} spacing={3} alignItems={'center'}>
+                <Box mb={2} width={{ sm:'120px',xs:'100px' }} >
                   <Show10 setShow={setShow}/>
                 </Box>
             <TextField
               placeholder={t('Search')}
-              fullWidth
+
               InputProps={{
                 startAdornment: (
                   <Box paddingRight={1}>
@@ -104,22 +97,26 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
                 )
               }}
               onChange={handelSearch}
-              sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+              sx={{ backgroundColor: '#F5F7FA',border:'none', boxShadow: 'none',width:{sm:'320px',xs:'100%'} }}
               size='small'
             />
             </Stack>
-              <Stack direction={{sm:'row',xs:'column'}} spacing={6} >
+              <Stack direction={{sm:'row',xs:'column'}} spacing={3} marginTop={'10px'} alignItems={'center'} >
+                  <Typography className='filterTitle' display={{ xs:'none',sm:'block',md:'block' }}>{t('Filter')}</Typography>
                   <TextField
                   type='date'
-                  fullWidth
+                  sx={{ width:{sm:'320px',xs:'100%'} }}
                   size='small'
                   onChange={handelDate}
+
                   />
 
                 <TextField
                     select
                     fullWidth
                     defaultValue="Status"
+                    sx={{ width:{sm:'320px',xs:'100%'} }}
+
                     SelectProps={{
                       value: status,
                       displayEmpty: true,
@@ -140,7 +137,7 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
 
             {policy &&state ?
           <CustomDataGrid columns={columns} show={show} rows={rows || [] } />
-            :<Box sx={{ height:'50vh',display:'flex',justifyContent:'center',alignItems:'center' }} ><CircularProgress/></Box>}
+          :<Box sx={{ height:'50vh',display:'flex',justifyContent:'center',alignItems:'center' }} ><CircularProgress/></Box>}
           </Stack>
 
 

@@ -19,18 +19,17 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose ,handle
   const toggleDatePickerMonth = () => {
     setStartDate(new Date());
     setShowMonthPicker('month');
-
   };
 
   function Close() {
-    handleClose(true)
+    handleClose()
   }
 
   const handleClickOutside = (event) => {
 
     if (CloseRef.current && !CloseRef.current.contains(event.target)) {
 
-      handleClose(true);
+      handleClose();
     }
   };
 
@@ -60,6 +59,8 @@ export  const CustomDatePickerSalary = ({ selectedDate, handleDateChoose ,handle
       setStartDate(date)
       handleDateChoose(formattedDate)
     }
+    Close()
+
   }
 
   const handleDateSendMonth = date => {

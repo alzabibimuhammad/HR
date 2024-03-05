@@ -30,7 +30,7 @@ const useContractColumns = () => {
       renderCell: params => {
         return (
           <Box>
-            <Typography sx={{ fontSize: '14px' }}>{params?.row?.id}</Typography>
+            <Typography className='custome-data-grid-font'>{params?.row?.id}</Typography>
           </Box>
         )
       }
@@ -38,16 +38,19 @@ const useContractColumns = () => {
     {
       field: 'employee',
       headerName: t('Employee'),
-      flex: 2.2,
+      flex: 2.5,
       disableClickEventBubbling: true,
       renderCell: params => {
         return (
         <Link style={{ textDecoration:'none' }} href={`/profile/${params?.row?.user_id}`}>
             <Box display={'flex'} alignItems={'center'}  >
               <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
-              <Typography ml={1} sx={{ fontSize: '14px' }}>
+              <Stack marginLeft={'23px'} >
+              <Typography className='custome-data-grid-font' sx={{ fontSize: '14px' }}>
                 {params?.row?.employee} {params?.row?.employeeLastName}
               </Typography>
+              <Typography className='custome-data-grid-font2' >{params?.row?.specialization}</Typography>
+              </Stack>
             </Box>
         </Link>
         )
@@ -61,7 +64,7 @@ const useContractColumns = () => {
       renderCell: params => {
         return (
           <Box>
-            <Typography sx={{ fontSize: '14px' }}>{params?.row?.startDate}</Typography>
+            <Typography className='custome-data-grid-font' >{params?.row?.startDate}</Typography>
           </Box>
         )
       }
@@ -74,7 +77,7 @@ const useContractColumns = () => {
       renderCell: params => {
         return (
           <Box>
-            <Typography sx={{ fontSize: '14px' }}>{params?.row?.endDate}</Typography>
+            <Typography className='custome-data-grid-font' >{params?.row?.endDate}</Typography>
           </Box>
         )
       }
@@ -113,7 +116,7 @@ const useContractColumns = () => {
             <Stack>
               <Link href={`/contracts/view/${params?.row?.user_id}`}>
                 <IconButton>
-                  <VisibilityIcon variant='contained' sx={{ color: '#FF9F43' }} size='small'>
+                  <VisibilityIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
                     Details
                   </VisibilityIcon>
                 </IconButton>

@@ -45,11 +45,6 @@ const Users = ({ rows }) => {
     roleData.add(element?.role)
   })
 
-  let specializationFilter = new Set([])
-  rows?.data?.data?.forEach(element => {
-    if(element?.specialization)
-    specializationFilter.add(element?.specialization)
-  })
 
   let departmentFilter = new Set([])
   rows?.data?.data?.forEach(element => {
@@ -201,7 +196,7 @@ const Users = ({ rows }) => {
             justifyContent={'center'}
           >
             <Stack direction={'row'} width={{ sm: '50%', xs: '100%' }} spacing={3} alignItems={'center'}>
-              <Box mb={2}>
+            <Box mb={2} width={{ sm:'120px',xs:'100px' }} >
                 <Show10 setShow={setShow} />
               </Box>
               <TextField
@@ -225,15 +220,15 @@ const Users = ({ rows }) => {
                   )
                 }}
                 onChange={handelSearch}
-                sx={{ paddingLeft: '8px', backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+                sx={{ backgroundColor: '#F5F7FA',border:'none', boxShadow: 'none',width:{sm:'320px',xs:'100%'} }}
                 size='small'
               />
             </Stack>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-              <Typography sx={{ fontSize: '16px', marginTop: '5px' }}>{t('Filters')}</Typography>
+            <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={'center'} spacing={2}>
+              <Typography className='filterTitle' >{t('Filters')}</Typography>
               <TextField
                 select
-                fullWidth
+                sx={{ width:{sm:'320px',xs:'100%'} }}
                 defaultValue=''
                 SelectProps={{
                   value: role,
@@ -251,7 +246,7 @@ const Users = ({ rows }) => {
                 ))}
               </TextField>
 
-              <TextField
+              {/* <TextField
                 select
                 fullWidth
                 defaultValue=''
@@ -268,11 +263,11 @@ const Users = ({ rows }) => {
                     {element}
                   </MenuItem>
                 ))}
-              </TextField>
+              </TextField> */}
 
               <TextField
                 select
-                fullWidth
+                sx={{ width:{sm:'320px',xs:'100%'} }}
                 defaultValue=''
                 SelectProps={{
                   value: department,

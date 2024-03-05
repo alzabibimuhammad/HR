@@ -8,7 +8,7 @@ export const ReportData = elements => {
       employee: element?.first_name,
       role: element?.role,
       specialization:element?.specialization,
-      team: element.department_id ,
+      team: element?.department?.name ,
       ID:element.id,
       Name:element.first_name,
       Email:element.email,

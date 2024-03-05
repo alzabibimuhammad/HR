@@ -126,11 +126,12 @@ endMinuts = endMinuts.toString().padStart(2, '0');
       id: element?.id,
       first_name: element?.first_name,
       last_name: element?.last_name,
-      department: element?.department?.name,
+      department: element?.department?.name?element?.department?.name:'---',
       status: statusX,
-      checkIn: checkinDate,
-      checkOut: checkoutDate,
-      user_info:element?.user_info?.image
+      checkIn: checkinDate?checkinDate:'---',
+      checkOut: checkoutDate?checkoutDate:'---',
+      user_info:element?.user_info?.image,
+      specialization:element?.specialization
     };
   });
 };

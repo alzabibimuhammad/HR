@@ -654,5 +654,18 @@ width: 100% !important;
 }
 
 
+.filterTitle{
+  color: var(--blue-gray, #8090A7)!important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: normal !important;
+}
+
+
+.css-1rt6uap-MuiDataGrid-root .MuiDataGrid-columnHeader:last-of-type {
+  background-color: #DCE1E6;
+    border-radius:10px;
+}
 /* .rtl-1sdzv1m-MuiPickersCalendarHeader-labelContainer */
 

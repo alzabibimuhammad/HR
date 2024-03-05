@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAttendancePercentage, getRegisteration, storeAttendanceLogs } from './store'
 import { Grid } from '@mui/material'
 import Loading from 'src/features/dashboard/loadingAttendance'
+import { useTranslation } from 'react-i18next'
 
 export default function Dashboard() {
   const store = useSelector(state => state.Dashboard)
@@ -46,9 +47,7 @@ export default function Dashboard() {
         </Box>
 
       </Grid>
-      <Grid item sm={4} xs={12} >
-        <Attendance Data={percentageData} />
-      </Grid>
+
 
       <Grid sx={{position:"relative",borderRadius:"12px"}} item sm={4} xs={12}>
         <Attendance  Data={percentageData} />

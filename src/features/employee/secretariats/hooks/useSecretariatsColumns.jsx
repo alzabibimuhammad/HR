@@ -55,8 +55,15 @@ const useSecretariatsColumns = () => {
           <Link style={{ textDecoration: 'none' }} href={`/profile/${params?.row?.user_id}`}>
             <Stack direction={'row'} alignItems={'center'} spacing={1}>
               <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
-              <Typography>{params?.row?.first_name}</Typography>
-              <Typography>{params?.row?.last_name}</Typography>
+              <Stack direction={'column'}>
+                <Stack direction={'row'}>
+                  <Typography className='custome-data-grid-font' >{params?.row?.first_name}</Typography>
+                  <Typography className='custome-data-grid-font'>{params?.row?.last_name}</Typography>
+                </Stack>
+
+                <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
+
+              </Stack>
             </Stack>
           </Link>
         )
@@ -66,13 +73,21 @@ const useSecretariatsColumns = () => {
       field: 'date',
       headerName: t('Date'),
       disableClickEventBubbling: true,
-      flex: 1
+      flex: 1,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.date}</Typography>
+
+      )
     },
     {
       field: 'description',
       headerName: t('Description'),
       disableClickEventBubbling: true,
-      flex: 4
+      flex: 4,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.description}</Typography>
+
+      )
     },
 
     {

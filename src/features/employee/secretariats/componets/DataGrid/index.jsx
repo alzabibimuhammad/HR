@@ -25,32 +25,28 @@ const SecretariatsTable = ({ rows }) => {
   const [fdata, setfdata] = useState(rows)
 
   useEffect(() => {
-
     let filterData = SecretariatsData(rows)
-    if(date)filterData=filterData?.filter((value,index)=>value?.date == date)
-    if(search)filterData = filterData?.filter((value,index)=>(
-      value?.first_name?.toLowerCase()?.includes(search?.toLowerCase())||
-      value?.last_name?.toLowerCase()?.includes(search?.toLowerCase())
-    ))
+    if (date) filterData = filterData?.filter((value, index) => value?.date == date)
+    if (search)
+      filterData = filterData?.filter(
+        (value, index) =>
+          value?.first_name?.toLowerCase()?.includes(search?.toLowerCase()) ||
+          value?.last_name?.toLowerCase()?.includes(search?.toLowerCase())
+      )
 
     setfdata(filterData)
-  }, [rows,date,search])
-
+  }, [rows, date, search])
 
   const handleDate = e => {
     const date = e.target.value
-    if(date)
-      setDate(date)
-    else
-      setDate(null)
+    if (date) setDate(date)
+    else setDate(null)
   }
 
   const handelSearch = event => {
     const searchText = event.target.value
-    if(searchText)
-      setSearch(searchText)
-    else
-      setSearch(null)
+    if (searchText) setSearch(searchText)
+    else setSearch(null)
   }
 
   const gridStyles = {
@@ -80,21 +76,30 @@ const SecretariatsTable = ({ rows }) => {
 
   return (
     <>
-      <Card>
+      <Typography className='Pagetitle'>
+        {t('Secretariats')}
+      </Typography>
+      <Card sx={{ marginTop:'24px' }}>
         <CardContent>
-          <Typography variant='h4' paddingBottom={'10px'}>
-            {t('Secretariats List')}
-          </Typography>
-
           <Stack
             direction={{ xs: 'column', sm: 'column' }}
             spacing={3}
             alignContent={'center'}
             justifyContent={'center'}
           >
-            <Stack direction={{ sm: 'row', xs: 'row' }} justifyContent={{sm:'space-between',xs:'start'}}  alignItems={{sm:'center'}}>
-              <Stack direction={{sm:'row',xs:'column'}} width={{ sm: '50%', xs: '100%' }} spacing={3} justifyContent={{ xs:'start' }} alignItems={{sm:'center'}}>
-                <Box mb={{sm:2}} display={'flex'} justifyContent={{ xs:'start' }}>
+            <Stack
+              direction={{ sm: 'row', xs: 'row' }}
+              justifyContent={{ sm: 'space-between', xs: 'start' }}
+              alignItems={{ sm: 'center' }}
+            >
+              <Stack
+                direction={{ sm: 'row', xs: 'column' }}
+                width={{ sm: '50%', xs: '100%' }}
+                spacing={3}
+                justifyContent={{ xs: 'start' }}
+                alignItems={{ sm: 'center' }}
+              >
+            <Box mb={2} width={{ sm:'120px',xs:'100px' }} >
                   <Show10 setShow={setShow} />
                 </Box>
                 <TextField
@@ -118,7 +123,7 @@ const SecretariatsTable = ({ rows }) => {
                   }}
                   onChange={handelSearch}
                   sx={{
-                    width: {sm:'50%',xs:'100%'},
+                    width: { sm: '50%', xs: '100%' },
                     paddingLeft: '8px',
                     backgroundColor: '#F5F7FA',
                     border: 'none',
@@ -126,31 +131,33 @@ const SecretariatsTable = ({ rows }) => {
                   }}
                   size='small'
                 />
-
-
               </Stack>
               <Button
                 sx={{
                   backgroundColor: '#6AB2DF',
-                  mt:{xs:2},
                   height: '30%',
                   color: '#fff',
                   '&:hover': { backgroundColor: '#6ab2df', color: '#fff' }
                 }}
                 onClick={handleAdd}
               >
-                <Stack direction={'row'}  >
+                <Stack direction={'row'}>
                   <AddIcon />
                   <Typography color={'#fff'}>{t('Add')}</Typography>
                 </Stack>
               </Button>
               {openAdd ? <DrawerFormAdd open={openAdd} setOpenParent={setOpenAdd} /> : null}
             </Stack>
-            <Stack direction={{ xs: 'column', sm: 'column' }} spacing={2} width={{ sm: '40%', xs: '100%' }}>
-              <Typography sx={{ fontSize: '16px', marginTop: '5px' }}>{t('Filters')}</Typography>
+            <Stack
+              direction={{ xs: 'row', sm: 'row' }}
+              alignItems={'center'}
+              spacing={2}
+              width={{ sm: '100%', xs: '100%' }}
+            >
+              <Typography className='filterTitle'>{t('Filters')}</Typography>
 
               <TextField
-                fullWidth
+                sx={{ width: { sm: '320px', md: '320px', xs: '100%' } }}
                 type='date'
                 onChange={handleDate}
                 SelectProps={{
@@ -160,9 +167,7 @@ const SecretariatsTable = ({ rows }) => {
               />
             </Stack>
 
-            {rows ? (
-              <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={fdata || []} />
-            ) : null}
+            {rows ? <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={fdata || []} /> : null}
           </Stack>
         </CardContent>
       </Card>

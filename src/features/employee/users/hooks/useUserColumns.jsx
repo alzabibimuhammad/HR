@@ -84,17 +84,7 @@ const handleViewProfileTap=_=>{
           return <Typography  className='custome-data-grid-font' >{params?.row?.role}</Typography>
         }
       },
-      {
-        field: 'specialization',
-        headerName: t('Specialization'),
-        disableClickEventBubbling: true,
-        flex: 2.5,
-        headerAlign: 'center',
-        align: 'center',
-        renderCell: params => {
-          return <Typography  className='custome-data-grid-font' >{params?.row?.specialization}</Typography>
-        }
-      },
+
       {
         field: 'department',
         headerName: t('department'),

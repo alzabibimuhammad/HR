@@ -7,13 +7,16 @@ import Requests from 'src/features/dashboard/requests'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAttendancePercentage, getRegisteration, storeAttendanceLogs } from './store'
 import { Grid } from '@mui/material'
+import Loading from 'src/features/dashboard/loadingAttendance'
 
 export default function Dashboard() {
   const store = useSelector(state => state.Dashboard)
 
+
   const [registration, setRegistration] = useState([])
   const [percentageData, setpercentageData] = useState([])
 
+  const {t} = useTranslation()
   const dispatch = useDispatch()
   const date = new Date()
 
@@ -30,15 +33,15 @@ export default function Dashboard() {
     dispatch(getRegisteration(formattedDate))
     setRegistration(store?.Registertion)
 
-    dispatch(storeAttendanceLogs())
-
   }, [dispatch, store?.AttendancePercentage?.length, store?.Registertion?.length])
 
   return (
-    <Grid container spacing={5} sx={{ overflow: 'hidden' }}>
+    <>
+    <Loading/>
+    <Grid container spacing={6} sx={{ overflow: 'hidden' }}>
       <Grid item sm={8} xs={12}>
 
-        <Box  sx={{ backgroundColor: '#fff' }}>
+        <Box  sx={{ backgroundColor: '#fff',borderRadius:"12px" }}>
           <AppCalendar />
         </Box>
 
@@ -47,6 +50,10 @@ export default function Dashboard() {
         <Attendance Data={percentageData} />
       </Grid>
 
+      <Grid sx={{position:"relative",borderRadius:"12px"}} item sm={4} xs={12}>
+        <Attendance  Data={percentageData} />
+      </Grid>
+<p className='Attendance' style={{position:"absolute",right:"18%",marginTop:"37px",fontSize:"20px",fontWeight:"600",color:"#8090a7"}}>{t('Attendance')}</p>
 
         <Grid item sm={8} xs={12} >
         <Registration Data={registration} />
@@ -59,5 +66,6 @@ export default function Dashboard() {
         </Grid>
 
     </Grid>
+    </>
   )
 }

@@ -14,10 +14,23 @@ export default function Annual({Controller,control,errors}) {
   const [noteAdded, setNoteAdded] = useState(false);
 
   const {t} = useTranslation()
-
   const Typo = styled(Typography)(({ theme }) => ({
-    fontSize:'14px'
-    }))
+  
+    fontFamily: "Montserrat",
+    fontSize: "14px",
+    fontWeight: 500,
+    letterSpacing: 0.7,
+    color:'#8090A7'
+        }))
+        const TittleSection = styled(Typography)(({ theme }) => ({
+      
+          fontFamily: "Montserrat",
+          fontSize: "20px",
+          fontWeight: 600,
+         
+          color:'#8090A7'
+              }))
+    
 
     const [checked, setChecked] = React.useState(false);
 
@@ -46,7 +59,7 @@ export default function Annual({Controller,control,errors}) {
     <Card>
       <CardContent>
         <Stack spacing={2}>
-        <Typography fontSize={'20px'} >{t("Annual Salary Increase")}</Typography>
+        <TittleSection fontSize={'20px'} >{t("Annual Salary Increase")}</TittleSection>
 
 
         <Typo style={{ marginTop:'24px' }}>{t("Annual percentage increase")}</Typo>
@@ -73,7 +86,7 @@ export default function Annual({Controller,control,errors}) {
         />
          )}
          />
-         <Box sx={{width:"100%",display:"flex"}}>
+         <Box sx={{width:"100%",display:"flex",marginTop:'12px'}}>
     <Controller
       name={`annual_salary_increase.allow_advance_request`}
       control={control}
@@ -86,7 +99,7 @@ export default function Annual({Controller,control,errors}) {
 
   )}
        />
-        <Typography>{t("Allow advance requests")}</Typography>
+        <Typo sx={{marginX:'2px'}}>{t("Allow advance requests")}</Typo>
          </Box>
     </Stack>
 

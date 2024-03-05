@@ -6,6 +6,7 @@ import { useFieldArray } from 'react-hook-form';
 import { Button} from '@mui/material'
 import Box from '@mui/material/Box'
 import CloseIcon from '@mui/icons-material/Close';
+import styled from 'styled-components';
 
 export default function Reviews({Controller,control,errors}) {
   const {t} = useTranslation()
@@ -24,13 +25,29 @@ function appendInput() {
     appendInput()
   }, [])
 
-
+  const Typo = styled(Typography)(({ theme }) => ({
+  
+    fontFamily: "Montserrat",
+    fontSize: "14px",
+    fontWeight: 500,
+    letterSpacing: 0.7,
+    color:'#8090A7'
+        }))
+        const TittleSection = styled(Typography)(({ theme }) => ({
+      
+          fontFamily: "Montserrat",
+          fontSize: "20px",
+          fontWeight: 600,
+         
+          color:'#8090A7'
+              }))
+    
 
   return (
 
-    <Card>
+    <Card sx={{borderRadius: "12px"}}>
       <CardContent>
-        <Typography fontSize={'20px'}>{t("Reviews")}</Typography>
+        <TittleSection fontSize={'20px'}>{t("Reviews")}</TittleSection>
         <Stack spacing={2} >
         {fields.map((field, index) => (
             <React.Fragment key={field.id}>
@@ -43,9 +60,9 @@ function appendInput() {
 
 </Typography>
               }
-             <Typography style={{ marginTop: '24px' }} fontSize={'14px'}>
+             <Typo style={{ marginTop: '24px' }} fontSize={'14px'}>
   {t('Review criteria')}
-</Typography>
+</Typo>
 <Controller
   name={`rate_type[${index }]`}
   control={control}

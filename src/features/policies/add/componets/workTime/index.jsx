@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import { useTranslation } from 'react-i18next';
 import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch';
 import {  MenuItem } from '@mui/material'
+import { InputAdornment } from '@mui/material';
 
 export default function WorkTime({Controller,control,days,setDays,errors}) {
   const [openParent, setOpenParent] = React.useState(false);
@@ -22,10 +23,41 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
   const handleDayPicker = (date) => {
     setOpenParent(true);
   };
-
+const CssTextField = styled(TextField)({
+  '& label.Mui-focused': {
+    color: '#8090A7',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#8090A7',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#8090A7',
+    },
+    '&:hover fieldset': {
+      borderColor: '#8090A7',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#8090A7',
+    },
+  },
+});
   const Typo = styled(Typography)(({ theme }) => ({
-    fontSize:'14px'
+  
+fontFamily: "Montserrat",
+fontSize: "14px",
+fontWeight: 500,
+letterSpacing: 0.7,
+color:'#8090A7'
     }))
+    const TittleSection = styled(Typography)(({ theme }) => ({
+  
+      fontFamily: "Montserrat",
+      fontSize: "20px",
+      fontWeight: 600,
+     
+      color:'#8090A7'
+          }))
 
 
     const { fields, append, remove } = useFieldArray({
@@ -47,11 +79,12 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
 
 
   return (
-    <Card >
+    <Card sx={{borderRadius: "12px"}}>
+   
       <CardContent>
 
         <Stack spacing={2} direction={'column'}>
-          <Typography fontSize={'20px'}>{t("Work Time")}</Typography>
+          <TittleSection fontSize={'20px'}>{t("Work Time")}</TittleSection>
           <Typo style={{ marginTop:'24px' }} >{t("Work days")}</Typo>
           <Controller
   name={`work_time.work_days`}
@@ -65,8 +98,8 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
       }}
       sx={{
         justifyContent: 'start',
-        border: '1px solid black',
-        height: '2.5em',
+        border: '1px solid #8090A7',
+        height: '44px',
         '&:hover': {
           backgroundColor: '#fff',
           color: 'none',
@@ -118,8 +151,17 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
               placeholder="Start time"
               fullWidth
               size='small'
+              color="warning"
               error={Boolean(errors.work_time?.start_time)}
               helperText={errors.work_time?.start_time?.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                          <img className='input-icon' src='/images/IconInput/time.svg' alt='events'/>
+
+                  </InputAdornment>
+                ),
+              }}
             />
         )}
         />
@@ -138,8 +180,17 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
               placeholder="Cut-off time"
               fullWidth
               size='small'
+             
               error={Boolean(errors.work_time?.cut_off_time)}
               helperText={errors.work_time?.cut_off_time?.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                          <img className='input-icon' src='/images/IconInput/time.svg' alt='events'/>
+
+                  </InputAdornment>
+                ),
+              }}
             />
         ) }
 />
@@ -148,7 +199,8 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
         name={`work_time.end_time`}
         control={control}
         render={({ field }) => (
-            <TextField
+            <CssTextField
+            id="custom-css-outlined-input"
             {...field}
               type='time'
               placeholder="End time"
@@ -156,11 +208,20 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
               size='small'
               error={Boolean(errors.work_time?.end_time)}
               helperText={errors.work_time?.end_time?.message}
+              InputProps={{
+                endAdornment: (
+
+                  <InputAdornment  position="end">
+                          <img  className='input-icon' src='/images/IconInput/time.svg' alt='events'/>
+
+                  </InputAdornment>
+                ),
+              }}
             />
         ) }
         />
 
-
+<Typo style={{ marginTop:'24px' }} >{t("Branch")}</Typo>
 <Controller
             name='branch_id'
             control={control}

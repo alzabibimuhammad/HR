@@ -8,7 +8,8 @@ export const ResignedData = elements => {
       last_name: element?.last_name,
       role: element?.role,
       specialization:element?.specialization,
-      image:element?.user_info?.image
+      user_info:element?.user_info?.image,
+      department:element?.department?.name?element?.department?.name:'---'
     }
   })
 }

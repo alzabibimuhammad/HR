@@ -257,7 +257,9 @@
   "Out Eatly&Arraived Late":"خرج مبكرا وجاء متأخرا",
   "Arrived but forgot to checkout":"وصل ولكن نسى تسجيل الخروج",
   "Arrived late & forgot to checkout":"وصل متأخرا و نسى تسجيل الخروج",
+  "Out early & Arraived Late":"وصل متأخرا و خرج مبكرا",
   "Next":"التالي",
+
   "Back":"السابق",
   "Events":"الأحداث",
   "Salary":"مرتب",
@@ -579,6 +581,18 @@
   "review":"تقييم",
   "Amount":"الكمية",
   "Edit Employee":"تعديل موظف",
-  "Attendance":"الحضور"
+  "Attendance":"الحضور",
+  "department":"القسم",
+  "Accept":"قبول",
+  "Rejected":"مرفوض",
+  "Accepted":"مقبول",
+  "See More":"عرض أكثر",
+  "See Less":"عرض أقل",
+  "Departments":"أقسام",
+  "Department ID":"معرف القسم",
+  "Department Name":"اسم القسم",
+  "Add Department":"اضافة قسم",
+  "ADD DEPARTMENT":"اضافة قسم",
+  "Department Leader":"قائد القسم"
 
 }

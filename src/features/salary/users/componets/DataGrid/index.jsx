@@ -119,9 +119,9 @@ const SalaryDataGrid = ({ rows }) => {
 
   return (
     <>
-      <Typography className='Pagetitle' >
+      <p className='Pagetitle' >
         {t('Salaries')}
-      </Typography>
+      </p>
       <Box sx={{ margin: 0, marginTop: '24px', padding: 0 }}></Box>
 
       <Card>

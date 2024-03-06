@@ -296,7 +296,7 @@ export default function CollapsibleTable(Data, setEditData) {
           onClick={handleDrawerOpen}
         >
           <AddIcon/>
-          {t('ADD TEAM')}
+          {t('Add Department')}
         </Button>
       </Stack>
 
@@ -304,13 +304,13 @@ export default function CollapsibleTable(Data, setEditData) {
         <DrawerForm open={openParent} setOpenParent={setOpenParent} />
       </Box>
 
-      <TableContainer   component={Paper}>
+      <TableContainer component={Paper}>
         <Table aria-label='collapsible table'>
           <TableHead>
             <TableRow>
-              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' >{t('Team Name')}</TableCell>
-              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ width: '10%' }}>{t('Team ID')}</TableCell>
-              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ left: 0, width: '70%', textAlign: 'right' }}>{t('Action')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'sx={{ width:'19%' }} >{t('Department Name')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ width: '19%' }}>{t('Department ID')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ left: 0, width: '62%', textAlign: 'right' }}>{t('Action')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

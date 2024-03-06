@@ -62,10 +62,10 @@ const List = ({ rows }) => {
 
   return (
 <>
-    <Typography className='Pagetitle' >
+    <p className='Pagetitle' >
     {t("Contracts")}
 
-    </Typography>
+    </p>
     <Card sx={{ marginTop:'24px' }} >
       <CardContent>
 

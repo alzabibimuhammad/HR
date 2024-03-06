@@ -76,9 +76,9 @@ const SecretariatsTable = ({ rows }) => {
 
   return (
     <>
-      <Typography className='Pagetitle'>
+      <p className='Pagetitle'>
         {t('Secretariats')}
-      </Typography>
+      </p>
       <Card sx={{ marginTop:'24px' }}>
         <CardContent>
           <Stack

@@ -69,7 +69,7 @@ const Absence = ({ rows }) => {
 
   return (
     <>
-    <Typography className='Pagetitle' >{t('Absence')}</Typography>
+    <p className='Pagetitle' >{t('Absence')}</p>
       <Card sx={{ marginTop:'24px' }}>
         <CardContent>
 

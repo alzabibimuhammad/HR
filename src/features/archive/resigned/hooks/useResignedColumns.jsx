@@ -1,9 +1,10 @@
 // Import necessary components and libraries
 import React, { useMemo, useState } from 'react';
-import { Avatar, Typography } from '@mui/material';
+import { Avatar, Stack, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { setProfileTap } from 'src/store/apps/user';
+import Link from 'next/link';
 
 const useResignedColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false);
@@ -42,47 +43,48 @@ const useResignedColumns = () => {
 
   return useMemo(() => [
 
-      {
-        field: '',
-        headerName: t("Employee"),
-        disableClickEventBubbling: true,
-        flex:1,
-        renderCell: (params) => {
-              return (
-              <>
-              <Avatar src={params?.row?.image}  />
-              <Typography  style={{fontSize:'14px', marginLeft:'2px' }} >{params?.row?.first_name}</Typography>
-              <Typography style={{ fontSize:'14px',marginLeft:'3px' }} >{params?.row?.last_name}</Typography>
-              </>
-            );
-          },
-      },
+    {
+      field: '',
+      headerName: t('Employee'),
+       disableClickEventBubbling: true,
+      flex: 2,
+      renderCell: params => {
+        return (
+          <Link href={`/profile/${params?.row?.id}`} style={{ display: 'flex', textDecoration: 'none', alignItems: 'center' }}>
+            <Avatar sx={{width:'36px',height:'36px'}} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
+            <Stack marginLeft={'12px'} direction={'column'}>
+              <Typography className='custome-data-grid-font' >{params?.row?.first_name} {params?.row?.last_name}</Typography>
+              <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
+            </Stack>
+          </Link>
+        )
+      }
+    },
     {
       field: 'role',
       headerName: t("Role"),
       disableClickEventBubbling: true,
-      flex:1,
+      flex:1.5,
       renderCell: (params) => {
         return (
-        <Typography sx={{ fontSize:'14px' }} >
+        <Typography className='custome-data-grid-font' >
           {t(params?.row?.role)}
         </Typography>
       );
     },
     },
     {
-      field: 'specialization',
-      headerName: t("Specialization"),
+      field: 'department',
+      headerName: t("Department"),
       disableClickEventBubbling: true,
-      flex:1,
+      flex:1.5,
       renderCell: (params) => {
         return (
-          <Typography sx={{ fontSize:'14px' }} >
-          {params?.row?.specialization}
+        <Typography className='custome-data-grid-font' >
+          {t(params?.row?.department)}
         </Typography>
       );
     },
-
     },
 
 

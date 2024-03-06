@@ -13,7 +13,7 @@ export default function Employees() {
   return (
     <Grid container spacing={4}>
     <Grid item xs={12}>
-    <Typography className='Pagetitle' >{t('Departments')}</Typography>
+    <p className='Pagetitle' >{t('Departments')}</p>
 
       <Card sx={{ marginTop:'24px',borderRadius:'12px' }} >
         <CardContent >

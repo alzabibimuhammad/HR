@@ -47,6 +47,7 @@ export default function AddNote({user_id, open, setOpen }) {
     setOpen(false)
 
   }
+
   return (
     <CenteredDrawer
       anchor='top'
@@ -72,7 +73,7 @@ export default function AddNote({user_id, open, setOpen }) {
 
             />
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '7px', gap: '4px', marginTop: '8px' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '7px', gap: '4px', marginTop: '8px',marginRight: {sm:"15px"} }}>
           <Button onClick={handleDrawerClose}>Cancel</Button>
           <Button
             sx={{ backgroundColor: '#6AB2DF', color: '#fff', ':hover': { color: '#fff', backgroundColor: '#2A4759' } }}

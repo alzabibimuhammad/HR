@@ -36,6 +36,13 @@ import useGetDecision from './manage/hook/useGetDecision'
 import ReviewsReport from './reviews'
 import Download from './download'
 import NoteReport from './notesReport'
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
+
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import DatePacker from './datePacker'
+import { ShowErrorToast } from 'src/utiltis/showErrorToast'
 
 
 
@@ -45,6 +52,7 @@ const Profiles = ({ data, tab }) => {
   const [SelecetedDate, SetSelectedDate] = useState()
 
   const [userData, setuserData] = useState()
+
 
   const userDataClean = userData?.data?.data[0]
   const store = useSelector(state => state.user)
@@ -76,7 +84,16 @@ const Profiles = ({ data, tab }) => {
   }, [data])
 
 
+
+
+
+
+
+
+
+
   return (
+    <>
     <Stack overflowX='hidden' direction={'column'} container spacing={{ sm: 15, xs: 6 }}>
       <Box overflowX='hidden' item xs={12} sx={{ height: '120px', zIndex: 999 }} marginTop={{ sm: '0' }}>
         <UserProfileHeader
@@ -86,14 +103,14 @@ const Profiles = ({ data, tab }) => {
           values={value}
         />
       </Box>
-
       {value == 1 ? (
-        <Stack direction={{ sm: 'row', xs: 'column' }} width={'100%'} spacing={{ sm: 5, xs: 1 }}>
+        <Stack   direction={{ sm: 'row', xs: 'column' }} width={'100%'} spacing={{  xs: 1 }}>
           <Stack
             direction={'column'}
-            width={{ sm: '50%', xs: '100%' }}
+            width={{ sm: '61.2%', xs: '100%' }}
             height={{ sm: '100%' }}
             spacing={{ sm: 2, xs: 1 }}
+            sx={{marginRight:"32px",marginTop:"24px"}}
           >
             <Box>
               <AboutOverivew userDataClean={userDataClean} Data={data} />
@@ -102,25 +119,32 @@ const Profiles = ({ data, tab }) => {
               <ReviewsReport SelecetedDate={SelecetedDate}  />
             </Box>
           </Stack>
-          <Stack width={{ sm: '50%', xs: '100%' }} spacing={{ sm: 2, xs: 1 }} direction={'column'}>
-            <Box width={'100%'}>
-              <CustomDatePicker setUserData={setuserData} SetSelectedDate={SetSelectedDate} />
+          <Stack  width={{ sm: '50%', xs: '100%' }}  direction={'column'}>
+            <Box sx={{marginTop:"24px"}} width={'100%'}>
+
+
+
+            <DatePacker setUserData={setuserData} SetSelectedDate={SetSelectedDate}/>
+
+
+              {/* <CustomDatePicker setUserData={setuserData} SetSelectedDate={SetSelectedDate} /> */}
+
             </Box>
-            <Box>
+            <Box sx={{marginTop:"24px"}}>
               <Download ProfileData={ProfileData} user={userData} />
             </Box>
 
-            <Box width={'100%'} height={'20% !important '}>
+            <Box sx={{marginTop:"24px"}} width={'100%'} height={'20% !important '}>
               <NoteReport user_id={id} />
             </Box>
           </Stack>
         </Stack>
       ) : null}
       {value == 2 ? (
-        <Stack direction={{ sm: 'row', xs: 'column' }} spacing={{ sm: 5, xs: 1 }}>
+        <Stack  direction={{ sm: 'row', xs: 'column' }} spacing={{ sm: 9, xs: 1 }}>
           <Stack
             sx={{ height: '100%' }}
-            spacing={{ sm: 5, xs: 1 }}
+            spacing={{ sm: 8, xs: 1 }}
             width={{ sm: '40%', xs: '100%' }}
             direction={'column'}
           >
@@ -128,7 +152,7 @@ const Profiles = ({ data, tab }) => {
             <NoteReport user_id={id} />
           </Stack>
 
-          <Stack width={{ sm: '60%', xs: '100%', height: '100%' }} spacing={{ sm: 5, xs: 1 }} direction={'column'}>
+          <Stack width={{ sm: '60%', xs: '100%', height: '100%' }} spacing={{ sm: 8, xs: 1 }} direction={'column'}>
             <Skills ProfileData={ProfileData} />
             <Employment ProfileData={ProfileData} />
           </Stack>
@@ -145,6 +169,8 @@ const Profiles = ({ data, tab }) => {
         </Stack>
       ) : null}
     </Stack>
+    </>
+
   )
 }
 

@@ -4,8 +4,7 @@ import { Box, Stack, styled } from '@mui/system'
 import Divider from '@mui/material/Divider'
 
 const PDFGenerator = ({user,ProfileData,contentRef}) => {
-  console.log("🚀 ~ PDFGenerator ~ user:", user)
-  console.log("🚀 ~ PDFGenerator ~ ProfileData:", ProfileData)
+
   const  data = user?.data?.data?.[0]
 
 

@@ -19,7 +19,7 @@ export default function ReviewsReport(SelecetedDate) {
   const total = data?.data?.data?.reduce((total , percentage)=>total + percentage?.percentage, 0)
 
   return (
-    <Card>
+    <Card sx={{marginTop:"24px",borderRadius:"12px"}}>
       <CardContent>
         <Stack direction={'column'} spacing={1}>
         <Typography fontSize={'20px'} color={'#8090A7'}>

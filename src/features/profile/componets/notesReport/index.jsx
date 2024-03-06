@@ -49,7 +49,7 @@ const NoteReport = (user_id) => {
   }
 
   return (
-    <Box height={'100%'} overflow={{ sm: 'auto', xs: 'hidden' }}>
+    <Box  height={'100%'} overflow={{ sm: 'auto', xs: 'hidden' }}>
       <Card>
         <CardContent>
           <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'} >

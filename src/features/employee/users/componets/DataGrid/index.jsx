@@ -183,7 +183,7 @@ const Users = ({ rows }) => {
             </Stack>
           </AccordionDetails>
         </Accordion>
-        <DrawerForm open={openParent} setOpenParent={setOpenParent} />
+          <DrawerForm open={openParent} setOpenParent={setOpenParent} />
       </Box>
 
       <Card sx={{borderRadius:'12px', marginTop:'24px' }}>

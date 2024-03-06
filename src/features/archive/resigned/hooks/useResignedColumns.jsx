@@ -37,7 +37,7 @@ const useResignedColumns = () => {
     setIsDeletePopupOpen(false)
   };
 
-  const handleProfileTap=_=>{
+  const handleProfileTap = _ => {
     dispatch(setProfileTap(2))
   }
 
@@ -46,12 +46,12 @@ const useResignedColumns = () => {
     {
       field: '',
       headerName: t('Employee'),
-       disableClickEventBubbling: true,
+      disableClickEventBubbling: true,
       flex: 2,
       renderCell: params => {
         return (
           <Link href={`/profile/${params?.row?.id}`} style={{ display: 'flex', textDecoration: 'none', alignItems: 'center' }}>
-            <Avatar sx={{width:'36px',height:'36px'}} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
+            <Avatar sx={{ width: '36px', height: '36px' }} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
             <Stack marginLeft={'12px'} direction={'column'}>
               <Typography className='custome-data-grid-font' >{params?.row?.first_name} {params?.row?.last_name}</Typography>
               <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
@@ -64,28 +64,47 @@ const useResignedColumns = () => {
       field: 'role',
       headerName: t("Role"),
       disableClickEventBubbling: true,
-      flex:1.5,
+      flex: 1.5,
       renderCell: (params) => {
         return (
-        <Typography className='custome-data-grid-font' >
-          {t(params?.row?.role)}
-        </Typography>
-      );
-    },
+          <Typography className='custome-data-grid-font' >
+            {t(params?.row?.role)}
+          </Typography>
+        );
+      },
     },
     {
       field: 'department',
       headerName: t("Department"),
       disableClickEventBubbling: true,
-      flex:1.5,
+      flex: 1.5,
       renderCell: (params) => {
         return (
-        <Typography className='custome-data-grid-font' >
-          {t(params?.row?.department)}
-        </Typography>
-      );
+          <Typography className='custome-data-grid-font' >
+            {t(params?.row?.department)}
+          </Typography>
+        );
+      },
     },
+    {
+      field: 'date',
+      headerName: t("Date"),
+      disableClickEventBubbling: true,
+      flex: 1.5,
+      renderCell: (params) => {
+        return (
+          <Stack>
+            <Typography className='custome-data-grid-font' >
+              {t(params?.row?.date)}
+            </Typography>
+            <Typography className='custome-data-grid-font2' >
+              {params?.row?.time}
+            </Typography>
+        </Stack>
+        );
+      },
     },
+
 
 
 

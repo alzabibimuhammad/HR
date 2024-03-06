@@ -176,9 +176,9 @@ export default function CollapsibleTable(Data ) {
 
   return (
     <>
-         <Typography className='Pagetitle'>
-            {t('Reports List')}
-          </Typography>
+         <p className='Pagetitle'>
+            {t('Reports')}
+          </p>
     <Card sx={{ marginTop:'24px' }} >
       <CardContent>
         <Stack direction={'column'} spacing={2} >

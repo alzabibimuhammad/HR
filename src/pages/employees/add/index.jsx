@@ -190,9 +190,12 @@ const handleDataEditSubmit = data => {
 
 return (
   <>
-    {ShowUser ?
-      <>
-        <Box width={'100%'} display={'flex'} justifyContent={'end'}>
+
+
+        <Box width={'100%'} display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
+        <p className='Pagetitle'>
+        {ShowUser.data.data.length === 0 ? t("Add Employee") : t("Edit Employee")}
+      </p>
           <Button
             type='submit'
             sx={{
@@ -322,8 +325,7 @@ return (
               </Box>
             </Stack>
           </Stack>
-        </>
-        : null}
+
 
 
     </>

@@ -67,7 +67,7 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
 
   return (
     <Stack height={'100%'}>
-      <Typography className='Pagetitle' >{t('Registeration')}</Typography>
+      <p className='Pagetitle' >{t('Registeration')}</p>
       <Card sx={{ marginTop:'24px' }} >
         <CardContent>
 

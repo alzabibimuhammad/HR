@@ -158,7 +158,7 @@ const PDFGenerator = ({user,ProfileData,contentRef}) => {
   </tr>
   <tr>
     <td>health_status  : </td>
-    <td>{ProfileData?.user_info.health_status}</td>
+    <td>{ProfileData?.user_info?.health_status}</td>
   </tr>
 
 

@@ -14,7 +14,7 @@ const navigation = () => {
           path:"/employees/users"
         },
         {
-          title:"Teams",
+          title:"Departments",
           path:"/employees/team"
         },
         {

@@ -135,9 +135,9 @@ const Users = ({ rows }) => {
 
   return (
     <>
-         <Typography variant='h4' className='Pagetitle' paddingBottom={'10px'}>
+         <p  className='Pagetitle' paddingBottom={'10px'}>
             {t('Employees')}
-          </Typography>
+          </p>
       <Box sx={{ marginTop:'24px',margin: 0, padding: 0  }}>
         <Accordion  >
           <AccordionSummary  expandIcon={<ExpandMoreIcon />} aria-controls='panel2-content' id='panel2-header'>

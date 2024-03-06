@@ -1,4 +1,5 @@
   export const InquiriesData = elements => {
+  console.log("🚀 ~ InquiriesData ~ elements:", elements)
 
     return elements?.data?.data?.map(element => {
 
@@ -14,6 +15,8 @@
         employee:element?.user?.first_name+" "+element?.user?.last_name ,
         status:element?.status,
         time:time,
+        specialization:element?.user?.specialization,
+        user_info:element?.user?.user_info?.image
 
       }
     })

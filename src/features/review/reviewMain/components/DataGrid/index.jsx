@@ -36,9 +36,9 @@ const ReviewFeature = ({ Data }) => {
 
   return (
     <>
-            <Typography className='Pagetitle'>
+            <p className='Pagetitle'>
         {t("Reviews")}
-        </Typography>
+        </p>
       <Card sx={{ marginTop:'24px' }} >
         <CardContent>
           <Stack direction={'column'} spacing={3} >

@@ -512,12 +512,14 @@ line-height: normal !important;
 }
 
 .Pagetitle{
-  color: var(--blue-gray, #8090A7) !important;
-  font-size: 24px !important;
-  font-style: normal !important;
-  font-weight: 600 !important;
-  line-height: normal !important;
-  letter-spacing: 1.2px !important;
+  margin: 0;
+  padding: 0;
+  color: var(--blue-gray, #8090A7) ;
+  font-size: 24px ;
+  font-style: normal;
+  font-weight: 600 ;
+  line-height: normal;
+  letter-spacing: 1.2px;
 }
 
 

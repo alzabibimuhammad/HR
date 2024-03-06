@@ -39,31 +39,31 @@ const Inquiries = ({ rows }) => {
 
   const handleStatusChange = e => {
     setStatus(e.target.value)
-    if(e.target.value)
-     setStatus(e.target.value)
+    if (e.target.value)
+      setStatus(e.target.value)
     else
       setStatus(null)
 
   }
   useEffect(() => {
-      let filteredData = InquiriesData(rows);
+    let filteredData = InquiriesData(rows);
 
-      if (status)filteredData = filteredData.filter((value,index) => value.status === status);
-      if (title)filteredData = filteredData.filter((value,index) => value.Title === title);
-      if (date)filteredData = filteredData.filter((value,index) => value.Date === date);
-      setFdata(filteredData);
+    if (status) filteredData = filteredData.filter((value, index) => value.status === status);
+    if (title) filteredData = filteredData.filter((value, index) => value.Title === title);
+    if (date) filteredData = filteredData.filter((value, index) => value.Date === date);
+    setFdata(filteredData);
 
   }, [status, title, date, rows]);
 
-  const handleTitleChange =e=>{
+  const handleTitleChange = e => {
     const titleData = e.target.value
 
 
-    if(titleData)
+    if (titleData)
       setTitle(titleData)
     else
       setTitle(null)
-    }
+  }
 
   const gridStyles = {
     root: {
@@ -109,25 +109,26 @@ const Inquiries = ({ rows }) => {
     } else setFdata(InquiriesData(rows))
   }
 
-  const handleDate =e=>{
+  const handleDate = e => {
     const dateChange = e.target.value
-    if(dateChange)
-    setDate(dateChange)
-  else
-    setDate(null)
+    if (dateChange)
+      setDate(dateChange)
+    else
+      setDate(null)
 
   }
   return (
     <>
-      <Grid container spacing={4}>
+      <p className='Pagetitle'>
+        {t('Inquiries')}
+      </p>
+      <Grid marginTop={'24px'} container spacing={4}>
         <Grid item xs={12}>
           <Card>
             <CardContent>
-              <Typography variant='h4' paddingBottom={'10px'}>
-                {t('Inquiries List')}
-              </Typography>
-              <Stack direction={'row'} width={{ sm: '50%', xs: '100%' }} spacing={3} alignItems={'center'}>
-                <Box mb={2}>
+
+              <Stack direction={'row'} width={{ sm: '100%', xs: '100%' }} spacing={3} alignItems={'center'}>
+                <Box mb={2} width={{ sm: '120px', xs: '100px' }} >
                   <Show10 setShow={setShow} />
                 </Box>
                 <TextField
@@ -151,7 +152,7 @@ const Inquiries = ({ rows }) => {
                     )
                   }}
                   onChange={handelSearch}
-                  sx={{ paddingLeft: '8px', backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+                  sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none', width: { sm: '320px', xs: '100%' } }}
                   size='small'
                 />
               </Stack>
@@ -162,27 +163,31 @@ const Inquiries = ({ rows }) => {
                 sx={{
                   gap: '10px',
                   width: '100%',
-                  mb: '12px'
+                  mb: '12px',
+                  mt: '24px'
                 }}
               >
-                <TextField type='date' size='small' fullWidth onChange={handleDate} />
+                <Typography className='filterTitle' >{t('Filters')}</Typography>
+                <TextField type='date' size='small' sx={{ width: { sm: '320px', xs: '100%', md: '320px' } }}
+                  onChange={handleDate} />
                 <TextField
                   select
                   size='small'
-                  fullWidth
+                  sx={{ width: { sm: '320px', xs: '100%', md: '320px' } }}
+
                   value={title}
                   onChange={handleTitleChange}
                   label={t('Title')}
                 >
                   <MenuItem value=''>{t('Title')}</MenuItem>
                   {Array.from(titleData).map(element => (
-                      <MenuItem key={element} value={element}>{t(element)}</MenuItem>
-                    ))}
+                    <MenuItem key={element} value={element}>{t(element)}</MenuItem>
+                  ))}
                 </TextField>
                 <TextField
                   select
                   size='small'
-                  fullWidth
+                  sx={{ width: { sm: '320px', xs: '100%', md: '320px' } }}
                   value={status}
                   onChange={handleStatusChange}
                   label={t('Action')}
@@ -196,7 +201,7 @@ const Inquiries = ({ rows }) => {
 
               <Divider sx={{ m: '0 !important' }} />
 
-              <CustomDataGrid show={show} columns={columns} rows={fdata || []} sx={gridStyles.root} rowHeight={120} />
+              <CustomDataGrid show={show} columns={columns} rows={fdata || []} sx={gridStyles.root} rowHeight={108} />
             </CardContent>
           </Card>
         </Grid>

@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 export default function Skills({ ProfileData }) {
   const { t } = useTranslation()
+
   const Typo = styled(Typography)(() => ({
     fontSize: '14px',
     fontWeight: '500',
@@ -33,7 +34,7 @@ export default function Skills({ ProfileData }) {
   }))
 
   return (
-    <Card>
+    <Card sx={{marginTop:"24px",borderRadius:"12px"}}>
       <CardContent>
         <Stack spacing={2} direction={'column'}>
           <StackRow>
@@ -106,20 +107,20 @@ export default function Skills({ ProfileData }) {
           </Stack>
 
           <Stack direction={'column'}>
-            <Typo>{t('Languages')}:</Typo>
-            <ul style={{ padding: 0, margin: 0, marginLeft: '5%' }}>
-              {ProfileData &&
-                ProfileData?.languages &&
-                ProfileData?.languages?.map((val, index) => (
-                  <li key={index}>
-                    <StackRow>
-                      <TypoVal>{val?.languages}</TypoVal>
-                      <Rating name='size-medium' readOnly defaultValue={val.rate} />
-                    </StackRow>
-                  </li>
-                ))}
-            </ul>
-          </Stack>
+  <Typo>{t('Languages')}:</Typo>
+  <ul style={{display:"flex",flexDirection:"column",gap:"5px"}} className='language-list'>
+    {ProfileData &&
+      ProfileData?.languages &&
+      ProfileData?.languages?.map((val, index) => (
+        <li key={index} className='language-item'>
+          <StackRow className='Rating'>
+            <TypoVal>{val?.languages}</TypoVal>
+            <Rating sx={{marginLeft:"6px"}} name='size-medium' readOnly defaultValue={val.rate} />
+          </StackRow>
+        </li>
+      ))}
+  </ul>
+</Stack>
         </Stack>
       </CardContent>
     </Card>

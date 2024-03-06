@@ -35,38 +35,38 @@ export default function Mange({id}) {
 
 
   return (
-    <Grid container spacing={2}>
-    <Grid item xs={12} md={6}>
+    <Grid container spacing={8}>
+    <Grid item xs={12} sx={{marginTop:"24px"}} md={6}>
       {/* Warnings section */}
       <Warnings id={id} />
       {/* End Warnings section */}
 
       {/* Alerts section */}
-      <Box sx={{ marginTop: '15px' }}>
+      <Box sx={{ marginTop: '24px' }}>
         <Alerts id={id} />
       </Box>
       {/* End Alerts section */}
 
       {/* Penalties section and translate */}
-      <Box sx={{ marginTop: '15px' }}>
+      <Box sx={{ marginTop: '24px' }}>
         <Penalties id={id} />
       </Box>
       {/* End Penalties section */}
     </Grid>
 
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} sx={{marginTop:"24px"}} md={6}>
       {/* Deductions section */}
       <Deductions id={id} />
       {/* End Deductions section */}
 
       {/* Absence section */}
-      <Box sx={{ marginTop: '15px' }}>
+      <Box sx={{ marginTop: '24px' }}>
         <Absence id={id} />
       </Box>
       {/* End Absence section */}
 
       {/* Rewards section */}
-      <Box sx={{ marginTop: '15px' }}>
+      <Box sx={{ marginTop: '24px' }}>
         <Rewards id={id} />
       </Box>
       {/* End Rewards section */}

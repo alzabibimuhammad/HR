@@ -152,8 +152,8 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
     <div>
 
       <Grid >
-        <Grid item xs={12}>
-          <Card>
+        <Grid item xs={12} >
+          <Card >
             <CardContent>
 
               <Box sx={{ mb: 6 }}>

@@ -673,3 +673,28 @@ width: 100% !important;
     border-radius:10px;
 }
  */
+
+.rtl-9reuh9-MuiPickersArrowSwitcher-root{
+  display: none !important;
+ }
+
+ /* .MuiRating-root   {
+  background-color: red !important;
+ } */
+
+ .language-list {
+  padding: 0;
+  margin: 0;
+  margin-left: 8%;
+  margin-top: 10px;
+}
+
+.language-item {
+  margin-bottom: 10px;
+
+}
+
+
+
+
+

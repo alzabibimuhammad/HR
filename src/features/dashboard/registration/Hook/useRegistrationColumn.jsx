@@ -24,13 +24,13 @@ const useRegistrationColumn = () => {
     {
       field: 'first_name',
       headerName: t('First Name'),
-      flex: 7,
+      flex: 3,
       renderCell: params =>(
 
         <Stack onClick={()=>handleViewProfileTap(params?.row?.id)} direction={'row'} sx={{ cursor:'pointer' }} spacing={1}>
           <Avatar sx={{ width:'36px',height:'36px' }} src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} />
           <Stack direction={'column'}>
-            <Typography className='custome-data-grid-font' >{params?.row?.first_name} {params?.row?.last_name}</Typography>
+            <Typography className='custome-data-grid-font' >{params?.row?.first_name} </Typography>
             <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
           </Stack>
         </Stack>
@@ -38,8 +38,8 @@ const useRegistrationColumn = () => {
     },
     {
       field: 'department',
-      headerName: t('Department'),
-      flex: 4,
+      headerName: t('team'),
+      flex: 2,
       renderCell: params =>(
         <Typography className='custome-data-grid-font' >{params?.row?.department}</Typography>
       )
@@ -49,7 +49,7 @@ const useRegistrationColumn = () => {
       headerName: t('Status'),
       headerAlign: 'center',
       align: 'center',
-      flex: 6,
+      flex: 5,
       renderCell: params => {
         return (
           <Box
@@ -57,21 +57,32 @@ const useRegistrationColumn = () => {
               backgroundColor:
                 params?.row?.status === 'Arrived'
                   ? 'rgba(145, 196, 131, 0.20)'
-                  : Boolean(params?.row?.status?.includes('Late'))
+                  : params?.row?.status.includes('Late')
+                  ? 'rgba(106, 178, 223, 0.20) opacity:0.8'
+                  : params?.row?.status === 'Out'
                   ? 'rgba(106, 178, 223, 0.20)'
                   : params?.row?.status === 'out'
                   ? 'rgba(145, 196, 131, 0.20)'
                   : params?.row?.status === 'Absent'
-                  ? 'rgba(223, 46, 56, 0.20)'
-                  : Boolean(params?.row?.status?.includes('Early'))
-                  ? 'rgba(106, 178, 223, 0.20)'
+                  ? 'rgba(223, 46, 56, 0.20) opacity:0.8'
                   : 'rgba(223, 46, 56, 0.20)',
-
-              borderRadius: '4px',
-              display: 'flex',
-              padding: '4px 8px',
-              alignItems: 'flex-start',
-              gap: '10px'
+              color:
+                params?.row?.status === 'Arrived'
+                  ? '#91C483'
+                  : params?.row?.status.includes('Late')
+                  ? '#6AB2DF'
+                  : params?.row?.status === 'Out'
+                  ? '#6AB2DF'
+                  : params?.row?.status === 'Absent'
+                  ? '#DF2E38'
+                  : '#DF2E38',
+                
+                  
+              fontSize: '12px',
+              height: '30px',
+              width: 'auto',
+              padding: '5px',
+              borderRadius:'4px'
             }}
           >
             {' '}
@@ -107,7 +118,7 @@ const useRegistrationColumn = () => {
     {
       field: 'checkIn',
       headerName: t('Check in'),
-      flex: 3,
+      flex: 2,
       renderCell: params =>(
         <Typography className='custome-data-grid-font' sx={{ lineHeight:'25px',letterSpacing:'0.07px' }} >{params?.row?.checkIn}</Typography>
       )
@@ -115,7 +126,7 @@ const useRegistrationColumn = () => {
     {
       field: 'checkOut',
       headerName: t('Check out'),
-      flex: 3,
+      flex: 2,
       renderCell: params =>(
         <Typography className='custome-data-grid-font' sx={{ lineHeight:'25px',letterSpacing:'0.07px' }} >{params?.row?.checkOut}</Typography>
       )

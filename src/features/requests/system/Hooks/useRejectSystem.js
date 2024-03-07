@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { showSuccesToast } from "src/utiltis/toastSecces";
 import RejectSystem from "../../api/RejectSystem";
+import { showErrorToast } from "src/utiltis/showErrorToast";
 
 export const useRejectSystem = () => {
   const queryClient = useQueryClient();
@@ -13,7 +14,7 @@ export const useRejectSystem = () => {
       queryClient.invalidateQueries("system");
     },
     onError: (data) => {
-      showSuccesToast(data.data.message,"")
+      showErrorToast(data.data.message,"")
     },
   });
 };

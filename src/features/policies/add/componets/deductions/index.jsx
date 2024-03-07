@@ -20,7 +20,7 @@ export default function Deductions({Controller,control}) {
 
 
   return (
-    <Card>
+    <Card sx={{borderRadius: "12px"}}>
     <CardContent>
       <Stack direction={'column'} spacing={2}>
         <Typography fontSize={'20px'}>{t('Deductions')}</Typography>

@@ -3,7 +3,8 @@ import React, {  useMemo, useState } from 'react'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import { Avatar,  Chip, IconButton, Typography } from '@mui/material'
-import VisibilityIcon from '@mui/icons-material/Visibility'
+
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import { useTranslation } from 'react-i18next'
 import AlertDialog from '../Componets/dialog'
 import Link from 'next/link'
@@ -118,7 +119,7 @@ const useContractColumns = () => {
                 <IconButton>
                   <VisibilityIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
                     Details
-                  </VisibilityIcon>
+                  </RemoveRedEyeOutlinedIcon>
                 </IconButton>
               </Link>
             </Stack>

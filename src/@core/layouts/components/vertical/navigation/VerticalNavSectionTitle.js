@@ -45,7 +45,7 @@ const VerticalNavSectionTitle = props => {
         {navCollapsed && !navHover ? (
           <Icon icon='tabler:separator' />
         ) : (
-          <Typography noWrap variant='caption' sx={{ textTransform: 'uppercase' }}>
+          <Typography noWrap variant='caption' sx={{ textTransform: 'uppercase',fontSize: "16px",color:'#8090A7' }}>
             <Translations text={item.sectionTitle} />
           </Typography>
         )}

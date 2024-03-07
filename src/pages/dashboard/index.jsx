@@ -47,8 +47,7 @@ export default function Dashboard() {
         </Box>
 
       </Grid>
-
-
+    
       <Grid sx={{position:"relative",borderRadius:"12px"}} item sm={4} xs={12}>
         <Attendance  Data={percentageData} />
       </Grid>

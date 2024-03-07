@@ -24,7 +24,7 @@ import themeConfig from 'src/configs/themeConfig'
 import UserIcon from 'src/layouts/components/UserIcon'
 import Translations from 'src/layouts/components/Translations'
 import CanViewNavLink from 'src/layouts/components/acl/CanViewNavLink'
-
+import EllipseIcon from './../../../../../../public/images/IconInput/Ellipse'
 // ** Util Imports
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 import { handleURLQueries } from 'src/@core/layouts/utils'
@@ -57,7 +57,7 @@ const HorizontalNavLink = props => {
   // ** Hook & Vars
   const router = useRouter()
   const { navSubItemIcon, menuTextTruncate } = themeConfig
-  const icon = item.icon ? item.icon : navSubItemIcon
+  const icon = item.icon ? item.icon : <EllipseIcon/>
   const Wrapper = !hasParent ? List : Fragment
 
   const isNavLinkActive = () => {

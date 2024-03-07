@@ -129,7 +129,7 @@ export default function Policies() {
         <Stack  spacing={6} direction={'column'}>
           <Box  >
 
-            <WorkTime errors={errors} defaultValues={defaultValues} control={control} Controller={Controller} setDays={setDays} days={days}/>
+            <WorkTime  errors={errors} defaultValues={defaultValues} control={control} Controller={Controller} setDays={setDays} days={days}/>
 
           </Box>
 

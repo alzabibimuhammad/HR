@@ -11,6 +11,7 @@ import axios from 'axios'
 import authConfig from 'src/configs/auth'
 
 import toast from 'react-hot-toast';
+import { width } from '@mui/system';
 
 // ** Defaults
 const defaultProvider = {
@@ -54,25 +55,20 @@ const AuthProvider = ({ children }) => {
          const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
          router.replace(redirectURL)
          toast.success(`${response.data.message} `, {
-           position: "top-left",
-           style: {
-             backgroundColor: "green",
-             width: "500px",
-           },
+           
+           duration: 10000,
+           className: "full-width-toast", 
          });
+ 
       })
        .catch(err => {
-         toast.error(`${err.response?.status === 401 ? "Unauthorized":err?.message}  `, {
-           position: "top-left",
-           style: {
-             backgroundColor: "#e20d29",
-             width: "500px",
-           },
-         });
-       })
+    
+        toast.custom(<div style={{backgroundColor:'#fff',width:'100%',  display:"flex", justifyContent:'end'}}>Hello World</div>);
+  })
   }
 
   const handleLogout = () => {
+    console.log('done')
     setUser(null)
     window.localStorage.removeItem('userData')
     window.localStorage.removeItem(authConfig.storageTokenKeyName)

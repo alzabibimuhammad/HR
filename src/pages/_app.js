@@ -124,8 +124,8 @@ const [queryClient]= React.useState(()=> new QueryClient)
                         </QueryClientProvider>
                       </AclGuard>
                     </Guard>
-                    <ReactHotToast >
-                      <Toaster  position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast',style: {color: '#fff'}, }} />
+                    <ReactHotToast>
+                      <Toaster position={settings.toastPosition} toastOptions={{ className: 'react-hot-toast',style: {color: '#fff',width:"100vh "}, }} />
                     </ReactHotToast>
                   </ThemeComponent>
                 )

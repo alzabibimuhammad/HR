@@ -17,6 +17,9 @@ import { useAccepteRequest } from './useAccepteRequest' // Import the new hook
 import { useRejectRequest } from './useRejectRequest'
 import { Stack } from '@mui/system'
 import Link from 'next/link'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+
 const ITEM_HEIGHT = 162
 
 const useInquiriesColumns = () => {
@@ -80,12 +83,20 @@ const useInquiriesColumns = () => {
     {
       field: 'employee',
       headerName: t('Employee'),
-      flex: 1,
+      flex: 2.5,
       disableClickEventBubbling: true,
       renderCell: params => (
         <Box>
           <Link style={{ textDecoration: 'none' }} href={`/profile/${params?.row?.user_id}`}>
-            <Typography sx={{ fontSize: '14px' }}>{params?.row?.employee}</Typography>
+            <Stack direction={'row'} alignItems={'center'} >
+              <Avatar
+              src={process.env.NEXT_PUBLIC_IMAGES + '/'+params?.row?.user_info}
+              />
+            <Stack ml={'8px'}>
+              <Typography  className='custome-data-grid-font'>{params?.row?.employee}</Typography>
+              <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
+            </Stack>
+            </Stack>
           </Link>
         </Box>
       )
@@ -99,10 +110,10 @@ const useInquiriesColumns = () => {
         return (
           <Stack direction={'column'}>
             <Box>
-              <Typography sx={{ fontSize: '14px' }}>{params?.row?.Date}</Typography>
+              <Typography className='custome-data-grid-font'>{params?.row?.Date}</Typography>
             </Box>
             <Box>
-              <Typography sx={{ color: '#8090A7', fontSize: '12px' }}>{params?.row?.time}</Typography>
+              <Typography className='custome-data-grid-font2'>{params?.row?.time}</Typography>
             </Box>
           </Stack>
         )
@@ -117,7 +128,7 @@ const useInquiriesColumns = () => {
       renderCell: params => {
         return (
           <Box>
-            <Typography sx={{ fontSize: '14px' }}>{params?.row?.Title}</Typography>
+            <Typography className='custome-data-grid-font'>{params?.row?.Title}</Typography>
           </Box>
         )
       }
@@ -136,11 +147,12 @@ const useInquiriesColumns = () => {
         return (
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-              <Typography sx={{ fontSize: '14px' }}>{content?.slice(0, 40) + '...'}</Typography>
+              <Typography className='custome-data-grid-font'>{content?.slice(0, 40) + '...'}</Typography>
             </div>
             {showMoreMap[id] && (
               <div>
-                <Typography sx={{ fontSize: '14px' }}>{content?.slice(40)}</Typography>
+                <Typography className='custome-data-grid-font'>{content?.slice(40)}</Typography>
+
               </div>
             )}
 
@@ -152,7 +164,23 @@ const useInquiriesColumns = () => {
                   color='#8090A7'
                   onClick={() => handleShowMoreClick(params)}
                 >
-                  <p>{showMoreMap[id] ? 'Show Less' : 'Show More'}</p>
+                  <p>
+                    {showMoreMap[id] ? (
+                      <Box display={'flex'} alignItems={'center'}>
+                        <Typography fontSize={'12px'} fontWeight={500} lineHeight={'25px'} color={'#8090A7'}>
+                          {t('See Less')}
+                        </Typography>
+                        <KeyboardArrowUpIcon style={{ cursor: 'pointer', marginLeft: '8px' }} fontSize='10px' />{' '}
+                      </Box>
+                    ) : (
+                      <Box display={'flex'} alignItems={'center'}>
+                        <Typography fontSize={'12px'} fontWeight={500} lineHeight={'25px'} color={'#8090A7'}>
+                          {t('See More')}
+                        </Typography>
+                        <KeyboardArrowDownIcon style={{ cursor: 'pointer', marginLeft: '8px' }} fontSize='10px' />{' '}
+                      </Box>
+                    )}
+                  </p>
                 </Typography>
               </>
             )}
@@ -165,62 +193,18 @@ const useInquiriesColumns = () => {
       field: 'actions',
       headerName: t('Actions'),
       headerAlign: 'center',
-      flex: 1,
+      flex: 2,
       renderCell: params => {
         return (
-          <Stack direction={'row'} width={'100%'} justifyContent={'end'} alignItems={'center'}>
-            <Box>
-              {params.row.status === 'waiting' ? (
-                <Stack direction={'column'} spacing={1}>
-                  <Button
-                    sx={{
-                      width: '100%',
-                      color: '#91C483',
-                      fontWeight: '500',
-                      fontSize: '10px',
-                      backgroundColor: '#DDE6DA',
-                      borderRadius: '4px'
-                    }}
-                    onClick={() => handleApproveClick(params)}
-                  >
-                    {t('Approve')}
-                  </Button>
-                  <Button
-                    sx={{
-                      width: '100%',
-                      color: '#DF2E38',
-                      fontWeight: '500',
-                      fontSize: '10px',
-                      backgroundColor: '#F9D5D7',
-                      borderRadius: '4px'
-                    }}
-                    onClick={() => handleRejectClick(params)}
-                  >
-                    {t('Decline')}
-                  </Button>
-                </Stack>
-              ) : params.row.status === 'rejected' ? (
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#DF2E38' }}>
-                    {t('Declined')}
-                  </Typography>
-                </Box>
-              ) : (
-                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                  <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#91C483' }}>
-                    {t('Approved')}
-                  </Typography>
-                </Box>
-              )}
-            </Box>
-
-            <Box>
+          <Stack direction={'column'} height={'100%'} width={'100%'}>
+            <Box display={'flex'} justifyContent={'end'} pt={'12px'}>
               <IconButton
                 aria-label='more'
                 id='long-button'
                 aria-controls={open ? 'long-menu' : undefined}
                 aria-expanded={open ? 'true' : undefined}
                 aria-haspopup='true'
+                sx={{ padding: 0, margin: 0 }}
                 onClick={event => handleClick(event, params.row)}
               >
                 <MoreVertIcon />
@@ -241,7 +225,6 @@ const useInquiriesColumns = () => {
                   }
                 }}
               >
-
                 <MenuItem sx={{ padding: '0', color: '#3F4458' }} onClick={handleOpenModal}>
                   <Box style={{ textDecoration: 'none' }}>
                     <IconButton>
@@ -260,25 +243,98 @@ const useInquiriesColumns = () => {
                 </MenuItem>
               </Menu>
 
-              <Dialog open={openModal} sx={{ overflowX:'hidden' }}  onClose={handleCloseModal}>
+              <Dialog open={openModal} sx={{ overflowX: 'hidden' }} onClose={handleCloseModal}>
                 <DialogTitle sx={{ fontSize: '20px', fontWeight: '600', color: '#3F4458', textAlign: 'center' }}>
-                {t('Request')}
+                  {t('Request')}
                 </DialogTitle>
                 <DialogContent sx={{ overflowX: 'hidden', width: '100%', height: '100%' }}>
                   <h3>{t('Title Request')}</h3>
                   <p style={{ fontWeight: '400', fontSize: '14px', color: '#3e4458' }}>{rowData?.Title}</p>
-                  <Divider component='' sx={{ width:'80%' }} />
+                  <Divider component='' sx={{ width: '80%' }} />
                   <h3>{t('Date Request')}</h3>
                   <p style={{ fontWeight: '400', fontSize: '14px', color: '#3e4458' }}>{rowData?.Date}</p>
-                  <Divider component='' sx={{ width:'80%' }} />
+                  <Divider component='' sx={{ width: '80%' }} />
                   <h3>{t('Description Request')}</h3>
-                  <p style={{ fontWeight: '400',
-                   fontSize: '14px',
-                    color: '#3e4458',
-                    width:'80%'
-                }}>{rowData?.CONTENT}</p>
+                  <p
+                    style={{
+                      fontWeight: '400',
+                      fontSize: '14px',
+                      color: '#3e4458',
+                      width: '80%'
+                    }}
+                  >
+                    {rowData?.CONTENT}
+                  </p>
                 </DialogContent>
               </Dialog>
+            </Box>
+            <Box display={'flex'} height={'100%'} justifyContent={'end'} pb={'12px'}>
+              {params.row.status === 'waiting' ? (
+                <Stack direction={'row'} alignItems={'end'} spacing={1}>
+                  <Button
+                    sx={{
+                      display: 'flex',
+                      padding: '4px 12px',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      gap: '10px',
+                      borderRadius: '4px',
+                      background: 'rgba(145, 196, 131, 0.20)'
+                    }}
+                    onClick={() => handleApproveClick(params)}
+                  >
+                    <Typography
+                      sx={{
+                        color: 'var(--green, #91C483)',
+                        fontSize: '14px',
+                        fontStyle: 'normal',
+                        fontWeight: 500,
+                        lineHeight: '130%' /* 18.2px */,
+                        textTransform: 'capitalize'
+                      }}
+                    >
+                      {t('Accept')}
+                    </Typography>
+                  </Button>
+                  <Button
+                    sx={{
+                      display: 'flex',
+                      padding: '4px 12px',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      gap: '10px',
+                      borderRadius: '4px',
+                      background: 'rgba(223, 46, 56, 0.20)'
+                    }}
+                    onClick={() => handleRejectClick(params)}
+                  >
+                    <Typography
+                      sx={{
+                        color: 'var(--red, #DF2E38)',
+                        fontSize: '14px',
+                        fontStyle: 'normal',
+                        fontWeight: 500,
+                        lineHeight: '130%' /* 18.2px */,
+                        textTransform: 'capitalize'
+                      }}
+                    >
+                      {t('Reject')}
+                    </Typography>
+                  </Button>
+                </Stack>
+              ) : params.row.status === 'rejected' ? (
+                <Box display={'flex'} height={'100%'} justifyContent={'end'} alignItems={'end'} pb={'12px'}>
+                  <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#DF2E38' }}>
+                    {t('Rejected')}
+                  </Typography>
+                </Box>
+              ) : (
+                <Box display={'flex'} height={'100%'} justifyContent={'end'} alignItems={'end'} pb={'12px'}>
+                  <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#91C483' }}>
+                    {t('Accepted')}
+                  </Typography>
+                </Box>
+              )}
             </Box>
           </Stack>
         )

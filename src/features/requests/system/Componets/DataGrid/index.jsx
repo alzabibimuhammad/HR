@@ -72,14 +72,15 @@ const SystemTable = ({ rows }) => {
 
   return (
     <>
-      <Grid container spacing={4}>
+     <p className='Pagetitle' >{t('System')}</p>
+
+      <Grid mt={'24px'} container spacing={4}>
         <Grid item xs={12}>
           <Card>
             <CardContent>
               <Stack direction={'column'} spacing={3}>
-                <Typography variant='h4'>{t('System')}</Typography>
                 <Stack direction={'row'} width={{ sm: '50%', xs: '100%' }} spacing={3} alignItems={'center'}>
-                  <Box mb={2}>
+                <Box mb={2} width={{ sm:'120px',xs:'100px' }} >
                     <Show10 setShow={setShow} />
                   </Box>
                   <TextField
@@ -109,15 +110,15 @@ const SystemTable = ({ rows }) => {
                       )
                     }}
                     onChange={handelSearch}
-                    sx={{ paddingLeft: '8px', backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+                    sx={{ backgroundColor: '#F5F7FA',border:'none', boxShadow: 'none',width:{sm:'320px',xs:'100%'} }}
                     size='small'
                   />
                 </Stack>
                 <Stack direction={{ sm: 'row', xs: 'column' }} width={'100%'} alignItems={{sm:'center',xs:'start'}} spacing={2}>
-                  <Typography variant='h5'>{t('Filter')}</Typography>
-                  <TextField type='date' size='small' fullWidth onChange={handleDateChange} />
+                  <Typography className='filterTitle' >{t('Filter')}</Typography>
+                  <TextField sx={{ width:{md:'320px',sm:'320px',xs:'100%'} }} type='date' size='small' fullWidth onChange={handleDateChange} />
 
-                  <TextField select value={title} onChange={handleTitleChange} label={t('Title')} size='small' fullWidth>
+                  <TextField sx={{ width:{md:'320px',sm:'320px',xs:'100%'} }} select value={title} onChange={handleTitleChange} label={t('Title')} size='small' fullWidth>
                     <MenuItem value=''>{t('Title')}</MenuItem>
                     {Array.from(titleFilter).map(element => (
                       <MenuItem key={element} value={element}>{t(element)}</MenuItem>

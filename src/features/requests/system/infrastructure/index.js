@@ -1,4 +1,5 @@
   export const SystemData = elements => {
+  console.log("🚀 ~ SystemData ~ elements:", elements)
 
     return elements?.data?.data?.map(element => {
       let countAlert = element?.user?.alert?.length
@@ -18,7 +19,8 @@
         date:element?.lateDate,
         first_name:element?.user?.first_name,
         last_name:element?.user?.last_name,
-        user_info:element?.user?.user_info?.image
+        user_info:element?.user?.user_info?.image,
+        specialization:element?.user?.specialization
       }
     })
   }

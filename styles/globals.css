@@ -512,16 +512,16 @@ line-height: normal !important;
 }
 
 .Pagetitle{
-  color: var(--blue-gray, #8090A7) !important;
-  font-size: 24px !important;
-  font-style: normal !important;
-  font-weight: 600 !important;
-  line-height: normal !important;
-  letter-spacing: 1.2px !important;
+  margin: 0;
+  padding: 0;
+  color: var(--blue-gray, #8090A7) ;
+  font-size: 24px ;
+  font-style: normal;
+  font-weight: 600 ;
+  line-height: normal;
+  letter-spacing: 1.2px;
 }
-th {
-  background-color: #f2f2f2;
-} */
+
 
 .css-2v4r7n-MuiButtonBase-root-MuiPickersDay-root {
   font-size: 14px !important;
@@ -653,7 +653,50 @@ width: 100% !important;
   background-color: transparent !important;
 }
 
+.rtl-1is5gi8-MuiPaper-root-MuiCard-root{
+  border-radius: 12px !important;
+}
+
+.ag-chart-wrapper{
+  border-radius: 12px !important;
+}
+
+.filterTitle{
+  color: var(--blue-gray, #8090A7)!important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: normal !important;
+}
 
 
-/* .rtl-1sdzv1m-MuiPickersCalendarHeader-labelContainer */
+/* .css-1rt6uap-MuiDataGrid-root .MuiDataGrid-columnHeader:last-of-type {
+  background-color: #DCE1E6;
+    border-radius:10px;
+}
+ */
+
+.rtl-9reuh9-MuiPickersArrowSwitcher-root{
+  display: none !important;
+ }
+
+ /* .MuiRating-root   {
+  background-color: red !important;
+ } */
+
+ .language-list {
+  padding: 0;
+  margin: 0;
+  margin-left: 8%;
+  margin-top: 10px;
+}
+
+.language-item {
+  margin-bottom: 10px;
+
+}
+
+
+
+
 

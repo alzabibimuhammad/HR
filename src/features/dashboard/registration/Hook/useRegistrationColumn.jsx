@@ -52,8 +52,7 @@ const useRegistrationColumn = () => {
       flex: 5,
       renderCell: params => {
         return (
-          <Chip
-            label={t(params?.row?.status)}
+          <Box
             sx={{
               backgroundColor:
                 params?.row?.status === 'Arrived'
@@ -62,6 +61,8 @@ const useRegistrationColumn = () => {
                   ? 'rgba(106, 178, 223, 0.20) opacity:0.8'
                   : params?.row?.status === 'Out'
                   ? 'rgba(106, 178, 223, 0.20)'
+                  : params?.row?.status === 'out'
+                  ? 'rgba(145, 196, 131, 0.20)'
                   : params?.row?.status === 'Absent'
                   ? 'rgba(223, 46, 56, 0.20) opacity:0.8'
                   : 'rgba(223, 46, 56, 0.20)',
@@ -83,7 +84,33 @@ const useRegistrationColumn = () => {
               padding: '5px',
               borderRadius:'4px'
             }}
-          />
+          >
+            {' '}
+            <Typography
+              sx={{
+                fontFamily: 'DM Sans',
+                fontSize: '14px',
+                fontStyle: 'normal',
+                fontWeight: 500,
+                lineHeight: '130%',
+                color:
+                  params?.row?.status === 'Arrived'
+                    ? '#91C483'
+                    : Boolean(params?.row?.status?.includes('Late'))
+                    ? '#6AB2DF'
+                    : params?.row?.status === 'out'
+                    ? '#91C483'
+                    : params?.row?.status === 'Absent'
+                    ? '#DF2E38'
+                    : Boolean(params?.row?.status?.includes('Early'))
+                    ? '#6AB2DF'
+                    : '#DF2E38'
+              }}
+            >
+
+              {t(params?.row?.status)}
+            </Typography>
+          </Box>
         )
       }
     },

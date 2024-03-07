@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 export default function PersonalInfo({ProfileData}) {
 
   const {t} = useTranslation()
+
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -39,7 +40,7 @@ export default function PersonalInfo({ProfileData}) {
 
   return (
 
-    <Card >
+    <Card sx={{marginTop:"24px",borderRadius:"12px"}}>
       <CardContent >
         <Stack spacing={2} direction={'column'}>
 

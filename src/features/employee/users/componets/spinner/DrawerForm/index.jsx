@@ -14,12 +14,10 @@ import { useTranslation } from 'react-i18next';
 const drawerWidth = 440;
 
 const CenteredDrawer = styled(Drawer)(({ theme }) => ({
-  width: drawerWidth,
+  width:{sm:'440px',xs:'200px',md:'440px'} ,
   flexShrink: 0,
-
-
   '& .MuiDrawer-paper': {
-    width: drawerWidth,
+    width:{sm:'440px',xs:'200px',md:'440px'} ,
     margin: 'auto',
     top: '20%',
     borderRadius:"12px "
@@ -63,7 +61,7 @@ export default function DrawerForm({ open, setOpenParent }) {
   return (
     <>
     {data?
-    <CenteredDrawer
+    <Drawer
       anchor="top"
       open={open}
       variant="temporary"
@@ -71,7 +69,16 @@ export default function DrawerForm({ open, setOpenParent }) {
         keepMounted: true,
       }}
         onEscapeKeyDown={handleDrawerClose}
-
+      sx={{
+        width:{sm:'440px',xs:'300px',md:'440px'} ,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width:{sm:'440px',xs:'300px',md:'440px'} ,
+          margin: 'auto',
+          top: '20%',
+          borderRadius:"12px "
+        },
+       }}
       >
       <DrawerHeader sx={{color:'#8090A7',padding:'0px 0px 0px 10px' }} >{t('Select the new employee of the month')}</DrawerHeader>
 
@@ -118,7 +125,7 @@ export default function DrawerForm({ open, setOpenParent }) {
     </Box>
     </Stack>
 
-    </CenteredDrawer>
+    </Drawer>
             : null }
             </>
   );

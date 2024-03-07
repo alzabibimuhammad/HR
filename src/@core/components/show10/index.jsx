@@ -15,7 +15,7 @@ export default function Show10({setShow}) {
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box >
 
       <FormControl fullWidth>
         <Box mt={2} justifyContent={'start'} alignItems={'start'} >

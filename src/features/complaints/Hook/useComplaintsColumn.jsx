@@ -8,6 +8,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutline';
 import AlertDialogDelete from '../components/delete'
 import Show from '../components/show'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 
 const useComplaintsColumn = () => {
   const { t } = useTranslation()
@@ -48,9 +50,9 @@ const useComplaintsColumn = () => {
             <Box>
               <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt='' />
             </Box>
-            <Stack ml={1} spacing={1} direction={'row'}>
-              <Typography>{params.row?.first_name}</Typography>
-              <Typography>{params.row?.last_name}</Typography>
+            <Stack ml={1} spacing={1} direction={'column'}>
+              <Typography className='custome-data-grid-font' >{params.row?.first_name} {params.row?.last_name}</Typography>
+              <Typography className='custome-data-grid-font2' > {params.row?.specialization}</Typography>
             </Stack>
             </Link>
         )
@@ -59,7 +61,11 @@ const useComplaintsColumn = () => {
     {
       field: 'date',
       headerName: t('Date'),
-      flex: 2
+      flex: 2,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.date}</Typography>
+
+      )
     },
 
     {
@@ -75,14 +81,14 @@ const useComplaintsColumn = () => {
         return (
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-            <Typography sx={{ fontSize: '14px' }}>
+            <Typography className='custome-data-grid-font'>
               { content?.slice(0, 40) + '...'}
             </Typography>
           </div>
           {showMoreMap[id] && (
                 <div>
 
-                  <Typography sx={{ fontSize: '14px' }}>
+                  <Typography className='custome-data-grid-font'>
                   {content?.slice(40)}
             </Typography>
                 </div>
@@ -96,9 +102,23 @@ const useComplaintsColumn = () => {
                 color="#8090A7"
                 onClick={() => handleShowMoreClick(params)}
               >
-                <p>
-                  {showMoreMap[id] ? "Show Less" : "Show More"}
-                </p>
+                     <p>
+                    {showMoreMap[id] ? (
+                      <Box display={'flex'} alignItems={'center'}>
+                        <Typography fontSize={'12px'} fontWeight={500} lineHeight={'25px'} color={'#8090A7'}>
+                          {t('See Less')}
+                        </Typography>
+                        <KeyboardArrowUpIcon style={{ cursor: 'pointer', marginLeft: '8px' }} fontSize='10px' />{' '}
+                      </Box>
+                    ) : (
+                      <Box display={'flex'} alignItems={'center'}>
+                        <Typography fontSize={'12px'} fontWeight={500} lineHeight={'25px'} color={'#8090A7'}>
+                          {t('See More')}
+                        </Typography>
+                        <KeyboardArrowDownIcon style={{ cursor: 'pointer', marginLeft: '8px' }} fontSize='10px' />{' '}
+                      </Box>
+                    )}
+                  </p>
               </Typography>
 
 

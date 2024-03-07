@@ -18,7 +18,7 @@ const ReviewFeature = ({ Data }) => {
   const [show, setShow] = React.useState(10);
 
   useEffect(() => {
-    
+
     let filterData = ReviewData(Data?.data.data)
     if(date)filterData = filterData?.filter((value,index)=>value?.date==date)
     setRows(filterData)
@@ -35,22 +35,24 @@ const ReviewFeature = ({ Data }) => {
 
 
   return (
-      <Card>
+    <>
+            <p className='Pagetitle'>
+        {t("Reviews")}
+        </p>
+      <Card sx={{ marginTop:'24px' }} >
         <CardContent>
           <Stack direction={'column'} spacing={3} >
-        <Typography variant='h4' paddingBottom={'10px'}>
-        {t("Reviews List")}
-        </Typography>
+
 
           <Stack direction={'row'} width={{sm:'100%',xs:'100%'}} spacing={3} alignItems={'center'} >
                 <Stack width={'100%'} spacing={2} direction={'row'} alignItems={'center'}>
-                <Box mb={2}>
+                <Box mb={2} width={{ sm:'120px',xs:'100px' }} >
                   <Show10 setShow={setShow}/>
                 </Box>
                  <TextField
                   type='date'
                   size='small'
-                  sx={{ width:{sm:'40%',xs:'100%'} }}
+                  sx={{ width:{sm:'320px',md:'320px',xs:'100%'} }}
                   onChange={handelDate}
                   />
           </Stack>
@@ -62,6 +64,7 @@ const ReviewFeature = ({ Data }) => {
     </Stack>
         </CardContent>
       </Card>
+      </>
   )
 }
 

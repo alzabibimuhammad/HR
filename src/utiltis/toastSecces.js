@@ -3,10 +3,10 @@ import toast from 'react-hot-toast';
 
 export const showSuccesToast = (message,SuccessMessageApi) => {
     toast.success(`${message?message:""}    ${SuccessMessageApi?SuccessMessageApi:""} `, {
-        position: "top-left",
+        position: "down",
         style: {
           backgroundColor: "#91C483",
-          width: "500px",
+          width: "100vh",
           color:"#fff",
           fontSize:"16px",
           fontWeight:"600",

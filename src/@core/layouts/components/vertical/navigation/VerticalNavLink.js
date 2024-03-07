@@ -22,6 +22,8 @@ import CanViewNavLink from 'src/layouts/components/acl/CanViewNavLink'
 // ** Util Imports
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 import { handleURLQueries } from 'src/@core/layouts/utils'
+import SvgIconChildren from 'src/layouts/components/vertical/SvgIcon'
+import EllipseIcon from './../../../../../../public/images/IconInput/Ellipse'
 
 // ** Styled Components
 const MenuNavLink = styled(ListItemButton)(({ theme }) => ({
@@ -80,7 +82,7 @@ const VerticalNavLink = ({
 
   // ** Vars
   const { navCollapsed } = settings
-  const icon = parent && !item.icon ? themeConfig.navSubItemIcon : item.icon
+  const icon = parent && !item.icon ? <EllipseIcon/> : item.icon
 
   const isNavLinkActive = () => {
     if (router.pathname === item.path || handleURLQueries(router, item.path)) {
@@ -115,10 +117,11 @@ const VerticalNavLink = ({
           }}
           sx={{
             py: 2,
+            fontSize: "16px",
             ...(item.disabled ? { pointerEvents: 'none' } : { cursor: 'pointer' }),
             px: navCollapsed && !navHover ? (collapsedNavWidth - navigationBorderWidth - 22 - 28) / 8 : 4,
             '& .MuiTypography-root, & svg': {
-              color: 'text.secondary'
+              color: '#8090A7'
             }
           }}
         >
@@ -134,7 +137,8 @@ const VerticalNavLink = ({
               }
             }}
           >
-            <UserIcon icon={icon} />
+                     {icon}
+
           </ListItemIcon>
 
           <MenuItemTextMetaWrapper

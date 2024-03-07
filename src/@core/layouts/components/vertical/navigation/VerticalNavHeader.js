@@ -70,6 +70,16 @@ const VerticalNavHeader = props => {
       return 6
     }
   }
+
+  const TittleSection = styled(Typography)(({ theme }) => ({
+  
+    fontFamily: "Montserrat",
+    fontSize: "20px",
+    fontWeight: 600,
+   
+    color:'#8090A7'
+        }))
+
   const MenuLockedIcon = () => userMenuLockedIcon || <Icon icon='tabler:circle-dot' />
   const MenuUnlockedIcon = () => userMenuUnlockedIcon || <Icon icon='tabler:circle' />
 
@@ -90,10 +100,10 @@ const VerticalNavHeader = props => {
 
 <img width="30px" height="30px"  src='/images/policesIcon/pageLogo/logo.svg'/>
 
-            <Typography sx={{fontWeight:"700",color:"#8090a7",fontSize:"16px"}}>
+            <TittleSection>
              {t("Code Shild")}
 
-            </Typography>
+            </TittleSection>
 
 
           </Box>
@@ -105,34 +115,7 @@ const VerticalNavHeader = props => {
         </LinkStyled>
       )}
 
-      {hidden ? (
-        <IconButton
-          disableRipple
-          disableFocusRipple
-          onClick={toggleNavVisibility}
-          sx={{ p: 0, color: 'text.secondary', backgroundColor: 'transparent !important' }}
-        >
-          <Icon icon='tabler:x' fontSize='1.25rem' />
-        </IconButton>
-      ) : userMenuLockedIcon === null && userMenuUnlockedIcon === null ? null : (
-        <IconButton
-          disableRipple
-          disableFocusRipple
-          onClick={() => saveSettings({ ...settings, navCollapsed: !navCollapsed })}
-          sx={{
-            p: 0,
-            color: 'text.primary',
-            backgroundColor: 'transparent !important',
-            '& svg': {
-              fontSize: '1.25rem',
-              ...menuCollapsedStyles,
-              transition: 'opacity .25s ease-in-out'
-            }
-          }}
-        >
-          {navCollapsed ? MenuUnlockedIcon() : MenuLockedIcon()}
-        </IconButton>
-      )}
+     
     </MenuHeaderWrapper>
   )
 }

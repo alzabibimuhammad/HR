@@ -71,7 +71,7 @@ export default function Warnings({Controller,control,defaultValues,setAlert ,ale
     }
 
   return (
-    <Card>
+    <Card sx={{borderRadius: "12px"}}>
       <CardContent>
         <Stack direction={'column'} spacing={2}>
         <TittleSection fontSize={'20px'}>{t("Warnings Management")}</TittleSection>

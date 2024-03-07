@@ -21,9 +21,7 @@ const CustomDataGrid = ({ rows, columns, show, rowHeight }) => {
     <>
       <Box sx={{ height: 500, width: '100%', overflow: 'auto'}}>
         <DataGrid
-          sx={{ minWidth: 800 ,
-
-          }}
+       
           columns={columns}
           rows={rows || []}
           pageSizeOptions={[7, 10, 25, 50]}

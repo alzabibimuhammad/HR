@@ -1,13 +1,30 @@
+ 
+
+import ComplaintsIcon from '../../../public/images/IconInput/complaints'
+import HierarchyIcon from '../../../public/images/IconInput/hierarchy'
+import HomeIcon from '../../../public/images/IconInput/home'
+import EmployeeIcon from '../../../public/images/IconInput/employee'
+import ContractIcon from '../../../public/images/IconInput/contract'
+import  OrderLigthIcon from '../../../public/images/IconInput/Order_light'
+import  ReviewsIcon from '../../../public/images/IconInput/reviews'
+import  SalaryIcon from '../../../public/images/IconInput/Salary'
+import  RequestsIcon from '../../../public/images/IconInput/Requests'
+import  Calender from '../../../public/images/IconInput/Calender'
+import  EmailIcon from '../../../public/images/IconInput/Emai'
+import  ArachiveIcon from '../../../public/images/IconInput/Arachive'
+import  System from '../../../public/images/IconInput/System'
+
+
 const navigation = () => {
   return [
     {
       title: 'Home',
-      icon: 'lets-icons:order-light',
+      icon:   <HomeIcon/>,
       path: '/dashboard'
     },
     {
       title: 'Employees',
-      icon: 'tabler:users',
+      icon: <EmployeeIcon/> ,
       children:[
         {
           title:"List",
@@ -38,7 +55,7 @@ const navigation = () => {
 
     {
       title: 'Contracts',
-      icon: 'tabler:file-text',
+      icon: <ContractIcon/>,
       children:[
 
         {
@@ -53,22 +70,22 @@ const navigation = () => {
     },
     {
       title: 'Reports',
-      icon: 'tabler:file-report',
+      icon: <OrderLigthIcon/>,
       path: '/report'
     },
     {
       title: 'Reviews',
-      icon: 'tabler:stars',
+      icon: <ReviewsIcon/>,
       path: '/review'
     },
     {
       title: 'Salaries',
-      icon: 'tabler:coin',
+      icon: <SalaryIcon/>,
       path: '/salary'
     },
     {
       title: 'Requests',
-      icon: 'tabler:alert-circle',
+      icon: <RequestsIcon/>,
       children:[
         {
           title:"Employees",
@@ -82,27 +99,38 @@ const navigation = () => {
     },
     {
       title: 'Complaints',
-      icon: 'tabler:alert-square',
+      icon: <ComplaintsIcon/>,
       path:"/complaints"
     },
     {
       title: 'Calendar',
-      icon: 'tabler:calendar',
+      icon: <Calender/>,
       path: '/calendar'
     },
     {
       title: 'Hierarchy',
-      icon: 'tabler:tree',
+      icon: <HierarchyIcon/>,
       path: '/tree'
     },
     {
       title: 'Emails',
-      icon: 'tabler:mail',
+      icon: <EmailIcon/>,
       path: '/apps/email'
     },
     {
+      title: 'Archive',
+      icon: <ArachiveIcon/>,
+      path: '/Archive',
+      children:[
+        {
+          title:"Resigned",
+          path:"/archive/resigned"
+        },
+      ]
+    },
+    {
       title: 'Policies',
-      icon: 'tabler:file-text',
+      icon: <System/>,
       path: '/policies',
       children:[
         {
@@ -115,17 +143,7 @@ const navigation = () => {
         },
       ]
     },
-    {
-      title: 'Archive',
-      icon: 'tabler:archive',
-      path: '/Archive',
-      children:[
-        {
-          title:"Resigned",
-          path:"/archive/resigned"
-        },
-      ]
-    },
+  
 
 
   ];

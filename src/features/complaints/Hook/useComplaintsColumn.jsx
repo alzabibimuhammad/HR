@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-
 import { Avatar, Button, Chip, IconButton, Rating, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Box, Stack } from '@mui/system'
@@ -25,7 +24,13 @@ const useComplaintsColumn = () => {
     setdeleteID(params)
   };
 
-
+  const handleShowMoreClick = params => {
+    const { id } = params.row
+    setShowMoreMap(prevMap => ({
+      ...prevMap,
+      [id]: !prevMap[id]
+    }))
+  }
 
   const handleClose=_=>{
     setIsDeletePopupOpen(false)
@@ -35,9 +40,11 @@ const useComplaintsColumn = () => {
     setIsShow(true)
     setShowData(params.row)
   }
+
   const handleCloseShow=_=>{
     setIsShow(false)
   }
+
   return useMemo(() => [
     {
       field: 'first_name',
@@ -69,6 +76,7 @@ const useComplaintsColumn = () => {
     },
 
     {
+
       field: 'content',
       headerName: t("Content"),
       flex: 3,
@@ -82,7 +90,7 @@ const useComplaintsColumn = () => {
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
             <Typography className='custome-data-grid-font'>
-              { content?.slice(0, 40) + '...'}
+              { content?.slice(0,40) }
             </Typography>
           </div>
           {showMoreMap[id] && (

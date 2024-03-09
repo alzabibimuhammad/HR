@@ -1,3 +1,5 @@
+import { fontFamily } from "@mui/system"
+
 const GlobalStyles = theme => {
   return {
     '.demo-space-x > *': {
@@ -5,7 +7,7 @@ const GlobalStyles = theme => {
       marginRight: '1rem !important',
       'body[dir="rtl"] &': {
         marginRight: '0 !important',
-        marginLeft: '1rem !important'
+        marginLeft: '1rem !important',
       }
     },
     '.demo-space-y > *:not(:last-of-type)': {

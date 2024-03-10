@@ -78,7 +78,7 @@ const BlankLayoutAppBar = () => {
           </Typography>
         </LinkStyled>
       </Toolbar>
-      <h1>kfdhkjsdfhdl</h1>
+   
     </AppBar>
   )
 }

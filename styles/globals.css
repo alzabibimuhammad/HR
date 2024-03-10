@@ -607,6 +607,14 @@ width: 100% !important;
   margin-left: 3px !important;
   background-color: #bebebe40 !important  ;
 }
+.rtl-km4ven-MuiInputBase-root-MuiOutlinedInput-root {
+  border-radius: 8px !important;
+}
+.rtl-1bdczpd-MuiFormControl-root-MuiTextField-root {
+  width: 100%;
+   padding-right: 0;
+
+}
 
 .rtl-1vooibu-MuiSvgIcon-root{
   width: 32px !important;

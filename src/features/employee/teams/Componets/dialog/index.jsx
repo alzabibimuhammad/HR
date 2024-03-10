@@ -45,7 +45,7 @@ export default function AlertDialog({ id, open, handleClose }) {
 
 
         <DialogTitle style={{ fontSize: "19px", color: '#B4B4B3' }}>
-        {t("Are you sure you want to delete ")+" "+t("team")+"?"}
+        {t("Are you sure you want to delete ")+" "+t("department")+"?"}
       </DialogTitle>
 
 

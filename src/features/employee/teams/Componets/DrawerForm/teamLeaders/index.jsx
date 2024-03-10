@@ -90,7 +90,7 @@ const Members = ({SetteamLeader,Data}) => {
   return (
     <>
       <Typography>
-      {t('Team Leader')}
+      {t('Department Leader')}
       </Typography>
 
       <TextField

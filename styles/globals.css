@@ -1,8 +1,23 @@
+@font-face {
+  font-family: 'Noto Kufi Arabic';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/noto-kufi-arabic@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/noto-kufi-arabic@latest/latin-400-normal.woff) format('woff');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
 html,
 body {
   min-height: 100%;
   font-family: "Montserrat";
 }
+
+[dir="rtl"]  html,
+body,h1,h2,h3,h4,h5,h6,p,span,p,div,ul,li {
+  font-family: "Noto Kufi Arabic" !important;
+}
+
 
 #__next {
   height: 100%;
@@ -271,6 +286,7 @@ position: relative !important;
   color: #6AB2DF !important;
 }
 
+
 .button-tap::after {
   content: '';
   position: absolute;
@@ -512,16 +528,16 @@ line-height: normal !important;
 }
 
 .Pagetitle{
-  color: var(--blue-gray, #8090A7) !important;
-  font-size: 24px !important;
-  font-style: normal !important;
-  font-weight: 600 !important;
-  line-height: normal !important;
-  letter-spacing: 1.2px !important;
+  margin: 0;
+  padding: 0;
+  color: var(--blue-gray, #8090A7) ;
+  font-size: 24px ;
+  font-style: normal;
+  font-weight: 600 ;
+  line-height: normal;
+  letter-spacing: 1.2px;
 }
-th {
-  background-color: #f2f2f2;
-} */
+
 
 .css-2v4r7n-MuiButtonBase-root-MuiPickersDay-root {
   font-size: 14px !important;
@@ -661,7 +677,59 @@ width: 100% !important;
   background-color: transparent !important;
 }
 
+.rtl-1is5gi8-MuiPaper-root-MuiCard-root{
+  border-radius: 12px !important;
+}
+
+.ag-chart-wrapper{
+  border-radius: 12px !important;
+}
+
+.filterTitle{
+  color: var(--blue-gray, #8090A7)!important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  line-height: normal !important;
+}
 
 
-/* .rtl-1sdzv1m-MuiPickersCalendarHeader-labelContainer */
+/* .css-1rt6uap-MuiDataGrid-root .MuiDataGrid-columnHeader:last-of-type {
+  background-color: #DCE1E6;
+    border-radius:10px;
+}
+ */
 
+.rtl-9reuh9-MuiPickersArrowSwitcher-root{
+  display: none !important;
+ }
+
+ /* .MuiRating-root   {
+  background-color: red !important;
+ } */
+
+ .language-list {
+  padding: 0;
+  margin: 0;
+  margin-left: 8%;
+  margin-top: 10px;
+}
+
+.language-item {
+  margin-bottom: 10px;
+
+}
+
+
+
+
+
+
+
+.rtl-1sjsjab-MuiButtonBase-root-MuiListItemButton-root.active, .rtl-1sjsjab-MuiButtonBase-root-MuiListItemButton-root.active:hover{
+  background:#6AB2DF !important;
+}
+
+.nav-link :active{
+  color: #131627 !important;
+}

@@ -44,7 +44,10 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
     lineHeight: '25px',
     color: '#131627',
     fontWeight: 500,
-    fontStyle: 'normal'
+    fontStyle: 'normal',
+    marginLeft:"8px",
+    marginRight:"8px",
+
   }));
 
 
@@ -53,7 +56,8 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
     fontSize: '14px',
     fontStyle: 'normal',
     color: '#8090A7',
-    marginLeft: 3
+    marginLeft: 3,
+
   }));
 
   const Detail = styled('p')(({ }) => ({
@@ -61,11 +65,14 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
     marginLeft: 6,
     fontSize: '10px',
     color: '#8090A7',
+
   }));
 
   const StackRow = styled(Stack)(({ }) => ({
     flexDirection: 'row',
+    alignItems:"center",
     marginLeft: 4,
+lineHeight:"22px"
   }));
 
   const Typo = styled(Typography)(({ }) => ({
@@ -73,7 +80,9 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
     fontWeight: 600,
     fontStyle: 'normal',
     color: '#3F4458',
-    margin: 0
+    margin: 0,
+
+
   }))
 
   const handleDetails = _ => {
@@ -152,13 +161,13 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
     <div>
 
       <Grid >
-        <Grid item xs={12}>
-          <Card>
+        <Grid item xs={12} >
+          <Card >
             <CardContent>
 
               <Box sx={{ mb: 6 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }} >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="17" viewBox="0 0 12 17" fill="none">
+                <Box sx={{ display: 'flex', alignItems: 'end' }} >
+                  <svg style={{marginBottom:"6px"}} xmlns="http://www.w3.org/2000/svg" width="12" height="17" viewBox="0 0 12 17" fill="none">
                     <path fillRule="evenodd" clipRule="evenodd" d="M10.3746 14.7727C10.3746 15.1519 10.0644 15.4621 9.68523 15.4621H1.32698C0.947843 15.4621 0.63764 15.1519 0.63764 14.7727V3.70882C0.63764 3.32968 0.947843 3.01948 1.32698 3.01948H1.61995V2.38184H1.32698C0.603173 2.38184 0 2.98501 0 3.70882V14.7727C0 15.4965 0.603173 16.0997 1.32698 16.0997H9.68523C10.409 16.0997 11.0122 15.4965 11.0122 14.7727V5.5C10.8054 5.56893 10.5986 5.46553 10.3746 5.5V14.7727Z" fill="black" />
                     <path fillRule="evenodd" clipRule="evenodd" d="M10.3748 3.70882V5.51833C10.5989 5.5528 10.8057 5.6045 11.0125 5.67343V3.70882C11.0125 2.98501 10.4093 2.38184 9.68549 2.38184H9.34082V3.01948H9.68549C10.0474 3.01948 10.3748 3.32968 10.3748 3.70882Z" fill="black" />
                     <path fillRule="evenodd" clipRule="evenodd" d="M8.70274 2.3815H6.72088C6.73812 2.31256 6.73812 2.24363 6.73812 2.17469C6.73812 1.46812 6.16941 0.899414 5.46284 0.899414C4.75626 0.899414 4.18756 1.46812 4.18756 2.17469C4.18756 2.24363 4.18756 2.31256 4.20479 2.3815H2.24017V4.17378H8.70274V2.3815ZM5.46284 2.81233C5.11817 2.81233 4.8252 2.51936 4.8252 2.17469C4.8252 1.83002 5.11817 1.53705 5.46284 1.53705C5.80751 1.53705 6.10048 1.83002 6.10048 2.17469C6.10048 2.5366 5.82474 2.81233 5.46284 2.81233Z" fill="black" />
@@ -168,10 +177,10 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
                     <path fillRule="evenodd" clipRule="evenodd" d="M6.47972 11.0156H1.86115V11.6533H6.91056C6.75546 11.4637 6.60036 11.2397 6.47972 11.0156Z" fill="black" />
                     <path d="M8.25478 12.7217H1.86115V13.3593H8.25478V12.7217Z" fill="black" />
                   </svg>
-                  <Header ariant='body2' sx={{ textTransform: 'uppercase' }}>
+                  <Header ariant='body2'  sx={{ textTransform: 'uppercase',   }}>
                     {t('General')}
                   </Header>
-                  <Divider sx={{ width: '85%' }} style={{ background: '#8090A7' }} />
+                  <Divider  sx={{ width: '80%' }} style={{ background: '#8090A7' }} />
                 </Box>
                 <Stack direction={'column'}  >
 
@@ -311,8 +320,8 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
               {/* second section */}
 
               <Box sx={{ mb: 6 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }} >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 13 17" fill="none">
+                <Box sx={{ display: 'flex', alignItems: 'end' }} >
+                  <svg style={{marginBottom:"6px"}} xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 13 17" fill="none">
                     <path fillRule="evenodd" clipRule="evenodd" d="M10.3746 14.7727C10.3746 15.1519 10.0644 15.4621 9.68523 15.4621H1.32698C0.947843 15.4621 0.63764 15.1519 0.63764 14.7727V3.70882C0.63764 3.32968 0.947843 3.01948 1.32698 3.01948H1.61995V2.38184H1.32698C0.603173 2.38184 0 2.98501 0 3.70882V14.7727C0 15.4965 0.603173 16.0997 1.32698 16.0997H9.68523C10.409 16.0997 11.0122 15.4965 11.0122 14.7727V12.8081C10.8054 12.877 10.5986 12.9287 10.3746 12.9632V14.7727Z" fill="black" />
                     <path fillRule="evenodd" clipRule="evenodd" d="M10.3748 3.70882V5.51833C10.5989 5.5528 10.8057 5.6045 11.0125 5.67343V3.70882C11.0125 2.98501 10.4093 2.38184 9.68549 2.38184H9.34082V3.01948H9.68549C10.0474 3.01948 10.3748 3.32968 10.3748 3.70882Z" fill="black" />
                     <path fillRule="evenodd" clipRule="evenodd" d="M8.70274 2.3815H6.72088C6.73812 2.31256 6.73812 2.24363 6.73812 2.17469C6.73812 1.46812 6.16941 0.899414 5.46284 0.899414C4.75626 0.899414 4.18756 1.46812 4.18756 2.17469C4.18756 2.24363 4.18756 2.31256 4.20479 2.3815H2.24017V4.17378H8.70274V2.3815ZM5.46284 2.81233C5.11817 2.81233 4.8252 2.51936 4.8252 2.17469C4.8252 1.83002 5.11817 1.53705 5.46284 1.53705C5.80751 1.53705 6.10048 1.83002 6.10048 2.17469C6.10048 2.5366 5.82474 2.81233 5.46284 2.81233Z" fill="black" />
@@ -327,7 +336,7 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
                   <Header ariant='body2' sx={{ textTransform: 'uppercase' }}>
                     {t('Financial')}
                   </Header>
-                  <Divider sx={{ width: '80%' }} style={{ background: '#8090A7' }} />
+                  <Divider sx={{ width: '79.5%' }} style={{ background: '#8090A7' }} />
                 </Box>
                 <Stack direction={'column'}  >
                   <StackRow   >
@@ -363,7 +372,7 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
 
                     <Stack marginLeft={6} direction={'column'} justifyContent={'space-between'}>
                       {userDataClean?.overTimes?.map((ele,index)=>(
-                          <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
+                          <Stack key={index} direction={'row'} justifyContent={'space-between'} width={'100%'}>
                             <Text >{ele?.type}</Text>
                                               <Text>{ele?.status}</Text>
                                               <Text>{ele?.lateDate}</Text>
@@ -473,7 +482,7 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
                   {isDeductionDetails &&userDataClean?.deductions?.length   ?
                     <Stack marginLeft={6} direction={'column'} >
                       {userDataClean?.deductions?.map((ele, index) => (
-                        <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+                        <Stack key={index} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
                           <Text>{ele?.amount}</Text>
                           <Text>{ele?.dateTime}</Text>
                         </Stack>
@@ -490,16 +499,16 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
 
               {/* third section */}
               <Box sx={{ mb: 6 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }} >
+                <Box sx={{ display: 'flex', alignItems: 'end' }} >
 
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                  <svg xmlns="http://www.w3.org/2000/svg" style={{marginBottom:"6px"}} width="16" height="15" viewBox="0 0 16 15" fill="none">
                     <path fillRule="evenodd" clipRule="evenodd" d="M4.70588 3.39655V1.94727C4.70588 1.14799 5.33639 0.5 6.11531 0.5H9.88469C10.6628 0.5 11.2941 1.14946 11.2941 1.94727V3.39655H14.1195C15.1576 3.39655 16 4.26184 16 5.32644V12.5701C16 13.6355 15.1571 14.5 14.1195 14.5H1.88052C0.842366 14.5 0 13.6347 0 12.5701V5.32644C0 4.26107 0.842877 3.39655 1.88052 3.39655H4.70588ZM5.88235 10.1552H3.76621C2.72596 10.1552 1.88235 9.29153 1.88235 8.22551V4.36207H1.88052C1.36264 4.36207 0.941176 4.79435 0.941176 5.32644V12.5701C0.941176 13.1018 1.36244 13.5345 1.88052 13.5345H14.1195C14.6374 13.5345 15.0588 13.1022 15.0588 12.5701V5.32644C15.0588 4.79479 14.6376 4.36207 14.1195 4.36207H14.1176V8.22551C14.1176 9.29184 13.2749 10.1552 12.2338 10.1552H10.1176V10.3966C10.1176 10.9302 9.69551 11.3621 9.17509 11.3621H6.82491C6.30432 11.3621 5.88235 10.9317 5.88235 10.3966V10.1552ZM10.1176 9.18966H12.2338C12.7554 9.18966 13.1765 8.75831 13.1765 8.22551V4.36207H2.82353V8.22551C2.82353 8.75784 3.24532 9.18966 3.76621 9.18966H5.88235V8.94819C5.88235 8.41462 6.30449 7.98276 6.82491 7.98276H9.17509C9.69568 7.98276 10.1176 8.41313 10.1176 8.94819V9.18966ZM6.82353 10.3966C6.82353 10.3972 9.17509 10.3966 9.17509 10.3966C9.1763 10.3966 9.17647 8.94819 9.17647 8.94819C9.17647 8.94763 6.82491 8.94828 6.82491 8.94828C6.8237 8.94828 6.82353 10.3966 6.82353 10.3966ZM10.3529 1.94727C10.3529 1.6821 10.1424 1.46552 9.88469 1.46552H6.11531C5.85657 1.46552 5.64706 1.68084 5.64706 1.94727V3.39655H10.3529V1.94727Z" fill="#131627" />
                   </svg>
 
                   <Header ariant='body2' sx={{ textTransform: 'uppercase' }}>
                     {t('WorkTime')}
                   </Header>
-                  <Divider sx={{ width: '80%' }} style={{ background: '#8090A7' }} />
+                  <Divider sx={{ width: '73.5%' }} style={{ background: '#8090A7' }} />
                 </Box>
                 <Stack direction={'column'}  >
                   <StackRow   >
@@ -551,20 +560,20 @@ const AboutOverivew = ({ userDataClean, Data, ProfileData }) => {
 
               {/*fourth section */}
               <Box sx={{ mb: 6 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center' }} >
+                <Box sx={{ display: 'flex', alignItems: 'end' }} >
 
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15" fill="none">
+                  <svg xmlns="http://www.w3.org/2000/svg" style={{marginBottom:"6px"}} width="16" height="15" viewBox="0 0 16 15" fill="none">
                     <path fillRule="evenodd" clipRule="evenodd" d="M4.70588 3.39655V1.94727C4.70588 1.14799 5.33639 0.5 6.11531 0.5H9.88469C10.6628 0.5 11.2941 1.14946 11.2941 1.94727V3.39655H14.1195C15.1576 3.39655 16 4.26184 16 5.32644V12.5701C16 13.6355 15.1571 14.5 14.1195 14.5H1.88052C0.842366 14.5 0 13.6347 0 12.5701V5.32644C0 4.26107 0.842877 3.39655 1.88052 3.39655H4.70588ZM5.88235 10.1552H3.76621C2.72596 10.1552 1.88235 9.29153 1.88235 8.22551V4.36207H1.88052C1.36264 4.36207 0.941176 4.79435 0.941176 5.32644V12.5701C0.941176 13.1018 1.36244 13.5345 1.88052 13.5345H14.1195C14.6374 13.5345 15.0588 13.1022 15.0588 12.5701V5.32644C15.0588 4.79479 14.6376 4.36207 14.1195 4.36207H14.1176V8.22551C14.1176 9.29184 13.2749 10.1552 12.2338 10.1552H10.1176V10.3966C10.1176 10.9302 9.69551 11.3621 9.17509 11.3621H6.82491C6.30432 11.3621 5.88235 10.9317 5.88235 10.3966V10.1552ZM10.1176 9.18966H12.2338C12.7554 9.18966 13.1765 8.75831 13.1765 8.22551V4.36207H2.82353V8.22551C2.82353 8.75784 3.24532 9.18966 3.76621 9.18966H5.88235V8.94819C5.88235 8.41462 6.30449 7.98276 6.82491 7.98276H9.17509C9.69568 7.98276 10.1176 8.41313 10.1176 8.94819V9.18966ZM6.82353 10.3966C6.82353 10.3972 9.17509 10.3966 9.17509 10.3966C9.1763 10.3966 9.17647 8.94819 9.17647 8.94819C9.17647 8.94763 6.82491 8.94828 6.82491 8.94828C6.8237 8.94828 6.82353 10.3966 6.82353 10.3966ZM10.3529 1.94727C10.3529 1.6821 10.1424 1.46552 9.88469 1.46552H6.11531C5.85657 1.46552 5.64706 1.68084 5.64706 1.94727V3.39655H10.3529V1.94727Z" fill="#131627" />
                   </svg>
 
                   <Header ariant='body2' sx={{ textTransform: 'uppercase' }}>
                     {t('Secretariats')}
                   </Header>
-                  <Divider sx={{ width: '74%' }} style={{ background: '#8090A7' }} />
+                  <Divider sx={{ width: '75.5%' }} style={{ background: '#8090A7' }} />
                 </Box>
 
                 {userDataClean?.deposits?.map((element) => (
-                  <Stack direction={'column'}  >
+                  <Stack key={index} direction={'column'}  >
                     <StackRow justifyContent={'space-between'} >
                       <Typo>{element?.description}</Typo>
                       <Text >{element?.received_date}</Text>

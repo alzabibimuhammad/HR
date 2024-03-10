@@ -43,6 +43,17 @@ function createData(id, name, user) {
 export default function CollapsibleTable(Data, setEditData) {
   function Row(props) {
     const { row } = props
+    const sortedRows = row?.user.sort((a, b) => {
+      const roleA = a.role === 'team_leader' ? -1 : 1;
+      const roleB = b.role === 'team_leader' ? -1 : 1;
+      if (roleA === roleB) {
+        return 0;
+      } else {
+        return roleA - roleB;
+      }
+    });
+
+
     const [open, setOpen] = useState(false)
 
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
@@ -159,7 +170,7 @@ export default function CollapsibleTable(Data, setEditData) {
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout='auto' unmountOnExit>
               <Stack spacing={3} sx={{ margin: 1 }}>
-                {row?.user?.map((user,index) => (
+                {sortedRows?.map((user,index) => (
 
                   <Stack direction={'row'} justifyContent={'space-between'}>
                     <Link style={{ textDecoration: 'none' }} href={`/profile/${user.id}`}>
@@ -170,7 +181,7 @@ export default function CollapsibleTable(Data, setEditData) {
                         />
                         <Stack marginLeft={'8px'} direction={'column'}>
                           <>
-                        {index == 0 && user?.role == 'team_leader'?
+                        {index == 0 && user?.role == 'team_leader' ?
 
                         <>
                           <Typography className='custome-data-grid-font'>
@@ -181,14 +192,10 @@ export default function CollapsibleTable(Data, setEditData) {
                           </Typography>
                           </>
                           :
-                          <>
                           <Typography className='custome-data-grid-font'>
                             {user.first_name} {user.last_name}
                           </Typography>
-                          <Typography className='custome-data-grid-font2'>
-                            {user.role}
-                          </Typography>
-                          </>
+
                           }
 
                           </>
@@ -244,7 +251,6 @@ export default function CollapsibleTable(Data, setEditData) {
   return (
     <>
 
-
       <Stack
         spacing={{ xs: 2 }}
         direction={{ sm: 'row', xs: 'column' }}
@@ -274,7 +280,7 @@ export default function CollapsibleTable(Data, setEditData) {
               )
             }}
             onChange={handelSearch}
-            sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+            sx={{ backgroundColor: '#F5F7FA',border:'none', boxShadow: 'none',width:{sm:'320px',xs:'100%'} }}
             size='small'
           />
         </Box>
@@ -290,7 +296,7 @@ export default function CollapsibleTable(Data, setEditData) {
           onClick={handleDrawerOpen}
         >
           <AddIcon/>
-          {t('ADD TEAM')}
+          {t('Add Department')}
         </Button>
       </Stack>
 
@@ -298,13 +304,13 @@ export default function CollapsibleTable(Data, setEditData) {
         <DrawerForm open={openParent} setOpenParent={setOpenParent} />
       </Box>
 
-      <TableContainer   component={Paper}>
+      <TableContainer component={Paper}>
         <Table aria-label='collapsible table'>
           <TableHead>
             <TableRow>
-              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' >{t('Team Name')}</TableCell>
-              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ width: '10%' }}>{t('Team ID')}</TableCell>
-              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ left: 0, width: '70%', textAlign: 'right' }}>{t('Action')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'sx={{ width:'19%' }} >{t('Department Name')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ width: '19%' }}>{t('Department ID')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ left: 0, width: '62%', textAlign: 'right' }}>{t('Action')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

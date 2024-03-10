@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { Avatar,IconButton, Typography } from '@mui/material';
+import { Avatar, IconButton, Typography } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
 import DrawerForm from '../componets/DrawerForm';
@@ -57,12 +57,15 @@ const useAbsenceColumns = () => {
       flex: 3,
       renderCell: (params) => {
         return (
-          <Link style={{ textDecoration:'none' }} href={`/profile/${params?.row?.user_info?.user_id}`}>
-          <Stack direction={'row'} alignItems={'center'} spacing={1}>
-            <Avatar alt='' src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info?.image} />
-            <Typography>{params?.row?.name}</Typography>
-            <Typography>{params?.row?.last_name}</Typography>
-          </Stack>
+          <Link style={{ textDecoration: 'none' }} href={`/profile/${params?.row?.user_info?.user_id}`}>
+            <Stack direction={'row'} alignItems={'center'} >
+              <Avatar alt='' src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info?.image} />
+              <Stack direction={'column'} marginLeft={'8px'}>
+                  <Typography className='custome-data-grid-font' >{params?.row?.name} {params?.row?.last_name}</Typography>
+                <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
+
+              </Stack>
+            </Stack>
           </Link>
         );
       },
@@ -72,18 +75,30 @@ const useAbsenceColumns = () => {
       headerName: t("Justified"),
       disableClickEventBubbling: true,
       flex: 1.1,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.justified}</Typography>
+
+      )
     },
     {
       field: 'unjustified',
       headerName: t("Unjustified"),
       disableClickEventBubbling: true,
       flex: 1.1,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.unjustified}</Typography>
+
+      )
     },
     {
       field: 'total',
       headerName: t("Total"),
       disableClickEventBubbling: true,
       flex: 4,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.total}</Typography>
+
+      )
     },
     {
       field: 'action',
@@ -114,12 +129,12 @@ const useAbsenceColumns = () => {
 
             </Stack>
             {isDrawerOpenEdit && (
-      <DrawerForm
-        open={isDrawerOpenEdit}
-        setOpenParent={setIsDrawerOpenEdit}
-        Data={EditData}
-      />
-    )}
+              <DrawerForm
+                open={isDrawerOpenEdit}
+                setOpenParent={setIsDrawerOpenEdit}
+                Data={EditData}
+              />
+            )}
 
           </>
         );

@@ -33,6 +33,8 @@ import GuestGuard from 'src/@core/components/auth/GuestGuard'
 // ** Spinner Import
 import Spinner from 'src/@core/components/spinner'
 import "@fontsource/montserrat";
+import "@fontsource/noto-kufi-arabic";
+
 
 // ** Contexts
 import { AuthProvider } from 'src/context/AuthContext'
@@ -109,6 +111,7 @@ const [queryClient]= React.useState(()=> new QueryClient)
           />
           <meta name='keywords' content='Material Design, MUI, Admin Template, React Admin Template' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
+
         </Head>
 
         <AuthProvider>

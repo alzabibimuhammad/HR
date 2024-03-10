@@ -22,37 +22,48 @@ const useSalaryColumns = () => {
 
   return useMemo(() => [
 
-      {
-        field: '',
-        headerName: t("Employee"),
-        disableClickEventBubbling: true,
-        flex:1.7,
-        renderCell: (params) => {
-              return (
-                <Link style={{ textDecoration:'none' }}  href={`/profile/${params?.row?.id}`}>
+    {
+      field: '',
+      headerName: t("Employee"),
+      disableClickEventBubbling: true,
+      flex: 1.7,
+      renderCell: (params) => {
+        return (
+          <Link style={{ textDecoration: 'none' }} href={`/profile/${params?.row?.id}`}>
 
-              <Stack direction={'row'} spacing={1} alignItems={'center'}>
-              <Avatar src={process.env.NEXT_PUBLIC_IMAGES+'/'+params?.row?.user_info} alt=''  />
-              <Typography  >{params?.row?.first_name}</Typography>
-              <Typography  >{params?.row?.last_name}</Typography>
+            <Stack direction={'row'} spacing={1} alignItems={'center'}>
+              <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
+              <Stack>
+                <Typography className='custome-data-grid-font' >{params?.row?.first_name} {params?.row?.last_name}</Typography>
+                <Typography className='custome-data-grid-font2' >{params?.row?.specialization} {params?.row?.last_name}</Typography>
+
               </Stack>
-              </Link>
+            </Stack>
+          </Link>
 
-            );
-          },
+        );
       },
+    },
     {
       field: 'base',
       headerName: t("base"),
       disableClickEventBubbling: true,
-      flex:1,
+      flex: 1,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.base}</Typography>
+
+      )
 
     },
     {
       field: 'overtime',
       headerName: t("overtime"),
       disableClickEventBubbling: true,
-      flex:1,
+      flex: 1,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.overtime}</Typography>
+
+      )
 
 
     },
@@ -60,7 +71,11 @@ const useSalaryColumns = () => {
       field: 'reward',
       headerName: t("reward"),
       disableClickEventBubbling: true,
-      flex:1,
+      flex: 1,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.reward}</Typography>
+
+      )
 
     },
 
@@ -69,19 +84,31 @@ const useSalaryColumns = () => {
     {
       field: 'deducations',
       headerName: t("deducations"),
-      flex:1,
+      flex: 1,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.deducations}</Typography>
+
+      )
 
     },
     {
       field: 'advances',
       headerName: t("advances"),
-      flex:1,
+      flex: 1,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.advances}</Typography>
+
+      )
 
     },
     {
       field: 'total',
       headerName: t("total"),
-      flex:1,
+      flex: 1,
+      renderCell: params => (
+        <Typography className='custome-data-grid-font' >{params?.row?.total}</Typography>
+
+      )
 
     },
   ]);

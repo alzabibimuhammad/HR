@@ -84,7 +84,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
             fontFamily: 'Montserrat'
           }}
         >
-          {t('ADD TEAM')}
+          {t('ADD DEPARTMENT')}
         </Box>
         <Box sx={{ padding: '12px' }}>
           <Typography sx={{ fontFamily: 'Montserrat' }}>{t('Name')}</Typography>

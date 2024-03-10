@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 export default function PersonalInfo({ProfileData}) {
 
   const {t} = useTranslation()
+
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -19,7 +20,7 @@ export default function PersonalInfo({ProfileData}) {
 
   const TypoVal = styled(Typography)(() => ({
     fontSize:'14px',
-    marginLeft:'3px'
+    marginRight:'12px'
 
   }))
 
@@ -28,8 +29,9 @@ export default function PersonalInfo({ProfileData}) {
     marginLeft:'5px',
     fontWeight:'500',
     textTransform:'capitalize',
-    color:'#131627'
-
+    color:'#131627',
+    marginLeft:"8px",
+    marginRight:"8px"
   }))
 
   const StackRow = styled(Stack)(({ direction }) => ({
@@ -39,49 +41,49 @@ export default function PersonalInfo({ProfileData}) {
 
   return (
 
-    <Card >
+    <Card sx={{marginTop:"24px",borderRadius:"12px"}}>
       <CardContent >
         <Stack spacing={2} direction={'column'}>
 
         <StackRow  >
           <img src='/images/pesonalProfile/personalInfo/icon.svg'/>
-          <TypoHeader  >{t('Personal Information')}:</TypoHeader>
+          <TypoHeader  >{t('Personal Information')} :</TypoHeader>
         </StackRow>
 
-        <StackRow>
-          <Typo>{t('ID Number')}: </Typo>
+        <StackRow >
+          <Typo>{t('ID Number')} : </Typo>
           <TypoVal>{ProfileData?.user_info?.nationalID}</TypoVal>
         </StackRow>
 
         <StackRow>
-          <Typo>{t('Birth Date')}: </Typo>
+          <Typo>{t('Birth Date')} : </Typo>
           <TypoVal>{ProfileData?.user_info?.birth_date}</TypoVal>
         </StackRow>
 
         <StackRow>
-          <Typo>{t('Military Status')}:</Typo>
+          <Typo>{t('Military Status')} :</Typo>
           <TypoVal>{t(ProfileData?.user_info?.military_situation)}</TypoVal>
         </StackRow>
 
         <StackRow>
-          <Typo>{t('Social status')}:</Typo>
+          <Typo>{t('Social status')} :</Typo>
           <TypoVal>{t(ProfileData?.user_info?.social_situation)}</TypoVal>
         </StackRow>
 
         <StackRow>
           <img src='/images/pesonalProfile/contact/icon.svg'/>
-          <TypoHeader marginLeft={'5px'} fontSize={'16px'} >{t('Contact Information')}:</TypoHeader>
+          <TypoHeader >{t('Contact Information')} :</TypoHeader>
         </StackRow>
 
         <StackRow>
-          <Typo>{t('Address')}:</Typo>
+          <Typo>{t('Address')} :</Typo>
           <TypoVal>{ProfileData?.address}</TypoVal>
         </StackRow>
         <Stack>
         {ProfileData?.my_contacts?.map((contact, index) => (
   contact.type === 'user_num' && (
     <StackRow sx={{padding:"3px"}}  key={index}>
-      <Typo>{t('Phone Number')} {index -1}:</Typo>
+      <Typo>{t('Phone Number')} {index -1} :</Typo>
       <TypoVal>{contact.contact}</TypoVal>
     </StackRow>
   )
@@ -90,7 +92,7 @@ export default function PersonalInfo({ProfileData}) {
         </Stack>
         <StackRow >
 
-        <Typo>{t('Email')}:</Typo>
+        <Typo>{t('Email')} :</Typo>
 
         <TypoVal>{ProfileData?.email}</TypoVal>
         </StackRow>
@@ -98,30 +100,30 @@ export default function PersonalInfo({ProfileData}) {
         {ProfileData?.my_contacts?.map((contact, index) => (
   contact.type === 'email' && (
     <StackRow key={index}>
-      <Typo>{t('Email')}{index +1}:</Typo>
+      <Typo>{t('Email')}{index +1} : </Typo>
 
       <TypoVal>{contact.contact}</TypoVal>
     </StackRow>
   )
 ))}
 
-        <TypoHeader marginLeft={'5px'} fontSize={'16px'} >{t('Emergency')}:</TypoHeader>
+        <TypoHeader  >{t('Emergency')} :</TypoHeader>
         {ProfileData?.emergency?.map((val, index) => (
   <Box  key={val.id}>
     <StackRow>
-      <Typo>{t('Name')}:</Typo>
+      <Typo>{t('Name')} :</Typo>
       <TypoVal>{val?.name}</TypoVal>
     </StackRow>
     <StackRow>
-      <Typo>{t('Address')}:</Typo>
+      <Typo>{t('Address')} :</Typo>
       <TypoVal>{val?.address}</TypoVal>
     </StackRow>
     <StackRow>
-      <Typo>{t('Phone number')}:</Typo>
+      <Typo>{t('Phone number')} :</Typo>
       <TypoVal>{val.phone_num}</TypoVal>
     </StackRow>
     <StackRow>
-      <Typo>{t('Email')}:</Typo>
+      <Typo>{t('Email')} :</Typo>
       <TypoVal>{val?.email}</TypoVal>
     </StackRow>
   </Box>
@@ -132,19 +134,19 @@ export default function PersonalInfo({ProfileData}) {
 
         <StackRow>
           <img src='/images/pesonalProfile/professional/icon.svg'/>
-          <TypoHeader marginLeft={'5px'} fontSize={'16px'} >{t('Professional')}:</TypoHeader>
+          <TypoHeader  >{t('Professional')} :</TypoHeader>
         </StackRow>
 
         <StackRow>
-          <Typo>{t('Specialization')}:</Typo>
+          <Typo>{t('Specialization')} :</Typo>
           <TypoVal>{ProfileData?.specialization}</TypoVal>
         </StackRow>
         <StackRow>
-          <Typo>{t('Role')}:</Typo>
+          <Typo>{t('Role')} :</Typo>
           <TypoVal>{t(ProfileData?.role)}</TypoVal>
         </StackRow>
         <StackRow>
-          <Typo>{t('Team')}:</Typo>
+          <Typo>{t('Team')} :</Typo>
           <TypoVal>{ProfileData?.department?.name}</TypoVal>
 
         </StackRow>

@@ -56,26 +56,26 @@ const DashboardSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(storeAttendanceLogs.pending, (state) => {
-       
+
         state.loading = 'pending';
       })
       .addCase(storeAttendanceLogs.fulfilled, (state, action) => {
-       
-        
+
+
         state.AttendancePercentage = action.payload.data;
         state.loading = 'succeeded';
       })
       .addCase(storeAttendanceLogs.rejected, (state, action) => {
         state.loading = 'failed';
-        
-        showErrorToast(action.payload, "");
+
+        showErrorToast(action?.payload, "");
       })
       .addCase(getAttendancePercentage.fulfilled, (state, action) => {
-        
+
         state.AttendancePercentage = action.payload?.data;
       })
       .addCase(getRegisteration.fulfilled, (state, action) => {
-      
+
         state.Registertion = action.payload?.data;
       });
   },

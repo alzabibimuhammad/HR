@@ -71,15 +71,16 @@ const ComplaintsTable = ({ Data }) => {
   }, [FilterDate])
 
   return (
-    <Stack height={'100%'}>
-      <Card>
+    <Stack >
+                <p className='Pagetitle' >
+            {t('Complaints')}
+          </p>
+      <Card sx={{ marginTop:'24px' }}>
         <CardContent>
-          <Typography variant='h4' paddingBottom={'10px'}>
-            {t('Complaints List')}
-          </Typography>
-          <Stack direction={'column'} spacing={2}>
+
+          <Stack  direction={'column'} spacing={2}>
           <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
-                <Box mb={2}>
+          <Box mb={2} width={{ sm:'120px',xs:'100px' }} >
                   <Show10 setShow={setShow}/>
                 </Box>
             <TextField
@@ -103,18 +104,18 @@ const ComplaintsTable = ({ Data }) => {
                   </Box>
                 )
               }}
-              sx={{ backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+              sx={{ backgroundColor: '#F5F7FA',border:'none', boxShadow: 'none',width:{sm:'320px',xs:'100%'} }}
               size='small'
             />
             </Stack>
             <Stack
-              alignItems={'start'}
-              width={{ sm: '50%', xs: '100%' }}
-              direction={{ sm: 'column', xs: 'column' }}
+              alignItems={'center'}
+              width={{ sm: '100%', xs: '100%' }}
+              direction={{ sm: 'row', xs: 'row' }}
               spacing={1}
             >
-              <Typography>{t('Filter')}</Typography>
-              <TextField type='date' fullWidth size='small' onChange={handelDate} />
+              <Typography className='filterTitle' >{t('Filter')}</Typography>
+              <TextField  sx={{ marginLeft:'8px',width:{sm:'320px',md:'320px',xs:'100%'} }} type='date' fullWidth size='small' onChange={handelDate} />
             </Stack>
 
             <CustomDataGrid show={show}  columns={columns} rows={rows || []} />

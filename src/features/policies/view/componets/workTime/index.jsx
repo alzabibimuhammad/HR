@@ -13,7 +13,7 @@ export default function WorkTimes({data}) {
     fontSize:'14px',
     fontWeight:'500',
     textTransform:'capitalize',
-    color:'#131627'
+    color:'#131627',
 
   }))
 
@@ -62,7 +62,7 @@ export default function WorkTimes({data}) {
     <div >
 
           <Stack direction={'row'} marginTop={'2%'} spacing={1}>
-            <Typo>{t('Work days')}:</Typo>
+            <Typo sx={{margin:"12px 0px"}}>{t('Work days')}:</Typo>
             <TypoVal>{data?.data?.policy.work_time?.work_days?.map((day)=>( day+" "))}</TypoVal>
           </Stack>
 
@@ -85,7 +85,8 @@ export default function WorkTimes({data}) {
         <TypoVal style={{ maxWidth:'319px', marginLeft:'21px',color:"red" }}>
   {data?.data?.policy.work_time?.notes?.length > 0 ?
     data?.data?.policy.work_time?.notes.map((note, index) => (
-      <Stack direction={'column'}>
+
+      <Stack key={index} direction={'column'}>
         <Typo marginLeft={'25px'} >{t('Note')} {index+1}:</Typo>
         <Typo marginLeft={'40px'}  key={index}>{note}</Typo>
       </Stack>

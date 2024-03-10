@@ -11,7 +11,8 @@ export const ComplaintsData = elements => {
       date: date,
       description: element?.description,
       user_info:element?.user?.user_info?.image,
-      user_id:element?.user?.id
+      user_id:element?.user?.id,
+      specialization:element?.user?.specialization
 
     };
 

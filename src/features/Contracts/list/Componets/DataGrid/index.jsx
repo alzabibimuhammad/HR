@@ -61,18 +61,21 @@ const List = ({ rows }) => {
   }
 
   return (
-    <Card>
+<>
+    <p className='Pagetitle' >
+    {t("Contracts")}
+
+    </p>
+    <Card sx={{ marginTop:'24px' }} >
       <CardContent>
-        <Typography variant='h4' paddingBottom={'10px'}>
-        {t("Contract List")}
-        </Typography>
-        <Stack direction={'row'} width={{sm:'50%',xs:'100%'}} spacing={3} alignItems={'center'}>
-                <Box mb={2}>
+
+        <Stack direction={'row'} width={{sm:'100%',xs:'100%'}} spacing={3} alignItems={'center'}>
+        <Box mb={2} width={{ sm:'120px',xs:'100px' }} >
                   <Show10 setShow={setShow}/>
                 </Box>
         <TextField
           placeholder={t('Search')}
-          fullWidth
+
           InputProps={{
             startAdornment: (
               <Box paddingRight={1}>
@@ -91,7 +94,7 @@ const List = ({ rows }) => {
             )
           }}
           onChange={handelSearch}
-          sx={{ paddingLeft: '8px', backgroundColor: '#F5F7FA', border: 'none', boxShadow: 'none' }}
+          sx={{ backgroundColor: '#F5F7FA',border:'none', boxShadow: 'none',width:{sm:'320px',xs:'100%'} }}
           size='small'
         />
         </Stack>
@@ -102,6 +105,7 @@ const List = ({ rows }) => {
         </Grid>
       </CardContent>
     </Card>
+    </>
   )
 }
 

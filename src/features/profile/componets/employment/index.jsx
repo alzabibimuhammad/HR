@@ -8,7 +8,9 @@ import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
 
 export default function Employment({ProfileData}) {
+
   const {t} = useTranslation()
+
   const Typo = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
@@ -56,7 +58,7 @@ export default function Employment({ProfileData}) {
                       <TypoVal>{deposit.received_date}</TypoVal>
                     </StackRow>
                     <Stack direction={"row"}>
-                      <Typo>{t('Secretariats')}</Typo>
+                      <Typo>{t('Secretariats : ')}</Typo>
                       <TypoVal>{deposit.description}</TypoVal>
                     </Stack>
                   </Box>

@@ -91,13 +91,13 @@ const HorizontalNavLink = props => {
                   '&.active, &.active:hover': {
                     boxShadow: theme => `0px 2px 6px ${hexToRGBA(theme.palette.primary.main, 0.48)}`,
                     background: theme =>
-                      `linear-gradient(72.47deg, ${theme.palette.primary.main} 22.16%, ${hexToRGBA(
+                      ` ${theme.palette.primary.main}  ${hexToRGBA(
                         theme.palette.primary.main,
                         0.7
                       )} 76.47%)`,
                     '&:focus-visible': {
                       background: theme =>
-                        `linear-gradient(72.47deg, ${theme.palette.primary.dark} 22.16%, ${hexToRGBA(
+                        ` ${theme.palette.primary.dark} ${hexToRGBA(
                           theme.palette.primary.dark,
                           0.7
                         )} 76.47%)`

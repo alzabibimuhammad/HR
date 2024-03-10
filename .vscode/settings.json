@@ -3,6 +3,7 @@
         "apexcharts",
         "daygrid",
         "fullcalendar",
-        "timegrid"
+        "timegrid",
+        "uniquifier"
     ]
 }

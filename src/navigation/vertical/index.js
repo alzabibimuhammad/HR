@@ -31,11 +31,11 @@ const navigation = () => {
           path:"/employees/users"
         },
         {
-          title:"Teams",
+          title:"Departments",
           path:"/employees/team"
         },
         {
-          title: 'Registration',
+          title: 'Registeration',
           path: '/employees/registeration'
         },
         {

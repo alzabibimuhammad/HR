@@ -5,6 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 const languageKey = 'language'; // Define a key for storing language preference
 
+
 // Initialize i18n
 i18n
   .use(Backend)
@@ -23,7 +24,7 @@ i18n
     },
     interpolation: {
       escapeValue: false,
-      formatSeparator: ','
+      formatSeparator: ',',
     }
   });
 

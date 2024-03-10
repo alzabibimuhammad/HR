@@ -26,7 +26,7 @@ function appendInput() {
   }, [])
 
   const Typo = styled(Typography)(({ theme }) => ({
-  
+
     fontFamily: "Montserrat",
     fontSize: "14px",
     fontWeight: 500,
@@ -34,18 +34,18 @@ function appendInput() {
     color:'#8090A7'
         }))
         const TittleSection = styled(Typography)(({ theme }) => ({
-      
+
           fontFamily: "Montserrat",
           fontSize: "20px",
           fontWeight: 600,
-         
+
           color:'#8090A7'
               }))
-    
+
 
   return (
 
-    <Card sx={{borderRadius: "12px"}}>
+    <Card sx={{borderRadius: "12px",marginTop:"24px"}}>
       <CardContent>
         <TittleSection fontSize={'20px'}>{t("Reviews")}</TittleSection>
         <Stack spacing={2} >

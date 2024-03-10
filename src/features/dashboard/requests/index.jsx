@@ -10,15 +10,46 @@ import AccepteRequest from 'src/features/requests/api/AccepteRequest';
 import { useTranslation } from 'react-i18next';
 import { useRejectRequest } from 'src/features/requests/Inquiries/Hooks/useRejectRequest';
 import { useAccepteRequest } from 'src/features/requests/Inquiries/Hooks/useAccepteRequest';
-
+import styled from 'styled-components';
 export default function Requests() {
+  const Name = styled(Typography)(() => ({
+    fontSize:'14px',
+    fontWeight:'500',
+
+    color:'#3F4458'
+
+  }))
+  const SectionTittle = styled(Typography)(() => ({
+    fontSize:'20px',
+    fontWeight:'600',
+
+    color:'#8090A7'
+
+  }))
+  const Content = styled(Typography)(() => ({
+    fontSize:'14px',
+    fontWeight:'500',
+   
+    color:'#3F4458'
+
+  }))
 
   const { data } = useGetAllInquiries();
   const {mutate:Rejected,isloading}=useRejectRequest()
   const {mutate:Accepted}=useAccepteRequest()
 
+  const formatTime = (dateString) => {
+    const date = new Date(dateString);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    // Ensure leading zero for single digit minutes
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    return `${hours}:${formattedMinutes}`;
+  };
+
   const { t } = useTranslation()
   const requestsData = data?.data?.data || [];
+  console.log("🚀 ~ Requests ~ requestsData:", requestsData)
   let counter = 0;
 
     const handleApproveClick = (params) => {
@@ -31,9 +62,9 @@ export default function Requests() {
 
   return (
     <>
-      <Stack sx={{ width: '100%',borderRadius:'6px',height:'100%' ,backgroundColor: "#fff", p: "15px" ,overflowY: 'auto',borderRadius:'12px' }} spacing={2}>
+      <Stack sx={{ width: '100%',height:'100%' ,backgroundColor: "#fff", p: "15px" ,overflowY: 'auto',borderRadius:'12px' }} spacing={2}>
 
-        <Typography variant="h3" marginTop={"25px"} marginLeft={"10px"} color="#8090A7">{t('Requests')}</Typography>
+        <SectionTittle >{t('Requests')}</SectionTittle>
 
         {requestsData?.map((request, index) => (
           <>
@@ -44,28 +75,26 @@ export default function Requests() {
 
             <Stack direction={{ sm:'row',xs:'row' }}  >
 
-                <Box>
+            <Stack direction={{ sm:'row',xs:'row' }} marginTop={'2.5%' }  marginLeft={{ sm:'1%' }}  spacing={{sm:16,xs:4}}  >
+            <Stack direction={'row'} spacing={1}  >
+        
                   <Avatar
                     alt="Remy Sharp"
                     src="/static/images/avatar/1.jpg"
-                    sx={{ width: 45, height: 45 }}
+                    sx={{ width: 40, height: 40,marginX:'8px' }}
 
                   />
-                </Box>
+       <Stack direction={'column'}  >
+                  <Name>
+                    {request?.user?.first_name} {request?.user?.last_name}
+                  </Name>
+                  <Content >{request?.description}</Content>
 
-              <Stack direction={{ sm:'row',xs:'row' }} marginTop={'2.5%' } marginLeft={{ sm:'1%' }}  spacing={{sm:16,xs:4}}  >
-                <Stack direction={'row'}  spacing={1}>
-                  <Typography>
-                    {request?.user?.first_name}
-                  </Typography>
-                  <Typography >
-                    {request?.user?.last_name}
-                  </Typography>
+                  </Stack>
+                 
                 </Stack>
+                <Typography>{formatTime(request?.date)}</Typography>
 
-                <Box >
-                  <Typography >{request?.date}</Typography>
-                </Box>
 
               </Stack>
 
@@ -73,14 +102,14 @@ export default function Requests() {
 
             </Stack>
 
-            <Stack spacing={{sm:2,xs:1}} direction={{ sm:'row',xs:'row' }}  justifyContent={'end'}>
+            <Stack spacing={{sm:2,xs:1}} sx={{marginY:'12px'}} direction={{ sm:'row',xs:'row' }}  justifyContent={'end'}>
               <Box>
-                <Button size='medium' variant="outlined" color="error" onClick={() => handleRejectClick(request?.id)}>
+                <Button size='medium' sx={{ backgroundColor:'rgba(223, 46, 56, 0.20)',paddingX:'12px'}} color="error" onClick={() => handleRejectClick(request?.id)}>
                   {t('Decline')}
                 </Button>
               </Box>
               <Box>
-                <Button variant="outlined" color="success" onClick={() => handleApproveClick(request?.id)} >
+                <Button  color="success" sx={{ backgroundColor:'rgba(145, 196, 131, 0.20)',paddingX:'12px'}} onClick={() => handleApproveClick(request?.id)} >
                   {t('Approve')}
                 </Button>
               </Box>

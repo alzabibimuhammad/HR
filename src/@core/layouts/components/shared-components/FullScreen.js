@@ -27,7 +27,7 @@ export default function FullScreen() {
   return (
     <div>
       <button className={classes.button} onClick={toggleFullScreen}>
-        {isFullScreen ? <FullscreenExitIcon /> : <FullscreenIcon />}
+        {isFullScreen ? <FullscreenExitIcon sx={{color:'#8090A7'}} /> : <FullscreenIcon sx={{color:'#8090A7'}} />}
       </button>
     </div>
   );

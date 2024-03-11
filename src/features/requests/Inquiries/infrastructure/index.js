@@ -16,7 +16,8 @@
         status:element?.status,
         time:time,
         specialization:element?.user?.specialization,
-        user_info:element?.user?.user_info?.image
+        user_info:element?.user?.user_info?.image,
+        department:element?.department?.name?element?.department?.name:' ',
 
       }
     })

@@ -22,8 +22,8 @@ export function FormateDateTime(date) {
     var formattedMinutes = (minutes < 10 ? '0' : '') + minutes;
     var formattedSeconds = (seconds < 10 ? '0' : '') + seconds;
     
-    var formattedDate = year + '-' + formattedMonth + '-' + formattedDay + ' ' + formattedHours + ':' + formattedMinutes + ':' + formattedSeconds;
+    var formattedTime = year + '-' + formattedMonth + '-' + formattedDay + ' ' + formattedHours + ':' + formattedMinutes + ':' + formattedSeconds;
   
-    return formattedDate;
+    return formattedTime;
   }
   

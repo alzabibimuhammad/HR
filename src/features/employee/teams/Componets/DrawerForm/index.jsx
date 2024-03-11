@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import { styled, useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
-import { Button, TextField, Typography, Stack } from '@mui/material'
+import { Button, TextField, Typography, Stack, Divider } from '@mui/material'
 import Members from './members'
 import TeamLeaders from './teamLeaders'
 import { useAddTeam } from '../../hooks/useAddTeam'
@@ -79,15 +79,16 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
             backgroundColor: '#DCE1E6',
             fontSize: '20px',
             gap: '10px',
-            padding: '15px',
-            borderRadius: '10px',
-            fontFamily: 'Montserrat'
+            padding: '24px',
+           color:'#8090A7',
+            fontFamily: 'Montserrat',
+            fontWeight:600
           }}
         >
           {t('ADD DEPARTMENT')}
         </Box>
-        <Box sx={{ padding: '12px' }}>
-          <Typography sx={{ fontFamily: 'Montserrat' }}>{t('Name')}</Typography>
+        <Box sx={{ padding: '24px' }}>
+          <Typography sx={{ fontFamily: 'Montserrat' ,fontSize:'16px',fontWeight:600, marginBottom:'12px' }}>{t('Name')}</Typography>
           <TextField
             fullWidth
             style={{ height: '10px' }}
@@ -97,10 +98,11 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
             onChange={handleTeamNameChange}
           />
         </Box>
-        <Box sx={{ padding: '12px' }}>
+        
+        <Box sx={{ padding: '24px' }}>
           <Members SetMembers={SetMembers} />
         </Box>
-        <Box sx={{ padding: '12px' }}>
+        <Box sx={{ padding: '24px' }}>
           <TeamLeaders SetteamLeader={SetteamLeader} />
         </Box>
         <Box sx={{ display: 'flex', width: '100%', padding: '10px' }}>
@@ -117,15 +119,20 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
             >
               {t('Cancel')}
             </Button>
-            <LoadingButton
+            <Button
               onClick={handlerSendData}
               loading={isloading}
               loadingPosition='start'
-              startIcon={<SaveIcon />}
-              variant='outlined'
+              variant='contained'
+              sx={{
+           
+                borderRadius: '4px',
+                padding: '8px 24px',
+            
+              }}
             >
-              {t('Save')}
-            </LoadingButton>
+              {t('Add')}
+            </Button>
           </Stack>
         </Box>
       </Stack>

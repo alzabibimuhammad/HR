@@ -17,6 +17,10 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useDispatch } from 'react-redux'
 import { setProfileTap } from 'src/store/apps/user'
+import DeleteIcon from '../../../../../public/images/IconInput/delete'
+import EditIcon from '../../../../../public/images/IconInput/edit'
+import ViewIcon from '../../../../../public/images/IconInput/view'
+import { Badge } from '@mui/material'
 
 const useUserColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
@@ -41,6 +45,7 @@ const useUserColumns = () => {
   }
 
   const handleClickOpen = params => {
+    console.log("🚀 ~ handleClickOpen ~ params:", params)
     setDeleteId(params)
     setIsDeletePopupOpen(true)
   }
@@ -60,38 +65,43 @@ const handleViewProfileTap=_=>{
       {
         field: '',
         headerName: t('Employee'),
-         disableClickEventBubbling: true,
+        disableClickEventBubbling: true,
         flex: 2.5,
         renderCell: params => {
+     
           return (
             <Link href={`/profile/${params?.row?.id}`} style={{ display: 'flex', textDecoration: 'none', alignItems: 'center' }}>
-              <Avatar sx={{width:'36px',height:'36px'}} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
+              <Badge color={params?.row?.status === '0'?'success':'error'} variant="dot" sx={{ marginX: '12px' }} size="large">
+              </Badge>
+              <Avatar sx={{ width: '36px', height: '36px' }} src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
               <Stack marginLeft={'12px'} direction={'column'}>
-                <Typography className='custome-data-grid-font' >{params?.row?.first_name} {params?.row?.last_name}</Typography>
+                <Typography className='custome-data-grid-font'>{params?.row?.first_name} {params?.row?.last_name}</Typography>
                 <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
               </Stack>
             </Link>
-          )
+          );
         }
       },
+      
       {
         field: 'role',
-        headerName: t('Role'),
+        headerName: t('Level'),
         disableClickEventBubbling: true,
         flex: 1.5,
         headerAlign: 'center',
         align: 'center',
         renderCell: params => {
-          return <Typography  className='custome-data-grid-font' >{params?.row?.role}</Typography>
+          return <Typography  className='custome-data-grid-font' >{params?.row?.level}</Typography>
         }
       },
 
       {
         field: 'department',
-        headerName: t('department'),
+        headerName: t('SPECIALIZATION'),
         flex: 2.5,
         renderCell: params => {
-          return <Typography  className='custome-data-grid-font'>{params?.row?.department}</Typography>
+          return <Typography  className='custome-data-grid-font'>{params?.row?.department
+            }</Typography>
         }
       },
       {
@@ -107,16 +117,16 @@ const handleViewProfileTap=_=>{
               <Box >
                     <Link href={`/profile/${params.row.id}?type=profile`}>
                       <IconButton onClick={handleViewProfileTap}>
-                        <VisibilityIcon variant="contained" sx={{ color: '#8090A7' }} size='small'>Details</VisibilityIcon>
+                        <ViewIcon/>
                       </IconButton>
                     </Link>
-                    <IconButton>
-                    <img  style={{ color: '#8090A7',width:"24px",height:"24px" }}  onClick={() => handleEditClick(params.row)}  src="/images/pin.svg" alt="Details" />
+                    <IconButton onClick={() => handleEditClick(params.row)}>
+                    <EditIcon    />
 
                       {/* <BorderColorOutlinedIcon style={{ color: '#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon> */}
                     </IconButton>
-                    <IconButton>
-                      <DeleteOutlinedIcon onClick={() => handleClickOpen(params.row.id)} variant="contained" color="#8090A7" size='small'>  Delete   </DeleteOutlinedIcon>
+                    <IconButton onClick={() => handleClickOpen(params.row.id)} >
+                      <DeleteIcon  >  Delete   </DeleteIcon>
                     </IconButton>
 
 
@@ -130,8 +140,7 @@ const handleViewProfileTap=_=>{
           )
         }
       }
-    ],
-    []
+    ]
   )
 }
 

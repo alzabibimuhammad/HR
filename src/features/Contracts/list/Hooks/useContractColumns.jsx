@@ -119,7 +119,7 @@ const useContractColumns = () => {
                 <IconButton>
                   <VisibilityIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
                     Details
-                  </RemoveRedEyeOutlinedIcon>
+                  </VisibilityIcon>
                 </IconButton>
               </Link>
             </Stack>

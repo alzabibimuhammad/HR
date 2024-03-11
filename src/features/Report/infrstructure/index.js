@@ -12,6 +12,7 @@ export const ReportData = elements => {
       ID:element.id,
       Name:element.first_name,
       Email:element.email,
+      created_at:element.created_at,
 
     };
   });

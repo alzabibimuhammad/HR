@@ -23,7 +23,8 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { setProfileTap } from 'src/store/apps/user'
-
+import DeleteIcon from '../../../../../public/images/IconInput/delete'
+import ViewIcon from '../../../../../public/images/IconInput/view'
 
 export default function CollapsibleTable(Data ) {
   const { t } = useTranslation()
@@ -93,6 +94,7 @@ export default function CollapsibleTable(Data ) {
                   onClick={() => setOpen(!open)}
                   sx={{
                     fontSize: '13px',
+                    color:'#8090A7',
                     '&:hover': {
                       background: 'none !important'
                     },
@@ -101,29 +103,30 @@ export default function CollapsibleTable(Data ) {
                   disableRipple
                 >
                   <Stack direction={'row'}>
-                    <Typography sx={{ fontSize: '14px',color:'#8090A7',fontWeight:500 }}>{t('Daily Report')}</Typography>
+                    <Typography sx={{ fontSize: '14px',color:'#8090A7',fontWeight:500, marginRight:'8px'}}>{t('Daily Report')}</Typography>
                   </Stack>
-                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                  {open ? <KeyboardArrowUpIcon sx={{marginTop:'3px'}} /> : <KeyboardArrowDownIcon sx={{marginTop:'3px'}} />}
                 </IconButton>
               </Box>
             </Stack>
           </TableCell>
           <TableCell>
-            <Typography className='custome-data-grid-font' >{t(row?.role)}</Typography>
+            <Typography className='custome-data-grid-font' >{row?.team?row.team:'---'}</Typography>
           </TableCell>
 
           <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{row?.department?.name?row?.department?.name:'---'}</Typography>
+            <Typography sx={{ fontSize: '14px' }}>{row.created_at}</Typography>
           </TableCell>
           <TableCell>
             <Box style={{ display:'flex', justifyContent:'end' }} >
               <Link href={`/profile/${row.id}?type=reports`}>
                 <IconButton onClick={handleViewProfileTap}>
-                  <VisibilityIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
+                  <ViewIcon >
                   {t('Details')}
-                  </VisibilityIcon>
+                  </ViewIcon>
                 </IconButton>
               </Link>
+        
 
             </Box>
           </TableCell>
@@ -251,8 +254,8 @@ export default function CollapsibleTable(Data ) {
               <TableHead>
                 <TableRow>
                   <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Employee')}</TableCell>
-                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Role')}</TableCell>
-                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Team')}</TableCell>
+                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Level')}</TableCell>
+                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Date')}</TableCell>
                   <TableCell  className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' style={{ display:'flex', justifyContent:'end' }} >{t('Action')}</TableCell>
                 </TableRow>
               </TableHead>

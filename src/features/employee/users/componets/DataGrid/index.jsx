@@ -226,7 +226,7 @@ const Users = ({ rows }) => {
             </Stack>
             <Stack direction={{ xs: 'column', sm: 'row' }} alignItems={'center'} spacing={2}>
               <Typography className='filterTitle' >{t('Filters')}</Typography>
-              <TextField
+              {/* <TextField
                 select
                 sx={{ width:{sm:'320px',xs:'100%'} }}
                 defaultValue=''
@@ -244,7 +244,7 @@ const Users = ({ rows }) => {
                     {element}
                   </MenuItem>
                 ))}
-              </TextField>
+              </TextField> */}
 
               {/* <TextField
                 select

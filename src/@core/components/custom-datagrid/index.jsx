@@ -19,7 +19,7 @@ const CustomDataGrid = ({ rows, columns, show, rowHeight }) => {
 
   return (
     <>
-      <Box sx={{ height: 500, width: '100%', overflow: 'auto'}}>
+      <Box sx={{ height: 500, width: '100%'}}>
         <DataGrid
        
           columns={columns}

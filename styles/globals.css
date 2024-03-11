@@ -495,11 +495,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .css-sbn3f9-MuiDataGrid-columnHeaderTitle {
-  color: var(--text-Primarycolor, #3F4458) !important;
-font-size: 14px !important;
-font-style: normal !important;
+  color: #3F4458 !important;
+font-size: 16px !important;
 font-weight: 600 !important;
-line-height: normal !important;
 }
 
 
@@ -525,6 +523,31 @@ line-height: normal !important;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+}
+
+.css-k4zmsa-MuiFormControl-root-MuiTextField-root {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  vertical-align: top;
+  width: 100%;
+   padding-left: 0px !important; 
+  background-color: #F5F7FA;
+  margin-bottom: 2%;
+}
+
+.css-1imrn1l-MuiFormControl-root-MuiTextField-root {
+   padding-left: 0px !important
+ 
 }
 
 .Pagetitle{
@@ -732,4 +755,14 @@ width: 100% !important;
 
 .nav-link :active{
   color: #131627 !important;
+}
+
+.rtl-opk9kx-MuiDataGrid-root .MuiDataGrid-columnHeader--moving {
+   background-color: #fff !important;
+}
+
+.css-opk9kx-MuiDataGrid-root .MuiDataGrid-columnHeader--moving {
+  background-color: #fff !important;
+
+  /* background-color: rgba(47, 43, 61, 0.04); */
 }

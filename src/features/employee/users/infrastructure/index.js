@@ -7,6 +7,8 @@ export const UsersData = elements => {
       middle_name:element?.middle_name,
       role: element?.role,
       specialization:element?.specialization,
+      level:element?.level,
+      status:element?.status,
       email:element?.email,
       user_info:element?.user_info?.image,
       department:element?.department?.name?element?.department?.name:'---'

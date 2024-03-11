@@ -40,7 +40,7 @@ const useInquiriesColumns = () => {
             <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + params?.row?.user_info} alt='' />
             <Stack>
               <Typography className='custome-data-grid-font'>{params?.row?.first_name} {params?.row?.last_name}</Typography>
-              <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
+              <Typography className='custome-data-grid-font2'>{params?.row?.department}</Typography>
             </Stack>
           </Stack>
         </Link>

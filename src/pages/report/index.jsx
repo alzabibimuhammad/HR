@@ -1,10 +1,16 @@
 import { Box } from '@mui/system'
 import { CircularProgress } from '@mui/material'
 import CollapsibleTable from 'src/features/Report/componets/table'
-import useGetAllUsers from 'src/features/employee/users/hooks/useGetAllUsers'
+
+import { useReports } from 'src/features/Report/hooks/useGetAllReports'
+import { useEffect } from 'react'
 
 const ReportPage = () => {
-  const {data} =  useGetAllUsers()
+  const {mutate:report,data} =  useReports()
+
+  useEffect(()=>{
+    report('2024-02-12')
+  },[])
 
   return(
     <>

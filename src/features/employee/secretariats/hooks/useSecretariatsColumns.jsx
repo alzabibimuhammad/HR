@@ -29,6 +29,7 @@ const useSecretariatsColumns = () => {
     setIsDrawerOpenEdit(true)
     setIsMenuOpen(false)
 
+
   }
 
   const handleClickOpenn = params => {
@@ -138,7 +139,7 @@ const useSecretariatsColumns = () => {
             )}
 
             <Box>
-              <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
+              <DrawerForm AllData={params?.row} open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
             </Box>
           </>
         )

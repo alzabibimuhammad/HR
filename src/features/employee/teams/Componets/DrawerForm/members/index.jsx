@@ -69,6 +69,7 @@ const data = [
 ]
 
 const Members = ({ SetMembers, SelectedRow }) => {
+  console.log("🚀 ~ Members ~ SelectedRow:", SelectedRow)
   const {t} = useTranslation()
   const [selectedItems, setSelectedItems] = useState(SelectedRow || [])
 

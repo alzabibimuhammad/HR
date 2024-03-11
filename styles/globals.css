@@ -749,3 +749,8 @@ input[type="time"] {
 }
 
 
+.title-section{
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  color: #8090a7 !important;
+}

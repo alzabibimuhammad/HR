@@ -77,7 +77,7 @@ export default function Employment({ onDataChange, Controller, control, errors,S
     <Card>
       <CardContent>
 
-        <Typography >{t("Employment")}</Typography>
+        <Typography className='title-section'>{t("Employment")}</Typography>
         <br />
 
         <Stack direction={'column'} spacing={3} width={'100%'} >

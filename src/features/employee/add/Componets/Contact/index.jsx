@@ -71,7 +71,7 @@ export default function Contact({ onDataChange, Controller, control, defaultValu
   return (
     <Card>
       <CardContent>
-        <Typography>{t('Contact')}</Typography>
+        <Typography className='title-section'>{t('Contact')}</Typography>
         <br />
 
         <Stack sx={{ padding: '0' }}  direction={'column'} spacing={2} width={'100%'}>

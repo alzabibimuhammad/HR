@@ -89,7 +89,7 @@ const Members = ({SetteamLeader,Data}) => {
 
   return (
     <>
-      <Typography>
+      <Typography sx={{ fontFamily: 'Montserrat' ,fontSize:'16px',fontWeight:600, marginBottom:'12px' }}>
       {t('Department Leader')}
       </Typography>
 
@@ -108,7 +108,7 @@ const Members = ({SetteamLeader,Data}) => {
             </Box>
           ),
         }}
-        sx={{ paddingLeft: '8px',backgroundColor:'#F5F7FA',marginBottom:'2%' }}
+        sx={{ paddingLeft: '8px',backgroundColor:'#F5F7FA',marginBottom:'12px' }}
         size='small'
         fullWidth
       />
@@ -124,7 +124,7 @@ const Members = ({SetteamLeader,Data}) => {
                 mb: index !== data.length - 1 ? [6.25, 6.25, 5.5, 6.25] : undefined
               }}
             >
-              <Avatar variant='rounded' src={process.env.NEXT_PUBLIC_IMAGES+'/'+item?.user_info?.image} sx={{ mr: 4, width: 34, height: 34 }}>
+              <Avatar variant='circular' src={process.env.NEXT_PUBLIC_IMAGES+'/'+item?.user_info?.image} sx={{ mr: 4, width: 34, height: 34 }}>
                 <Icon icon={item.first_name} />
               </Avatar>
               <Box
@@ -139,9 +139,9 @@ const Members = ({SetteamLeader,Data}) => {
                 }}
               >
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                  <Typography variant='h6'>{item.first_name + '\u00A0\u00A0' + item.last_name}</Typography>
-                  <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-                    {t(item.role)}
+                  <Typography sx={{fontSize:'14px',fontWeight:500}}>{item.first_name + '\u00A0\u00A0' + item.last_name}</Typography>
+                  <Typography sx={{ fontSize:'12px',fontWeight:400,color:'#7B8794' }}>
+                    {t(item.level)}
                   </Typography>
                 </Box>
                 <Box>

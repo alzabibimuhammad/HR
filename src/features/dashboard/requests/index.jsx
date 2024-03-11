@@ -15,6 +15,7 @@ export default function Requests() {
   const Name = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
+    textTransform: 'uppercase',
 
     color:'#3F4458'
 
@@ -64,7 +65,7 @@ export default function Requests() {
     <>
       <Stack sx={{ width: '100%',height:'100%' ,backgroundColor: "#fff", p: "15px" ,overflowY: 'auto',borderRadius:'12px' }} spacing={2}>
 
-        <SectionTittle >{t('Requests')}</SectionTittle>
+        <SectionTittle sx={{marginY:'19px'}} >{t('Requests')}</SectionTittle>
 
         {requestsData?.map((request, index) => (
           <>
@@ -75,8 +76,8 @@ export default function Requests() {
 
             <Stack direction={{ sm:'row',xs:'row' }}  >
 
-            <Stack direction={{ sm:'row',xs:'row' }} marginTop={'2.5%' }  marginLeft={{ sm:'1%' }}  spacing={{sm:16,xs:4}}  >
-            <Stack direction={'row'} spacing={1}  >
+            <Stack direction={{ sm:'row',xs:'row' }} marginTop={'2.5%' }  marginLeft={{ sm:'1%' }}  spacing={{sm:38,xs:4}} justifyContent="space-between"  >
+            <Stack direction={'row'} spacing={1}   >
         
                   <Avatar
                     alt="Remy Sharp"
@@ -93,7 +94,7 @@ export default function Requests() {
                   </Stack>
                  
                 </Stack>
-                <Typography>{formatTime(request?.date)}</Typography>
+                <Typography ma>{formatTime(request?.date)}</Typography>
 
 
               </Stack>

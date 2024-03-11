@@ -73,6 +73,7 @@ const Members = ({ SetMembers, SelectedRow }) => {
   const {t} = useTranslation()
   const [selectedItems, setSelectedItems] = useState(SelectedRow || [])
 
+
   useEffect(() => {
     if (SelectedRow) {
       const idsArray = selectedItems.map(item => item?.id)
@@ -112,9 +113,9 @@ const Members = ({ SetMembers, SelectedRow }) => {
 
   return (
     <Box sx={{ overflowX: 'hidden' }}>
-      <Typography sx={{ fontFamily: 'Montserrat' }}>{t('Members')}</Typography>
+      <Typography sx={{ fontFamily: 'Montserrat' ,fontSize:'16px',fontWeight:600 }}>{t('Members')}</Typography>
 
-        <Stack direction='row' spacing={2} padding={'10px'} position={'relative'} width={'100%'} sx={{ overflowX: 'auto', scrollbarWidth: 'thin', scrollbarColor: 'red ' }}>
+        <Stack direction='row' spacing={2} padding={'8px'} position={'relative'} width={'100%'} sx={{ overflowX: 'hidden', scrollbarWidth: 'thin', scrollbarColor: 'red ' }}>
           {selectedItems?.map((icon, index) => (
             <Avatar
               key={index}
@@ -168,7 +169,7 @@ const Members = ({ SetMembers, SelectedRow }) => {
             </Box>
           )
         }}
-        sx={{ paddingLeft: '8px', backgroundColor: '#F5F7FA', marginBottom: '2%' }}
+        sx={{  backgroundColor: '#F5F7FA', marginBottom: '12px' }}
         size='small'
         fullWidth
       />
@@ -183,9 +184,9 @@ const Members = ({ SetMembers, SelectedRow }) => {
           }}
         >
           <Avatar
-            variant='rounded'
+            variant='circular'
             src={process.env.NEXT_PUBLIC_IMAGES + '/' + item?.user_info?.image}
-            sx={{ mr: 4, width: 34, height: 34 }}
+            sx={{ mr: 4, width: 36, height: 36 }}
           >
             <Icon icon={item.first_name} />
           </Avatar>
@@ -201,9 +202,9 @@ const Members = ({ SetMembers, SelectedRow }) => {
             }}
           >
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-              <Typography variant='h6'>{item.first_name + '\u00A0\u00A0' + item.last_name}</Typography>
-              <Typography variant='body2' sx={{ color: 'text.disabled' }}>
-                {t(item.role)}
+              <Typography sx={{fontSize:'14px',fontWeight:500}}>{item.first_name + '\u00A0\u00A0' + item.last_name}</Typography>
+              <Typography  sx={{ fontSize:'12px',fontWeight:400,color:'#7B8794' }}>
+                {t(item.level)}
               </Typography>
             </Box>
             <Box>

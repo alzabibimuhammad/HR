@@ -71,7 +71,7 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
     <Card>
         <CardContent>
 
-          <Typography >{t("Personal Info")}</Typography>
+          <Typography className='title-section'>{t("Personal Info")}</Typography>
           <br/>
 
           <Stack direction={'column'} spacing={3} width={'100%'} >

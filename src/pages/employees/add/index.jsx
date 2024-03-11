@@ -91,7 +91,8 @@ export default function Add() {
           experiences:ShowUser?.data?.data[0]?.careers||[{ experience: '' }],
           certificates:ShowUser?.data?.data[0]?.certificates||[{content:''}],
           secretaraits:ShowUser?.data?.data[0]?.deposits||[{object:"",delivery_date:""}],
-          emergency_contact:ShowUser?.data?.data[0]?.emergency
+          emergency_contact:ShowUser?.data?.data[0]?.emergency,
+          role:ShowUser?.data?.data[0]?.role
         }
 
 
@@ -123,6 +124,7 @@ export default function Add() {
 
 
   const handleDataSubmit = data => {
+  console.log("🚀 ~ handleDataSubmit ~ data:", data)
 
 
 
@@ -136,6 +138,7 @@ export default function Add() {
 
 
 }
+
 const handleDataEditSubmit = data => {
 
 
@@ -310,6 +313,7 @@ return (
                   control={control}
                   Controller={Controller}
                   onDataChange={setSkillsData}
+                  ShowUser={ShowUser}
                 />
               </Box>
               <Box>

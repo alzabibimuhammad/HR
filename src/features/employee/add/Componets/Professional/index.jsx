@@ -48,112 +48,13 @@ export default function Professional({ onDataChange, Controller, control,errors,
   return (
     <Card>
       <CardContent>
-        <Typography>{t('Professional')}</Typography>
+        <Typography className='title-section'>{t('Professional')}</Typography>
         <br />
 
         <Stack direction={'column'} spacing={3} width={'100%'}>
-          <Typography>{t('Branch')}</Typography>
 
-          <Controller
-            name='branch_id'
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                select
-                fullWidth
-                error={Boolean(errors?.branch_id)}
-                helperText={errors?.branch_id?.message}
-                value={branch}
-                SelectProps={{
 
-                  displayEmpty: true,
-                  onChange: e => {
-                    field.onChange(e)
-                    handleSelectBranchChange(e)
-                  }
-                }}
-                size='small'
-              >
-                <MenuItem value='' >{`${t('Branch')}`}</MenuItem>
 
-                {SelectBranch?.data?.data?.map((val, index) => (
-                  <MenuItem key={val.id} value={val.id}>
-                    {val.name}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-          />
-
-          <Typography>{t("Specialization")}</Typography>
-
-          <Controller
-            name='specialization'
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                select
-                fullWidth
-                error={Boolean(errors?.specialization)}
-                {...(errors?.specialization && {
-                  helperText: errors?.specialization?.message
-                })}
-                value={specialization}
-                SelectProps={{
-                  displayEmpty: true,
-                  onChange: e => {
-                    field.onChange(e)
-                    handleSpecializationChange(e)
-                  }
-                }}
-                size='small'
-              >
-                <MenuItem value='' >
-                {t("work specialization")}
-                </MenuItem>
-
-                {data?.data?.data?.specialisation?.map((val, index) => (
-                  <MenuItem key={index} value={val}>
-                    {val}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-          />
-
-          <Typography>{t("Level")}</Typography>
-
-          <Controller
-            name="level"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                select
-                fullWidth
-                value={level}
-                error={Boolean(errors?.level)}
-                helperText={errors?.level?.message}
-                SelectProps={{
-                  displayEmpty: true,
-                  onChange: e => {
-                    field.onChange(e)
-                    handleLevelChange(e)
-                  }
-                }}
-                size='small'
-              >
-                <MenuItem value=''>{`${t('Level')}`}</MenuItem>
-                {LevelData?.data?.data?.levels?.map((val, index) => (
-                  <MenuItem key={index} value={val}>
-                    {val}
-                  </MenuItem>
-                ))}
-              </TextField>
-            )}
-          />
 
           <Typography>{t("Team/Department")}</Typography>
 
@@ -187,6 +88,44 @@ export default function Professional({ onDataChange, Controller, control,errors,
               </TextField>
             )}
           />
+
+
+
+
+
+
+
+<Typography>{t("Level")}</Typography>
+
+<Controller
+  name="level"
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      select
+      fullWidth
+      value={level}
+      error={Boolean(errors?.level)}
+      helperText={errors?.level?.message}
+      SelectProps={{
+        displayEmpty: true,
+        onChange: e => {
+          field.onChange(e)
+          handleLevelChange(e)
+        }
+      }}
+      size='small'
+    >
+      <MenuItem value=''>{`${t('Level')}`}</MenuItem>
+      {LevelData?.data?.data?.levels?.map((val, index) => (
+        <MenuItem key={index} value={val}>
+          {val}
+        </MenuItem>
+      ))}
+    </TextField>
+  )}
+/>
         </Stack>
 
       </CardContent>

@@ -1,5 +1,4 @@
 export const ContractsData = elements => {
-console.log("🚀 ~ ContractsData ~ elements:", elements)
 
   return elements?.data?.data?.map(element => {
     return {
@@ -13,7 +12,8 @@ console.log("🚀 ~ ContractsData ~ elements:", elements)
       role: element?.user?.role,
       user_info: element?.user?.user_info?.image,
       user_id:element?.user?.id,
-      specialization:element?.user?.specialization
+      specialization:element?.user?.specialization,
+      path:element?.path
     }
   })
 }

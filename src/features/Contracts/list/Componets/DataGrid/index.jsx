@@ -14,11 +14,12 @@ import Show10 from 'src/@core/components/show10'
 const List = ({ rows }) => {
   const [Fdata , setFData] = useState(rows)
   const [show, setShow] = React.useState(10);
-
   const columns = useContractColumns()
   const { t } = useTranslation()
+  const [FilterDate, setFilterDate] = useState()
 
   const [searchText, setsearchText] = useState()
+  const [Rows, setRows] = useState()
 
 
   const handelSearch = event => {
@@ -28,6 +29,27 @@ const List = ({ rows }) => {
       setsearchText(null)
   };
 
+  const handelDate = event => {
+    setRows(ContractsData(rows))
+    const value = event.target.value
+    if (value) setFilterDate(value)
+    else setRows(ContractsData(rows))
+  }
+
+
+  useEffect(() => {
+    let date = Rows?.filter(element => {
+      return FilterDate == element?.date
+    })
+    if (date?.length) setRows(date)
+    else {
+      if (FilterDate) setRows([])
+      else setRows(ContractsData(rows))
+    console.log("date",date);
+    }
+  }, [FilterDate])
+
+
   useEffect(()=>{
     let filterData = ContractsData(rows)
     if(searchText)filterData=filterData?.filter((value,index)=>(
@@ -36,6 +58,9 @@ const List = ({ rows }) => {
     ))
     setFData(filterData)
   },[rows,searchText])
+
+
+
 
 
 
@@ -97,7 +122,51 @@ const List = ({ rows }) => {
           sx={{ backgroundColor: '#F5F7FA',border:'none', boxShadow: 'none',width:{sm:'320px',xs:'100%'} }}
           size='small'
         />
+
         </Stack>
+        <Stack direction={"row"} width={"930px"} gap={"12px"}>
+
+             {/* <Controller
+            name={``}
+            control={control}
+            render={({ field }) => ( */}
+              <TextField
+
+// {...field}
+onChange={handelSearch}
+type='date'
+placeholder='Start time'
+fullWidth
+size='small'
+sx={{width:"302px"}}
+/>
+{/* )} */}
+{/* /> */}
+
+{/* ******************************************* */}
+              {/* <Controller
+name={``}
+control={control}
+render={({ field }) => ( */}
+<TextField
+sx={{width:"302px"}}
+
+// {...field}
+
+type='date'
+placeholder='End time'
+fullWidth
+size='small'
+/>
+{/* )}
+/> */}
+
+        </Stack>
+        <Stack direction={"row"} width={"930px"} gap={"12px"} marginTop={"12px"}>
+
+
+</Stack>
+
         <Grid marginTop={'1%'} container spacing={2} alignItems={'center'} justifyContent={'space-around'}>
           <Grid item sm={12} xs={12}>
             <CustomDataGrid columns={columns} show={show}  sx={gridStyles.root} rows={Fdata || []}/>

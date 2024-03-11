@@ -55,20 +55,19 @@ const AuthProvider = ({ children }) => {
          const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
          router.replace(redirectURL)
          toast.success(`${response.data.message} `, {
-           
+
            duration: 10000,
-           className: "full-width-toast", 
+           className: "full-width-toast",
          });
- 
+
       })
        .catch(err => {
-    
+
         toast.custom(<div style={{backgroundColor:'#fff',width:'100%',  display:"flex", justifyContent:'end'}}>Hello World</div>);
   })
   }
 
   const handleLogout = () => {
-    console.log('done')
     setUser(null)
     window.localStorage.removeItem('userData')
     window.localStorage.removeItem(authConfig.storageTokenKeyName)

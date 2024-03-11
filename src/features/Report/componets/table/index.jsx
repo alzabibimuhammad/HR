@@ -54,7 +54,6 @@ export default function CollapsibleTable(Data ) {
     setIsDeletePopupOpen(false)
   }
   function Row({ row }) {
-    console.log("🚀 ~ Row ~ row:", row)
     const [open, setOpen] = useState(false)
 
     const handleToggle = () => {

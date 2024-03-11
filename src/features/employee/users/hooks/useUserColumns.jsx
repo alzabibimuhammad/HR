@@ -111,9 +111,9 @@ const handleViewProfileTap=_=>{
                       </IconButton>
                     </Link>
                     <IconButton>
-                    <img  style={{ color: '#8090A7',width:"24px",height:"24px" }}  onClick={() => handleEditClick(params.row)}  src="/images/pin.svg" alt="Details" />
+                    {/* <img  style={{ color: '#8090A7',width:"24px",height:"24px" }}  onClick={() => handleEditClick(params.row)}  src="/images/pin.svg" alt="Details" /> */}
 
-                      {/* <BorderColorOutlinedIcon style={{ color: '#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon> */}
+                      <BorderColorOutlinedIcon style={{ color: '#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon>
                     </IconButton>
                     <IconButton>
                       <DeleteOutlinedIcon onClick={() => handleClickOpen(params.row.id)} variant="contained" color="#8090A7" size='small'>  Delete   </DeleteOutlinedIcon>

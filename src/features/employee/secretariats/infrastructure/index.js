@@ -1,5 +1,4 @@
 export const SecretariatsData = elements => {
-  console.log("🚀 ~ SecretariatsData ~ elements:", elements)
   return elements?.map(element => {
     return {
       id: element?.id,
@@ -9,7 +8,8 @@ export const SecretariatsData = elements => {
       date:element?.received_date,
       user_info:element?.user?.user_info?.image,
       user_id:element?.user?.id,
-      specialization:element?.user?.specialization
+      specialization:element?.user?.specialization,
+      name:element?.user?.name
     }
   })
 }

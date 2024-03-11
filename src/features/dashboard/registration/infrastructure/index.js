@@ -1,6 +1,5 @@
 
 export const RegistrationData = (elements,filterDate,policyTime) => {
-  console.log("🚀 ~ RegistrationData ~ elements:", elements)
   let [startHour, startMinuts] = String(policyTime?.start)?.split(':');
   let [endHour, endMinuts] = String(policyTime?.end)?.split(':');
   /* start time form policy */

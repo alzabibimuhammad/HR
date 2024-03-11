@@ -70,6 +70,18 @@ const useSecretariatsColumns = () => {
       }
     },
     {
+      field: 'name',
+      headerName: t('Name'),
+      disableClickEventBubbling: true,
+      flex: 1,
+      renderCell: params => ( <Stack direction={"row"}>
+        <Typography className='custome-data-grid-font' >{params?.row?.name}</Typography>
+        <Typography className='custome-data-grid-font' >{params?.row?.file}</Typography>
+      </Stack>
+
+      )
+    },
+    {
       field: 'date',
       headerName: t('Date'),
       disableClickEventBubbling: true,

@@ -103,10 +103,14 @@ const useSalaryColumns = () => {
     },
     {
       field: 'total',
-      headerName: t("total"),
-      flex: 1,
+  headerName: (
+      <span className="custom-total-header">
+        {t("total")}
+
+      </span>
+    ),            flex: 1,
       renderCell: params => (
-        <Typography className='custome-data-grid-font' >{params?.row?.total}</Typography>
+        <Typography  className='custome-data-grid-font' >{params?.row?.total}</Typography>
 
       )
 

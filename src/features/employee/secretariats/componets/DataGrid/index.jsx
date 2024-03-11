@@ -13,6 +13,7 @@ import DrawerFormAdd from '../DrawerAdd'
 import Show10 from 'src/@core/components/show10'
 
 const SecretariatsTable = ({ rows }) => {
+  console.log("🚀 ~ SecretariatsTable ~ rows:", rows)
   const columns = useSecretariatsColumns()
   const [show, setShow] = React.useState(10)
 

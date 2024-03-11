@@ -8,7 +8,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { Avatar, Button, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Schema } from '../../validation'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -86,6 +86,18 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
 
   }
 
+
+
+  const {fields,append,remove} = useFieldArray({
+    control,
+    name: 'file'
+  })
+
+  useEffect(() => {
+
+  }, [])
+
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -147,8 +159,10 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
           <Stack direction={'column'} mt={5} spacing={5}>
 
             <RadioGroup value={selectedUser} onChange={event => handleUserSelection(event.target.value)}>
-              {users?.map(user => (
-                <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+              {users?.map((user,index) => (
+
+                <Stack key={index} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+
                   <Stack direction={'row'} alignItems={'center'} spacing={1}>
                   <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + user?.user_info?.image}  />
                 <Typography>{user.first_name} {user.last_name}</Typography>
@@ -161,10 +175,48 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
                   />
               </Stack>
               ))}
+
             </RadioGroup>
 
           </Stack>
 
+                <Controller
+                  name='Secretariat name'
+                  control={control}
+
+                  defaultValue=''
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      sx={{ marginTop:5 }}
+                      placeholder='2000-01-01'
+                      fullWidth
+                      label={t('Secretariat name')}
+                      variant='outlined'
+
+                    />
+                  )}
+                />
+                 <Controller
+                    name='description'
+                    defaultValue=''
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        fullWidth
+                        sx={{ marginTop:5 }}
+                        autoFocus
+                        multiline
+                        rows={1}
+                        maxRows={4}
+                        label={`${t('Description')}`}
+                        variant='outlined'
+                        error={!!errors.description}
+                        helperText={t(errors.description) ? t(errors.description.message) : ''}
+                      />
+                    )}
+                  />
                 <Controller
                   name='received_date'
                   control={control}
@@ -183,26 +235,39 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
                     />
                   )}
                 />
-                  <Controller
-                    name='description'
-                    defaultValue=''
-                    control={control}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        fullWidth
-                        sx={{ marginTop:5 }}
-                        autoFocus
-                        multiline
-                        rows={7}
-                        maxRows={4}
-                        label={`${t('Description')}`}
-                        variant='outlined'
-                        error={!!errors.description}
-                        helperText={t(errors.description) ? t(errors.description.message) : ''}
-                      />
-                    )}
-                  />
+
+{/* ************************* */}
+{fields.map((file, index) => (
+              <Box key={index} >
+                <Controller
+                  name={`file.${index}.file`}
+
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                    sx={{marginTop:"12px"}}
+                    type='file'
+                      {...field}
+                      label={`${t('file')} ${index}`}
+                      variant='outlined'
+                      fullWidth
+                      size='small'
+                    />
+                  )}
+                />
+              </Box>
+            ))}
+                <Box sx={{ my: '10px' }}>
+
+                    <Button
+                    type='button'
+                    onClick={() => append({ file: '' })}
+                    sx={{ fontSize: '12px', fontWeight: '400', color: '#6ab2df', padding: '0' }}
+                  >
+                    {t('Upload File')}
+                  </Button>
+
+                </Box>
 
                   <Button type='submit' sx={{marginTop:"12px"}} variant='contained' color='primary'>
                     {`${t('Submit')}`}

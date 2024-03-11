@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useTranslation } from 'react-i18next';
+import {   MenuItem, } from '@mui/material'
 
 export default function Account({onDataChange,Controller,control,errors}) {
 
@@ -65,7 +66,7 @@ export default function Account({onDataChange,Controller,control,errors}) {
     <Card>
         <CardContent>
 
-          <Typography >{t("Account")}</Typography>
+          <Typography className='title-section'>{t("Account")}</Typography>
           <br/>
 
           <Stack direction={'column'} spacing={3} width={'100%'} >
@@ -172,6 +173,33 @@ export default function Account({onDataChange,Controller,control,errors}) {
 
             )}
             />
+
+<Controller
+            name={`role`}
+            control={control}
+            render={({ field }) => (
+              <TextField
+              {...field}
+              select
+              fullWidth
+
+
+
+              // SelectProps={{
+              //   displayEmpty: true,
+              //   onChange: (e) => {
+              //     field.onChange(e);  // Ensure field.onChange is called
+              //     handleStatusChange(e);
+              //   },
+              // }}
+              size='small'
+                  >
+                    <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
+                    <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
+
+                </TextField>
+  )}
+/>
 
 
           </Stack>

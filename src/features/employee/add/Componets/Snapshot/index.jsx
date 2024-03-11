@@ -48,7 +48,7 @@ export default function Snapshot({ onDataChange, Controller, control, defaultVal
     <Card>
       <CardContent>
 
-        <Typography >{t("Snapshot")}</Typography>
+        <Typography className='title-section'>{t("Snapshot")}</Typography>
         <br />
         <Stack direction={'row'} alignItems={"center"} spacing={3} >
           <Box>

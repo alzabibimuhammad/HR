@@ -3,24 +3,39 @@ import React, {  useMemo, useState } from 'react'
 import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import { Avatar,  Chip, IconButton, Typography } from '@mui/material'
-
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import { useTranslation } from 'react-i18next'
 import AlertDialog from '../Componets/dialog'
 import Link from 'next/link'
+import DrawerForm from '../DrawerForm';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined'
+import EditIcon from '../../../../../public/images/IconInput/edit'
 
 const useContractColumns = () => {
 
 
   const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
+  const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
+  const [EditData, setEditData] = useState(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const { t } = useTranslation()
+
+  const handleEditClick = row => {
+    setEditData(row)
+    setIsDrawerOpenEdit(true)
+    setIsMenuOpen(false)
+  }
 
 
   const handleClose = () => {
     setIsDeletePopupOpen(false)
   }
+
+
+
+
 
   return useMemo(() => [
     {
@@ -114,15 +129,22 @@ const useContractColumns = () => {
       renderCell: params => {
         return (
           <>
-            <Stack>
+            <Stack direction={{ sm: 'row' }}>
               <Link href={`/contracts/view/${params?.row?.user_id}`}>
                 <IconButton>
-                  <VisibilityIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
+                  <RemoveRedEyeOutlinedIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
                     Details
                   </VisibilityIcon>
                 </IconButton>
               </Link>
+              <IconButton onClick={() => handleEditClick(params.row)}>
+                <EditIcon/>
+                      {/* <BorderColorOutlinedIcon style={{ color: '#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon> */}
+                    </IconButton>
             </Stack>
+              <Box>
+              <DrawerForm pdf={params?.row?.path} open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
+            </Box>
             {isDeletePopupOpen && <AlertDialog id={deleteId} open={isDeletePopupOpen} handleClose={handleClose} />}
           </>
         )

@@ -29,6 +29,7 @@ const useSecretariatsColumns = () => {
     setIsDrawerOpenEdit(true)
     setIsMenuOpen(false)
 
+
   }
 
   const handleClickOpenn = params => {
@@ -68,6 +69,18 @@ const useSecretariatsColumns = () => {
           </Link>
         )
       }
+    },
+    {
+      field: 'name',
+      headerName: t('Name'),
+      disableClickEventBubbling: true,
+      flex: 1,
+      renderCell: params => ( <Stack direction={"row"}>
+        <Typography className='custome-data-grid-font' >{params?.row?.name}</Typography>
+        <Typography className='custome-data-grid-font' >{params?.row?.file}</Typography>
+      </Stack>
+
+      )
     },
     {
       field: 'date',
@@ -126,7 +139,7 @@ const useSecretariatsColumns = () => {
             )}
 
             <Box>
-              <DrawerForm open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
+              <DrawerForm AllData={params?.row} open={isDrawerOpenEdit} setOpenParent={setIsDrawerOpenEdit} Data={EditData} />
             </Box>
           </>
         )

@@ -8,11 +8,28 @@ import { useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { color } from '@mui/system';
 import { useTranslation } from 'react-i18next';
+import useSelectLevel from 'src/pages/employees/add/hook/useSelectLevel';
+import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch';
+import useSelectInput from 'src/pages/employees/add/hook/useSelectInput';
 
-export default function Skills({ onDataChange, Controller, control, handleRatingChange, handleLanguageChange, errors }) {
+export default function Skills({ ShowUser,onDataChange, Controller, control, handleRatingChange, handleLanguageChange, errors }) {
 
   const [degree, setDegree] = useState('');
   const { t } = useTranslation()
+
+  const [level, setLevel] = useState(ShowUser?.data?.data?.[0]?.user_info?.level||"")
+
+  const [specialization, setSpecialization] = useState(ShowUser?.data?.data?.[0]?.specialization||"")
+  const [team, setTeam] = useState(ShowUser?.data?.data?.[0]?.department?.id||"")
+
+  const [branch , setBranch] = useState(ShowUser?.data?.data[0]?.branch_id||"")
+
+
+  const { data } = useSelectInput()
+
+   const {data:LevelData}=useSelectLevel()
+
+  const { data: SelectBranch } = useSelectBranch()
 
   const handleFieldChange = (field, value) => {
     onDataChange(prevData => ({ ...prevData, [field]: value }));
@@ -166,8 +183,82 @@ export default function Skills({ onDataChange, Controller, control, handleRating
     <Card>
       <CardContent>
 
-        <Typography >{t("Skills & Career")}</Typography>
+        <Typography className='title-section'>{t("Skills & Career")}</Typography>
         <br />
+
+        <Typography>{t('Branch')}</Typography>
+
+<Controller
+  name='branch_id'
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      select
+      fullWidth
+      error={Boolean(errors?.branch_id)}
+      helperText={errors?.branch_id?.message}
+      value={branch}
+      SelectProps={{
+
+        displayEmpty: true,
+        onChange: e => {
+          field.onChange(e)
+          handleSelectBranchChange(e)
+        }
+      }}
+      size='small'
+    >
+      <MenuItem value='' >{`${t('Branch')}`}</MenuItem>
+
+      {SelectBranch?.data?.data?.map((val, index) => (
+        <MenuItem key={val.id} value={val.id}>
+          {val.name}
+        </MenuItem>
+      ))}
+    </TextField>
+  )}
+/>
+
+<Typography sx={{marginTop:"10px"}}>{t("Specialization")}</Typography>
+
+<Controller
+  name='specialization'
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      select
+      fullWidth
+      error={Boolean(errors?.specialization)}
+      {...(errors?.specialization && {
+        helperText: errors?.specialization?.message
+      })}
+      value={specialization}
+      SelectProps={{
+        displayEmpty: true,
+        onChange: e => {
+          field.onChange(e)
+          handleSpecializationChange(e)
+        }
+      }}
+      size='small'
+    >
+      <MenuItem value='' >
+      {t("work specialization")}
+      </MenuItem>
+
+      {data?.data?.data?.specialisation?.map((val, index) => (
+        <MenuItem key={index} value={val}>
+          {val}
+        </MenuItem>
+      ))}
+    </TextField>
+  )}
+/>
+
+
+
 
         <Stack direction={'column'} spacing={3} width={'100%'} >
           <Typography>{t("Education")}</Typography>

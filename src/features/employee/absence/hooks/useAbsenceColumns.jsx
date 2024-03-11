@@ -8,6 +8,7 @@ import { Avatar, IconButton, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import DrawerForm from '../componets/DrawerForm';
 import Link from 'next/link';
+import EditIcon from '../../../../../public/images/IconInput/edit'
 
 const useAbsenceColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false);
@@ -71,6 +72,13 @@ const useAbsenceColumns = () => {
       },
     },
     {
+      field: 'level',
+      headerName: t("Level"),
+      disableClickEventBubbling: true,
+      flex: 1.1,
+
+    },
+    {
       field: 'justified',
       headerName: t("Justified"),
       disableClickEventBubbling: true,
@@ -111,7 +119,7 @@ const useAbsenceColumns = () => {
             <Stack direction={{ sm: 'row' }} style={{ ...columnStyles.cell }}>
               <Box>
                 <IconButton>
-                  <BorderColorOutlinedIcon
+                  <EditIcon
                     style={{
                       color: '#8090A7',
                     }}
@@ -119,9 +127,8 @@ const useAbsenceColumns = () => {
                     color="primary"
                     size="small"
                     onClick={() => handleEditClick(params.row)}
-                  >
-                    Edit
-                  </BorderColorOutlinedIcon>
+                  />
+
                 </IconButton>
               </Box>
 

@@ -8,13 +8,14 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import { Avatar, Button, FormControlLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
-import { useForm, Controller } from 'react-hook-form'
+import { useForm, Controller, useFieldArray } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Schema } from '../../validation'
 import { yupResolver } from '@hookform/resolvers/yup'
 import useGetAllUsers from 'src/features/employee/users/hooks/useGetAllUsers'
 import { Stack } from '@mui/system'
 import useAddSecretariats from '../../hooks/useAddSecretariats'
+import EditIcon from '../../../../../../public/images/IconInput/edit'
 
 const drawerWidth = 440
 
@@ -29,6 +30,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function DrawerFormAdd({ open, setOpenParent }) {
   const { mutate: AddSecretariats, isLoading } = useAddSecretariats()
+  const [showFileInput, setShowFileInput] = useState(false);
 
   const { data } = useGetAllUsers()
   const [ users , setUsers] = useState(data?.data?.data)
@@ -38,7 +40,7 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
   },[data])
 
   const [selectedUser, setSelectedUser] = useState()
-
+  console.log("🚀 ~ DrawerFormAdd ~ selectedUser:", selectedUser)
   const theme = useTheme()
   const { t } = useTranslation()
 
@@ -57,9 +59,15 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
     mode: 'onBlur'
   })
 
+  const toggleFileInput = () => {
+        setShowFileInput(!showFileInput);
+  };
+
   const handleUserSelection = userId => {
 
     setSelectedUser(userId)
+
+
   }
 
   const onSubmit = data => {
@@ -86,6 +94,11 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
 
   }
 
+
+
+
+
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -104,14 +117,41 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
           keepMounted: true
         }}
       >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
+
+        {theme.direction === 'rtl' ?
+
+<DrawerHeader sx={{height:"72px",backgroundColor:"#DCE1E6",padding:"24px",borderRadius:"12px 0px 0px 0px",display:"flex",justifyContent:"flex-end"}}>
+  <Typography sx={{color:"#8090A7",fontSize:"20px",fontWeight:"600"}}> Secretariats</Typography>
+</DrawerHeader>
+
+:
+<DrawerHeader sx={{height:"72px",backgroundColor:"#DCE1E6",padding:"24px",borderRadius:"12px 0px 0px 0px",display:"flex",justifyContent:"flex-start"}}>
+<Typography sx={{color:"#8090A7",fontSize:"20px",fontWeight:"600"}}> Secretariats</Typography>
+</DrawerHeader>
+}
         <Box ml={2} pl={2} pr={2}>
           <Stack width={'100%'} direction={'column'}>
-            <Typography ml={2}>{t('Employee')}</Typography>
+            <Typography sx={{my:"12px"}} ml={2}>{t('Employee')}</Typography>
+
+            {users?.map((user, index) => (
+              selectedUser == user.id ? (
+                <Stack key={index} direction={'row'} sx={{marginTop:"12px",marginBottom:"12px"}} justifyContent={'space-between'} alignItems={'center'}>
+      <Stack direction={'row'} alignItems={'center'} spacing={3}>
+        <Box>
+        <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + user?.user_info?.image} />
+
+        </Box>
+        <Box>
+        <Typography sx={{color:"#131627",fontWeight:"500",fontSize:"14px"}}>{user.first_name} {user.last_name}</Typography>
+        <Typography sx={{color:"#7b8794",fontWeight:"400",fontSize:"12px"}}>{user.specialization} </Typography>
+
+        </Box>
+
+      </Stack>
+    </Stack>
+  ) : null
+))}
+
             <TextField
               placeholder={t('Search')}
               fullWidth
@@ -147,9 +187,11 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
           <Stack direction={'column'} mt={5} spacing={5}>
 
             <RadioGroup value={selectedUser} onChange={event => handleUserSelection(event.target.value)}>
-              {users?.map(user => (
-                <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-                  <Stack direction={'row'} alignItems={'center'} spacing={1}>
+              {users?.map((user,index) => (
+
+                <Stack key={index} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+
+                  <Stack sx={{marginTop:"8px",marginBottom:"8px"}} direction={'row'}  alignItems={'center'} spacing={1}>
                   <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + user?.user_info?.image}  />
                 <Typography>{user.first_name} {user.last_name}</Typography>
                 </Stack>
@@ -161,10 +203,48 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
                   />
               </Stack>
               ))}
+
             </RadioGroup>
 
           </Stack>
 
+                <Controller
+                  name='Secretariat name'
+                  control={control}
+
+                  defaultValue=''
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      sx={{ marginTop:5 }}
+                      placeholder='2000-01-01'
+                      fullWidth
+                      label={t('Secretariat name')}
+                      variant='outlined'
+
+                    />
+                  )}
+                />
+                 <Controller
+                    name='description'
+                    defaultValue=''
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        fullWidth
+                        sx={{ marginTop:5 }}
+                        autoFocus
+                        multiline
+                        rows={1}
+                        maxRows={4}
+                        label={`${t('Description')}`}
+                        variant='outlined'
+                        error={!!errors.description}
+                        helperText={t(errors.description) ? t(errors.description.message) : ''}
+                      />
+                    )}
+                  />
                 <Controller
                   name='received_date'
                   control={control}
@@ -183,30 +263,60 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
                     />
                   )}
                 />
+
+{/* ************************* */}
+
+                <Box sx={{ my: '10px' }}>
+
+              {showFileInput && (
+              <Stack height={"64px"} padding={"16px"} justifyContent={"space-between"} flexDirection={"row"} alignItems={"center"}>
+                <Box>
+                  <label htmlFor="fileInput">
+                    <Button component="span">
+                      <EditIcon />
+                    </Button>
+                  </label>
                   <Controller
-                    name='description'
-                    defaultValue=''
+                    name={`file`}
                     control={control}
                     render={({ field }) => (
-                      <TextField
-                        {...field}
-                        fullWidth
-                        sx={{ marginTop:5 }}
-                        autoFocus
-                        multiline
-                        rows={7}
-                        maxRows={4}
-                        label={`${t('Description')}`}
-                        variant='outlined'
-                        error={!!errors.description}
-                        helperText={t(errors.description) ? t(errors.description.message) : ''}
+                      <input
+                        id="fileInput"
+                        type="file"
+                        accept=".pdf"
+                        style={{ display: 'none' }}
                       />
                     )}
                   />
+                </Box>
+                <Box display={"flex"} alignItems={"center"} gap={"12px"}>
+                  <Typography sx={{ fontWeight: "500", fontSize: "14px", color: "#3f4458" }}>contract  </Typography>
+                  <img src='/images/pdf-icon.svg' alt="PDF Icon" />
+                </Box>
+              </Stack>
+            )}
+                  {!showFileInput ?
+                    <Button
+                    type='button'
+                    onClick={toggleFileInput}
+                    sx={{ fontSize: '12px', fontWeight: '400', color: '#6ab2df', padding: '0' }}
+                  >
+                    {t('Upload File')}
+                  </Button>
+                  :""}
 
+                </Box>
+
+                <Stack direction={'row'} sx={{gap:"12px"}}>
                   <Button type='submit' sx={{marginTop:"12px"}} variant='contained' color='primary'>
                     {`${t('Submit')}`}
                   </Button>
+                  <Button  onClick={handleDrawerClose} sx={{marginTop:"12px",padding:"8px 24px 8px 24px",backgroundColor:"#dce1e6",color:"#8090a7",fontWeight:"500",fontSize:"14px"}} variant='contained' >
+                  {`${t('Cancle')}`}
+                </Button>
+
+                </Stack>
+
             </form>
         </Box>
       </Drawer>

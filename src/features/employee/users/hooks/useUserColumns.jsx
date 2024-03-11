@@ -123,7 +123,7 @@ const handleViewProfileTap=_=>{
                     <IconButton onClick={() => handleEditClick(params.row)}>
                     <EditIcon    />
 
-                      {/* <BorderColorOutlinedIcon style={{ color: '#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon> */}
+                      <BorderColorOutlinedIcon style={{ color: '#8090A7' }} variant="contained" color="primary" size='small' onClick={() => handleEditClick(params.row)}>Edit</BorderColorOutlinedIcon>
                     </IconButton>
                     <IconButton onClick={() => handleClickOpen(params.row.id)} >
                       <DeleteIcon  >  Delete   </DeleteIcon>

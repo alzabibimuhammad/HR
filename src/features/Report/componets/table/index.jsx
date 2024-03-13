@@ -23,36 +23,33 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { setProfileTap } from 'src/store/apps/user'
+import useGetAllDepartment from '../../hooks/useGetAllDepartment'
 
 
 export default function CollapsibleTable(Data ) {
+
+    const {data}=useGetAllDepartment()
+
+
   const { t } = useTranslation()
   const [users, setUsers] = useState({ rows: [] })
-  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false) // Add this line
-  const [deleteId, setDeleteId] = useState()
   const [search , setSearch] = useState(null)
   const [department,setDepartment] = useState('')
-  const [role, setRole] = useState('')
+  const [level, setlevel] = useState('')
+  const [Departmen, setDepartmen] = useState( )
   const dispatch = useDispatch()
 
   useEffect(() => {
      let filterData =  Data?.Data
-      if(role)filterData = filterData?.filter((value,index)=>value?.role == role)
-      if(department)filterData = filterData?.filter((value,index)=>value?.specialization == department)
+      if(department)filterData = filterData?.filter((value,index)=> value?.department?.name  == department)
       if(search)filterData = filterData?.filter((value,index)=>(
        value?.first_name?.toLowerCase()?.includes(search.toLowerCase())||
        value?.last_name?.toLowerCase()?.includes(search.toLowerCase())
       ))
       setUsers({rows:filterData})
-  }, [Data,search,role,department])
+  }, [Data,search,level,department])
 
-  const handleClickOpen = id => {
-    setIsDeletePopupOpen(true)
-    setDeleteId(id)
-  }
-  const handleClose = _ => {
-    setIsDeletePopupOpen(false)
-  }
+
   function Row({ row }) {
     const [open, setOpen] = useState(false)
 
@@ -79,11 +76,11 @@ export default function CollapsibleTable(Data ) {
                   src={process.env.NEXT_PUBLIC_IMAGES + '/' + row?.user_info?.image}
                   alt=''
                 />
-                <Stack marginLeft={'6px'}>
+                <Stack  marginLeft={'6px'} spacing={-0.5}>
                     <Typography  className='custome-data-grid-font'>
                       {row?.first_name} {row?.last_name}
                     </Typography>
-                    <Typography  className='custome-data-grid-font2' >{row?.specialization}</Typography>
+                    <Typography   className='custome-data-grid-font2' >{row?.specialization}</Typography>
                 </Stack>
               </Box>
               <Box >
@@ -108,11 +105,11 @@ export default function CollapsibleTable(Data ) {
             </Stack>
           </TableCell>
           <TableCell>
-            <Typography className='custome-data-grid-font' >{t(row?.role)}</Typography>
+            <Typography className='custome-data-grid-font' >{t(row?.level)}</Typography>
           </TableCell>
 
           <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{row?.department?.name?row?.department?.name:'---'}</Typography>
+            <Typography sx={{ fontSize: '14px' }}>{row?.date ? row?.date:'---'}</Typography>
           </TableCell>
           <TableCell>
             <Box style={{ display:'flex', justifyContent:'end' }} >
@@ -148,14 +145,15 @@ export default function CollapsibleTable(Data ) {
       </>
     )
   }
+
   const handelSearch = e => {
     if(e.target.value)setSearch(e.target.value)
     else setSearch(null)
   }
 
-  const handleRoleChange = e => {
-    if (e.target.value) setRole(e.target.value)
-    else setRole(null)
+  const handlelevelChange = e => {
+    if (e.target.value) setlevel(e.target.value)
+    else setlevel(null)
   }
 
   const handledepartmentChange = e => {
@@ -163,14 +161,19 @@ export default function CollapsibleTable(Data ) {
     else setDepartment(null)
   }
 
-  let specialization = new Set([])
-  Data.Data?.forEach(element => {
-    specialization.add(element?.specialization)
+
+
+  let departmentt = new Set([])
+  data?.data?.data?.forEach(element => {
+
+    departmentt.add(element?.name)
+
   })
 
-  let roleData = new Set([])
+  let levelData = new Set([])
   Data.Data?.forEach(element => {
-    roleData.add(element?.role)
+    levelData.add(element?.level)
+
   })
 
   return (
@@ -208,40 +211,28 @@ export default function CollapsibleTable(Data ) {
               />
               <Stack direction={{sm:'row',md:'row',xs:'column'}} alignItems={'center'} spacing={2}>
                 <Typography className='filterTitle' >{t('Filter')}</Typography>
-              <TextField
-                select
-                sx={{ width:{sm:'320px',md:'320px',xs:'100%'} }}
-                value={role}
-                label={t('Role')}
-                defaultValue={role}
-                onChange={handleRoleChange}
-                size='small'
-              >
-                <MenuItem value=''>{t('Role')}</MenuItem>
 
-                {Array.from(roleData).map(element => (
-                  <MenuItem key={element} value={element}>
-                    {t(element)}
-                  </MenuItem>
-                ))}
-              </TextField>
               <TextField
                 select
                 sx={{ width:{sm:'320px',md:'320px',xs:'100%'} }}
 
                 defaultValue={department}
                 value={department}
-                label={t('Specialization')}
+                label={t('Team')}
                 onChange={handledepartmentChange}
                 size='small'
               >
-                <MenuItem value=''>{`${t('Specialization')}`}</MenuItem>
-                {Array.from(specialization).map(element => (
+                <MenuItem value=''>{`${t('Team')}`}</MenuItem>
+                {Array.from(departmentt).map(element => (
                   <MenuItem key={element} value={element}>
                     {element}
+
                   </MenuItem>
                 ))}
               </TextField>
+
+                  {/* *******    here set filter dandoooooooooon              */}
+
 
               </Stack>
 
@@ -250,8 +241,8 @@ export default function CollapsibleTable(Data ) {
               <TableHead>
                 <TableRow>
                   <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Employee')}</TableCell>
-                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Role')}</TableCell>
-                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Team')}</TableCell>
+                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Level')}</TableCell>
+                  <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'>{t('Date')}</TableCell>
                   <TableCell  className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' style={{ display:'flex', justifyContent:'end' }} >{t('Action')}</TableCell>
                 </TableRow>
               </TableHead>

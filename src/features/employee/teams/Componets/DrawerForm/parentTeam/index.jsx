@@ -17,7 +17,6 @@ export default function ParentTeam() {
   const { data } = useGetAllTeams();
   const [openIndex, setOpenIndex] = useState(null);
   const [selectedItem, setSelectedItem] = useState({});
-  console.log("🚀 ~ ParentTeam ~ selectedItem:", selectedItem)
 
   const handleCheckboxChange = (id) => {
     setSelectedItem(id);
@@ -27,6 +26,10 @@ export default function ParentTeam() {
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
+
+  const filteredData = data?.data?.data?.filter((user) =>
+  user.name.toLowerCase().includes(searchText.toLowerCase())
+);
 
   return (
     <>
@@ -41,6 +44,7 @@ export default function ParentTeam() {
 
       <TextField
         placeholder={t('Search')}
+        value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         InputProps={{
           startAdornment: (
@@ -65,7 +69,7 @@ export default function ParentTeam() {
       />
 
       <Stack spacing={5} marginTop={'14px'}>
-        {data?.data?.data?.map((user, index) => (
+        {filteredData?.map((user, index) => (
           <Box  key={index}>
             <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
               <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#3f4458' }}>{user?.name}</Typography>

@@ -94,7 +94,7 @@ const useInquiriesColumns = () => {
               />
             <Stack ml={'8px'}>
               <Typography  className='custome-data-grid-font'>{params?.row?.employee}</Typography>
-              <Typography className='custome-data-grid-font2'>{params?.row?.specialization}</Typography>
+              <Typography className='custome-data-grid-font2'>{params?.row?.department}</Typography>
             </Stack>
             </Stack>
           </Link>
@@ -293,7 +293,7 @@ const useInquiriesColumns = () => {
                         textTransform: 'capitalize'
                       }}
                     >
-                      {t('Accept')}
+                      {t('Approve')}
                     </Typography>
                   </Button>
                   <Button
@@ -318,7 +318,7 @@ const useInquiriesColumns = () => {
                         textTransform: 'capitalize'
                       }}
                     >
-                      {t('Reject')}
+                      {t('Decline')}
                     </Typography>
                   </Button>
                 </Stack>

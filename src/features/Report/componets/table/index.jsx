@@ -89,6 +89,7 @@ export default function CollapsibleTable(Data ) {
                   onClick={() => setOpen(!open)}
                   sx={{
                     fontSize: '13px',
+                    color:'#8090A7',
                     '&:hover': {
                       background: 'none !important'
                     },
@@ -97,9 +98,9 @@ export default function CollapsibleTable(Data ) {
                   disableRipple
                 >
                   <Stack direction={'row'}>
-                    <Typography sx={{ fontSize: '14px',color:'#8090A7',fontWeight:500 }}>{t('Daily Report')}</Typography>
+                    <Typography sx={{ fontSize: '14px',color:'#8090A7',fontWeight:500, marginRight:'8px'}}>{t('Daily Report')}</Typography>
                   </Stack>
-                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                  {open ? <KeyboardArrowUpIcon sx={{marginTop:'3px'}} /> : <KeyboardArrowDownIcon sx={{marginTop:'3px'}} />}
                 </IconButton>
               </Box>
             </Stack>
@@ -115,11 +116,12 @@ export default function CollapsibleTable(Data ) {
             <Box style={{ display:'flex', justifyContent:'end' }} >
               <Link href={`/profile/${row.id}?type=reports`}>
                 <IconButton onClick={handleViewProfileTap}>
-                  <VisibilityIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
+                  <ViewIcon >
                   {t('Details')}
-                  </VisibilityIcon>
+                  </ViewIcon>
                 </IconButton>
               </Link>
+        
 
             </Box>
           </TableCell>

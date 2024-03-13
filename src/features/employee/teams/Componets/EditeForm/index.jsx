@@ -108,8 +108,22 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
       }}
     >
       <Stack spacing={3}>
-        <Box sx={{ padding: '12px' }}>
-          <Typography sx={{ fontFamily: 'Montserrat' }}>{t('Name')}</Typography>
+      <Box
+          sx={{
+            width: '100%',
+            backgroundColor: '#DCE1E6',
+            fontSize: '20px',
+            gap: '10px',
+            padding: '24px',
+           color:'#8090A7',
+            fontFamily: 'Montserrat',
+            fontWeight:600
+          }}
+        >
+          {t('EDIT DEPARTMENT')}
+        </Box>
+        <Box sx={{ padding: '24px' }}>
+          <Typography sx={{ fontFamily: 'Montserrat' ,fontSize:'16px',fontWeight:600, marginBottom:'12px' }}>{t('Name')}</Typography>
           <TextField
             fullWidth
             style={{ height: '10px' }}
@@ -120,12 +134,12 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
           />
         </Box>
 
-        <Box sx={{ padding: '12px' }}>
+        <Box sx={{ padding: '24px' }}>
           <Members SetMembers={SetMembers} SelectedRow={SelectedRow.user} />
         </Box>
         {/* ********************** */}
 
-        <Box sx={{ padding: '12px' }}>
+        <Box sx={{ padding: '24px' }}>
           <TeamLeaders SetteamLeader={SetteamLeader} Data={SelectedRow} />
         </Box>
 

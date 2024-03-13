@@ -16,10 +16,12 @@ export const ResignedData = elements => {
       first_name:element?.first_name,
       last_name: element?.last_name,
       role: element?.role,
+      level:element?.level,
       specialization:element?.specialization,
       department:element?.department?.name?element?.department?.name:'---',
       date:formattedDate,
       user_info:element?.user_info?.image,
+      status:element?.isTrash,
       time:formatedTime
 
     }

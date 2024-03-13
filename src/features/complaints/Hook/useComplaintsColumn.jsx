@@ -9,7 +9,9 @@ import AlertDialogDelete from '../components/delete'
 import Show from '../components/show'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-
+import DeleteIcon from '../../../../public/images/IconInput/delete'
+import EditIcon from '../../../../public/images/IconInput/edit'
+import ViewIcon from '../../../../public/images/IconInput/view'
 const useComplaintsColumn = () => {
   const { t } = useTranslation()
   const [showMoreMap, setShowMoreMap] = useState({});
@@ -59,7 +61,7 @@ const useComplaintsColumn = () => {
             </Box>
             <Stack ml={1} spacing={1} direction={'column'}>
               <Typography className='custome-data-grid-font' >{params.row?.first_name} {params.row?.last_name}</Typography>
-              <Typography className='custome-data-grid-font2' > {params.row?.specialization}</Typography>
+              <Typography className='custome-data-grid-font2' > {params.row?.department}</Typography>
             </Stack>
             </Link>
         )
@@ -70,8 +72,11 @@ const useComplaintsColumn = () => {
       headerName: t('Date'),
       flex: 2,
       renderCell: params => (
-        <Typography className='custome-data-grid-font' >{params?.row?.date}</Typography>
-
+        <Stack ml={1} spacing={1} direction={'column'}>
+          <Typography className='custome-data-grid-font' >{params?.row?.date}</Typography>
+        <Typography>{params?.row?.time}</Typography>
+      </Stack>
+     
       )
     },
 
@@ -147,11 +152,11 @@ const useComplaintsColumn = () => {
             <Stack direction={{ sm:'row' }}  >
 
             <IconButton onClick={()=>  handleClickShow(params)} >
-            <VisibilityIcon  variant="contained" sx={{ color:'#8090A7' }} size='small'>Details</VisibilityIcon>
+            <ViewIcon />
             </IconButton>
 
               <IconButton onClick={()=>  handleClickOpen(params?.row?.id)}>
-              <DeleteOutlinedIcon  variant="contained" color="#8090A7" size='small'>  Delete   </DeleteOutlinedIcon>
+              <DeleteIcon />  
               </IconButton>
 
             {isDeletePopupOpen && <AlertDialogDelete id={deleteID}  open={isDeletePopupOpen} handleClose={handleClose} />}

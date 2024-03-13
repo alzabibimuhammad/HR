@@ -19,7 +19,8 @@
         first_name:element?.user?.first_name,
         last_name:element?.user?.last_name,
         user_info:element?.user?.user_info?.image,
-        specialization:element?.user?.specialization
+        specialization:element?.user?.specialization,
+        department:element?.department?.name?element?.department?.name:'',
       }
     })
   }

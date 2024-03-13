@@ -29,7 +29,8 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { useDispatch } from 'react-redux'
 import { setProfileTap } from 'src/store/apps/user'
-
+import DeleteIcon from '../../../../../../public/images/IconInput/delete'
+import EditIcon from '../../../../../../public/images/IconInput/edit'
 import AddIcon from '@mui/icons-material/Add';
 
 function createData(id, name, user) {
@@ -110,10 +111,10 @@ export default function CollapsibleTable(Data, setEditData) {
               sx={{ padding: '0', margin: '0' }}
             >
               <Box>
-                <Typography sx={{ fontSize: '14px' }}>{row.name}</Typography>
+                <Typography sx={{ fontSize: '16px' }}>{row.name}</Typography>
               </Box>
 
-              <Box>
+              <Box sx={{marginTop:'8px'}}>
                 <IconButton
                   size='small'
                   onClick={() => setOpen(!open)}
@@ -122,13 +123,14 @@ export default function CollapsibleTable(Data, setEditData) {
                     '&:hover': {
                       background: 'none !important'
                     },
+                    
                     padding: 0
                   }}
                   disableRipple
                 >
                   <Stack direction={'row'}>
-                    <Typography sx={{ fontSize: '14px', marginRight: '3px' }}>{row?.user?.length}</Typography>
-                    <Typography sx={{ fontSize: '14px' }}>{t('Members')}</Typography>
+                    <Typography sx={{ fontSize: '13px', marginRight: '3px' }}>{row?.user?.length}</Typography>
+                    <Typography sx={{ fontSize: '13px' }}>{t('Members')}</Typography>
                   </Stack>
 
                   {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -141,16 +143,8 @@ export default function CollapsibleTable(Data, setEditData) {
           </TableCell>
           <TableCell sx={{ textAlign: 'right' }}>
             <Box>
-              <IconButton>
-                <BorderColorOutlinedIcon
-                  style={{ color: '#8090A7' }}
-                  variant='contained'
-                  color='primary'
-                  size='small'
-                  onClick={() => handleEditClick(row)}
-                >
-                  Edit
-                </BorderColorOutlinedIcon>
+              <IconButton  onClick={() => handleEditClick(row)}>
+                <EditIcon/>
               </IconButton>
 
               {SelectedRow && (
@@ -158,7 +152,7 @@ export default function CollapsibleTable(Data, setEditData) {
               )}
 
               <IconButton onClick={() => handleClickOpen(row.id)}>
-                <DeleteOutlinedIcon style={{ color: '#8090A7' }} variant color='error' size='small'/>
+                <DeleteIcon/>
               </IconButton>
             </Box>
 
@@ -287,15 +281,17 @@ export default function CollapsibleTable(Data, setEditData) {
         <Button
           width={{ xs: '100%' }}
           sx={{
-            fontSize: '13px',
+            fontSize: '14px',
             color: 'white',
             borderRadius:'8px',
+            fontWeight:'600px',
+         
             backgroundColor: '#6AB2DF',
             ':hover': { color: '#6D6B77' }
           }}
           onClick={handleDrawerOpen}
         >
-          <AddIcon/>
+          <AddIcon sx={{ fontSize: 20, marginX:'8px'}}/>
           {t('Add Department')}
         </Button>
       </Stack>
@@ -308,8 +304,8 @@ export default function CollapsibleTable(Data, setEditData) {
         <Table aria-label='collapsible table'>
           <TableHead>
             <TableRow>
-              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle'sx={{ width:'19%' }} >{t('Department Name')}</TableCell>
-              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ width: '19%' }}>{t('Department ID')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' >{t('Department Name')}</TableCell>
+              <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' >{t('Department ID')}</TableCell>
               <TableCell className='css-sbn3f9-MuiDataGrid-columnHeaderTitle' sx={{ left: 0, width: '62%', textAlign: 'right' }}>{t('Action')}</TableCell>
             </TableRow>
           </TableHead>

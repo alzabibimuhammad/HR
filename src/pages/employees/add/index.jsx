@@ -124,7 +124,6 @@ export default function Add() {
 
 
   const handleDataSubmit = data => {
-  console.log("🚀 ~ handleDataSubmit ~ data:", data)
 
 
 

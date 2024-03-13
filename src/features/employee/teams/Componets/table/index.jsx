@@ -32,6 +32,7 @@ import { setProfileTap } from 'src/store/apps/user'
 import DeleteIcon from '../../../../../../public/images/IconInput/delete'
 import EditIcon from '../../../../../../public/images/IconInput/edit'
 import AddIcon from '@mui/icons-material/Add';
+import useGetAllTeams from '../../hooks/useGetAllTeams'
 
 function createData(id, name, user) {
   return {
@@ -55,6 +56,7 @@ export default function CollapsibleTable(Data, setEditData) {
       }
     });
 
+    const { data } = useGetAllTeams();
 
     const [open, setOpen] = useState(false)
 
@@ -149,7 +151,7 @@ export default function CollapsibleTable(Data, setEditData) {
               </IconButton>
 
               {SelectedRow && (
-                <EditeForm open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow} />
+                <EditeForm open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow} data={data}/>
               )}
 
               <IconButton onClick={() => handleClickOpen(row.id)}>

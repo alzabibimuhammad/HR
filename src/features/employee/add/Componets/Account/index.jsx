@@ -14,7 +14,6 @@ export default function Account({onDataChange,Controller,control,errors,ShowUser
 
 
   const [Role, setRole] = useState('role');
-  console.log("🚀 ~ Account ~ Role:", Role)
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 

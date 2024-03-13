@@ -23,6 +23,7 @@ export default function WorkTime({Controller,control,days,setDays,errors}) {
   const handleDayPicker = (date) => {
     setOpenParent(true);
   };
+
 const CssTextField = styled(TextField)({
   '& label.Mui-focused': {
     color: '#8090A7',
@@ -42,20 +43,22 @@ const CssTextField = styled(TextField)({
     },
   },
 });
+
   const Typo = styled(Typography)(({ theme }) => ({
-  
+
 fontFamily: "Montserrat",
 fontSize: "14px",
 fontWeight: 500,
 letterSpacing: 0.7,
 color:'#8090A7'
     }))
+
     const TittleSection = styled(Typography)(({ theme }) => ({
-  
+
       fontFamily: "Montserrat",
       fontSize: "20px",
       fontWeight: 600,
-     
+
       color:'#8090A7'
           }))
 
@@ -80,8 +83,9 @@ color:'#8090A7'
 
   return (
     <Card sx={{borderRadius: "12px"}}>
-   
+
       <CardContent>
+
 
         <Stack spacing={2} direction={'column'}>
           <TittleSection fontSize={'20px'}>{t("Work Time")}</TittleSection>
@@ -154,14 +158,7 @@ color:'#8090A7'
               color="warning"
               error={Boolean(errors.work_time?.start_time)}
               helperText={errors.work_time?.start_time?.message}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                          <img className='input-icon' src='/images/IconInput/time.svg' alt='events'/>
 
-                  </InputAdornment>
-                ),
-              }}
             />
         )}
         />
@@ -180,17 +177,10 @@ color:'#8090A7'
               placeholder="Cut-off time"
               fullWidth
               size='small'
-             
+
               error={Boolean(errors.work_time?.cut_off_time)}
               helperText={errors.work_time?.cut_off_time?.message}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                          <img className='input-icon' src='/images/IconInput/time.svg' alt='events'/>
 
-                  </InputAdornment>
-                ),
-              }}
             />
         ) }
 />
@@ -208,15 +198,7 @@ color:'#8090A7'
               size='small'
               error={Boolean(errors.work_time?.end_time)}
               helperText={errors.work_time?.end_time?.message}
-              InputProps={{
-                endAdornment: (
 
-                  <InputAdornment  position="end">
-                          <img  className='input-icon' src='/images/IconInput/time.svg' alt='events'/>
-
-                  </InputAdornment>
-                ),
-              }}
             />
         ) }
         />

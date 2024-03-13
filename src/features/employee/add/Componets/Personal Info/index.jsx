@@ -151,19 +151,15 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
             <Controller
             name={`gender`}
             control={control}
-
             render={({ field }) => (
               <TextField
-
               {...field}
               select
               fullWidth
-
               value={Gender}
               error={Boolean(errors.gender)}
               {...(errors.gender && { helperText: errors.gender.message })}
               SelectProps={{
-
                 displayEmpty: true,
                 onChange: (e) => {
                   field.onChange(e);
@@ -172,7 +168,7 @@ export default function Info({onDataChange,Controller,control,errors, defaultVal
               }}
               size='small'
                   >
-                    <MenuItem value=''>{`${t("Gender")}`}</MenuItem>
+                    <MenuItem  disabled="true" value=''>{`${t("Gender")}`}</MenuItem>
                     <MenuItem value='Male'>{`${t("Male")}`}</MenuItem>
                     <MenuItem value='Female'>{`${t("Female")}`}</MenuItem>
                 </TextField>

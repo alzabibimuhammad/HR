@@ -44,6 +44,7 @@ function createData(id, name, user) {
 export default function CollapsibleTable(Data, setEditData) {
   function Row(props) {
     const { row } = props
+
     const sortedRows = row?.user.sort((a, b) => {
       const roleA = a.role === 'team_leader' ? -1 : 1;
       const roleB = b.role === 'team_leader' ? -1 : 1;
@@ -123,7 +124,7 @@ export default function CollapsibleTable(Data, setEditData) {
                     '&:hover': {
                       background: 'none !important'
                     },
-                    
+
                     padding: 0
                   }}
                   disableRipple
@@ -285,7 +286,7 @@ export default function CollapsibleTable(Data, setEditData) {
             color: 'white',
             borderRadius:'8px',
             fontWeight:'600px',
-         
+
             backgroundColor: '#6AB2DF',
             ':hover': { color: '#6D6B77' }
           }}

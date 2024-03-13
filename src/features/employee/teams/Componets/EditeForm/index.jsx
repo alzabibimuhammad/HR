@@ -1,45 +1,30 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { styled, useTheme } from '@mui/material/styles'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
-import List from '@mui/material/List'
-import IconButton from '@mui/material/IconButton'
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
-import { Button, CardHeader, Input, TextField, Typography } from '@mui/material'
+
+import { Button, TextField, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import TeamLeaders from '../DrawerForm/teamLeaders'
 import Members from '../DrawerForm/members'
-import { useAddTeam } from '../../hooks/useAddTeam'
-import { Checkbox } from '@mui/material'
-import Avatar from '@mui/material/Avatar'
-import CloseIcon from '@mui/icons-material/Close'
-
-import Icon from 'src/@core/components/icon'
-import useGetEmployeeDropDown from 'src/features/Contracts/list/Hooks/useEmployee'
 import { useEditTeam } from '../../hooks/useEditTeam'
 import { useTranslation } from 'react-i18next'
-import useGetAllUsers from '../../hooks/useGetAllEmployee'
+import useGetAllTeams from '../../hooks/useGetAllTeams'
+import ParentTeam from '../DrawerForm/parentTeam'
 
 const drawerWidth = 440
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
 
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-start'
-}))
 
-export default function EditeForm({ open, setOpenParent, SelectedRow }) {
-  const { data: UserData, isloading } = useGetAllUsers()
-  const theme = useTheme()
+export default function EditeForm({ open, setOpenParent, SelectedRow,data }) {
   const { mutate: EditTeam } = useEditTeam()
   const [members, SetMembers] = useState([])
   const [teamLeader, SetteamLeader] = useState()
   const [teamName, setTeamName] = useState(SelectedRow.name)
   const { t } = useTranslation()
+
+
+
+
 
   const handleTeamNameChange = event => {
     setTeamName(event.target.value)
@@ -62,31 +47,6 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
     handleDrawerClose()
   }
 
-  const [selectedItems, setSelectedItems] = useState([])
-  const [searchText, setSearchText] = useState('')
-
-  const deletee = index => {
-    setSelectedItems(prevItems => prevItems.filter((_, i) => i !== index))
-  }
-
-  const toggleSelect = icon => {
-    const isSelected = selectedItems.includes(icon)
-    if (isSelected) {
-      setSelectedItems(selectedItems.filter(item => item !== icon))
-      SetMembers(selectedItems.filter(item => item !== icon))
-    } else {
-      SetMembers([...selectedItems, icon])
-      setSelectedItems([...selectedItems, icon])
-    }
-  }
-
-  const filteredData = useMemo(() => {
-    if (!searchText || !UserData || !UserData.data || !UserData.data.data) {
-      return UserData?.data.data || []
-    }
-
-    return UserData.data.data.filter(item => item.first_name.toLowerCase().includes(searchText.toLowerCase()))
-  }, [searchText, UserData])
 
   return (
     <Drawer
@@ -142,6 +102,11 @@ export default function EditeForm({ open, setOpenParent, SelectedRow }) {
         <Box sx={{ padding: '24px' }}>
           <TeamLeaders SetteamLeader={SetteamLeader} Data={SelectedRow} />
         </Box>
+
+        <Box sx={{ padding: '24px' }}>
+          <ParentTeam data={data} />
+        </Box>
+
 
         {/* ****************** */}
 

@@ -96,8 +96,7 @@ useEffect(() => {
 
 
   const onSubmit =   data => {
-  console.log("🚀 ~ onSubmit ~ data:", data)
-  console.log("🚀 ~ onSubmit ~ file pdf:", selectedFile)
+
 
       // handleDrawerClose()
       // reset();

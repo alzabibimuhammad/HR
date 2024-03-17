@@ -23,12 +23,16 @@ const useAbsenceColumns = () => {
 
 
 
+  const handleOpenClick = ()=>{
+    setIsDrawerOpenEdit(true)
 
+  }
 
 
   const handleEditClick = (row) => {
     setEditData(row);
     setIsDrawerOpenEdit(true);
+    console.log('done');
 
   };
 
@@ -117,8 +121,7 @@ const useAbsenceColumns = () => {
         return (
           <>
             <Stack direction={{ sm: 'row' }} style={{ ...columnStyles.cell }}>
-              <Box>
-                <IconButton>
+              <Box sx={{cursor:"pointer"}} onClick={handleOpenClick}>
                   <EditIcon
                     style={{
                       color: '#8090A7',
@@ -126,10 +129,9 @@ const useAbsenceColumns = () => {
                     variant="contained"
                     color="primary"
                     size="small"
-                    onClick={() => handleEditClick(params.row)}
+
                   />
 
-                </IconButton>
               </Box>
 
 

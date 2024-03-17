@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 
-import { Avatar, Chip, IconButton, Rating, Typography } from '@mui/material'
+import { Avatar,  Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { Box, Stack } from '@mui/system'
 import { useRouter } from 'next/router'
@@ -11,7 +11,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 
 
@@ -29,6 +28,7 @@ const style = {
 };
 
 const useRegistrationColumn = () => {
+
   const { t } = useTranslation()
 
   const router = useRouter()
@@ -44,7 +44,6 @@ const useRegistrationColumn = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState();
 
-  console.log("🚀 ~ useRegistrationColumn ~ value:", value)
 
   const [selectedPaid, setSelectedPaid] = useState(false);
   const [selectedUnpaid, setSelectedUnpaid] = useState(false);
@@ -115,34 +114,23 @@ const useRegistrationColumn = () => {
           <Box
             sx={{
               backgroundColor:
-                params?.row?.status === 'Arrived'
-                  ? 'rgba(145, 196, 131, 0.20)'
-                  : params?.row?.status.includes('Late')
-                  ? 'rgba(106, 178, 223, 0.20) opacity:0.8'
-                  : params?.row?.status === 'Out'
-                  ? 'rgba(106, 178, 223, 0.20)'
-                  : params?.row?.status === 'out'
-                  ? 'rgba(145, 196, 131, 0.20)'
-                  : params?.row?.status === 'Absent'
-                  ? 'rgba(223, 46, 56, 0.20) opacity:0.8'
-                  : 'rgba(223, 46, 56, 0.20)',
-              color:
-                params?.row?.status === 'Arrived'
-                  ? '#91C483'
-                  : params?.row?.status.includes('Late')
-                  ? '#6AB2DF'
-                  : params?.row?.status === 'Out'
-                  ? '#6AB2DF'
-                  : params?.row?.status === 'Absent'
-                  ? '#DF2E38'
-                  : '#DF2E38',
+              params?.row?.status === 'Arrived'
+                ? 'rgba(145, 196, 131, 0.20)'
+                : Boolean(params?.row?.status?.includes('Late'))
+                ? 'rgba(106, 178, 223, 0.20)'
+                : params?.row?.status === 'out'
+                ? 'rgba(145, 196, 131, 0.20)'
+                : params?.row?.status === 'Absent'
+                ? 'rgba(223, 46, 56, 0.20)'
+                : Boolean(params?.row?.status?.includes('Early'))
+                ? 'rgba(106, 178, 223, 0.20)'
+                : 'rgba(223, 46, 56, 0.20)',
 
-
-              fontSize: '12px',
-              height: '30px',
-              width: 'auto',
-              padding: '5px',
-              borderRadius:'4px'
+            borderRadius: '4px',
+            display: 'flex',
+            padding: '4px 8px',
+            alignItems: 'flex-start',
+            gap: '10px'
             }}
           >
             {' '}
@@ -229,6 +217,7 @@ const useRegistrationColumn = () => {
           </RadioGroup>
         </FormControl>
       }
+
     </Stack>
     <Stack>
       <RadioGroup
@@ -242,8 +231,8 @@ const useRegistrationColumn = () => {
       </RadioGroup>
     </Stack>
     <Stack direction={'row'} justifyContent={'flex-end'} spacing={3} textAlign={'end'}>
-      <Button disableHoverListener onClick={handleClose} sx={{ width: "106px", height: "34px", backgroundColor: "#6ab2df", padding: "8px 24px 8px 24px", color: "#fff", "&:hover": { backgroundColor: "#6ab2df" } }}>Confirm</Button>
-      <Button disableHoverListener onClick={handleClose} sx={{ width: "106px", height: "34px", backgroundColor: "#8090A733", padding: "8px 24px 8px 24px", color: "#8090A7", "&:hover": { backgroundColor: "#8090A733" } }}>cancel</Button>
+      <Button  onClick={handleClose} sx={{ width: "106px", height: "34px", backgroundColor: "#6ab2df", padding: "8px 24px 8px 24px", color: "#fff", "&:hover": { backgroundColor: "#6ab2df" } }}>Confirm</Button>
+      <Button  onClick={handleClose} sx={{ width: "106px", height: "34px", backgroundColor: "#8090A733", padding: "8px 24px 8px 24px", color: "#8090A7", "&:hover": { backgroundColor: "#8090A733" } }}>cancel</Button>
     </Stack>
   </Box>
 </Modal>

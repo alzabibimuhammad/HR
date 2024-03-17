@@ -24,7 +24,7 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { setProfileTap } from 'src/store/apps/user'
 import useGetAllDepartment from '../../hooks/useGetAllDepartment'
-
+import ViewIcon  from '../../../../../public/images/IconInput/view'
 
 export default function CollapsibleTable(Data ) {
 
@@ -110,7 +110,7 @@ export default function CollapsibleTable(Data ) {
           </TableCell>
 
           <TableCell>
-            <Typography sx={{ fontSize: '14px' }}>{row?.date ? row?.date:'---'}</Typography>
+            <Typography sx={{ fontSize: '14px' }}>{row?.user_info?.start_date ? row?.user_info?.start_date:'---'}</Typography>
           </TableCell>
           <TableCell>
             <Box style={{ display:'flex', justifyContent:'end' }} >
@@ -121,7 +121,7 @@ export default function CollapsibleTable(Data ) {
                   </ViewIcon>
                 </IconButton>
               </Link>
-        
+
 
             </Box>
           </TableCell>

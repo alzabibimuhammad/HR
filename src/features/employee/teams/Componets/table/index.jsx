@@ -56,22 +56,22 @@ export default function CollapsibleTable(Data, setEditData) {
       }
     });
 
-    const { data } = useGetAllTeams();
+    // const { data } = useGetAllTeams();
+
 
     const [open, setOpen] = useState(false)
 
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
     const [deleteId, setDeleteId] = useState(null)
 
-    const [openMember, setOpenMember] = useState(false)
     const [SelectedRow, setSelectedRow] = useState('')
     const [openParentEdit, setOpenParentEdit] = useState(false)
 
     const [isMemberPopupOpen, setIsMemberPopupOpen] = useState(false)
     const [memberdeleteId, setMemberDeleteId] = useState(null)
 
-    const [DrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
     const dispatch = useDispatch()
+
     const handleEditClick = row => {
 
       setSelectedRow(row)
@@ -151,7 +151,7 @@ export default function CollapsibleTable(Data, setEditData) {
               </IconButton>
 
               {SelectedRow && (
-                <EditeForm open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow} data={data}/>
+                <EditeForm open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow} data={Data}/>
               )}
 
               <IconButton onClick={() => handleClickOpen(row.id)}>

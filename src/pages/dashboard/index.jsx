@@ -38,7 +38,7 @@ export default function Dashboard() {
 
   return (
     <>
-    <Loading/>
+    {/* <Loading/> */}
     <Grid container spacing={6} sx={{ overflow: 'hidden' }}>
       <Grid item sm={8} xs={12}>
 
@@ -47,7 +47,7 @@ export default function Dashboard() {
         </Box>
 
       </Grid>
-    
+
       <Grid sx={{position:"relative",borderRadius:"12px"}} item sm={4} xs={12}>
         <Attendance  Data={percentageData} />
       </Grid>

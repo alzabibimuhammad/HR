@@ -1,7 +1,7 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { requestDashboard } from 'src/utiltis/AxiosDashboard';
-import { showErrorToast } from 'src/utiltis/showErrorToast';
+import { ShowErrorToast } from 'src/utiltis/showErrorToast';
 
 
 
@@ -10,6 +10,7 @@ import { showErrorToast } from 'src/utiltis/showErrorToast';
 export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendancePercentage', async _ => {
   try {
     const response = await requestDashboard({ url: '/api/showPercent' });
+
     return response.data;
 
   } catch (error) {
@@ -21,6 +22,7 @@ export const getAttendancePercentage = createAsyncThunk('Dashboard/getAttendance
 export const getRegisteration = createAsyncThunk('Dashboard/getRegisteration', async date => {
   try {
     const response = await requestDashboard({ url: `/api/DayAttendance/${date}`});
+
     return response.data;
 
   } catch (error) {
@@ -35,6 +37,7 @@ export const storeAttendanceLogs = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await requestDashboard({ url: '/api/storeAttendanceLogs' });
+
       return response.data; // Return data directly
     } catch (error) {
       // Dispatching an error action using rejectWithValue
@@ -68,7 +71,7 @@ const DashboardSlice = createSlice({
       .addCase(storeAttendanceLogs.rejected, (state, action) => {
         state.loading = 'failed';
 
-        showErrorToast(action?.payload, "");
+        ShowErrorToast(action?.payload, "");
       })
       .addCase(getAttendancePercentage.fulfilled, (state, action) => {
 

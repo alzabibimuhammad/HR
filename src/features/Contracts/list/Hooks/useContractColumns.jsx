@@ -134,7 +134,7 @@ const useContractColumns = () => {
                 <IconButton>
                   <RemoveRedEyeOutlinedIcon variant='contained' sx={{ color: '#8090A7' }} size='small'>
                     Details
-                  </VisibilityIcon>
+                  </RemoveRedEyeOutlinedIcon>
                 </IconButton>
               </Link>
               <IconButton onClick={() => handleEditClick(params.row)}>

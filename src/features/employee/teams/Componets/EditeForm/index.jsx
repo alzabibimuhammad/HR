@@ -8,7 +8,6 @@ import TeamLeaders from '../DrawerForm/teamLeaders'
 import Members from '../DrawerForm/members'
 import { useEditTeam } from '../../hooks/useEditTeam'
 import { useTranslation } from 'react-i18next'
-import useGetAllTeams from '../../hooks/useGetAllTeams'
 import ParentTeam from '../DrawerForm/parentTeam'
 
 const drawerWidth = 440

@@ -48,6 +48,7 @@ const Registration = ({ Data, setFilterDate,filterDate }) => {
     else
       setSearch(null)
   }
+
   const handelDate = event=>{
     setFilterDate(event.target.value)
     setState(false)

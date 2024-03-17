@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { Box, Typography, TextField, Stack, Checkbox } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import useGetAllTeams from '../../../hooks/useGetAllTeams';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Collapse from '@mui/material/Collapse';

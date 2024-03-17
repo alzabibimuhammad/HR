@@ -81,6 +81,7 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
       setfdata(searchData)
     }
   }
+
   const handleDateN = e => {
     const date = e.target.value
 
@@ -129,11 +130,13 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
     deleteAbcence(params?.id)
     handleCloseDeleteDialog()
   }
+
   const handleDeleteAbsence = (index, type) => {
     setTypeDelete(type)
     setDeleteDialog(true)
     setIndexDelete(index)
   }
+
   const handleCloseDeleteDialog = _ => {
     setDeleteDialog(false)
   }

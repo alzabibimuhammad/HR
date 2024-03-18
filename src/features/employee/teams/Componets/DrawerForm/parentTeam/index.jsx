@@ -6,7 +6,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 
-const ParentTeam = ({ data }) => {
+const ParentTeam = ({ data , setParentTeamId , setEditParentTeamId }) => {
   const { t } = useTranslation();
   const [searchText, setSearchText] = useState('');
   const [openIndex, setOpenIndex] = useState(null);
@@ -14,22 +14,31 @@ const ParentTeam = ({ data }) => {
 
   const handleCheckboxChange = (id) => {
     setSelectedItem(id);
+    setParentTeamId(id);
+    setEditParentTeamId(id);
   };
 
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const filteredData = useMemo(() => {
-    return data?.data?.data?.filter((user) =>
-      user?.name?.toLowerCase().includes(searchText.toLowerCase())
+
+  var filteredData = useMemo(() => {
+
+
+    return data?.Data?.data?.data?.filter((user) =>
+    user?.name?.toLowerCase().includes(searchText.toLowerCase())
     );
+
   }, [data, searchText]);
 
 
+
   return (
+
     <>
-      {filteredData && (
+    {filteredData &&(
+
         <>
           <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '12px' }}>
             <Typography sx={{ fontFamily: 'Montserrat', fontSize: '16px', fontWeight: 600, marginBottom: '12px' }}>
@@ -65,8 +74,11 @@ const ParentTeam = ({ data }) => {
             fullWidth
           />
           <Stack spacing={5} marginTop={'14px'}>
-            {filteredData.map((user, index) => (
+            {filteredData?.map((user, index) => (
+
+
               <Box key={index}>
+                {console.log(user)}
                 <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
                   <Typography sx={{ fontWeight: '500', fontSize: '14px', color: '#3f4458' }}>{user?.name}</Typography>
                   <Checkbox
@@ -109,7 +121,8 @@ const ParentTeam = ({ data }) => {
             ))}
           </Stack>
         </>
-      )}
+    )}
+
     </>
   );
 };

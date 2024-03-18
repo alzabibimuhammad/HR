@@ -38,19 +38,20 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
 
 
   const Typo = styled(Typography)(({ theme }) => ({
-  
+
     fontFamily: "Montserrat",
     fontSize: "14px",
     fontWeight: 500,
     letterSpacing: 0.7,
     color:'#8090A7'
         }))
+
         const TittleSection = styled(Typography)(({ theme }) => ({
-      
+
           fontFamily: "Montserrat",
           fontSize: "20px",
           fontWeight: 600,
-         
+
           color:'#8090A7'
               }))
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -141,52 +142,7 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
     </Box>
 
 
-    <Box sx={{width:"100%",marginTop:"15px !important"}}>
 
-      <Typo>{t("Unpaid absence days")}</Typo>
-      <Controller
-        name={`absence_management.unpaid_absence_days[count]`}
-        control={control}
-        render={({ field }) => (
-            <TextField
-            {...field}
-              value={Unpaid !== 0 ? Unpaid : t('none')}
-              disabled
-        fullWidth
-        size='small'
-        InputProps={{
-          endAdornment: (
-            <Box marginLeft={'70%'} display={'flex'}>
-              <Button onClick={handleUpUnpaid} style={{ padding: 0, minWidth: 'unset' }}>
-                <KeyboardArrowUpRoundedIcon />
-              </Button>
-              <Button onClick={handleDownUnpaid} style={{ padding: 0, minWidth: 'unset' }}>
-                <ExpandMoreRoundedIcon />
-              </Button>
-            </Box>
-          ),
-        }}
-    />
-        )}
-        />
-
-       <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"12px"}>
-    <Controller
-      name={`absence_management.unpaid_absence_days[compensatory_time]`}
-      control={control}
-        render={({ field }) => (
-      <input
-      {...field}
-          type='checkbox'
-       />
-        ) }
-        />
-<Typo>
-
-{t('Compensatory time')}
-</Typo>
-    </Box>
-    </Box>
     <Box sx={{width:"100%",marginTop:"15px !important"}}>
 
       <Typo>{t("Sick absence days")}</Typo>
@@ -231,6 +187,24 @@ export default function AbsencesManagement({Controller,control,Paid,setPaid,Unpa
 {t("Compensatory time")}
 </Typo>
     </Box>
+    </Box>
+
+    {/* **** */}
+    <Box display={"flex"} alignItems={"center"} gap={"5px"} marginTop={"12px"}>
+       <Controller
+      name={`absence_management.sick_absence_days[compensatory_time]`}
+      control={control}
+        render={({ field }) => (
+      <input
+      {...field}
+          type='checkbox'
+       />
+        ) }
+        />
+<Typo>
+
+{t("Compensatory time for Unpaid absence days")}
+</Typo>
     </Box>
 
 

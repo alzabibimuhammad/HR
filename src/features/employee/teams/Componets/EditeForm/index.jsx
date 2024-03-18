@@ -19,6 +19,9 @@ export default function EditeForm({ open, setOpenParent, SelectedRow,data }) {
   const [members, SetMembers] = useState([])
   const [teamLeader, SetteamLeader] = useState()
   const [teamName, setTeamName] = useState(SelectedRow.name)
+  const [EditParentTeamId, setEditParentTeamId] = useState()
+  console.log("🚀 ~ EditeForm ~ EditParentTeamId:", EditParentTeamId)
+
   const { t } = useTranslation()
 
 
@@ -38,6 +41,8 @@ export default function EditeForm({ open, setOpenParent, SelectedRow,data }) {
     const formData = new FormData()
     formData.append('name', teamName)
     formData.append('team_leader', teamLeader)
+
+    // formData.append('parent_id', EditParentTeamId)
     members.forEach((user, index) => {
       formData.append(`users_array[${index}]`, user)
     })
@@ -103,7 +108,7 @@ export default function EditeForm({ open, setOpenParent, SelectedRow,data }) {
         </Box>
 
         <Box sx={{ padding: '24px' }}>
-          <ParentTeam data={data} />
+          <ParentTeam setEditParentTeamId={setEditParentTeamId} data={data} />
         </Box>
 
 

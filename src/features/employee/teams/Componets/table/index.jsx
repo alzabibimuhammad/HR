@@ -154,6 +154,7 @@ export default function CollapsibleTable(Data, setEditData) {
                 <EditeForm open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow} data={Data}/>
               )}
 
+
               <IconButton onClick={() => handleClickOpen(row.id)}>
                 <DeleteIcon/>
               </IconButton>
@@ -300,7 +301,7 @@ export default function CollapsibleTable(Data, setEditData) {
       </Stack>
 
       <Box >
-        <DrawerForm open={openParent} setOpenParent={setOpenParent} />
+        <DrawerForm data={Data} open={openParent} setOpenParent={setOpenParent} />
       </Box>
 
       <TableContainer component={Paper}>

@@ -30,7 +30,7 @@ export default function Deductions({Controller,control}) {
       <Stack direction={'column'} spacing={2}>
         <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
         <Box>
-        <Typography fontSize={'20px'}>{t('Deductions')}</Typography>
+        <Typography sx={{fontWeight:"600",color:"#8090a7"}} fontSize={'20px'}>{t('Deductions')}</Typography>
           </Box>
 
           <Box>

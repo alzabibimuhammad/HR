@@ -1,4 +1,4 @@
- 
+
 
 import ComplaintsIcon from '../../../public/images/IconInput/complaints'
 import HierarchyIcon from '../../../public/images/IconInput/hierarchy'
@@ -38,10 +38,7 @@ const navigation = () => {
           title: 'Registeration',
           path: '/employees/registeration'
         },
-        {
-          title:"Absence",
-          path:"/employees/absence"
-        },
+
         {
           title:"Secretariats",
           path:"/employees/secretariats"
@@ -52,6 +49,17 @@ const navigation = () => {
         },
       ]
     },
+
+        {
+      title: 'Absence',
+      icon: <EmployeeIcon/> ,
+      children:[
+        {
+          title:"Daily Absence",
+          path:"/employees/absence"
+        },
+      ]
+      },
 
     {
       title: 'Contracts',
@@ -96,6 +104,9 @@ const navigation = () => {
           path:"/requests/system"
         },
       ]
+
+
+
     },
     {
       title: 'Complaints',
@@ -143,7 +154,7 @@ const navigation = () => {
         },
       ]
     },
-  
+
 
 
   ];

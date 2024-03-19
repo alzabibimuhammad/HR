@@ -3,21 +3,42 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { Avatar, IconButton, Typography } from '@mui/material';
+import { Avatar, ListItem, Typography } from '@mui/material';
+import Collapse from '@mui/material/Collapse'
+import ListItemIcon from '@mui/material/ListItemIcon'
+import TableCell from '@mui/material/TableCell'
 
 import { useTranslation } from 'react-i18next';
 import DrawerForm from '../componets/DrawerForm';
 import Link from 'next/link';
 import EditIcon from '../../../../../public/images/IconInput/edit'
+import List from '@mui/material/List'
+import ListItemText from '@mui/material/ListItemText'
+import IconButton from '@mui/material/IconButton'
+
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+
+
+import MuiListItem from '@mui/material/ListItem'
 
 const useAbsenceColumns = () => {
   const [isDrawerOpenEdit, setIsDrawerOpenEdit] = useState(false);
 
   const [EditData, setEditData] = useState(null);
+  const [openRows, setOpenRows] = useState({});
+
+  const [open, setOpen] = useState(false)
+
+  const handleToggle = (id) => {
+    setOpenRows((prevOpenRows) => ({
+      ...prevOpenRows,
+      [id]: !prevOpenRows[id],
+    }));
+  };
 
 
-  const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false);
-  const [deleteId, setDeleteId] = useState(null);
 
   const { t } = useTranslation();
 
@@ -75,13 +96,14 @@ const useAbsenceColumns = () => {
         );
       },
     },
-    {
-      field: 'level',
-      headerName: t("Level"),
-      disableClickEventBubbling: true,
-      flex: 1.1,
 
-    },
+    // {
+    //   field: 'level',
+    //   headerName: t("Level"),
+    //   disableClickEventBubbling: true,
+    //   flex: 1.1,
+
+    // },
     {
       field: 'justified',
       headerName: t("Justified"),
@@ -98,17 +120,57 @@ const useAbsenceColumns = () => {
       disableClickEventBubbling: true,
       flex: 1.1,
       renderCell: params => (
+        <>
         <Typography className='custome-data-grid-font' >{params?.row?.unjustified}</Typography>
 
+        <Box onClick={() => handleToggle(params.row.id)}>
+                <IconButton
+                  onClick={() => setOpen(!openRows)}
+                  sx={{
+                    fontSize: '13px',
+                    color:'#8090A7',
+                    '&:hover': {
+                      background: 'none !important'
+                    },
+                    padding: 0
+                  }}
+                  disableRipple
+                >
+
+                  {openRows[params.row.id]? <Stack  direction={'column'} >
+                    <Box>
+                   <KeyboardArrowUpIcon  sx={{marginTop:'53px'}} />
+                    </Box>
+
+                    <Box>
+                      <Typography sx={{ fontSize: '14px' }}>{params?.row?.unjustified}</Typography>
+                    </Box>
+                    <Box>
+                      <Typography sx={{ fontSize: '14px' }}>{params?.row?.unjustified}</Typography>
+                    </Box>
+
+                  </Stack>
+
+
+
+                  : <KeyboardArrowDownIcon sx={{marginTop:'3px'}} />}
+                </IconButton>
+              </Box>
+
+        </>
       )
     },
     {
-      field: 'total',
-      headerName: t("Total"),
+      field: 'sick',
+      headerName: t("SICK"),
       disableClickEventBubbling: true,
       flex: 4,
       renderCell: params => (
-        <Typography className='custome-data-grid-font' >{params?.row?.total}</Typography>
+
+        <>
+        <Typography className='custome-data-grid-font' >{params?.row?.sick}</Typography>
+
+        </>
 
       )
     },

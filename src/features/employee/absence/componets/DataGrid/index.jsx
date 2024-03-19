@@ -19,6 +19,7 @@ import useAbsenceColumns from '../../hooks/useAbsenceColumns'
 import { AbsenceData } from '../../infrastructure'
 import { Box } from '@mui/system'
 import Show10 from 'src/@core/components/show10'
+import { auto } from '@popperjs/core'
 
 const Absence = ({ rows }) => {
   const columns = useAbsenceColumns()
@@ -113,7 +114,7 @@ const Absence = ({ rows }) => {
           </Stack>
             </Stack>
 
-            <CustomDataGrid columns={columns} show={show} sx={gridStyles.root} rows={row } />
+            <CustomDataGrid rowHeight={auto} columns={columns} show={show} sx={gridStyles.root} rows={row } />
           </Stack>
         </CardContent>
       </Card>

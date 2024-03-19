@@ -21,7 +21,7 @@ const CustomDataGrid = ({ rows, columns, show, rowHeight }) => {
     <>
       <Box sx={{ height: 500, width: '100%'}}>
         <DataGrid
-       
+
           columns={columns}
           rows={rows || []}
           pageSizeOptions={[7, 10, 25, 50]}
@@ -29,7 +29,7 @@ const CustomDataGrid = ({ rows, columns, show, rowHeight }) => {
           onPaginationModelChange={setPaginationModel}
           rowHeight={rowHeight}
           className="custom-data-grid" // Apply custom class here
-
+          getRowHeight={() => 'auto'}
         />
       </Box>
     </>

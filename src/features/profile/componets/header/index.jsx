@@ -60,6 +60,13 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
 
   }
 
+  const handleFive= _ => {
+    dispatch(setProfileTap(5))
+    type = null
+    setActiveButton('Absences');
+
+  }
+
 
 
   return Object.keys(Data).length > 0 ? (
@@ -80,6 +87,7 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
         <Button className={`button-tap ${activeButton === 'profile' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleTwo}> {t('Profile')} </Button>
         <Button className={`button-tap ${activeButton === 'manage' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleThree}>{t('Manage')} </Button>
         <Button className={`button-tap ${activeButton === 'review' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleFoure}>{t('Review')} </Button>
+        <Button className={`button-tap ${activeButton === 'review' ? 'active' : ''}`} sx={{ width: { xs: '10px', sm: '25px' }, fontSize: { xs: '12px', sm: '16px' } }} onClick={handleFive}>{t('Absences')} </Button>
       </Stack>
       <Stack
         direction={'row'}

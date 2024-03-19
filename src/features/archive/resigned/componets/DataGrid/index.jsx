@@ -22,7 +22,7 @@ const ResignedTable = ({ rows }) => {
 
   let roleData = new Set([]);
   rows?.forEach(element => {
-    roleData.add(element?.role)
+    roleData.add(element?.department)
   });
 
   let specialization = new Set([]);
@@ -33,18 +33,25 @@ const ResignedTable = ({ rows }) => {
   const handleDrawerOpen = () => {
     setOpenParent(true);
   };
-
+const active =[
+  'active',
+  'former'
+]
 
   const [fdata, setfdata] = useState({ rows });
   useEffect(() => { setfdata(rows) }, [rows])
 
   const [role, setRole] = useState('');
+  const [status,setStatus]=useState()
 
   const [department, setDepartment] = useState('');
 
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
+  };
+  const handleStatusChange = (e) => {
+    setStatus(e.target.value);
   };
 
   const handledepartmentChange = (e) => {
@@ -205,9 +212,27 @@ const ResignedTable = ({ rows }) => {
                   size='small'
                 >
 
-                  <MenuItem value=''>{`${t("Role")}`}</MenuItem>
+                  <MenuItem value=''>{`${t("Team")}`}</MenuItem>
 
                   {Array.from(roleData).map(element => (
+                    <MenuItem key={element} value={element}>{t(element)}</MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  select
+                  sx={{ width: { sm: '320px', md: '320px', xs: '100%' } }}
+                  defaultValue="Status"
+                  SelectProps={{
+                    value: status,
+                    displayEmpty: true,
+                    onChange: handleStatusChange,
+                  }}
+                  size='small'
+                >
+
+                  <MenuItem value=''>{`${t("Status")}`}</MenuItem>
+
+                  {active.map(element => (
                     <MenuItem key={element} value={element}>{t(element)}</MenuItem>
                   ))}
                 </TextField>

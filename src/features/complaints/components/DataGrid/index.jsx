@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, TextField } from '@mui/material'
+import { Grid, Card, CardHeader, CardContent, MenuItem, Divider, Typography, TextField, Button, Modal } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import PageHeader from 'src/@core/components/page-header'
@@ -10,13 +10,23 @@ import { Box, Stack } from '@mui/system'
 import useComplaintsColumn from '../../Hook/useComplaintsColumn'
 import { FormateDate } from 'src/utiltis/DateFormate'
 import Show10 from 'src/@core/components/show10'
+import { CustomDatePickerSalary } from 'src/@core/components/customPickerSalary'
+import { CustomDatePickerFillter } from 'src/@core/components/CustomPickerDateFillter'
 
 const ComplaintsTable = ({ Data }) => {
   const columns = useComplaintsColumn()
-
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    bgcolor: 'background.paper',
+    boxShadow: 24
+  }
   const [rows, setRows] = useState()
   const [show, setShow] = React.useState(10);
-
+  const handleOpen = () => setOpen(true)
+   const [open, setOpen] = React.useState(false)
   useEffect(() => {
     setRows(ComplaintsData(Data))
   }, [Data])
@@ -115,7 +125,16 @@ const ComplaintsTable = ({ Data }) => {
               spacing={1}
             >
               <Typography className='filterTitle' >{t('Filter')}</Typography>
-              <TextField  sx={{ marginLeft:'8px',width:{sm:'320px',md:'320px',xs:'100%'} }} type='date' fullWidth size='small' onChange={handelDate} />
+             
+              <Button sx={{ display: 'flex', justifyContent: 'space-between', border: '1px solid #8090A7', width: { sm: '320px', md: '320px', xs: '100%' }, height: '38px', color: '#8090A7', ':hover': { backgroundColor: 'inherit' } }} fullWidth onClick={handleOpen}>
+
+                <Typography >{t('Monthly')}</Typography>
+                <img src='/images/pesonalProfile/date/icon.svg' />
+
+              </Button>
+
+                  <CustomDatePickerFillter  selectedDate={1}  />
+            
             </Stack>
 
             <CustomDataGrid show={show}  columns={columns} rows={rows || []} />

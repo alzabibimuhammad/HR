@@ -31,6 +31,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }))
 
 export default function DrawerForm({ open, setOpenParent, Data, }) {
+console.log("🚀 ~ DrawerForm ~ Data:", Data)
 
 
 
@@ -56,12 +57,13 @@ export default function DrawerForm({ open, setOpenParent, Data, }) {
   }
   const [selectedUser, setSelectedUser] = useState()
   const [showFileInput, setShowFileInput] = useState(false);
-
+  const [selectedFileName, setSelectedFileName] = useState('');
   const toggleFileInput = () => {
     setShowFileInput(!showFileInput);
 };
 
   const defaultValues = {
+    Secretariat_name:Data?.title,
     description: Data?.description,
     received_date: Data?.date
   }
@@ -70,6 +72,15 @@ export default function DrawerForm({ open, setOpenParent, Data, }) {
     reset(defaultValues);
 
   }, [Data]);
+
+  const handleFileChange = (event) => {
+
+    const file = event.target.files[0]; 
+ 
+   
+  
+    setSelectedFileName(file);
+  };
 
 
   const {
@@ -86,7 +97,14 @@ export default function DrawerForm({ open, setOpenParent, Data, }) {
 
   const onSubmit = data => {
 
-    UpdateSecretariats({id:Data?.id,data:data})
+    const formData = new FormData()
+    formData.append('path',selectedFileName)
+    formData.append('title',data.Secretariat_name)
+    formData.append('description',data.description)
+    formData.append('received_date',data.received_date)
+    formData.append('user_id',selectedUser)
+
+    UpdateSecretariats({id:Data?.id,data:formData})
 
     handleDrawerClose()
   }
@@ -109,6 +127,7 @@ export default function DrawerForm({ open, setOpenParent, Data, }) {
   }
 
   const handleUserSelection = userId => {
+  console.log("🚀 ~ handleUserSelection ~ userId:", userId)
 
     setSelectedUser(userId)
 
@@ -197,58 +216,33 @@ export default function DrawerForm({ open, setOpenParent, Data, }) {
         </Stack>
             <form onSubmit={handleSubmit(onSubmit)}>
         <Stack direction={'column'} mt={5} spacing={5}>
+        <RadioGroup value={selectedUser} onChange={event => handleUserSelection(event.target.value)}>
+              {users?.map((user,index) => (
 
-          <RadioGroup value={selectedUser} onChange={event => handleUserSelection(event.target.value)}>
+                <Stack key={index} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
 
+                  <Stack sx={{marginTop:"8px",marginBottom:"8px"}} direction={'row'}  alignItems={'center'} spacing={1}>
+                  <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + user?.user_info?.image}  />
+                <Typography>{user.first_name} {user.last_name}</Typography>
+                </Stack>
+                  <FormControlLabel
+                    key={user.id}
+                    value={user.id}
+                    control={<Radio />}
 
-              {/* <Stack  direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-
-                <Stack sx={{marginTop:"8px",marginBottom:"8px"}} direction={'row'}  alignItems={'center'} spacing={3}>
-                <Box>
-      <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + Data?.user_info} />
-
-      </Box>
-                <Box>
-      <Typography sx={{color:"#131627",fontWeight:"500",fontSize:"14px"}}>{Data?.first_name} {Data?.last_name}</Typography>
-      <Typography sx={{color:"#7b8794",fontWeight:"400",fontSize:"12px"}}>{Data?.specialization} </Typography>
-
-      </Box>
-
+                  />
               </Stack>
-                <FormControlLabel
-                  key={Data?.id}
-                  value={Data?.id}
-                  control={<Radio />}
+              ))}
 
-                />
+            </RadioGroup>
 
 
-
-            </Stack> */}
-
-          </RadioGroup>
-          {users?.map((user, index) => (
-  selectedUser !== user.id ? (
-    <Stack key={index} direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
-      <Stack sx={{marginTop:"2px",marginBottom:"2px"}} direction={'row'}  alignItems={'center'} spacing={1}>
-        <Avatar src={process.env.NEXT_PUBLIC_IMAGES + '/' + user?.user_info?.image}  />
-        <Typography>{user.first_name} {user.last_name}</Typography>
-      </Stack>
-      <FormControlLabel
-        key={user.id}
-        value={user.id}
-        control={<Radio />}
-      />
-    </Stack>
-  )
-  :""
-))}
         </Stack>
 
 
 
               <Controller
-                name='Secretariat name'
+                name='Secretariat_name'
                 control={control}
 
                 defaultValue=''
@@ -310,26 +304,27 @@ export default function DrawerForm({ open, setOpenParent, Data, }) {
             {showFileInput && (
             <Stack height={"64px"} padding={"16px"} justifyContent={"space-between"} flexDirection={"row"} alignItems={"center"}>
               <Box>
-                <label htmlFor="fileInput">
-                  <Button component="span">
-                    <EditIcon />
-                  </Button>
-                </label>
-                <Controller
-                  name={`file`}
-                  control={control}
-                  render={({ field }) => (
-                    <input
+              <Button component="span" onClick={() => document.getElementById('fileInput').click()}>
+                      <EditIcon />
+                    </Button>
+               
+                  <Controller
+                    name={`file`}
+                    control={control}
+                    render={({ field }) => (
+                      <input
+                      {...field}
                       id="fileInput"
-                      type="file"
-                      accept=".pdf"
-                      style={{ display: 'none' }}
-                    />
-                  )}
-                />
+                        type="file"
+                        accept=".pdf"
+                        onChange={handleFileChange}
+                        style={{ display: 'none' }}
+                      />
+                    )}
+                  />
               </Box>
               <Box display={"flex"} alignItems={"center"} gap={"12px"}>
-                <Typography sx={{ fontWeight: "500", fontSize: "14px", color: "#3f4458" }}>contract  </Typography>
+                <Typography sx={{ fontWeight: "500", fontSize: "14px", color: "#3f4458" }}>{selectedFileName ? selectedFileName.name :"contract"}   </Typography>
                 <img src='/images/pdf-icon.svg' alt="PDF Icon" />
               </Box>
             </Stack>

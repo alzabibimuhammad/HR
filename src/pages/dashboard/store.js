@@ -68,7 +68,7 @@ const DashboardSlice = createSlice({
       .addCase(storeAttendanceLogs.rejected, (state, action) => {
         state.loading = 'failed';
 
-        showErrorToast(action?.payload, "");
+       
       })
       .addCase(getAttendancePercentage.fulfilled, (state, action) => {
 

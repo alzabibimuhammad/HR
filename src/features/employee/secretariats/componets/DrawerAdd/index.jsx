@@ -31,7 +31,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function DrawerFormAdd({ open, setOpenParent }) {
   const { mutate: AddSecretariats, isLoading } = useAddSecretariats()
   const [showFileInput, setShowFileInput] = useState(false);
-
+  const [selectedFileName, setSelectedFileName] = useState('');
   const { data } = useGetAllUsers()
   const [ users , setUsers] = useState(data?.data?.data)
 
@@ -48,6 +48,15 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
     setOpenParent(false)
     open = false
   }
+
+  const handleFileChange = (event) => {
+
+    const file = event.target.files[0]; 
+    console.log("🚀 ~ handleFileChange ~ fullPath:", file)
+   
+  
+    setSelectedFileName(file);
+  };
 
   const {
     control,
@@ -71,9 +80,18 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
   }
 
   const onSubmit = data => {
-    data.user_id = Number(selectedUser)
-    AddSecretariats(data)
-    handleDrawerClose()
+
+
+
+    const formData = new FormData()
+    formData.append('path',selectedFileName)
+    formData.append('title',data.Secretariat_name)
+    formData.append('description',data.description)
+    formData.append('received_date',data.received_date)
+    formData.append('user_id',selectedUser)
+ 
+    AddSecretariats(formData)
+    // handleDrawerClose()
 
   }
 
@@ -209,7 +227,7 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
           </Stack>
 
                 <Controller
-                  name='Secretariat name'
+                  name='Secretariat_name'
                   control={control}
 
                   defaultValue=''
@@ -271,26 +289,30 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
               {showFileInput && (
               <Stack height={"64px"} padding={"16px"} justifyContent={"space-between"} flexDirection={"row"} alignItems={"center"}>
                 <Box>
-                  <label htmlFor="fileInput">
-                    <Button component="span">
+                 
+                    <Button component="span" onClick={() => document.getElementById('fileInput').click()}>
                       <EditIcon />
                     </Button>
-                  </label>
+               
                   <Controller
                     name={`file`}
                     control={control}
                     render={({ field }) => (
                       <input
-                        id="fileInput"
+                      {...field}
+                      id="fileInput"
                         type="file"
                         accept=".pdf"
+                        onChange={handleFileChange}
                         style={{ display: 'none' }}
                       />
                     )}
                   />
+   
+  
                 </Box>
                 <Box display={"flex"} alignItems={"center"} gap={"12px"}>
-                  <Typography sx={{ fontWeight: "500", fontSize: "14px", color: "#3f4458" }}>contract  </Typography>
+                  <Typography sx={{ fontWeight: "500", fontSize: "14px", color: "#3f4458" }}>{selectedFileName ? selectedFileName.name :"contract"}  </Typography>
                   <img src='/images/pdf-icon.svg' alt="PDF Icon" />
                 </Box>
               </Stack>

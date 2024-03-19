@@ -9,7 +9,8 @@ export const SecretariatsData = elements => {
       user_info:element?.user?.user_info?.image,
       user_id:element?.user?.id,
       specialization:element?.user?.specialization,
-      name:element?.user?.name
+      name:element?.user?.name,
+      title:element?.title
     }
   })
 }

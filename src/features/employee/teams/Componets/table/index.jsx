@@ -32,6 +32,7 @@ import { setProfileTap } from 'src/store/apps/user'
 import DeleteIcon from '../../../../../../public/images/IconInput/delete'
 import EditIcon from '../../../../../../public/images/IconInput/edit'
 import AddIcon from '@mui/icons-material/Add';
+import useGetAllTeams from '../../hooks/useGetAllTeams'
 
 function createData(id, name, user) {
   return {
@@ -44,6 +45,7 @@ function createData(id, name, user) {
 export default function CollapsibleTable(Data, setEditData) {
   function Row(props) {
     const { row } = props
+
     const sortedRows = row?.user.sort((a, b) => {
       const roleA = a.role === 'team_leader' ? -1 : 1;
       const roleB = b.role === 'team_leader' ? -1 : 1;
@@ -54,21 +56,22 @@ export default function CollapsibleTable(Data, setEditData) {
       }
     });
 
+    // const { data } = useGetAllTeams();
+
 
     const [open, setOpen] = useState(false)
 
     const [isDeletePopupOpen, setIsDeletePopupOpen] = useState(false)
     const [deleteId, setDeleteId] = useState(null)
 
-    const [openMember, setOpenMember] = useState(false)
     const [SelectedRow, setSelectedRow] = useState('')
     const [openParentEdit, setOpenParentEdit] = useState(false)
 
     const [isMemberPopupOpen, setIsMemberPopupOpen] = useState(false)
     const [memberdeleteId, setMemberDeleteId] = useState(null)
 
-    const [DrawerOpenEdit, setIsDrawerOpenEdit] = useState(false)
     const dispatch = useDispatch()
+
     const handleEditClick = row => {
 
       setSelectedRow(row)
@@ -123,7 +126,7 @@ export default function CollapsibleTable(Data, setEditData) {
                     '&:hover': {
                       background: 'none !important'
                     },
-                    
+
                     padding: 0
                   }}
                   disableRipple
@@ -148,8 +151,9 @@ export default function CollapsibleTable(Data, setEditData) {
               </IconButton>
 
               {SelectedRow && (
-                <EditeForm open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow} />
+                <EditeForm open={openParentEdit} setOpenParent={setOpenParentEdit} SelectedRow={SelectedRow} data={Data}/>
               )}
+
 
               <IconButton onClick={() => handleClickOpen(row.id)}>
                 <DeleteIcon/>
@@ -285,7 +289,7 @@ export default function CollapsibleTable(Data, setEditData) {
             color: 'white',
             borderRadius:'8px',
             fontWeight:'600px',
-         
+
             backgroundColor: '#6AB2DF',
             ':hover': { color: '#6D6B77' }
           }}
@@ -297,7 +301,7 @@ export default function CollapsibleTable(Data, setEditData) {
       </Stack>
 
       <Box >
-        <DrawerForm open={openParent} setOpenParent={setOpenParent} />
+        <DrawerForm data={Data} open={openParent} setOpenParent={setOpenParent} />
       </Box>
 
       <TableContainer component={Paper}>

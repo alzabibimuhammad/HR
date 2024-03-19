@@ -595,6 +595,9 @@
   "Department Name":"اسم القسم",
   "Add Department":"اضافة قسم",
   "ADD DEPARTMENT":"اضافة قسم",
-  "Department Leader":"قائد القسم"
+  "Department Leader":"قائد القسم",
+  "Role":"الصلاحية",
+  "role":"الصلاحية",
+  "Compensatory time for Unpaid absence days":"الوقت التعويضي لأيام الغياب غير مدفوعة الأجر"
 
 }

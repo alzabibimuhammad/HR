@@ -40,7 +40,6 @@ export default function DrawerFormAdd({ open, setOpenParent }) {
   },[data])
 
   const [selectedUser, setSelectedUser] = useState()
-  console.log("🚀 ~ DrawerFormAdd ~ selectedUser:", selectedUser)
   const theme = useTheme()
   const { t } = useTranslation()
 

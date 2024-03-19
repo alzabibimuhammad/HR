@@ -45,7 +45,6 @@ const List = ({ rows }) => {
     else {
       if (FilterDate) setRows([])
       else setRows(ContractsData(rows))
-    console.log("date",date);
     }
   }, [FilterDate])
 

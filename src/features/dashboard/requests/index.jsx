@@ -30,7 +30,7 @@ export default function Requests() {
   const Content = styled(Typography)(() => ({
     fontSize:'14px',
     fontWeight:'500',
-   
+
     color:'#3F4458'
 
   }))
@@ -50,7 +50,6 @@ export default function Requests() {
 
   const { t } = useTranslation()
   const requestsData = data?.data?.data || [];
-  console.log("🚀 ~ Requests ~ requestsData:", requestsData)
   let counter = 0;
 
     const handleApproveClick = (params) => {
@@ -78,7 +77,7 @@ export default function Requests() {
 
             <Stack direction={{ sm:'row',xs:'row' }} marginTop={'2.5%' }  marginLeft={{ sm:'1%' }}  spacing={{sm:38,xs:4}} justifyContent="space-between"  >
             <Stack direction={'row'} spacing={1}   >
-        
+
                   <Avatar
                     alt="Remy Sharp"
                     src="/static/images/avatar/1.jpg"
@@ -92,7 +91,7 @@ export default function Requests() {
                   <Content >{request?.description}</Content>
 
                   </Stack>
-                 
+
                 </Stack>
                 <Typography ma>{formatTime(request?.date)}</Typography>
 

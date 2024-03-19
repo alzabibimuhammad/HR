@@ -2,7 +2,6 @@ export const AbsenceData = elements => {
 
   return elements?.data?.data?.map(element => {
 
-console.log("element",element?.userinfo?.level);
 
     return {
       id: element?.id,

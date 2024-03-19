@@ -124,7 +124,6 @@ export default function Add() {
 
 
   const handleDataSubmit = data => {
-  console.log("🚀 ~ handleDataSubmit ~ data:", data)
 
 
 
@@ -216,8 +215,8 @@ return (
             </Stack>
           </Button>
         </Box>
-        <Stack marginTop={'1%'} direction={{ sm: 'row', xs: 'column' }} spacing={2}>
-          <Stack spacing={2} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
+        <Stack marginTop={'1%'} direction={{ sm: 'row', xs: 'column' }} spacing={8}>
+          <Stack spacing={8} width={{ sm: '50%' }} direction={{ sm: 'column', xs: 'column' }}>
             <Box>
               <Snapshot
                 onDataChange={setSnapshotData}
@@ -253,7 +252,6 @@ return (
                 Controller={Controller}
                 passwordValue={getValues('password')}
                 ShowUser={ShowUser}
-                // Pass the password value
 
               />
             </Box>
@@ -291,7 +289,7 @@ return (
           </Stack>
 
 
-          <Stack flex={1} direction={'column'} spacing={2}>
+          <Stack flex={1} direction={'column'} spacing={8}>
               <Box>
                 <Professional
                   onDataChange={setProfessionalData}

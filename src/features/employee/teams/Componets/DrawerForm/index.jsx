@@ -9,6 +9,7 @@ import { useAddTeam } from '../../hooks/useAddTeam'
 import { LoadingButton } from '@mui/lab'
 import SaveIcon from '@mui/icons-material/Save'
 import { useTranslation } from 'react-i18next'
+import ParentTeam from './parentTeam'
 
 const drawerWidth = 440
 
@@ -21,13 +22,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start'
 }))
 
-export default function DrawerForm({ open, setOpenParent, Data }) {
+export default function DrawerForm({ open, setOpenParent, data}) {
   const theme = useTheme()
   const { mutate: AddTeam, isloading } = useAddTeam()
   const [members, SetMembers] = useState([])
   const [teamLeader, SetteamLeader] = useState()
   const [teamName, setTeamName] = useState('')
-  const [searchText, setSearchText] = useState('')
+  const [ParentTeamId, setParentTeamId] = useState('')
 
   const { t } = useTranslation()
 
@@ -46,6 +47,9 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
       formData.append('team_leader', teamLeader)
     members.forEach((user, index) => {
       formData.append(`users_array[${index}]`, user)
+      formData.append('parent_id', ParentTeamId)
+      console.log(formData);
+
     })
     AddTeam(formData)
     handleDrawerClose()
@@ -98,12 +102,15 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
             onChange={handleTeamNameChange}
           />
         </Box>
-        
+
         <Box sx={{ padding: '24px' }}>
           <Members SetMembers={SetMembers} />
         </Box>
         <Box sx={{ padding: '24px' }}>
           <TeamLeaders SetteamLeader={SetteamLeader} />
+        </Box>
+        <Box sx={{ padding: '24px' }}>
+          <ParentTeam setParentTeamId={setParentTeamId} data={data} />
         </Box>
         <Box sx={{ display: 'flex', width: '100%', padding: '10px' }}>
           <Stack sx={{ marginLeft: { sm: '50%' } }} direction={'row'} spacing={2}>
@@ -125,10 +132,10 @@ export default function DrawerForm({ open, setOpenParent, Data }) {
               loadingPosition='start'
               variant='contained'
               sx={{
-           
+
                 borderRadius: '4px',
                 padding: '8px 24px',
-            
+
               }}
             >
               {t('Add')}

@@ -45,7 +45,6 @@ const useUserColumns = () => {
   }
 
   const handleClickOpen = params => {
-    console.log("🚀 ~ handleClickOpen ~ params:", params)
     setDeleteId(params)
     setIsDeletePopupOpen(true)
   }
@@ -68,7 +67,7 @@ const handleViewProfileTap=_=>{
         disableClickEventBubbling: true,
         flex: 2.5,
         renderCell: params => {
-     
+
           return (
             <Link href={`/profile/${params?.row?.id}`} style={{ display: 'flex', textDecoration: 'none', alignItems: 'center' }}>
               <Badge color={params?.row?.status === '0'?'success':'error'} variant="dot" sx={{ marginX: '12px' }} size="large">
@@ -82,7 +81,7 @@ const handleViewProfileTap=_=>{
           );
         }
       },
-      
+
       {
         field: 'role',
         headerName: t('Level'),

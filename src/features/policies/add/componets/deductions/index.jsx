@@ -5,25 +5,44 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useTranslation } from 'react-i18next';
+import Switch from '@mui/material/Switch';
 
 export default function Deductions({Controller,control}) {
   const [selectedOption, setSelectedOption] = useState('');
 
   const {t} = useTranslation()
 
+  const [Show  ,setShow] = useState(false)
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
+
+  const handleShow = () => {
+    setShow(!Show);
   };
 
+  console.log(Show);
 
+  const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 
   return (
     <Card sx={{borderRadius: "12px"}}>
     <CardContent>
       <Stack direction={'column'} spacing={2}>
-        <Typography fontSize={'20px'}>{t('Deductions')}</Typography>
+        <Stack direction={'row'} justifyContent={'space-between'} alignItems={'center'}>
+        <Box>
+        <Typography sx={{fontWeight:"600",color:"#8090a7"}} fontSize={'20px'}>{t('Deductions')}</Typography>
+          </Box>
+
+          <Box>
+
+        <Switch  {...label} onClick={handleShow}  />
+          </Box>
+        </Stack>
+
+
+
+        {Show ?
+
 
         <Controller
   name="deduction_status"
@@ -84,6 +103,8 @@ export default function Deductions({Controller,control}) {
     </RadioGroup>
   )}
 />
+    :""  }
+
 
 
       </Stack>

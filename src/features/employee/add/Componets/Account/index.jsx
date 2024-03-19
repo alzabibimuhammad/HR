@@ -8,30 +8,15 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useTranslation } from 'react-i18next';
 import {   MenuItem, } from '@mui/material'
 
-export default function Account({onDataChange,Controller,control,errors}) {
+export default function Account({onDataChange,Controller,control,errors,ShowUser}) {
 
   const {t} = useTranslation()
 
-  const SvgMail = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-  <rect x="3.33325" y="5" width="13.3333" height="10" rx="2" stroke="#8090A7"/>
-  <path d="M3.33325 7.5L9.10549 10.3861C9.66855 10.6676 10.3313 10.6676 10.8943 10.3861L16.6666 7.5" stroke="#8090A7"/>
-</svg>
-`;
 
-  const SvgPassword = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-  <path d="M4.66602 11.2C4.66602 10.0799 4.66602 9.51984 4.884 9.09202C5.07575 8.71569 5.38171 8.40973 5.75803 8.21799C6.18586 8 6.74591 8 7.86602 8H12.1327C13.2528 8 13.8128 8 14.2407 8.21799C14.617 8.40973 14.9229 8.71569 15.1147 9.09202C15.3327 9.51984 15.3327 10.0799 15.3327 11.2V11.2C15.3327 12.8802 15.3327 13.7202 15.0057 14.362C14.7181 14.9265 14.2591 15.3854 13.6947 15.673C13.0529 16 12.2128 16 10.5327 16H9.46602C7.78586 16 6.94578 16 6.30404 15.673C5.73956 15.3854 5.28062 14.9265 4.993 14.362C4.66602 13.7202 4.66602 12.8802 4.66602 11.2V11.2Z" stroke="#8090A7"/>
-  <path d="M12.6654 7.33333V6.66667C12.6654 5.19391 11.4715 4 9.9987 4V4C8.52594 4 7.33203 5.19391 7.33203 6.66667V7.33333" stroke="#8090A7" stroke-linecap="round"/>
-  <circle cx="9.99935" cy="12.0003" r="1.33333" fill="#8090A7"/>
-</svg>
-  `;
-
+  const [Role, setRole] = useState('role');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [password, setPassword] = useState();
 
-  const [passwordsMatch, setpasswordsMatch] = useState(true);
 
 
 
@@ -47,20 +32,27 @@ export default function Account({onDataChange,Controller,control,errors}) {
     setShowConfirm((prevShowPassword) => !prevShowPassword);
   };
 
-  const handlePasswordChange=value=>{
-      setPassword(value.target.value)
-  }
 
-  const handleConfirmationChange = (value) => {
-    if (value.target.value === password) {
-      setpasswordsMatch(true);
-      handleFieldChange('password', value);
-    } else {
-      setpasswordsMatch(false);
-    }
+
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
+    handleFieldChange('role',e.target.value)
   };
 
+  const SvgMail = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <rect x="3.33325" y="5" width="13.3333" height="10" rx="2" stroke="#8090A7"/>
+  <path d="M3.33325 7.5L9.10549 10.3861C9.66855 10.6676 10.3313 10.6676 10.8943 10.3861L16.6666 7.5" stroke="#8090A7"/>
+  </svg>
+  `;
 
+  const SvgPassword = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <path d="M4.66602 11.2C4.66602 10.0799 4.66602 9.51984 4.884 9.09202C5.07575 8.71569 5.38171 8.40973 5.75803 8.21799C6.18586 8 6.74591 8 7.86602 8H12.1327C13.2528 8 13.8128 8 14.2407 8.21799C14.617 8.40973 14.9229 8.71569 15.1147 9.09202C15.3327 9.51984 15.3327 10.0799 15.3327 11.2V11.2C15.3327 12.8802 15.3327 13.7202 15.0057 14.362C14.7181 14.9265 14.2591 15.3854 13.6947 15.673C13.0529 16 12.2128 16 10.5327 16H9.46602C7.78586 16 6.94578 16 6.30404 15.673C5.73956 15.3854 5.28062 14.9265 4.993 14.362C4.66602 13.7202 4.66602 12.8802 4.66602 11.2V11.2Z" stroke="#8090A7"/>
+  <path d="M12.6654 7.33333V6.66667C12.6654 5.19391 11.4715 4 9.9987 4V4C8.52594 4 7.33203 5.19391 7.33203 6.66667V7.33333" stroke="#8090A7" stroke-linecap="round"/>
+  <circle cx="9.99935" cy="12.0003" r="1.33333" fill="#8090A7"/>
+  </svg>
+  `;
 
   return (
     <Card>
@@ -77,10 +69,10 @@ export default function Account({onDataChange,Controller,control,errors}) {
             defaultValues=''
             render={({ field }) => (
               <TextField
-                {...field}
-                fullWidth
-                type='email'
-                size='small'
+              {...field}
+              fullWidth
+              type='email'
+              size='small'
                 error={Boolean(errors.email)}
       {...(errors.email && { helperText: errors.email.message })}
                 label={
@@ -175,29 +167,35 @@ export default function Account({onDataChange,Controller,control,errors}) {
             />
 
 <Controller
-            name={`role`}
-            control={control}
-            render={({ field }) => (
-              <TextField
-              {...field}
-              select
-              fullWidth
+  name="role"
+  control={control}
+  render={({ field }) => (
+    <TextField
+      {...field}
+      select
+      fullWidth
+      value={Role}
+      SelectProps={{
+        displayEmpty: true,
+        onChange: (e) => {
+          field.onChange(e);
+          handleRoleChange(e);
+        },
+        renderValue: (selected) => {
+          if (selected === 'role') {
+            return <em>{t('role')}</em>;
+          }
 
+          return selected;
+        },
+      }}
+      size="small"
+      InputLabelProps={{ shrink: true }}
+    >
 
-
-              // SelectProps={{
-              //   displayEmpty: true,
-              //   onChange: (e) => {
-              //     field.onChange(e);  // Ensure field.onChange is called
-              //     handleStatusChange(e);
-              //   },
-              // }}
-              size='small'
-                  >
-                    <MenuItem value='admin'>{`${t("admin")}`}</MenuItem>
-                    <MenuItem value='employee'>{`${t("employee")}`}</MenuItem>
-
-                </TextField>
+      <MenuItem value="admin">{t('Admin')}</MenuItem>
+      <MenuItem value="employee">{t('Employee')}</MenuItem>
+    </TextField>
   )}
 />
 

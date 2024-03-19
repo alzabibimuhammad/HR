@@ -11,8 +11,11 @@ import { useTranslation } from 'react-i18next';
 import useSelectLevel from 'src/pages/employees/add/hook/useSelectLevel';
 import useSelectBranch from 'src/pages/employees/add/hook/useSelectBranch';
 import useSelectInput from 'src/pages/employees/add/hook/useSelectInput';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 export default function Skills({ ShowUser,onDataChange, Controller, control, handleRatingChange, handleLanguageChange, errors }) {
+
 
   const [degree, setDegree] = useState('');
   const { t } = useTranslation()
@@ -39,6 +42,11 @@ export default function Skills({ ShowUser,onDataChange, Controller, control, han
     setDegree(e.target.value);
     handleFieldChange('degree', degree)
   };
+
+
+
+
+
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -129,14 +137,7 @@ export default function Skills({ ShowUser,onDataChange, Controller, control, han
 
 
 
-  // useEffect(()=>{
-  //   append('educations', { study: '', degree: '' });
-  //   certificateAppend('certificates', {  });
-  //   experienceAppend('experiences', { experience: '' });
-  //   skillsAppend('skills', { skills: '', rate: "" });
-  //   LanguageAppend('languages', { languages: '',rate:"" });
 
-  // },[append,certificateAppend,experienceAppend,skillsAppend,LanguageAppend])
 
 
   const SvgStudy = `
@@ -186,7 +187,7 @@ export default function Skills({ ShowUser,onDataChange, Controller, control, han
         <Typography className='title-section'>{t("Skills & Career")}</Typography>
         <br />
 
-        <Typography>{t('Branch')}</Typography>
+        <Typography sx={{marginBottom:"6px"}}>{t('Branch')}</Typography>
 
 <Controller
   name='branch_id'
@@ -220,7 +221,7 @@ export default function Skills({ ShowUser,onDataChange, Controller, control, han
   )}
 />
 
-<Typography sx={{marginTop:"10px"}}>{t("Specialization")}</Typography>
+<Typography sx={{marginTop:"14px",marginBottom:"6px"}}>{t("Specialization")}</Typography>
 
 <Controller
   name='specialization'
@@ -261,7 +262,7 @@ export default function Skills({ ShowUser,onDataChange, Controller, control, han
 
 
         <Stack direction={'column'} spacing={3} width={'100%'} >
-          <Typography>{t("Education")}</Typography>
+          <Typography sx={{marginTop:"14px"}}>{t("Education")}</Typography>
 
 
 
@@ -461,8 +462,8 @@ export default function Skills({ ShowUser,onDataChange, Controller, control, han
                   value={field.rate}
                   onChange={(event, newValue) => {
                     handleRatingChange(index, newValue);
-
                   }}
+
                 />
 
               </Box>

@@ -16,10 +16,18 @@ import Button from '@mui/material/Button'
 import { CustomDatePickerSalary } from 'src/@core/components/customPickerSalary'
 import { useGetDataByMonth } from '../../hooks/useGetDataByMonth'
 import Show10 from 'src/@core/components/show10'
+import DrawerForm from '../DrawerForm'
+import DrawerFormSalary from '../DrawerForm'
 
 const SalaryDataGrid = ({ rows }) => {
 
   const totalSalaries = SalaryData(rows)?.reduce((sum, value) => sum + value.total, 0);
+  const [role, setRole] = useState('')
+  const [show, setShow] = React.useState(10)
+  const [openParent, setOpenParent] = useState('')
+  const [open, setOpen] = React.useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
 
   let roleData = new Set([]);
   rows?.data?.data?.forEach(element => {
@@ -34,10 +42,6 @@ const SalaryDataGrid = ({ rows }) => {
   const [fdata, setfdata] = useState(rows)
   useEffect(() => { setfdata(rows) }, [rows])
 
-  const [role, setRole] = useState('')
-
-  const [department, setDepartment] = useState('')
-  const [show, setShow] = React.useState(10)
 
   const style = {
     position: 'absolute',
@@ -48,14 +52,19 @@ const SalaryDataGrid = ({ rows }) => {
     boxShadow: 24
   }
 
-  const [open, setOpen] = React.useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
 
 
   const handleRoleChange = e => {
     setRole(e.target.value)
   }
+
+  const handleDrawerOpen = () => {
+    setOpenParent(true)
+  }
+
+
+
+
 
 
   useEffect(() => {
@@ -163,7 +172,15 @@ const SalaryDataGrid = ({ rows }) => {
                   size='small'
                 />
               </Stack>
+              <Stack direction={'row'} alignItems={'center'} spacing={4}>
               <Typography sx={{ fontSize: '16px', fontWeight: 500, color: '#8090A7' }} >{t('Total')}: {totalSalaries ? totalSalaries : 0} {t('L.S')}</Typography>
+                  <Box onClick={handleDrawerOpen} sx={{width:"74px",height:"33px",borderRadius:"8px",padding:"8px 12px 8px 12px",backgroundColor:"#6ab2df",cursor:"pointer"}}>
+              <span   style={{fontWeight:"600",fontSize:"14px",color:"#fff",margin:"0 auto"}}>+ Add</span>
+                  </Box>
+              <Box >
+        <DrawerFormSalary   Data={rows} openParent={openParent} setOpenParent={setOpenParent} />
+      </Box>
+              </Stack>
 
             </Stack>
 

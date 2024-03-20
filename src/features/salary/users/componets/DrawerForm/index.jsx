@@ -3,10 +3,7 @@ import { styled, useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import { Button, TextField, Typography, Stack, Divider ,MenuItem} from '@mui/material'
-import { LoadingButton } from '@mui/lab'
-import SaveIcon from '@mui/icons-material/Save'
 import { useTranslation } from 'react-i18next'
-import ParentTeam from './parentTeam'
 import Avatar from '@mui/material/Avatar'
 import { Checkbox } from '@mui/material'
 import Icon from 'src/@core/components/icon'
@@ -27,24 +24,27 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function DrawerFormSalary({ openParent, setOpenParent, Data}) {
 
   const {data}= Data?.data
-  console.log("🚀 ~ DrawerFormSalary ~ data:", data)
-
   const theme = useTheme()
   const [teamName, setTeamName] = useState('')
   const [Type, setType] = useState("");
   const [Value, seValue] = useState("");
   const [selectedItems, setSelectedItems] = useState( [])
+  const [Search, setSearch] = useState( [])
 
   const { mutate: AddDecision, isloading } = useAddDecision()
 
-
-
-
   const { t } = useTranslation()
 
-  const handleTeamNameChange = event => {
-    setTeamName(event.target.value)
-  }
+
+  const filteredData = useMemo(() => {
+    if (!Search || !data || !data.length) {
+      return Data?.data?.data || [];
+    }
+
+    const searchString = typeof Search === 'string' ? Search.toLowerCase() : '';
+
+    return data.filter(item => item.first_name.toLowerCase().includes(searchString));
+  }, [Search, data ]);
 
   const handleDrawerClose = () => {
     setOpenParent(false)
@@ -65,7 +65,7 @@ export default function DrawerFormSalary({ openParent, setOpenParent, Data}) {
       const allIds = data.map(item => item.id);
       setSelectedItems(allIds);
     }
-  }, [data, ]);
+  }, [ ]);
 
   const toggleSelectAll = () => {
     if (selectedItems.length === 0) {
@@ -117,7 +117,7 @@ export default function DrawerFormSalary({ openParent, setOpenParent, Data}) {
     console.log(formData);
      AddDecision(formData)
 
-    // handleDrawerClose()
+     handleDrawerClose()
   }
 
   return (
@@ -213,8 +213,9 @@ export default function DrawerFormSalary({ openParent, setOpenParent, Data}) {
             style={{ height: '10px',width:"90%" }}
             placeholder={t('Search...')}
             size='small'
-            value={teamName}
-            onChange={handleTeamNameChange}
+            value={Search}
+              onChange={e => setSearch(e.target.value)}
+
           />
 <Box sx={{marginTop:"20px"}}>
 
@@ -228,7 +229,7 @@ export default function DrawerFormSalary({ openParent, setOpenParent, Data}) {
 
         </Box>
             {/* ***************** */}
-            {data?.map((item,index)=>(
+            {filteredData?.map((item,index)=>(
 
             <Box
           key={index}

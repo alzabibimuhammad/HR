@@ -10,9 +10,10 @@ export const useAddDecision = () => {
     mutationFn:AddDecision,
     onSuccess: (data) => {
       queryClient.invalidateQueries("AddDecisionn");
-      showSuccesToast('',data?.data?.data)
+      showSuccesToast('',data?.data?.message)
     },
-    onError: (data) =>{
+    onError: (data) => {
+
       ShowErrorToast(data.message)
     }
   });

@@ -3,7 +3,7 @@ import { request } from "src/utiltis/AxiosUtilitis";
 const AddDecision = (payload) => {
 
   return request({
-    url: `/api/Decision/addDecision`,
+    url: `/api/Decision/addDecisions`,
     method: "post",
     data: payload,
     headers: {

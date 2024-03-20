@@ -105,7 +105,7 @@ function DatePacker({ setUserData, SetSelectedDate }) {
 
   return (
 
-    <Card sx={{width:"100%",borderRadius:"12px"}}>
+    <Card sx={{width:"100%",borderRadius:"12px",height:"94%"}}>
         <CardContent>
         <Typography sx={{ fontSize: '20px', fontWeight: '600', color: '#8090A7' }}>{t('Filter')} </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'end',marginBottom:"10px" }}>
@@ -142,8 +142,6 @@ function DatePacker({ setUserData, SetSelectedDate }) {
               onChange={handelSendReport}
               sx={{position:"relative"}}
               />
-              <img style={{width:"10px",height:"10px",position:"absolute",left:"16.8%",bottom:"38.4%",transform:"rotate(85deg)"}} src="/images/arrow.svg" alt="" />
-              {/* <ArrowBackIosNewIcon sx={{width:"20px",height:"20px",position:"absolute",right:"16.7%",bottom:"30.9%",transform:"rotate(-45deg)"}}/> */}
             </LocalizationProvider>
         </CardContent>
     </Card>

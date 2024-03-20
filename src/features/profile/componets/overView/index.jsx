@@ -180,7 +180,7 @@ lineHeight:"22px"
                   <Header ariant='body2'  sx={{ textTransform: 'uppercase',   }}>
                     {t('General')}
                   </Header>
-                  <Divider  sx={{ width: '80%' }} style={{ background: '#8090A7' }} />
+                  <Divider  sx={{ width: '89%' }} style={{ background: '#8090A7' }} />
                 </Box>
                 <Stack direction={'column'}  >
 
@@ -336,7 +336,7 @@ lineHeight:"22px"
                   <Header ariant='body2' sx={{ textTransform: 'uppercase' }}>
                     {t('Financial')}
                   </Header>
-                  <Divider sx={{ width: '79.5%' }} style={{ background: '#8090A7' }} />
+                  <Divider sx={{ width: '89%' }} style={{ background: '#8090A7' }} />
                 </Box>
                 <Stack direction={'column'}  >
                   <StackRow   >
@@ -508,7 +508,7 @@ lineHeight:"22px"
                   <Header ariant='body2' sx={{ textTransform: 'uppercase' }}>
                     {t('WorkTime')}
                   </Header>
-                  <Divider sx={{ width: '73.5%' }} style={{ background: '#8090A7' }} />
+                  <Divider sx={{ width: '83%' }} style={{ background: '#8090A7' }} />
                 </Box>
                 <Stack direction={'column'}  >
                   <StackRow   >
@@ -569,7 +569,7 @@ lineHeight:"22px"
                   <Header ariant='body2' sx={{ textTransform: 'uppercase' }}>
                     {t('Secretariats')}
                   </Header>
-                  <Divider sx={{ width: '75.5%' }} style={{ background: '#8090A7' }} />
+                  <Divider sx={{ width: '86%' }} style={{ background: '#8090A7' }} />
                 </Box>
 
                 {userDataClean?.deposits?.map((element) => (

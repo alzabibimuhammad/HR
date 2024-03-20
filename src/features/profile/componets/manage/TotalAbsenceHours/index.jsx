@@ -21,22 +21,23 @@ import { styled } from '@mui/material/styles';
 import { CustomPickerManage } from 'src/@core/components/customPickerManage';
 import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
-import { useAddAbsence } from './hook/useAddAbsence';
-import useGetAbsence from './hook/useGetAbsence';
-import { useDeleteAbsence } from './hook/useDeleteAbsence';
-import { useEditAbsence } from './hook/useEditAbsence';
+// import { useAddAbsence } from './hook/useAddAbsence';
+// import useGetAbsence from './hook/useGetAbsence';
+// import { useDeleteAbsence } from './hook/useDeleteAbsence';
+// import { useEditAbsence } from './hook/useEditAbsence';
 import { MenuItem } from '@mui/material'
 import { useTranslation } from 'react-i18next';
 
 
 
-export default function Advances({id}) {
+export default function TotalAbsenceHours({id}) {
   const idUser =id
   const {t} = useTranslation()
-  const { mutate: DeleteAbsence, isLoading } = useDeleteAbsence();
-  const { mutate:getAbsenceDate, data: DataWarnings } = useGetAbsence();
-  const { mutate: AddAbsence} = useAddAbsence();
-  const {mutate : EditAbsence} = useEditAbsence()
+  // const { mutate: DeleteAbsence, isLoading } = useDeleteAbsence();
+  // const { mutate:getAbsenceDate, data: DataWarnings } = useGetAbsence();
+
+  // const { mutate: AddAbsence} = useAddAbsence();
+  // const {mutate : EditAbsence} = useEditAbsence()
 
   const [openAdd, setOpenAdd] = React.useState(false);
   const [openEdit, setOpenEdit] = React.useState(false);
@@ -212,7 +213,7 @@ export default function Advances({id}) {
 
 <StackRow >
   <Box>
- <TypoHeader sx={{color:"#131627",fontWeight:"500"}}>{t('Advances')} </TypoHeader>
+ <TypoHeader sx={{color:"#131627",fontWeight:"500"}}>{t('Total Absence hours')} </TypoHeader>
   </Box>
   <Box>
 
@@ -247,7 +248,7 @@ export default function Advances({id}) {
 <StackRow >
   <Box>
 
- <TypoHeader>{t('Total')} {DataWarnings?.data?.data?.absences?.length} {t('Advances')}</TypoHeader>
+ <TypoHeader>{t('Total')} {"DataWarnings?.data?.data?.absences?.length"} {t('Total Absence hours')}</TypoHeader>
   </Box>
   <Box sx={{display:"flex",gap:"10px"}}>
 
@@ -260,7 +261,7 @@ export default function Advances({id}) {
       aria-labelledby="responsive-dialog-title"
     >
       <DialogTitle sx={{fontWeight:"600",fontSize:"20px",color:"#8090a7"}} id="responsive-dialog-title">
-      {t('Add Advances')}
+      {t('Add Total Absence hours')}
       </DialogTitle>
       <DialogContent sx={{width:"100vh"}}>
         <DialogContentText sx={{width:"80%",display:"flex",flexDirection:"column",gap:"16px"}}>
@@ -323,7 +324,7 @@ export default function Advances({id}) {
      </Box>
 </StackRow>
 <>
-      {DataWarnings?.data?.data?.absences?.map((val, index) => (
+      {/* {DataWarnings?.data?.data?.absences?.map((val, index) => (
         <StackRow key={index}>
           <Box>
             <Typography>{`${val.type}`}</Typography>
@@ -372,7 +373,7 @@ export default function Advances({id}) {
               </Button>
               <Dialog fullScreen={fullScreen} open={openEdit} onClose={handleCloseEdit} aria-labelledby="responsive-dialog-title">
                 <DialogTitle sx={{ fontWeight: '600', fontSize: '20px', color: '#8090a7' }}>
-                {t('Edit Advances')}
+                {t('Edit Total Absence hours')}
                 </DialogTitle>
                 <DialogContent sx={{ width: '100vh' }}>
                   <DialogContentText sx={{ width: '80%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -434,7 +435,7 @@ export default function Advances({id}) {
             </StackRow>
           </Box>
         </StackRow>
-      ))}
+      ))} */}
     </>
 
 </Stack>

@@ -1,48 +1,22 @@
 // ** React Imports
 import { useState, useEffect, useMemo } from 'react'
 import React from 'react'
-
-// ** Next Import
 import { useRouter } from 'next/router'
-
-import Grid from '@mui/material/Grid'
-import { styled } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import MuiTabList from '@mui/lab/TabList'
-
 import AboutOverivew from './overView'
-import ActivityTimeline from './timeLine'
 import UserProfileHeader from './header'
 import { Box, Stack } from '@mui/system'
-import TeamLeader from './teamLeader'
-import { Button, ButtonGroup, Card, CardContent, CardHeader, Tab, Tabs, Typography } from '@mui/material'
-import { TabContext, TabPanel } from '@mui/lab'
-import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
-import DatePicker from 'react-datepicker'
-import { FormateDate } from 'src/utiltis/DateFormate'
-import { date } from 'yup'
-import { CustomDatePicker } from 'src/@core/components/customPickerDate'
 import PersonalInfo from './personalInformation'
 import Skills from './skills'
 import Employment from './employment'
 import { useGetEmployeeById } from 'src/features/employee/hooks/useGetEmployeeById'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUserId } from '../../../store/apps/user'
-import { setProfileTap } from '../../../store/apps/user'
 import RatingTabel from '../ratingTabel'
 import Mange from './manage'
-import useGetRatingById from '../ratingTabel/hooks/useGetRatingById'
-import useGetDecision from './manage/hook/useGetDecision'
 import ReviewsReport from './reviews'
 import Download from './download'
 import NoteReport from './notesReport'
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
-
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import DatePacker from './datePacker'
-import { ShowErrorToast } from 'src/utiltis/showErrorToast'
 import Absences from './absences'
 
 
@@ -105,12 +79,12 @@ const Profiles = ({ data, tab }) => {
         />
       </Box>
       {value == 1 ? (
-        <Stack   direction={{ sm: 'row', xs: 'column' }} width={'100%'} spacing={{  xs: 1 }}>
+        <Stack   direction={{ sm: 'row', xs: 'column' }} width={'100%'} spacing={{  xs: 1 ,sm:1}}>
           <Stack
             direction={'column'}
-            width={{ sm: '61.2%', xs: '100%' }}
+            width={{ sm: '71.2%', xs: '100%' }}
             height={{ sm: '100%' }}
-            spacing={{ sm: 2, xs: 1 }}
+            spacing={{ sm: 0, xs: 1 }}
             sx={{marginRight:"32px",marginTop:"24px"}}
           >
             <Box>
@@ -120,7 +94,7 @@ const Profiles = ({ data, tab }) => {
               <ReviewsReport SelecetedDate={SelecetedDate}  />
             </Box>
           </Stack>
-          <Stack  width={{ sm: '50%', xs: '100%' }}  direction={'column'}>
+          <Stack  width={{ sm: '35%', xs: '100%' }}   direction={'column'}>
             <Box sx={{marginTop:"24px"}} width={'100%'}>
 
 
@@ -131,7 +105,7 @@ const Profiles = ({ data, tab }) => {
               {/* <CustomDatePicker setUserData={setuserData} SetSelectedDate={SetSelectedDate} /> */}
 
             </Box>
-            <Box sx={{marginTop:"24px"}}>
+            <Box >
               <Download ProfileData={ProfileData} user={userData} />
             </Box>
 

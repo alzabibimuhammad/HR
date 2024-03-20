@@ -113,8 +113,9 @@ const UserProfileHeader = ({ Data, setValues, value, ProfileData, userData }) =>
 
 
         <Box>
-          <Typography variant='h5' sx={{ mb: 2.5, marginTop: { xs: '-45px', sm: '0px' } }}>
-            {ProfileData?.first_name} {ProfileData?.last_name}
+          <Typography variant='h5' sx={{ mb: 2.5, marginTop: { xs: '-45px', sm: '0px' } ,display:"flex",alignItems:"center",gap:"10px"}}>
+            {ProfileData?.first_name} {ProfileData?.last_name} {ProfileData?.role === 'admin' ? <img src='/images/star-admin.svg'/> : ""}
+            {console.log(ProfileData)}
           </Typography>
           <Typography color={'#8090A7'} fontSize={'14px'}>
             {userData?.specialization}

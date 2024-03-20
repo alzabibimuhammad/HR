@@ -58,6 +58,11 @@ const navigation = () => {
           title:"Daily Absence",
           path:"/employees/absence"
         },
+
+        {
+          title:"Hourly Absence",
+          path:"/employees/absencehourly"
+        },
       ]
       },
 

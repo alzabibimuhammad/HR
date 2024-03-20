@@ -24,6 +24,8 @@ import Deductions from './deductions';
 import Rewards from './rewards';
 import Absence from './absence';
 import dynamic from 'next/dynamic'
+import Advances from './absence';
+import TotalAbsenceHours from './TotalAbsenceHours';
 
 export default function Mange({id}) {
 
@@ -38,37 +40,45 @@ export default function Mange({id}) {
     <Grid container spacing={8}>
     <Grid item xs={12} sx={{marginTop:"24px"}} md={6}>
       {/* Warnings section */}
-      <Warnings id={id} />
       {/* End Warnings section */}
-
+      <Box sx={{ marginTop: '24px' }}>
+        <Rewards id={id} />
+      </Box>
       {/* Alerts section */}
       <Box sx={{ marginTop: '24px' }}>
-        <Alerts id={id} />
+        <Advances id={id} />
       </Box>
-      {/* End Alerts section */}
-
-      {/* Penalties section and translate */}
       <Box sx={{ marginTop: '24px' }}>
-        <Penalties id={id} />
+
+      <Deductions id={id} />
       </Box>
-      {/* End Penalties section */}
+
+      <Box sx={{ marginTop: '24px' }}>
+
+<TotalAbsenceHours id={id} />
+</Box>
+
     </Grid>
 
     <Grid item xs={12} sx={{marginTop:"24px"}} md={6}>
       {/* Deductions section */}
-      <Deductions id={id} />
+      <Box sx={{ marginTop: '24px' }}>
+
+      <Warnings id={id} />
+      </Box>
+
       {/* End Deductions section */}
-
+      <Box sx={{ marginTop: '24px' }}>
+        <Alerts id={id} />
+      </Box>
       {/* Absence section */}
-      <Box sx={{ marginTop: '24px' }}>
-        <Absence id={id} />
-      </Box>
-      {/* End Absence section */}
 
-      {/* Rewards section */}
+      {/* End Absence section */}
       <Box sx={{ marginTop: '24px' }}>
-        <Rewards id={id} />
+        <Penalties id={id} />
       </Box>
+      {/* Rewards section */}
+
       {/* End Rewards section */}
     </Grid>
   </Grid>

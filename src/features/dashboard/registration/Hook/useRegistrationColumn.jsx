@@ -12,6 +12,8 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
+import { useForm, Controller } from 'react-hook-form'
+import { useUpdateAbsence } from './useUpdateAbsence'
 
 
 const style = {
@@ -34,6 +36,8 @@ const useRegistrationColumn = () => {
   const router = useRouter()
 
   const dispatch = useDispatch()
+  const { mutate: updateAbsence, isLoading } = useUpdateAbsence()
+
 
   const handleViewProfileTap=id=>{
     dispatch(setProfileTap(1))
@@ -46,14 +50,23 @@ const useRegistrationColumn = () => {
 
 
   const [selectedPaid, setSelectedPaid] = useState(false);
+  console.log("🚀 ~ useRegistrationColumn ~ selectedPaid:", selectedPaid)
   const [selectedUnpaid, setSelectedUnpaid] = useState(false);
+  console.log("🚀 ~ useRegistrationColumn ~ selectedUnpaid:", selectedUnpaid)
 
   const handleChangePaid = () => {
-    setSelectedPaid(!selectedPaid);
+    setSelectedPaid(true);
+    setSelectedUnpaid(false);
+    setValue(1);
+    console.log('1');
   };
 
   const handleChangeUnpaid = () => {
-    setSelectedUnpaid(!selectedUnpaid);
+    setSelectedPaid(false);
+    setSelectedUnpaid(true);
+    setValue(0);
+    console.log('0');
+
   };
 
   const handleOpen = () => {
@@ -72,6 +85,40 @@ const useRegistrationColumn = () => {
     setValue(event.target.value);
 
   };
+
+
+  const defaultValues = {
+    type: '',
+    id: '',
+
+  }
+
+
+  const onSubmit = async (id)  =>  {
+    try {
+      const formData = new FormData()
+
+      formData.append('type', value)
+      formData.append('id',id)
+      const isPaidValue = selectedPaid ? '1' : '0';
+      formData.append('isPaid', isPaidValue);
+      updateAbsence(formData)
+    } catch (error) {
+
+
+    }
+  }
+
+  const {
+    control,
+    setError,
+    handleSubmit,
+    formState: { errors }
+  } = useForm({
+    defaultValues,
+    mode: 'onBlur'
+  })
+
 
 
   return useMemo(() => [
@@ -193,7 +240,7 @@ const useRegistrationColumn = () => {
             value={value}
             onChange={handleChange}
           >
-            <FormControlLabel value="Justified" control={<Radio />} label="Justified" />
+            <FormControlLabel value="justified" control={<Radio />} label="Justified" />
             <FormControlLabel value="Unjustified" control={<Radio />} label="Unjustified" />
           </RadioGroup>
         </FormControl>
@@ -212,7 +259,7 @@ const useRegistrationColumn = () => {
             value={value}
             onChange={handleChange}
           >
-            <FormControlLabel value="Justified" control={<Radio />} label="Justified" />
+            <FormControlLabel value="justified" control={<Radio />} label="Justified" />
             <FormControlLabel value="Unjustified" control={<Radio />} label="Unjustified" />
           </RadioGroup>
         </FormControl>
@@ -226,12 +273,11 @@ const useRegistrationColumn = () => {
         value={value}
         onChange={handleChange}
       >
-        <FormControlLabel value="Sick" control={<Radio />} label="Sick" />
-        <FormControlLabel value="Present" control={<Radio />} label="Present" />
+        <FormControlLabel value="sick" control={<Radio />} label="Sick" />
       </RadioGroup>
     </Stack>
     <Stack direction={'row'} justifyContent={'flex-end'} spacing={3} textAlign={'end'}>
-      <Button  onClick={handleClose} sx={{ width: "106px", height: "34px", backgroundColor: "#6ab2df", padding: "8px 24px 8px 24px", color: "#fff", "&:hover": { backgroundColor: "#6ab2df" } }}>Confirm</Button>
+      <Button  onClick={() => onSubmit(params?.row?.id)} sx={{ width: "106px", height: "34px", backgroundColor: "#6ab2df", padding: "8px 24px 8px 24px", color: "#fff", "&:hover": { backgroundColor: "#6ab2df" } }}>Confirm</Button>
       <Button  onClick={handleClose} sx={{ width: "106px", height: "34px", backgroundColor: "#8090A733", padding: "8px 24px 8px 24px", color: "#8090A7", "&:hover": { backgroundColor: "#8090A733" } }}>cancel</Button>
     </Stack>
   </Box>
